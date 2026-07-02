@@ -6,6 +6,15 @@ using UnityEngine;
 /// </summary>
 public static class GlobalConfig
 {
+    #region Units
+    public static readonly List<UnitData> PossibleAllyUnits = new();
+    public static readonly List<UnitData> PossibleEnemyUnits = new();
+
+    public static UnitData GetPlayerVariant(UnitData unitData)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 
     public static string SaveFileLocation => Application.persistentDataPath;
     /// <summary>

@@ -37,7 +37,9 @@ namespace Utilities
 
         public static Vector3 GetPositionWithOscilation(this IObject @object, Unit scanner)
         {
-            var dist = Mathf.Max((scanner.Transform.position - @object.Transform.position).sqrMagnitude - @object.Signature - scanner.ScanRange, 0);
+            var dist = Mathf.Max((scanner.Transform.position -
+                @object.Transform.position).sqrMagnitude -
+                @object.Signature - scanner.ScanRange, 0);
             return @object.Transform.position + dist * Random.insideUnitSphere;
         }
         #endregion

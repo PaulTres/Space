@@ -32,7 +32,12 @@ public abstract class Unit : MonoBehaviour, IObject
         }
     }
     public Vector3 Position => Transform.position;
-    [SerializeField] protected float signature, defaultSignature;
+    protected float signature;
+    [SerializeField] protected float defaultSignature;
+    [SerializeField] protected float maxSignature;
+    [SerializeField] protected float signatureDecreaseRate = 0.1f;
+    [SerializeField] protected float signatureDecreaseCooldown = 5f;
+    protected float signatureIncreaseTime;
     [field: SerializeField] public float ScanRange { get; protected set; }
     protected HPComponent hpComponent;
     public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
@@ -50,6 +55,8 @@ public abstract class Unit : MonoBehaviour, IObject
     #region Setup
     protected virtual void Awake()
     {
+        maxSignature = Mathf.Max(maxSignature, defaultSignature);
+        Turrets ??= new(GetComponentsInChildren<Turret>());
         wait = new(tickInterval);
         if (hpComponent != null) hpComponent = GetComponent<HPComponent>();
         ComponentRegister<Unit>.Register(Transform, this);
@@ -64,6 +71,7 @@ public abstract class Unit : MonoBehaviour, IObject
         signature = defaultSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
+        signatureIncreaseTime = Time.time;
     }
 
     protected virtual void OnDisable()
@@ -90,6 +98,19 @@ public abstract class Unit : MonoBehaviour, IObject
         yield return wait;
         GetSurroundingMissiles();
         onTick?.Invoke();
+        DecreaseSignature(tickInterval);
+    }
+
+    public void IncreaseSignature(float amount)
+    {
+        signatureIncreaseTime = Time.time;
+        signature = Mathf.Min(maxSignature, signature + amount);
+    }
+
+    protected virtual void DecreaseSignature(float deltaTime)
+    {
+        if (Time.time - signatureIncreaseTime < signatureDecreaseCooldown) return;
+        signature = Mathf.Max(defaultSignature, signature - signatureDecreaseRate * deltaTime);
     }
 
     protected virtual void GetSurroundingMissiles()

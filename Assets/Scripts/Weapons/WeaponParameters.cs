@@ -10,7 +10,7 @@ namespace Weapons
     {
         [Tooltip("cooldown between shots.")]
         public float MaxShotCooldown = 1, RateOfFireRampUp = 0.1f, RateOfFireRampDown = 0.2f,
-            MinShotCooldown = 0.1f;
+            MinShotCooldown = 0.1f, SignatureIncrease = 1;
         public BulletData BulletData;
         protected virtual void OnValidate()
         {

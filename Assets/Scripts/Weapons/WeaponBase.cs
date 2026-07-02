@@ -5,7 +5,19 @@ namespace Weapons
 {
     public abstract class WeaponBase : MonoBehaviour, IResettable
     {
-        #region Utils        
+        #region Utils   
+        protected Unit unit;
+        public Unit Unit
+        {
+            get
+            {
+                if (unit == null)
+                {
+                    unit = transform.root.GetComponent<Unit>();
+                }
+                return unit;
+            }
+        }
         protected CountdownTimer shotTimer;
         protected float currentShotCooldown;
         #endregion
@@ -84,6 +96,7 @@ namespace Weapons
 
         public virtual void ProcessBullet(Bullet bullet, IObject target)
         {
+            Unit.IncreaseSignature(@params.SignatureIncrease);
             bullet.Owner = transform.root;
             bullet.gameObject.SetActive(true);
         }

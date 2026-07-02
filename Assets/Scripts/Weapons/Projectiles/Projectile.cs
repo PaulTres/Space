@@ -74,6 +74,10 @@ namespace Weapons
             if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
                 linearVelocity.magnitude * dt, collisionMask))
             {
+                if (hit.collider.transform.root.GetInstanceID() == Owner.GetInstanceID())
+                {
+                    return false;
+                }
                 OnHit(hit.collider);
                 return true;
             }

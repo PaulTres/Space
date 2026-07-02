@@ -4,7 +4,24 @@ namespace Weapons
 {
     public class Turret : MonoBehaviour
     {
-        public IObject Target { get; set; }
+        protected bool ceaseFire;
+        public bool CeaseFire
+        {
+            get => ceaseFire;
+            set
+            {
+                if (ceaseFire != value)
+                {
+                    ceaseFire = value;
+                    if (!ceaseFire)
+                    {
+                        Target = null;
+                    }
+                }
+            }
+        }
+        public bool TargetMissiles { get; set; }
+        public IObject Target { get; protected set; }
         public Unit Owner { get; protected set; }
         [SerializeField] protected WeaponBase weapon;
         protected Transform tr;
@@ -24,16 +41,24 @@ namespace Weapons
         }
         protected virtual void OnEnable()
         {
+            CeaseFire = false;
+            Target = null;
+            TargetMissiles = @params.TargetMissiles;
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(Tick);
         }
         protected virtual void OnDisable()
         {
+            Target = null;
             GlobalUpdater.TryGetInstance().UnregisterUpdate(Tick);
         }
         #endregion
 
         #region Functionality
-
+        /// <summary>
+        /// Returns whether a given position can be targeted by the turret.
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public bool IsInAngle(Vector3 position)
         {
             var dir = (position - Transform.position).normalized;
@@ -54,9 +79,11 @@ namespace Weapons
         {
             float timeToHit = 0;
             var m = weapon.BulletData as ProjectileData;
-            if (m != null) timeToHit = (target.Transform.position - Transform.position).magnitude / m.TopSpeed;
+            if (m != null) timeToHit = (target.Transform.position -
+                    Transform.position).magnitude / m.TopSpeed;
 
-            var futureTargetPos = target.GetPositionWithOscilation(Owner) + target.LinearVelocity * timeToHit;
+            var futureTargetPos = target.GetPositionWithOscilation(Owner) +
+                target.LinearVelocity * timeToHit;
 
             return futureTargetPos;
         }
@@ -64,23 +91,22 @@ namespace Weapons
         protected bool IsTargetValid(IObject target)
         {
             if (target == null) return false;
-            if (!IsInAngle(target.Transform.position)) return false;
-
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
-
+            if (!IsInAngle(target.Transform.position)) return false;
             return true;
         }
 
         public void UpdateTargets()
         {
-            if (Owner == null) return;
+            if (CeaseFire || Owner == null) return;
+
             if (Target != null && !Target.Transform.gameObject.activeSelf) Target = null;
 
             float bestScore = Target == null ? 0 : @params.EvaluateTarget(this, Target);
 
             #region Evaluate missiles
-            if (@params.TargetMissiles)
+            if (TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
                 if (count > 0)
@@ -162,6 +188,12 @@ namespace Weapons
             #endregion
         }
 
+        /// <summary>
+        /// If a target is present and enabled, rotate towards the target, 
+        /// shoot and increase readiness. Otherwise decrease readiness and 
+        /// call UpdateTargets().
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public void Tick(float deltaTime)
         {
             if (Target != null)
@@ -181,13 +213,10 @@ namespace Weapons
                         }
                     }
                 }
-                else
-                {
-                    Target = null;
-                    UpdateTargets();
-                }
+                else Target = null;
             }
             DecreaseReadiness(deltaTime);
+            UpdateTargets();
         }
 
         protected void IncreaseReadiness(float deltaTime)

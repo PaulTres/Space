@@ -13,6 +13,7 @@ namespace Weapons
         public enum Type
         {
             Laser,
+            BasicShell,
             Missile
         }
         static readonly ObjectPool<Type, Bullet> objectPool = new();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities;
 [RequireComponent(typeof(Rigidbody))]
 public class Navigation : Ship
 {
@@ -14,6 +15,7 @@ public class Navigation : Ship
     [SerializeField] protected ObstacleChecker checker;
     [field: SerializeField] public bool UpdateRotation { get; set; } = true;
 
+    #region Setup
     protected override void Awake()
     {
         base.Awake();
@@ -26,11 +28,26 @@ public class Navigation : Ship
         }
         radAngleToForward = Mathf.Rad2Deg * angleToForward / 2;
     }
-    protected void Update()
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (GlobalUpdater.TryGetInstance() != null) GlobalUpdater.TryGetInstance().
+                UnregisterUpdate(PerformUpdate);
+    }
+    #endregion
+
+    protected void PerformUpdate(float deltaTime)
     {
         if (Destination == null)
         {
-            if (DampenVelocityToZero) ApplyDampeners(Vector3.zero, Time.deltaTime);
+            if (DampenVelocityToZero) ApplyDampeners(Vector3.zero, deltaTime);
             return;
         }
         navPivot.LookAt(Destination.Value);
@@ -43,14 +60,15 @@ public class Navigation : Ship
         }
         if (!checker.CheckForward(transform, direction.normalized))
         {
-            MoveTowards(direction, Time.deltaTime);
+            MoveTowards(direction, deltaTime);
         }
         else
         {
             var point = checker.RunCheck(navPivot);
-            MoveTowards(point, Time.deltaTime);
+            MoveTowards(point, deltaTime);
         }
     }
+
     public void Face(Vector3 direction, float deltaTime)
     {
         if (direction == Vector3.zero) return;
@@ -87,6 +105,7 @@ public class Navigation : Ship
         }
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxVelocityMagnitude);
     }
+
     protected void OnDrawGizmos()
     {
         if (Destination != null)
