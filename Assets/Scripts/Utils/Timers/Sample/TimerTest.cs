@@ -13,7 +13,7 @@ public class TimerTest : MonoBehaviour
         countdown2.OnTimerStop += () => Debug.Log("Timer2 stopped.");
     }
     public bool b;
-    private void Update()
+    protected void Update()
     {
         if (b)
         {

@@ -32,18 +32,18 @@ public class WFX_Demo_New : MonoBehaviour
 	public GameObject m4, m4fps;
 	public Material wood,concrete,metal,checker;
 	public Material woodWall,concreteWall,metalWall,checkerWall;
-	private string groundTextureStr = "Checker";
-	private List<string> groundTextures = new List<string>(new string[]{"Concrete","Wood","Metal","Checker"});
+	protected string groundTextureStr = "Checker";
+	protected List<string> groundTextures = new List<string>(new string[]{"Concrete","Wood","Metal","Checker"});
 	
 	//-------------------------------------------------------------
 
-	private GameObject[] ParticleExamples;
-	private int exampleIndex;
-	private bool slowMo;
-	private Vector3 defaultCamPosition;
-	private Quaternion defaultCamRotation;
+	protected GameObject[] ParticleExamples;
+	protected int exampleIndex;
+	protected bool slowMo;
+	protected Vector3 defaultCamPosition;
+	protected Quaternion defaultCamRotation;
 	
-	private List<GameObject> onScreenParticles = new List<GameObject>();
+	protected List<GameObject> onScreenParticles = new List<GameObject>();
 	
 	//-------------------------------------------------------------
 	
@@ -160,7 +160,7 @@ public class WFX_Demo_New : MonoBehaviour
 	//-------------------------------------------------------------
 	// UI
 	
-	private void UpdateUI()
+	protected void UpdateUI()
 	{
 		EffectLabel.text = ParticleExamples[exampleIndex].name;
 		EffectIndexLabel.text = string.Format("{0}/{1}", (exampleIndex+1).ToString("00"), ParticleExamples.Length.ToString("00"));
@@ -231,7 +231,7 @@ public class WFX_Demo_New : MonoBehaviour
 		}
 	}
 	
-	private void prevParticle()
+	protected void prevParticle()
 	{
 		exampleIndex--;
 		if(exampleIndex < 0) exampleIndex = ParticleExamples.Length - 1;
@@ -239,7 +239,7 @@ public class WFX_Demo_New : MonoBehaviour
 		UpdateUI();
 		showHideStuff();
 	}
-	private void nextParticle()
+	protected void nextParticle()
 	{
 		exampleIndex++;
 		if(exampleIndex >= ParticleExamples.Length) exampleIndex = 0;
@@ -248,7 +248,7 @@ public class WFX_Demo_New : MonoBehaviour
 		showHideStuff();
 	}
 	
-	private void destroyParticles()
+	protected void destroyParticles()
 	{
 		for(int i = onScreenParticles.Count - 1; i >= 0; i--)
 		{
@@ -263,7 +263,7 @@ public class WFX_Demo_New : MonoBehaviour
 	
 	// Change Textures
 	
-	private void prevTexture()
+	protected void prevTexture()
 	{
 		int index = groundTextures.IndexOf(groundTextureStr);
 		index--;
@@ -275,7 +275,7 @@ public class WFX_Demo_New : MonoBehaviour
 		selectMaterial();
 		
 }
-	private void nextTexture()
+	protected void nextTexture()
 	{
 		int index = groundTextures.IndexOf(groundTextureStr);
 		index++;
@@ -287,7 +287,7 @@ public class WFX_Demo_New : MonoBehaviour
 		selectMaterial();
 	}
 	
-	private void selectMaterial()
+	protected void selectMaterial()
 	{
 		switch(groundTextureStr)
 		{
@@ -317,7 +317,7 @@ public class WFX_Demo_New : MonoBehaviour
 		}
 	}
 	
-	private void showHideStuff()
+	protected void showHideStuff()
 	{
 		//Show m4
 		if(ParticleExamples[exampleIndex].name.StartsWith("WFX_MF Spr"))

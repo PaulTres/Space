@@ -17,6 +17,11 @@ namespace Weapons
             Missile
         }
         static readonly ObjectPool<Type, Bullet> objectPool = new();
+
+        /// <summary>
+        /// Makes the pool clear itself on scene change. Call this method once at the 
+        /// start of the game.
+        /// </summary>
         public static void InitializePool()
         {
             SceneManager.activeSceneChanged += (s1, s2) => ClearPool();
@@ -52,8 +57,13 @@ namespace Weapons
             {
                 if (value != damageInfo.Source)
                 {
+                    if (damageInfo.Source != null) EventBus<PoolableRecycled>.RemoveActions(damageInfo.Source.GetInstanceID(), null, ClearOwner);
                     damageInfo.Source = value;
-                    gameObject.layer = GlobalConfig.GetBulletLayer(value != null ? value.gameObject.layer : 0);
+                    if (value != null)
+                    {
+                        EventBus<PoolableRecycled>.AddActions(value.GetInstanceID(), null, ClearOwner);
+                        gameObject.layer = GlobalConfig.GetBulletLayer(value.gameObject.layer);
+                    }
                 }
             }
         }
@@ -83,7 +93,6 @@ namespace Weapons
             if (soundData != null && soundData.clip != null) SoundManager.TryGetInstance(true).Play(soundData, tr.position);
             else Debug.LogWarning($"{transform} has no sound data!");
             GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformUpdate);
-            EventBus<PoolableRecycled>.AddActions(Owner.GetInstanceID(), null, ClearOwner);
         }
 
         public virtual void Initialize(BulletData poolableData)
@@ -95,16 +104,19 @@ namespace Weapons
             poolKey = poolableData.Key;
         }
 
+        /// <summary>
+        /// Set the owner to null without changing the bullet's layer.
+        /// </summary>
         public void ClearOwner()
         {
-            damageInfo.Source = null;
+            Owner = null;
         }
 
         protected virtual void OnDisable()
         {
-            EventBus<PoolableRecycled>.RemoveActions(Owner.GetInstanceID(), null, ClearOwner);
             Owner = null;
-            GlobalUpdater.TryGetInstance().UnregisterFixedUpdate(PerformUpdate);
+            var u = GlobalUpdater.TryGetInstance();
+            if (u != null) u.UnregisterFixedUpdate(PerformUpdate);
             Release(this);
         }
 

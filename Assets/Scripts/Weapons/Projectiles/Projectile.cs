@@ -13,6 +13,7 @@ namespace Weapons
         public Vector3 AngularVelocity => Vector3.zero;
         public float Signature => 0;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
+        public float initialVelocity;
 
         public override void Initialize(BulletData poolableData)
         {
@@ -22,6 +23,7 @@ namespace Weapons
                 throw new System.ArgumentException($"Expected {typeof(ProjectileData)}, got {poolableData.GetType()}");
             }
             topSpeed = data.TopSpeed;
+            initialVelocity = data.InitialVelocity;
             if (topSpeed <= 0)
             {
                 Debug.LogWarning($"Missile top speed set to 0 or lower on {transform}");
@@ -30,7 +32,7 @@ namespace Weapons
             acceleration = data.Acceleration;
             if (acceleration <= 0)
             {
-                Debug.LogWarning($"Missile forwardThrust should not be 0. Setting forwardThrust to 10% of top speed on {transform}.");
+                Debug.LogWarning($"Projectile acceleration should not be 0. Setting acceleration to 10% of top speed on {transform}.");
                 acceleration = topSpeed / 10;
             }
         }
@@ -38,7 +40,7 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
-            linearVelocity = Owner.GetLinearVelocity();
+            linearVelocity = Forward * initialVelocity;
 
             if (Owner != null) gameObject.layer = GlobalConfig.
                     GetBulletLayer(Owner.gameObject.layer);
@@ -74,14 +76,22 @@ namespace Weapons
             if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
                 linearVelocity.magnitude * dt, collisionMask))
             {
-                if (hit.collider.transform.root.GetInstanceID() == Owner.GetInstanceID())
+                if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == Owner.GetTeam())
                 {
                     return false;
                 }
                 OnHit(hit.collider);
-                return true;
+                return disableOnHit;
             }
             return false;
+        }
+
+        protected virtual void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(tr.position, linearVelocity);
+            //Gizmos.color = Color.blue;
+            //Gizmos.DrawRay(tr.position, tr.forward * topSpeed);
         }
     }
 }

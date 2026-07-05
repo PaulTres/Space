@@ -7,6 +7,10 @@ namespace Weapons
     {
         #region Utils   
         protected Unit unit;
+        /// <summary>
+        /// The unit that owns this weapon. Lazily initialized by searching for a Unit 
+        /// component in the root of the transform hierarchy.
+        /// </summary>
         public Unit Unit
         {
             get
@@ -19,7 +23,7 @@ namespace Weapons
             }
         }
         protected CountdownTimer shotTimer;
-        protected float currentShotCooldown;
+        [field: SerializeField] public float CurrentShotCooldown { get; protected set; }
         #endregion
 
         #region Weapon parameters
@@ -35,6 +39,7 @@ namespace Weapons
             Debug.Assert(@params.MaxShotCooldown >= 0, $"{transform} has negative cooldown!");
             Debug.Assert((!shootPoints.IsEmpty() && shootPoints[0] != null), $"{transform} has invalid shoot points!");
             shotTimer = new(@params.MaxShotCooldown);
+            CurrentShotCooldown = @params.MaxShotCooldown;
         }
 
         protected virtual void OnEnable()
@@ -43,11 +48,12 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Reset cooldown.
+        /// Reset shot cooldown.
         /// </summary>
         public virtual void PerformReset()
         {
             shotTimer.Reset(@params.MaxShotCooldown);
+            CurrentShotCooldown = @params.MaxShotCooldown;
         }
 
         protected virtual void OnDestroy()
@@ -57,34 +63,52 @@ namespace Weapons
         #endregion
 
         #region Functionality
+        /// <summary>
+        /// Increases weapon rate of fire.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public virtual void IncreaseReadiness(float deltaTime)
         {
-            currentShotCooldown = Mathf.Max(@params.MinShotCooldown,
-                currentShotCooldown - @params.RateOfFireRampUp);
+            CurrentShotCooldown = Mathf.Max(@params.MinShotCooldown,
+                CurrentShotCooldown - @params.RateOfFireRampUp * deltaTime);
         }
 
+        /// <summary>
+        /// Decreases weapon rate of fire.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public virtual void DecreaseReadiness(float deltaTime)
         {
-            currentShotCooldown = Mathf.Min(@params.MaxShotCooldown,
-                currentShotCooldown + @params.RateOfFireRampDown);
+            CurrentShotCooldown = Mathf.Min(@params.MaxShotCooldown,
+                CurrentShotCooldown + @params.RateOfFireRampDown * deltaTime);
         }
 
+        /// <summary>
+        /// Checks if the weapon can shoot by using the shot cooldown timer.
+        /// </summary>
+        /// <returns></returns>
         public virtual bool CanShoot()
         {
             return !shotTimer.IsRunning;
         }
 
+        /// <summary>
+        /// Returns true if the weapon can shoot and fires a bullet at the target. 
+        /// Resets the shot cooldown timer.
+        /// </summary>
+        /// <param name="target">The target to shoot at.</param>
+        /// <returns>True if the weapon successfully fired a shot, false otherwise.</returns>
         public bool Shoot(IObject target)
         {
             if (!CanShoot()) return false;
             Fire(target);
-            shotTimer.Reset(currentShotCooldown);
+            shotTimer.Reset(CurrentShotCooldown);
             shotTimer.Start();
             return true;
         }
 
         /// <summary>
-        /// Fire once.
+        /// Fire once for every shoot point.
         /// </summary>
         public virtual void Fire(IObject target)
         {
@@ -94,6 +118,12 @@ namespace Weapons
             }
         }
 
+        /// <summary>
+        /// Assign the bullet to the weapon's owner and increase the owner's signature. 
+        /// Then activate the bullet.
+        /// </summary>
+        /// <param name="bullet">The bullet to be processed.</param>
+        /// <param name="target">The target of the bullet.</param>
         public virtual void ProcessBullet(Bullet bullet, IObject target)
         {
             Unit.IncreaseSignature(@params.SignatureIncrease);

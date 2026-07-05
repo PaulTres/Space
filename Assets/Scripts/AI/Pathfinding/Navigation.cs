@@ -1,5 +1,6 @@
 using UnityEngine;
 using Utilities;
+
 [RequireComponent(typeof(Rigidbody))]
 public class Navigation : Ship
 {
@@ -13,7 +14,17 @@ public class Navigation : Ship
     public float angleToForward = 10;
     protected float radAngleToForward;
     [SerializeField] protected ObstacleChecker checker;
-    [field: SerializeField] public bool UpdateRotation { get; set; } = true;
+    public bool UpdateRotation => RotationTarget == null;
+    public RotationTarget RotationTarget { get; set; }
+
+    public Vector3 IntendedForward
+    {
+        get
+        {
+            if (RotationTarget == null) return Transform.forward;
+            return RotationTarget.GetTargetRotation(Transform) * Vector3.forward;
+        }
+    }
 
     #region Setup
     protected override void Awake()
@@ -38,6 +49,7 @@ public class Navigation : Ship
     protected override void OnDisable()
     {
         base.OnDisable();
+        RotationTarget = null;
         if (GlobalUpdater.TryGetInstance() != null) GlobalUpdater.TryGetInstance().
                 UnregisterUpdate(PerformUpdate);
     }
@@ -69,14 +81,11 @@ public class Navigation : Ship
         }
     }
 
-    public void Face(Vector3 direction, float deltaTime)
+    public void Face(Quaternion targetRotation, float deltaTime)
     {
-        if (direction == Vector3.zero) return;
-
-        Quaternion rot = Quaternion.LookRotation(direction, direction + transform.up);
         Quaternion previousRotation = transform.rotation;
-        transform.rotation = Quaternion.RotateTowards(previousRotation, rot,
-            rotationSpeed * deltaTime);
+        transform.rotation = Quaternion.RotateTowards(previousRotation, targetRotation,
+            RotationSpeed * deltaTime);
 
         Quaternion rotationDelta = (transform.rotation *
             Quaternion.Inverse(previousRotation)).normalized;
@@ -86,6 +95,18 @@ public class Navigation : Ship
         angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / deltaTime;
     }
 
+    public void Face(Vector3 direction, float deltaTime)
+    {
+        if (direction == Vector3.zero) return;
+        Face(Quaternion.LookRotation(direction, direction + transform.up), deltaTime);
+    }
+
+    /// <summary>
+    /// Slowly adjust the rigidbody's linear velocity towards the intended velocity, 
+    /// simulating a dampening effect.
+    /// </summary>
+    /// <param name="intendedVelocity">The target velocity to move towards.</param>
+    /// <param name="deltaTime">The time elapsed since the last update.</param>
     protected void ApplyDampeners(Vector3 intendedVelocity, float deltaTime)
     {
         rb.linearVelocity = Vector3.MoveTowards(rb.linearVelocity,
@@ -95,6 +116,7 @@ public class Navigation : Ship
     protected void MoveTowards(Vector3 direction, float deltaTime)
     {
         if (UpdateRotation) Face(direction, deltaTime);
+        else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
         ApplyDampeners(direction, deltaTime);
         if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(Mathf.Deg2Rad *
@@ -103,11 +125,12 @@ public class Navigation : Ship
             rb.AddForce(forwardThrust * Time.deltaTime * direction.normalized,
                 ForceMode.Acceleration);
         }
-        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxVelocityMagnitude);
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
     }
 
-    protected void OnDrawGizmos()
+    protected override void OnDrawGizmos()
     {
+        base.OnDrawGizmos();
         if (Destination != null)
         {
             Gizmos.color = Color.magenta;

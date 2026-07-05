@@ -13,7 +13,7 @@ using System.Collections;
 [RequireComponent(typeof(MeshFilter))]
 public class WFX_BulletHoleDecal : MonoBehaviour
 {
-	static private Vector2[] quadUVs = new Vector2[]{new Vector2(0,0), new Vector2(0,1), new Vector2(1,0), new Vector2(1,1)};
+	static protected Vector2[] quadUVs = new Vector2[]{new Vector2(0,0), new Vector2(0,1), new Vector2(1,0), new Vector2(1,1)};
 	
 	public float lifetime = 10f;
 	public float fadeoutpercent = 80;
@@ -21,10 +21,10 @@ public class WFX_BulletHoleDecal : MonoBehaviour
 	public bool randomRotation = false;
 	public bool deactivate = false;
 	
-	private float life;
-	private float fadeout;
-	private Color color;
-	private float orgAlpha;
+	protected float life;
+	protected float fadeout;
+	protected Color color;
+	protected float orgAlpha;
 	
 	void Awake()
 	{

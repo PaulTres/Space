@@ -163,15 +163,23 @@ namespace Player
             }
 
             rb.AddForce(intendedVelocity, ForceMode.Acceleration);
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxVelocityMagnitude);
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
         }
 
         public void PerformUpdate(float deltaTime)
         {
             if (!freeLook)
             {
+                Quaternion previousRotation = shipBody.rotation;
+
                 //rotate the ship body to match the rotation of the camera pivot
-                shipBody.rotation = Quaternion.RotateTowards(shipBody.rotation, camPivot.rotation, deltaTime * rotationSpeed);
+                shipBody.rotation = Quaternion.RotateTowards(shipBody.rotation, camPivot.rotation, deltaTime * RotationSpeed);
+
+                Quaternion rotationDelta = (shipBody.rotation *
+                    Quaternion.Inverse(previousRotation)).normalized;
+                rotationDelta.ToAngleAxis(out float angleInDegrees, out Vector3 axis);
+                if (angleInDegrees > 180f) angleInDegrees -= 360f;
+                angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / deltaTime;
             }
         }
 

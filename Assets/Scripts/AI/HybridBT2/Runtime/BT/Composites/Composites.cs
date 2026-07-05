@@ -87,9 +87,14 @@ namespace HybridBT2
     public class Selector : RegularComposite
     {
         protected int prevChild = -1;
+        protected int currentChild = 0;
         public Selector(string name, Action<Node, Blackboard> onEnter = null, Action<Node, Blackboard> onExit = null) : base(name, onEnter, onExit)
         {
-            this.onEnter += (_, _) => prevChild = -1;
+            this.onEnter += (_, _) =>
+            {
+                currentChild = 0;
+                prevChild = -1;
+            };
         }
         /// <summary>
         /// Executes the first child which does not fail. If previously had a lower priority child, 
@@ -98,26 +103,27 @@ namespace HybridBT2
         /// <param name="context"></param>
         protected override void ExecuteUnderlyingBehaviour(Blackboard context)
         {
-            for (int i = 0; i < children.Count; i++)
+            children[currentChild].Evaluate(context);
+            switch (children[currentChild].State)
             {
-                if (prevChild != -1 && !children[i].AlwaysCheck && i != prevChild) continue;
-                children[i].Evaluate(context);
-                if (children[i].State == NodeState.FAILURE)
-                {
-                    if (i == children.Count - 1)
+                case NodeState.FAILURE:
+                    currentChild++;
+                    if (currentChild >= children.Count) SetState(NodeState.FAILURE, context);
+                    else SetState(NodeState.RUNNING, context);
+                    break;
+                case NodeState.RUNNING:
+                    if (prevChild != currentChild)
                     {
-                        SetState(NodeState.FAILURE, context);
-                        return;
+                        children[prevChild].Abort(context);
+                        prevChild = currentChild;
                     }
                     SetState(NodeState.RUNNING, context);
-                    continue;
-                }
-                if (prevChild != -1) children[prevChild].Abort(context);
-                prevChild = i;
-                SetState(children[i].State, context);
-                return;
+                    break;
+                case NodeState.SUCCESS:
+                    if (prevChild != currentChild) children[prevChild].Abort(context);
+                    SetState(NodeState.SUCCESS, context);
+                    break;
             }
-            throw new Exception($"{this} did not finish executing main loop!");
         }
     }
     public class ParallelNode : RegularComposite

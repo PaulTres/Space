@@ -29,8 +29,8 @@ using UnityEngine.InputSystem.Utilities;
 /// // Example of using an InputActionMap named "Player" from a UnityEngine.MonoBehaviour implementing callback interface.
 /// public class Example : MonoBehaviour, MyActions.IPlayerActions
 /// {
-///     private MyActions_Actions m_Actions;                  // Source code representation of asset.
-///     private MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
+///     protected MyActions_Actions m_Actions;                  // Source code representation of asset.
+///     protected MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
 ///
 ///     void Awake()
 ///     {
@@ -200,9 +200,9 @@ public partial class @UIControls: IInputActionCollection2, IDisposable
     }
 
     // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Escape;
+    protected readonly InputActionMap m_UI;
+    protected List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    protected readonly InputAction m_UI_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>

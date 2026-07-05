@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 public class CFX_AutoStopLoopedEffect : MonoBehaviour
 {
 	public float effectDuration = 2.5f;
-	private float d;
+	protected float d;
 	
 	void OnEnable()
 	{

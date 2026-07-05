@@ -10,6 +10,12 @@ namespace Weapons
         public int Damage;
         public float LifeTime;
         public SoundData SoundData;
+
+        /// <summary>
+        /// Returns an instance of the bullet from the object pool or creates a new one if 
+        /// it doesn't exist. Initializes the bullet with the current BulletData.
+        /// </summary>
+        /// <returns>The initialized bullet instance.</returns>
         protected override Bullet GetInstance()
         {
             if (!Bullet.Get(Key, out Bullet instance))
@@ -19,6 +25,7 @@ namespace Weapons
             instance.Initialize(this);
             return instance;
         }
+
         protected virtual void OnValidate()
         {
             if (LifeTime <= 0)

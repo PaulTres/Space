@@ -9,7 +9,7 @@ public class CFX_Demo_Translate : MonoBehaviour
 	public Vector3 rotation = Vector3.forward;
 	public Vector3 axis = Vector3.forward;
 	public bool gravity;
-	private Vector3 dir;
+	protected Vector3 dir;
 	
 	void Start ()
 	{

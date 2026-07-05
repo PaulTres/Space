@@ -8,12 +8,12 @@ namespace AudioSystem
     [RequireComponent(typeof(AudioSource))]
     public class SoundEmitter : MonoBehaviour
     {
-        public SoundData Data { get; private set; }
+        public SoundData Data { get; protected set; }
         public LinkedListNode<SoundEmitter> Node { get; set; }
 
         AudioSource audioSource;
         Coroutine playingCoroutine;
-        public Transform Transform { get; private set; }
+        public Transform Transform { get; protected set; }
         void Awake()
         {
             audioSource = transform.GetOrAddComponent<AudioSource>();

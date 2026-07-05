@@ -21,7 +21,19 @@ namespace Weapons
         [Tooltip("The turret will only fire when the angle between its barrel(s) and the " +
             "target is <= this value.")]
         public float MaxAngleDifference = 1;
-        public float MaxRangeSquared;
+        public float MaxRange = 100;
+        protected float maxRangeSquared = -1;
+        public float MaxRangeSquared
+        {
+            get
+            {
+                if (maxRangeSquared < 0)
+                {
+                    maxRangeSquared = MaxRange * MaxRange;
+                }
+                return maxRangeSquared;
+            }
+        }
         [Header("Turret movement")]
         public float RotSpeed = 50;
         public float MinElevation = 0;

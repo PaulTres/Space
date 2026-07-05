@@ -1,5 +1,6 @@
 using EventBus;
 using HP;
+using HybridBT2;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ public abstract class Unit : MonoBehaviour, IObject
         "will have their owner set to null.")]
     [SerializeField] protected bool deleteOwnershipOnDeath = true;
     public int UnitManagerIndex { get; set; }
-    public int Team { get; set; }
+    [field: SerializeField] public int Team { get; set; }
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.forward;
     public virtual Vector3 Up => Transform.forward;
@@ -37,6 +38,11 @@ public abstract class Unit : MonoBehaviour, IObject
     [SerializeField] protected float maxSignature;
     [SerializeField] protected float signatureDecreaseRate = 0.1f;
     [SerializeField] protected float signatureDecreaseCooldown = 5f;
+    /// <summary>
+    /// The time it takes before the signature starts decreasing after it has been increased. 
+    /// This is used to prevent the signature from decreasing too quickly after it has been 
+    /// increased.
+    /// </summary>
     protected float signatureIncreaseTime;
     [field: SerializeField] public float ScanRange { get; protected set; }
     protected HPComponent hpComponent;
@@ -44,12 +50,30 @@ public abstract class Unit : MonoBehaviour, IObject
     public float CurrentHPPercentage => hpComponent != null ?
         hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     [field: SerializeField] public List<Turret> Turrets { get; protected set; } = new();
+    /// <summary>
+    /// Fires on every tick. Mainly used to update turrets.
+    /// </summary>
     protected Action onTick = delegate { };
-    protected Collider[] buffer;
+    /// <summary>
+    /// Used to check for missiles in the vicinity of the unit.
+    /// </summary>
+    protected Collider[] missileBuffer;
     protected int missileCount;
     [SerializeField] protected float tickInterval = 0.5f;
     protected WaitForSeconds wait;
     protected Coroutine coroutine;
+    /// <summary>
+    /// The unit this is currently targeting.
+    /// </summary>
+    public Unit Target
+    {
+        get
+        {
+            var blackboard = Transform.GetBlackboard();
+            if (blackboard == null) return null;
+            return blackboard.GetData<Unit>(Blackboard.Keys.Target);
+        }
+    }
     #endregion
 
     #region Setup
@@ -67,7 +91,7 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void OnEnable()
     {
         coroutine = StartCoroutine(Tick());
-        buffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
+        missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         signature = defaultSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
@@ -79,7 +103,7 @@ public abstract class Unit : MonoBehaviour, IObject
         if (coroutine != null) StopCoroutine(coroutine);
         UnitManager.Unregister(this);
         this.UnregisterForRadar();
-        buffer = null;
+        missileBuffer = null;
     }
 
     protected virtual void OnDestroy()
@@ -91,14 +115,31 @@ public abstract class Unit : MonoBehaviour, IObject
     #endregion
 
     #region Functionality
+    /// <summary>
+    /// Fires when an object reaches 0 health.
+    /// </summary>
+    /// <param name="event"></param>
     public abstract void Die(ObjectDestroyed @event);
 
+    /// <summary>
+    /// Detect surrounding missiles, fire tick event(turrets), and decrease signature.
+    /// </summary>
+    /// <returns></returns>
     protected IEnumerator Tick()
     {
         yield return wait;
         GetSurroundingMissiles();
         onTick?.Invoke();
         DecreaseSignature(tickInterval);
+    }
+
+    protected virtual void OnDrawGizmos()
+    {
+        if (!Application.IsPlaying(this)) signature = defaultSignature;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(Transform.position, Signature);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Transform.position, ScanRange);
     }
 
     public void IncreaseSignature(float amount)
@@ -115,11 +156,15 @@ public abstract class Unit : MonoBehaviour, IObject
 
     protected virtual void GetSurroundingMissiles()
     {
-        missileCount = Physics.OverlapSphereNonAlloc(Transform.position, ScanRange, buffer, GlobalConfig.GetEnemyBulletCheckMask(gameObject.layer));
+        missileCount = Physics.OverlapSphereNonAlloc(Transform.position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(gameObject.layer));
     }
 
-    public (int, Collider[]) GetMissiles() => (missileCount, buffer);
+    public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
 
+    /// <summary>
+    /// Returns a list of all units that are on a different team than this unit.
+    /// </summary>
+    /// <returns></returns>
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
 }

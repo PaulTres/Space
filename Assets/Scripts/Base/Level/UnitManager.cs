@@ -30,6 +30,7 @@ public static class UnitManager
             ships[team] = new();
         }
         ships[team].Add(ship);
+        ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
         ship.UnitManagerIndex = ships[team].Count - 1;
     }
 

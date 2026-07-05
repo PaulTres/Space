@@ -5,33 +5,33 @@ namespace Player
 {
     public class AudioSettingsMenu : MonoBehaviour
     {
-        [SerializeField] Slider masterSlider;
-        [SerializeField] Slider musicSlider;
-        [SerializeField] Slider sfxSlider;
+        [SerializeField] protected Slider masterSlider;
+        [SerializeField] protected Slider musicSlider;
+        [SerializeField] protected Slider sfxSlider;
 
-        private const string MixerMaster = "MasterVolume";
-        private const string MixerMusic = "MusicVolume";
-        private const string MixerSFX = "SFXVolume";
+        protected const string mixerMaster = "MasterVolume";
+        protected const string mixerMusic = "MusicVolume";
+        protected const string mixerSFX = "SFXVolume";
 
-        private const string KeyMaster = "Audio_Master";
-        private const string KeyMusic = "Audio_Music";
-        private const string KeySFX = "Audio_SFX";
+        protected const string keyMaster = "Audio_Master";
+        protected const string keyMusic = "Audio_Music";
+        protected const string keySFX = "Audio_SFX";
 
         [SerializeField] AudioMixer audioMixer;
 
         protected void OnEnable()
         {
-            float master = PlayerPrefs.GetFloat(KeyMaster, 1f);
-            float music = PlayerPrefs.GetFloat(KeyMusic, 1f);
-            float sfx = PlayerPrefs.GetFloat(KeySFX, 1f);
+            float master = PlayerPrefs.GetFloat(keyMaster, 1f);
+            float music = PlayerPrefs.GetFloat(keyMusic, 1f);
+            float sfx = PlayerPrefs.GetFloat(keySFX, 1f);
 
             masterSlider.SetValueWithoutNotify(master);
             musicSlider.SetValueWithoutNotify(music);
             sfxSlider.SetValueWithoutNotify(sfx);
 
-            ApplyVolume(MixerMaster, master);
-            ApplyVolume(MixerMusic, music);
-            ApplyVolume(MixerSFX, sfx);
+            ApplyVolume(mixerMaster, master);
+            ApplyVolume(mixerMusic, music);
+            ApplyVolume(mixerSFX, sfx);
         }
 
         protected void OnDisable()
@@ -39,11 +39,11 @@ namespace Player
             SaveAudioSettings();
         }
 
-        public void SetMasterVolume(float value) => ApplyVolume(MixerMaster, value);
+        public void SetMasterVolume(float value) => ApplyVolume(mixerMaster, value);
 
-        public void SetMusicVolume(float value) => ApplyVolume(MixerMusic, value);
+        public void SetMusicVolume(float value) => ApplyVolume(mixerMusic, value);
 
-        public void SetSFXVolume(float value) => ApplyVolume(MixerSFX, value);
+        public void SetSFXVolume(float value) => ApplyVolume(mixerSFX, value);
 
         protected void ApplyVolume(string parameter, float linearValue)
         {
@@ -53,17 +53,17 @@ namespace Player
 
         public void SaveAudioSettings()
         {
-            PlayerPrefs.SetFloat(KeyMaster, masterSlider.value);
-            PlayerPrefs.SetFloat(KeyMusic, musicSlider.value);
-            PlayerPrefs.SetFloat(KeySFX, sfxSlider.value);
+            PlayerPrefs.SetFloat(keyMaster, masterSlider.value);
+            PlayerPrefs.SetFloat(keyMusic, musicSlider.value);
+            PlayerPrefs.SetFloat(keySFX, sfxSlider.value);
             PlayerPrefs.Save();
         }
 
         public static void LoadAudioSettings(AudioMixer mixer)
         {
-            SetMixerVolume(mixer, MixerMaster, PlayerPrefs.GetFloat(KeyMaster, 1f));
-            SetMixerVolume(mixer, MixerMusic, PlayerPrefs.GetFloat(KeyMusic, 1f));
-            SetMixerVolume(mixer, MixerSFX, PlayerPrefs.GetFloat(KeySFX, 1f));
+            SetMixerVolume(mixer, mixerMaster, PlayerPrefs.GetFloat(keyMaster, 1f));
+            SetMixerVolume(mixer, mixerMusic, PlayerPrefs.GetFloat(keyMusic, 1f));
+            SetMixerVolume(mixer, mixerSFX, PlayerPrefs.GetFloat(keySFX, 1f));
         }
 
         static void SetMixerVolume(AudioMixer mixer, string parameter, float linearValue)

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CannonData
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.WeaponParameters
   MaxShotCooldown: 5
-  RateOfFireRampUp: 0.05
+  RateOfFireRampUp: 0.01
   RateOfFireRampDown: 0.3
   MinShotCooldown: 1
+  SignatureIncrease: 1
   BulletData: {fileID: 11400000, guid: 21190ed61dd2b8f4396235a6ec5e1560, type: 2}

@@ -18,13 +18,13 @@ public class CFX_LightIntensityFade : MonoBehaviour
 	public float finalIntensity = 0.0f;
 	
 	// Base intensity, automatically taken from light parameters.
-	private float baseIntensity;
+	protected float baseIntensity;
 	
 	// If <c>true</c>, light will destructs itself on completion of the effectOnDeath
 	public bool autodestruct;
 	
-	private float p_lifetime = 0.0f;
-	private float p_delay;
+	protected float p_lifetime = 0.0f;
+	protected float p_delay;
 	
 	void Start()
 	{

@@ -28,7 +28,6 @@ public class BasicStrafeNode : LeafNodeData
     public float StopDistance = 0.5f, Radius = 10, TargetErrorThreshold = 1;
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
-        ctx.Navigation.UpdateRotation = false;
         ctx.Navigation.SetDestination(null);
         ((LeafNode)n).SetData((int)Keys.OldStopDistance, ctx.Navigation.StopDistance);
         ctx.Navigation.StopDistance = StopDistance;

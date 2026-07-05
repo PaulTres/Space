@@ -12,7 +12,7 @@ public class WFX_LightFlicker : MonoBehaviour
 {
 	public float time = 0.05f;
 	
-	private float timer;
+	protected float timer;
 	
 	void Start ()
 	{

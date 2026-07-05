@@ -1,4 +1,5 @@
 using HP;
+using HybridBT2;
 using Radar;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Utilities
         {
             if (@object == null) throw new System.ArgumentNullException();
 
-            var r = RadarSystem.TryGetInstance();
+            var r = PlayerTargetSystem.TryGetInstance();
             if (r != null) r.RegisterTarget(@object);
         }
 
@@ -19,7 +20,7 @@ namespace Utilities
         {
             if (@object == null) throw new System.ArgumentNullException();
 
-            var r = RadarSystem.TryGetInstance();
+            var r = PlayerTargetSystem.TryGetInstance();
             if (r != null) r.UnregisterTarget(@object);
         }
 
@@ -35,12 +36,21 @@ namespace Utilities
             return @object.GetInstanceID() == other.GetInstanceID();
         }
 
+        /// <summary>
+        /// Returns a position with oscillation based on the distance between the object 
+        /// and the scanner. The further away the object is, the more oscillation is applied. This is used to simulate radar inaccuracies.
+        /// </summary>
+        /// <param name="object">The object to get the position for.</param>
+        /// <param name="scanner">The scanner unit.</param>
+        /// <returns>The position with oscillation applied.</returns>
         public static Vector3 GetPositionWithOscilation(this IObject @object, Unit scanner)
         {
             var dist = Mathf.Max((scanner.Transform.position -
-                @object.Transform.position).sqrMagnitude -
+                @object.Transform.position).magnitude -
                 @object.Signature - scanner.ScanRange, 0);
-            return @object.Transform.position + dist * Random.insideUnitSphere;
+            return @object.Transform.position + Mathf.Min(GlobalConfig.
+                MaxOscillationMagnitude, dist * GlobalConfig.PositionOscillationCoefficient) *
+                Random.insideUnitSphere;
         }
         #endregion
 
@@ -61,6 +71,13 @@ namespace Utilities
             return angle;
         }
 
+        /// <summary>
+        /// Returns a vector that is perpendicular to the input vector. If the input vector 
+        /// is zero, returns zero. If normalize is true, returns a normalized vector.
+        /// </summary>
+        /// <param name="inputVector">The input vector.</param>
+        /// <param name="normalize">Whether to normalize the resulting vector.</param>
+        /// <returns>A vector that is perpendicular to the input vector.</returns>
         public static Vector3 Perpendicular(this Vector3 inputVector, bool normalize = true)
         {
             if (inputVector == Vector3.zero) return Vector3.zero;
@@ -81,6 +98,17 @@ namespace Utilities
         }
 
         #region Transform
+        public static Blackboard GetBlackboard(this Transform transform)
+        {
+            if (transform == null) throw new System.ArgumentNullException();
+            var comp = ComponentRegister<BanditTree>.Get(transform);
+            if (comp != null)
+            {
+                return comp.Blackboard;
+            }
+            return null;
+        }
+
         public static float GetHP(this Transform transform, bool percentage = false)
         {
             if (transform == null) throw new System.ArgumentNullException();
@@ -154,6 +182,14 @@ namespace Utilities
             return velocityProvider != null ? (velocityProvider.LinearVelocity, velocityProvider.AngularVelocity) : (Vector3.zero, Vector3.zero);
         }
 
+        /// <summary>
+        /// Applies a DamageInfo to the HPComponent of the given Transform. Returns true if 
+        /// damage was applied, false otherwise.
+        /// </summary>
+        /// <param name="transform">The Transform to apply damage to.</param>
+        /// <param name="damageInfo">The DamageInfo to apply.</param>
+        /// <returns>True if damage was applied, false otherwise.</returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
         public static bool TakeDamage(this Transform transform, DamageInfo damageInfo)
         {
             if (transform == null) throw new System.ArgumentNullException();

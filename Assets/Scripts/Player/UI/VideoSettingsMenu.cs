@@ -10,7 +10,7 @@ namespace Player
         [SerializeField] Toggle vSyncToggle, fullscreenToggle;
         [SerializeField] TMP_Dropdown resolutionDropdown;
 
-        private Resolution[] resolutions;
+        protected Resolution[] resolutions;
 
         public const string KeyQuality = "QualityLevel", KeyVSync = "VSync", KeyFullscreen = "Fullscreen";
 
@@ -55,7 +55,7 @@ namespace Player
             Screen.SetResolution(r.width, r.height, Screen.fullScreenMode, r.refreshRateRatio);
         }
 
-        private void PopulateResolutions()
+        protected void PopulateResolutions()
         {
             resolutions = Screen.resolutions;
             resolutionDropdown.ClearOptions();
@@ -85,6 +85,7 @@ namespace Player
 
         public static void LoadVideoSettings()
         {
+            QualitySettings.shadows = ShadowQuality.Disable;
             QualitySettings.SetQualityLevel(PlayerPrefs.GetInt(KeyQuality,
                 QualitySettings.names.Length - 1), true);
             QualitySettings.vSyncCount = PlayerPrefs.GetInt(KeyVSync, 0);

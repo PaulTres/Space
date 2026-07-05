@@ -13,7 +13,7 @@ namespace Weapons
                 if (ceaseFire != value)
                 {
                     ceaseFire = value;
-                    if (!ceaseFire)
+                    if (ceaseFire)
                     {
                         Target = null;
                     }
@@ -49,7 +49,8 @@ namespace Weapons
         protected virtual void OnDisable()
         {
             Target = null;
-            GlobalUpdater.TryGetInstance().UnregisterUpdate(Tick);
+            var u = GlobalUpdater.TryGetInstance();
+            if (u != null) u.UnregisterUpdate(Tick);
         }
         #endregion
 
@@ -62,19 +63,27 @@ namespace Weapons
         public bool IsInAngle(Vector3 position)
         {
             var dir = (position - Transform.position).normalized;
+            if (Mathf.Abs(Vector3.Dot(Transform.up, dir)) == 1) return false;
 
             var localRotation = Quaternion.Inverse(Transform.rotation) *
                 Quaternion.LookRotation(dir, Transform.up);
 
-            if (localRotation.eulerAngles.y < @params.MinRot ||
-                localRotation.eulerAngles.y > @params.MaxRot) return false;
+            var y = Extensions.NormalizeAngle(localRotation.eulerAngles.y);
+            if (y < @params.MinRot || y > @params.MaxRot) return false;
 
-            if (localRotation.eulerAngles.x < -@params.MaxElevation ||
-                localRotation.eulerAngles.x > -@params.MinElevation) return false;
+            var x = Extensions.NormalizeAngle(localRotation.eulerAngles.x);
+            if (x < -@params.MaxElevation || x > -@params.MinElevation) return false;
 
             return true;
         }
 
+        /// <summary>
+        /// Computes the position to aim at for a given target, taking into account the 
+        /// target's movement and the projectile speed. May introduce randomness based on 
+        /// the target's signature.
+        /// </summary>
+        /// <param name="target">The target to aim at.</param>
+        /// <returns>The position to aim at.</returns>
         public Vector3 ComputeTargetingPosition(IObject target)
         {
             float timeToHit = 0;
@@ -82,28 +91,46 @@ namespace Weapons
             if (m != null) timeToHit = (target.Transform.position -
                     Transform.position).magnitude / m.TopSpeed;
 
+            //Debug.Log(timeToHit);
             var futureTargetPos = target.GetPositionWithOscilation(Owner) +
                 target.LinearVelocity * timeToHit;
 
             return futureTargetPos;
         }
 
+        /// <summary>
+        /// Returns whether a given target is valid for the turret to aim at. Checks for 
+        /// obstructions, if the target is active, within range, and within the turret's 
+        /// angle limits.
+        /// </summary>
+        /// <param name="target">The target to check.</param>
+        /// <returns>True if the target is valid, false otherwise.</returns>
         protected bool IsTargetValid(IObject target)
         {
-            if (target == null) return false;
+            if (target == null || !target.Transform.gameObject.activeSelf) return false;
+
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;
+            if (Physics.Linecast(Transform.position, target.Transform.position,
+                GlobalConfig.GetTurretObstructionMask(Transform.root.gameObject.layer))) return false;
             return true;
         }
 
+        /// <summary>
+        /// Go over available targets and select the best one based on the turret's 
+        /// parameters. If a target is already selected, it will only be replaced if 
+        /// a better one is found.
+        /// </summary>
         public void UpdateTargets()
         {
             if (CeaseFire || Owner == null) return;
 
+            //Debug.Log($"Turret {transform.name} checking for targets.");
+
             if (Target != null && !Target.Transform.gameObject.activeSelf) Target = null;
 
-            float bestScore = Target == null ? 0 : @params.EvaluateTarget(this, Target);
+            float bestScore = Target == null ? float.MinValue : @params.EvaluateTarget(this, Target);
 
             #region Evaluate missiles
             if (TargetMissiles)
@@ -174,9 +201,10 @@ namespace Weapons
                 for (int i = 0; i < targets.Count; i++)
                 {
                     if (!IsTargetValid(targets[i])) continue;
-
+                    //Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = @params.EvaluateTarget(this, targets[i]);
-                    if (score <= 0) return;
+                    //Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
+                    if (score <= 0 && !@params.AllowZeroScoreTarget) continue;
 
                     if (score > bestScore + @params.MinScoreDelta)
                     {
@@ -200,10 +228,13 @@ namespace Weapons
             {
                 if (Target.Transform.gameObject.activeSelf)
                 {
+                    //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                     var pos = ComputeTargetingPosition(Target);
+                    Debug.DrawLine(Transform.position, pos, Color.red);
+                    LookAt(pos, deltaTime);
                     if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                     {
-                        LookAt(pos, deltaTime);
+                        //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         if (Vector3.Angle(ElevationPivot.forward, (pos -
                             Transform.position)) < @params.MaxAngleDifference)
                         {
@@ -215,23 +246,39 @@ namespace Weapons
                 }
                 else Target = null;
             }
+            else
+            {
+                RotateToIdle(deltaTime);
+                UpdateTargets();
+            }
             DecreaseReadiness(deltaTime);
-            UpdateTargets();
         }
 
+        /// <summary>
+        /// Increases readiness on the weapon.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         protected void IncreaseReadiness(float deltaTime)
         {
             weapon.IncreaseReadiness(deltaTime);
         }
 
+        /// <summary>
+        /// Calls DecreaseReadiness on the weapon.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         protected void DecreaseReadiness(float deltaTime)
         {
             weapon.DecreaseReadiness(deltaTime);
-            RotateToIdle(deltaTime);
         }
 
+        /// <summary>
+        /// Rotate the turret to idle rotation.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         protected void RotateToIdle(float deltaTime)
         {
+            //Debug.Log("Rotating turret to idle position.");
             if (RotationPivot.rotation == Quaternion.identity && ElevationPivot.rotation == Quaternion.identity) return;
 
             if (RotationPivot == ElevationPivot)
@@ -270,6 +317,12 @@ namespace Weapons
             }
         }
 
+        /// <summary>
+        /// Treats the rotation and elevation pivots as if they are the same object. Rotates 
+        /// them to face a given target.
+        /// </summary>
+        /// <param name="direction">The direction to rotate towards.</param>
+        /// <param name="deltaTime">The time elapsed since the last update.</param>
         protected void RotateUnified(Vector3 direction, float deltaTime)
         {
             var newRotation = Quaternion.LookRotation(direction, Transform.up);
@@ -285,6 +338,12 @@ namespace Weapons
             RotationPivot.localRotation = Quaternion.Euler(targetPitch, targetYaw, 0);
         }
 
+        /// <summary>
+        /// Rotate the rotation pivot and elevation pivot separately towards a given 
+        /// direction. Performs no checks to see if that is possible.
+        /// </summary>
+        /// <param name="direction">The direction to rotate towards.</param>
+        /// <param name="deltaTime">The time elapsed since the last update.</param>
         protected void RotateSeparate(Vector3 direction, float deltaTime)
         {
             var newRotation = Quaternion.LookRotation(direction, Transform.up);
@@ -304,6 +363,8 @@ namespace Weapons
                 localRotation.eulerAngles.x), -@params.MaxElevation, -@params.MinElevation);
             //var targetPitch=Mathf.Clamp(ElevationPivot.localRotation.x,)
             ElevationPivot.localRotation = Quaternion.Euler(targetPitch, 0, 0);
+
+            //Debug.Log($"Turret {transform.name} rotated to yaw {targetYaw} and pitch {targetPitch}: {ElevationPivot.localRotation.eulerAngles}.");
         }
         #endregion
     }

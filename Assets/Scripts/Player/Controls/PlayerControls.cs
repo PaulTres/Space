@@ -29,8 +29,8 @@ using UnityEngine.InputSystem.Utilities;
 /// // Example of using an InputActionMap named "Player" from a UnityEngine.MonoBehaviour implementing callback interface.
 /// public class Example : MonoBehaviour, MyActions.IPlayerActions
 /// {
-///     private MyActions_Actions m_Actions;                  // Source code representation of asset.
-///     private MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
+///     protected MyActions_Actions m_Actions;                  // Source code representation of asset.
+///     protected MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
 ///
 ///     void Awake()
 ///     {
@@ -468,15 +468,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
 
     // BasicControls
-    private readonly InputActionMap m_BasicControls;
-    private List<IBasicControlsActions> m_BasicControlsActionsCallbackInterfaces = new List<IBasicControlsActions>();
-    private readonly InputAction m_BasicControls_Move;
-    private readonly InputAction m_BasicControls_Roll;
-    private readonly InputAction m_BasicControls_MouseLook;
-    private readonly InputAction m_BasicControls_FreeLookToggle;
-    private readonly InputAction m_BasicControls_Zoom;
-    private readonly InputAction m_BasicControls_Reset;
-    private readonly InputAction m_BasicControls_ToggleDampeners;
+    protected readonly InputActionMap m_BasicControls;
+    protected List<IBasicControlsActions> m_BasicControlsActionsCallbackInterfaces = new List<IBasicControlsActions>();
+    protected readonly InputAction m_BasicControls_Move;
+    protected readonly InputAction m_BasicControls_Roll;
+    protected readonly InputAction m_BasicControls_MouseLook;
+    protected readonly InputAction m_BasicControls_FreeLookToggle;
+    protected readonly InputAction m_BasicControls_Zoom;
+    protected readonly InputAction m_BasicControls_Reset;
+    protected readonly InputAction m_BasicControls_ToggleDampeners;
     /// <summary>
     /// Provides access to input actions defined in input action map "BasicControls".
     /// </summary>
@@ -630,9 +630,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public BasicControlsActions @BasicControls => new BasicControlsActions(this);
 
     // UI
-    private readonly InputActionMap m_UI;
-    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    private readonly InputAction m_UI_Escape;
+    protected readonly InputActionMap m_UI;
+    protected List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    protected readonly InputAction m_UI_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>

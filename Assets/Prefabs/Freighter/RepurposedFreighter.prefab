@@ -348,8 +348,9 @@ GameObject:
   - component: {fileID: 3154723758667108999}
   - component: {fileID: 2980037791619241156}
   - component: {fileID: 4298294375742760955}
+  - component: {fileID: 4609933958113882276}
   m_Layer: 0
-  m_Name: Freighter
+  m_Name: RepurposedFreighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,25 +415,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   deleteOwnershipOnDeath: 1
+  <Team>k__BackingField: 2
   defaultSignature: 7
   maxSignature: 0
+  signatureDecreaseRate: 0.1
+  signatureDecreaseCooldown: 5
   <ScanRange>k__BackingField: 5
   <Turrets>k__BackingField:
   - {fileID: 6609336810006813245}
   tickInterval: 0.5
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
   effectOnDeath: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
   maxVelocityMagnitude: 5
   forwardThrust: 1
-  rotationSpeed: 5
+  <RotationSpeed>k__BackingField: 20
   strafeThrust: 1
   <DampenVelocityToZero>k__BackingField: 1
   navPivot: {fileID: 9068449300522950742}
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
   checker: {fileID: 11400000, guid: 6056b7ab88ce01f40a6615f2fe497788, type: 2}
-  <UpdateRotation>k__BackingField: 1
+--- !u!114 &4609933958113882276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842088929563580042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f764f23fdef8054b86888c1cee5b779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BanditTree
+  rootData: {fileID: 11400000, guid: 16555f55f6f6ec148b1ad1d424aba8f7, type: 2}
+  tickInterval: 0.1
+  shouldRun: 1
 --- !u!1 &4933765255462686569
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9efb0f05974f348888b4719273a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
+  <CurrentShotCooldown>k__BackingField: 0
   params: {fileID: 11400000, guid: 60fed34bdaf644c40b13d082c04abb6c, type: 2}
   shootPoints:
   - {fileID: 2882820736332348734}
@@ -522,13 +539,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5796470622578978281}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2564895730712824694}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &6209567729492945900
 GameObject:
   m_ObjectHideFlags: 0

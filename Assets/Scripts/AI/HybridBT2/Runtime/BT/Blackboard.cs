@@ -7,10 +7,12 @@ namespace HybridBT2
         public enum Keys
         {
             Target,
-            Launchers
+            Launchers,
+            TargetPosition
         }
         public readonly Transform Transform;
         public readonly Unit Unit;
+        public Vector3 Position => Unit.Position;
         public readonly Navigation Navigation;
         /// <summary>
         /// Time since last tree tick.

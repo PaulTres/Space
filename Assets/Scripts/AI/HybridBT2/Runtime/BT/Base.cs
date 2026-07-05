@@ -111,7 +111,7 @@ namespace HybridBT2
         {
             get
             {
-                return alwaysCheck.HasValue ? alwaysCheck.Value : false;
+                return alwaysCheck ?? false;
             }
             set
             {

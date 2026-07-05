@@ -6,9 +6,9 @@ public abstract class Ship : Unit
 {
     [Header("Ship")]
     [SerializeField] protected PoolableEffect effectOnDeath;
-    [SerializeField] protected float maxVelocityMagnitude = 5f;
+    [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
     [SerializeField] protected float forwardThrust = 1;
-    [SerializeField] protected float rotationSpeed = 5;
+    [field: SerializeField] public float RotationSpeed { get; protected set; } = 5;
     [SerializeField] protected float strafeThrust = 1;
     protected Rigidbody rb;
     protected Vector3 angularVelocity;

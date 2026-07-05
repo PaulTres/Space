@@ -118,7 +118,7 @@ public class CFX_SpawnSystem : MonoBehaviour
 	
 	// INTERNAL SYSTEM ----------------------------------------------------------------------------------------------------------------------------------------
 	
-	static private CFX_SpawnSystem instance;
+	static protected CFX_SpawnSystem instance;
 	
 	public GameObject[] objectsToPreload = new GameObject[0];
 	public int[] objectsToPreloadTimes = new int[0];
@@ -127,11 +127,11 @@ public class CFX_SpawnSystem : MonoBehaviour
 	public bool onlyGetInactiveObjects = false;
 	public bool instantiateIfNeeded = false;
 	
-	private bool allObjectsLoaded;
-	private Dictionary<int,List<GameObject>> instantiatedObjects = new Dictionary<int, List<GameObject>>();
-	private Dictionary<int,int> poolCursors = new Dictionary<int, int>();
+	protected bool allObjectsLoaded;
+	protected Dictionary<int,List<GameObject>> instantiatedObjects = new Dictionary<int, List<GameObject>>();
+	protected Dictionary<int,int> poolCursors = new Dictionary<int, int>();
 	
-	private void addObjectToPool(GameObject sourceObject, int number)
+	protected void addObjectToPool(GameObject sourceObject, int number)
 	{
 		int uniqueId = sourceObject.GetInstanceID();
 
@@ -172,7 +172,7 @@ public class CFX_SpawnSystem : MonoBehaviour
 		}
 	}
 	
-	private void removeObjectsFromPool(GameObject sourceObject)
+	protected void removeObjectsFromPool(GameObject sourceObject)
 	{
 		int uniqueId = sourceObject.GetInstanceID();
 		
@@ -195,7 +195,7 @@ public class CFX_SpawnSystem : MonoBehaviour
 		poolCursors.Remove(uniqueId);
 	}
 
-	private void increasePoolCursor(int uniqueId)
+	protected void increasePoolCursor(int uniqueId)
 	{
 		instance.poolCursors[uniqueId]++;
 		if(instance.poolCursors[uniqueId] >= instance.instantiatedObjects[uniqueId].Count)

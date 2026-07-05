@@ -7,6 +7,14 @@ using Utilities;
 /// </summary>
 public interface IObject : IRegisterableComponent
 {
+    public bool Active
+    {
+        get
+        {
+            if (Transform == null) return false;
+            return Transform.gameObject.activeSelf;
+        }
+    }
     float Signature { get; }
     Transform Transform { get; }
     public Vector3 Forward { get; }

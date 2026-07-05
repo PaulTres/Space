@@ -16,24 +16,24 @@ public class WFX_Demo : MonoBehaviour
 	public bool orderedSpawns = true;
 	public float step = 1.0f;
 	public float range = 5.0f;
-	private float order = -5.0f;
+	protected float order = -5.0f;
 	
 	public GameObject walls;
 	public GameObject bulletholes;
 	
 	public GameObject[] ParticleExamples;
 	
-	private int exampleIndex;
-	private string randomSpawnsDelay = "0.5";
-	private bool randomSpawns;
+	protected int exampleIndex;
+	protected string randomSpawnsDelay = "0.5";
+	protected bool randomSpawns;
 	
-	private bool slowMo;
-	private bool rotateCam = true;
+	protected bool slowMo;
+	protected bool rotateCam = true;
 	
 	public Material wood,concrete,metal,checker;
 	public Material woodWall,concreteWall,metalWall,checkerWall;
-	private string groundTextureStr = "Checker";
-	private List<string> groundTextures = new List<string>(new string[]{"Concrete","Wood","Metal","Checker"});
+	protected string groundTextureStr = "Checker";
+	protected List<string> groundTextures = new List<string>(new string[]{"Concrete","Wood","Metal","Checker"});
 		
 	void OnMouseDown()
 	{
@@ -172,7 +172,7 @@ public class WFX_Demo : MonoBehaviour
 	}
 	
 	public GameObject m4, m4fps;
-	private bool rotate_m4 = true;
+	protected bool rotate_m4 = true;
 	
 	IEnumerator RandomSpawnsCoroutine()
 	{
@@ -214,7 +214,7 @@ public class WFX_Demo : MonoBehaviour
 		}
 	}
 	
-	private void prevTexture()
+	protected void prevTexture()
 	{
 		int index = groundTextures.IndexOf(groundTextureStr);
 		index--;
@@ -226,7 +226,7 @@ public class WFX_Demo : MonoBehaviour
 		selectMaterial();
 		
 	}
-	private void nextTexture()
+	protected void nextTexture()
 	{
 		int index = groundTextures.IndexOf(groundTextureStr);
 		index++;
@@ -238,7 +238,7 @@ public class WFX_Demo : MonoBehaviour
 		selectMaterial();
 	}
 	
-	private void selectMaterial()
+	protected void selectMaterial()
 	{
 		switch(groundTextureStr)
 		{
@@ -268,14 +268,14 @@ public class WFX_Demo : MonoBehaviour
 		}
 	}
 	
-	private void prevParticle()
+	protected void prevParticle()
 	{
 		exampleIndex--;
 		if(exampleIndex < 0) exampleIndex = ParticleExamples.Length - 1;
 		
 		showHideStuff();
 	}
-	private void nextParticle()
+	protected void nextParticle()
 	{
 		exampleIndex++;
 		if(exampleIndex >= ParticleExamples.Length) exampleIndex = 0;
@@ -283,7 +283,7 @@ public class WFX_Demo : MonoBehaviour
 		showHideStuff();
 	}
 	
-	private void showHideStuff()
+	protected void showHideStuff()
 	{
 		//Show m4
 		if(ParticleExamples[exampleIndex].name.StartsWith("WFX_MF Spr"))
