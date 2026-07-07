@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db62fcb7749c7b74dabb71b2d40c6326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
+  type: 0
   deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 2
   defaultSignature: 7
@@ -425,7 +426,7 @@ MonoBehaviour:
   - {fileID: 6609336810006813245}
   tickInterval: 0.5
   effectOnDeath: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
-  maxVelocityMagnitude: 5
+  <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 20
   strafeThrust: 1
@@ -446,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f764f23fdef8054b86888c1cee5b779, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BanditTree
-  rootData: {fileID: 11400000, guid: 16555f55f6f6ec148b1ad1d424aba8f7, type: 2}
+  rootData: {fileID: 11400000, guid: 5e4760723fd514e4dbbb80c853505187, type: 2}
   tickInterval: 0.1
   shouldRun: 1
 --- !u!1 &4933765255462686569

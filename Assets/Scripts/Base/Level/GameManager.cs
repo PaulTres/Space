@@ -7,6 +7,7 @@ public static class GameManager
 {
     static GameSave currentSave;
     static public readonly List<ObjectDestroyed> UnitsDestroyed = new();
+    public static IObject Player { get; set; } = null;
 
     #region Pausing
     public static bool IsPaused => Time.timeScale == 0f;

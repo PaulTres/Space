@@ -5,6 +5,9 @@ using UnityEngine;
 
 public static class UnitManager
 {
+    /// <summary>
+    /// All active ships. The key is a ship's team.
+    /// </summary>
     readonly static Dictionary<int, List<Unit>> ships = new();
 
     public static List<Unit> GetShips(int team)

@@ -7,6 +7,13 @@ using Utilities;
 /// </summary>
 public interface IObject : IRegisterableComponent
 {
+    public enum Type
+    {
+        Missile,
+        Skiff
+    }
+
+    public Type ObjectType { get; }
     public bool Active
     {
         get
@@ -23,7 +30,9 @@ public interface IObject : IRegisterableComponent
     public Vector3 Position => Transform.position;
     Vector3 AngularVelocity { get; }
     Vector3 LinearVelocity { get; }
+    public virtual IObject Target => null;
 }
+
 public struct DamageInfo : IEvent
 {
     public float Amount { get; set; }

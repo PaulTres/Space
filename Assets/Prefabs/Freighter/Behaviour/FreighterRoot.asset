@@ -15,5 +15,8 @@ MonoBehaviour:
   myName: 
   AlwaysCheck: 1
   Conditions: []
-  Services: []
-  Children: []
+  Services:
+  - {fileID: 11400000, guid: 12a11a2104d92ff418b6e5a3721b5dc7, type: 2}
+  Children:
+  - {fileID: 11400000, guid: 16555f55f6f6ec148b1ad1d424aba8f7, type: 2}
+  - {fileID: 11400000, guid: 78ac6db0c4d1f9244a90efadfe633fa4, type: 2}

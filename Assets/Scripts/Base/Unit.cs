@@ -14,6 +14,8 @@ public abstract class Unit : MonoBehaviour, IObject
     [Header("Unit")]
     [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
         "will have their owner set to null.")]
+    [SerializeField] protected IObject.Type type;
+    public IObject.Type ObjectType => type;
     [SerializeField] protected bool deleteOwnershipOnDeath = true;
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
@@ -34,7 +36,7 @@ public abstract class Unit : MonoBehaviour, IObject
     }
     public Vector3 Position => Transform.position;
     protected float signature;
-    [SerializeField] protected float defaultSignature;
+    [field: SerializeField] public float DefaultSignature { get; protected set; }
     [SerializeField] protected float maxSignature;
     [SerializeField] protected float signatureDecreaseRate = 0.1f;
     [SerializeField] protected float signatureDecreaseCooldown = 5f;
@@ -65,7 +67,7 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
-    public Unit Target
+    IObject IObject.Target
     {
         get
         {
@@ -79,7 +81,7 @@ public abstract class Unit : MonoBehaviour, IObject
     #region Setup
     protected virtual void Awake()
     {
-        maxSignature = Mathf.Max(maxSignature, defaultSignature);
+        maxSignature = Mathf.Max(maxSignature, DefaultSignature);
         Turrets ??= new(GetComponentsInChildren<Turret>());
         wait = new(tickInterval);
         if (hpComponent != null) hpComponent = GetComponent<HPComponent>();
@@ -92,7 +94,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         coroutine = StartCoroutine(Tick());
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
-        signature = defaultSignature;
+        signature = DefaultSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
         signatureIncreaseTime = Time.time;
@@ -135,7 +137,7 @@ public abstract class Unit : MonoBehaviour, IObject
 
     protected virtual void OnDrawGizmos()
     {
-        if (!Application.IsPlaying(this)) signature = defaultSignature;
+        if (!Application.IsPlaying(this)) signature = DefaultSignature;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Transform.position, Signature);
         Gizmos.color = Color.blue;
@@ -151,7 +153,7 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void DecreaseSignature(float deltaTime)
     {
         if (Time.time - signatureIncreaseTime < signatureDecreaseCooldown) return;
-        signature = Mathf.Max(defaultSignature, signature - signatureDecreaseRate * deltaTime);
+        signature = Mathf.Max(DefaultSignature, signature - signatureDecreaseRate * deltaTime);
     }
 
     protected virtual void GetSurroundingMissiles()

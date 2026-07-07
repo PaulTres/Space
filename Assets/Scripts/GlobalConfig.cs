@@ -1,22 +1,86 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
-/// <summary>
-/// This class has a bunch of global parameters and shit.
-/// </summary>
-public static class GlobalConfig
+[CreateAssetMenu(menuName = "ScriptableObjects/GlobalConfig", fileName = "GlobalConfig")]
+public class GlobalConfig : ScriptableObject
 {
-    #region Units
-    public static readonly List<UnitData> PossibleAllyUnits = new();
-    public static readonly List<UnitData> PossibleEnemyUnits = new();
-
-    public static UnitData GetPlayerVariant(UnitData unitData)
+    #region Access
+    static readonly string addressableAdress = "GlobalConfig";
+    static GlobalConfig instance;
+    public static GlobalConfig Instance
     {
-        throw new System.NotImplementedException();
+        get
+        {
+            if (instance == null)
+            {
+
+                var handle = Addressables.LoadAssetAsync<GlobalConfig>(addressableAdress);
+                instance = handle.WaitForCompletion();
+                foreach (var a in instance.objectIconsList)
+                {
+                    instance.objectIconsDict.Add(a.Type, a.Icon);
+                }
+            }
+            return instance;
+        }
+    }
+
+    public static async Task LoadInstance()
+    {
+        var handle = Addressables.LoadAssetAsync<GlobalConfig>(addressableAdress);
+        instance = await handle.Task;
+        foreach (var a in instance.objectIconsList)
+        {
+            instance.objectIconsDict.Add(a.Type, a.Icon);
+        }
     }
     #endregion
 
+    #region UI
+    [System.Serializable]
+    public class ObjectTypeIconCorrespondence
+    {
+        public IObject.Type Type;
+        public Sprite Icon;
+    }
+
+    [SerializeField] protected List<ObjectTypeIconCorrespondence> objectIconsList = new();
+    protected Dictionary<IObject.Type, Sprite> objectIconsDict = new();
+
+    public static Sprite GetIcon(IObject.Type type)
+    {
+        return Instance.objectIconsDict[type];
+    }
+
+    [SerializeField] protected float iconSizeCoefficient = 5;
+    public static float IconSizeCoefficient => Instance.iconSizeCoefficient;
     public static readonly float UIUpdateCooldown = 1;
+
+    /// <summary>
+    /// Returns what color should an object appear with on the radar. Default is white.
+    /// </summary>
+    /// <param name="ownerLayer">The game object layer of an object.</param>
+    /// <returns></returns>
+    public static Color GetColor(int ownerLayer)
+    {
+        return ownerLayer switch
+        {
+            0 => Color.white,
+            6 => Color.blue,
+            7 => Color.blue,
+            8 => Color.red,
+            9 => Color.red,
+            _ => Color.white
+        };
+    }
+    #endregion
+
+    #region Misc
+    public static readonly string PlayerOptionsAddressableTag = "Player",
+         AllyUnitsAddressableTag = "Allies", EnemyUnitsAddressableTag = "Enemies";
+
     public static readonly float PositionOscillationCoefficient = 1;
     public static readonly float MaxOscillationMagnitude = 1;
     /// <summary>
@@ -33,7 +97,8 @@ public static class GlobalConfig
     /// </summary>
     public static readonly float MissionEndDuration = 3;
     public static readonly float ParticleSystemLifetimeCheckInterval = 1;
-    public static readonly int MissionSceneIndex = 3, EndMissionSceneIndex = 4, LobbySceneIndex = 2;
+    public static readonly int MainMenuSceneIndex = 1, MissionSceneIndex = 3, EndMissionSceneIndex = 4, LobbySceneIndex = 2;
+    #endregion
 
     #region Layers and layer masks
     /// <summary>
@@ -105,25 +170,6 @@ public static class GlobalConfig
             2 => 8,
             _ => 0
         };
-    }
-    #endregion
-
-    #region Colors
-    static readonly Dictionary<int, Color> teamColors = new()
-    {
-        { 0,Color.white},{6,Color.blue},{8,Color.red},
-        { 10,Color.white},{7,Color.blue},{9,Color.red}
-    };
-
-    /// <summary>
-    /// Returns what color should an object appear with on the radar. Default is white.
-    /// </summary>
-    /// <param name="ownerLayer">The game object layer of an object.</param>
-    /// <returns></returns>
-    public static Color GetColor(int ownerLayer)
-    {
-        if (teamColors.TryGetValue(ownerLayer, out var color)) return color;
-        return Color.white;
     }
     #endregion
 

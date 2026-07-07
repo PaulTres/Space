@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BroadsideFacingNode
   myName: 
   AlwaysCheck: 1
-  Conditions: []
-  Services:
-  - {fileID: 11400000, guid: 12a11a2104d92ff418b6e5a3721b5dc7, type: 2}
+  Conditions:
+  - {fileID: 11400000, guid: ff33d5f8a5d6c704ba713c6f4ffdf2b7, type: 2}
+  Services: []
   TargetFacing: 0
   TicksBeforeRepath: 2
   StrafeDistance: 0

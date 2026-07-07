@@ -1,5 +1,6 @@
 using Effects;
 using Player;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -10,7 +11,8 @@ namespace Utilities
     {
         [Tooltip("The audio mixer to use for audio settings.")]
         [SerializeField] protected AudioMixer audioMixer;
-        protected void Start()
+
+        protected async void Start()
         {
             PoolableEffect.InitializePool();
             Bullet.InitializePool();
@@ -18,10 +20,12 @@ namespace Utilities
             {
                 EventBus.EventBusUtil.ClearAllBuses();
             };
-
             VideoSettingsMenu.LoadVideoSettings();
             AudioSettingsMenu.LoadAudioSettings(audioMixer);
-            SceneManager.LoadScene(1);
+
+            await Task.WhenAll(GlobalConfig.LoadInstance(), UnitData.LoadAllSpawnableUnits());
+
+            SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
         }
     }
 }

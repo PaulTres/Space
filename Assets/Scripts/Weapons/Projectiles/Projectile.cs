@@ -4,6 +4,7 @@ namespace Weapons
 {
     public class Projectile : Bullet, IObject
     {
+        public IObject.Type ObjectType => IObject.Type.Missile;
         protected float topSpeed, acceleration;
         protected Vector3 linearVelocity, angularVelocity;
         public Vector3 Forward => Transform.forward;

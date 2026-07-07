@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 using Utilities;
 namespace Player
 {
@@ -35,7 +34,6 @@ namespace Player
         public static List<string> GetSaveFileNames()
         {
             List<string> fileNames = new();
-            Debug.Log("Saves");
             var dir = new DirectoryInfo(GlobalConfig.SaveFileLocation);
             foreach (var file in dir.GetFiles("GameSave_*"))
             {
