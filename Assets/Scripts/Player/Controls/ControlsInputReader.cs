@@ -15,6 +15,7 @@ namespace Player
         public event UnityAction<float> FreeLookToggleEvent = delegate { };
         public event UnityAction ResetEvent = delegate { };
         public event UnityAction DampenerToggleEvent = delegate { };
+        public event UnityAction FindTargetEvent = delegate { };
 
         public void EnablePlayerActions()
         {
@@ -27,6 +28,7 @@ namespace Player
             ZoomEvent ??= delegate { };
             ResetEvent ??= delegate { };
             DampenerToggleEvent ??= delegate { };
+            FindTargetEvent ??= delegate { };
         }
 
         public void DisablePlayerActions()
@@ -35,12 +37,18 @@ namespace Player
             {
                 inputActions.BasicControls.SetCallbacks(null);
                 inputActions.Disable();
-                MoveEvent = null;
-                ResetEvent = null;
-                RollEvent = ZoomEvent = null;
-                FreeLookToggleEvent = null;
-                DampenerToggleEvent = null;
+                DisableCallbacks();
             }
+        }
+
+        public void DisableCallbacks()
+        {
+            MoveEvent = delegate { };
+            ResetEvent = delegate { };
+            RollEvent = ZoomEvent = delegate { };
+            FreeLookToggleEvent = delegate { };
+            DampenerToggleEvent = delegate { };
+            FindTargetEvent = delegate { };
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -73,6 +81,7 @@ namespace Player
         {
             ZoomEvent?.Invoke(context.ReadValue<float>());
         }
+
         public void OnReset(InputAction.CallbackContext context)
         {
             if (context.started) ResetEvent?.Invoke();
@@ -81,6 +90,11 @@ namespace Player
         public void OnToggleDampeners(InputAction.CallbackContext context)
         {
             if (context.started) DampenerToggleEvent?.Invoke();
+        }
+
+        public void OnFindTarget(InputAction.CallbackContext context)
+        {
+            FindTargetEvent?.Invoke();
         }
     }
 }

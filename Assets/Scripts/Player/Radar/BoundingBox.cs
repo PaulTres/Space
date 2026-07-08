@@ -16,6 +16,7 @@ namespace Radar
             }
         }
         [field: SerializeField] public Image Icon { get; protected set; }
+        [field: SerializeField] public Image SelectionIcon { get; protected set; }
         [field: SerializeField] public Image BBox { get; protected set; }
         [field: SerializeField] public TextMeshProUGUI DistanceText { get; protected set; }
     }

@@ -39,20 +39,20 @@ public class GlobalConfig : ScriptableObject
     #endregion
 
     #region UI
+    [Header("UI")]
+    public static float PlayerTargetAngleWeight { get; set; } = 1;
+    public static float PlayerTargetDistanceWeight { get; set; } = 1;
+    public static float PlayerTargetMaxDistance { get; set; } = 100;
     [System.Serializable]
     public class ObjectTypeIconCorrespondence
     {
         public IObject.Type Type;
         public Sprite Icon;
     }
-
     [SerializeField] protected List<ObjectTypeIconCorrespondence> objectIconsList = new();
-    protected Dictionary<IObject.Type, Sprite> objectIconsDict = new();
+    protected Dictionary<IObject.Type, Sprite> objectIconsDict { get; } = new();
 
-    public static Sprite GetIcon(IObject.Type type)
-    {
-        return Instance.objectIconsDict[type];
-    }
+    public static Sprite GetIcon(IObject.Type type) => Instance.objectIconsDict[type];
 
     [SerializeField] protected float iconSizeCoefficient = 5;
     public static float IconSizeCoefficient => Instance.iconSizeCoefficient;

@@ -29,8 +29,8 @@ using UnityEngine.InputSystem.Utilities;
 /// // Example of using an InputActionMap named "Player" from a UnityEngine.MonoBehaviour implementing callback interface.
 /// public class Example : MonoBehaviour, MyActions.IPlayerActions
 /// {
-///     protected MyActions_Actions m_Actions;                  // Source code representation of asset.
-///     protected MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
+///     private MyActions_Actions m_Actions;                  // Source code representation of asset.
+///     private MyActions_Actions.PlayerActions m_Player;     // Source code representation of action map.
 ///
 ///     void Awake()
 ///     {
@@ -150,6 +150,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""ToggleDampeners"",
                     ""type"": ""Button"",
                     ""id"": ""66c54521-8232-4599-8a61-6a54a43cf0df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FindTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""b19d7053-90f4-4cda-8d36-839e44c18c73"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -343,6 +352,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleDampeners"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed0e30d9-e61e-45e0-abc7-832f239ba021"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FindTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -386,6 +406,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_BasicControls_Zoom = m_BasicControls.FindAction("Zoom", throwIfNotFound: true);
         m_BasicControls_Reset = m_BasicControls.FindAction("Reset", throwIfNotFound: true);
         m_BasicControls_ToggleDampeners = m_BasicControls.FindAction("ToggleDampeners", throwIfNotFound: true);
+        m_BasicControls_FindTarget = m_BasicControls.FindAction("FindTarget", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
@@ -468,15 +489,16 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
 
     // BasicControls
-    protected readonly InputActionMap m_BasicControls;
-    protected List<IBasicControlsActions> m_BasicControlsActionsCallbackInterfaces = new List<IBasicControlsActions>();
-    protected readonly InputAction m_BasicControls_Move;
-    protected readonly InputAction m_BasicControls_Roll;
-    protected readonly InputAction m_BasicControls_MouseLook;
-    protected readonly InputAction m_BasicControls_FreeLookToggle;
-    protected readonly InputAction m_BasicControls_Zoom;
-    protected readonly InputAction m_BasicControls_Reset;
-    protected readonly InputAction m_BasicControls_ToggleDampeners;
+    private readonly InputActionMap m_BasicControls;
+    private List<IBasicControlsActions> m_BasicControlsActionsCallbackInterfaces = new List<IBasicControlsActions>();
+    private readonly InputAction m_BasicControls_Move;
+    private readonly InputAction m_BasicControls_Roll;
+    private readonly InputAction m_BasicControls_MouseLook;
+    private readonly InputAction m_BasicControls_FreeLookToggle;
+    private readonly InputAction m_BasicControls_Zoom;
+    private readonly InputAction m_BasicControls_Reset;
+    private readonly InputAction m_BasicControls_ToggleDampeners;
+    private readonly InputAction m_BasicControls_FindTarget;
     /// <summary>
     /// Provides access to input actions defined in input action map "BasicControls".
     /// </summary>
@@ -516,6 +538,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BasicControls/ToggleDampeners".
         /// </summary>
         public InputAction @ToggleDampeners => m_Wrapper.m_BasicControls_ToggleDampeners;
+        /// <summary>
+        /// Provides access to the underlying input action "BasicControls/FindTarget".
+        /// </summary>
+        public InputAction @FindTarget => m_Wrapper.m_BasicControls_FindTarget;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -563,6 +589,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleDampeners.started += instance.OnToggleDampeners;
             @ToggleDampeners.performed += instance.OnToggleDampeners;
             @ToggleDampeners.canceled += instance.OnToggleDampeners;
+            @FindTarget.started += instance.OnFindTarget;
+            @FindTarget.performed += instance.OnFindTarget;
+            @FindTarget.canceled += instance.OnFindTarget;
         }
 
         /// <summary>
@@ -595,6 +624,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleDampeners.started -= instance.OnToggleDampeners;
             @ToggleDampeners.performed -= instance.OnToggleDampeners;
             @ToggleDampeners.canceled -= instance.OnToggleDampeners;
+            @FindTarget.started -= instance.OnFindTarget;
+            @FindTarget.performed -= instance.OnFindTarget;
+            @FindTarget.canceled -= instance.OnFindTarget;
         }
 
         /// <summary>
@@ -630,9 +662,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public BasicControlsActions @BasicControls => new BasicControlsActions(this);
 
     // UI
-    protected readonly InputActionMap m_UI;
-    protected List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
-    protected readonly InputAction m_UI_Escape;
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Escape;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -780,6 +812,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleDampeners(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FindTarget" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFindTarget(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

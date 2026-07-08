@@ -1,3 +1,4 @@
+using Radar;
 using UnityEngine;
 using Utilities;
 namespace Player
@@ -7,6 +8,7 @@ namespace Player
     {
         #region Fields
         [Header("Player controls")]
+        [SerializeField] protected PlayerTargetSystem targetSystem;
         [SerializeField] protected ControlsInputReader inputReader;
         [SerializeField] protected Transform shipBody;
         [SerializeField] protected Transform cam;
@@ -54,11 +56,13 @@ namespace Player
         {
             base.Awake();
             defaultCamPos = cam.localPosition;
+            if (targetSystem == null) targetSystem = GetComponentInChildren<PlayerTargetSystem>();
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
+            GameManager.Player = this;
             dampeners = true;
             FreeLook = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -70,6 +74,7 @@ namespace Player
             inputReader.ResetEvent += OnResetCamera;
             inputReader.FreeLookToggleEvent += OnFreeLookToggle;
             inputReader.DampenerToggleEvent += OnDampenerToggle;
+            inputReader.FindTargetEvent += OnFindTarget;
             GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformFixedUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
@@ -79,9 +84,10 @@ namespace Player
         protected override void OnDisable()
         {
             base.OnDisable();
+            GameManager.Player = null;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            inputReader.DisablePlayerActions();
+            inputReader.DisableCallbacks();
 
             var i = GlobalUpdater.TryGetInstance();
             if (i != null)
@@ -92,6 +98,12 @@ namespace Player
             }
         }
         #endregion
+
+        #region Functionality
+        protected void OnFindTarget()
+        {
+            targetSystem.SelectTarget();
+        }
 
         protected void OnZoom(float zoom)
         {
@@ -109,6 +121,7 @@ namespace Player
         {
             this.movementVector = movementVector;
         }
+
         protected void OnRoll(float rollValue)
         {
             rollInput = rollValue;
@@ -195,5 +208,6 @@ namespace Player
             }
             else camPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
         }
+        #endregion
     }
 }

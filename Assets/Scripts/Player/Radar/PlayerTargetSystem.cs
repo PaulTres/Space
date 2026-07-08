@@ -4,10 +4,12 @@ using Timers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Utilities;
+
 namespace Radar
 {
     public class PlayerTargetSystem : Singleton<PlayerTargetSystem>
     {
+        #region Fields
         protected Camera cam;
         [SerializeField] protected BoundingBox boundingBoxPrefab;
         protected Stack<BoundingBox> boundingBoxPool { get; } = new();
@@ -20,16 +22,42 @@ namespace Radar
         /// </summary>
         protected readonly CountdownTimer reorderTimer = new(GlobalConfig.UIUpdateCooldown);
         protected EventSystem eventSystem;
+        protected Unit currentTarget;
+        public Unit CurrentTarget
+        {
+            get
+            {
+                if (currentTarget == null || !currentTarget.gameObject.activeSelf) return null;
+                return currentTarget;
+            }
+            set
+            {
+                if (currentTarget != value)
+                {
+                    if (value != null && !value.gameObject.activeSelf) value = null;
+                    currentTarget = value;
+                }
+            }
+        }
+        protected PointerEventData pointerEventData;
+        #endregion
 
+        #region Setup
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
+            if (eventSystem != null) eventSystem = EventSystem.current;
             cam = GetComponentInChildren<Camera>();
+            pointerEventData = new PointerEventData(eventSystem)
+            {
+                position = new Vector2(Screen.width / 2, Screen.height / 2)
+            };
         }
 
         protected virtual void OnEnable()
         {
-            if (eventSystem != null) eventSystem = EventSystem.current;
+            CurrentTarget = null;
+
             reorderTimer.OnTimerStop += () =>
             {
                 ReorderBoundingBoxes();
@@ -41,6 +69,7 @@ namespace Radar
 
         protected void OnDisable()
         {
+            ClearTarget();
             boundingBoxes.Clear();
             reorderTimer.OnTimerStop = null;
             reorderTimer.Stop();
@@ -53,7 +82,9 @@ namespace Radar
             base.ClearSingleton();
             reorderTimer.Dispose();
         }
+        #endregion
 
+        #region Functionality
         protected void PerformLateUpdate(float deltaTime)
         {
             foreach (var (target, bbox) in boundingBoxes)
@@ -138,6 +169,7 @@ namespace Radar
             bbox.Icon.sprite = GlobalConfig.GetIcon(target.ObjectType);
             var (color, _) = GlobalConfig.GetTeamColor(target.Transform.gameObject.layer);
             bbox.Icon.color = color;
+            bbox.SelectionIcon.gameObject.SetActive(false);
             bbox.BBox.color = color;
             bbox.DistanceText.color = color;
             bbox.gameObject.SetActive(true);
@@ -149,9 +181,97 @@ namespace Radar
             if (boundingBoxes.TryGetValue(target, out var bbox))
             {
                 boundingBoxes.Remove(target);
+                if (bbox.SelectionIcon.gameObject.activeSelf)
+                {
+                    //this was the current target
+                    ClearTarget();
+                }
                 bbox.gameObject.SetActive(false);
                 boundingBoxPool.Push(bbox);
             }
         }
+
+        #region Target selection
+        /// <summary>
+        /// Cast a ray to find an image in front of the crosshair. If found, select the 
+        /// corresponding object as the current target.
+        /// </summary>
+        public void SelectTarget()
+        {
+            if (GameManager.Player == null) return;
+            var targets = GameManager.Player.GetTargets();
+            Unit bestCandidate = null;
+            float bestScore = float.MinValue;
+            foreach (var target in targets)
+            {
+                //compute a score for all of these
+                if (target == null || !target.Transform.gameObject.activeSelf) continue;
+                var score = EvaluateTarget(target);
+                if (score > bestScore)
+                {
+                    bestCandidate = target;
+                    bestScore = score;
+                }
+            }
+            TargetSelected(bestCandidate);
+        }
+
+        /// <summary>
+        /// Fires when a new target has been selected.
+        /// </summary>
+        /// <param name="unit"></param>
+        protected void TargetSelected(Unit unit)
+        {
+            if (GameManager.IsPaused) return;
+            if (unit == CurrentTarget) return;
+            if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
+            {
+                previousData.SelectionIcon.gameObject.SetActive(false);
+            }
+            CurrentTarget = unit;
+            if (CurrentTarget == null) return;
+            if (!boundingBoxes.TryGetValue(CurrentTarget, out var data))
+            {
+                Debug.LogError($"Current target {unit} has no bounding box!");
+                ClearTarget();
+                return;
+            }
+            data.SelectionIcon.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Used to evaluate a target for selection. Takes into account distance and angle.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public float EvaluateTarget(Unit target)
+        {
+            if (GameManager.Player == null || !GameManager.Player.gameObject.activeSelf ||
+                target == null | !target.gameObject.activeSelf) return float.MinValue;
+
+            var direction = target.Position - GameManager.Player.Position;
+            var distance = direction.magnitude;
+
+            var angleScore = Vector3.Dot(direction.normalized, cam.transform.forward);
+            var distanceScore = (GlobalConfig.PlayerTargetMaxDistance - distance) /
+                GlobalConfig.PlayerTargetMaxDistance;
+            return angleScore * GlobalConfig.PlayerTargetAngleWeight + distanceScore *
+                GlobalConfig.PlayerTargetDistanceWeight;
+        }
+
+        /// <summary>
+        /// Clears current target and disables its selection icon.
+        /// </summary>
+        public void ClearTarget()
+        {
+            if (CurrentTarget == null) return;
+            if (boundingBoxes.TryGetValue(CurrentTarget, out var data))
+            {
+                data.SelectionIcon.gameObject.SetActive(false);
+            }
+            CurrentTarget = null;
+        }
+        #endregion
+        #endregion
     }
 }
