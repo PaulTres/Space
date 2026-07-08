@@ -3,34 +3,26 @@ using TMPro;
 using UnityEngine;
 namespace Player
 {
-    public class LobbyScreen : MenuPDA
+    public class LobbyScreen : MonoBehaviour
     {
+        [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected int missionStartTimerDuration = 5;
         [SerializeField] protected TextMeshProUGUI timerText, shipDescriptionText;
         [SerializeField] protected TMP_Dropdown playerOptions;
+        [SerializeField] protected GameObject pauseMenu;
         protected WaitForSeconds waitForOneSecond = new(1);
         protected Coroutine coroutine;
 
         #region Setup
-        protected override void OnEnable()
+        protected void OnEnable()
         {
-            base.OnEnable();
             PopulatePlayerChoiceDropdown();
-            timerText.text = missionStartTimerDuration.ToString();
+            inputReader.EnablePlayerActions();
+            inputReader.OnEscapeEvent += OnEscape;
+            timerText.text = $"Start: {missionStartTimerDuration}";
+            pauseMenu.gameObject.SetActive(false);
         }
 
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            if (coroutine != null) StopCoroutine(coroutine);
-        }
-        #endregion
-
-        public void SetPlayerChoice(int index)
-        {
-            UnitData.PlayerChoiceIndex = index;
-            shipDescriptionText.text = UnitData.AvailablePlayerOptions[index].Description;
-        }
 
         protected void PopulatePlayerChoiceDropdown()
         {
@@ -43,6 +35,27 @@ namespace Player
             playerOptions.SetValueWithoutNotify(0);
         }
 
+        protected void OnDisable()
+        {
+            inputReader.DisablePlayerActions();
+            if (coroutine != null) StopCoroutine(coroutine);
+        }
+        #endregion
+
+        protected void OnEscape()
+        {
+            //open the pause menu
+            //Debug.Log("Escaping");
+            pauseMenu.SetActive(true);
+        }
+
+        public void SetPlayerChoice(int index)
+        {
+            UnitData.PlayerChoiceIndex = index;
+            shipDescriptionText.text = UnitData.AvailablePlayerOptions[index].Description;
+        }
+
+        #region Mission start
         public void BeginMission()
         {
             Mission.CurrentMission = Mission.GetRandomMission();
@@ -55,10 +68,11 @@ namespace Player
             while (count > 0)
             {
                 yield return waitForOneSecond;
-                timerText.text = count.ToString();
+                timerText.text = $"Start: {count}";
                 count--;
             }
             GameManager.LoadMission();
         }
+        #endregion
     }
 }

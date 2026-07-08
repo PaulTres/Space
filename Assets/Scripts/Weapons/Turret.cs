@@ -21,7 +21,23 @@ namespace Weapons
             }
         }
         public bool TargetMissiles { get; set; }
-        public IObject Target { get; protected set; }
+        protected IObject currentTarget;
+        public IObject Target
+        {
+            get => currentTarget;
+            set
+            {
+                if (currentTarget != value)
+                {
+                    var m = currentTarget != null ? currentTarget as Projectile : null;
+                    if (m != null && m.gameObject.activeSelf) m.TargetedCount--;
+                    currentTarget = value;
+                    m = currentTarget != null ? currentTarget as Projectile : null;
+                    if (m != null && m.gameObject.activeSelf) m.TargetedCount++;
+                    if (currentTarget != null && !currentTarget.Active) currentTarget = null;
+                }
+            }
+        }
         public Unit Owner { get; protected set; }
         [SerializeField] protected WeaponBase weapon;
         protected Transform tr;
@@ -138,16 +154,15 @@ namespace Weapons
                 (var count, var missiles) = Owner.GetMissiles();
                 if (count > 0)
                 {
-                    var currentM = Target as Missile;
+                    var currentM = Target != null ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.
                         IsEqual(Owner);
 
-
                     for (int i = 0; i < count; i++)
                     {
-                        if (missiles[i] == null) continue;
+                        if (missiles[i] == null || !missiles[i].gameObject.activeSelf) continue;
                         var m = missiles[i].transform.GetComponentViaRegister<Missile>();
-                        if (m == null || !IsTargetValid(m)) continue;
+                        if (m == null || !IsTargetValid(m) || m.TargetedCount > 0) continue;
 
                         if (Target == null)
                         {
@@ -186,6 +201,8 @@ namespace Weapons
                             }
                         }
                     }
+
+
 
                     if (targetIsAimedAtOwner) return;
                 }

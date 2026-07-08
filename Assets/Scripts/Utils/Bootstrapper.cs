@@ -1,6 +1,5 @@
 using Effects;
 using Player;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -18,12 +17,14 @@ namespace Utilities
             Bullet.InitializePool();
             SceneManager.activeSceneChanged += (s1, s2) =>
             {
+                Time.timeScale = 1;
                 EventBus.EventBusUtil.ClearAllBuses();
             };
             VideoSettingsMenu.LoadVideoSettings();
             AudioSettingsMenu.LoadAudioSettings(audioMixer);
 
-            await Task.WhenAll(GlobalConfig.LoadInstance(), UnitData.LoadAllSpawnableUnits());
+            await GlobalConfig.LoadInstance();
+            //await Task.WhenAll(GlobalConfig.LoadInstance(), UnitData.LoadAllSpawnableUnits());
 
             SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
         }

@@ -22,7 +22,8 @@ namespace Player
         }
         protected virtual void OnDisable()
         {
-            inputReader.DisablePlayerActions();
+            inputReader.OnEscapeEvent -= Pop;
+            //inputReader.DisablePlayerActions();
             while (windows.Count > 0) Pop(true);
         }
         public void AddOnTop(Window window, bool deactivatePrev = true)

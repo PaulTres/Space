@@ -65,10 +65,15 @@ public static class GameManager
     #endregion
 
     #region Scene loading
+    public static void LoadMainMenu()
+    {
+        SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
+    }
+
     public static void LoadLobby()
     {
         UnitsDestroyed.Clear();
-        SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
+        SceneManager.LoadScene(GlobalConfig.LobbySceneIndex);
     }
 
     public static void LoadMission()
