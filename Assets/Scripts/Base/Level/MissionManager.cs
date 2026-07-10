@@ -4,7 +4,6 @@ using Utilities;
 public class MissionManager : Singleton<MissionManager>
 {
     protected CountdownTimer endMissionTimer;
-    public IObject Player { get; protected set; }
 
     protected override void InitializeSingleton()
     {

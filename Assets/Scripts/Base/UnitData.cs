@@ -25,6 +25,6 @@ public class UnitData : MonoSpawnableData<Unit>
         await Task.WhenAll(playerHandle.Task, friendHandle.Task, enemyHandle.Task);
     }
 
-    public float Points = 1;
+    public int Points = 1;
     public string Description;
 }

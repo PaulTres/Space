@@ -16,11 +16,13 @@ namespace Player
         #region Setup
         protected void OnEnable()
         {
+            Debug.LogWarning("Generating dummy mission!");
+            Mission.CurrentMission = new FleetBattleMission(3600, 100, 100);
             PopulatePlayerChoiceDropdown();
             inputReader.EnablePlayerActions();
             inputReader.OnEscapeEvent += OnEscape;
             timerText.text = $"Start: {missionStartTimerDuration}";
-            pauseMenu.gameObject.SetActive(false);
+            pauseMenu.SetActive(false);
         }
 
 
@@ -29,6 +31,7 @@ namespace Player
             playerOptions.ClearOptions();
             foreach (var data in UnitData.AvailablePlayerOptions)
             {
+                if (data.Points > Mission.CurrentMission.PlayerPoints) continue;
                 playerOptions.options.Add(new(data.name));
             }
             SetPlayerChoice(0);

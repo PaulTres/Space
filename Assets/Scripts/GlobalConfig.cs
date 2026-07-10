@@ -78,9 +78,16 @@ public class GlobalConfig : ScriptableObject
     #endregion
 
     #region Misc
+    /// <summary>
+    /// When this ship is spawned, no other ships should be around it in this radius.
+    /// </summary>
+    public static readonly float ShipSpawnEmptySphereRadius = 5;
+    /// <summary>
+    /// How many times do we try to spawn a ship until the system gives up.
+    /// </summary>
+    public static readonly int MaxSpawnRetries = 100;
     public static readonly string PlayerOptionsAddressableTag = "Player",
          AllyUnitsAddressableTag = "Allies", EnemyUnitsAddressableTag = "Enemies";
-
     public static readonly float PositionOscillationCoefficient = 1;
     public static readonly float MaxOscillationMagnitude = 1;
     /// <summary>
