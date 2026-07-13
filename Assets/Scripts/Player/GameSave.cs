@@ -19,6 +19,7 @@ namespace Player
             return Name + ": " + DateTime.FromBinary(dateTimeBinary).ToString();
         }
 
+        #region Static helpers
         public static string ConvertToFileName(string fancyString)
         {
             var dateTime = DateTime.Parse(fancyString.Replace("GameSave: ", ""));
@@ -60,5 +61,6 @@ namespace Player
         {
             JSONService.SaveData(this, Name + "_" + dateTimeBinary);
         }
+        #endregion
     }
 }

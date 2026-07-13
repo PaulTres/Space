@@ -9,19 +9,23 @@ using Weapons;
 public class MissileEvadeNode : LeafNodeData
 {
     [SerializeField] protected float directionMagnitude = 10;
+    [SerializeField] protected bool resetRotationTarget = true;
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
         var pdTurrets = ctx.GetData<List<Turret>>(Blackboard.Keys.PDTurrets);
         if (pdTurrets.IsEmpty()) return NodeState.FAILURE;
-        foreach(var turret in pdTurrets)
+        foreach (var turret in pdTurrets)
         {
             if (turret.Target == null) continue;
             var m = turret.Target as Missile;
-            if(m!=null)
+            if (m != null && m.gameObject.activeSelf)
             {
-                var direction = (m.Transform.position - ctx.Position).Perpendicular();
-                ctx.Navigation.RotationTarget = null;
-                ctx.Navigation.SetDestination(ctx.Position+direction*directionMagnitude);
+                var normal = m.Transform.position - ctx.Position;
+                var direction = Vector3.ProjectOnPlane(normal, ctx.Unit.Forward).normalized;
+                if (direction.magnitude == 0) direction = normal.Perpendicular();
+                if (resetRotationTarget) ctx.Navigation.RotationTarget = null;
+                ctx.Navigation.SetDestination(ctx.Position + direction * directionMagnitude);
+                return NodeState.RUNNING;
             }
         }
         return NodeState.FAILURE;
