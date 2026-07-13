@@ -32,6 +32,7 @@ namespace Weapons
         protected HPComponent hpComponent;
         public float EffectiveTracking { get; protected set; }
         protected PoolableEffect effectOnDeath;
+        protected TrailRenderer trailRenderer;
         #endregion
 
         #region Setup
@@ -73,7 +74,12 @@ namespace Weapons
             hpComponent.MaxHP = missileData.HP;
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;
-            effectOnDeath = missileData.Effect;
+            effectOnDeath = missileData.OnDeathEffect;
+            if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
+            trailRenderer.material = missileData.RendererMaterial;
+            trailRenderer.startWidth = Transform.localScale.y;
+            trailRenderer.endWidth = 0;
+            trailRenderer.time = 1;
         }
         #endregion
 

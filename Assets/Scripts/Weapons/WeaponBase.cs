@@ -23,7 +23,7 @@ namespace Weapons
             }
         }
         protected CountdownTimer shotTimer;
-        [field: SerializeField] public float CurrentShotCooldown { get; protected set; }
+        public float CurrentShotCooldown { get; protected set; }
         #endregion
 
         #region Weapon parameters

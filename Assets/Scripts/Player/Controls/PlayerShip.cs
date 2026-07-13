@@ -57,6 +57,7 @@ namespace Player
             base.Awake();
             defaultCamPos = cam.localPosition;
             if (targetSystem == null) targetSystem = GetComponentInChildren<PlayerTargetSystem>();
+            inputReader.EnablePlayerActions();
         }
 
         protected override void OnEnable()
@@ -67,7 +68,6 @@ namespace Player
             FreeLook = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            inputReader.EnablePlayerActions();
             inputReader.MoveEvent += OnMove;
             inputReader.RollEvent += OnRoll;
             inputReader.ZoomEvent += OnZoom;

@@ -67,7 +67,7 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
-    IObject IObject.Target
+    public IObject Target
     {
         get
         {

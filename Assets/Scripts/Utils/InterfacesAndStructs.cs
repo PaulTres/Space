@@ -3,14 +3,19 @@ using UnityEngine;
 using Utilities;
 
 /// <summary>
-/// Provides linear and angular velocity.
+/// Provides linear and angular velocity, transform and a bunch of other bullshit.
 /// </summary>
 public interface IObject : IRegisterableComponent
 {
     public enum Type
     {
         Missile,
-        Skiff
+        //tiny baby ship
+        Skiff,
+        //smallest actual line vessel
+        Frigate,
+        //actual line vessel
+        Cruiser
     }
 
     public Type ObjectType { get; }
@@ -37,6 +42,16 @@ public struct DamageInfo : IEvent
 {
     public float Amount { get; set; }
     public Transform Source { get; set; }
+}
+
+public readonly struct ObjectDamaged : IEvent
+{
+    public readonly float CurrentHP, CurrentHPPercentage;
+    public ObjectDamaged(float currentHP, float currentHPPercentage)
+    {
+        CurrentHP = currentHP;
+        CurrentHPPercentage = currentHPPercentage;
+    }
 }
 
 /// <summary>

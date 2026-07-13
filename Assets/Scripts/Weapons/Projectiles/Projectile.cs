@@ -14,7 +14,7 @@ namespace Weapons
         public Vector3 AngularVelocity => Vector3.zero;
         public float Signature => 0;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
-        public float initialVelocity;
+        protected float initialVelocity;
         protected int targetedCount;
         /// <summary>
         /// How many turrets is this targeted by. Used to prevent multiple turrets from 
@@ -46,6 +46,7 @@ namespace Weapons
                 Debug.LogWarning($"Projectile acceleration should not be 0. Setting acceleration to 10% of top speed on {transform}.");
                 acceleration = topSpeed / 10;
             }
+            Transform.localScale = data.Scale;
         }
 
         protected override void OnEnable()
@@ -101,7 +102,7 @@ namespace Weapons
         protected virtual void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawRay(tr.position, linearVelocity);
+            Gizmos.DrawRay(Transform.position, linearVelocity);
             //Gizmos.color = Color.blue;
             //Gizmos.DrawRay(tr.position, tr.forward * topSpeed);
         }

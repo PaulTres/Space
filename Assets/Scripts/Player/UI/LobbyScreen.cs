@@ -25,7 +25,6 @@ namespace Player
             pauseMenu.SetActive(false);
         }
 
-
         protected void PopulatePlayerChoiceDropdown()
         {
             playerOptions.ClearOptions();

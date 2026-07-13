@@ -1,4 +1,5 @@
 using EventBus;
+using System;
 using UnityEngine;
 using Utilities;
 namespace HP
@@ -8,6 +9,8 @@ namespace HP
         [SerializeField] protected float maxHP;
         public float CurrentHP { get; protected set; }
         protected Transform tr;
+        [SerializeField] protected bool sendEventOnDamage = false;
+        public event Action OnDamageTaken = delegate { };
 
         public float MaxHP
         {
@@ -56,6 +59,11 @@ namespace HP
             PerformReset();
         }
 
+        protected void OnDisable()
+        {
+            OnDamageTaken = delegate { };
+        }
+
         public void TakeDamage(DamageInfo damageInfo)
         {
             if (damageInfo.Source.GetTeam(throwOnNullTransform: false) == transform.root.GetTeam())
@@ -63,6 +71,12 @@ namespace HP
                 return;
             }
             CurrentHP -= damageInfo.Amount;
+            if (sendEventOnDamage)
+            {
+                EventBus<ObjectDamaged>.Raise(Transform.GetInstanceID(), new
+                    ObjectDamaged(CurrentHP, CurrentHP - MaxHP));
+                OnDamageTaken?.Invoke();
+            }
             if (CurrentHP <= 0)
             {
                 EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(),

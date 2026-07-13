@@ -1,4 +1,5 @@
 using AudioSystem;
+using Effects;
 using Spawning;
 using UnityEngine;
 namespace Weapons
@@ -8,8 +9,9 @@ namespace Weapons
     {
         public bool DisableOnHit = true;
         public int Damage;
-        public float LifeTime;
+        public float LifeTime = 20;
         public SoundData SoundData;
+        public PoolableEffect OnHitEffect;
 
         /// <summary>
         /// Returns an instance of the bullet from the object pool or creates a new one if 

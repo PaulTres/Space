@@ -114,7 +114,7 @@ namespace HybridBT2
                 case NodeState.RUNNING:
                     if (prevChild != currentChild)
                     {
-                        children[prevChild].Abort(context);
+                        if (prevChild > -1) children[prevChild].Abort(context);
                         prevChild = currentChild;
                     }
                     SetState(NodeState.RUNNING, context);

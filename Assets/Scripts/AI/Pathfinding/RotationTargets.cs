@@ -20,7 +20,6 @@ public class FaceTargetRotation : RotationTarget
     {
         var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
         if (tr == null) return unit.rotation;
-
         var direction = (tr.Position - unit.position).normalized;
         return Quaternion.LookRotation(direction, direction + unit.up);
     }
@@ -37,7 +36,9 @@ public class VerticalFacingRotation : RotationTarget
     {
         var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
         if (tr == null) return unit.rotation;
-        throw new System.NotImplementedException();
+        var dir = tr.Position - unit.position;
+        var forward = dir.Perpendicular();
+        return Quaternion.LookRotation(forward, dir.normalized);
     }
 }
 

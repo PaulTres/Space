@@ -1,4 +1,5 @@
 using AudioSystem;
+using Effects;
 using EventBus;
 using Spawning;
 using UnityEngine;
@@ -79,6 +80,7 @@ namespace Weapons
         protected SoundData soundData;
         protected bool disableOnHit = true;
         protected float lifeTime;
+        protected PoolableEffect onHitEffect;
         #endregion
 
         #region Setup
@@ -102,6 +104,7 @@ namespace Weapons
             lifeTime = poolableData.LifeTime;
             soundData = poolableData.SoundData;
             poolKey = poolableData.Key;
+            onHitEffect = poolableData.OnHitEffect;
         }
 
         /// <summary>
@@ -139,6 +142,13 @@ namespace Weapons
         protected virtual void OnHit(Collider collider)
         {
             collider.transform.root.TakeDamage(damageInfo);
+            if (onHitEffect != null)
+            {
+                if (!PoolableEffect.Get(onHitEffect.PoolKey, out var e)) e = Instantiate(onHitEffect);
+                e.transform.position = Transform.position;
+                e.transform.localScale = Transform.localScale;
+                e.gameObject.SetActive(true);
+            }
             if (disableOnHit) gameObject.SetActive(false);
         }
         #endregion

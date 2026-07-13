@@ -25,6 +25,7 @@ namespace Player
                 OnEscapeEvent = null;
             }
         }
+
         public void OnEscape(InputAction.CallbackContext context)
         {
             if (context.started)

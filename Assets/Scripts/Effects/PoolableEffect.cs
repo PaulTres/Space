@@ -10,7 +10,10 @@ namespace Effects
         #region Pool
         public enum Type
         {
-            MissileExplosion
+            MissileExplosionYellow,
+            MissileExplosionPurple,
+            ExplosionBigGreen,
+            ExplosionBigRed
         }
         static readonly ObjectPool<Type, PoolableEffect> objectPool = new();
 

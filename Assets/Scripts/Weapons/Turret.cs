@@ -4,6 +4,9 @@ namespace Weapons
 {
     public class Turret : MonoBehaviour
     {
+        [Tooltip("The score of the current target of the ship will be multiplied by this " +
+            "amount when evaluating targets(divided if negative).")]
+        [SerializeField] protected float CurrentTargetScoreMultiplier = 2;
         protected bool ceaseFire;
         public bool CeaseFire
         {
@@ -222,7 +225,12 @@ namespace Weapons
                     var score = @params.EvaluateTarget(this, targets[i]);
                     //Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !@params.AllowZeroScoreTarget) continue;
-
+                    if (Owner.Target != null && targets[i].GetInstanceID() ==
+                        Owner.Target.GetInstanceID())
+                    {
+                        if (score >= 0) score *= CurrentTargetScoreMultiplier;
+                        else score /= CurrentTargetScoreMultiplier;
+                    }
                     if (score > bestScore + @params.MinScoreDelta)
                     {
                         bestScore = score;
