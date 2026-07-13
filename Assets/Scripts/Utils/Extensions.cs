@@ -1,3 +1,4 @@
+using Effects;
 using HP;
 using HybridBT2;
 using Radar;
@@ -7,6 +8,16 @@ namespace Utilities
 {
     public static class Extensions
     {
+        public static bool Active(this Unit unit)
+        {
+            return unit != null && unit.gameObject.activeSelf;
+        }
+
+        public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
+        {
+            PoolableEffect.Spawn(effect, position, scaleFactor * Vector3.one);
+        }
+
         #region IObject
         public static void RegisterForRadar(this IObject @object)
         {

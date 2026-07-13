@@ -1,9 +1,11 @@
 ﻿using HybridBT2;
+using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 using Weapons;
 public class BanditTree : BT, IRegisterableComponent
 {
+    [SerializeField] protected List<Turret> pointDefenseTurrets = new();
     public Blackboard Blackboard => blackboard;
 
     protected override void Awake()
@@ -22,7 +24,8 @@ public class BanditTree : BT, IRegisterableComponent
     protected override void SetupBlackboard()
     {
         var launchers = GetComponentsInChildren<MissileLauncher>();
-        blackboard.SetData(Blackboard.Keys.Launchers, launchers);
+        Blackboard.SetData(Blackboard.Keys.Launchers, launchers);
         Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
+        Blackboard.SetData(Blackboard.Keys.PDTurrets, pointDefenseTurrets);
     }
 }

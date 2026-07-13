@@ -353,6 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerGameUI
   inputReader: {fileID: 11400000, guid: b44ba8df712ee83499feb9dff7f9b917, type: 2}
   pauseMenu: {fileID: 8972052015629843260}
+  hullImage: {fileID: 0}
 --- !u!1 &7499537464438286024
 GameObject:
   m_ObjectHideFlags: 0

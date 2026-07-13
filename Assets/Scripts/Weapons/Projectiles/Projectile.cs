@@ -4,8 +4,10 @@ namespace Weapons
 {
     public class Projectile : Bullet, IObject
     {
+        #region Fields
         public IObject.Type ObjectType => IObject.Type.Missile;
         protected float topSpeed, acceleration;
+        public virtual float TopSpeed => topSpeed;
         protected Vector3 linearVelocity, angularVelocity;
         public Vector3 Forward => Transform.forward;
         public Vector3 Right => Transform.right;
@@ -25,7 +27,10 @@ namespace Weapons
             get => targetedCount;
             set => targetedCount = Mathf.Max(value, 0);
         }
+        protected TrailRenderer trailRenderer;
+        #endregion
 
+        #region Setup
         public override void Initialize(BulletData poolableData)
         {
             base.Initialize(poolableData);
@@ -47,6 +52,15 @@ namespace Weapons
                 acceleration = topSpeed / 10;
             }
             Transform.localScale = data.Scale;
+
+            if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
+            if (trailRenderer != null)
+            {
+                trailRenderer.material = data.RendererMaterial;
+                trailRenderer.startWidth = Transform.localScale.y;
+                trailRenderer.endWidth = 0;
+                trailRenderer.time = 1;
+            }
         }
 
         protected override void OnEnable()
@@ -70,20 +84,32 @@ namespace Weapons
             base.OnDisable();
             this.UnregisterForRadar();
         }
+        #endregion
 
+        #region Functionality
         protected override void PerformUpdate(float dt)
         {
             base.PerformUpdate(dt);
             if (!CheckCollisions(dt)) RestOfPerformUpdate(dt);
         }
 
+        /// <summary>
+        /// Updates and applies linear velocity.
+        /// </summary>
+        /// <param name="dt"></param>
         protected virtual void RestOfPerformUpdate(float dt)
         {
             linearVelocity += acceleration * dt * tr.forward;
-            linearVelocity = Vector3.ClampMagnitude(linearVelocity, topSpeed);
+            linearVelocity = Vector3.ClampMagnitude(linearVelocity, TopSpeed);
             tr.position += dt * linearVelocity;
         }
 
+        /// <summary>
+        /// Checks for collisions using a raycast in the direction of travel.
+        /// If found, returns disableOnHit and calls OnHit.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         protected virtual bool CheckCollisions(float dt)
         {
             if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
@@ -106,5 +132,6 @@ namespace Weapons
             //Gizmos.color = Color.blue;
             //Gizmos.DrawRay(tr.position, tr.forward * topSpeed);
         }
+        #endregion
     }
 }

@@ -113,7 +113,7 @@ public class CFX_SpawnSystemEditor : Editor
 #endif
 				(this.target as CFX_SpawnSystem).objectsToPreload[i] = obj;
 			}
-			EditorGUILayout.LabelField(new GUIContent("times","Number of times to copy the effectOnDeath\nin the pool, i.e. the max number of\ntimes the object will be used\nsimultaneously"), GUILayout.Width(40));
+			EditorGUILayout.LabelField(new GUIContent("times","Number of times to copy the onDeathEffect\nin the pool, i.e. the max number of\ntimes the object will be used\nsimultaneously"), GUILayout.Width(40));
 			EditorGUI.BeginChangeCheck();
 			int nb = EditorGUILayout.IntField("", (this.target as CFX_SpawnSystem).objectsToPreloadTimes[i], GUILayout.Width(50));
 			if(nb < 1)

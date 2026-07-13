@@ -6,5 +6,6 @@ namespace Weapons
     {
         public float TopSpeed, Acceleration, InitialVelocity;
         public Vector3 Scale = Vector3.one;
+        public Material RendererMaterial;
     }
 }

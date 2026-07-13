@@ -1,4 +1,3 @@
-using AudioSystem;
 using Effects;
 using Spawning;
 using UnityEngine;
@@ -10,7 +9,9 @@ namespace Weapons
         public bool DisableOnHit = true;
         public int Damage;
         public float LifeTime = 20;
-        public SoundData SoundData;
+        public float EffectScaleFactor = 1;
+        public Vector3 EffectScale => EffectScaleFactor * Vector3.one;
+        public PoolableEffect OnSpawnEffect;
         public PoolableEffect OnHitEffect;
 
         /// <summary>

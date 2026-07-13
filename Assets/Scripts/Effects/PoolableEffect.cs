@@ -36,6 +36,17 @@ namespace Effects
         {
             return objectPool.Get(effectType, out effect);
         }
+
+        public static void Spawn(PoolableEffect effect, Vector3 position, Vector3 scale)
+        {
+            if (effect != null)
+            {
+                if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
+                e.transform.position = position;
+                e.transform.localScale = scale;
+                e.gameObject.SetActive(true);
+            }
+        }
         #endregion
 
         [field: SerializeField] public Type PoolKey { get; protected set; }

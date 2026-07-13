@@ -4,6 +4,7 @@ using UnityEngine;
 using Utilities;
 public abstract class Ship : Unit
 {
+    #region Fields
     [Header("Ship")]
     [SerializeField] protected PoolableEffect effectOnDeath;
     [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
@@ -14,6 +15,7 @@ public abstract class Ship : Unit
     protected Vector3 angularVelocity;
     public override Vector3 AngularVelocity => angularVelocity;
     public override Vector3 LinearVelocity => rb != null ? rb.linearVelocity : Vector3.zero;
+    #endregion
 
     #region Setup
     protected override void Awake()
@@ -42,13 +44,7 @@ public abstract class Ship : Unit
 
     public override void Die(ObjectDestroyed @event)
     {
-        if (effectOnDeath != null)
-        {
-            if (!PoolableEffect.Get(effectOnDeath.PoolKey, out var e)) e = Instantiate(effectOnDeath);
-            e.transform.position = Transform.position;
-            e.transform.localScale = Transform.localScale;
-            e.gameObject.SetActive(true);
-        }
+        effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
         gameObject.SetActive(false);
     }
 }

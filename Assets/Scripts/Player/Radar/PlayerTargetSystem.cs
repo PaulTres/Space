@@ -3,6 +3,7 @@ using System.Linq;
 using Timers;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using Utilities;
 
 namespace Radar
@@ -17,6 +18,8 @@ namespace Radar
         protected readonly Dictionary<IObject, BoundingBox> boundingBoxes = new();
         [SerializeField] protected RectTransform boundingBoxParent;
         [SerializeField] protected float minTextScale, maxTextScale;
+        [SerializeField] protected Image secondView;
+        [SerializeField] protected Camera secondViewCamera;
         /// <summary>
         /// This timer determines how often the bounding boxes are reordered.
         /// </summary>
@@ -36,6 +39,8 @@ namespace Radar
                 {
                     if (value != null && !value.gameObject.activeSelf) value = null;
                     currentTarget = value;
+                    if (secondView != null) secondView.gameObject.SetActive(value != null);
+                    if (secondViewCamera != null) secondViewCamera.gameObject.SetActive(value != null);
                 }
             }
         }
@@ -52,6 +57,10 @@ namespace Radar
             {
                 position = new Vector2(Screen.width / 2, Screen.height / 2)
             };
+            if (secondViewCamera != null && secondView != null)
+            {
+                secondViewCamera.targetTexture = (RenderTexture)secondView.mainTexture;
+            }
         }
 
         protected virtual void OnEnable()
@@ -126,14 +135,34 @@ namespace Radar
 
                 #region Text
                 dist = Vector3.Distance(cam.transform.root.position, worldPos);
-                if (GameManager.Player != null && target.Target.GetInstanceID() ==
-                    GameManager.Player.GetInstanceID())
+                if (GameManager.Player != null && target.Target.
+                    IsEqual(GameManager.Player))
                 {
                     bbox.DistanceText.text = $"<color=red>{dist:0.0}";
                 }
                 else bbox.DistanceText.text = $"<color=blue>{dist:0.0}";
                 #endregion
             }
+            UpdateSecondView();
+        }
+
+        protected void UpdateSecondView()
+        {
+            if (!CurrentTarget.Active()) return;
+            if (secondViewCamera == null || secondView == null) return;
+            var direction = (transform.root.position - CurrentTarget.Position).normalized;
+            if (direction.magnitude < CurrentTarget.EffectScaleFactor)
+            {
+                secondViewCamera.gameObject.SetActive(false);
+                secondView.gameObject.SetActive(false);
+            }
+            secondViewCamera.gameObject.SetActive(true);
+            secondView.gameObject.SetActive(true);
+            //Debug.DrawLine(Vector3.zero, transform.root.position, Color.green);
+            //Debug.DrawRay(CurrentTarget.Position, direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor));
+            secondViewCamera.transform.position = CurrentTarget.Position + direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor);
+            //Debug.Log(Vector3.Distance(secondViewCamera.transform.position, CurrentTarget.Position));
+            secondViewCamera.transform.LookAt(CurrentTarget.Position);
         }
 
         protected void ReorderBoundingBoxes()
@@ -180,22 +209,22 @@ namespace Radar
         {
             if (boundingBoxes.TryGetValue(target, out var bbox))
             {
-                boundingBoxes.Remove(target);
                 if (bbox.SelectionIcon.gameObject.activeSelf)
                 {
                     //this was the current target
                     ClearTarget();
                 }
+                if (CurrentTarget != null && !CurrentTarget.gameObject.activeSelf)
+                {
+                    ClearTarget();
+                }
                 bbox.gameObject.SetActive(false);
+                boundingBoxes.Remove(target);
                 boundingBoxPool.Push(bbox);
             }
         }
 
         #region Target selection
-        /// <summary>
-        /// Cast a ray to find an image in front of the crosshair. If found, select the 
-        /// corresponding object as the current target.
-        /// </summary>
         public void SelectTarget()
         {
             if (GameManager.Player == null) return;
@@ -207,7 +236,7 @@ namespace Radar
                 //compute a score for all of these
                 if (target == null || !target.Transform.gameObject.activeSelf) continue;
                 var score = EvaluateTarget(target);
-                if (score > bestScore)
+                if (score > bestScore && score > 0)
                 {
                     bestCandidate = target;
                     bestScore = score;
@@ -253,6 +282,7 @@ namespace Radar
             var distance = direction.magnitude;
 
             var angleScore = Vector3.Dot(direction.normalized, cam.transform.forward);
+            if (angleScore <= 0) return 0;
             var distanceScore = (GlobalConfig.PlayerTargetMaxDistance - distance) /
                 GlobalConfig.PlayerTargetMaxDistance;
             return angleScore * GlobalConfig.PlayerTargetAngleWeight + distanceScore *

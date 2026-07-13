@@ -6,7 +6,9 @@ namespace Player
 {
     public class EndMissionScreen : MenuPDA
     {
-        [SerializeField] protected TextMeshProUGUI playerKills, teamCasualties, enemyCasualties;
+        [SerializeField]
+        protected TextMeshProUGUI playerKills, teamCasualties,
+            enemyCasualties, outcomeText;
 
         protected override void OnEnable()
         {
@@ -16,6 +18,7 @@ namespace Player
 
         public void PopulateText(List<ObjectDestroyed> unitsDestroyed)
         {
+            var score = 0;
             unitsDestroyed.Sort((a, b) =>
             {
                 return a.KillerName.CompareTo(b.KillerName);
@@ -36,6 +39,8 @@ namespace Player
                     else enemyCasualties.text += unitsDestroyed[i] + "\n";
                 }
             }
+
+            outcomeText.text = score > 0 ? "Victory" : score < 0 ? "Defeat" : "Stalemate";
         }
 
         public void ReturnToLobby()

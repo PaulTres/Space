@@ -194,7 +194,7 @@ public class CFXEasyEditor : EditorWindow
 		
 		EditorGUILayout.BeginHorizontal();
 		
-		GUILayout.Label("Test effectOnDeath(s):");
+		GUILayout.Label("Test onDeathEffect(s):");
 		using(new EditorGUI.DisabledScope(SelectedParticleSystemsCount <= 0))
 		{
 
@@ -317,19 +317,19 @@ public class CFXEasyEditor : EditorWindow
 			GUILayout.Space(2);
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Loop", "Loop the effectOnDeath (might not work properly on some effects such as explosions)"), EditorStyles.miniButtonLeft))
+			if(GUILayout.Button(new GUIContent("Loop", "Loop the onDeathEffect (might not work properly on some effects such as explosions)"), EditorStyles.miniButtonLeft))
 			{
 				loopEffect(true);
 			}
-			if(GUILayout.Button(new GUIContent("Unloop", "Remove looping from the effectOnDeath"), EditorStyles.miniButtonRight))
+			if(GUILayout.Button(new GUIContent("Unloop", "Remove looping from the onDeathEffect"), EditorStyles.miniButtonRight))
 			{
 				loopEffect(false);
 			}
-			if(GUILayout.Button(new GUIContent("Prewarm On", "Prewarm the effectOnDeath (if looped)"), EditorStyles.miniButtonLeft))
+			if(GUILayout.Button(new GUIContent("Prewarm On", "Prewarm the onDeathEffect (if looped)"), EditorStyles.miniButtonLeft))
 			{
 				prewarmEffect(true);
 			}
-			if(GUILayout.Button(new GUIContent("Prewarm Off", "Don't prewarm the effectOnDeath (if looped)"), EditorStyles.miniButtonRight))
+			if(GUILayout.Button(new GUIContent("Prewarm Off", "Don't prewarm the onDeathEffect (if looped)"), EditorStyles.miniButtonRight))
 			{
 				prewarmEffect(false);
 			}

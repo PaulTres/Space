@@ -31,8 +31,8 @@ namespace Weapons
         public int Index { get; set; }
         protected HPComponent hpComponent;
         public float EffectiveTracking { get; protected set; }
-        protected PoolableEffect effectOnDeath;
-        protected TrailRenderer trailRenderer;
+        protected PoolableEffect onDeathEffect;
+        public override float TopSpeed => topSpeed * (1 + Telemetry());
         #endregion
 
         #region Setup
@@ -74,12 +74,7 @@ namespace Weapons
             hpComponent.MaxHP = missileData.HP;
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;
-            effectOnDeath = missileData.OnDeathEffect;
-            if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
-            trailRenderer.material = missileData.RendererMaterial;
-            trailRenderer.startWidth = Transform.localScale.y;
-            trailRenderer.endWidth = 0;
-            trailRenderer.time = 1;
+            onDeathEffect = missileData.OnDeathEffect;
         }
         #endregion
 
@@ -103,6 +98,10 @@ namespace Weapons
                 Mathf.Min(1, target.Signature / maxTargetSignature);
         }
 
+        /// <summary>
+        /// Calculates and applies tracking and linear velocity.
+        /// </summary>
+        /// <param name="dt"></param>
         protected override void RestOfPerformUpdate(float dt)
         {
             if (target != null && target.Transform.gameObject.activeInHierarchy == false)
@@ -127,24 +126,16 @@ namespace Weapons
 
                 angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / dt;
             }
-            base.PerformUpdate(dt);
-            linearVelocity += acceleration * dt * tr.forward;
-            linearVelocity = Vector3.ClampMagnitude(linearVelocity, topSpeed);
+            base.RestOfPerformUpdate(dt);
         }
 
         /// <summary>
-        /// Plays an effectOnDeath if the missile has one. Deactivates the game object.
+        /// Plays an onDeathEffect if the missile has one. Deactivates the game object.
         /// </summary>
         /// <param name="event"></param>
         public void Die(ObjectDestroyed @event)
         {
-            if (effectOnDeath != null)
-            {
-                if (!PoolableEffect.Get(effectOnDeath.PoolKey, out var e)) e = Instantiate(effectOnDeath);
-                e.transform.position = Transform.position;
-                e.transform.localScale = Transform.localScale;
-                e.gameObject.SetActive(true);
-            }
+            onDeathEffect.SpawnEffect(Transform.position, effectScaleFactor);
             gameObject.SetActive(false);
         }
         #endregion

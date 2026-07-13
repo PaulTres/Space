@@ -6,7 +6,6 @@ namespace Weapons
     public class MissileData : ProjectileData
     {
         public float Tracking, MaxTargetSignature, MaxTelemetryBonus = 0.7f, HP = 1;
-        public Material RendererMaterial;
         public PoolableEffect OnDeathEffect;
 
         protected override void OnValidate()

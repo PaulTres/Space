@@ -76,6 +76,7 @@ public abstract class Unit : MonoBehaviour, IObject
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
         }
     }
+    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     #endregion
 
     #region Setup

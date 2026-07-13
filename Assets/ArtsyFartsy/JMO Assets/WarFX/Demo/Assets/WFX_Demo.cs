@@ -93,7 +93,7 @@ public class WFX_Demo : MonoBehaviour
 		}
 		
 		GUILayout.FlexibleSpace();
-		GUILayout.Label("Click on the ground to spawn the selected effectOnDeath");
+		GUILayout.Label("Click on the ground to spawn the selected onDeathEffect");
 		GUILayout.FlexibleSpace();
 		
 		if(GUILayout.Button(rotateCam ? "Pause Camera" : "Rotate Camera", GUILayout.Width(110)))

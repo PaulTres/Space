@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 // Cartoon FX  - (c) 2015 Jean Moreno
 //
-// Script handling looped effectOnDeath in the Demo Scene, so that they eventually stop
+// Script handling looped onDeathEffect in the Demo Scene, so that they eventually stop
 
 [RequireComponent(typeof(ParticleSystem))]
 public class CFX_AutoStopLoopedEffect : MonoBehaviour

@@ -9,7 +9,14 @@ public static class UnitManager
     /// All active ships. The key is a ship's team.
     /// </summary>
     readonly static Dictionary<int, List<Unit>> ships = new();
+    public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
+    public static int EnemyCount => ships[GlobalConfig.EnemyTeam].Count;
 
+    /// <summary>
+    /// Get all the ships belonging to a specific team.
+    /// </summary>
+    /// <param name="team"></param>
+    /// <returns></returns>
     public static List<Unit> GetShips(int team)
     {
         return ships.ContainsKey(team) ? ships[team].ToList() : null;

@@ -1,4 +1,3 @@
-using AudioSystem;
 using Effects;
 using EventBus;
 using Spawning;
@@ -77,10 +76,10 @@ namespace Weapons
                 return tr;
             }
         }
-        protected SoundData soundData;
         protected bool disableOnHit = true;
         protected float lifeTime;
-        protected PoolableEffect onHitEffect;
+        protected PoolableEffect onSpawnEffect, onHitEffect;
+        protected float effectScaleFactor;
         #endregion
 
         #region Setup
@@ -92,19 +91,19 @@ namespace Weapons
 
         protected virtual void OnEnable()
         {
-            if (soundData != null && soundData.clip != null) SoundManager.TryGetInstance(true).Play(soundData, tr.position);
-            else Debug.LogWarning($"{transform} has no sound data!");
+            onSpawnEffect.SpawnEffect(Transform.position, effectScaleFactor);
             GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformUpdate);
         }
 
         public virtual void Initialize(BulletData poolableData)
         {
+            poolKey = poolableData.Key;
             disableOnHit = poolableData.DisableOnHit;
             damageInfo.Amount = poolableData.Damage;
             lifeTime = poolableData.LifeTime;
-            soundData = poolableData.SoundData;
-            poolKey = poolableData.Key;
+            onSpawnEffect = poolableData.OnSpawnEffect;
             onHitEffect = poolableData.OnHitEffect;
+            effectScaleFactor = poolableData.EffectScaleFactor;
         }
 
         /// <summary>
@@ -142,13 +141,7 @@ namespace Weapons
         protected virtual void OnHit(Collider collider)
         {
             collider.transform.root.TakeDamage(damageInfo);
-            if (onHitEffect != null)
-            {
-                if (!PoolableEffect.Get(onHitEffect.PoolKey, out var e)) e = Instantiate(onHitEffect);
-                e.transform.position = Transform.position;
-                e.transform.localScale = Transform.localScale;
-                e.gameObject.SetActive(true);
-            }
+            onHitEffect.SpawnEffect(Transform.position, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }
         #endregion

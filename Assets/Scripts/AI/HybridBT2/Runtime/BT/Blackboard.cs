@@ -8,7 +8,8 @@ namespace HybridBT2
         {
             Target,
             Launchers,
-            TargetPosition
+            TargetPosition,
+            PDTurrets
         }
         public readonly Transform Transform;
         public readonly Unit Unit;
@@ -20,18 +21,22 @@ namespace HybridBT2
         public float DeltaTime { get; protected set; }
         protected Dictionary<Keys, object> data = new();
         protected float lastTime;
+
         public void PerformReset()
         {
             data.Clear();
             lastTime = Time.time;
             DeltaTime = 0;
         }
+
         public void Tick()
         {
             DeltaTime = Time.time - lastTime;
             lastTime = Time.time;
         }
+
         public void Tick(float deltaTime) => DeltaTime = deltaTime;
+
         public Blackboard(Transform transform)
         {
             Transform = transform;
@@ -40,7 +45,9 @@ namespace HybridBT2
             DeltaTime = 0;
             lastTime = Time.time;
         }
+
         public void SetData<R>(Keys key, R value) => data[key] = value;
+
         public R GetData<R>(Keys key)
         {
             return data.TryGetValue(key, out var value) ? (R)value : default;

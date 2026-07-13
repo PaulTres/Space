@@ -8,10 +8,10 @@ using System.Collections;
 [RequireComponent(typeof(Light))]
 public class CFX_LightIntensityFade : MonoBehaviour
 {
-	// Duration of the effectOnDeath.
+	// Duration of the onDeathEffect.
 	public float duration = 1.0f;
 	
-	// Delay of the effectOnDeath.
+	// Delay of the onDeathEffect.
 	public float delay = 0.0f;
 	
 	/// Final intensity of the light.
@@ -20,7 +20,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 	// Base intensity, automatically taken from light parameters.
 	protected float baseIntensity;
 	
-	// If <c>true</c>, light will destructs itself on completion of the effectOnDeath
+	// If <c>true</c>, light will destructs itself on completion of the onDeathEffect
 	public bool autodestruct;
 	
 	protected float p_lifetime = 0.0f;

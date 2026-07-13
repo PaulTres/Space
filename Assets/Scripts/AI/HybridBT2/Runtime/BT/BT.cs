@@ -55,9 +55,9 @@ namespace HybridBT2
             while (gameObject.activeSelf)
             {
                 yield return intervalWait;
-                yield return pauseWait;
+                //yield return pauseWait;
                 Root.Evaluate(blackboard);
-                blackboard.Tick();
+                blackboard.Tick(tickInterval);
             }
         }
         public void SetValue(Blackboard.Keys key, object value) => blackboard.SetData(key, value);

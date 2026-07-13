@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
     static GameSave currentSave;
-    static public readonly List<ObjectDestroyed> UnitsDestroyed = new();
+    public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
     public static Unit Player { get; set; } = null;
 
     #region Pausing
@@ -33,11 +33,6 @@ public static class GameManager
         Cursor.visible = false;
     }
     #endregion
-
-    public static void AbortMission()
-    {
-        MissionManager.TryGetInstance(true).EndMission();
-    }
 
     #region Progress
     public static void ResetProgress()
