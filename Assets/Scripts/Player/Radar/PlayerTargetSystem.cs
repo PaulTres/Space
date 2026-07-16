@@ -1,6 +1,8 @@
+using Player;
 using System.Collections.Generic;
 using System.Linq;
 using Timers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,26 +13,38 @@ namespace Radar
     public class PlayerTargetSystem : Singleton<PlayerTargetSystem>
     {
         #region Fields
-        protected Camera cam;
+        [SerializeField] protected Camera cam;
+        protected EventSystem eventSystem;
+        [Header("Object tracking")]
         [SerializeField] protected BoundingBox boundingBoxPrefab;
-        protected Stack<BoundingBox> boundingBoxPool { get; } = new();
-
-        protected readonly Dictionary<IObject, BoundingBox> boundingBoxes = new();
+        [SerializeField] protected Sprite unitIcon;
+        [SerializeField] protected Sprite missileIcon;
         [SerializeField] protected RectTransform boundingBoxParent;
-        [SerializeField] protected float minTextScale, maxTextScale;
+        [SerializeField] protected float minScale, maxScale;
+        [Header("Materials")]
+        [SerializeField] protected Material enemyMaterial;
+        [SerializeField] protected Material enemyTransluscentMaterial;
+        [SerializeField] protected Material allyMaterial;
+        [SerializeField] protected Material allyTransluscentMaterial;
+        [SerializeField] protected Material neutralMaterial;
+        [SerializeField] protected Material neutralTransluscentMaterial;
+        protected Stack<BoundingBox> boundingBoxPool { get; } = new();
+        protected readonly Dictionary<IObject, BoundingBox> boundingBoxes = new();
+        protected readonly CountdownTimer reorderTimer = new(GlobalConfig.UIUpdateCooldown);
+        [Header("Target selection/info")]
         [SerializeField] protected Image secondView;
         [SerializeField] protected Camera secondViewCamera;
+        [SerializeField] protected TextMeshProUGUI targetInfoText;
         /// <summary>
         /// This timer determines how often the bounding boxes are reordered.
         /// </summary>
-        protected readonly CountdownTimer reorderTimer = new(GlobalConfig.UIUpdateCooldown);
-        protected EventSystem eventSystem;
         protected Unit currentTarget;
         public Unit CurrentTarget
         {
             get
             {
-                if (currentTarget == null || !currentTarget.gameObject.activeSelf) return null;
+                if (currentTarget == null || !currentTarget.gameObject.activeSelf)
+                    return null;
                 return currentTarget;
             }
             set
@@ -39,12 +53,15 @@ namespace Radar
                 {
                     if (value != null && !value.gameObject.activeSelf) value = null;
                     currentTarget = value;
-                    if (secondView != null) secondView.gameObject.SetActive(value != null);
-                    if (secondViewCamera != null) secondViewCamera.gameObject.SetActive(value != null);
+                    if (secondView != null) secondView.gameObject.
+                            SetActive(value != null);
+                    if (secondViewCamera != null) secondViewCamera.gameObject.
+                            SetActive(value != null);
                 }
             }
         }
         protected PointerEventData pointerEventData;
+        protected PlayerShip owner;
         #endregion
 
         #region Setup
@@ -52,7 +69,8 @@ namespace Radar
         {
             base.InitializeSingleton();
             if (eventSystem != null) eventSystem = EventSystem.current;
-            cam = GetComponentInChildren<Camera>();
+            if (cam == null) cam = GetComponentInChildren<Camera>();
+            owner = GetComponentInParent<PlayerShip>();
             pointerEventData = new PointerEventData(eventSystem)
             {
                 position = new Vector2(Screen.width / 2, Screen.height / 2)
@@ -129,40 +147,52 @@ namespace Radar
                 //scale based on distance
                 float dist = Vector3.Distance(cam.transform.position, worldPos);
                 var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (dist + 0.00001f),
-                    minTextScale, maxTextScale);
+                    minScale, maxScale);
                 bbox.RectTransform.localScale = Vector3.one * size;
                 #endregion
 
-                #region Text
-                dist = Vector3.Distance(cam.transform.root.position, worldPos);
-                if (GameManager.Player != null && target.Target.
-                    IsEqual(GameManager.Player))
+                var distance = Vector3.Distance(owner.Position, target.Position);
+                if (distance <= owner.ScanRange + target.Signature)
                 {
-                    bbox.DistanceText.text = $"<color=red>{dist:0.0}";
+                    bbox.BBox.material = bbox.RegularMaterial;
                 }
-                else bbox.DistanceText.text = $"<color=blue>{dist:0.0}";
-                #endregion
+                else bbox.BBox.material = bbox.TransluscentMaterial;
             }
-            UpdateSecondView();
+            UpdateTargetInfo();
         }
 
-        protected void UpdateSecondView()
+        protected void UpdateTargetInfo()
         {
             if (!CurrentTarget.Active()) return;
-            if (secondViewCamera == null || secondView == null) return;
-            var direction = (transform.root.position - CurrentTarget.Position).normalized;
-            if (direction.magnitude < CurrentTarget.EffectScaleFactor)
+            #region Target view
+            if (secondViewCamera != null && secondView != null)
             {
-                secondViewCamera.gameObject.SetActive(false);
-                secondView.gameObject.SetActive(false);
+                var direction = (transform.root.position -
+                    CurrentTarget.Position).normalized;
+                if (direction.magnitude < CurrentTarget.EffectScaleFactor)
+                {
+                    secondViewCamera.gameObject.SetActive(false);
+                    secondView.gameObject.SetActive(false);
+                }
+                secondViewCamera.gameObject.SetActive(true);
+                secondView.gameObject.SetActive(true);
+                secondViewCamera.transform.position = CurrentTarget.Position +
+                    direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor);
+                secondViewCamera.transform.LookAt(CurrentTarget.Position);
             }
-            secondViewCamera.gameObject.SetActive(true);
-            secondView.gameObject.SetActive(true);
-            //Debug.DrawLine(Vector3.zero, transform.root.position, Color.green);
-            //Debug.DrawRay(CurrentTarget.Position, direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor));
-            secondViewCamera.transform.position = CurrentTarget.Position + direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor);
-            //Debug.Log(Vector3.Distance(secondViewCamera.transform.position, CurrentTarget.Position));
-            secondViewCamera.transform.LookAt(CurrentTarget.Position);
+            #endregion
+
+            #region Text
+            if (targetInfoText != null)
+            {
+                string enemyTarget = CurrentTarget.Target == null ? "None" :
+                    CurrentTarget == GameManager.Player ? "You" :
+                    CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
+                targetInfoText.text = $"{CurrentTarget.name}: " +
+                    $"{Vector3.Distance(transform.root.position, CurrentTarget.Position)}" +
+                    $"\nTarget: {enemyTarget}";
+            }
+            #endregion
         }
 
         protected void ReorderBoundingBoxes()
@@ -191,16 +221,27 @@ namespace Radar
 
         public void RegisterTarget(IObject target)
         {
-            //Debug.Log(target.Transform.name);
-            if (boundingBoxes.ContainsKey(target)) return;
+            if (!target.Active || target.Transform == transform.root || boundingBoxes.ContainsKey(target)) return;
             var bbox = GetBoundingBox();
-            //Debug.Log(bbox.gameObject.name);
-            bbox.Icon.sprite = GlobalConfig.GetIcon(target.ObjectType);
-            var (color, _) = GlobalConfig.GetTeamColor(target.Transform.gameObject.layer);
-            bbox.Icon.color = color;
             bbox.SelectionIcon.gameObject.SetActive(false);
-            bbox.BBox.color = color;
-            bbox.DistanceText.color = color;
+            if (target is Unit) bbox.BBox.sprite = unitIcon;
+            else bbox.BBox.sprite = missileIcon;
+            var team = GlobalConfig.GetTeam(target.Transform.gameObject.layer);
+            if (team == GlobalConfig.PlayerTeam)
+            {
+                bbox.RegularMaterial = allyMaterial;
+                bbox.TransluscentMaterial = allyTransluscentMaterial;
+            }
+            else if (team == GlobalConfig.EnemyTeam)
+            {
+                bbox.RegularMaterial = enemyMaterial;
+                bbox.TransluscentMaterial = enemyTransluscentMaterial;
+            }
+            else
+            {
+                bbox.RegularMaterial = neutralMaterial;
+                bbox.TransluscentMaterial = neutralTransluscentMaterial;
+            }
             bbox.gameObject.SetActive(true);
             boundingBoxes.Add(target, bbox);
         }
@@ -234,7 +275,7 @@ namespace Radar
             foreach (var target in targets)
             {
                 //compute a score for all of these
-                if (target == null || !target.Transform.gameObject.activeSelf) continue;
+                if (target == null || !target.Transform.gameObject.activeSelf || target.IsEqual(CurrentTarget)) continue;
                 var score = EvaluateTarget(target);
                 if (score > bestScore && score > 0)
                 {

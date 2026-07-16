@@ -32,7 +32,7 @@ public class Navigation : Ship
         base.Awake();
         if (navPivot == null)
         {
-            navPivot = new GameObject().transform;
+            navPivot = new GameObject("Auto-generated nav pivot").transform;
             navPivot.SetPositionAndRotation(transform.position, transform.rotation);
             navPivot.parent = transform;
             Debug.LogWarning($"Created new nav pivot for {transform}.");
