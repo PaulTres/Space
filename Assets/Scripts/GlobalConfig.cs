@@ -79,6 +79,11 @@ public class GlobalConfig : ScriptableObject
 
     #region Misc
     /// <summary>
+    /// Morale will only replenish after this much time has passed since 
+    /// the last morale damage.
+    /// </summary>
+    public static readonly float MoraleRechargeCooldown = 10;
+    /// <summary>
     /// When this ship is spawned, no other ships should be around it in this radius.
     /// </summary>
     public static readonly float ShipSpawnEmptySphereRadius = 5;
@@ -196,9 +201,9 @@ public class GlobalConfig : ScriptableObject
         { 6,1 },{7,1 }, {8,2 },{ 9,2 },{10,10},{0,0}
     };
 
-    public static int EnemyTeam => 2;
-
+    public static int NeutralTeam = 0;
     public static int PlayerTeam => 1;
+    public static int EnemyTeam => 2;
 
     public static int GetTeam(int objectLayer)
     {

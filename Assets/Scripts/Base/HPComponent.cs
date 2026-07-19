@@ -79,8 +79,8 @@ namespace HP
             }
             if (CurrentHP <= 0)
             {
-                EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(),
-                    new(Transform, damageInfo.Source));
+                ObjectDestroyed @event = new(Transform, damageInfo.Source);
+                EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
             }
         }
 

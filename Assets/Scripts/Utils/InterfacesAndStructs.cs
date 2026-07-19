@@ -79,6 +79,17 @@ public readonly struct ObjectDestroyed : IEvent
     }
 }
 
+public readonly struct UnitDestroyed : IEvent
+{
+    public readonly Unit Unit;
+    public readonly float Time;
+    public UnitDestroyed(Unit unit)
+    {
+        Unit = unit;
+        Time = UnityEngine.Time.time;
+    }
+}
+
 public readonly struct PoolableRecycled : IEvent { }
 
 public interface IResettable

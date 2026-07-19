@@ -6,6 +6,10 @@ namespace HybridBT2
     {
         public enum Keys
         {
+            Fleeing,
+            LastMoraleDamageTime,
+            DefaultMorale,
+            Morale,
             Target,
             Launchers,
             TargetPosition,

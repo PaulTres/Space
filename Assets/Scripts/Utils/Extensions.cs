@@ -8,10 +8,29 @@ namespace Utilities
 {
     public static class Extensions
     {
+        #region Unit
+        public static float GetMoraleWeight(this Unit unit)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public static bool Active(this Unit unit)
         {
             return unit != null && unit.gameObject.activeSelf;
         }
+
+        public static bool Fleeing(this IObject @object)
+        {
+            return Fleeing(@object as Unit);
+        }
+
+        public static bool Fleeing(this Unit unit)
+        {
+            if (unit == null) return false;
+            return unit.Transform.GetBlackboard().GetData<bool>(Blackboard.
+                Keys.Fleeing);
+        }
+        #endregion
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {

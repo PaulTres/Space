@@ -15,6 +15,10 @@ public class Navigation : Ship
     protected float radAngleToForward;
     [SerializeField] protected ObstacleChecker checker;
     public bool UpdateRotation => RotationTarget == null;
+    /// <summary>
+    /// Describes what rotation this object should have. NULL means the object 
+    /// will face its velocity.
+    /// </summary>
     public RotationTarget RotationTarget { get; set; }
 
     public Vector3 IntendedForward

@@ -1,4 +1,5 @@
 using Effects;
+using EventBus;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
@@ -45,6 +46,7 @@ public abstract class Ship : Unit
     public override void Die(ObjectDestroyed @event)
     {
         effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
+        EventBus<UnitDestroyed>.Raise(new(this));
         gameObject.SetActive(false);
     }
 }

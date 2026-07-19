@@ -75,8 +75,6 @@ namespace Weapons
             collisionMask = GlobalConfig.GetBulletCollisionMask(gameObject.layer);
 
             angularVelocity = Vector3.zero;
-
-            this.RegisterForRadar();
         }
 
         protected override void OnDisable()

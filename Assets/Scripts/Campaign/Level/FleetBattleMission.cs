@@ -13,7 +13,8 @@ public class FleetBattleMission : Mission
     public FleetBattleMission(float timeLimit, int playerPoints, int enemyPoints) : base(playerPoints, enemyPoints)
     {
         TimeLimit = timeLimit;
-        distanceFromCenter = (playerPoints + enemyPoints + GlobalConfig.ShipSpawnEmptySphereRadius) * 2;
+        distanceFromCenter = (playerPoints + enemyPoints +
+            GlobalConfig.ShipSpawnEmptySphereRadius) * 2;
         playerSpawnRadius = playerPoints;
         enemySpawnRadius = enemyPoints;
     }

@@ -17,7 +17,7 @@ namespace Player
         protected void OnEnable()
         {
             Debug.LogWarning("Generating dummy mission!");
-            Mission.CurrentMission = new FleetBattleMission(3600, 100, 100);
+            //Mission.CurrentMission = new FleetBattleMission(3600, 100, 100);
             PopulatePlayerChoiceDropdown();
             inputReader.EnablePlayerActions();
             inputReader.OnEscapeEvent += OnEscape;

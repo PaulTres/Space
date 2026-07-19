@@ -5,19 +5,23 @@ namespace EventBus
 {
     public static class EventBus<T> where T : IEvent
     {
+        static EventBinding<T> globalBinding = new();
         static readonly Dictionary<int, EventBinding<T>> bindings = new();
         static void Clear()
         {
             bindings.Clear();
+            globalBinding = null;
         }
         /// <summary>
-        /// Raise binding 0.
+        /// Raise global binding.
         /// </summary>
         /// <param name="event">The value of the IEvent parameter.</param>
         /// <returns>True if the binding was found and raised.</returns>
         public static bool Raise(T @event)
         {
-            return Raise(0, @event);
+            if (globalBinding == null) return false;
+            globalBinding.Invoke(@event);
+            return true;
         }
         /// <summary>
         /// Raise a binding.
@@ -39,7 +43,7 @@ namespace EventBus
         /// </summary>
         /// <param name="id">The id of the new binding. Defaults to 0.</param>
         /// <returns>True if the binding was successfully added.</returns>
-        public static bool AddBinding(int id = 0)
+        public static bool AddBinding(int id)
         {
             return bindings.TryAdd(id, new());
         }
@@ -48,7 +52,7 @@ namespace EventBus
         /// </summary>
         /// <param name="id">The id of the binding to remove.</param>
         /// <returns>True if the binding was successfully removed.</returns>
-        public static bool RemoveBinding(int id = 0)
+        public static bool RemoveBinding(int id)
         {
             if (bindings.TryGetValue(id, out EventBinding<T> binding))
             {
@@ -63,7 +67,7 @@ namespace EventBus
         /// </summary>
         /// <param name="id">The id of the binding to clear. Defaults to 0.</param>
         /// <returns>True if the binding was found.</returns>
-        public static bool ClearBinding(int id = 0)
+        public static bool ClearBinding(int id)
         {
             if (bindings.TryGetValue(id, out EventBinding<T> binding))
             {
@@ -72,8 +76,12 @@ namespace EventBus
             }
             return false;
         }
+        public static void ClearGlobalBinding()
+        {
+            globalBinding.Clear();
+        }
         /// <summary>
-        /// Add Actions to binding 0. By default will attempt to add a new binding if none is found, and add the Actions to it.
+        /// Add Actions to global binding.
         /// </summary>
         /// <param name="action">Parametrized action.</param>
         /// <param name="actionNoArgs">Non-parametrized action.</param>
@@ -82,7 +90,14 @@ namespace EventBus
         public static bool AddActions(Action<T> action,
             Action actionNoArgs = null, bool addBinding = true)
         {
-            return AddActions(0, action, actionNoArgs, addBinding);
+            if (globalBinding == null)
+            {
+                if (addBinding) globalBinding = new();
+                else return false;
+            }
+            globalBinding.Add(action);
+            globalBinding.Add(actionNoArgs);
+            return true;
         }
         /// <summary>
         /// Add Actions to a binding. By default will attempt to add a new binding if none is found, and add the Actions to it.
@@ -111,7 +126,7 @@ namespace EventBus
             return false;
         }
         /// <summary>
-        /// Removes Actions from binding 0.
+        /// Removes Actions from global binding.
         /// </summary>
         /// <param name="action">Parametrized action.</param>
         /// <param name="actionNoArgs">Non-parametrized action.</param>
@@ -119,7 +134,10 @@ namespace EventBus
         public static bool RemoveActions(Action<T> action,
             Action actionNoArgs = null)
         {
-            return RemoveActions(0, action, actionNoArgs);
+            if (globalBinding == null) return false;
+            globalBinding.Remove(action);
+            globalBinding.Remove(actionNoArgs);
+            return true;
         }
         /// <summary>
         /// Removes Actions from a binding.

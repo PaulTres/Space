@@ -8,7 +8,7 @@ public abstract class Mission
     protected float startTime;
     public int PlayerPoints { get; protected set; }
     public int EnemyPoints { get; protected set; }
-
+    public string Briefing { get; set; } = "";
     public Mission(int playerPoints, int enemyPoints)
     {
         PlayerPoints = playerPoints;

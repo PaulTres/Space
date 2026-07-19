@@ -46,6 +46,7 @@ namespace Weapons
         {
             base.OnEnable();
             ComponentRegister<Missile>.Register(Transform, this);
+            this.RegisterForRadar();
         }
 
         protected override void OnDestroy()
