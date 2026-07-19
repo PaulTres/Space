@@ -21,10 +21,10 @@ namespace Utilities
 
         public static bool Fleeing(this IObject @object)
         {
-            return Fleeing(@object as Unit);
+            return IsFleeing(@object as Unit);
         }
 
-        public static bool Fleeing(this Unit unit)
+        public static bool IsFleeing(this Unit unit)
         {
             if (unit == null) return false;
             return unit.Transform.GetBlackboard().GetData<bool>(Blackboard.

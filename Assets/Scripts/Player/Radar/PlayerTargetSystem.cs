@@ -146,6 +146,7 @@ namespace Radar
                 #region Scaling
                 //scale based on distance
                 float dist = Vector3.Distance(cam.transform.position, worldPos);
+                bbox.DistanceText.text = ((int)dist).ToString();
                 var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (dist + 0.00001f),
                     minScale, maxScale);
                 bbox.RectTransform.localScale = Vector3.one * size;
@@ -154,9 +155,31 @@ namespace Radar
                 var distance = Vector3.Distance(owner.Position, target.Position);
                 if (distance <= owner.ScanRange + target.Signature)
                 {
-                    bbox.BBox.material = bbox.RegularMaterial;
+                    bbox.BBox.material = bbox.DistanceText.material =
+                        bbox.RegularMaterial;
                 }
-                else bbox.BBox.material = bbox.TransluscentMaterial;
+                else bbox.BBox.material = bbox.DistanceText.material =
+                        bbox.TransluscentMaterial;
+
+                var unit = target as Unit;
+                if (unit != null)
+                {
+                    if (unit.IsFleeing())
+                    {
+                        //flicker the bounding box and distance text
+                        if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)
+                        {
+                            bbox.BBox.enabled = !bbox.BBox.enabled;
+                            bbox.DistanceText.enabled = !bbox.DistanceText.enabled;
+                            bbox.TimeSinceLastFlicker = Time.time;
+                        }
+                    }
+                    else
+                    {
+                        bbox.BBox.enabled = true;
+                        bbox.DistanceText.enabled = true;
+                    }
+                }
             }
             UpdateTargetInfo();
         }
@@ -164,6 +187,7 @@ namespace Radar
         protected void UpdateTargetInfo()
         {
             if (!CurrentTarget.Active()) return;
+
             #region Target view
             if (secondViewCamera != null && secondView != null)
             {
@@ -188,9 +212,7 @@ namespace Radar
                 string enemyTarget = CurrentTarget.Target == null ? "None" :
                     CurrentTarget == GameManager.Player ? "You" :
                     CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
-                targetInfoText.text = $"{CurrentTarget.name}: " +
-                    $"{Vector3.Distance(transform.root.position, CurrentTarget.Position)}" +
-                    $"\nTarget: {enemyTarget}";
+                targetInfoText.text = $"{CurrentTarget.name}:\nTarget: {enemyTarget}";
             }
             #endregion
         }
@@ -226,6 +248,7 @@ namespace Radar
             bbox.SelectionIcon.gameObject.SetActive(false);
             if (target is Unit) bbox.BBox.sprite = unitIcon;
             else bbox.BBox.sprite = missileIcon;
+            bbox.TimeSinceLastFlicker = Time.time;
             var team = GlobalConfig.GetTeam(target.Transform.gameObject.layer);
             if (team == GlobalConfig.PlayerTeam)
             {

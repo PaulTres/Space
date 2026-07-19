@@ -79,6 +79,20 @@ public class GlobalConfig : ScriptableObject
 
     #region Misc
     /// <summary>
+    /// It will take this amount of time for bounding boxes of fleeing enemies to 
+    /// switch between on and off.
+    /// </summary>
+    public static readonly float FlickerInterval = 0.5f;
+    /// <summary>
+    /// Morale needs to be <= to InitialMorale* this value for the unit to flee.
+    /// </summary>
+    public static readonly float MoraleFleeThreshold = 0;
+    /// <summary>
+    /// Morale needs to be at least InitialMorale* this value for the unit 
+    /// to stop fleeing.
+    /// </summary>
+    public static readonly float MoraleRecoverThreshold = .5f;
+    /// <summary>
     /// Morale will only replenish after this much time has passed since 
     /// the last morale damage.
     /// </summary>

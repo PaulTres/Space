@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,8 @@ namespace Radar
             }
         }
         [field: SerializeField] public Image SelectionIcon { get; protected set; }
+        [field: SerializeField] public TextMeshProUGUI DistanceText { get; protected set; }
         [field: SerializeField] public Image BBox { get; protected set; }
+        public float TimeSinceLastFlicker { get; set; }
     }
 }

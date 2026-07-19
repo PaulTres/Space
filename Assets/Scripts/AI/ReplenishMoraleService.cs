@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="ReplenishMorale",menuName = "HybridBT2/Services/ReplenishMorale")]
+[CreateAssetMenu(fileName = "ReplenishMorale", menuName = "HybridBT2/Services/ReplenishMorale")]
 public class ReplenishMoraleService : ServiceData
 {
     [Tooltip("The amount of morale that gets replenished per second once regen starts.")]
@@ -15,9 +15,9 @@ public class ReplenishMoraleService : ServiceData
         if (Time.time - time < moraleRechargeCooldown) return;
         var morale = ctx.GetData<float>(Blackboard.Keys.Morale);
         var defaultMorale = ctx.GetData<float>(Blackboard.Keys.DefaultMorale);
-        if(morale<defaultMorale)
+        if (morale < defaultMorale)
         {
-            morale=Mathf.Min(morale+moraleReplenishmentRate*ctx.DeltaTime, 
+            morale = Mathf.Min(morale + moraleReplenishmentRate * ctx.DeltaTime,
                 defaultMorale);
             ctx.SetData(Blackboard.Keys.Morale, morale);
         }
