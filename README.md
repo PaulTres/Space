@@ -25,7 +25,7 @@ Missiles gain increased speed and tracking when the shooter is facing the target
 
 ## Morale
 
-Ships suffer morale damage when friendlies are destroyed. When a ship's morale reaches 0, it will flee from its current target. Morale recovers over time, but it cannot recover for a certain period of time after taking morale damage.
+Ships suffer morale damage when friendlies are destroyed. When a ship's morale reaches 0, it will flee from its current target. Morale recovers over time, but it cannot recover for a certain period of time after taking morale damage. A ship will stop fleeing once it recovers 50% of its morale.
 
 ## Player awareness
 
