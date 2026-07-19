@@ -46,7 +46,14 @@ public abstract class Unit : MonoBehaviour, IObject
     /// increased.
     /// </summary>
     protected float signatureIncreaseTime;
-    [field: SerializeField] public float ScanRange { get; protected set; }
+    [SerializeField] protected float scanRange = 10;
+    public float ScanRange
+    {
+        get
+        {
+            return this.IsFleeing() ? 0 : scanRange;
+        }
+    }
     protected HPComponent hpComponent;
     public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
     public float CurrentHPPercentage => hpComponent != null ?
