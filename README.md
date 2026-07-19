@@ -23,9 +23,13 @@ Turrets increase their rate of fire the longer they are shooting, and rapidly de
 
 Missiles gain increased speed and tracking when the shooter is facing the target (use dot-product to calculate the strength of this bonus).
 
+## Morale
+
+Ships suffer morale damage when friendlies are destroyed. When a ship's morale reaches 0, it will flee from its current target. Morale recovers over time, but it cannot recover for a certain period of time after taking morale damage.
+
 ## Player awareness
 
-Enemies are colored in red, friendlies in blue, neutrals(assuming they exist) in white. Enemies beyond optimal engagement range have transluscent bounding boxes instead of normal ones. Distance and target of enemy is displayed upon selecting them. Enemies within optimal engagement range and targeting the player will have a thin red line between the two.
+Enemies are colored in red, friendlies in blue, neutrals(assuming they exist) in white. Enemies beyond optimal engagement range have transluscent bounding boxes instead of normal ones. An enemy's target is displayed upon selecting them. Enemies within optimal engagement range and targeting the player will have a thin red line between the two. Fleeing ships have flickering bounding boxes.
 
 # Campaign
 
