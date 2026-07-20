@@ -184,7 +184,7 @@ public class GlobalConfig : ScriptableObject
     }
 
     /// <summary>
-    /// Returns what layer a ship should be on, given its team. Team 1 is layer 6, team 2 is layer 8.
+    /// Returns what layer a ship should be on, given its Team. Team 1 is layer 6, Team 2 is layer 8.
     /// </summary>
     /// <param name="team"></param>
     /// <returns></returns>

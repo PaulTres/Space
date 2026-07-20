@@ -84,7 +84,6 @@ namespace Player
         protected override void OnDisable()
         {
             base.OnDisable();
-            GameManager.Player = null;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             inputReader.DisableCallbacks();
@@ -207,6 +206,13 @@ namespace Player
                 freelookCamPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
             }
             else camPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
+        }
+
+        public override void Die(ObjectDestroyed @event)
+        {
+            base.Die(@event);
+            GameManager.Player = null;
+            MissionManager.TryGetInstance().EndMission();
         }
         #endregion
     }

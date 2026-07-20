@@ -51,7 +51,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         get
         {
-            return this.IsFleeing() ? 0 : scanRange;
+            return this.IsFleeing ? 0 : scanRange;
         }
     }
     protected HPComponent hpComponent;
@@ -83,6 +83,15 @@ public abstract class Unit : MonoBehaviour, IObject
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
         }
     }
+    public bool IsFleeing
+    {
+        get
+        {
+            var b = Transform.GetBlackboard();
+            if (b == null) return false;
+            return b.GetData<bool>(Blackboard.Keys.Fleeing);
+        }
+    }
     [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     #endregion
 
@@ -111,7 +120,6 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void OnDisable()
     {
         if (coroutine != null) StopCoroutine(coroutine);
-        UnitManager.Unregister(this);
         this.UnregisterForRadar();
         missileBuffer = null;
     }
@@ -172,7 +180,7 @@ public abstract class Unit : MonoBehaviour, IObject
     public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
 
     /// <summary>
-    /// Returns a list of all units that are on a different team than this unit.
+    /// Returns a list of all units that are on a different Team than this unit.
     /// </summary>
     /// <returns></returns>
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);

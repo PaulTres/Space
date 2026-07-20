@@ -60,7 +60,7 @@ namespace Player
         #region Mission start
         public void BeginMission()
         {
-            Mission.CurrentMission = Mission.GetRandomMission();
+            //Mission.CurrentMission = Mission.GetRandomMission();
             coroutine = StartCoroutine(MissionStartCountdown());
         }
 

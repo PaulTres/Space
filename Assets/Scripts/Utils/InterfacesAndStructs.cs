@@ -81,11 +81,15 @@ public readonly struct ObjectDestroyed : IEvent
 
 public readonly struct UnitDestroyed : IEvent
 {
-    public readonly Unit Unit;
+    public readonly int UnitTeam;
+    public readonly float UnitMoraleWeight;
+    public readonly Vector3 UnitPosition;
     public readonly float Time;
     public UnitDestroyed(Unit unit)
     {
-        Unit = unit;
+        UnitTeam = unit.Team;
+        UnitMoraleWeight = unit.GetMoraleWeight();
+        UnitPosition = unit.Position;
         Time = UnityEngine.Time.time;
     }
 }

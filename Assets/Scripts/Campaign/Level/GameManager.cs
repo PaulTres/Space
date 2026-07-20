@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public static class GameManager
 {
     static GameSave currentSave;
+    public static float MissionTime { get; set; } = 0;
     public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
     public static Unit Player { get; set; } = null;
 
@@ -78,6 +79,7 @@ public static class GameManager
 
     public static void EndMission()
     {
+        MissionTime = Time.time - Mission.CurrentMission.StartTime;
         SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
     }
     #endregion

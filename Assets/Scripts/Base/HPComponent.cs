@@ -80,6 +80,7 @@ namespace HP
             if (CurrentHP <= 0)
             {
                 ObjectDestroyed @event = new(Transform, damageInfo.Source);
+                GameManager.UnitsDestroyed.Add(@event);
                 EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
             }
         }

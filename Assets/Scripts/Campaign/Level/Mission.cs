@@ -1,56 +1,44 @@
-using EventBus;
 using UnityEngine;
-using Utilities;
 
-public abstract class Mission
+public abstract class Mission : ScriptableObject
 {
     public static Mission CurrentMission { get; set; }
-    protected float startTime;
-    public int PlayerPoints { get; protected set; }
-    public int EnemyPoints { get; protected set; }
-    public string Briefing { get; set; } = "";
-    public Mission(int playerPoints, int enemyPoints)
+    public float StartTime { get; protected set; }
+    /// <summary>
+    /// Time limit for the mission. Ignored if set to <=0.
+    /// </summary>
+    [field: SerializeField] public float TimeLimit { get; protected set; } = -1;
+    [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
+    [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
+    [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
+
+    public void EndMission()
     {
-        PlayerPoints = playerPoints;
-        EnemyPoints = enemyPoints;
+        var m = MissionManager.TryGetInstance();
+        if (m != null) m.EndMission();
     }
 
-    public void CheckIfMissionIsOver()
-    {
-        if (IsMissionOver()) MissionManager.TryGetInstance().EndMission();
-    }
-
-    public virtual void OnUnitDestroyed(ObjectDestroyed @event)
-    {
-        EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
-        GameManager.UnitsDestroyed.Add(@event);
-    }
-
-    protected Unit SpawnUnit(UnitData unit, int team, Transform transform)
-    {
-        return SpawnUnit(unit, team, transform.position, transform.rotation);
-    }
-
-    protected Unit SpawnUnit(UnitData unit, int team, Vector3 position)
-    {
-        return SpawnUnit(unit, team, position, Quaternion.identity);
-    }
-
-    protected virtual Unit SpawnUnit(UnitData data, int team, Vector3 position, Quaternion rotation)
-    {
-        var unit = data.CreateInstance();
-        unit.Team = team;
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(unit), OnUnitDestroyed);
-        unit.transform.root.SetPositionAndRotation(position, rotation);
-        return unit;
-    }
-
-    public static Mission GetRandomMission() => null;
-
+    /// <summary>
+    /// Fires when the mission manager is initialized. Initializes time.
+    /// Should handle environment, spawning etc.
+    /// </summary>
     public virtual void Initialize()
     {
-        startTime = Time.time;
+        CurrentMission = this;
+        StartTime = Time.time;
+        SpawnPlayer();
+        SpawnScenery();
+        SpawnUnits();
     }
 
-    public abstract bool IsMissionOver();
+    public abstract void SpawnPlayer();
+
+    public virtual void SpawnScenery() { }
+
+    public abstract void SpawnUnits();
+
+    public virtual void OnAllEnemiesDestroyed()
+    {
+        EndMission();
+    }
 }

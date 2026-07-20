@@ -164,7 +164,7 @@ namespace Radar
                 var unit = target as Unit;
                 if (unit != null)
                 {
-                    if (unit.IsFleeing())
+                    if (unit.IsFleeing)
                     {
                         //flicker the bounding box and distance text
                         if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)

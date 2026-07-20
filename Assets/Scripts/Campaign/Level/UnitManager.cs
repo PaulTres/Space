@@ -6,7 +6,7 @@ using UnityEngine;
 public static class UnitManager
 {
     /// <summary>
-    /// All active ships. The key is a ship's team.
+    /// All active ships. The key is a ship's Team.
     /// </summary>
     readonly static Dictionary<int, List<Unit>> ships = new();
     public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
@@ -54,6 +54,11 @@ public static class UnitManager
             ships[team].RemoveAtSwapBack(ship.UnitManagerIndex);
             if (ships[team].Count > 0) ships[team][index].UnitManagerIndex = index;
             ship.UnitManagerIndex = -1;
+        }
+
+        if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)
+        {
+            Mission.CurrentMission.OnAllEnemiesDestroyed();
         }
     }
 }
