@@ -36,21 +36,17 @@ public static class GameManager
     #endregion
 
     #region Progress
-    public static void ResetProgress()
-    {
-        currentSave = new();
-    }
 
     public static void NewGame()
     {
-        currentSave = new();
+        currentSave = new(0);
         LoadLobby();
     }
 
     public static void Load(string fileName)
     {
         var s = GameSave.Load(fileName);
-        currentSave = s ?? new();
+        currentSave = s ?? new(0);
         LoadLobby();
     }
 

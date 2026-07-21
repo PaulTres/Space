@@ -116,18 +116,32 @@ namespace Radar
         {
             foreach (var (target, bbox) in boundingBoxes)
             {
-                if (target == null || !target.Active) continue;
+                ProcessTarget(target, bbox);
+            }
+            UpdateTargetInfo();
+        }
 
-                Vector3 worldPos = target.Position;
+        /// <summary>
+        /// Handles bounding box and other UI aspects of objects.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="bbox"></param>
+        protected void ProcessTarget(IObject target, BoundingBox bbox)
+        {
+            if (target == null || !target.Active || bbox == null) return;
 
-                Vector3 viewportPos = cam.WorldToViewportPoint(worldPos);
-                if (viewportPos.z <= 0)
-                {
-                    bbox.gameObject.SetActive(false);
-                    return;
-                }
-                bbox.gameObject.SetActive(true);
+            var unit = target as Unit;
+            var distance = Vector3.Distance(owner.Position, target.Position);
+            Vector3 viewportPos = cam.WorldToViewportPoint(target.Position);
+            if (viewportPos.z <= 0)
+            {
+                bbox.Hide();
+            }
+            else
+            {
+                bbox.Show();
 
+                #region Bounding box position
                 Vector2 screenPos = new(
                     viewportPos.x * Screen.width,
                     viewportPos.y * Screen.height
@@ -142,17 +156,18 @@ namespace Radar
 
                 //Debug.Log($"{worldPos}-:-{viewportPos}-:-{localPos}");
                 bbox.RectTransform.localPosition = localPos;
+                #endregion
 
                 #region Scaling
                 //scale based on distance
-                float dist = Vector3.Distance(cam.transform.position, worldPos);
-                bbox.DistanceText.text = ((int)dist).ToString();
-                var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (dist + 0.00001f),
+                float distanceToCamera = Vector3.Distance(cam.transform.position, target.Position);
+                bbox.DistanceText.text = ((int)distanceToCamera).ToString();
+                var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (distanceToCamera + 0.00001f),
                     minScale, maxScale);
                 bbox.RectTransform.localScale = Vector3.one * size;
                 #endregion
 
-                var distance = Vector3.Distance(owner.Position, target.Position);
+                #region Distance text
                 if (distance <= owner.ScanRange + target.Signature)
                 {
                     bbox.BBox.material = bbox.DistanceText.material =
@@ -160,8 +175,9 @@ namespace Radar
                 }
                 else bbox.BBox.material = bbox.DistanceText.material =
                         bbox.TransluscentMaterial;
+                #endregion
 
-                var unit = target as Unit;
+                #region Fleeing
                 if (unit != null)
                 {
                     if (unit.IsFleeing)
@@ -173,6 +189,7 @@ namespace Radar
                             bbox.DistanceText.enabled = !bbox.DistanceText.enabled;
                             bbox.TimeSinceLastFlicker = Time.time;
                         }
+                        bbox.LineRenderer.enabled = false;
                     }
                     else
                     {
@@ -180,8 +197,21 @@ namespace Radar
                         bbox.DistanceText.enabled = true;
                     }
                 }
+                #endregion
             }
-            UpdateTargetInfo();
+
+            if (unit != null && unit.Target == (IObject)GameManager.Player && GameManager.Player != null)
+            {
+                bbox.LineRenderer.enabled = true;
+                bbox.LineRenderer.SetPosition(0, unit.Position);
+                bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
+                if (distance > unit.ScanRange + GameManager.Player.Signature)
+                {
+                    bbox.LineRenderer.material = bbox.DottedLineMaterial;
+                }
+                else bbox.LineRenderer.material = bbox.RegularLineMaterial;
+            }
+            else bbox.LineRenderer.enabled = false;
         }
 
         protected void UpdateTargetInfo()

@@ -29,7 +29,7 @@ Ships suffer morale damage when friendlies are destroyed. When a ship's morale r
 
 ## Player awareness
 
-Enemies are colored in red, friendlies in blue, neutrals(assuming they exist) in white. Enemies beyond optimal engagement range have transluscent bounding boxes instead of normal ones. An enemy's target is displayed upon selecting them. Enemies within optimal engagement range and targeting the player will have a thin red line between the two. Fleeing ships have flickering bounding boxes.
+Enemies are colored in red, friendlies in blue, neutrals(assuming they exist) in white. Enemies beyond optimal engagement range have transluscent bounding boxes instead of normal ones. An enemy's target is displayed upon selecting them. Enemies and targeting the player will have a thin red line between the two, dotted if they are outside optimal engagement range. Fleeing ships have flickering bounding boxes.
 
 # Campaign
 

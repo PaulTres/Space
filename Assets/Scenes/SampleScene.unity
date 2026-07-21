@@ -156,7 +156,7 @@ MonoBehaviour:
   maxSignature: 0
   signatureDecreaseRate: 0.1
   signatureDecreaseCooldown: 5
-  <ScanRange>k__BackingField: 0
+  scanRange: 10
   <Turrets>k__BackingField: []
   tickInterval: 0.5
   <EffectScaleFactor>k__BackingField: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   maxSignature: 0
   signatureDecreaseRate: 0.1
   signatureDecreaseCooldown: 5
-  <ScanRange>k__BackingField: 0
+  scanRange: 10
   <Turrets>k__BackingField: []
   tickInterval: 0.5
   <EffectScaleFactor>k__BackingField: 2

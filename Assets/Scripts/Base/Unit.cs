@@ -78,6 +78,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         get
         {
+            //return GameManager.Player;
             var blackboard = Transform.GetBlackboard();
             if (blackboard == null) return null;
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);

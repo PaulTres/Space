@@ -20,6 +20,23 @@ namespace Radar
         [field: SerializeField] public Image SelectionIcon { get; protected set; }
         [field: SerializeField] public TextMeshProUGUI DistanceText { get; protected set; }
         [field: SerializeField] public Image BBox { get; protected set; }
+        [field: SerializeField] public Material RegularLineMaterial { get; protected set; }
+        [field: SerializeField] public Material DottedLineMaterial { get; protected set; }
+        [field: SerializeField] public LineRenderer LineRenderer { get; protected set; }
         public float TimeSinceLastFlicker { get; set; }
+
+        public void Show()
+        {
+            BBox.enabled = true;
+            SelectionIcon.enabled = true;
+            DistanceText.enabled = true;
+        }
+
+        public void Hide()
+        {
+            BBox.enabled = false;
+            SelectionIcon.enabled = false;
+            DistanceText.enabled = false;
+        }
     }
 }

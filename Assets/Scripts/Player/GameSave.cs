@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,9 +10,13 @@ namespace Player
     {
         public static readonly string Name = "GameSave";
         public readonly long dateTimeBinary;
-        public GameSave()
+        public int CurrentMissionIndex { get; set; } = 0;
+
+        [JsonConstructor]
+        public GameSave([JsonProperty("CurrentMissionIndex")] int index)
         {
             dateTimeBinary = DateTime.Now.ToBinary();
+            CurrentMissionIndex = index;
         }
 
         public override string ToString()
