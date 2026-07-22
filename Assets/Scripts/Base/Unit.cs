@@ -15,26 +15,10 @@ public abstract class Unit : MonoBehaviour, IObject
     [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
         "will have their owner set to null.")]
     [SerializeField] protected IObject.Type type;
-    public IObject.Type ObjectType => type;
     [SerializeField] protected bool deleteOwnershipOnDeath = true;
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
-    public virtual Vector3 Forward => Transform.forward;
-    public virtual Vector3 Right => Transform.forward;
-    public virtual Vector3 Up => Transform.forward;
-    public virtual Vector3 LinearVelocity => Vector3.zero;
-    public virtual Vector3 AngularVelocity => Vector3.zero;
-    public float Signature => signature;
     protected Transform tr;
-    public Transform Transform
-    {
-        get
-        {
-            if (tr == null) tr = transform;
-            return tr;
-        }
-    }
-    public Vector3 Position => Transform.position;
     protected float signature;
     [field: SerializeField] public float DefaultSignature { get; protected set; }
     [SerializeField] protected float maxSignature;
@@ -47,17 +31,7 @@ public abstract class Unit : MonoBehaviour, IObject
     /// </summary>
     protected float signatureIncreaseTime;
     [SerializeField] protected float scanRange = 10;
-    public float ScanRange
-    {
-        get
-        {
-            return this.IsFleeing ? 0 : scanRange;
-        }
-    }
     protected HPComponent hpComponent;
-    public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
-    public float CurrentHPPercentage => hpComponent != null ?
-        hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     [field: SerializeField] public List<Turret> Turrets { get; protected set; } = new();
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
@@ -71,6 +45,36 @@ public abstract class Unit : MonoBehaviour, IObject
     [SerializeField] protected float tickInterval = 0.5f;
     protected WaitForSeconds wait;
     protected Coroutine coroutine;
+    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
+    #endregion
+
+    #region Properties
+    public IObject.Type ObjectType => type;
+    public virtual Vector3 Forward => Transform.forward;
+    public virtual Vector3 Right => Transform.forward;
+    public virtual Vector3 Up => Transform.forward;
+    public virtual Vector3 LinearVelocity => Vector3.zero;
+    public virtual Vector3 AngularVelocity => Vector3.zero;
+    public float Signature => signature;
+    public Transform Transform
+    {
+        get
+        {
+            if (tr == null) tr = transform;
+            return tr;
+        }
+    }
+    public Vector3 Position => Transform.position;
+    public float ScanRange
+    {
+        get
+        {
+            return this.IsFleeing ? 0 : scanRange;
+        }
+    }
+    public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
+    public float CurrentHPPercentage => hpComponent != null ?
+        hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
@@ -78,7 +82,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         get
         {
-            //return GameManager.Player;
+            return GameManager.Player;
             var blackboard = Transform.GetBlackboard();
             if (blackboard == null) return null;
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
@@ -93,7 +97,6 @@ public abstract class Unit : MonoBehaviour, IObject
             return b.GetData<bool>(Blackboard.Keys.Fleeing);
         }
     }
-    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     #endregion
 
     #region Setup

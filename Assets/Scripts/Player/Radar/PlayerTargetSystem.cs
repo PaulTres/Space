@@ -4,7 +4,6 @@ using System.Linq;
 using Timers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utilities;
 
@@ -14,7 +13,6 @@ namespace Radar
     {
         #region Fields
         [SerializeField] protected Camera cam;
-        protected EventSystem eventSystem;
         [Header("Object tracking")]
         [SerializeField] protected BoundingBox boundingBoxPrefab;
         [SerializeField] protected Sprite unitIcon;
@@ -43,9 +41,7 @@ namespace Radar
         {
             get
             {
-                if (currentTarget == null || !currentTarget.gameObject.activeSelf)
-                    return null;
-                return currentTarget;
+                return currentTarget.Active() ? currentTarget : null;
             }
             set
             {
@@ -53,14 +49,12 @@ namespace Radar
                 {
                     if (value != null && !value.gameObject.activeSelf) value = null;
                     currentTarget = value;
-                    if (secondView != null) secondView.gameObject.
-                            SetActive(value != null);
-                    if (secondViewCamera != null) secondViewCamera.gameObject.
-                            SetActive(value != null);
+                    if (secondView != null) secondView.gameObject.SetActive(value != null);
+                    if (secondViewCamera != null) secondViewCamera.gameObject.SetActive(value != null);
+                    if (targetInfoText != null) targetInfoText.gameObject.SetActive(value != null);
                 }
             }
         }
-        protected PointerEventData pointerEventData;
         protected PlayerShip owner;
         #endregion
 
@@ -68,13 +62,8 @@ namespace Radar
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
-            if (eventSystem != null) eventSystem = EventSystem.current;
             if (cam == null) cam = GetComponentInChildren<Camera>();
             owner = GetComponentInParent<PlayerShip>();
-            pointerEventData = new PointerEventData(eventSystem)
-            {
-                position = new Vector2(Screen.width / 2, Screen.height / 2)
-            };
             if (secondViewCamera != null && secondView != null)
             {
                 secondViewCamera.targetTexture = (RenderTexture)secondView.mainTexture;
@@ -200,7 +189,8 @@ namespace Radar
                 #endregion
             }
 
-            if (unit != null && unit.Target == (IObject)GameManager.Player && GameManager.Player != null)
+            if (unit != null && unit.Target == (IObject)GameManager.Player &&
+                GameManager.Player != null)
             {
                 bbox.LineRenderer.enabled = true;
                 bbox.LineRenderer.SetPosition(0, unit.Position);
@@ -208,6 +198,8 @@ namespace Radar
                 if (distance > unit.ScanRange + GameManager.Player.Signature)
                 {
                     bbox.LineRenderer.material = bbox.DottedLineMaterial;
+                    bbox.LineRenderer.material.mainTextureScale =
+                        new Vector2(distance / 2, 1f);
                 }
                 else bbox.LineRenderer.material = bbox.RegularLineMaterial;
             }
@@ -252,9 +244,8 @@ namespace Radar
             var list = boundingBoxes.ToList();
             list.Sort((a, b) =>
             {
-                float distA = Vector3.Distance(cam.transform.position, a.Key.Position);
-                float distB = Vector3.Distance(cam.transform.position, b.Key.Position);
-                return distB.CompareTo(distA);
+                return Vector3.Distance(cam.transform.position, b.Key.Position).
+                    CompareTo(Vector3.Distance(cam.transform.position, a.Key.Position));
             });
             for (int i = 0; i < list.Count; i++)
             {
@@ -273,12 +264,15 @@ namespace Radar
 
         public void RegisterTarget(IObject target)
         {
-            if (!target.Active || target.Transform == transform.root || boundingBoxes.ContainsKey(target)) return;
+            if (!target.Active || target.Transform == transform.root ||
+                boundingBoxes.ContainsKey(target)) return;
+
             var bbox = GetBoundingBox();
             bbox.SelectionIcon.gameObject.SetActive(false);
             if (target is Unit) bbox.BBox.sprite = unitIcon;
             else bbox.BBox.sprite = missileIcon;
             bbox.TimeSinceLastFlicker = Time.time;
+
             var team = GlobalConfig.GetTeam(target.Transform.gameObject.layer);
             if (team == GlobalConfig.PlayerTeam)
             {
@@ -295,6 +289,7 @@ namespace Radar
                 bbox.RegularMaterial = neutralMaterial;
                 bbox.TransluscentMaterial = neutralTransluscentMaterial;
             }
+
             bbox.gameObject.SetActive(true);
             boundingBoxes.Add(target, bbox);
         }
@@ -303,12 +298,7 @@ namespace Radar
         {
             if (boundingBoxes.TryGetValue(target, out var bbox))
             {
-                if (bbox.SelectionIcon.gameObject.activeSelf)
-                {
-                    //this was the current target
-                    ClearTarget();
-                }
-                if (CurrentTarget != null && !CurrentTarget.gameObject.activeSelf)
+                if ((IObject)CurrentTarget == target)
                 {
                     ClearTarget();
                 }
@@ -369,8 +359,7 @@ namespace Radar
         /// <returns></returns>
         public float EvaluateTarget(Unit target)
         {
-            if (GameManager.Player == null || !GameManager.Player.gameObject.activeSelf ||
-                target == null | !target.gameObject.activeSelf) return float.MinValue;
+            if (!GameManager.Player.Active() || !target.Active()) return float.MinValue;
 
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;

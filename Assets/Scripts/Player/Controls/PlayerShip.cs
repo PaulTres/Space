@@ -212,6 +212,7 @@ namespace Player
         {
             base.Die(@event);
             GameManager.Player = null;
+            UnitManager.Unregister(this);
             MissionManager.TryGetInstance().EndMission();
         }
         #endregion
