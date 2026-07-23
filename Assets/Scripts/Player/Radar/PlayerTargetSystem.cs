@@ -1,7 +1,5 @@
 using Player;
 using System.Collections.Generic;
-using System.Linq;
-using Timers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +26,6 @@ namespace Radar
         [SerializeField] protected Material neutralTransluscentMaterial;
         protected Stack<BoundingBox> boundingBoxPool { get; } = new();
         protected readonly Dictionary<IObject, BoundingBox> boundingBoxes = new();
-        protected readonly CountdownTimer reorderTimer = new(GlobalConfig.UIUpdateCooldown);
         [Header("Target selection/info")]
         [SerializeField] protected Image secondView;
         [SerializeField] protected Camera secondViewCamera;
@@ -73,13 +70,6 @@ namespace Radar
         protected virtual void OnEnable()
         {
             CurrentTarget = null;
-
-            reorderTimer.OnTimerStop += () =>
-            {
-                ReorderBoundingBoxes();
-                reorderTimer.Start();
-            };
-            reorderTimer.Start();
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
         }
 
@@ -87,16 +77,8 @@ namespace Radar
         {
             ClearTarget();
             boundingBoxes.Clear();
-            reorderTimer.OnTimerStop = null;
-            reorderTimer.Stop();
             var u = GlobalUpdater.TryGetInstance();
             if (u != null) u.UnregisterLateUpdate(PerformLateUpdate);
-        }
-
-        protected override void ClearSingleton()
-        {
-            base.ClearSingleton();
-            reorderTimer.Dispose();
         }
         #endregion
 
@@ -237,20 +219,6 @@ namespace Radar
                 targetInfoText.text = $"{CurrentTarget.name}:\nTarget: {enemyTarget}";
             }
             #endregion
-        }
-
-        protected void ReorderBoundingBoxes()
-        {
-            var list = boundingBoxes.ToList();
-            list.Sort((a, b) =>
-            {
-                return Vector3.Distance(cam.transform.position, b.Key.Position).
-                    CompareTo(Vector3.Distance(cam.transform.position, a.Key.Position));
-            });
-            for (int i = 0; i < list.Count; i++)
-            {
-                list[i].Value.RectTransform.SetSiblingIndex(i);
-            }
         }
 
         protected BoundingBox GetBoundingBox()
