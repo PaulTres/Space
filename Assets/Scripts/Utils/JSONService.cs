@@ -57,7 +57,7 @@ namespace Utilities
             }
         }
         /// <summary>
-        /// Load an object of type T from a JSON file. The file should be located in the persistent 
+        /// LoadSave an object of type T from a JSON file. The file should be located in the persistent 
         /// data path and have the specified file name. If the file is successfully loaded, the 
         /// result parameter will contain the deserialized object and the method will return true. 
         /// If there is an error (e.g., file not found, invalid JSON), the method will return false 

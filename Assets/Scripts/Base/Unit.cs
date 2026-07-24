@@ -61,6 +61,10 @@ public abstract class Unit : MonoBehaviour, IObject
         get
         {
             if (tr == null) tr = transform;
+            if (tr == null)
+            {
+                Debug.LogError("Transform is null!");
+            }
             return tr;
         }
     }
@@ -127,8 +131,8 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <param name="layer"></param>
     public virtual void SetObjectLayer(int layer)
     {
-        //gameObject.layer = layer;
-        foreach (var c in GetComponentsInChildren(typeof(Collider)))
+        gameObject.layer = layer;
+        foreach (var c in GetComponentsInChildren<Collider>())
         {
             c.gameObject.layer = layer;
         }

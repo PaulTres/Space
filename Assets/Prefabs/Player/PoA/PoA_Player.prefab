@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 2258113681808944998}
   - component: {fileID: 8032434638253165816}
   m_Layer: 6
-  m_Name: PoA
+  m_Name: PoA_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

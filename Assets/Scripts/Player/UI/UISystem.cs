@@ -6,7 +6,7 @@ namespace Player
 
     public class UISystem : MonoBehaviour
     {
-        [SerializeField] protected Canvas canvas;
+        [SerializeField] protected RectTransform textParent;
         [SerializeField] protected Widget widgetPrefab;
         protected readonly Stack<Widget> textWidgetPool = new();
 
@@ -18,7 +18,6 @@ namespace Player
         protected virtual void Awake()
         {
             EventBus<ShowText>.AddActions(SpawnText);
-            if (canvas == null) canvas = GetComponentInParent<Canvas>();
         }
 
         public void SpawnText(ShowText @event)
@@ -44,7 +43,7 @@ namespace Player
         {
             if (textWidgetPool.Count == 0)
             {
-                var w = Instantiate(widgetPrefab, canvas.transform);
+                var w = Instantiate(widgetPrefab, textParent.transform);
                 w.OnDisableEvent += ReleaseWidget;
                 return w;
             }

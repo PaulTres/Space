@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59a6f4c667502d48b79053fb27e491d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.HUD
-  canvas: {fileID: 6401583569470795384}
+  textParent: {fileID: 3089513961058513832}
   widgetPrefab: {fileID: 5829202150402400054, guid: ec0cbf08acbf8494ca604df770e6e0a1, type: 3}
   healthBar: {fileID: 7519591301086121730}
 --- !u!1 &122630562925509492
@@ -3776,6 +3776,7 @@ RectTransform:
   - {fileID: 2979184693261568005}
   - {fileID: 4100698858098647573}
   - {fileID: 7162823434401620689}
+  - {fileID: 3089513961058513832}
   m_Father: {fileID: 5254128983991761225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5217,6 +5218,41 @@ RectTransform:
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6313126348365650757
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3089513961058513832}
+  m_Layer: 6
+  m_Name: TextParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3089513961058513832
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6313126348365650757}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6113722012356018044}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 120}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6422659849446197852
 GameObject:
@@ -8256,5 +8292,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7173980200709933336, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7162823434401620689}
+    - targetCorrespondingSourceObject: {fileID: 7173980200709933336, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3089513961058513832}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}

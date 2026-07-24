@@ -9,7 +9,14 @@ public static class GameManager
     public static float MissionTime { get; set; } = 0;
     public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
     public static Unit Player { get; set; } = null;
-    public static int LatestMissionIndex => currentSave != null ? currentSave.CurrentMissionIndex : 0;
+    public static int LatestMissionIndex
+    {
+        get
+        {
+            if (currentSave == null) return 0;
+            return Mathf.Min(currentSave.CurrentMissionIndex, Mission.Campaign.Count - 1);
+        }
+    }
     public static int ChosenMissionIndex { get; set; }
 
     #region Pausing
@@ -44,7 +51,7 @@ public static class GameManager
         LoadLobby();
     }
 
-    public static void Load(string fileName)
+    public static void LoadSave(string fileName)
     {
         var s = GameSave.Load(fileName);
         currentSave = s ?? new(0);
@@ -55,7 +62,7 @@ public static class GameManager
     {
         if (ChosenMissionIndex == LatestMissionIndex)
         {
-            currentSave.CurrentMissionIndex = Mathf.Min(Mission.Campaign.Count, ChosenMissionIndex + 1);
+            currentSave.CurrentMissionIndex = Mathf.Min(Mission.Campaign.Count - 1, ChosenMissionIndex + 1);
             currentSave.Save();
         }
     }

@@ -202,6 +202,7 @@ public class GlobalConfig : ScriptableObject
     #region Teams
     public static (Color color, string colorTag) GetTeamColor(int team)
     {
+        //Debug.Log(team);
         return team switch
         {
             1 => (Color.blue, "blue"),

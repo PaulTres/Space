@@ -86,8 +86,12 @@ public readonly struct ObjectDestroyed : IEvent
 
     public override string ToString()
     {
+        if (VictimTeam == 0)
+        {
+            Debug.Log($"{VictimName} was neutral.");
+        }
         return $"<color={GlobalConfig.GetTeamColor(VictimTeam).colorTag}>{VictimName} " +
-            $"<color=black>destroyed by <color={GlobalConfig.GetTeamColor(KillerTeam).colorTag}> KillerName";
+            $"<color=black>destroyed by <color={GlobalConfig.GetTeamColor(KillerTeam).colorTag}>{KillerName}";
     }
 }
 

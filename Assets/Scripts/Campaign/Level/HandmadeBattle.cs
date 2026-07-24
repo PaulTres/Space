@@ -10,7 +10,7 @@ public class HandmadeBattle : Mission
 
     public override void FinishInitialization()
     {
-        UISystem.ShowText(new(Vector3.zero, 5, "Eliminate all targets", Color.red));
+        UISystem.ShowText(new(Vector3.zero, 3, "Eliminate all targets", Color.red));
     }
 
     public override void SpawnPlayer()

@@ -28,6 +28,7 @@ namespace Player
             missionOptions.ClearOptions();
             for (int i = 0; i <= GameManager.LatestMissionIndex; i++)
             {
+                //Debug.Log(i);
                 missionOptions.options.Add(new(Mission.Campaign[i].name));
             }
             missionOptions.SetValueWithoutNotify(GameManager.LatestMissionIndex);
@@ -64,7 +65,7 @@ namespace Player
         protected void OnEscape()
         {
             //open the pause menu
-            //Debug.Log("Escaping");
+            Debug.Log("Escaping");
             pauseMenu.SetActive(true);
         }
 

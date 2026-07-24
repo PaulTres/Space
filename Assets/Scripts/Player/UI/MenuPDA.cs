@@ -30,7 +30,7 @@ namespace Player
         {
             if (window == null)
             {
-                Debug.LogWarning($"Cannot add empty canvas group on stack for {transform}!");
+                Debug.LogWarning($"Cannot add empty textParent group on stack for {transform}!");
                 return;
             }
             if (deactivatePrev && windows.Count > 0)

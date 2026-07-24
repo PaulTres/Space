@@ -128,6 +128,11 @@ namespace Weapons
         /// <returns>True if the target is valid, false otherwise.</returns>
         protected bool IsTargetValid(IObject target)
         {
+            if (target == null)
+            {
+                Debug.LogError("Target is null!");
+                return false;
+            }
             if (target == null || !target.Transform.gameObject.activeSelf) return false;
 
             var dir = target.Transform.position - Transform.position;

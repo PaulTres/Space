@@ -9,8 +9,11 @@ namespace Player
     public class GameSave
     {
         public static readonly string Name = "GameSave";
+        public static readonly List<string> Saves = new List<string>();
+
         public readonly long dateTimeBinary;
         public int CurrentMissionIndex { get; set; } = 0;
+
 
         [JsonConstructor]
         public GameSave([JsonProperty("LatestMissionIndex")] int index)
@@ -39,10 +42,12 @@ namespace Player
 
         public static List<string> GetSaveFileNames()
         {
+            Saves.Clear();
             List<string> fileNames = new();
             var dir = new DirectoryInfo(GlobalConfig.SaveFileLocation);
             foreach (var file in dir.GetFiles("GameSave_*"))
             {
+                Saves.Add(file.Name);
                 fileNames.Add(ConvertFileName(file.Name));
             }
             return fileNames;

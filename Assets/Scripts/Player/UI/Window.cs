@@ -49,7 +49,7 @@ namespace Player
         }
 
         /// <summary>
-        /// Sets canvas group to be non-interactable and disables the game object.
+        /// Sets textParent group to be non-interactable and disables the game object.
         /// </summary>
         public void Deactivate()
         {
