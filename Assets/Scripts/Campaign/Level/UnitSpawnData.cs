@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class UnitSpawnData
 {
-    [field: SerializeField] public Vector3 SpawnRotation { get; protected set; }
     [field: SerializeField] public Vector3 SpawnPosition { get; protected set; }
+    [field: SerializeField] public Vector3 SpawnRotation { get; protected set; }
     [field: SerializeField] public float SpawnRadius { get; protected set; }
     [field: SerializeField] public int Team { get; protected set; } = 1;
     [SerializeField] protected List<UnitData> spawnOptions = new();

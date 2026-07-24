@@ -32,7 +32,8 @@ namespace Weapons
         protected HPComponent hpComponent;
         public float EffectiveTracking { get; protected set; }
         protected PoolableEffect onDeathEffect;
-        public override float TopSpeed => topSpeed * (1 + Telemetry());
+        public override float TopSpeed => topSpeed * (1 + telemetryBonus);
+        protected float telemetryBonus;
         #endregion
 
         #region Setup
@@ -45,6 +46,7 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
+            telemetryBonus = 0;
             ComponentRegister<Missile>.Register(Transform, this);
             this.RegisterForRadar();
         }
@@ -95,7 +97,7 @@ namespace Weapons
                 return;
             }
 
-            EffectiveTracking = initialTracking * (1 + Telemetry()) *
+            EffectiveTracking = initialTracking * (1 + telemetryBonus) *
                 Mathf.Min(1, target.Signature / maxTargetSignature);
         }
 
@@ -112,6 +114,7 @@ namespace Weapons
             }
             if (Target != null)
             {
+                telemetryBonus = Telemetry();
                 CalculateEffectiveTracking();
 
                 Vector3 directionToTarget = (Target.Transform.position - tr.position).normalized;

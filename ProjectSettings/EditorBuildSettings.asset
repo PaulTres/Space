@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MissionScene.unity
-    guid: da254feee5a710940852ed5c4b3681df
+    path: Assets/Scenes/BootstrapperScene.unity
+    guid: 9d22ee1bb8e9cd94fba4d94a658b51f5
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 158bf9a1c5c987c41b1cdd45651022b5
   - enabled: 1
     path: Assets/Scenes/LobbyScene.unity
     guid: c66e52623a689fb40acf59c3150f9f68
+  - enabled: 1
+    path: Assets/Scenes/MissionScene.unity
+    guid: da254feee5a710940852ed5c4b3681df
   - enabled: 1
     path: Assets/Scenes/MissionEndScene.unity
     guid: 576d6d5a223fa7543a5b2f99aff7848b

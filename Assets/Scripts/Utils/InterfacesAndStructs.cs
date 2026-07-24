@@ -38,6 +38,17 @@ public interface IObject : IRegisterableComponent
     public virtual IObject Target => null;
 }
 
+public interface IResettable
+{
+    void PerformReset();
+}
+
+public interface IOwnable : IRegisterableComponent
+{
+    Transform Owner { get; }
+}
+
+#region Event bus stuff
 public struct DamageInfo : IEvent
 {
     public float Amount { get; set; }
@@ -47,6 +58,7 @@ public struct DamageInfo : IEvent
 public readonly struct ObjectDamaged : IEvent
 {
     public readonly float CurrentHP, CurrentHPPercentage;
+
     public ObjectDamaged(float currentHP, float currentHPPercentage)
     {
         CurrentHP = currentHP;
@@ -96,12 +108,33 @@ public readonly struct UnitDestroyed : IEvent
 
 public readonly struct PoolableRecycled : IEvent { }
 
-public interface IResettable
+public readonly struct ShowText : IEvent
 {
-    void PerformReset();
-}
+    public readonly Vector2 AnchorMax, AnchorMin;
+    public readonly Vector3 AnchoredPosition;
+    public readonly string Text;
+    public readonly Color TextColor;
+    public readonly float LifeTime;
 
-public interface IOwnable : IRegisterableComponent
-{
-    Transform Owner { get; }
+    public ShowText(Vector3 anchoredPosition, Vector2 anchorMax, Vector2 anchorMin,
+        float lifeTime, string text, Color color)
+    {
+        AnchoredPosition = anchoredPosition;
+        LifeTime = lifeTime;
+        AnchorMax = anchorMax;
+        AnchorMin = anchorMin;
+        Text = text;
+        TextColor = color;
+    }
+
+    public ShowText(Vector3 anchoredPosition, float lifeTime, string text, Color color)
+    {
+        AnchoredPosition = anchoredPosition;
+        LifeTime = lifeTime;
+        AnchorMax = new(0.5f, 0.5f);
+        AnchorMin = new(0.5f, 0.5f);
+        Text = text;
+        TextColor = color;
+    }
 }
+#endregion

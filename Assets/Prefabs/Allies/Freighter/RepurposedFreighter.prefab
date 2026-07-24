@@ -469,6 +469,7 @@ GameObject:
   - component: {fileID: 2980037791619241156}
   - component: {fileID: 4298294375742760955}
   - component: {fileID: 4609933958113882276}
+  - component: {fileID: 203425491766119350}
   m_Layer: 0
   m_Name: RepurposedFreighter
   m_TagString: Untagged
@@ -537,14 +538,15 @@ MonoBehaviour:
   type: 1
   deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 2
-  <DefaultSignature>k__BackingField: 0
-  maxSignature: 0
+  <DefaultSignature>k__BackingField: 14
+  maxSignature: 25
   signatureDecreaseRate: 0.1
   signatureDecreaseCooldown: 5
-  <ScanRange>k__BackingField: 5
+  scanRange: 15
   <Turrets>k__BackingField:
   - {fileID: 6609336810006813245}
   tickInterval: 0.5
+  <EffectScaleFactor>k__BackingField: 1
   effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
   <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
@@ -570,6 +572,24 @@ MonoBehaviour:
   rootData: {fileID: 11400000, guid: 5e4760723fd514e4dbbb80c853505187, type: 2}
   tickInterval: 0.1
   shouldRun: 1
+  pointDefenseTurrets: []
+  missileLaunchers: []
+  initialMorale: 10
+  maxMoraleImpactRange: 50
+--- !u!114 &203425491766119350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842088929563580042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
+  maxHP: 10
+  sendEventOnDamage: 0
 --- !u!1 &4933765255462686569
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9efb0f05974f348888b4719273a8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
-  <CurrentShotCooldown>k__BackingField: 0
   params: {fileID: 11400000, guid: 60fed34bdaf644c40b13d082c04abb6c, type: 2}
   shootPoints:
   - {fileID: 2882820736332348734}
@@ -754,13 +773,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1494453c1519d2d49a85174861a34489, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5538203871905745241}
   m_SourcePrefab: {fileID: 100100000, guid: 1494453c1519d2d49a85174861a34489, type: 3}
 --- !u!4 &466042205145131993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1494453c1519d2d49a85174861a34489, type: 3}
   m_PrefabInstance: {fileID: 143287908231449650}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &953749671974777187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1494453c1519d2d49a85174861a34489, type: 3}
+  m_PrefabInstance: {fileID: 143287908231449650}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &5538203871905745241
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953749671974777187}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.3
+  m_Height: 6
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.29999995}
 --- !u!1001 &1717869088205359361
 PrefabInstance:
   m_ObjectHideFlags: 0

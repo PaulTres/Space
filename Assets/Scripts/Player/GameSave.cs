@@ -13,7 +13,7 @@ namespace Player
         public int CurrentMissionIndex { get; set; } = 0;
 
         [JsonConstructor]
-        public GameSave([JsonProperty("CurrentMissionIndex")] int index)
+        public GameSave([JsonProperty("LatestMissionIndex")] int index)
         {
             dateTimeBinary = DateTime.Now.ToBinary();
             CurrentMissionIndex = index;

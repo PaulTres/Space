@@ -40,20 +40,22 @@ public static class UnitManager
             ships[team] = new();
         }
         ships[team].Add(ship);
-        ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
+        ship.SetObjectLayer(GlobalConfig.GetShipLayer(team));
+        //ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
         ship.UnitManagerIndex = ships[team].Count - 1;
+        //Debug.Log($"Registered unit {ship.Transform} with index {ship.UnitManagerIndex}.");
     }
 
     public static void Unregister(Unit ship)
     {
-        if (ship == null) return;
+        if (ship == null || ship.UnitManagerIndex == -1) return;
         int team = ship.Team;
-        int index = ship.UnitManagerIndex;
         if (ships.ContainsKey(team))
         {
+            int index = ship.UnitManagerIndex;
             ships[team].RemoveAtSwapBack(ship.UnitManagerIndex);
-            if (ships[team].Count > 0) ships[team][index].UnitManagerIndex = index;
-            ship.UnitManagerIndex = -1;
+            if (ships[team].Count > index) ships[team][index].UnitManagerIndex = index;
+            //ship.UnitManagerIndex = -1;
         }
 
         if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)

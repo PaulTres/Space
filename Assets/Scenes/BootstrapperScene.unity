@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 943173854}
   - component: {fileID: 943173853}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Bootstrapper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

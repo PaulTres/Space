@@ -4,6 +4,7 @@ namespace Weapons
 {
     public class Turret : MonoBehaviour
     {
+        #region Fields
         [Tooltip("The score of the current target of the ship will be multiplied by this " +
             "amount when evaluating targets(divided if negative).")]
         [SerializeField] protected float CurrentTargetScoreMultiplier = 2;
@@ -50,6 +51,7 @@ namespace Weapons
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
         public float MaxRangeSquared => @params.MaxRangeSquared;
+        #endregion
 
         #region Setup
         protected void Awake()
@@ -132,7 +134,11 @@ namespace Weapons
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;
             if (Physics.Linecast(Transform.position, target.Transform.position,
-                GlobalConfig.GetTurretObstructionMask(Transform.root.gameObject.layer))) return false;
+                GlobalConfig.GetTurretObstructionMask(Transform.root.gameObject.layer)))
+            {
+                Debug.Log("obstructed");
+                return false;
+            }
             return true;
         }
 

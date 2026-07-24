@@ -12,6 +12,8 @@ namespace Effects
         {
             MissileExplosionYellow,
             MissileExplosionPurple,
+            MissileExplosionBlue,
+            GunshotBlue,
             ExplosionBigGreen,
             ExplosionBigRed
         }
@@ -37,6 +39,17 @@ namespace Effects
             return objectPool.Get(effectType, out effect);
         }
 
+        public static void Spawn(PoolableEffect effect, Transform parent, Vector3 scale)
+        {
+            if (effect != null)
+            {
+                if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
+                e.transform.parent = parent;
+                e.transform.localScale = scale;
+                e.gameObject.SetActive(true);
+            }
+        }
+
         public static void Spawn(PoolableEffect effect, Vector3 position, Vector3 scale)
         {
             if (effect != null)
@@ -58,7 +71,7 @@ namespace Effects
         protected void Awake()
         {
             wait = new(GlobalConfig.ParticleSystemLifetimeCheckInterval);
-            particles = new ParticleSystem[particles.Length];
+            particles = GetComponentsInChildren<ParticleSystem>();
         }
 
         protected void OnEnable()
@@ -101,6 +114,7 @@ namespace Effects
         protected void OnDisable()
         {
             if (coroutine != null) StopCoroutine(coroutine);
+            transform.parent = null;
             Release(this);
         }
     }

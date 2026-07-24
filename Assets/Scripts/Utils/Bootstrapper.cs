@@ -18,13 +18,14 @@ namespace Utilities
             SceneManager.activeSceneChanged += (s1, s2) =>
             {
                 Time.timeScale = 1;
-                EventBus.EventBusUtil.ClearAllBuses();
+                //EventBus.EventBusUtil.ClearAllBuses();
             };
             VideoSettingsMenu.LoadVideoSettings();
             AudioSettingsMenu.LoadAudioSettings(audioMixer);
 
             await GlobalConfig.LoadInstance();
-            //await Task.WhenAll(GlobalConfig.LoadInstance(), UnitData.LoadAllSpawnableUnits());
+            await UnitData.LoadAllSpawnableUnits();
+            await Mission.LoadCampaignMissions();
 
             SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
         }

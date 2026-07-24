@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Campaign
+[CreateAssetMenu(menuName = "Missions/Campaign", fileName = "Campaign")]
+public class Campaign : ScriptableObject
 {
     public List<Mission> Missions = new();
 }

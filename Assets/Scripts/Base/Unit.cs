@@ -8,13 +8,13 @@ using UnityEngine;
 using Utilities;
 using Weapons;
 
+[RequireComponent(typeof(HPComponent))]
 public abstract class Unit : MonoBehaviour, IObject
 {
     #region Fields
     [Header("Unit")]
-    [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
-        "will have their owner set to null.")]
     [SerializeField] protected IObject.Type type;
+    [Tooltip("If true, when this unit is destroyed all its inflight missiles will have their owner set to null.")]
     [SerializeField] protected bool deleteOwnershipOnDeath = true;
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
@@ -78,11 +78,11 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
-    public IObject Target
+    public virtual IObject Target
     {
         get
         {
-            return GameManager.Player;
+            //return GameManager.Player;
             var blackboard = Transform.GetBlackboard();
             if (blackboard == null) return null;
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
@@ -119,6 +119,20 @@ public abstract class Unit : MonoBehaviour, IObject
         UnitManager.Register(this);
         this.RegisterForRadar();
         signatureIncreaseTime = Time.time;
+    }
+
+    /// <summary>
+    /// Sets the layer of all important objects to a specified layer.
+    /// </summary>
+    /// <param name="layer"></param>
+    public virtual void SetObjectLayer(int layer)
+    {
+        //gameObject.layer = layer;
+        foreach (var c in GetComponentsInChildren(typeof(Collider)))
+        {
+            c.gameObject.layer = layer;
+        }
+
     }
 
     protected virtual void OnDisable()

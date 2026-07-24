@@ -10,6 +10,7 @@ public class BanditTree : BT, IRegisterableComponent
     [SerializeField] protected List<Turret> pointDefenseTurrets = new();
     [SerializeField] protected List<MissileLauncher> missileLaunchers = new();
     [SerializeField] protected float initialMorale = 10;
+    [Tooltip("The maximum distance from a morale event at which this unit will be affected.")]
     [SerializeField] protected float maxMoraleImpactRange = 50;
 
     protected override void Awake()

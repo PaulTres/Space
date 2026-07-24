@@ -45,6 +45,7 @@ public abstract class Ship : Unit
 
     public override void Die(ObjectDestroyed @event)
     {
+        //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
         UnitManager.Unregister(this);
         effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
         EventBus<UnitDestroyed>.Raise(new(this));

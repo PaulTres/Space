@@ -21,7 +21,7 @@ public class CFXEasyEditor : EditorWindow
 
 	private int SelectedParticleSystemsCount;
 
-	//Change Start Color
+	//Change Start TextColor
 	private bool AffectAlpha = true;
 	private Color ColorValue = Color.white;
 	private Color ColorValue2 = Color.white;
@@ -86,8 +86,8 @@ public class CFXEasyEditor : EditorWindow
 		new ParticleSystemModule("Velocity", "VelocityModule"),
 		new ParticleSystemModule("Limit Velocity", "ClampVelocityModule"),
 		new ParticleSystemModule("Force", "ForceModule"),
-		new ParticleSystemModule("Color over Lifetime", "ColorModule"),
-		new ParticleSystemModule("Color by Speed", "ColorBySpeedModule"),
+		new ParticleSystemModule("TextColor over Lifetime", "ColorModule"),
+		new ParticleSystemModule("TextColor by Speed", "ColorBySpeedModule"),
 		new ParticleSystemModule("Size over Lifetime", "SizeModule"),
 		new ParticleSystemModule("Size by Speed", "SizeBySpeedModule"),
 		new ParticleSystemModule("Rotation over Lifetime", "RotationModule"),
@@ -357,7 +357,7 @@ public class CFXEasyEditor : EditorWindow
 		//----------------------------------------------------------------
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Set Start Color(s)", "Changes the color(s) of the Particle System(s)\nSecond Color is used when Start Color is 'Random Between Two Colors'."),GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Set Start TextColor(s)", "Changes the color(s) of the Particle System(s)\nSecond TextColor is used when Start TextColor is 'Random Between Two Colors'."),GUILayout.Width(120)))
 			{
 				applyColor();
 			}
@@ -417,13 +417,13 @@ public class CFXEasyEditor : EditorWindow
 			
 		//----------------------------------------------------------------
 			
-			GUILayout.Label("Color Modules to affect:");
+			GUILayout.Label("TextColor Modules to affect:");
 			
 			GUILayout.BeginHorizontal();
 			GUILayout.Space(4);
-			TintStartColor = GUILayout.Toggle(TintStartColor, new GUIContent("Start Color", "If checked, the \"Start Color\" value(s) will be affected."), EditorStyles.toolbarButton);
-			TintColorModule = GUILayout.Toggle(TintColorModule, new GUIContent("Color over Lifetime", "If checked, the \"Color over Lifetime\" value(s) will be affected."), EditorStyles.toolbarButton);
-			TintColorSpeedModule = GUILayout.Toggle(TintColorSpeedModule, new GUIContent("Color by Speed", "If checked, the \"Color by Speed\" value(s) will be affected."), EditorStyles.toolbarButton);
+			TintStartColor = GUILayout.Toggle(TintStartColor, new GUIContent("Start TextColor", "If checked, the \"Start TextColor\" value(s) will be affected."), EditorStyles.toolbarButton);
+			TintColorModule = GUILayout.Toggle(TintColorModule, new GUIContent("TextColor over Lifetime", "If checked, the \"TextColor over Lifetime\" value(s) will be affected."), EditorStyles.toolbarButton);
+			TintColorSpeedModule = GUILayout.Toggle(TintColorSpeedModule, new GUIContent("TextColor by Speed", "If checked, the \"TextColor by Speed\" value(s) will be affected."), EditorStyles.toolbarButton);
 			GUILayout.Space(4);
 			GUILayout.EndHorizontal();
 			
@@ -715,7 +715,7 @@ public class CFXEasyEditor : EditorWindow
 		}
 	}
 	
-	//Change Color
+	//Change TextColor
 	private void applyColor()
 	{
 		foreach(GameObject go in Selection.gameObjects)
@@ -750,7 +750,7 @@ public class CFXEasyEditor : EditorWindow
 	{
 		if(!TintStartColor && !TintColorModule && !TintColorSpeedModule)
 		{
-			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three Color Modules to be able to tint anything!");
+			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three TextColor Modules to be able to tint anything!");
 			return;
 		}
 		
@@ -786,7 +786,7 @@ public class CFXEasyEditor : EditorWindow
 	{
 		if(!TintStartColor && !TintColorModule && !TintColorSpeedModule)
 		{
-			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three Color Modules to be able to use hue shift!");
+			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three TextColor Modules to be able to use hue shift!");
 			return;
 		}
 
@@ -821,7 +821,7 @@ public class CFXEasyEditor : EditorWindow
 		int state = colorProperty.FindPropertyRelative("minMaxState").intValue;
 		switch(state)
 		{
-			//Constant Color
+			//Constant TextColor
 		case 0:
 			colorProperty.FindPropertyRelative("maxColor").colorValue = HSLColor.FromRGBA(colorProperty.FindPropertyRelative("maxColor").colorValue).ColorWithHue(hue, shift);
 			break;
@@ -863,7 +863,7 @@ public class CFXEasyEditor : EditorWindow
 	{
 		if(!TintStartColor && !TintColorModule && !TintColorSpeedModule)
 		{
-			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three Color Modules to be able to change lightness!");
+			Debug.LogWarning("Cartoon FX Easy Editor: You must toggle at least one of the three TextColor Modules to be able to change lightness!");
 			return;
 		}
 		
@@ -903,7 +903,7 @@ public class CFXEasyEditor : EditorWindow
 		int state = colorProperty.FindPropertyRelative("minMaxState").intValue;
 		switch(state)
 		{
-			//Constant Color
+			//Constant TextColor
 		case 0:
 			colorProperty.FindPropertyRelative("maxColor").colorValue = HSLColor.FromRGBA(colorProperty.FindPropertyRelative("maxColor").colorValue).ColorWithLightnessOffset(lightness);
 			break;

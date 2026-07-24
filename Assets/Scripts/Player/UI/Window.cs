@@ -1,6 +1,7 @@
 using UnityEngine;
 namespace Player
 {
+
     [RequireComponent(typeof(CanvasGroup))]
     public class Window : MonoBehaviour
     {

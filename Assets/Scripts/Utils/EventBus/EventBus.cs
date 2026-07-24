@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace EventBus
 {
@@ -7,11 +8,14 @@ namespace EventBus
     {
         static EventBinding<T> globalBinding = new();
         static readonly Dictionary<int, EventBinding<T>> bindings = new();
+
         static void Clear()
         {
+            //Debug.Log("Clearing bindings");
             bindings.Clear();
             globalBinding = null;
         }
+
         /// <summary>
         /// Raise global binding.
         /// </summary>
@@ -23,6 +27,7 @@ namespace EventBus
             globalBinding.Invoke(@event);
             return true;
         }
+
         /// <summary>
         /// Raise a binding.
         /// </summary>
@@ -36,8 +41,10 @@ namespace EventBus
                 binding.Invoke(@event);
                 return true;
             }
+            Debug.LogWarning($"No binding found for id {bindingId}.");
             return false;
         }
+
         /// <summary>
         /// Add a new binding.
         /// </summary>
@@ -47,6 +54,7 @@ namespace EventBus
         {
             return bindings.TryAdd(id, new());
         }
+
         /// <summary>
         /// Clear and then remove an existing binding.
         /// </summary>
@@ -62,6 +70,7 @@ namespace EventBus
             }
             return false;
         }
+
         /// <summary>
         /// Clears an existing binding.
         /// </summary>
@@ -76,10 +85,12 @@ namespace EventBus
             }
             return false;
         }
+
         public static void ClearGlobalBinding()
         {
             globalBinding.Clear();
         }
+
         /// <summary>
         /// Add Actions to global binding.
         /// </summary>
@@ -87,8 +98,8 @@ namespace EventBus
         /// <param name="actionNoArgs">Non-parametrized action.</param>
         /// <param name="addBinding">If true, will attempt to add a new binding if none is found, and add the Actions to it. Defaults to true.</param>
         /// <returns>True if the binding was found, or if it was successfully added.</returns>
-        public static bool AddActions(Action<T> action,
-            Action actionNoArgs = null, bool addBinding = true)
+        public static bool AddActions(Action<T> action, Action actionNoArgs = null,
+            bool addBinding = true)
         {
             if (globalBinding == null)
             {
@@ -99,6 +110,7 @@ namespace EventBus
             globalBinding.Add(actionNoArgs);
             return true;
         }
+
         /// <summary>
         /// Add Actions to a binding. By default will attempt to add a new binding if none is found, and add the Actions to it.
         /// </summary>
@@ -116,11 +128,11 @@ namespace EventBus
                 e.Add(actionNoArgs);
                 return true;
             }
-            if (addBinding && bindings.TryAdd(bindingId, new()))
+            if (addBinding)
             {
-                e = bindings[bindingId];
-                e.Add(action);
-                e.Add(actionNoArgs);
+                bindings.Add(bindingId, new());
+                bindings[bindingId].Add(action);
+                bindings[bindingId].Add(actionNoArgs);
                 return true;
             }
             return false;
@@ -139,6 +151,7 @@ namespace EventBus
             globalBinding.Remove(actionNoArgs);
             return true;
         }
+
         /// <summary>
         /// Removes Actions from a binding.
         /// </summary>

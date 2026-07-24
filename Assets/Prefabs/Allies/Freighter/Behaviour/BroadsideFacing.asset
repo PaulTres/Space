@@ -20,4 +20,4 @@ MonoBehaviour:
   TargetFacing: 0
   TicksBeforeRepath: 2
   StrafeDistance: 0
-  UseSignatureForStrafeDistance: 0
+  UseSignatureForStrafeDistance: 1

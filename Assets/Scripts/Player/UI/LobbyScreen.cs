@@ -7,8 +7,8 @@ namespace Player
     {
         [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected int missionStartTimerDuration = 5;
-        [SerializeField] protected TextMeshProUGUI timerText, shipDescriptionText;
-        [SerializeField] protected TMP_Dropdown playerOptions;
+        [SerializeField] protected TextMeshProUGUI timerText, shipDescriptionText, missionBriefingText;
+        [SerializeField] protected TMP_Dropdown playerOptions, missionOptions;
         [SerializeField] protected GameObject pauseMenu;
         protected WaitForSeconds waitForOneSecond = new(1);
         protected Coroutine coroutine;
@@ -16,13 +16,30 @@ namespace Player
         #region Setup
         protected void OnEnable()
         {
-            Debug.LogWarning("Generating dummy mission!");
-            //Mission.CurrentMission = new FleetBattleMission(3600, 100, 100);
-            PopulatePlayerChoiceDropdown();
+            PopulateMissionDropdown();
             inputReader.EnablePlayerActions();
             inputReader.OnEscapeEvent += OnEscape;
             timerText.text = $"Start: {missionStartTimerDuration}";
             pauseMenu.SetActive(false);
+        }
+
+        protected void PopulateMissionDropdown()
+        {
+            missionOptions.ClearOptions();
+            for (int i = 0; i <= GameManager.LatestMissionIndex; i++)
+            {
+                missionOptions.options.Add(new(Mission.Campaign[i].name));
+            }
+            missionOptions.SetValueWithoutNotify(GameManager.LatestMissionIndex);
+            SetMissionChoice(GameManager.LatestMissionIndex);
+        }
+
+        public void SetMissionChoice(int index)
+        {
+            Mission.CurrentMission = Mission.Campaign[index];
+            GameManager.ChosenMissionIndex = index;
+            missionBriefingText.text = Mission.CurrentMission.Briefing;
+            PopulatePlayerChoiceDropdown();
         }
 
         protected void PopulatePlayerChoiceDropdown()
@@ -61,13 +78,13 @@ namespace Player
         public void BeginMission()
         {
             //Mission.CurrentMission = Mission.GetRandomMission();
-            coroutine = StartCoroutine(MissionStartCountdown());
+            if (coroutine == null) coroutine = StartCoroutine(MissionStartCountdown());
         }
 
         protected IEnumerator MissionStartCountdown()
         {
             int count = missionStartTimerDuration;
-            while (count > 0)
+            while (count >= 0)
             {
                 yield return waitForOneSecond;
                 timerText.text = $"Start: {count}";

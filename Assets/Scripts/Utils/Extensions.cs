@@ -11,7 +11,7 @@ namespace Utilities
         public static float GetMoraleWeight(this Unit unit)
         {
             if (unit == null) return 0;
-            throw new System.NotImplementedException();
+            return 0;
         }
 
         public static bool Active(this Unit unit)
@@ -22,6 +22,11 @@ namespace Utilities
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
             PoolableEffect.Spawn(effect, position, scaleFactor * Vector3.one);
+        }
+
+        public static void SpawnEffect(this PoolableEffect effect, Transform parent, float scaleFactor)
+        {
+            PoolableEffect.Spawn(effect, parent, scaleFactor * Vector3.one);
         }
 
         #region IObject
@@ -210,6 +215,10 @@ namespace Utilities
         public static bool TakeDamage(this Transform transform, DamageInfo damageInfo)
         {
             if (transform == null) throw new System.ArgumentNullException();
+            if (transform.parent != null)
+            {
+                Debug.LogWarning($"{transform} has parent!");
+            }
             return HPComponent.TakeDamage(transform, damageInfo);
         }
         #endregion

@@ -197,16 +197,19 @@ namespace Radar
             {
                 var direction = (transform.root.position -
                     CurrentTarget.Position).normalized;
-                if (direction.magnitude < CurrentTarget.EffectScaleFactor)
+                if (direction.magnitude < CurrentTarget.EffectScaleFactor * 2)
                 {
                     secondViewCamera.gameObject.SetActive(false);
                     secondView.gameObject.SetActive(false);
                 }
-                secondViewCamera.gameObject.SetActive(true);
-                secondView.gameObject.SetActive(true);
-                secondViewCamera.transform.position = CurrentTarget.Position +
-                    direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor);
-                secondViewCamera.transform.LookAt(CurrentTarget.Position);
+                else
+                {
+                    secondViewCamera.gameObject.SetActive(true);
+                    secondView.gameObject.SetActive(true);
+                    secondViewCamera.transform.position = CurrentTarget.Position +
+                        direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor * 2);
+                    secondViewCamera.transform.LookAt(CurrentTarget.Position);
+                }
             }
             #endregion
 
@@ -216,7 +219,7 @@ namespace Radar
                 string enemyTarget = CurrentTarget.Target == null ? "None" :
                     CurrentTarget == GameManager.Player ? "You" :
                     CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
-                targetInfoText.text = $"{CurrentTarget.name}:\nTarget: {enemyTarget}";
+                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}";
             }
             #endregion
         }

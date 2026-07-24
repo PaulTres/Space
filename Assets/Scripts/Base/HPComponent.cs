@@ -2,12 +2,13 @@ using EventBus;
 using System;
 using UnityEngine;
 using Utilities;
+
 namespace HP
 {
     public class HPComponent : MonoBehaviour, IResettable
     {
-        [SerializeField] protected float maxHP;
-        public float CurrentHP { get; protected set; }
+        [SerializeField] protected float maxHP = 10;
+        [field: SerializeField] public float CurrentHP { get; protected set; }
         protected Transform tr;
         [SerializeField] protected bool sendEventOnDamage = false;
         public event Action OnDamageTaken = delegate { };
@@ -46,7 +47,10 @@ namespace HP
         protected virtual void Awake()
         {
             tr = transform;
-            EventBus<DamageInfo>.AddActions(transform.root.GetInstanceID(), TakeDamage);
+            if (!EventBus<DamageInfo>.AddActions(transform.root.GetInstanceID(), TakeDamage))
+            {
+                Debug.LogWarning($"{Transform} unable to add DamageInfo actions to event bus binding.");
+            }
         }
 
         public static bool TakeDamage(Transform transform, DamageInfo damageInfo)
@@ -68,13 +72,15 @@ namespace HP
         {
             if (damageInfo.Source.GetTeam(throwOnNullTransform: false) == transform.root.GetTeam())
             {
+                //Debug.Log("Friendly fire");
                 return;
             }
+            //Debug.Log(damageInfo.Amount);
             CurrentHP -= damageInfo.Amount;
             if (sendEventOnDamage)
             {
                 EventBus<ObjectDamaged>.Raise(Transform.GetInstanceID(), new
-                    ObjectDamaged(CurrentHP, CurrentHP - MaxHP));
+                    ObjectDamaged(CurrentHP, CurrentHP / (MaxHP + float.Epsilon)));
                 OnDamageTaken?.Invoke();
             }
             if (CurrentHP <= 0)

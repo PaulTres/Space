@@ -13,11 +13,8 @@ public class MissionManager : Singleton<MissionManager>
     {
         base.InitializeSingleton();
         if (mission != null) Mission.CurrentMission = mission;
-        if (Mission.CurrentMission.TimeLimit > 0)
-        {
-            endMissionTimer = new(GlobalConfig.MissionEndDuration);
-            endMissionTimer.OnTimerStop += () => GameManager.EndMission();
-        }
+        endMissionTimer = new(GlobalConfig.MissionEndDuration);
+        endMissionTimer.OnTimerStop += () => GameManager.EndMission();
         Mission.CurrentMission.Initialize();
     }
 
@@ -29,6 +26,7 @@ public class MissionManager : Singleton<MissionManager>
 
     public void EndMission()
     {
+        //.Log("Ending mission");
         endMissionTimer?.Start();
     }
 }

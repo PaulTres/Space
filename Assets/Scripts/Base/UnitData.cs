@@ -1,4 +1,5 @@
 using Spawning;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,16 +16,48 @@ public class UnitData : MonoSpawnableData<Unit>
 
     public static async Task LoadAllSpawnableUnits()
     {
-        var playerHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
-            PlayerOptionsAddressableTag, (data) => AvailablePlayerOptions.Add(data));
-        var friendHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
-            AllyUnitsAddressableTag, (data) => AvailableAllyUnits.Add(data));
-        var enemyHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
-            EnemyUnitsAddressableTag, (data) => AvailableEnemyUnits.Add(data));
+        try
+        {
+            var playerHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
+                PlayerOptionsAddressableTag, (data) => AvailablePlayerOptions.Add(data));
+            await playerHandle.Task;
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
 
-        await Task.WhenAll(playerHandle.Task, friendHandle.Task, enemyHandle.Task);
+        //try
+        //{
+        //    var friendHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
+        //        AllyUnitsAddressableTag, (data) => AvailableAllyUnits.Add(data));
+        //    await friendHandle.Task;
+        //}
+        //catch (Exception e)
+        //{
+        //    //Debug.LogException(e);
+        //}
+
+        //try
+        //{
+        //    var enemyHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
+        //    EnemyUnitsAddressableTag, (data) => AvailableEnemyUnits.Add(data));
+        //    await enemyHandle.Task;
+        //}
+        //catch (Exception e)
+        //{
+        //    //Debug.LogException(e);
+        //}
     }
 
     public int Points = 1;
-    public string Description;
+    [SerializeField] protected string description;
+    public string Description
+    {
+        get
+        {
+            if (description != null && description.Length > 0) return description;
+            return "A " + name + '.';
+        }
+    }
 }

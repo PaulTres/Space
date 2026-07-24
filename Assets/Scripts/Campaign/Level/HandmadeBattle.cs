@@ -1,18 +1,25 @@
+using Player;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Missions/Handmade battle", fileName = "HandmadeBattle")]
 public class HandmadeBattle : Mission
 {
     [SerializeField] protected Vector3 playerSpawnPos, playerSpawnRot;
     [SerializeField] protected List<UnitSpawnData> spawns = new();
+
+    public override void FinishInitialization()
+    {
+        UISystem.ShowText(new(Vector3.zero, 5, "Eliminate all targets", Color.red));
+    }
 
     public override void SpawnPlayer()
     {
         var player = UnitData.PlayerChoice.CreateInstance();
         player.Transform.SetPositionAndRotation(playerSpawnPos, Quaternion.
             Euler(playerSpawnRot));
-        player.gameObject.SetActive(true);
         PlayerPoints -= UnitData.PlayerChoice.Points;
+        player.gameObject.SetActive(true);
     }
 
     public override void SpawnUnits()

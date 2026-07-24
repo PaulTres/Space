@@ -1,8 +1,27 @@
+using Player;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public abstract class Mission : ScriptableObject
 {
+    #region Static stuff
     public static Mission CurrentMission { get; set; }
+    public static List<Mission> Campaign { get; } = new();
+
+    public static async Task LoadCampaignMissions()
+    {
+        Campaign.Clear();
+        var handle = Addressables.LoadAssetAsync<Campaign>("Campaign");
+        var instance = await handle.Task;
+        foreach (var a in instance.Missions)
+        {
+            Campaign.Add(a);
+        }
+    }
+    #endregion
+
     public float StartTime { get; protected set; }
     /// <summary>
     /// Time limit for the mission. Ignored if set to <=0.
@@ -26,10 +45,14 @@ public abstract class Mission : ScriptableObject
     {
         CurrentMission = this;
         StartTime = Time.time;
+        //Debug.Log("Starting mission");
         SpawnPlayer();
         SpawnScenery();
         SpawnUnits();
+        FinishInitialization();
     }
+
+    public abstract void FinishInitialization();
 
     public abstract void SpawnPlayer();
 
@@ -39,6 +62,8 @@ public abstract class Mission : ScriptableObject
 
     public virtual void OnAllEnemiesDestroyed()
     {
+        //Debug.Log("enemies destroyed");
+        UISystem.ShowText(new(Vector3.zero, 5, "Victory!", Color.green));
         EndMission();
     }
 }

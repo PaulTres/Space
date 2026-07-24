@@ -1,3 +1,4 @@
+using EventBus;
 using Radar;
 using UnityEngine;
 using Utilities;
@@ -49,6 +50,15 @@ namespace Player
         public override Vector3 Forward => shipBody.forward;
         public override Vector3 Right => shipBody.right;
         public override Vector3 Up => shipBody.up;
+        public override IObject Target
+        {
+            get
+            {
+                var t = PlayerTargetSystem.TryGetInstance();
+                if (t != null) return t.CurrentTarget;
+                return null;
+            }
+        }
         #endregion
 
         #region Setup
@@ -99,6 +109,7 @@ namespace Player
         #endregion
 
         #region Functionality
+
         protected void OnFindTarget()
         {
             targetSystem.SelectTarget();
@@ -210,10 +221,15 @@ namespace Player
 
         public override void Die(ObjectDestroyed @event)
         {
-            base.Die(@event);
+            //base.Die(@event);
+            EventBus<UnitDestroyed>.Raise(new(this));
             GameManager.Player = null;
             UnitManager.Unregister(this);
-            MissionManager.TryGetInstance().EndMission();
+            UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
+            MissionManager.TryGetInstance(true).EndMission();
+            effectOnDeath.SpawnEffect(Transform, EffectScaleFactor);
+            inputReader.DisableCallbacks();
+            dampeners = false;
         }
         #endregion
     }

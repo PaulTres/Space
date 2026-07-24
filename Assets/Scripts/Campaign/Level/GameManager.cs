@@ -9,6 +9,8 @@ public static class GameManager
     public static float MissionTime { get; set; } = 0;
     public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
     public static Unit Player { get; set; } = null;
+    public static int LatestMissionIndex => currentSave != null ? currentSave.CurrentMissionIndex : 0;
+    public static int ChosenMissionIndex { get; set; }
 
     #region Pausing
     public static bool IsPaused => Time.timeScale == 0f;
@@ -36,7 +38,6 @@ public static class GameManager
     #endregion
 
     #region Progress
-
     public static void NewGame()
     {
         currentSave = new(0);
@@ -50,9 +51,13 @@ public static class GameManager
         LoadLobby();
     }
 
-    public static void Save()
+    public static void OnMissionCompleted()
     {
-        currentSave.Save();
+        if (ChosenMissionIndex == LatestMissionIndex)
+        {
+            currentSave.CurrentMissionIndex = Mathf.Min(Mission.Campaign.Count, ChosenMissionIndex + 1);
+            currentSave.Save();
+        }
     }
     #endregion
 
@@ -75,6 +80,7 @@ public static class GameManager
 
     public static void EndMission()
     {
+        OnMissionCompleted();
         MissionTime = Time.time - Mission.CurrentMission.StartTime;
         SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
     }

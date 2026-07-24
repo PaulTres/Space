@@ -127,7 +127,7 @@ namespace Weapons
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(Transform.position, linearVelocity);
-            //Gizmos.color = Color.blue;
+            //Gizmos.color = TextColor.blue;
             //Gizmos.DrawRay(tr.position, tr.forward * topSpeed);
         }
         #endregion
