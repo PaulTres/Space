@@ -121,7 +121,7 @@ public class GlobalConfig : ScriptableObject
     /// <summary>
     /// How many seconds to wait between ending the mission and loading the end mission screen.
     /// </summary>
-    public static readonly float MissionEndDuration = 3;
+    public static readonly float MissionEndDuration = 7;
     public static readonly float ParticleSystemLifetimeCheckInterval = 1;
     public static readonly int MainMenuSceneIndex = 1, MissionSceneIndex = 3, EndMissionSceneIndex = 4, LobbySceneIndex = 2;
     #endregion

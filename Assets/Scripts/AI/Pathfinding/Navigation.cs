@@ -4,7 +4,6 @@ using Utilities;
 [RequireComponent(typeof(Rigidbody))]
 public class Navigation : Ship
 {
-    [field: SerializeField] public bool DampenVelocityToZero { get; set; } = true;
     public void SetDestination(Vector3? destination) => Destination = destination;
     public Vector3? Destination { get; protected set; }
     public bool HasDestination => Destination != null;
@@ -63,7 +62,7 @@ public class Navigation : Ship
     {
         if (Destination == null)
         {
-            if (DampenVelocityToZero) ApplyDampeners(Vector3.zero, deltaTime);
+            if (Dampeners) ApplyDampeners(Vector3.zero, deltaTime);
             return;
         }
         navPivot.LookAt(Destination.Value);

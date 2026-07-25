@@ -1,3 +1,4 @@
+using Effects;
 using EventBus;
 using HP;
 using HybridBT2;
@@ -9,13 +10,21 @@ using Utilities;
 using Weapons;
 
 [RequireComponent(typeof(HPComponent))]
+[RequireComponent(typeof(ParticleSystem))]
 public abstract class Unit : MonoBehaviour, IObject
 {
     #region Fields
     [Header("Unit")]
+    [Tooltip("This is mostly used for object pooling for the bullets. Once again, " +
+        "DO NOT FUCK WITH THIS!")]
     [SerializeField] protected IObject.Type type;
-    [Tooltip("If true, when this unit is destroyed all its inflight missiles will have their owner set to null.")]
+    [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
+        "will have their owner set to null.")]
     [SerializeField] protected bool deleteOwnershipOnDeath = true;
+    /// <summary>
+    /// This is used for quick removal from the unit manager lists. 
+    /// DO NOT FUCK WITH THIS!
+    /// </summary>
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
     protected Transform tr;
@@ -24,6 +33,13 @@ public abstract class Unit : MonoBehaviour, IObject
     [SerializeField] protected float maxSignature;
     [SerializeField] protected float signatureDecreaseRate = 0.1f;
     [SerializeField] protected float signatureDecreaseCooldown = 5f;
+    [Tooltip("Plays when the ship has finished exploding.")]
+    [SerializeField] protected PoolableEffect effectOnDeath;
+    /// <summary>
+    /// Plays while the unit explodes. Unit will be disabled once the effect is 
+    /// finished playing.
+    /// </summary>
+    protected ParticleSystem effectDuringDeath;
     /// <summary>
     /// The time it takes before the signature starts decreasing after it has been increased. 
     /// This is used to prevent the signature from decreasing too quickly after it has been 
@@ -44,11 +60,23 @@ public abstract class Unit : MonoBehaviour, IObject
     protected int missileCount;
     [SerializeField] protected float tickInterval = 0.5f;
     protected WaitForSeconds wait;
-    protected Coroutine coroutine;
+    protected Coroutine tickCoroutine;
     [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     #endregion
-
+    public bool IsDying { get; protected set; }
     #region Properties
+    public ParticleSystem EffectDuringDeath
+    {
+        get
+        {
+            if (effectDuringDeath == null)
+            {
+                effectDuringDeath = GetComponent<ParticleSystem>();
+                //effectDuringDeath.loop = false;
+            }
+            return effectDuringDeath;
+        }
+    }
     public IObject.Type ObjectType => type;
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.forward;
@@ -61,10 +89,6 @@ public abstract class Unit : MonoBehaviour, IObject
         get
         {
             if (tr == null) tr = transform;
-            if (tr == null)
-            {
-                Debug.LogError("Transform is null!");
-            }
             return tr;
         }
     }
@@ -73,7 +97,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         get
         {
-            return this.IsFleeing ? 0 : scanRange;
+            return IsFleeing ? 0 : scanRange;
         }
     }
     public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
@@ -86,7 +110,6 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         get
         {
-            //return GameManager.Player;
             var blackboard = Transform.GetBlackboard();
             if (blackboard == null) return null;
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
@@ -117,7 +140,8 @@ public abstract class Unit : MonoBehaviour, IObject
 
     protected virtual void OnEnable()
     {
-        coroutine = StartCoroutine(Tick());
+        IsDying = false;
+        tickCoroutine = StartCoroutine(Tick());
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         signature = DefaultSignature;
         UnitManager.Register(this);
@@ -141,9 +165,10 @@ public abstract class Unit : MonoBehaviour, IObject
 
     protected virtual void OnDisable()
     {
-        if (coroutine != null) StopCoroutine(coroutine);
+        if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         this.UnregisterForRadar();
         UnitManager.Unregister(this);
+        if (IsDying) effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
         missileBuffer = null;
     }
 
@@ -156,12 +181,8 @@ public abstract class Unit : MonoBehaviour, IObject
     #endregion
 
     #region Functionality
-    /// <summary>
-    /// Fires when an object reaches 0 health.
-    /// </summary>
-    /// <param name="event"></param>
-    public abstract void Die(ObjectDestroyed @event);
 
+    #region Targeting
     /// <summary>
     /// Detect surrounding missiles, fire tick event(turrets), and decrease signature.
     /// </summary>
@@ -173,6 +194,20 @@ public abstract class Unit : MonoBehaviour, IObject
         onTick?.Invoke();
         DecreaseSignature(tickInterval);
     }
+
+    protected virtual void GetSurroundingMissiles()
+    {
+        missileCount = Physics.OverlapSphereNonAlloc(Transform.position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(gameObject.layer));
+    }
+
+    public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
+
+    /// <summary>
+    /// Returns a list of all units that are on a different Team than this unit.
+    /// </summary>
+    /// <returns></returns>
+    public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
+    #endregion
 
     protected virtual void OnDrawGizmos()
     {
@@ -195,17 +230,20 @@ public abstract class Unit : MonoBehaviour, IObject
         signature = Mathf.Max(DefaultSignature, signature - signatureDecreaseRate * deltaTime);
     }
 
-    protected virtual void GetSurroundingMissiles()
-    {
-        missileCount = Physics.OverlapSphereNonAlloc(Transform.position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(gameObject.layer));
-    }
-
-    public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
-
     /// <summary>
-    /// Returns a list of all units that are on a different Team than this unit.
+    /// Fires when an object reaches 0 health.
     /// </summary>
-    /// <returns></returns>
-    public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
+    /// <param name="event"></param>
+    public virtual void Die(ObjectDestroyed @event)
+    {
+        //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
+        UnitManager.Unregister(this);
+        EffectDuringDeath.Play();
+        IsDying = true;
+        if (tickCoroutine != null) StopCoroutine(tickCoroutine);
+        this.UnregisterForRadar();
+        EventBus<UnitDestroyed>.Raise(new(this));
+    }
     #endregion
 }

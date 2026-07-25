@@ -25,11 +25,11 @@ namespace Utilities
         }
 
         #region IObject
-        public static bool NotNullAndActive(this IObject @object)
+        public static bool NotNullAndActive(this IObject @object, bool allowDying = false)
         {
             if (@object == null) return false;
-            if (@object is UnityEngine.Object unityObj) return unityObj != null &&
-                    @object.Transform.gameObject.activeSelf;
+            if (@object is Unit unityObj) return unityObj != null &&
+                    @object.Transform.gameObject.activeSelf && (allowDying || !unityObj.IsDying);
             return @object != null && @object.Transform.gameObject.activeSelf;
         }
 

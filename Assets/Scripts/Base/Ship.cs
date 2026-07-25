@@ -1,5 +1,3 @@
-using Effects;
-using EventBus;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
@@ -7,7 +5,6 @@ public abstract class Ship : Unit
 {
     #region Fields
     [Header("Ship")]
-    [SerializeField] protected PoolableEffect effectOnDeath;
     [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
     [SerializeField] protected float forwardThrust = 1;
     [field: SerializeField] public float RotationSpeed { get; protected set; } = 5;
@@ -16,6 +13,7 @@ public abstract class Ship : Unit
     protected Vector3 angularVelocity;
     public override Vector3 AngularVelocity => angularVelocity;
     public override Vector3 LinearVelocity => rb != null ? rb.linearVelocity : Vector3.zero;
+    public bool Dampeners { get; protected set; }
     #endregion
 
     #region Setup
@@ -32,6 +30,7 @@ public abstract class Ship : Unit
     protected override void OnEnable()
     {
         base.OnEnable();
+        Dampeners = true;
         angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
     }
@@ -45,10 +44,7 @@ public abstract class Ship : Unit
 
     public override void Die(ObjectDestroyed @event)
     {
-        //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
-        UnitManager.Unregister(this);
-        effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
-        EventBus<UnitDestroyed>.Raise(new(this));
-        gameObject.SetActive(false);
+        Dampeners = false;
+        base.Die(@event);
     }
 }

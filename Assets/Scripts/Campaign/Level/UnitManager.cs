@@ -49,6 +49,11 @@ public static class UnitManager
         //Debug.Log($"Registered unit {ship.Transform} with index {ship.UnitManagerIndex}.");
     }
 
+    /// <summary>
+    /// Remove the ship from the list of ships and set its index to -1, otherwise 
+    /// it can try to unregister again and that fucks with everything.
+    /// </summary>
+    /// <param name="ship"></param>
     public static void Unregister(Unit ship)
     {
         if (!ship.NotNullAndActive() || ship.UnitManagerIndex == -1) return;

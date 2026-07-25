@@ -37,19 +37,22 @@ namespace HybridBT2
         }
         protected virtual void OnEnable()
         {
+            PerformReset();
             coroutine = StartCoroutine(TickLoop());
         }
         protected virtual void OnDisable()
         {
             StopCoroutine(coroutine);
         }
+
         public void PerformReset()
         {
+            Resume();
             if (blackboard == null) return;
             Root?.Abort(blackboard);
             blackboard.PerformReset();
-            Resume();
         }
+
         protected IEnumerator TickLoop()
         {
             while (gameObject.activeSelf)
@@ -60,11 +63,14 @@ namespace HybridBT2
                 blackboard.Tick(tickInterval);
             }
         }
+
         public void SetValue(Blackboard.Keys key, object value) => blackboard.SetData(key, value);
+
         /// <summary>
         /// Sets shouldRun to false, pausing the tree.
         /// </summary>
         public void Pause() => shouldRun = false;
+
         /// <summary>
         /// Sets shouldRun to true, resuming the tree.
         /// </summary>

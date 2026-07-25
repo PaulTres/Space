@@ -18,6 +18,7 @@ public class BanditTree : BT, IRegisterableComponent
         base.Awake();
         EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Register(transform, this);
+        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Blackboard.Unit), null, Pause);
     }
 
     /// <summary>
@@ -50,6 +51,8 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected virtual void OnDestroy()
     {
+        Blackboard.Clear();
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Blackboard.Unit), null, Pause);
         EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Unregister(transform);
     }

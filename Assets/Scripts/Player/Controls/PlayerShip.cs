@@ -1,4 +1,3 @@
-using EventBus;
 using Radar;
 using UnityEngine;
 using Utilities;
@@ -21,7 +20,7 @@ namespace Player
         [SerializeField] protected float zSens = 10;
         protected Vector3 defaultCamPos;
         protected Vector3 movementVector;
-        protected bool freeLook, dampeners;
+        protected bool freeLook;
         protected float rollInput, camXAngle, camYAngle, camZAngle;
         public bool FreeLook
         {
@@ -74,7 +73,7 @@ namespace Player
         {
             base.OnEnable();
             GameManager.Player = this;
-            dampeners = true;
+            Dampeners = true;
             FreeLook = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -139,12 +138,12 @@ namespace Player
 
         protected void OnFreeLookToggle(float value) => FreeLook = value > .5f;
 
-        protected void OnDampenerToggle() => dampeners = !dampeners;
+        protected void OnDampenerToggle() => Dampeners = !Dampeners;
 
         public void PerformFixedUpdate(float deltaTime)
         {
             Vector3 intendedVelocity;
-            if (!dampeners)
+            if (!Dampeners)
             {
                 intendedVelocity = movementVector.z * forwardThrust * shipBody.forward +
                     movementVector.x * strafeThrust * shipBody.right +
@@ -221,15 +220,10 @@ namespace Player
 
         public override void Die(ObjectDestroyed @event)
         {
-            //base.Die(@event);
-            EventBus<UnitDestroyed>.Raise(new(this));
             GameManager.Player = null;
-            UnitManager.Unregister(this);
             UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
-            MissionManager.TryGetInstance(true).EndMission();
-            effectOnDeath.SpawnEffect(Transform, EffectScaleFactor);
             inputReader.DisableCallbacks();
-            dampeners = false;
+            base.Die(@event);
         }
         #endregion
     }

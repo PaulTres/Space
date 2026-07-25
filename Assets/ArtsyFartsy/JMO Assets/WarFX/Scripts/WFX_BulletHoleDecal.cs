@@ -51,7 +51,7 @@ public class WFX_BulletHoleDecal : MonoBehaviour
 		if(randomRotation)
 			this.transform.Rotate(0f,0f,Random.Range(0f,360f), Space.Self);
 		
-		//Start lifetime coroutine
+		//Start lifetime tickCoroutine
 		life = lifetime;
 		fadeout = life * (fadeoutpercent/100f);
 		color.a = orgAlpha;

@@ -26,6 +26,17 @@ namespace HybridBT2
         protected Dictionary<Keys, object> data = new();
         protected float lastTime;
 
+        public Blackboard(Transform transform)
+        {
+            Transform = transform;
+            Unit = transform.GetComponent<Unit>();
+            Navigation = transform.GetComponent<Navigation>();
+            DeltaTime = 0;
+            lastTime = Time.time;
+        }
+
+        public void Clear() => data.Clear();
+
         public void PerformReset()
         {
             data.Clear();
@@ -40,15 +51,6 @@ namespace HybridBT2
         }
 
         public void Tick(float deltaTime) => DeltaTime = deltaTime;
-
-        public Blackboard(Transform transform)
-        {
-            Transform = transform;
-            Unit = transform.GetComponent<Unit>();
-            Navigation = transform.GetComponent<Navigation>();
-            DeltaTime = 0;
-            lastTime = Time.time;
-        }
 
         public void SetData<R>(Keys key, R value) => data[key] = value;
 
