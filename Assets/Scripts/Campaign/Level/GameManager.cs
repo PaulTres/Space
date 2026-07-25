@@ -76,7 +76,6 @@ public static class GameManager
 
     public static void LoadLobby()
     {
-        UnitsDestroyed.Clear();
         SceneManager.LoadScene(GlobalConfig.LobbySceneIndex);
     }
 

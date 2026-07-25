@@ -46,6 +46,7 @@ public abstract class Mission : ScriptableObject
         CurrentMission = this;
         StartTime = Time.time;
         //Debug.Log("Starting mission");
+        GameManager.UnitsDestroyed.Clear();
         SpawnPlayer();
         SpawnScenery();
         SpawnUnits();

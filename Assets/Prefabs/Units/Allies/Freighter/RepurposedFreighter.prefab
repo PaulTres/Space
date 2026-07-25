@@ -546,7 +546,7 @@ MonoBehaviour:
   <Turrets>k__BackingField:
   - {fileID: 6609336810006813245}
   tickInterval: 0.5
-  <EffectScaleFactor>k__BackingField: 1
+  <EffectScaleFactor>k__BackingField: 2
   effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
   <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 2
+  maxHP: 10
   <CurrentHP>k__BackingField: 0
   sendEventOnDamage: 0
 --- !u!1 &4933765255462686569

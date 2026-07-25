@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Player
 {
     public class EndMissionScreen : MenuPDA
     {
-        [SerializeField] protected TextMeshProUGUI playerKills, teamCasualties, enemyCasualties, outcomeText;
+        [SerializeField] protected TextMeshProUGUI playerKills;
 
         protected override void OnEnable()
         {
@@ -16,34 +17,15 @@ namespace Player
 
         public void PopulateText(List<ObjectDestroyed> unitsDestroyed)
         {
-            playerKills.text = enemyCasualties.text = teamCasualties.text = "";
-
-            var score = 0;
-            unitsDestroyed.Sort((a, b) =>
+            playerKills.text = "Kills:";
+            var killCounts = unitsDestroyed.Where(a => a.KillerName.
+                Contains("Player")).GroupBy(a => a.VictimName).
+                Select(a => new KeyValuePair<string, int>(a.Key, a.Count()));
+            foreach (var pair in killCounts)
             {
-                return a.KillerName.CompareTo(b.KillerName);
-            });
-            for (int i = 0; i < unitsDestroyed.Count; i++)
-            {
-                //Debug.Log(unitsDestroyed[i]);
-                if (unitsDestroyed[i].VictimTeam == GlobalConfig.PlayerTeam)
-                {
-                    teamCasualties.text += unitsDestroyed[i] + "\n";
-                }
-                else if (unitsDestroyed[i].VictimTeam == GlobalConfig.EnemyTeam)
-                {
-                    if (unitsDestroyed[i].KillerName.Contains("Player"))
-                    {
-                        playerKills.text += unitsDestroyed[i] + "\n";
-                    }
-                    else enemyCasualties.text += unitsDestroyed[i] + "\n";
-                }
+                playerKills.text += '\n' + pair.Key + " x " + pair.Value;
             }
             playerKills.SetAllDirty();
-            enemyCasualties.SetAllDirty();
-            teamCasualties.SetAllDirty();
-
-            outcomeText.text = score > 0 ? "Victory" : score < 0 ? "Defeat" : "Stalemate";
         }
 
         public void ReturnToLobby()

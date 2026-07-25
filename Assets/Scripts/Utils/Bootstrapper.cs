@@ -1,5 +1,7 @@
 using Effects;
 using Player;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -8,6 +10,13 @@ namespace Utilities
 {
     public class Bootstrapper : MonoBehaviour
     {
+        [MenuItem("Tools/Start game")]
+        public static void LoadBootstrapperScene()
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/BootstrapperScene.unity");
+            EditorApplication.isPlaying = true;
+        }
+
         [Tooltip("The audio mixer to use for audio settings.")]
         [SerializeField] protected AudioMixer audioMixer;
 
