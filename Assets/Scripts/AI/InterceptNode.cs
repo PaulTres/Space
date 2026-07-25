@@ -1,6 +1,7 @@
 ﻿using HybridBT2;
 using System;
 using UnityEngine;
+using Utilities;
 
 [CreateAssetMenu(menuName = "HybridBT2/Leaves/Intercept", fileName = "Intercept")]
 public class InterceptNode : LeafNodeData
@@ -14,7 +15,7 @@ public class InterceptNode : LeafNodeData
     {
         ctx.Navigation.RotationTarget = new FaceTargetRotation(Blackboard.Keys.Target);
         var target = ctx.GetData<IObject>(Blackboard.Keys.Target);
-        if (target != null && target.Active)
+        if (target.NotNullAndActive())
         {
             ((LeafNode)n).SetData((int)InternalKeys.TargetPrevPos, target.Position);
             ctx.Navigation.SetDestination(target.Position);

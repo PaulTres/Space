@@ -86,6 +86,7 @@ public static class GameManager
 
     public static void EndMission()
     {
+        UnitManager.Clear();
         OnMissionCompleted();
         MissionTime = Time.time - Mission.CurrentMission.StartTime;
         SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);

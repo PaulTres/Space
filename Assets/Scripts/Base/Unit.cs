@@ -143,6 +143,7 @@ public abstract class Unit : MonoBehaviour, IObject
     {
         if (coroutine != null) StopCoroutine(coroutine);
         this.UnregisterForRadar();
+        UnitManager.Unregister(this);
         missileBuffer = null;
     }
 

@@ -19,6 +19,9 @@ public interface IObject : IRegisterableComponent
     }
 
     public Type ObjectType { get; }
+    /// <summary>
+    /// Returns true if the transform property is not null and the game object is active.
+    /// </summary>
     public bool Active
     {
         get

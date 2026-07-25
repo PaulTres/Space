@@ -38,7 +38,7 @@ namespace Radar
         {
             get
             {
-                return currentTarget.Active() ? currentTarget : null;
+                return currentTarget.NotNullAndActive() ? currentTarget : null;
             }
             set
             {
@@ -99,7 +99,7 @@ namespace Radar
         /// <param name="bbox"></param>
         protected void ProcessTarget(IObject target, BoundingBox bbox)
         {
-            if (target == null || !target.Active || bbox == null) return;
+            if (!target.NotNullAndActive() || bbox == null) return;
 
             var unit = target as Unit;
             var distance = Vector3.Distance(owner.Position, target.Position);
@@ -190,7 +190,7 @@ namespace Radar
 
         protected void UpdateTargetInfo()
         {
-            if (!CurrentTarget.Active()) return;
+            if (!CurrentTarget.NotNullAndActive()) return;
 
             #region Target view
             if (secondViewCamera != null && secondView != null)
@@ -235,7 +235,7 @@ namespace Radar
 
         public void RegisterTarget(IObject target)
         {
-            if (!target.Active || target.Transform == transform.root ||
+            if (!target.NotNullAndActive() || target.Transform == transform.root ||
                 boundingBoxes.ContainsKey(target)) return;
 
             var bbox = GetBoundingBox();
@@ -330,7 +330,7 @@ namespace Radar
         /// <returns></returns>
         public float EvaluateTarget(Unit target)
         {
-            if (!GameManager.Player.Active() || !target.Active()) return float.MinValue;
+            if (!GameManager.Player.NotNullAndActive() || !target.NotNullAndActive()) return float.MinValue;
 
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;

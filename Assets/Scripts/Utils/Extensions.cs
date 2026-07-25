@@ -14,11 +14,6 @@ namespace Utilities
             return 0;
         }
 
-        public static bool Active(this Unit unit)
-        {
-            return unit != null && unit.gameObject.activeSelf;
-        }
-
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
             PoolableEffect.Spawn(effect, position, scaleFactor * Vector3.one);
@@ -30,6 +25,14 @@ namespace Utilities
         }
 
         #region IObject
+        public static bool NotNullAndActive(this IObject @object)
+        {
+            if (@object == null) return false;
+            if (@object is UnityEngine.Object unityObj) return unityObj != null &&
+                    @object.Transform.gameObject.activeSelf;
+            return @object != null && @object.Transform.gameObject.activeSelf;
+        }
+
         public static void RegisterForRadar(this IObject @object)
         {
             if (@object == null) throw new System.ArgumentNullException();

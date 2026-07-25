@@ -64,8 +64,6 @@ namespace Player
 
         protected void OnEscape()
         {
-            //open the pause menu
-            Debug.Log("Escaping");
             pauseMenu.SetActive(true);
         }
 
@@ -78,8 +76,7 @@ namespace Player
         #region Mission start
         public void BeginMission()
         {
-            //Mission.CurrentMission = Mission.GetRandomMission();
-            if (coroutine == null) coroutine = StartCoroutine(MissionStartCountdown());
+            coroutine ??= StartCoroutine(MissionStartCountdown());
         }
 
         protected IEnumerator MissionStartCountdown()

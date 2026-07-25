@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 10
+  maxHP: 1
   <CurrentHP>k__BackingField: 0
   sendEventOnDamage: 0
 --- !u!1 &4933765255462686569

@@ -133,7 +133,17 @@ namespace Weapons
                 Debug.LogError("Target is null!");
                 return false;
             }
-            if (target == null || !target.Transform.gameObject.activeSelf) return false;
+            if (target.Transform == null)
+            {
+                Debug.LogError("Transform is null!");
+                return false;
+            }
+            if (target.Transform.gameObject == null)
+            {
+                Debug.LogError("GameObject is null!");
+                return false;
+            }
+            if (!target.NotNullAndActive()) return false;
 
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;

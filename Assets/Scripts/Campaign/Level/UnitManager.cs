@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Collections;
 using UnityEngine;
+using Utilities;
 
 public static class UnitManager
 {
@@ -12,6 +13,8 @@ public static class UnitManager
     public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
     public static int EnemyCount => ships[GlobalConfig.EnemyTeam].Count;
 
+    public static void Clear() => ships.Clear();
+
     /// <summary>
     /// Get all the ships belonging to a specific team.
     /// </summary>
@@ -19,7 +22,7 @@ public static class UnitManager
     /// <returns></returns>
     public static List<Unit> GetShips(int team)
     {
-        return ships.ContainsKey(team) ? ships[team].ToList() : null;
+        return ships.ContainsKey(team) ? ships[team].ToList() : new();
     }
 
     public static List<Unit> GetTargets(int myTeam)
@@ -48,14 +51,14 @@ public static class UnitManager
 
     public static void Unregister(Unit ship)
     {
-        if (ship == null || ship.UnitManagerIndex == -1) return;
+        if (!ship.NotNullAndActive() || ship.UnitManagerIndex == -1) return;
         int team = ship.Team;
         if (ships.ContainsKey(team))
         {
             int index = ship.UnitManagerIndex;
             ships[team].RemoveAtSwapBack(ship.UnitManagerIndex);
+            ship.UnitManagerIndex = -1;
             if (ships[team].Count > index) ships[team][index].UnitManagerIndex = index;
-            //ship.UnitManagerIndex = -1;
         }
 
         if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)
