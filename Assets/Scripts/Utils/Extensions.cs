@@ -14,6 +14,18 @@ namespace Utilities
             return 0;
         }
 
+        public static bool InOptimalFiringRange(this Unit unit, IObject target)
+        {
+            if (unit == null) return false;
+            return Vector3.Distance(unit.Position, target.Position) <= unit.ScanRange + target.Signature;
+        }
+
+        public static bool InOptimalFiringRange(this Unit unit, Vector3 targetPosition, float targetSignature)
+        {
+            if (unit == null) return false;
+            return Vector3.Distance(targetPosition, unit.Position) <= unit.ScanRange + targetSignature;
+        }
+
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
             PoolableEffect.Spawn(effect, position, scaleFactor * Vector3.one);

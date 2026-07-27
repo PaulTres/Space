@@ -113,7 +113,7 @@ namespace Weapons
             if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
                 linearVelocity.magnitude * dt, collisionMask))
             {
-                if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == Owner.GetTeam())
+                if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == Owner.Team)
                 {
                     return false;
                 }

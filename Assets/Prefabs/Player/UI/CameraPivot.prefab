@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Radar.PlayerTargetSystem
   cam: {fileID: 6308187698919889019}
   boundingBoxPrefab: {fileID: 5340728449833994343, guid: d1affc83db3e08d48a5b7653ca7ce480, type: 3}
-  unitIcon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  unitIcon: {fileID: 21300000, guid: 8b5be3ca98b557646906102e761d846e, type: 3}
   missileIcon: {fileID: 21300000, guid: 23cf7d7bddf37064ea949fd62312efba, type: 3}
   boundingBoxParent: {fileID: 5024718599936986434}
   minScale: 0.1
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 7806879453624652830}
   - component: {fileID: 3571870783288367133}
   m_Layer: 6
-  m_Name: HullImage
+  m_Name: SpeedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3320,7 +3320,7 @@ GameObject:
   - component: {fileID: 5407021095427339456}
   - component: {fileID: 8081031289659843683}
   m_Layer: 6
-  m_Name: HealthBackground
+  m_Name: SpeedBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5657,7 +5657,7 @@ GameObject:
   - component: {fileID: 4748112036899944143}
   - component: {fileID: 7654707511693821944}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: SpeedText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8623,7 +8623,7 @@ GameObject:
   - component: {fileID: 8145325730727544523}
   - component: {fileID: 3661570125803205997}
   m_Layer: 6
-  m_Name: Text (TMP)
+  m_Name: HealthText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

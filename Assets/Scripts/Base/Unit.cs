@@ -43,9 +43,17 @@ public abstract class Unit : MonoBehaviour, IObject
 
     #region HP
     protected HPComponent hpComponent;
-    public float MaxHP => hpComponent != null ? hpComponent.MaxHP : 0;
-    public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
-    public float CurrentHPPercentage => hpComponent != null ? hpComponent.CurrentHP / hpComponent.MaxHP : 0;
+    public HPComponent HPComponent
+    {
+        get
+        {
+            if (hpComponent == null) hpComponent = GetComponent<HPComponent>();
+            return hpComponent;
+        }
+    }
+    public float MaxHP => HPComponent != null ? HPComponent.MaxHP : 0;
+    public float CurrentHP => HPComponent != null ? HPComponent.CurrentHP : 0;
+    public float CurrentHPPercentage => HPComponent != null ? HPComponent.CurrentHP / HPComponent.MaxHP : 0;
     #endregion
 
     #region Death
@@ -146,7 +154,6 @@ public abstract class Unit : MonoBehaviour, IObject
         MaxSignature = Mathf.Max(MaxSignature, MinimumSignature);
         Turrets ??= new(GetComponentsInChildren<Turret>());
         wait = new(tickInterval);
-        if (hpComponent != null) hpComponent = GetComponent<HPComponent>();
         ComponentRegister<Unit>.Register(Transform, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);

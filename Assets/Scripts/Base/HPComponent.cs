@@ -8,20 +8,7 @@ namespace HP
 {
     public class HPComponent : MonoBehaviour, IResettable
     {
-        [SerializeField] protected float maxHP = 10;
-        public float MaxHP
-        {
-            get => maxHP;
-            set
-            {
-                if (value <= 0)
-                {
-                    Debug.LogError($"MaxHP <= 0 for {transform}. Setting to 1.");
-                    value = 1;
-                }
-                maxHP = value;
-            }
-        }
+        [field: SerializeField] public float MaxHP { get; set; } = 10;
         protected Transform tr;
         public Transform Transform
         {
@@ -108,7 +95,7 @@ namespace HP
 
         public void TakeDamage(DamageInfo damageInfo)
         {
-            if (damageInfo.Source.GetTeam(throwOnNullTransform: false) == transform.root.GetTeam())
+            if (damageInfo.Source.Team == transform.root.GetTeam())
             {
                 //Debug.Log("Friendly fire");
                 return;

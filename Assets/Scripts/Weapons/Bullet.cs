@@ -43,7 +43,7 @@ namespace Weapons
         #region Fields
         protected Type poolKey;
         protected DamageInfo damageInfo = new();
-        public Transform Owner
+        public Unit Owner
         {
             get
             {

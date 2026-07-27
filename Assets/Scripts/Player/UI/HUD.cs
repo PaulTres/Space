@@ -33,11 +33,11 @@ namespace Player
             healthBar.fillAmount = Mathf.Max(0, player.CurrentHPPercentage);
             healthText.text = $"{(int)player.CurrentHP}/{(int)player.MaxHP}";
 
-            healthBar.fillAmount = Mathf.Max(0, player.LinearVelocity.magnitude / player.MaxVelocityMagnitude);
-            healthText.text = $"{(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude}";
+            speedBar.fillAmount = Mathf.Max(0, player.LinearVelocity.magnitude / player.MaxVelocityMagnitude);
+            speedText.text = $"{(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude}";
 
             #region Signature display
-            var percentage = player.Signature / player.MaxSignature;
+            var percentage = player.Signature / (player.MaxSignature + Mathf.Epsilon);
             signatureText.text = $"{(int)player.Signature}/{(int)player.MaxSignature}";
             signatureDisplay.rectTransform.localScale = percentage *
                 maxSignatureDisplay.rectTransform.localScale;

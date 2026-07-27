@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 3129267647291598473}
   - component: {fileID: 5788284385268493472}
   - component: {fileID: 5931668450013296042}
+  - component: {fileID: 2941916668368914544}
   m_Layer: 0
   m_Name: MissionFailurePrefab
   m_TagString: Untagged
@@ -518,6 +519,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab578992f4453f4bba48b7b4f41e3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MissionFailureScreen
+--- !u!81 &2941916668368914544
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564781924928465574}
+  m_Enabled: 1
 --- !u!1 &5212348497062701041
 GameObject:
   m_ObjectHideFlags: 0

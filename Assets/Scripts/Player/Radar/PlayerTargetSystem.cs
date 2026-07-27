@@ -132,13 +132,13 @@ namespace Radar
                 #region Scaling
                 //scale based on distance
                 float distanceToCamera = Vector3.Distance(cam.transform.position, target.Position);
-                bbox.DistanceText.text = ((int)distanceToCamera).ToString();
                 var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (distanceToCamera + 0.00001f),
                     minScale, maxScale);
                 bbox.RectTransform.localScale = Vector3.one * size;
                 #endregion
 
                 #region Distance text
+                bbox.DistanceText.text = distance.ToString();
                 if (distance <= owner.ScanRange + target.Signature)
                 {
                     bbox.BBox.material = bbox.DistanceText.material =

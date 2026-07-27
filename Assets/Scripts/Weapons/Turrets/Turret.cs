@@ -153,8 +153,7 @@ namespace Weapons
 
             //Debug.Log($"Turret {transform.name} checking for targets.");
 
-            if (Target != null && !Target.Transform.gameObject.activeSelf) Target = null;
-
+            if (!Target.NotNullAndActive()) Target = null;
             float bestScore = Target == null ? float.MinValue : @params.EvaluateTarget(this, Target);
 
             #region Evaluate missiles
@@ -163,7 +162,7 @@ namespace Weapons
                 (var count, var missiles) = Owner.GetMissiles();
                 if (count > 0)
                 {
-                    var currentM = Target != null ? Target as Missile : null;
+                    var currentM = Target.NotNullAndActive() ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.
                         IsEqual(Owner);
 
@@ -231,7 +230,7 @@ namespace Weapons
                     var score = @params.EvaluateTarget(this, targets[i]);
                     //Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !@params.AllowZeroScoreTarget) continue;
-                    if (Owner.Target != null && targets[i].GetInstanceID() ==
+                    if (Owner.Target.NotNullAndActive() && targets[i].GetInstanceID() ==
                         Owner.Target.GetInstanceID())
                     {
                         if (score >= 0) score *= CurrentTargetScoreMultiplier;
@@ -255,30 +254,27 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public void Tick(float deltaTime)
         {
-            if (Target != null)
+            if (Target.NotNullAndActive())
             {
-                if (Target.Transform.gameObject.activeSelf)
+                //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                var pos = ComputeTargetingPosition(Target);
+                //Debug.DrawLine(Transform.position, pos, Color.red);
+                LookAt(pos, deltaTime);
+                if (!CeaseFire)
                 {
-                    //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
-                    var pos = ComputeTargetingPosition(Target);
-                    //Debug.DrawLine(Transform.position, pos, Color.red);
-                    LookAt(pos, deltaTime);
-                    if (!CeaseFire)
+                    if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                     {
-                        if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
+                        //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                        if (Vector3.Angle(ElevationPivot.forward, (pos -
+                            Transform.position)) < @params.MaxAngleDifference)
                         {
-                            //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
-                            if (Vector3.Angle(ElevationPivot.forward, (pos -
-                                Transform.position)) < @params.MaxAngleDifference)
+                            if (Owner.InOptimalFiringRange(Target.Position,
+                                Target.Signature))
                             {
-                                if ((Transform.position - pos).magnitude <=
-                                    Owner.ScanRange + Target.Signature)
-                                {
-                                    IncreaseReadiness(deltaTime);
-                                }
-                                Weapon.Shoot(Target);
-                                return;
+                                IncreaseReadiness(deltaTime);
                             }
+                            Weapon.Shoot(Target);
+                            return;
                         }
                     }
                 }

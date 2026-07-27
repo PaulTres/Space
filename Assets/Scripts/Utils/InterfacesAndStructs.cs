@@ -48,14 +48,14 @@ public interface IResettable
 
 public interface IOwnable : IRegisterableComponent
 {
-    Transform Owner { get; }
+    Unit Owner { get; }
 }
 
 #region Event bus stuff
 public struct DamageInfo : IEvent
 {
     public float Amount { get; set; }
-    public Transform Source { get; set; }
+    public Unit Source { get; set; }
 }
 
 public readonly struct ObjectHPChanged : IEvent
@@ -84,6 +84,16 @@ public readonly struct ObjectDestroyed : IEvent
         VictimTeam = GlobalConfig.GetTeam(victim.gameObject.layer);
         KillerID = killer.GetInstanceID();
         KillerName = killer.name.Replace("(Clone)", "");
+        KillerTeam = GlobalConfig.GetTeam(killer.gameObject.layer);
+    }
+
+    public ObjectDestroyed(Transform victim, Unit killer)
+    {
+        VictimID = victim.GetInstanceID();
+        VictimName = victim.name.Replace("(Clone)", "");
+        VictimTeam = GlobalConfig.GetTeam(victim.gameObject.layer);
+        KillerID = killer.Transform.GetInstanceID();
+        KillerName = killer.Transform.name.Replace("(Clone)", "");
         KillerTeam = GlobalConfig.GetTeam(killer.gameObject.layer);
     }
 

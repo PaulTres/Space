@@ -127,7 +127,7 @@ namespace Weapons
         public virtual void ProcessBullet(Bullet bullet, IObject target)
         {
             Unit.IncreaseSignature(@params.SignatureIncrease);
-            bullet.Owner = transform.root;
+            bullet.Owner = Unit;
             bullet.gameObject.SetActive(true);
         }
         #endregion
