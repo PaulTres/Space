@@ -259,19 +259,23 @@ namespace Weapons
             {
                 if (Target.Transform.gameObject.activeSelf)
                 {
+                    //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                    var pos = ComputeTargetingPosition(Target);
+                    //Debug.DrawLine(Transform.position, pos, Color.red);
+                    LookAt(pos, deltaTime);
                     if (!CeaseFire)
                     {
-                        //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
-                        var pos = ComputeTargetingPosition(Target);
-                        //Debug.DrawLine(Transform.position, pos, Color.red);
-                        LookAt(pos, deltaTime);
                         if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                         {
                             //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                             if (Vector3.Angle(ElevationPivot.forward, (pos -
                                 Transform.position)) < @params.MaxAngleDifference)
                             {
-                                IncreaseReadiness(deltaTime);
+                                if ((Transform.position - pos).magnitude <=
+                                    Owner.ScanRange + Target.Signature)
+                                {
+                                    IncreaseReadiness(deltaTime);
+                                }
                                 Weapon.Shoot(Target);
                                 return;
                             }
