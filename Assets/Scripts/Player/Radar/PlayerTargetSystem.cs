@@ -141,11 +141,9 @@ namespace Radar
                 bbox.DistanceText.text = distance.ToString();
                 if (distance <= owner.ScanRange + target.Signature)
                 {
-                    bbox.BBox.material = bbox.DistanceText.material =
-                        bbox.RegularMaterial;
+                    bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
                 }
-                else bbox.BBox.material = bbox.DistanceText.material =
-                        bbox.TransluscentMaterial;
+                else bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
                 #endregion
 
                 #region Fleeing
@@ -261,6 +259,7 @@ namespace Radar
                 bbox.TransluscentMaterial = neutralTransluscentMaterial;
             }
 
+            bbox.BBox.SetAllDirty();
             bbox.gameObject.SetActive(true);
             boundingBoxes.Add(target, bbox);
         }

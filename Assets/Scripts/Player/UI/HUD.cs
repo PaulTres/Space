@@ -28,6 +28,10 @@ namespace Player
             if (u != null) u.UnregisterLateUpdate(PerformLateUpdate);
         }
 
+        /// <summary>
+        /// Update health, speed, signature.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         protected void PerformLateUpdate(float deltaTime)
         {
             healthBar.fillAmount = Mathf.Max(0, player.CurrentHPPercentage);

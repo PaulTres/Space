@@ -131,6 +131,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoA_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: <MaxSignature>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: <MinimumSignature>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150000249197244867, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: unitIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 1ba7cb21136c5e94e962def2c2de2cca, type: 3}
     - target: {fileID: 6766837596616086251, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -170,6 +182,10 @@ PrefabInstance:
     - target: {fileID: 6766837596616086251, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7134069579003675855, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -5072,7 +5088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 10
+  <MaxHP>k__BackingField: 10
   sendEventOnHPChange: 0
   minHP: 0
   minHPRegainCooldown: 5

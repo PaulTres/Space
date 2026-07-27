@@ -228,8 +228,8 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
-  <MinimumSignature>k__BackingField: 0
-  <MaxSignature>k__BackingField: 0
+  <MinimumSignature>k__BackingField: 1
+  <MaxSignature>k__BackingField: 10
   signatureDecreaseRate: 0.1
   signatureDecreaseCooldown: 5
   scanRange: 20
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 1
+  <MaxHP>k__BackingField: 10
   sendEventOnHPChange: 0
   minHP: 0
   minHPRegainCooldown: 5

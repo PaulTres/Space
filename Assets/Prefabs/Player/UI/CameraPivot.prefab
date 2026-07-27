@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Radar.PlayerTargetSystem
   cam: {fileID: 6308187698919889019}
   boundingBoxPrefab: {fileID: 5340728449833994343, guid: d1affc83db3e08d48a5b7653ca7ce480, type: 3}
-  unitIcon: {fileID: 21300000, guid: 8b5be3ca98b557646906102e761d846e, type: 3}
+  unitIcon: {fileID: 21300000, guid: 1ba7cb21136c5e94e962def2c2de2cca, type: 3}
   missileIcon: {fileID: 21300000, guid: 23cf7d7bddf37064ea949fd62312efba, type: 3}
   boundingBoxParent: {fileID: 5024718599936986434}
   minScale: 0.1
