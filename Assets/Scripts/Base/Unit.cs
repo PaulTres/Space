@@ -43,9 +43,9 @@ public abstract class Unit : MonoBehaviour, IObject
 
     #region HP
     protected HPComponent hpComponent;
+    public float MaxHP => hpComponent != null ? hpComponent.MaxHP : 0;
     public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
-    public float CurrentHPPercentage => hpComponent != null ?
-        hpComponent.CurrentHP / hpComponent.MaxHP : 0;
+    public float CurrentHPPercentage => hpComponent != null ? hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     #endregion
 
     #region Death

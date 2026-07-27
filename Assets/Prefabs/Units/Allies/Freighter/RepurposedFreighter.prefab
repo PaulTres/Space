@@ -540,16 +540,39 @@ MonoBehaviour:
   type: 1
   deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 2
-  <DefaultSignature>k__BackingField: 14
-  maxSignature: 25
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
-  effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
-  scanRange: 15
   <Turrets>k__BackingField:
   - {fileID: 6609336810006813245}
   tickInterval: 0.5
+  effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
   <EffectScaleFactor>k__BackingField: 2
+  soundDuringDeath:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+  <MinimumSignature>k__BackingField: 0
+  <MaxSignature>k__BackingField: 0
+  signatureDecreaseRate: 0.1
+  signatureDecreaseCooldown: 5
+  scanRange: 15
   <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 20
@@ -603,7 +626,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 1
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}

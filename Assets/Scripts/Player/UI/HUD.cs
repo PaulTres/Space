@@ -7,6 +7,9 @@ namespace Player
     public class HUD : UISystem
     {
         [SerializeField] protected Image healthBar;
+        [SerializeField] protected TextMeshProUGUI healthText;
+        [SerializeField] protected Image speedBar;
+        [SerializeField] protected TextMeshProUGUI speedText;
         [SerializeField] protected Image maxSignatureDisplay, signatureDisplay;
         [SerializeField] protected TextMeshProUGUI signatureText;
         protected PlayerShip player;
@@ -28,11 +31,17 @@ namespace Player
         protected void PerformLateUpdate(float deltaTime)
         {
             healthBar.fillAmount = Mathf.Max(0, player.CurrentHPPercentage);
+            healthText.text = $"{(int)player.CurrentHP}/{(int)player.MaxHP}";
 
+            healthBar.fillAmount = Mathf.Max(0, player.LinearVelocity.magnitude / player.MaxVelocityMagnitude);
+            healthText.text = $"{(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude}";
+
+            #region Signature display
             var percentage = player.Signature / player.MaxSignature;
             signatureText.text = $"{(int)player.Signature}/{(int)player.MaxSignature}";
             signatureDisplay.rectTransform.localScale = percentage *
                 maxSignatureDisplay.rectTransform.localScale;
+            #endregion
         }
     }
 }
