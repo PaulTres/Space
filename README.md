@@ -1,3 +1,4 @@
+[More comprehensive google drive doc](https://docs.google.com/document/d/1fG6luBHeusFtK7PFvPkuekL7Ux02flMgyDUxtqdv8ts/edit?usp=sharing)
 # Gameplay
 
 Long-range, methodical, ~Splispace. Might include options for faster-paced gameplay.
