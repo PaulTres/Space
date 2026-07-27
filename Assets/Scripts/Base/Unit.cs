@@ -1,3 +1,4 @@
+using AudioSystem;
 using Effects;
 using EventBus;
 using HP;
@@ -15,8 +16,7 @@ public abstract class Unit : MonoBehaviour, IObject
 {
     #region Fields
     [Header("Unit")]
-    [Tooltip("This is mostly used for object pooling for the bullets. Once again, " +
-        "DO NOT FUCK WITH THIS!")]
+    [Tooltip("This is mostly used for object pooling for the bullets. Never manually modify.")]
     [SerializeField] protected IObject.Type type;
     [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
         "will have their owner set to null.")]
@@ -27,27 +27,6 @@ public abstract class Unit : MonoBehaviour, IObject
     /// </summary>
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
-    protected Transform tr;
-    protected float signature;
-    [field: SerializeField] public float DefaultSignature { get; protected set; }
-    [SerializeField] protected float maxSignature;
-    [SerializeField] protected float signatureDecreaseRate = 0.1f;
-    [SerializeField] protected float signatureDecreaseCooldown = 5f;
-    [Tooltip("Plays when the ship has finished exploding.")]
-    [SerializeField] protected PoolableEffect effectOnDeath;
-    /// <summary>
-    /// Plays while the unit explodes. Unit will be disabled once the effect is 
-    /// finished playing.
-    /// </summary>
-    protected ParticleSystem effectDuringDeath;
-    /// <summary>
-    /// The time it takes before the signature starts decreasing after it has been increased. 
-    /// This is used to prevent the signature from decreasing too quickly after it has been 
-    /// increased.
-    /// </summary>
-    protected float signatureIncreaseTime;
-    [SerializeField] protected float scanRange = 10;
-    protected HPComponent hpComponent;
     [field: SerializeField] public List<Turret> Turrets { get; protected set; } = new();
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
@@ -56,15 +35,28 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <summary>
     /// Used to check for missiles in the vicinity of the unit.
     /// </summary>
-    protected Collider[] missileBuffer;
-    protected int missileCount;
     [SerializeField] protected float tickInterval = 0.5f;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
-    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
+
+    #region HP
+    protected HPComponent hpComponent;
+    public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
+    public float CurrentHPPercentage => hpComponent != null ?
+        hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     #endregion
+
+    #region Death
+    [Header("Death")]
+    [Tooltip("Plays when the ship has finished exploding.")]
+    [SerializeField] protected PoolableEffect effectOnDeath;
+    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     public bool IsDying { get; protected set; }
-    #region Properties
+    /// <summary>
+    /// Plays while the unit explodes. Unit will be disabled once the effect is 
+    /// finished playing.
+    /// </summary>
+    protected ParticleSystem effectDuringDeath;
     public ParticleSystem EffectDuringDeath
     {
         get
@@ -77,13 +69,41 @@ public abstract class Unit : MonoBehaviour, IObject
             return effectDuringDeath;
         }
     }
+    [Tooltip("Plays while the ship is exploding.")]
+    [SerializeField] protected SoundData soundDuringDeath;
+    #endregion
+
+    #region Scan/Signature
+    protected float signature;
+    public float Signature => signature;
+    [field: SerializeField] public float DefaultSignature { get; protected set; }
+    [SerializeField] protected float maxSignature;
+    [SerializeField] protected float signatureDecreaseRate = 0.1f;
+    [SerializeField] protected float signatureDecreaseCooldown = 5f;
+    /// <summary>
+    /// The time it takes before the signature starts decreasing after it has been increased. 
+    /// This is used to prevent the signature from decreasing too quickly after it has been 
+    /// increased.
+    /// </summary>
+    protected float signatureDecreaseDelay;
+    [SerializeField] protected float scanRange = 10;
+    public float ScanRange
+    {
+        get
+        {
+            return IsFleeing ? 0 : scanRange;
+        }
+    }
+    #endregion
+
+    #region Helpers
     public IObject.Type ObjectType => type;
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.forward;
     public virtual Vector3 Up => Transform.forward;
     public virtual Vector3 LinearVelocity => Vector3.zero;
     public virtual Vector3 AngularVelocity => Vector3.zero;
-    public float Signature => signature;
+    protected Transform tr;
     public Transform Transform
     {
         get
@@ -93,16 +113,6 @@ public abstract class Unit : MonoBehaviour, IObject
         }
     }
     public Vector3 Position => Transform.position;
-    public float ScanRange
-    {
-        get
-        {
-            return IsFleeing ? 0 : scanRange;
-        }
-    }
-    public float CurrentHP => hpComponent != null ? hpComponent.CurrentHP : 0;
-    public float CurrentHPPercentage => hpComponent != null ?
-        hpComponent.CurrentHP / hpComponent.MaxHP : 0;
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
@@ -124,6 +134,9 @@ public abstract class Unit : MonoBehaviour, IObject
             return b.GetData<bool>(Blackboard.Keys.Fleeing);
         }
     }
+    protected Collider[] missileBuffer;
+    protected int missileCount;
+    #endregion
     #endregion
 
     #region Setup
@@ -146,7 +159,7 @@ public abstract class Unit : MonoBehaviour, IObject
         signature = DefaultSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
-        signatureIncreaseTime = Time.time;
+        signatureDecreaseDelay = Time.time;
     }
 
     /// <summary>
@@ -220,13 +233,13 @@ public abstract class Unit : MonoBehaviour, IObject
 
     public void IncreaseSignature(float amount)
     {
-        signatureIncreaseTime = Time.time;
+        signatureDecreaseDelay = Time.time;
         signature = Mathf.Min(maxSignature, signature + amount);
     }
 
     protected virtual void DecreaseSignature(float deltaTime)
     {
-        if (Time.time - signatureIncreaseTime < signatureDecreaseCooldown) return;
+        if (Time.time - signatureDecreaseDelay < signatureDecreaseCooldown) return;
         signature = Mathf.Max(DefaultSignature, signature - signatureDecreaseRate * deltaTime);
     }
 
