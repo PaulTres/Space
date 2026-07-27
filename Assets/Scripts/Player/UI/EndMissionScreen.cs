@@ -12,6 +12,7 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
+            GameManager.
             PopulateText(GameManager.UnitsDestroyed);
         }
 

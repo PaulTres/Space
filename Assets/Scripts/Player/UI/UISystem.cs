@@ -3,21 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Player
 {
-
     public class UISystem : MonoBehaviour
     {
+        [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected RectTransform textParent;
         [SerializeField] protected Widget widgetPrefab;
+        [SerializeField] protected GameObject pauseMenu;
         protected readonly Stack<Widget> textWidgetPool = new();
 
-        public static void ShowText(ShowText @event)
-        {
-            EventBus<ShowText>.Raise(@event);
-        }
-
+        #region Setup
         protected virtual void Awake()
         {
             EventBus<ShowText>.AddActions(SpawnText);
+            inputReader.OnEscapeEvent += OpenPauseMenu;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            inputReader.OnEscapeEvent -= OpenPauseMenu;
+            textWidgetPool.Clear();
+            EventBus<ShowText>.RemoveActions(SpawnText);
+        }
+        #endregion
+
+        public void OpenPauseMenu()
+        {
+            pauseMenu.SetActive(true);
+        }
+
+        #region Widgets 
+        public static void ShowText(ShowText @event)
+        {
+            EventBus<ShowText>.Raise(@event);
         }
 
         public void SpawnText(ShowText @event)
@@ -49,11 +66,6 @@ namespace Player
             }
             return textWidgetPool.Pop();
         }
-
-        protected virtual void OnDestroy()
-        {
-            textWidgetPool.Clear();
-            EventBus<ShowText>.RemoveActions(SpawnText);
-        }
+        #endregion
     }
 }

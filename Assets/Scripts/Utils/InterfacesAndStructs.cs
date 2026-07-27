@@ -58,11 +58,11 @@ public struct DamageInfo : IEvent
     public Transform Source { get; set; }
 }
 
-public readonly struct ObjectDamaged : IEvent
+public readonly struct ObjectHPChanged : IEvent
 {
     public readonly float CurrentHP, CurrentHPPercentage;
 
-    public ObjectDamaged(float currentHP, float currentHPPercentage)
+    public ObjectHPChanged(float currentHP, float currentHPPercentage)
     {
         CurrentHP = currentHP;
         CurrentHPPercentage = currentHPPercentage;

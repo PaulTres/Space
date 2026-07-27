@@ -43,7 +43,7 @@ namespace Weapons
             }
         }
         public Unit Owner { get; protected set; }
-        [SerializeField] protected WeaponBase weapon;
+        [field: SerializeField] public WeaponBase Weapon { get; protected set; }
         protected Transform tr;
         [field: SerializeField] public Transform RotationPivot { get; protected set; }
         [field: SerializeField] public Transform ElevationPivot { get; protected set; }
@@ -58,7 +58,7 @@ namespace Weapons
         {
             tr = transform;
             Owner = GetComponentInParent<Unit>();
-            if (weapon == null) weapon = GetComponentInChildren<WeaponBase>();
+            if (Weapon == null) Weapon = GetComponentInChildren<WeaponBase>();
         }
         protected virtual void OnEnable()
         {
@@ -108,7 +108,7 @@ namespace Weapons
         public Vector3 ComputeTargetingPosition(IObject target)
         {
             float timeToHit = 0;
-            var m = weapon.BulletData as ProjectileData;
+            var m = Weapon.BulletData as ProjectileData;
             if (m != null) timeToHit = (target.Transform.position -
                     Transform.position).magnitude / m.TopSpeed;
 
@@ -128,21 +128,6 @@ namespace Weapons
         /// <returns>True if the target is valid, false otherwise.</returns>
         protected bool IsTargetValid(IObject target)
         {
-            if (target == null)
-            {
-                Debug.LogError("Target is null!");
-                return false;
-            }
-            if (target.Transform == null)
-            {
-                Debug.LogError("Transform is null!");
-                return false;
-            }
-            if (target.Transform.gameObject == null)
-            {
-                Debug.LogError("GameObject is null!");
-                return false;
-            }
             if (!target.NotNullAndActive()) return false;
 
             var dir = target.Transform.position - Transform.position;
@@ -274,19 +259,22 @@ namespace Weapons
             {
                 if (Target.Transform.gameObject.activeSelf)
                 {
-                    //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
-                    var pos = ComputeTargetingPosition(Target);
-                    Debug.DrawLine(Transform.position, pos, Color.red);
-                    LookAt(pos, deltaTime);
-                    if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
+                    if (!CeaseFire)
                     {
-                        //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
-                        if (Vector3.Angle(ElevationPivot.forward, (pos -
-                            Transform.position)) < @params.MaxAngleDifference)
+                        //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                        var pos = ComputeTargetingPosition(Target);
+                        //Debug.DrawLine(Transform.position, pos, Color.red);
+                        LookAt(pos, deltaTime);
+                        if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                         {
-                            IncreaseReadiness(deltaTime);
-                            weapon.Shoot(Target);
-                            return;
+                            //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                            if (Vector3.Angle(ElevationPivot.forward, (pos -
+                                Transform.position)) < @params.MaxAngleDifference)
+                            {
+                                IncreaseReadiness(deltaTime);
+                                Weapon.Shoot(Target);
+                                return;
+                            }
                         }
                     }
                 }
@@ -301,21 +289,21 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Increases readiness on the weapon.
+        /// Increases readiness on the Weapon.
         /// </summary>
         /// <param name="deltaTime"></param>
         protected void IncreaseReadiness(float deltaTime)
         {
-            weapon.IncreaseReadiness(deltaTime);
+            Weapon.IncreaseReadiness(deltaTime);
         }
 
         /// <summary>
-        /// Calls DecreaseReadiness on the weapon.
+        /// Calls DecreaseReadiness on the Weapon.
         /// </summary>
         /// <param name="deltaTime"></param>
         protected void DecreaseReadiness(float deltaTime)
         {
-            weapon.DecreaseReadiness(deltaTime);
+            Weapon.DecreaseReadiness(deltaTime);
         }
 
         /// <summary>

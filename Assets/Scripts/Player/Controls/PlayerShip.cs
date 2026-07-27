@@ -8,7 +8,6 @@ namespace Player
     {
         #region Fields
         [Header("Player controls")]
-        [SerializeField] protected PlayerTargetSystem targetSystem;
         [SerializeField] protected ControlsInputReader inputReader;
         [SerializeField] protected Transform shipBody;
         [SerializeField] protected Transform cam;
@@ -18,6 +17,9 @@ namespace Player
         [SerializeField] protected float xSens = 10;
         [SerializeField] protected float ySens = 10;
         [SerializeField] protected float zSens = 10;
+        [Header("UI")]
+        [SerializeField] protected PlayerTargetSystem targetSystem;
+        [SerializeField] protected GameObject missionFailureScreenPrefab;
         protected Vector3 defaultCamPos;
         protected Vector3 movementVector;
         protected bool freeLook;
@@ -103,6 +105,11 @@ namespace Player
                 i.UnregisterFixedUpdate(PerformFixedUpdate);
                 i.UnregisterUpdate(PerformUpdate);
                 i.UnregisterLateUpdate(PerformLateUpdate);
+            }
+            if (IsDying)
+            {
+                //spawn mission failure screen
+                Instantiate(missionFailureScreenPrefab, transform.position, transform.rotation);
             }
         }
         #endregion

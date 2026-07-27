@@ -589,9 +589,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 1
-  <CurrentHP>k__BackingField: 0
-  sendEventOnDamage: 0
+  maxHP: 100000
+  sendEventOnHPChange: 0
+  minHP: 0
+  minHPRegainCooldown: 5
 --- !u!198 &3402708221022883169
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5442,7 +5443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   CurrentTargetScoreMultiplier: 2
-  weapon: {fileID: 3962779551035841589}
+  <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 7910306250757147500}
   <ElevationPivot>k__BackingField: {fileID: 3615077630076583751}
   params: {fileID: 11400000, guid: 71d1f9062f35ef64bbf3d90a306d2b79, type: 2}

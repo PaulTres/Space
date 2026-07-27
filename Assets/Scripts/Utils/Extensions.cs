@@ -24,12 +24,13 @@ namespace Utilities
             PoolableEffect.Spawn(effect, parent, scaleFactor * Vector3.one);
         }
 
-        #region IObject
+        #region IObject      
         public static bool NotNullAndActive(this IObject @object, bool allowDying = false)
         {
             if (@object == null) return false;
             if (@object is Unit unityObj) return unityObj != null &&
                     @object.Transform.gameObject.activeSelf && (allowDying || !unityObj.IsDying);
+            if (@object is Object obj) return obj != null && @object.Transform.gameObject.activeSelf;
             return @object != null && @object.Transform.gameObject.activeSelf;
         }
 

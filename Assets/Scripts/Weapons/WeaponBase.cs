@@ -8,7 +8,7 @@ namespace Weapons
         #region Utils   
         protected Unit unit;
         /// <summary>
-        /// The unit that owns this weapon. Lazily initialized by searching for a Unit 
+        /// The unit that owns this Weapon. Lazily initialized by searching for a Unit 
         /// component in the root of the transform hierarchy.
         /// </summary>
         public Unit Unit
@@ -35,7 +35,7 @@ namespace Weapons
         #region Setup
         protected virtual void Awake()
         {
-            Debug.Assert(@params != null, $"{transform} has no weapon parameters!");
+            Debug.Assert(@params != null, $"{transform} has no Weapon parameters!");
             Debug.Assert(@params.MaxShotCooldown >= 0, $"{transform} has negative cooldown!");
             Debug.Assert((!shootPoints.IsEmpty() && shootPoints[0] != null), $"{transform} has invalid shoot points!");
             shotTimer = new(@params.MaxShotCooldown);
@@ -64,7 +64,7 @@ namespace Weapons
 
         #region Functionality
         /// <summary>
-        /// Increases weapon rate of fire.
+        /// Increases Weapon rate of fire.
         /// </summary>
         /// <param name="deltaTime"></param>
         public virtual void IncreaseReadiness(float deltaTime)
@@ -74,7 +74,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Decreases weapon rate of fire.
+        /// Decreases Weapon rate of fire.
         /// </summary>
         /// <param name="deltaTime"></param>
         public virtual void DecreaseReadiness(float deltaTime)
@@ -84,7 +84,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Checks if the weapon can shoot by using the shot cooldown timer.
+        /// Checks if the Weapon can shoot by using the shot cooldown timer.
         /// </summary>
         /// <returns></returns>
         public virtual bool CanShoot()
@@ -93,11 +93,11 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Returns true if the weapon can shoot and fires a bullet at the target. 
+        /// Returns true if the Weapon can shoot and fires a bullet at the target. 
         /// Resets the shot cooldown timer.
         /// </summary>
         /// <param name="target">The target to shoot at.</param>
-        /// <returns>True if the weapon successfully fired a shot, false otherwise.</returns>
+        /// <returns>True if the Weapon successfully fired a shot, false otherwise.</returns>
         public bool Shoot(IObject target)
         {
             if (!CanShoot()) return false;
@@ -119,7 +119,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Assign the bullet to the weapon's owner and increase the owner's signature. 
+        /// Assign the bullet to the Weapon's owner and increase the owner's signature. 
         /// Then activate the bullet.
         /// </summary>
         /// <param name="bullet">The bullet to be processed.</param>

@@ -48,6 +48,7 @@ public static class GameManager
     public static void NewGame()
     {
         currentSave = new(0);
+        currentSave.Save();
         LoadLobby();
     }
 

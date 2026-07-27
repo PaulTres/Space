@@ -1,5 +1,6 @@
 using EventBus;
 using System;
+using Timers;
 using UnityEngine;
 using Utilities;
 
@@ -8,11 +9,6 @@ namespace HP
     public class HPComponent : MonoBehaviour, IResettable
     {
         [SerializeField] protected float maxHP = 10;
-        [field: SerializeField] public float CurrentHP { get; protected set; }
-        protected Transform tr;
-        [SerializeField] protected bool sendEventOnDamage = false;
-        public event Action OnDamageTaken = delegate { };
-
         public float MaxHP
         {
             get => maxHP;
@@ -26,36 +22,66 @@ namespace HP
                 maxHP = value;
             }
         }
-
+        protected Transform tr;
         public Transform Transform
         {
             get
             {
                 if (tr == null)
                 {
-                    tr = GetComponent<Transform>();
+                    tr = transform;
                 }
                 return tr;
+            }
+        }
+        [SerializeField] protected bool sendEventOnHPChange = false;
+        public event Action OnDamageTaken = delegate { };
+        [Tooltip("If the ship is not damaged for some time, it will recover health up to this threshold.")]
+        [SerializeField] protected float minHP = 0;
+        [Tooltip("The time it takes for min hp regain to kick in.")]
+        [SerializeField] protected float minHPRegainCooldown = 5;
+        protected float currentHP;
+        public float CurrentHP
+        {
+            get => currentHP;
+            set
+            {
+                value = Mathf.Clamp(value, 0, MaxHP);
+                if (currentHP != value)
+                {
+                    if (sendEventOnHPChange)
+                    {
+                        OnDamageTaken?.Invoke();
+                        EventBus<ObjectHPChanged>.Raise(Transform.GetInstanceID(),
+                            new ObjectHPChanged(CurrentHP,
+                            CurrentHP / (MaxHP + float.Epsilon)));
+                    }
+                    currentHP = value;
+                }
+            }
+        }
+        protected CountdownTimer hpRegainTimer;
+
+        #region Setup
+        protected virtual void Awake()
+        {
+            if (!EventBus<DamageInfo>.AddActions(transform.root.GetInstanceID(), TakeDamage))
+            {
+                Debug.LogWarning($"{Transform} unable to add DamageInfo actions to event bus binding.");
+            }
+            if (minHP > 0)
+            {
+                hpRegainTimer = new(minHPRegainCooldown);
+                hpRegainTimer.OnTimerStop += () =>
+                {
+                    if (currentHP < minHP) currentHP = minHP;
+                };
             }
         }
 
         public void PerformReset()
         {
             CurrentHP = MaxHP;
-        }
-
-        protected virtual void Awake()
-        {
-            tr = transform;
-            if (!EventBus<DamageInfo>.AddActions(transform.root.GetInstanceID(), TakeDamage))
-            {
-                Debug.LogWarning($"{Transform} unable to add DamageInfo actions to event bus binding.");
-            }
-        }
-
-        public static bool TakeDamage(Transform transform, DamageInfo damageInfo)
-        {
-            return EventBus<DamageInfo>.Raise(transform.GetInstanceID(), damageInfo);
         }
 
         protected void OnEnable()
@@ -68,6 +94,18 @@ namespace HP
             OnDamageTaken = delegate { };
         }
 
+        protected void OnDestroy()
+        {
+            hpRegainTimer?.Dispose();
+            EventBus<DamageInfo>.RemoveBinding(transform.root.GetInstanceID());
+        }
+        #endregion
+
+        public static bool TakeDamage(Transform transform, DamageInfo damageInfo)
+        {
+            return EventBus<DamageInfo>.Raise(transform.GetInstanceID(), damageInfo);
+        }
+
         public void TakeDamage(DamageInfo damageInfo)
         {
             if (damageInfo.Source.GetTeam(throwOnNullTransform: false) == transform.root.GetTeam())
@@ -77,23 +115,17 @@ namespace HP
             }
             //Debug.Log(damageInfo.Amount);
             CurrentHP -= damageInfo.Amount;
-            if (sendEventOnDamage)
-            {
-                EventBus<ObjectDamaged>.Raise(Transform.GetInstanceID(), new
-                    ObjectDamaged(CurrentHP, CurrentHP / (MaxHP + float.Epsilon)));
-                OnDamageTaken?.Invoke();
-            }
             if (CurrentHP <= 0)
             {
                 ObjectDestroyed @event = new(Transform, damageInfo.Source);
                 GameManager.UnitsDestroyed.Add(@event);
                 EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
             }
-        }
-
-        protected void OnDestroy()
-        {
-            EventBus<DamageInfo>.RemoveBinding(transform.root.GetInstanceID());
+            else if (currentHP < minHP)
+            {
+                //begin hp regain timer
+                hpRegainTimer.Start();
+            }
         }
     }
 }

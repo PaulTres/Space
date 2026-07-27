@@ -214,7 +214,6 @@ MonoBehaviour:
   forwardThrust: 3
   <RotationSpeed>k__BackingField: 20
   strafeThrust: 1
-  targetSystem: {fileID: 4150000249197244867}
   inputReader: {fileID: 11400000, guid: cc53166efb1d065419956e281515f266, type: 2}
   shipBody: {fileID: 6981843385956805702}
   cam: {fileID: 8304033343323657214}
@@ -224,6 +223,8 @@ MonoBehaviour:
   xSens: 10
   ySens: 10
   zSens: 10
+  targetSystem: {fileID: 4150000249197244867}
+  missionFailureScreenPrefab: {fileID: 3564781924928465574, guid: 01e313aa3a2e5b24d87c6332bfd75666, type: 3}
 --- !u!114 &8032434638253165816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  maxHP: 10
-  <CurrentHP>k__BackingField: 0
-  sendEventOnDamage: 1
+  maxHP: 1
+  sendEventOnHPChange: 0
+  minHP: 0
+  minHPRegainCooldown: 5
 --- !u!198 &8531889017233049811
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5241,7 +5243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   CurrentTargetScoreMultiplier: 2
-  weapon: {fileID: 5948014988345652913}
+  <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 8059394233922350034}
   <ElevationPivot>k__BackingField: {fileID: 1951445744599764571}
   params: {fileID: 11400000, guid: f461a4c5eb2f8eb4cbc57484e93562a8, type: 2}
@@ -5739,7 +5741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   CurrentTargetScoreMultiplier: 2
-  weapon: {fileID: 5218034772945713764}
+  <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 5551266451572612914}
   <ElevationPivot>k__BackingField: {fileID: 7697430285382936744}
   params: {fileID: 11400000, guid: f461a4c5eb2f8eb4cbc57484e93562a8, type: 2}

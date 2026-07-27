@@ -11,18 +11,18 @@ namespace Player
         {
             base.Awake();
             healthBar.fillAmount = 1;
-            EventBus<ObjectDamaged>.AddActions(transform.root.GetInstanceID(), 
+            EventBus<ObjectHPChanged>.AddActions(transform.root.GetInstanceID(), 
                 UpdateHealthBar);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            EventBus<ObjectDamaged>.RemoveActions(transform.root.GetInstanceID(), 
+            EventBus<ObjectHPChanged>.RemoveActions(transform.root.GetInstanceID(), 
                 UpdateHealthBar);
         }
 
-        protected void UpdateHealthBar(ObjectDamaged @event)
+        protected void UpdateHealthBar(ObjectHPChanged @event)
         {
             healthBar.fillAmount =Mathf.Max(0,@event.CurrentHPPercentage);
         }

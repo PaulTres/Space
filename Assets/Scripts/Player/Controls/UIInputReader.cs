@@ -8,6 +8,7 @@ namespace Player
     {
         public event UnityAction OnEscapeEvent = delegate { };
         public PlayerControls inputActions;
+
         public void EnablePlayerActions()
         {
             inputActions ??= new PlayerControls();

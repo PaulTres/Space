@@ -62,6 +62,7 @@ public class BanditTree : BT, IRegisterableComponent
     protected override void SetupBlackboard()
     {
         Blackboard.SetData(Blackboard.Keys.Fleeing, false);
+        Blackboard.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
         Blackboard.SetData(Blackboard.Keys.Launchers, missileLaunchers);
         Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
         Blackboard.SetData(Blackboard.Keys.PDTurrets, pointDefenseTurrets);

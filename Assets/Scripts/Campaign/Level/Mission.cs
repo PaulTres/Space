@@ -65,7 +65,10 @@ public abstract class Mission : ScriptableObject
     public virtual void OnAllEnemiesDestroyed()
     {
         //Debug.Log("enemies destroyed");
-        UISystem.ShowText(new(Vector3.zero, 5, "Victory!", Color.green));
-        EndMission();
+        if (GameManager.Player != null)
+        {
+            UISystem.ShowText(new(Vector3.zero, 5, "Victory!", Color.green));
+            EndMission();
+        }
     }
 }

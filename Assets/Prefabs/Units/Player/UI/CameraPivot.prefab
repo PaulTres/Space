@@ -84,8 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59a6f4c667502d48b79053fb27e491d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.HUD
+  inputReader: {fileID: 11400000, guid: b44ba8df712ee83499feb9dff7f9b917, type: 2}
   textParent: {fileID: 3089513961058513832}
   widgetPrefab: {fileID: 5829202150402400054, guid: ec0cbf08acbf8494ca604df770e6e0a1, type: 3}
+  pauseMenu: {fileID: 7956176956115542087}
   healthBar: {fileID: 7519591301086121730}
 --- !u!1 &122630562925509492
 GameObject:
