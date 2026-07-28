@@ -36,7 +36,7 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <summary>
     /// Used to check for missiles in the vicinity of the unit.
     /// </summary>
-    [SerializeField] protected float tickInterval = 0.5f;
+    [SerializeField] protected float tickInterval = 0.1f;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     #endregion
@@ -144,7 +144,7 @@ public abstract class Unit : MonoBehaviour, IObject
         }
     }
     protected Collider[] missileBuffer;
-    protected int missileCount;
+    protected int missileCount = 0;
     #endregion
     #endregion
 
@@ -162,8 +162,9 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void OnEnable()
     {
         IsDying = false;
-        tickCoroutine = StartCoroutine(Tick());
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
+        missileCount = 0;
+        tickCoroutine = StartCoroutine(Tick());
         Signature = MinimumSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
@@ -189,7 +190,7 @@ public abstract class Unit : MonoBehaviour, IObject
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         this.UnregisterForRadar();
         UnitManager.Unregister(this);
-        if (IsDying) effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
+        if (IsDying && !effectDuringDeath.isPlaying) effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
         missileBuffer = null;
     }
 
@@ -210,16 +211,21 @@ public abstract class Unit : MonoBehaviour, IObject
     /// <returns></returns>
     protected IEnumerator Tick()
     {
-        yield return wait;
-        GetSurroundingMissiles();
-        onTick?.Invoke();
-        DecreaseSignature(tickInterval);
+        while (true)
+        {
+            yield return wait;
+            GetSurroundingMissiles();
+            onTick?.Invoke();
+            DecreaseSignature(tickInterval);
+        }
     }
 
     protected virtual void GetSurroundingMissiles()
     {
-        missileCount = Physics.OverlapSphereNonAlloc(Transform.position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(gameObject.layer));
+        missileCount = Physics.OverlapSphereNonAlloc(Position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(Team));
+        //Debug.Log(missileCount);
     }
+
 
     public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
 

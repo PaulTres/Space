@@ -123,7 +123,6 @@ public class GlobalConfig : ScriptableObject
     /// How many seconds to wait between ending the mission and loading the end mission screen.
     /// </summary>
     public static readonly float MissionEndDuration = 7;
-    public static readonly float ParticleSystemLifetimeCheckInterval = 1;
     public static readonly int MainMenuSceneIndex = 1, MissionSceneIndex = 3, EndMissionSceneIndex = 4, LobbySceneIndex = 2;
     #endregion
 
@@ -131,16 +130,13 @@ public class GlobalConfig : ScriptableObject
     /// <summary>
     /// Returns the layer mask that an object should use to check for enemy bullets.
     /// </summary>
-    /// <param name="checkerLayer"></param>
+    /// <param name="checkerTeam"></param>
     /// <returns></returns>
-    public static LayerMask GetEnemyBulletsCheckMask(int checkerLayer)
+    public static LayerMask GetEnemyBulletsCheckMask(int checkerTeam)
     {
-        return checkerLayer switch
-        {
-            6 => 1 << 9 | 1 << 10,
-            8 => 1 << 7 | 1 << 10,
-            _ => 1 << 10 | 1 << 7 | 1 << 9
-        };
+        if (checkerTeam == PlayerTeam) return 1 << 9 | 1 << 10;
+        if (checkerTeam == EnemyTeam) return 1 << 7 | 1 << 10;
+        return 1 << 10 | 1 << 7 | 1 << 9;
     }
 
     /// <summary>

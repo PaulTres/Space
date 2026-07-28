@@ -24,7 +24,7 @@ namespace Weapons
                 }
             }
         }
-        public bool TargetMissiles { get; set; }
+        public bool TargetMissiles => @params.TargetMissiles;
         protected IObject currentTarget;
         public IObject Target
         {
@@ -64,7 +64,6 @@ namespace Weapons
         {
             CeaseFire = false;
             Target = null;
-            TargetMissiles = @params.TargetMissiles;
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(Tick);
         }
         protected virtual void OnDisable()
@@ -160,6 +159,7 @@ namespace Weapons
             if (TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
+                //Debug.Log(count);
                 if (count > 0)
                 {
                     var currentM = Target.NotNullAndActive() ? Target as Missile : null;

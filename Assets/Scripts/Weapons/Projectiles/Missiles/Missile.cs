@@ -28,7 +28,7 @@ namespace Weapons
         protected float initialTracking, maxTargetSignature, maxTelemetryBonus;
         public int Index { get; set; }
         protected HPComponent hpComponent;
-        [field: SerializeField] public float EffectiveTracking { get; protected set; }
+        public float EffectiveTracking { get; protected set; }
         protected PoolableEffect onDeathEffect;
         public override float TopSpeed => topSpeed * (1 + telemetryBonus);
         protected float telemetryBonus = 0;

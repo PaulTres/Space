@@ -7,7 +7,7 @@ namespace Weapons
     public class BulletData : MonoPoolableData<Bullet.Type, Bullet>
     {
         public bool DisableOnHit = true;
-        public int Damage = 1;
+        public float Damage = 1;
         public float LifeTime = 20;
         public float EffectScaleFactor = 1;
         public Vector3 EffectScale => EffectScaleFactor * Vector3.one;

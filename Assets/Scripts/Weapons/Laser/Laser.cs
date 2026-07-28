@@ -8,6 +8,7 @@ namespace Weapons
         protected float range = 100;
         public Transform Target { get; set; }
         protected LineRenderer lineRenderer;
+
         public override void Initialize(BulletData poolableData)
         {
             base.Initialize(poolableData);
@@ -23,6 +24,7 @@ namespace Weapons
             lineRenderer.endWidth = laserData.Width;
             range = laserData.Range;
         }
+
         protected override void OnEnable()
         {
             base.OnEnable();
