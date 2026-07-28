@@ -217,8 +217,17 @@ public class GlobalConfig : ScriptableObject
         { 6,1 },{7,1 }, {8,2 },{ 9,2 },{10,10},{0,0}
     };
 
+    /// <summary>
+    /// 0
+    /// </summary>
     public static int NeutralTeam = 0;
+    /// <summary>
+    /// 1
+    /// </summary>
     public static int PlayerTeam => 1;
+    /// <summary>
+    /// 2
+    /// </summary>
     public static int EnemyTeam => 2;
 
     public static int GetTeam(int objectLayer)

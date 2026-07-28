@@ -54,7 +54,7 @@ MonoBehaviour:
   missileIcon: {fileID: 21300000, guid: 23cf7d7bddf37064ea949fd62312efba, type: 3}
   boundingBoxParent: {fileID: 5024718599936986434}
   minScale: 0.1
-  maxScale: 3
+  maxScale: 1
   enemyMaterial: {fileID: 2100000, guid: 4c12b181dc852f44898523389ac017ca, type: 2}
   enemyTransluscentMaterial: {fileID: 2100000, guid: 780239fc38a6a27499f9487b9a5bf0e4, type: 2}
   allyMaterial: {fileID: 2100000, guid: 28a08df58f98140499d127a8175cc29d, type: 2}
@@ -6804,6 +6804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3503bee570cc1f9409132254bf868d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.VideoSettingsMenu
+  fovSlider: {fileID: 0}
+  fovText: {fileID: 0}
   qualityText: {fileID: 5734963750130588586}
   vSyncToggle: {fileID: 3544801381054066090}
   fullscreenToggle: {fileID: 2121549302953187028}

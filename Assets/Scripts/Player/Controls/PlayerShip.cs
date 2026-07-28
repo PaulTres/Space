@@ -15,6 +15,10 @@ namespace Player
         [SerializeField] protected Transform freelookCamPivot;
         [SerializeField] protected Transform camPivot;
         [SerializeField] protected float zoomSpeed = 1;
+        [Range(-100, 0)]
+        [SerializeField] protected float minZoom = -10;
+        [Range(0, 50)]
+        [SerializeField] protected float maxZoom = 5;
         [SerializeField] protected float xSens = 10;
         [SerializeField] protected float ySens = 10;
         [SerializeField] protected float zSens = 10;
@@ -128,7 +132,7 @@ namespace Player
         protected void OnZoom(float zoom)
         {
             cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y,
-                cam.localPosition.z + zoom * zoomSpeed);
+               Mathf.Clamp(cam.localPosition.z + zoom * zoomSpeed, minZoom, maxZoom));
         }
 
         protected void OnResetCamera()

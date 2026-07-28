@@ -27,7 +27,7 @@ namespace Weapons
         #endregion
 
         #region Weapon parameters
-        [SerializeField] protected WeaponParameters @params;
+        [SerializeField] protected WeaponData @params;
         [SerializeField] protected Transform[] shootPoints;
         public BulletData BulletData => @params != null ? @params.BulletData : null;
         #endregion

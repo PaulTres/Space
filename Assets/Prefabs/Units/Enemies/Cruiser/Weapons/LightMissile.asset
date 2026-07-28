@@ -18,36 +18,18 @@ MonoBehaviour:
   DisableOnHit: 1
   Damage: 1
   LifeTime: 20
-  SoundData:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0
-  TopSpeed: 20
-  Acceleration: 3
-  InitialVelocity: 10
+  EffectScaleFactor: 1
+  OnSpawnEffect: {fileID: 985664761693772524, guid: 57485f16f0edf1d4385b2ab98ded1192, type: 3}
+  OnHitEffect: {fileID: 0}
+  TopSpeed: 30
+  Acceleration: 5
+  InitialVelocity: 1
+  InertialDampeners: 1
   Scale: {x: 0.05, y: 0.05, z: 0.05}
-  Tracking: 1
+  RendererMaterial: {fileID: 2100000, guid: bd47b6b57adc5304b8ed3af152c43b68, type: 2}
+  Tracking: 10
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 1
-  RendererMaterial: {fileID: 2100000, guid: bd47b6b57adc5304b8ed3af152c43b68, type: 2}
-  Effect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
+  OnDeathEffect: {fileID: 0}
+  ShowOnRadar: 0

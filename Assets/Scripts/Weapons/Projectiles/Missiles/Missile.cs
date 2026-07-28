@@ -21,19 +21,18 @@ namespace Weapons
             {
                 if (target != value)
                 {
-                    if (target != null) MissileManager.Unregister(this);
                     target = value;
-                    if (target != null) MissileManager.Register(this);
                 }
             }
         }
         protected float initialTracking, maxTargetSignature, maxTelemetryBonus;
         public int Index { get; set; }
         protected HPComponent hpComponent;
-        public float EffectiveTracking { get; protected set; }
+        [field: SerializeField] public float EffectiveTracking { get; protected set; }
         protected PoolableEffect onDeathEffect;
         public override float TopSpeed => topSpeed * (1 + telemetryBonus);
-        protected float telemetryBonus;
+        protected float telemetryBonus = 0;
+        protected bool showOnRadar = false;
         #endregion
 
         #region Setup
@@ -48,7 +47,7 @@ namespace Weapons
             base.OnEnable();
             telemetryBonus = 0;
             ComponentRegister<Missile>.Register(Transform, this);
-            this.RegisterForRadar();
+            if (showOnRadar) this.RegisterForRadar();
         }
 
         protected override void OnDestroy()
@@ -60,7 +59,7 @@ namespace Weapons
         protected override void OnDisable()
         {
             Target = null;
-            ComponentRegister<Missile>.Unregister(Transform);
+            if (showOnRadar) this.UnregisterForRadar();
             base.OnDisable();
         }
 
@@ -78,6 +77,7 @@ namespace Weapons
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;
             onDeathEffect = missileData.OnDeathEffect;
+            showOnRadar = missileData.ShowOnRadar;
         }
         #endregion
 
@@ -97,8 +97,8 @@ namespace Weapons
                 return;
             }
 
-            EffectiveTracking = initialTracking * (1 + telemetryBonus) *
-                Mathf.Min(1, target.Signature / maxTargetSignature);
+            EffectiveTracking = initialTracking * (1 + telemetryBonus) * (1 +
+                Mathf.Min(1, target.Signature / (maxTargetSignature + Mathf.Epsilon)));
         }
 
         /// <summary>
@@ -107,17 +107,14 @@ namespace Weapons
         /// <param name="dt"></param>
         protected override void RestOfPerformUpdate(float dt)
         {
-            if (target != null && target.Transform.gameObject.activeInHierarchy == false)
-            {
-                Target = null;
-                EffectiveTracking = 0;
-            }
-            if (Target != null)
+            if (Target.NotNullAndActive())
             {
                 telemetryBonus = Telemetry();
                 CalculateEffectiveTracking();
 
                 Vector3 directionToTarget = (Target.Transform.position - tr.position).normalized;
+
+                //Quaternion newRotation = Quaternion.RotateTowards(tr.rotation, Quaternion.l)
                 Vector3 newDirection = Vector3.RotateTowards(tr.forward, directionToTarget,
                     EffectiveTracking * dt, 0);
 

@@ -40,10 +40,15 @@ public class HandmadeBattle : Mission
                 enemyPoints -= choice.Points;
             }
             else choice = spawner.SpawnUnit(int.MaxValue);
+
             var pos = spawner.SpawnPosition + Random.insideUnitSphere *
                 spawner.SpawnRadius;
-            choice.CreateInstance().Transform.SetPositionAndRotation(pos,
-                Quaternion.Euler(spawner.SpawnRotation));
+            var unit = choice.CreateInstance();
+            unit.Team = spawner.Team;
+            //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
+            unit.Transform.SetPositionAndRotation(pos, Quaternion.
+                Euler(spawner.SpawnRotation));
+            unit.gameObject.SetActive(true);
         }
     }
 }

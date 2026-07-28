@@ -28,7 +28,7 @@ public abstract class Unit : MonoBehaviour, IObject
     /// </summary>
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
-    [field: SerializeField] public List<Turret> Turrets { get; protected set; } = new();
+    public List<Turret> Turrets { get; protected set; }
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
     /// </summary>
@@ -152,7 +152,7 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void Awake()
     {
         MaxSignature = Mathf.Max(MaxSignature, MinimumSignature);
-        Turrets ??= new(GetComponentsInChildren<Turret>());
+        Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(tickInterval);
         ComponentRegister<Unit>.Register(Transform, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;

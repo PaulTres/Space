@@ -5,7 +5,7 @@ namespace Weapons
     [RequireComponent(typeof(LineRenderer))]
     public class Laser : Bullet
     {
-        protected float range = 10;
+        protected float range = 100;
         public Transform Target { get; set; }
         protected LineRenderer lineRenderer;
         public override void Initialize(BulletData poolableData)

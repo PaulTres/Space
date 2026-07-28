@@ -49,13 +49,15 @@ public class BroadsideFacingRotation : RotationTarget
     {
         TargetKey = targetKey;
     }
+
     public override Quaternion GetTargetRotation(Transform unit)
     {
         var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
-        if (tr == null) return unit.rotation;
+        if (tr == null) return Quaternion.LookRotation(unit.forward, unit.up);
         var dir = tr.Position - unit.position;
-        var upDir = dir.Perpendicular();
-        var forward = Vector3.Cross(upDir, dir).normalized;
+        var forward = Vector3.ProjectOnPlane(unit.forward, dir.normalized).normalized;
+        if (forward.magnitude == 0) forward = unit.right;
+        var upDir = Vector3.Cross(dir.normalized, forward);
         return Quaternion.LookRotation(forward, upDir);
     }
 }

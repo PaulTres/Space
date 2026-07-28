@@ -1,5 +1,4 @@
 using UnityEngine;
-using Utilities;
 namespace Weapons
 {
     public class Projectile : Bullet, IObject
@@ -28,6 +27,7 @@ namespace Weapons
             set => targetedCount = Mathf.Max(value, 0);
         }
         protected TrailRenderer trailRenderer;
+        protected bool inertialDampeners = true;
         #endregion
 
         #region Setup
@@ -61,6 +61,7 @@ namespace Weapons
                 trailRenderer.endWidth = 0;
                 trailRenderer.time = 1;
             }
+            inertialDampeners = data.InertialDampeners;
         }
 
         protected override void OnEnable()
@@ -75,12 +76,6 @@ namespace Weapons
             collisionMask = GlobalConfig.GetBulletCollisionMask(gameObject.layer);
 
             angularVelocity = Vector3.zero;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            this.UnregisterForRadar();
         }
         #endregion
 
@@ -98,6 +93,10 @@ namespace Weapons
         protected virtual void RestOfPerformUpdate(float dt)
         {
             linearVelocity += acceleration * dt * tr.forward;
+            if (inertialDampeners)
+            {
+                linearVelocity = Vector3.Project(linearVelocity, tr.forward);
+            }
             linearVelocity = Vector3.ClampMagnitude(linearVelocity, TopSpeed);
             tr.position += dt * linearVelocity;
         }

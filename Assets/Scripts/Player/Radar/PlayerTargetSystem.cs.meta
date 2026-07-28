@@ -1,2 +1,25 @@
 fileFormatVersion: 2
 guid: c62361e28bae0574999a1e394b764929
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - cam: {instanceID: 0}
+  - boundingBoxPrefab: {fileID: 5340728449833994343, guid: d1affc83db3e08d48a5b7653ca7ce480, type: 3}
+  - unitIcon: {fileID: 21300000, guid: 1ba7cb21136c5e94e962def2c2de2cca, type: 3}
+  - missileIcon: {fileID: 21300000, guid: 51c940ca5fc2e94439d21a37b4578b60, type: 3}
+  - boundingBoxParent: {instanceID: 0}
+  - enemyMaterial: {fileID: 2100000, guid: 4c12b181dc852f44898523389ac017ca, type: 2}
+  - enemyTransluscentMaterial: {fileID: 2100000, guid: 780239fc38a6a27499f9487b9a5bf0e4, type: 2}
+  - allyMaterial: {fileID: 2100000, guid: 28a08df58f98140499d127a8175cc29d, type: 2}
+  - allyTransluscentMaterial: {fileID: 2100000, guid: 15ec579b1029c094ebd2b43beecd0f27, type: 2}
+  - neutralMaterial: {fileID: 2100000, guid: 0893b4ad08bbeab4aa324463cf41716b, type: 2}
+  - neutralTransluscentMaterial: {fileID: 2100000, guid: ee3377a12211a5542b4fd190fcbd82de, type: 2}
+  - secondView: {instanceID: 0}
+  - secondViewCamera: {instanceID: 0}
+  - targetInfoText: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

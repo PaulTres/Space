@@ -8,23 +8,47 @@ namespace Utilities
 {
     public static class Extensions
     {
+        #region Unit
         public static float GetMoraleWeight(this Unit unit)
         {
             if (unit == null) return 0;
             return 0;
         }
 
+        /// <summary>
+        /// Returns true if the distance between a unit and its target is less 
+        /// than the unit's scan range + the target's signature.
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static bool InOptimalFiringRange(this Unit unit, IObject target)
         {
             if (unit == null) return false;
-            return Vector3.Distance(unit.Position, target.Position) <= unit.ScanRange + target.Signature;
+            return Vector3.Distance(unit.Position, target.Position) <=
+                unit.ScanRange + target.Signature;
         }
 
+        /// <summary>
+        /// Returns true if the distance between a unit and a position is less 
+        /// than the unit's scan range + the provided signature.
+        /// </summary>
+        /// <param name="unit"></param>
+        /// <param name="targetPosition"></param>
+        /// <param name="targetSignature"></param>
+        /// <returns></returns>
         public static bool InOptimalFiringRange(this Unit unit, Vector3 targetPosition, float targetSignature)
         {
             if (unit == null) return false;
-            return Vector3.Distance(targetPosition, unit.Position) <= unit.ScanRange + targetSignature;
+            return Vector3.Distance(targetPosition, unit.Position) <=
+                unit.ScanRange + targetSignature;
         }
+
+        public static bool Active(this Unit unit, bool acceptDying = false)
+        {
+            return unit != null && unit.gameObject.activeSelf && (acceptDying || !unit.IsDying);
+        }
+        #endregion
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {

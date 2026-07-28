@@ -49,11 +49,14 @@ public class BanditTree : BT, IRegisterableComponent
         }
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
+    }
     protected virtual void OnDestroy()
     {
-        Blackboard.Clear();
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Blackboard.Unit), null, Pause);
-        EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Unregister(transform);
     }
 
@@ -63,7 +66,9 @@ public class BanditTree : BT, IRegisterableComponent
     {
         Blackboard.SetData(Blackboard.Keys.Fleeing, false);
         Blackboard.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
+        //Debug.Log(missileLaunchers.Count);
         Blackboard.SetData(Blackboard.Keys.Launchers, missileLaunchers);
+        //Debug.Log(Blackboard.GetData<List<MissileLauncher>>(Blackboard.Keys.Launchers) == null);
         Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
         Blackboard.SetData(Blackboard.Keys.PDTurrets, pointDefenseTurrets);
         Blackboard.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);

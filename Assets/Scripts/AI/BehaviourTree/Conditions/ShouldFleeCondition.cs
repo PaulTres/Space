@@ -2,7 +2,8 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ShouldFlee", menuName = "HybridBT2/Services/ShouldFlee")]
+
+[CreateAssetMenu(fileName = "ShouldFlee", menuName = "HybridBT2/Conditions/ShouldFlee")]
 public class ShouldFleeCondition : ConditionData
 {
     public override Func<Node, Blackboard, bool> Function => (n, ctx) =>
@@ -11,14 +12,14 @@ public class ShouldFleeCondition : ConditionData
         if (isFleeing)
         {
             return ctx.GetData<float>(Blackboard.Keys.Morale) <=
-            GlobalConfig.MoraleRecoverThreshold *
-            ctx.GetData<float>(Blackboard.Keys.DefaultMorale);
+                GlobalConfig.MoraleRecoverThreshold *
+                ctx.GetData<float>(Blackboard.Keys.DefaultMorale);
         }
         else
         {
             return ctx.GetData<float>(Blackboard.Keys.Morale) <=
-            GlobalConfig.MoraleFleeThreshold *
-            ctx.GetData<float>(Blackboard.Keys.DefaultMorale);
+                GlobalConfig.MoraleFleeThreshold *
+                ctx.GetData<float>(Blackboard.Keys.DefaultMorale);
         }
     };
 }

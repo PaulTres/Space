@@ -7,6 +7,7 @@ namespace Weapons
     {
         public float Tracking, MaxTargetSignature, MaxTelemetryBonus = 0.7f, HP = 1;
         public PoolableEffect OnDeathEffect;
+        public bool ShowOnRadar = false;
 
         protected override void OnValidate()
         {

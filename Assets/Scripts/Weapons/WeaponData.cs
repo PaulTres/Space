@@ -4,9 +4,9 @@ namespace Weapons
     /// <summary>
     /// Parameters of a Weapon.
     /// </summary>
-    [CreateAssetMenu(menuName = "Weapons/WeaponParameters", fileName = "WeaponParameters")]
+    [CreateAssetMenu(menuName = "Weapons/WeaponData", fileName = "WeaponData")]
     [System.Serializable]
-    public class WeaponParameters : ScriptableObject
+    public class WeaponData : ScriptableObject
     {
         [Tooltip("Maximum cooldown between shots. The shot cooldown starts at this value.")]
         public float MaxShotCooldown = 5;

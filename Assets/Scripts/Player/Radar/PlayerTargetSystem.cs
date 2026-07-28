@@ -138,7 +138,8 @@ namespace Radar
                 #endregion
 
                 #region Distance text
-                bbox.DistanceText.text = distance.ToString();
+                if (distance < 10) bbox.DistanceText.text = distance.ToString("#.##");
+                else bbox.DistanceText.text = ((int)distance).ToString();
                 if (distance <= owner.ScanRange + target.Signature)
                 {
                     bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;

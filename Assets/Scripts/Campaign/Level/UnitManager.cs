@@ -42,6 +42,7 @@ public static class UnitManager
         {
             ships[team] = new();
         }
+        //Debug.Log($"{ship.Transform} registered on team {team}.");
         ships[team].Add(ship);
         ship.SetObjectLayer(GlobalConfig.GetShipLayer(team));
         //ship.gameObject.layer = GlobalConfig.GetShipLayer(team);

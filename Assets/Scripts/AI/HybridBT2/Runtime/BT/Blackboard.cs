@@ -40,7 +40,6 @@ namespace HybridBT2
 
         public void PerformReset()
         {
-            data.Clear();
             lastTime = Time.time;
             DeltaTime = 0;
         }
@@ -57,7 +56,12 @@ namespace HybridBT2
 
         public R GetData<R>(Keys key)
         {
-            return data.TryGetValue(key, out var value) ? (R)value : default;
+            if (data.TryGetValue(key, out var value))
+            {
+                return (R)value;
+            }
+            //Debug.LogError("Cannot find data for key " + key.ToString());
+            return default;
         }
     }
 }
