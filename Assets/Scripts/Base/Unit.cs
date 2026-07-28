@@ -258,6 +258,7 @@ public abstract class Unit : MonoBehaviour, IObject
     public virtual void Die(ObjectDestroyed @event)
     {
         //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
+        GameManager.UnitsDestroyed.Add(@event);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
         UnitManager.Unregister(this);
         EffectDuringDeath.Play();

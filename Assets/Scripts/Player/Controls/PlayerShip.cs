@@ -6,6 +6,7 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerShip : Ship
     {
+        public static Camera PlayerCamera { get; protected set; } = null;
         #region Fields
         [Header("Player controls")]
         [SerializeField] protected ControlsInputReader inputReader;
@@ -66,6 +67,7 @@ namespace Player
         protected override void Awake()
         {
             base.Awake();
+            PlayerCamera = cam.GetComponent<Camera>();
             defaultCamPos = cam.localPosition;
             if (targetSystem == null) targetSystem = GetComponentInChildren<PlayerTargetSystem>();
             inputReader.EnablePlayerActions();
@@ -74,6 +76,7 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
+            PlayerCamera.fieldOfView = GlobalConfig.FOV;
             GameManager.Player = this;
             Dampeners = true;
             FreeLook = false;
@@ -95,6 +98,7 @@ namespace Player
         protected override void OnDisable()
         {
             base.OnDisable();
+            PlayerCamera = null;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             inputReader.DisableCallbacks();

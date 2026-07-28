@@ -40,6 +40,7 @@ public class GlobalConfig : ScriptableObject
 
     #region UI
     [Header("UI")]
+    public static float FOV { get; set; } = 90;
     public static float PlayerTargetAngleWeight { get; set; } = 1;
     public static float PlayerTargetDistanceWeight { get; set; } = 1;
     public static float PlayerTargetMaxDistance { get; set; } = 100;

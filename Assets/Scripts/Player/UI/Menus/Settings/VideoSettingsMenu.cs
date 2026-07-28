@@ -6,13 +6,15 @@ namespace Player
 {
     public class VideoSettingsMenu : MonoBehaviour
     {
+        [SerializeField] protected Slider fovSlider;
+        [SerializeField] protected TextMeshProUGUI fovText;
         [SerializeField] TextMeshProUGUI qualityText;
         [SerializeField] Toggle vSyncToggle, fullscreenToggle;
         [SerializeField] TMP_Dropdown resolutionDropdown;
 
         protected Resolution[] resolutions;
 
-        public const string KeyQuality = "QualityLevel", KeyVSync = "VSync", KeyFullscreen = "Fullscreen";
+        public const string KeyQuality = "QualityLevel", KeyVSync = "VSync", KeyFullscreen = "Fullscreen", KeyFOV = "FOV";
 
         protected void OnEnable()
         {
@@ -20,11 +22,25 @@ namespace Player
             vSyncToggle.SetIsOnWithoutNotify(QualitySettings.vSyncCount > 0);
             fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
             PopulateResolutions();
+            SetupFOVSlider();
         }
 
         protected void OnDisable()
         {
             SaveVideoSettings();
+        }
+
+        protected void SetupFOVSlider()
+        {
+            fovSlider.value = GlobalConfig.FOV;
+            fovText.text = GlobalConfig.FOV.ToString();
+        }
+
+        public void SetFOV(float value)
+        {
+            GlobalConfig.FOV = value;
+            fovText.text = value.ToString();
+            if (PlayerShip.PlayerCamera != null) PlayerShip.PlayerCamera.fieldOfView = value;
         }
 
         protected void UpdateQualityText()
@@ -33,13 +49,13 @@ namespace Player
             qualityText.text = QualitySettings.names[q];
         }
 
-        public void IncreaseLevel()
+        public void IncreaseQualityLevel()
         {
             QualitySettings.IncreaseLevel(true);
             UpdateQualityText();
         }
 
-        public void DecreaseLevel()
+        public void DecreaseQualityLevel()
         {
             QualitySettings.DecreaseLevel(true);
             UpdateQualityText();
@@ -80,6 +96,7 @@ namespace Player
             PlayerPrefs.SetInt(KeyQuality, QualitySettings.GetQualityLevel());
             PlayerPrefs.SetInt(KeyVSync, QualitySettings.vSyncCount);
             PlayerPrefs.SetInt(KeyFullscreen, Screen.fullScreen ? 1 : 0);
+            PlayerPrefs.SetFloat(KeyFOV, GlobalConfig.FOV);
             PlayerPrefs.Save();
         }
 
@@ -90,6 +107,7 @@ namespace Player
                 QualitySettings.names.Length - 1), true);
             QualitySettings.vSyncCount = PlayerPrefs.GetInt(KeyVSync, 0);
             Screen.fullScreen = PlayerPrefs.GetInt(KeyFullscreen, 1) == 1;
+            GlobalConfig.FOV = PlayerPrefs.GetFloat(KeyFOV, 90);
         }
     }
 }

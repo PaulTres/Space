@@ -48,7 +48,7 @@ namespace HP
             }
         }
         protected CountdownTimer hpRegainTimer;
-
+        protected bool firedEvent = false;
         #region Setup
         protected virtual void Awake()
         {
@@ -68,6 +68,7 @@ namespace HP
 
         public void PerformReset()
         {
+            firedEvent = false;
             CurrentHP = MaxHP;
         }
 
@@ -102,13 +103,14 @@ namespace HP
             }
             //Debug.Log(damageInfo.Amount);
             CurrentHP -= damageInfo.Amount;
-            if (CurrentHP <= 0)
+            if (CurrentHP <= 0 && !firedEvent)
             {
+                firedEvent = true;
                 ObjectDestroyed @event = new(Transform, damageInfo.Source);
-                GameManager.UnitsDestroyed.Add(@event);
                 EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
+                return;
             }
-            else if (currentHP < minHP)
+            if (currentHP < minHP)
             {
                 //begin hp regain timer
                 hpRegainTimer.Start();
