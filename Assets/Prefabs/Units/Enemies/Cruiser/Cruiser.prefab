@@ -512,7 +512,7 @@ MonoBehaviour:
   <MaxSignature>k__BackingField: 0
   signatureDecreaseRate: 0.1
   signatureDecreaseCooldown: 5
-  scanRange: 100
+  scanRange: 20
   <MaxVelocityMagnitude>k__BackingField: 10
   forwardThrust: 3
   <RotationSpeed>k__BackingField: 20

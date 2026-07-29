@@ -13,8 +13,6 @@ public class StrafeNode : LeafNodeData
 
     public TargetFacingMode TargetFacing;
     public int TicksBeforeRepath = 10;
-    public float StrafeDistance = 0;
-    public bool UseSignatureForStrafeDistance = true;
 
     protected enum InternalKeys
     {
@@ -53,8 +51,6 @@ public class StrafeNode : LeafNodeData
             ctx.SetData<IObject>(Blackboard.Keys.Target, null);
             return NodeState.FAILURE;
         }
-
-        var radius = Mathf.Max(2, UseSignatureForStrafeDistance ? StrafeDistance + target.Signature + ctx.Unit.ScanRange : StrafeDistance);
 
         var currentTicks = n.GetData<int>((int)InternalKeys.CurrentTicks);
         if (currentTicks >= TicksBeforeRepath)

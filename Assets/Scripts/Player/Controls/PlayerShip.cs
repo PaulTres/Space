@@ -224,13 +224,16 @@ namespace Player
         {
             camXAngle -= deltaTime * inputReader.LookDelta.y * xSens;
             camYAngle += deltaTime * inputReader.LookDelta.x * ySens;
-            camZAngle += deltaTime * rollInput * zSens;
 
             if (freeLook)
             {
                 freelookCamPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
             }
-            else camPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
+            else
+            {
+                camZAngle += deltaTime * rollInput * zSens;
+                camPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
+            }
         }
 
         public override void Die(ObjectDestroyed @event)
