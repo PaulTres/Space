@@ -18,7 +18,7 @@ MonoBehaviour:
   TargetMissiles: 0
   TargetUnits: 1
   MaxAngleDifference: 5
-  MaxRange: 0
+  MaxRange: 50
   RotSpeed: 60
   MinElevation: -45
   MaxElevation: 60

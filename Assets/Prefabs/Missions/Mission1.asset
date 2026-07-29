@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandmadeBattle
   <TimeLimit>k__BackingField: -1
   <Briefing>k__BackingField: No briefing exists.
-  <PlayerPoints>k__BackingField: 2147483647
+  <PlayerPoints>k__BackingField: 2147483646
   <EnemyPoints>k__BackingField: 2147483647
   playerSpawnPos: {x: 0, y: 0, z: 0}
   playerSpawnRot: {x: 0, y: 0, z: 0}

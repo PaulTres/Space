@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &691443357
+--- !u!1001 &1312110427
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -127,26 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 650544249087549402, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-    - target: {fileID: 650544249087549402, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-    - target: {fileID: 650544249087549402, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2226320924230892230, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: m_Name
       value: PoA_Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4150000249197244867, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
-      propertyPath: unitIcon
-      value: 
-      objectReference: {fileID: 21300000, guid: 51c940ca5fc2e94439d21a37b4578b60, type: 3}
     - target: {fileID: 6766837596616086251, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5214,4 +5198,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1807719004}
-  - {fileID: 691443357}
+  - {fileID: 1312110427}

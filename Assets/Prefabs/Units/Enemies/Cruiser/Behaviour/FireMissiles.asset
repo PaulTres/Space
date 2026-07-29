@@ -16,4 +16,4 @@ MonoBehaviour:
   AlwaysCheck: 1
   Conditions: []
   Services: []
-  maxRange: 1000
+  maxRange: 100

@@ -24,6 +24,7 @@ public abstract class Ship : Unit
         rb = gameObject.GetOrAddComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = false;
+        rb.freezeRotation = true;
         rb.linearDamping = 0;
     }
 
