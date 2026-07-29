@@ -16,16 +16,6 @@ namespace Weapons
         public float Signature => 0;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
-        protected int targetedCount;
-        /// <summary>
-        /// How many turrets is this targeted by. Used to prevent multiple turrets from 
-        /// shooting at the same missile.
-        /// </summary>
-        public int TargetedCount
-        {
-            get => targetedCount;
-            set => targetedCount = Mathf.Max(value, 0);
-        }
         protected TrailRenderer trailRenderer;
         protected bool inertialDampeners = true;
         #endregion
@@ -67,14 +57,11 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
-            TargetedCount = 0;
             linearVelocity = Forward * initialVelocity;
-
             if (Owner != null) gameObject.layer = GlobalConfig.
                     GetBulletLayer(Owner.gameObject.layer);
             else gameObject.layer = GlobalConfig.GetBulletLayer(0);
             collisionMask = GlobalConfig.GetBulletCollisionMask(gameObject.layer);
-
             angularVelocity = Vector3.zero;
         }
         #endregion

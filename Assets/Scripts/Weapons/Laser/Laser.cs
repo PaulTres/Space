@@ -28,8 +28,8 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
-            lineRenderer.SetPosition(0, transform.position);
-            if (Target == null) lineRenderer.SetPosition(1, transform.position + transform.forward * range);
+            lineRenderer.SetPosition(0, Transform.position);
+            if (Target == null) lineRenderer.SetPosition(1, Transform.position + Transform.forward * range);
             else
             {
                 lineRenderer.SetPosition(1, Target.position);

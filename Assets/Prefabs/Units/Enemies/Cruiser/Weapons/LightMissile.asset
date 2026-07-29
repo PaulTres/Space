@@ -30,6 +30,6 @@ MonoBehaviour:
   Tracking: 10
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
-  HP: 1
-  OnDeathEffect: {fileID: 0}
+  HP: 0.1
+  OnDeathEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
   ShowOnRadar: 0

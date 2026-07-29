@@ -30,6 +30,7 @@ namespace Weapons
         [SerializeField] protected WeaponData @params;
         [SerializeField] protected Transform[] shootPoints;
         public BulletData BulletData => @params != null ? @params.BulletData : null;
+        public float DPS => @params.BulletData.Damage * shootPoints.Length / CurrentShotCooldown;
         #endregion
 
         #region Setup

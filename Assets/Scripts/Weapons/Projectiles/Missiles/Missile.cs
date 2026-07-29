@@ -28,11 +28,31 @@ namespace Weapons
         protected float initialTracking, maxTargetSignature, maxTelemetryBonus;
         public int Index { get; set; }
         protected HPComponent hpComponent;
+        public HPComponent HPComponent
+        {
+            get
+            {
+                if (hpComponent == null) hpComponent = GetComponent<HPComponent>();
+                return hpComponent;
+            }
+        }
         public float EffectiveTracking { get; protected set; }
         protected PoolableEffect onDeathEffect;
         public override float TopSpeed => topSpeed * (1 + telemetryBonus);
         protected float telemetryBonus = 0;
         protected bool showOnRadar = false;
+        protected float targetedCount;
+        /// <summary>
+        /// How much damage is this targeted by. Used to prevent all turrets from 
+        /// shooting at the same missile. Replaced old system to account for tanky 
+        /// missiles.
+        /// </summary>
+        public float TargetedDamage
+        {
+            get => targetedCount;
+            set => targetedCount = Mathf.Max(value, 0);
+        }
+        public float MaxHP => HPComponent.MaxHP;
         #endregion
 
         #region Setup
@@ -45,6 +65,7 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
+            TargetedDamage = 0;
             telemetryBonus = 0;
             ComponentRegister<Missile>.Register(Transform, this);
             if (showOnRadar) this.RegisterForRadar();
@@ -72,8 +93,7 @@ namespace Weapons
                     $"got {poolableData.GetType()}");
             }
             initialTracking = missileData.Tracking;
-            if (hpComponent == null) hpComponent = GetComponent<HPComponent>();
-            hpComponent.MaxHP = missileData.HP;
+            HPComponent.MaxHP = missileData.HP;
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;
             onDeathEffect = missileData.OnDeathEffect;

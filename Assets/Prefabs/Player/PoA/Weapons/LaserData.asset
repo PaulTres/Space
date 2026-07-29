@@ -16,11 +16,11 @@ MonoBehaviour:
   Key: 0
   RaiseEventOnRecycle: 0
   DisableOnHit: 1
-  Damage: 1
-  LifeTime: 0.2
+  Damage: 0.1
+  LifeTime: 0.1
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 985664761693772524, guid: 57485f16f0edf1d4385b2ab98ded1192, type: 3}
   OnHitEffect: {fileID: 0}
   Color: {r: 1, g: 0.72115487, b: 0, a: 1}
   Range: 100
-  Width: 0.1
+  Width: 0.05

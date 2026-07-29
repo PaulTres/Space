@@ -4,6 +4,7 @@ using HybridBT2;
 using Radar;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 namespace Utilities
 {
     public static class Extensions
@@ -49,6 +50,11 @@ namespace Utilities
             return unit != null && unit.gameObject.activeSelf && (acceptDying || !unit.IsDying);
         }
         #endregion
+
+        public static bool Active(this Missile missile)
+        {
+            return missile != null && missile.gameObject.activeSelf;
+        }
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {

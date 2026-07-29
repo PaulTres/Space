@@ -28,20 +28,20 @@ namespace Weapons
         protected IObject currentTarget;
         public IObject Target
         {
-            get => currentTarget;
+            get => currentTarget.NotNullAndActive() ? currentTarget : null;
             set
             {
                 if (currentTarget != value)
                 {
-                    var m = currentTarget != null ? currentTarget as Projectile : null;
-                    if (m != null && m.gameObject.activeSelf) m.TargetedCount--;
+                    var m = currentTarget != null ? currentTarget as Missile : null;
+                    if (m.Active()) m.TargetedDamage -= Weapon.DPS;
                     currentTarget = value;
-                    m = currentTarget != null ? currentTarget as Projectile : null;
-                    if (m != null && m.gameObject.activeSelf) m.TargetedCount++;
-                    if (currentTarget != null && !currentTarget.Active) currentTarget = null;
+                    m = currentTarget != null ? currentTarget as Missile : null;
+                    if (m.Active()) m.TargetedDamage += Weapon.DPS;
                 }
             }
         }
+        public float DPS => Weapon.DPS;
         public Unit Owner { get; protected set; }
         [field: SerializeField] public WeaponBase Weapon { get; protected set; }
         protected Transform tr;
@@ -170,7 +170,7 @@ namespace Weapons
                     {
                         if (missiles[i] == null || !missiles[i].gameObject.activeSelf) continue;
                         var m = missiles[i].transform.GetComponentViaRegister<Missile>();
-                        if (m == null || !IsTargetValid(m) || m.TargetedCount > 0) continue;
+                        if (m == null || !IsTargetValid(m) || m.TargetedDamage >= m.MaxHP) continue;
 
                         if (Target == null)
                         {

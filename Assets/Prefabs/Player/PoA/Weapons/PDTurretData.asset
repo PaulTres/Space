@@ -19,7 +19,7 @@ MonoBehaviour:
   TargetUnits: 1
   MaxAngleDifference: 1
   MaxRange: 100
-  RotSpeed: 50
+  RotSpeed: 200
   MinElevation: -20
   MaxElevation: 90
   MinRot: -190
