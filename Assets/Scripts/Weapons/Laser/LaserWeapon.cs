@@ -7,8 +7,11 @@ namespace Weapons
         [SerializeField] protected float heatPerShot = .1f;
         [SerializeField] protected float overheatThreshold = 1.0f;
         [SerializeField] protected float heatLoss = .34f;
+        [Tooltip("The weapon will not lose heat until at least this much time has passed after firing last time.")]
+        [SerializeField] protected float heatLossCooldown = .5f;
         protected bool overheated;
         protected float currentHeat;
+        protected float lastShotTime;
 
         protected override void OnEnable()
         {
@@ -25,17 +28,21 @@ namespace Weapons
             }
         }
 
-        public void PerformFixedUpdate(float dt)
-        {
-            currentHeat = Mathf.Max(0, currentHeat - heatLoss * dt);
-            if (currentHeat == 0) overheated = false;
-        }
-
         public override void PerformReset()
         {
             base.PerformReset();
             overheated = false;
+            lastShotTime = float.MinValue;
             currentHeat = 0;
+        }
+
+        public void PerformFixedUpdate(float dt)
+        {
+            if (Time.time - lastShotTime >= heatLossCooldown)
+            {
+                currentHeat = Mathf.Max(0, currentHeat - heatLoss * dt);
+                if (currentHeat == 0) overheated = false;
+            }
         }
 
         public override bool CanShoot()

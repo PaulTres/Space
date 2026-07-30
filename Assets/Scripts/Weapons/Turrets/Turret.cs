@@ -149,12 +149,6 @@ namespace Weapons
         }
         #endregion
 
-        public void SetAggressiveStance() => currentStance = aggresiveStance;
-
-        public void SetDefensiveStance() => currentStance = defensiveStance;
-
-        public void SetPassiveStance() => currentStance = passiveStance;
-
         /// <summary>
         /// If a target is present and enabled, rotate towards the target, 
         /// shoot and increase readiness. Otherwise decrease readiness and 
