@@ -61,10 +61,10 @@ namespace Radar
             base.InitializeSingleton();
             if (cam == null) cam = GetComponentInChildren<Camera>();
             owner = GetComponentInParent<PlayerShip>();
-            if (secondViewCamera != null && secondView != null)
-            {
-                secondViewCamera.targetTexture = (RenderTexture)secondView.mainTexture;
-            }
+            //if (secondViewCamera != null && secondView != null)
+            //{
+            //    secondViewCamera.targetTexture = (RenderTexture)secondView.mainTexture;
+            //}
         }
 
         protected virtual void OnEnable()

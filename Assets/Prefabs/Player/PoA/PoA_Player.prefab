@@ -7028,10 +7028,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6308187698919889019, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_ClearFlags
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3519906528226148416, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3879812863350137149}
   m_SourcePrefab: {fileID: 100100000, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
 --- !u!4 &1979539058047882969 stripped
 Transform:
@@ -7063,6 +7070,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1725484202626281479, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
   m_PrefabInstance: {fileID: 6022111154117881744}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7155074557989269456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3519906528226148416, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+  m_PrefabInstance: {fileID: 6022111154117881744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &3879812863350137149
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155074557989269456}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: a4be220830e90ea4eb88b48b7fd376ce, type: 2}
 --- !u!4 &8609302948104996223 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}

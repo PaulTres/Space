@@ -30,6 +30,7 @@ public abstract class Mission : ScriptableObject
     [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
     [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
     [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
+    [SerializeField] protected Material skyboxMaterial;
 
     public void EndMission()
     {
@@ -43,6 +44,8 @@ public abstract class Mission : ScriptableObject
     /// </summary>
     public virtual void Initialize()
     {
+        RenderSettings.skybox = skyboxMaterial;
+        DynamicGI.UpdateEnvironment();
         CurrentMission = this;
         StartTime = Time.time;
         //Debug.Log("Starting mission");
