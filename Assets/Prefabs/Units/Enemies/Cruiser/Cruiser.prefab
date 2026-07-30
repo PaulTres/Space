@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 5541644724529290292}
   <RotationPivot>k__BackingField: {fileID: 1219045531785865982}
   <ElevationPivot>k__BackingField: {fileID: 1235330440720467709}
@@ -419,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5893695798121321750
 Transform:
   m_ObjectHideFlags: 0
@@ -6440,7 +6439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 8743136785672510613}
   <RotationPivot>k__BackingField: {fileID: 5404518120208289819}
   <ElevationPivot>k__BackingField: {fileID: 2350757712138420839}

@@ -250,7 +250,7 @@ public class CFXEasyEditor : EditorWindow
 
 		//Separator
 		GUISeparator();
-		//GUILayout.Box("",GUILayout.Width(this.position.width - 12), GUILayout.Height(3));
+		//GUILayout.Box("",GUILayout.LineWidth(this.position.width - 12), GUILayout.Height(3));
 		
 		EditorGUI.BeginChangeCheck();
 		basicFoldout = EditorGUILayout.Foldout(basicFoldout, "QUICK EDIT");
@@ -343,7 +343,7 @@ public class CFXEasyEditor : EditorWindow
 
 		//Separator
 		GUISeparator();
-		//GUILayout.Box("",GUILayout.Width(this.position.width - 12), GUILayout.Height(3));
+		//GUILayout.Box("",GUILayout.LineWidth(this.position.width - 12), GUILayout.Height(3));
 		
 		EditorGUI.BeginChangeCheck();
 		colorFoldout = EditorGUILayout.Foldout(colorFoldout, "COLOR EDIT");
@@ -398,16 +398,16 @@ public class CFXEasyEditor : EditorWindow
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("Add/Substract Lightness:");
 			
-			LightnessStep = EditorGUILayout.IntField(LightnessStep, GUILayout.Width(30));
+			LightnessStep = EditorGUILayout.IntField(LightnessStep, GUILayout.LineWidth(30));
 			if(LightnessStep > 99) LightnessStep = 99;
 			else if(LightnessStep < 1) LightnessStep = 1;
 			GUILayout.Label("%");
 			
-			if(GUILayout.Button("-", EditorStyles.miniButtonLeft, GUILayout.Width(22)))
+			if(GUILayout.Button("-", EditorStyles.miniButtonLeft, GUILayout.LineWidth(22)))
 			{
 				addLightness(true);
 			}
-			if(GUILayout.Button("+", EditorStyles.miniButtonRight, GUILayout.Width(22)))
+			if(GUILayout.Button("+", EditorStyles.miniButtonRight, GUILayout.LineWidth(22)))
 			{
 				addLightness(false);
 			}
@@ -435,7 +435,7 @@ public class CFXEasyEditor : EditorWindow
 
 		//Separator
 		GUISeparator();
-		//GUILayout.Box("",GUILayout.Width(this.position.width - 12), GUILayout.Height(3));
+		//GUILayout.Box("",GUILayout.LineWidth(this.position.width - 12), GUILayout.Height(3));
 //		GUILayout.Space(6);
 		
 	//----------------------------------------------------------------

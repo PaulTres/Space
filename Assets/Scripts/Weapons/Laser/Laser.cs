@@ -20,8 +20,8 @@ namespace Weapons
             if (lineRenderer == null) lineRenderer = GetComponent<LineRenderer>();
             lineRenderer.startColor = laserData.Color;
             lineRenderer.endColor = laserData.Color;
-            lineRenderer.startWidth = laserData.Width;
-            lineRenderer.endWidth = laserData.Width;
+            lineRenderer.startWidth = laserData.LineWidth;
+            lineRenderer.endWidth = laserData.LineWidth;
             range = laserData.Range;
         }
 

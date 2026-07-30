@@ -102,14 +102,14 @@ public class WFX_Demo : MonoBehaviour
 		}
 		
 		/*
-		if(GUILayout.Button(randomSpawns ? "Stop Random Spawns" : "Start Random Spawns", GUILayout.Width(140)))
+		if(GUILayout.Button(randomSpawns ? "Stop Random Spawns" : "Start Random Spawns", GUILayout.LineWidth(140)))
 		{
 			randomSpawns = !randomSpawns;
 			if(randomSpawns)	StartCoroutine("RandomSpawnsCoroutine");
 			else 				StopCoroutine("RandomSpawnsCoroutine");
 		}
 		
-		randomSpawnsDelay = GUILayout.TextField(randomSpawnsDelay, 10, GUILayout.Width(42));
+		randomSpawnsDelay = GUILayout.TextField(randomSpawnsDelay, 10, GUILayout.LineWidth(42));
 		randomSpawnsDelay = Regex.Replace(randomSpawnsDelay, @"[^0-9.]", "");
 		*/
 		
