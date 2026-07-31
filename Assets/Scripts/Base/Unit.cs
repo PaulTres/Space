@@ -180,7 +180,11 @@ public abstract class Unit : MonoBehaviour, IObject
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         this.UnregisterForRadar();
         UnitManager.Unregister(this);
-        if (IsDying && !effectDuringDeath.isPlaying) unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
+        if (IsDying && !effectDuringDeath.isPlaying)
+        {
+            Debug.Log("Spawning death effect");
+            unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
+        }
         missileBuffer = null;
     }
 

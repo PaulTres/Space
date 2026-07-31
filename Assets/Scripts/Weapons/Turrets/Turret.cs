@@ -88,16 +88,14 @@ namespace Weapons
                     if (Vector3.Angle(ElevationPivot.forward, (pos -
                         Transform.position)) < @params.MaxAngleDifference)
                     {
-                        if (Owner.InOptimalFiringRange(Target.Position,
-                            Target.CurrentSignature))
-                        {
-                            IncreaseReadiness(deltaTime);
-                        }
+                        //if (Owner.InOptimalFiringRange(Target.Position,
+                        //   Target.CurrentSignature))
+
+                        IncreaseReadiness(deltaTime);
                         Weapon.Shoot(Target);
                         return;
                     }
                 }
-                else Target = null;
             }
             else
             {
@@ -113,6 +111,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         protected void IncreaseReadiness(float deltaTime)
         {
+            //Debug.Log("A");
             Weapon.IncreaseReadiness(deltaTime);
         }
 

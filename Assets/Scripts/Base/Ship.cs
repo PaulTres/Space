@@ -35,12 +35,6 @@ public abstract class Ship : Unit
         angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
     }
-
-    protected override void OnDestroy()
-    {
-        base.Awake();
-        ComponentRegister<IObject>.Unregister(transform);
-    }
     #endregion
 
     public override void Die(ObjectDestroyed @event)

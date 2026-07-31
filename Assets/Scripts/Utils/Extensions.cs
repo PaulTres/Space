@@ -122,6 +122,12 @@ namespace Utilities
         }
         #endregion
 
+        /// <summary>
+        /// Returns true if the collection is null or has no elements in it.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <returns></returns>
         public static bool IsEmpty<T>(this ICollection<T> collection)
         {
             return collection == null || collection.Count == 0;
@@ -227,27 +233,6 @@ namespace Utilities
                 component = transform.gameObject.AddComponent<T>();
             }
             return component;
-        }
-
-        public static Vector3 GetLinearVelocity(this Transform transform)
-        {
-            if (transform == null) throw new System.ArgumentNullException();
-            IObject velocityProvider = ComponentRegister<IObject>.Get(transform);
-            return velocityProvider != null ? velocityProvider.LinearVelocity : Vector3.zero;
-        }
-
-        public static Vector3 GetAngularVelocity(this Transform transform)
-        {
-            if (transform == null) throw new System.ArgumentNullException();
-            IObject velocityProvider = ComponentRegister<IObject>.Get(transform);
-            return velocityProvider != null ? velocityProvider.AngularVelocity : Vector3.zero;
-        }
-
-        public static (Vector3 linear, Vector3 angular) GetVelocities(this Transform transform)
-        {
-            if (transform == null) throw new System.ArgumentNullException();
-            IObject velocityProvider = ComponentRegister<IObject>.Get(transform);
-            return velocityProvider != null ? (velocityProvider.LinearVelocity, velocityProvider.AngularVelocity) : (Vector3.zero, Vector3.zero);
         }
 
         /// <summary>

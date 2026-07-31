@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1312110429}
     - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: unitParameters.ScanRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: <RotationSpeed>k__BackingField
       value: 100
       objectReference: {fileID: 0}
@@ -213,7 +217,6 @@ GameObject:
   - component: {fileID: 1807719004}
   - component: {fileID: 1807719003}
   - component: {fileID: 1807719002}
-  - component: {fileID: 1807719001}
   - component: {fileID: 1807719000}
   - component: {fileID: 1807718999}
   - component: {fileID: 1807718998}
@@ -5126,27 +5129,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1807719001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807718995}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1807719002
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5213,7 +5195,7 @@ Transform:
   m_GameObject: {fileID: 1807718995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.89}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

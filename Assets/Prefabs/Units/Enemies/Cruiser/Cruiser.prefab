@@ -156,6 +156,9 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 4440183957383060605}
   - {fileID: 3675284398190978406}
+  readinessDisplays: []
+  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
+  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &844964311985099125
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,39 +482,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   type: 3
-  deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 1
-  tickInterval: 0.5
-  effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
-  <EffectScaleFactor>k__BackingField: 1
-  soundDuringDeath:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0
-  <MinimumSignature>k__BackingField: 0
-  <MaxSignature>k__BackingField: 0
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
-  scanRange: 20
+  unitParameters:
+    TickInterval: 0.2
+    EffectOnDeath: {fileID: 0}
+    <EffectScaleFactor>k__BackingField: 1
+    SoundDuringDeath:
+      clip: {fileID: 0}
+      mixerGroup: {fileID: 0}
+      loop: 0
+      playOnAwake: 0
+      frequentSound: 0
+      mute: 0
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      panStereo: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      dopplerLevel: 1
+      spread: 0
+      minDistance: 1
+      maxDistance: 500
+      ignoreListenerVolume: 0
+      ignoreListenerPause: 0
+      rolloffMode: 0
+    <MinimumSignature>k__BackingField: 0
+    <MaxSignature>k__BackingField: 0
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 10
   <MaxVelocityMagnitude>k__BackingField: 10
   forwardThrust: 3
   <RotationSpeed>k__BackingField: 20
@@ -566,7 +569,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -6459,6 +6462,9 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 5786125438283946014}
   - {fileID: 7298034220520001478}
+  readinessDisplays: []
+  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
+  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &6033900855380238085
 GameObject:
   m_ObjectHideFlags: 0
@@ -6604,6 +6610,9 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 0f8d5788dee5420449746a45116262ce, type: 2}
   shootPoints:
   - {fileID: 672465566390999495}
+  readinessDisplays: []
+  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
+  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1001 &1918636842975563565
 PrefabInstance:
   m_ObjectHideFlags: 0

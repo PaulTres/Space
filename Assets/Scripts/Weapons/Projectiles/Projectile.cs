@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utilities;
 namespace Weapons
 {
     public class Projectile : Bullet, IObject
@@ -18,6 +19,7 @@ namespace Weapons
         protected float initialVelocity;
         protected TrailRenderer trailRenderer;
         protected bool inertialDampeners = true;
+        protected int team;
         #endregion
 
         #region Setup
@@ -58,9 +60,16 @@ namespace Weapons
         {
             base.OnEnable();
             linearVelocity = Forward * initialVelocity;
-            if (Owner != null) gameObject.layer = GlobalConfig.
-                    GetBulletLayer(Owner.gameObject.layer);
-            else gameObject.layer = GlobalConfig.GetBulletLayer(0);
+            if (Owner.Active())
+            {
+                team = Owner.Team;
+                gameObject.layer = GlobalConfig.GetBulletLayer(Owner.gameObject.layer);
+            }
+            else
+            {
+                team = 0;
+                gameObject.layer = GlobalConfig.GetBulletLayer(0);
+            }
             collisionMask = GlobalConfig.GetBulletCollisionMask(gameObject.layer);
             angularVelocity = Vector3.zero;
         }
@@ -99,7 +108,7 @@ namespace Weapons
             if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
                 linearVelocity.magnitude * dt, collisionMask))
             {
-                if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == Owner.Team)
+                if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == team)
                 {
                     return false;
                 }

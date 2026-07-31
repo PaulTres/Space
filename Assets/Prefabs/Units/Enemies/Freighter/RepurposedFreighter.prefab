@@ -538,39 +538,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   type: 1
-  deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 2
-  tickInterval: 0.5
-  effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
-  <EffectScaleFactor>k__BackingField: 2
-  soundDuringDeath:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0
-  <MinimumSignature>k__BackingField: 0
-  <MaxSignature>k__BackingField: 0
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
-  scanRange: 15
+  unitParameters:
+    TickInterval: 0.2
+    EffectOnDeath: {fileID: 0}
+    <EffectScaleFactor>k__BackingField: 1
+    SoundDuringDeath:
+      clip: {fileID: 0}
+      mixerGroup: {fileID: 0}
+      loop: 0
+      playOnAwake: 0
+      frequentSound: 0
+      mute: 0
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      panStereo: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      dopplerLevel: 1
+      spread: 0
+      minDistance: 1
+      maxDistance: 500
+      ignoreListenerVolume: 0
+      ignoreListenerPause: 0
+      rolloffMode: 0
+    <MinimumSignature>k__BackingField: 0
+    <MaxSignature>k__BackingField: 0
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 10
   <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 20
@@ -624,7 +624,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 2
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -5463,7 +5463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 7910306250757147500}
   <ElevationPivot>k__BackingField: {fileID: 3615077630076583751}
@@ -5483,6 +5482,9 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 60fed34bdaf644c40b13d082c04abb6c, type: 2}
   shootPoints:
   - {fileID: 2882820736332348734}
+  readinessDisplays: []
+  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
+  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &5796470622578978281
 GameObject:
   m_ObjectHideFlags: 0

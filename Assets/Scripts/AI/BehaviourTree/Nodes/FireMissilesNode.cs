@@ -25,7 +25,7 @@ public class FireMissilesNode : LeafNodeData
         }
         if (Vector3.Distance(ctx.Position, target.Position) > maxRange || !ctx.Unit.InOptimalFiringRange(target)) return NodeState.FAILURE;
         //Debug.Log("C");
-        //Debug.LogFormat("Shooting missiles");
+        Debug.Log($"{ctx.Transform} shooting missiles!");
         foreach (var l in launchers)
         {
             l.Shoot(target);

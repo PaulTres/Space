@@ -24,13 +24,16 @@ namespace Weapons
         }
         protected CountdownTimer shotTimer;
         public float CurrentShotCooldown { get; protected set; }
-        #endregion
-
-        #region Weapon parameters
-        [SerializeField] protected WeaponData @params;
-        [SerializeField] protected Transform[] shootPoints;
         public BulletData BulletData => @params != null ? @params.BulletData : null;
         public float DPS => @params.BulletData.Damage * shootPoints.Length / CurrentShotCooldown;
+        #endregion
+
+        #region Parameters
+        [SerializeField] protected WeaponData @params;
+        [Tooltip("A separate bullet will be spawned with the position and rotation of each of these objects.")]
+        [SerializeField] protected Transform[] shootPoints;
+        [SerializeField] protected Renderer[] readinessDisplays;
+        [SerializeField] protected Color noReadinessColor = Color.black, fullReadinessColor = Color.green;
         #endregion
 
         #region Setup
@@ -41,6 +44,13 @@ namespace Weapons
             Debug.Assert((!shootPoints.IsEmpty() && shootPoints[0] != null), $"{transform} has invalid shoot points!");
             shotTimer = new(@params.MaxShotCooldown);
             CurrentShotCooldown = @params.MaxShotCooldown;
+            if (!readinessDisplays.IsEmpty())
+            {
+                foreach (var display in readinessDisplays)
+                {
+                    display.material.EnableKeyword("_EMISSION");
+                }
+            }
         }
 
         protected virtual void OnEnable()
@@ -64,14 +74,31 @@ namespace Weapons
         #endregion
 
         #region Functionality
+        #region Display
+        public void UpdateReadinessRenderers()
+        {
+            if (readinessDisplays.IsEmpty()) return;
+            //we need 0 when CurrentShotCooldown==@params.MaxShotCooldown and 1 when CurrentShotCooldown==@params.MinShotCooldown
+            float lerpValue = (@params.MaxShotCooldown - CurrentShotCooldown) / (@params.MaxShotCooldown - @params.MinShotCooldown);
+            var newColor = Color.Lerp(noReadinessColor, fullReadinessColor, lerpValue);
+            //Debug.Log(lerpValue);
+            for (int i = 0; i < readinessDisplays.Length; i++)
+            {
+                readinessDisplays[i].material.SetColor("_EmissionColor", newColor);
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Increases Weapon rate of fire.
         /// </summary>
         /// <param name="deltaTime"></param>
         public virtual void IncreaseReadiness(float deltaTime)
         {
+            //Debug.Log("Increasing readiness: " + CurrentShotCooldown);
             CurrentShotCooldown = Mathf.Max(@params.MinShotCooldown,
                 CurrentShotCooldown - @params.RateOfFireRampUp * deltaTime);
+            UpdateReadinessRenderers();
         }
 
         /// <summary>
@@ -80,8 +107,10 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public virtual void DecreaseReadiness(float deltaTime)
         {
+            //Debug.Log("Decreasing readiness: " + CurrentShotCooldown);
             CurrentShotCooldown = Mathf.Min(@params.MaxShotCooldown,
                 CurrentShotCooldown + @params.RateOfFireRampDown * deltaTime);
+            UpdateReadinessRenderers();
         }
 
         /// <summary>
@@ -93,6 +122,7 @@ namespace Weapons
             return !shotTimer.IsRunning;
         }
 
+        #region Shooting
         /// <summary>
         /// Returns true if the Weapon can shoot and fires a bullet at the target. 
         /// Resets the shot cooldown timer.
@@ -131,6 +161,7 @@ namespace Weapons
             bullet.Owner = Unit;
             bullet.gameObject.SetActive(true);
         }
+        #endregion
         #endregion
     }
 }

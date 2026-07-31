@@ -6,16 +6,21 @@ namespace Utilities
     public static class ComponentRegister<T> where T : class, IRegisterableComponent
     {
         static readonly Dictionary<Transform, T> storage = new();
+
+        public static void Clear() => storage.Clear();
+
         public static T Get(Transform transform)
         {
             if (transform == null) throw new System.ArgumentNullException();
             return storage.TryGetValue(transform, out T instance) ? instance : null;
         }
+
         public static bool Register(Transform transform, T component)
         {
             if (transform == null || component == null) throw new System.ArgumentNullException();
             return storage.TryAdd(transform, component);
         }
+
         public static void Unregister(Transform transform)
         {
             if (transform == null)
