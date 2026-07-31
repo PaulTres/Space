@@ -118,7 +118,7 @@ namespace Weapons
             }
 
             EffectiveTracking = initialTracking * (1 + telemetryBonus) * (1 +
-                Mathf.Min(1, target.Signature / (maxTargetSignature + Mathf.Epsilon)));
+                Mathf.Min(1, target.CurrentSignature / (maxTargetSignature + Mathf.Epsilon)));
         }
 
         /// <summary>

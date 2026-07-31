@@ -13,7 +13,7 @@ namespace Weapons
         public Vector3 Up => Transform.up;
         public Vector3 LinearVelocity => linearVelocity;
         public Vector3 AngularVelocity => Vector3.zero;
-        public float Signature => 0;
+        public float CurrentSignature => 0;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
         protected TrailRenderer trailRenderer;

@@ -43,9 +43,9 @@ namespace Weapons
             tr = transform;
             Owner = GetComponentInParent<Unit>();
             if (Weapon == null) Weapon = GetComponentInChildren<WeaponBase>();
-            aggresiveStance = new() { Turret = this };
-            defensiveStance = new() { Turret = this };
-            passiveStance = new() { Turret = this };
+            aggresiveStance = new() { Turret = this, TurretData = @params };
+            defensiveStance = new() { Turret = this, TurretData = @params };
+            passiveStance = new() { Turret = this, TurretData = @params };
         }
 
         protected virtual void OnEnable()
@@ -170,7 +170,7 @@ namespace Weapons
                         Transform.position)) < @params.MaxAngleDifference)
                     {
                         if (Owner.InOptimalFiringRange(Target.Position,
-                            Target.Signature))
+                            Target.CurrentSignature))
                         {
                             IncreaseReadiness(deltaTime);
                         }

@@ -30,7 +30,7 @@ public interface IObject : IRegisterableComponent
             return Transform.gameObject.activeSelf;
         }
     }
-    float Signature { get; }
+    float CurrentSignature { get; }
     Transform Transform { get; }
     public Vector3 Forward { get; }
     public Vector3 Right { get; }

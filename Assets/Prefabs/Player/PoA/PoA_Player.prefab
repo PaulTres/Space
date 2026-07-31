@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 3087266930303951821}
   <RotationPivot>k__BackingField: {fileID: 646087190032260976}
   <ElevationPivot>k__BackingField: {fileID: 8910632270281574437}
@@ -161,6 +160,10 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 4111061145657378536}
+  heatPerShot: 0.1
+  overheatThreshold: 1
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
 --- !u!1 &1634145199033709852
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,39 +422,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerShip
   type: 2
-  deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 1
-  tickInterval: 0.2
-  effectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
-  <EffectScaleFactor>k__BackingField: 1
-  soundDuringDeath:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0
-  <MinimumSignature>k__BackingField: 1
-  <MaxSignature>k__BackingField: 10
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
-  scanRange: 20
+  unitParameters:
+    TickInterval: 0.2
+    EffectOnDeath: {fileID: 0}
+    <EffectScaleFactor>k__BackingField: 1
+    SoundDuringDeath:
+      clip: {fileID: 0}
+      mixerGroup: {fileID: 0}
+      loop: 0
+      playOnAwake: 0
+      frequentSound: 0
+      mute: 0
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      panStereo: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      dopplerLevel: 1
+      spread: 0
+      minDistance: 1
+      maxDistance: 500
+      ignoreListenerVolume: 0
+      ignoreListenerPause: 0
+      rolloffMode: 0
+    <MinimumSignature>k__BackingField: 0
+    <MaxSignature>k__BackingField: 0
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 10
   <MaxVelocityMagnitude>k__BackingField: 10
   forwardThrust: 3
   <RotationSpeed>k__BackingField: 20
@@ -459,12 +462,8 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: cc53166efb1d065419956e281515f266, type: 2}
   shipBody: {fileID: 6981843385956805702}
   cameraData:
-    RollPivot: {fileID: 8609302948104996223}
-    YawPivot: {fileID: 2251312373276018749}
-    PitchPivot: {fileID: 4642863794196711176}
-    FreelookRollPivot: {fileID: 4927202483543695255}
-    FreelookYawPivot: {fileID: 2068268750620774859}
-    FreelookPitchPivot: {fileID: 4289792296676839813}
+    CameraPivot: {fileID: 8609302948104996223}
+    FreelookCameraPivot: {fileID: 4927202483543695255}
     CameraTransform: {fileID: 1979539058047882969}
     ZoomSpeed: 1
     MinZoom: -10
@@ -5671,7 +5670,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 5907998532747234990}
   <RotationPivot>k__BackingField: {fileID: 8144096448290802914}
   <ElevationPivot>k__BackingField: {fileID: 6364759331970838231}
@@ -5691,6 +5689,10 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 2286655736557394615}
+  heatPerShot: 0.1
+  overheatThreshold: 1
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
 --- !u!1 &4934526136339367206
 GameObject:
   m_ObjectHideFlags: 0
@@ -5737,7 +5739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 8059394233922350034}
   <ElevationPivot>k__BackingField: {fileID: 1951445744599764571}
@@ -6077,7 +6078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 2174257438307557786}
   <RotationPivot>k__BackingField: {fileID: 1936348614943090302}
   <ElevationPivot>k__BackingField: {fileID: 5315465576912072663}
@@ -6097,6 +6097,10 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 9197534594434857916}
+  heatPerShot: 0.1
+  overheatThreshold: 1
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
 --- !u!1 &5789871915131131293
 GameObject:
   m_ObjectHideFlags: 0
@@ -6547,7 +6551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  CurrentTargetScoreMultiplier: 2
   <Weapon>k__BackingField: {fileID: 0}
   <RotationPivot>k__BackingField: {fileID: 5551266451572612914}
   <ElevationPivot>k__BackingField: {fileID: 7697430285382936744}
@@ -6986,7 +6989,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 30823223772318358, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_Name
-      value: RollCameraPivot
+      value: CameraPivot
       objectReference: {fileID: 0}
     - target: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7028,41 +7031,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6308187698919889019, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3519906528226148416, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3879812863350137149}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
 --- !u!4 &1979539058047882969 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5254128983991761225, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-  m_PrefabInstance: {fileID: 6022111154117881744}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2068268750620774859 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5701875197957111387, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-  m_PrefabInstance: {fileID: 6022111154117881744}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2251312373276018749 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5524952044887222189, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-  m_PrefabInstance: {fileID: 6022111154117881744}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4289792296676839813 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7501503214147894805, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-  m_PrefabInstance: {fileID: 6022111154117881744}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4642863794196711176 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1440046002689222808, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
   m_PrefabInstance: {fileID: 6022111154117881744}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4927202483543695255 stripped
@@ -7070,20 +7046,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1725484202626281479, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
   m_PrefabInstance: {fileID: 6022111154117881744}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7155074557989269456 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3519906528226148416, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
-  m_PrefabInstance: {fileID: 6022111154117881744}
-  m_PrefabAsset: {fileID: 0}
---- !u!45 &3879812863350137149
-Skybox:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155074557989269456}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: a4be220830e90ea4eb88b48b7fd376ce, type: 2}
 --- !u!4 &8609302948104996223 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}

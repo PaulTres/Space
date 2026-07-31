@@ -27,7 +27,7 @@ namespace Utilities
         {
             if (unit == null) return false;
             return Vector3.Distance(unit.Position, target.Position) <=
-                unit.ScanRange + target.Signature;
+                unit.ScanRange + target.CurrentSignature;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace Utilities
         {
             var dist = Mathf.Max((scanner.Transform.position -
                 @object.Transform.position).magnitude -
-                @object.Signature - scanner.ScanRange, 0);
+                @object.CurrentSignature - scanner.ScanRange, 0);
             return @object.Transform.position + Mathf.Min(GlobalConfig.
                 MaxOscillationMagnitude, dist * GlobalConfig.PositionOscillationCoefficient) *
                 Random.insideUnitSphere;

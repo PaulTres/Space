@@ -9,8 +9,8 @@ namespace Player
         [System.Serializable]
         public class CameraData
         {
-            public Transform RollPivot, YawPivot, PitchPivot;
-            public Transform FreelookRollPivot, FreelookYawPivot, FreelookPitchPivot;
+            public Transform CameraPivot;
+            public Transform FreelookCameraPivot;
             public Transform CameraTransform;
             public float ZoomSpeed = 1;
             [Range(-100, 0)]
@@ -32,31 +32,7 @@ namespace Player
         protected Vector3 defaultCamPos;
         protected Vector3 movementVector;
         protected bool freeLook;
-        protected float rollInput, camXAngle, camYAngle, camZAngle;
-        public bool FreeLook
-        {
-            get => freeLook;
-            set
-            {
-                if (freeLook != value)
-                {
-                    freeLook = value;
-                    //currentCameraAngles = CameraRotationPivot.localRotation.eulerAngles;
-                    if (!freeLook)
-                    {
-                        camXAngle = cameraData.PitchPivot.localRotation.eulerAngles.x;
-                        camYAngle = cameraData.YawPivot.localRotation.eulerAngles.y;
-                        camZAngle = cameraData.RollPivot.localRotation.eulerAngles.z;
-                    }
-                    else
-                    {
-                        camXAngle = cameraData.FreelookPitchPivot.localRotation.eulerAngles.x;
-                        camYAngle = cameraData.FreelookYawPivot.localRotation.eulerAngles.y;
-                        camZAngle = cameraData.FreelookRollPivot.localRotation.eulerAngles.z;
-                    }
-                }
-            }
-        }
+        protected float rollInput;
         protected Transform cam => cameraData.CameraTransform;
         public override Vector3 Forward => shipBody.forward;
         public override Vector3 Right => shipBody.right;
@@ -87,7 +63,7 @@ namespace Player
             PlayerCamera.fieldOfView = GlobalConfig.FOV;
             GameManager.Player = this;
             Dampeners = true;
-            FreeLook = false;
+            freeLook = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             inputReader.MoveEvent += OnMove;
@@ -142,9 +118,7 @@ namespace Player
         protected void OnResetCamera()
         {
             cam.localPosition = defaultCamPos;
-            cameraData.FreelookPitchPivot.localRotation = Quaternion.identity;
-            cameraData.FreelookYawPivot.localRotation = Quaternion.identity;
-            cameraData.FreelookRollPivot.localRotation = Quaternion.identity;
+            cameraData.FreelookCameraPivot.localRotation = Quaternion.identity;
         }
 
         protected void OnMove(Vector3 movementVector)
@@ -157,7 +131,7 @@ namespace Player
             rollInput = rollValue;
         }
 
-        protected void OnFreeLookToggle(float value) => FreeLook = value > .5f;
+        protected void OnFreeLookToggle(float value) => freeLook = value > .5f;
 
         protected void OnDampenerToggle() => Dampeners = !Dampeners;
 
@@ -211,12 +185,12 @@ namespace Player
 
         public void PerformUpdate(float deltaTime)
         {
-            if (!FreeLook)
+            if (!freeLook)
             {
                 Quaternion previousRotation = shipBody.rotation;
 
                 //rotate the ship body to match the rotation of the camera pivot
-                shipBody.rotation = Quaternion.RotateTowards(shipBody.rotation, cameraData.PitchPivot.rotation, deltaTime * RotationSpeed);
+                shipBody.rotation = Quaternion.RotateTowards(shipBody.rotation, cameraData.CameraPivot.rotation, deltaTime * RotationSpeed);
 
                 Quaternion rotationDelta = (shipBody.rotation *
                     Quaternion.Inverse(previousRotation)).normalized;
@@ -228,22 +202,19 @@ namespace Player
 
         public void PerformLateUpdate(float deltaTime)
         {
-            camXAngle -= deltaTime * inputReader.LookDelta.y * cameraData.XSens;
-            camYAngle += deltaTime * inputReader.LookDelta.x * cameraData.YSens;
-            camZAngle += deltaTime * rollInput * cameraData.ZSens;
-            if (FreeLook)
+            if (freeLook)
             {
-                cameraData.FreelookRollPivot.localRotation = Quaternion.Euler(0, 0, camZAngle);
-                cameraData.FreelookYawPivot.localRotation = Quaternion.Euler(0, camYAngle, 0);
-                cameraData.FreelookPitchPivot.localRotation = Quaternion.Euler(camXAngle, 0, 0);
-                //freelookCamPivot.localRotation = Quaternion.Euler(camXAngle, , camZAngle);
+                cameraData.FreelookCameraPivot.Rotate(
+                    -deltaTime * inputReader.LookDelta.y * cameraData.XSens,
+                    deltaTime * inputReader.LookDelta.x * cameraData.YSens,
+                    deltaTime * rollInput * cameraData.ZSens);
             }
             else
             {
-                cameraData.RollPivot.localRotation = Quaternion.Euler(0, 0, camZAngle);
-                cameraData.YawPivot.localRotation = Quaternion.Euler(0, camYAngle, 0);
-                cameraData.PitchPivot.localRotation = Quaternion.Euler(camXAngle, 0, 0);
-                //camPivot.localRotation = Quaternion.Euler(camXAngle, camYAngle, camZAngle);
+                cameraData.CameraPivot.Rotate(
+                    -deltaTime * inputReader.LookDelta.y * cameraData.XSens,
+                    deltaTime * inputReader.LookDelta.x * cameraData.YSens,
+                    deltaTime * rollInput * cameraData.ZSens);
             }
         }
 

@@ -41,8 +41,8 @@ namespace Player
             speedText.text = $"{(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude}";
 
             #region Signature display
-            var percentage = player.Signature / (player.MaxSignature + Mathf.Epsilon);
-            signatureText.text = $"{(int)player.Signature}/{(int)player.MaxSignature}";
+            var percentage = player.CurrentSignature / (player.MaxSignature + Mathf.Epsilon);
+            signatureText.text = $"{(int)player.CurrentSignature}/{(int)player.MaxSignature}";
             signatureDisplay.rectTransform.localScale = percentage *
                 maxSignatureDisplay.rectTransform.localScale;
             #endregion

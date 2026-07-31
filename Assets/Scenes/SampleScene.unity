@@ -131,6 +131,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoA_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: cameraData.CameraPivot
+      value: 
+      objectReference: {fileID: 1312110429}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: cameraData.FreelookCameraPivot
+      value: 
+      objectReference: {fileID: 1312110428}
+    - target: {fileID: 6052652902811772166, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: m_Name
+      value: CameraPivot
+      objectReference: {fileID: 0}
     - target: {fileID: 6766837596616086251, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -176,6 +188,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+--- !u!4 &1312110428 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4927202483543695255, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+  m_PrefabInstance: {fileID: 1312110427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1312110429 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8609302948104996223, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+  m_PrefabInstance: {fileID: 1312110427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1807718995
 GameObject:
   m_ObjectHideFlags: 0

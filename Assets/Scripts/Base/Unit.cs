@@ -14,14 +14,28 @@ using Weapons;
 [RequireComponent(typeof(ParticleSystem))]
 public abstract class Unit : MonoBehaviour, IObject
 {
+    [System.Serializable]
+    public class UnitParameters
+    {
+        public float TickInterval = 0.2f;
+        [Header("Death")]
+        [Tooltip("Plays when the ship has finished exploding.")]
+        public PoolableEffect EffectOnDeath;
+        [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
+        [Tooltip("Plays while the ship is exploding.")]
+        public SoundData SoundDuringDeath;
+        [field: SerializeField] public float MinimumSignature { get; protected set; }
+        [field: SerializeField] public float MaxSignature { get; protected set; }
+        public float SignatureDecreaseRate = 0.1f;
+        [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
+        public float SignatureDecreaseCooldown = 5f;
+        public float ScanRange = 10;
+    }
     #region Fields
     #region Misc
     [Header("Unit")]
     [Tooltip("This is mostly used for object pooling for the bullets. Never manually modify.")]
     [SerializeField] protected IObject.Type type;
-    [Tooltip("If true, when this unit is destroyed all its inflight missiles " +
-        "will have their owner set to null.")]
-    [SerializeField] protected bool deleteOwnershipOnDeath = true;
     /// <summary>
     /// This is used for quick removal from the unit manager lists. 
     /// DO NOT FUCK WITH THIS!
@@ -33,13 +47,16 @@ public abstract class Unit : MonoBehaviour, IObject
     /// Fires on every tick. Mainly used to update turrets.
     /// </summary>
     protected Action onTick = delegate { };
+    public bool IsDying { get; protected set; }
     /// <summary>
-    /// Used to check for missiles in the vicinity of the unit.
+    /// Plays while the unit explodes. Unit will be disabled once the effect is 
+    /// finished playing.
     /// </summary>
-    [SerializeField] protected float tickInterval = 0.1f;
-    protected WaitForSeconds wait;
-    protected Coroutine tickCoroutine;
+    protected ParticleSystem effectDuringDeath;
+    public float CurrentSignature { get; protected set; }
     #endregion
+
+    [SerializeField] protected UnitParameters unitParameters;
 
     #region HP
     protected HPComponent hpComponent;
@@ -56,17 +73,11 @@ public abstract class Unit : MonoBehaviour, IObject
     public float CurrentHPPercentage => HPComponent != null ? HPComponent.CurrentHP / HPComponent.MaxHP : 0;
     #endregion
 
-    #region Death
-    [Header("Death")]
-    [Tooltip("Plays when the ship has finished exploding.")]
-    [SerializeField] protected PoolableEffect effectOnDeath;
-    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
-    public bool IsDying { get; protected set; }
-    /// <summary>
-    /// Plays while the unit explodes. Unit will be disabled once the effect is 
-    /// finished playing.
-    /// </summary>
-    protected ParticleSystem effectDuringDeath;
+    #region Helpers
+    public float MaxSignature => unitParameters.MaxSignature;
+    protected WaitForSeconds wait;
+    protected Coroutine tickCoroutine;
+    protected float signatureDecreaseDelay;
     public ParticleSystem EffectDuringDeath
     {
         get
@@ -79,33 +90,14 @@ public abstract class Unit : MonoBehaviour, IObject
             return effectDuringDeath;
         }
     }
-    [Tooltip("Plays while the ship is exploding.")]
-    [SerializeField] protected SoundData soundDuringDeath;
-    #endregion
-
-    #region Scan/Signature
-    public float Signature { get; protected set; }
-    [field: SerializeField] public float MinimumSignature { get; protected set; }
-    [field: SerializeField] public float MaxSignature { get; protected set; }
-    [SerializeField] protected float signatureDecreaseRate = 0.1f;
-    [SerializeField] protected float signatureDecreaseCooldown = 5f;
-    /// <summary>
-    /// The time it takes before the signature starts decreasing after it has been increased. 
-    /// This is used to prevent the signature from decreasing too quickly after it has been 
-    /// increased.
-    /// </summary>
-    protected float signatureDecreaseDelay;
-    [SerializeField] protected float scanRange = 10;
+    public float EffectScaleFactor => unitParameters.EffectScaleFactor;
     public float ScanRange
     {
         get
         {
-            return IsFleeing ? 0 : scanRange;
+            return IsFleeing ? 0 : unitParameters.ScanRange;
         }
     }
-    #endregion
-
-    #region Helpers
     public IObject.Type ObjectType => type;
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.forward;
@@ -151,9 +143,8 @@ public abstract class Unit : MonoBehaviour, IObject
     #region Setup
     protected virtual void Awake()
     {
-        MaxSignature = Mathf.Max(MaxSignature, MinimumSignature);
         Turrets = new(GetComponentsInChildren<Turret>());
-        wait = new(tickInterval);
+        wait = new(unitParameters.TickInterval);
         ComponentRegister<Unit>.Register(Transform, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);
@@ -165,7 +156,7 @@ public abstract class Unit : MonoBehaviour, IObject
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         missileCount = 0;
         tickCoroutine = StartCoroutine(Tick());
-        Signature = MinimumSignature;
+        CurrentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
         this.RegisterForRadar();
         signatureDecreaseDelay = Time.time;
@@ -190,7 +181,7 @@ public abstract class Unit : MonoBehaviour, IObject
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         this.UnregisterForRadar();
         UnitManager.Unregister(this);
-        if (IsDying && !effectDuringDeath.isPlaying) effectOnDeath.SpawnEffect(Transform.position, EffectScaleFactor);
+        if (IsDying && !effectDuringDeath.isPlaying) unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         missileBuffer = null;
     }
 
@@ -216,13 +207,14 @@ public abstract class Unit : MonoBehaviour, IObject
             yield return wait;
             GetSurroundingMissiles();
             onTick?.Invoke();
-            DecreaseSignature(tickInterval);
+            DecreaseSignature(unitParameters.TickInterval);
         }
     }
 
     protected virtual void GetSurroundingMissiles()
     {
-        missileCount = Physics.OverlapSphereNonAlloc(Position, ScanRange, missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(Team));
+        missileCount = Physics.OverlapSphereNonAlloc(Position, ScanRange,
+            missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(Team));
         //Debug.Log(missileCount);
     }
 
@@ -238,9 +230,9 @@ public abstract class Unit : MonoBehaviour, IObject
 
     protected virtual void OnDrawGizmos()
     {
-        if (!Application.IsPlaying(this)) Signature = MinimumSignature;
+        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, Signature);
+        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
     }
@@ -248,13 +240,14 @@ public abstract class Unit : MonoBehaviour, IObject
     public void IncreaseSignature(float amount)
     {
         signatureDecreaseDelay = Time.time;
-        Signature = Mathf.Min(MaxSignature, Signature + amount);
+        CurrentSignature = Mathf.Min(unitParameters.MaxSignature, CurrentSignature + amount);
     }
 
     protected virtual void DecreaseSignature(float deltaTime)
     {
-        if (Time.time - signatureDecreaseDelay < signatureDecreaseCooldown) return;
-        Signature = Mathf.Max(MinimumSignature, Signature - signatureDecreaseRate * deltaTime);
+        if (Time.time - signatureDecreaseDelay < unitParameters.SignatureDecreaseCooldown) return;
+        CurrentSignature = Mathf.Max(unitParameters.MinimumSignature,
+            CurrentSignature - unitParameters.SignatureDecreaseRate * deltaTime);
     }
 
     /// <summary>
@@ -268,6 +261,8 @@ public abstract class Unit : MonoBehaviour, IObject
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
         UnitManager.Unregister(this);
         EffectDuringDeath.Play();
+        if (unitParameters.SoundDuringDeath != null) SoundManager.
+            TryGetInstance(true).Play(unitParameters.SoundDuringDeath, transform.position);
         IsDying = true;
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         this.UnregisterForRadar();

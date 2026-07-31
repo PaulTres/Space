@@ -140,7 +140,7 @@ namespace Radar
                 #region Distance text
                 if (distance < 10) bbox.DistanceText.text = distance.ToString("#.##");
                 else bbox.DistanceText.text = ((int)distance).ToString();
-                if (distance <= owner.ScanRange + target.Signature)
+                if (distance <= owner.ScanRange + target.CurrentSignature)
                 {
                     bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
                 }
@@ -176,7 +176,7 @@ namespace Radar
                 bbox.LineRenderer.enabled = true;
                 bbox.LineRenderer.SetPosition(0, unit.Position);
                 bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
-                if (distance > unit.ScanRange + GameManager.Player.Signature)
+                if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
                 {
                     bbox.LineRenderer.material = bbox.DottedLineMaterial;
                     bbox.LineRenderer.material.mainTextureScale =
