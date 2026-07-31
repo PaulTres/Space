@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
 namespace Weapons
@@ -31,10 +32,13 @@ namespace Weapons
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
         public float MaxRangeSquared => @params.MaxRangeSquared;
-        protected AggressiveTurretStance aggresiveStance;
-        protected DefensiveTurretStance defensiveStance;
-        protected PassiveTurretStance passiveStance;
-        protected TurretStance currentStance;
+        /// <summary>
+        /// Stance 0 - aggressive<br/>
+        /// Stance 1 - defensive<br/>
+        /// Stance 2 - passive
+        /// </summary>
+        protected List<TurretStance> turretStances = new();
+        protected int currentStanceIndex = 0;
         #endregion
 
         #region Setup
@@ -43,15 +47,15 @@ namespace Weapons
             tr = transform;
             Owner = GetComponentInParent<Unit>();
             if (Weapon == null) Weapon = GetComponentInChildren<WeaponBase>();
-            aggresiveStance = new() { Turret = this, TurretData = @params };
-            defensiveStance = new() { Turret = this, TurretData = @params };
-            passiveStance = new() { Turret = this, TurretData = @params };
+            turretStances.Add(new AggressiveTurretStance() { Turret = this, TurretData = @params });
+            turretStances.Add(new DefensiveTurretStance() { Turret = this, TurretData = @params });
+            turretStances.Add(new PassiveTurretStance() { Turret = this, TurretData = @params });
         }
 
         protected virtual void OnEnable()
         {
             Target = null;
-            currentStance = aggresiveStance;
+            currentStanceIndex = 0;
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(Tick);
         }
 
@@ -64,7 +68,85 @@ namespace Weapons
         #endregion
 
         #region Functionality
+        /// <summary>
+        /// If a target is present and enabled, rotate towards the target, 
+        /// shoot and increase readiness. Otherwise decrease readiness and 
+        /// call UpdateTargets().
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        public void Tick(float deltaTime)
+        {
+            if (Target.NotNullAndActive())
+            {
+                //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                var pos = ComputeTargetingPosition(Target);
+                //Debug.DrawLine(Transform.position, pos, Color.red);
+                LookAt(pos, deltaTime);
+                if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
+                {
+                    //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                    if (Vector3.Angle(ElevationPivot.forward, (pos -
+                        Transform.position)) < @params.MaxAngleDifference)
+                    {
+                        if (Owner.InOptimalFiringRange(Target.Position,
+                            Target.CurrentSignature))
+                        {
+                            IncreaseReadiness(deltaTime);
+                        }
+                        Weapon.Shoot(Target);
+                        return;
+                    }
+                }
+                else Target = null;
+            }
+            else
+            {
+                RotateToIdle(deltaTime);
+                UpdateTargets();
+            }
+            DecreaseReadiness(deltaTime);
+        }
+
+        /// <summary>
+        /// Increases readiness on the Weapon.
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        protected void IncreaseReadiness(float deltaTime)
+        {
+            Weapon.IncreaseReadiness(deltaTime);
+        }
+
+        /// <summary>
+        /// Calls DecreaseReadiness on the Weapon.
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        protected void DecreaseReadiness(float deltaTime)
+        {
+            Weapon.DecreaseReadiness(deltaTime);
+        }
+
         #region Targeting
+        /// <summary>
+        /// Sets stance index to index%(nr of stances), then calls UpdateTargets.
+        /// </summary>
+        /// <param name="index"></param>
+        public void SetStanceIndex(int index)
+        {
+            currentStanceIndex = index % turretStances.Count;
+            UpdateTargets();
+        }
+
+        /// <summary>
+        /// Increases stance index by 1, loops around on reaching end of stance list. Then calls UpdateTargets.
+        /// </summary>
+        public void CycleStance() => SetStanceIndex(currentStanceIndex + 1);
+
+        public void SetAggressiveStance() => SetStanceIndex(0);
+
+        public void SetDefensiveStance() => SetStanceIndex(1);
+
+        public void SetPassiveStance() => SetStanceIndex(2);
+
         /// <summary>
         /// Returns whether a given position can be targeted by the turret.
         /// </summary>
@@ -145,66 +227,9 @@ namespace Weapons
             //Debug.Log($"Turret {transform.name} checking for targets.");
 
             if (!Target.NotNullAndActive()) Target = null;
-            currentStance.UpdateTargets();
+            turretStances[currentStanceIndex].UpdateTargets();
         }
         #endregion
-
-        /// <summary>
-        /// If a target is present and enabled, rotate towards the target, 
-        /// shoot and increase readiness. Otherwise decrease readiness and 
-        /// call UpdateTargets().
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        public void Tick(float deltaTime)
-        {
-            if (Target.NotNullAndActive())
-            {
-                //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
-                var pos = ComputeTargetingPosition(Target);
-                //Debug.DrawLine(Transform.position, pos, Color.red);
-                LookAt(pos, deltaTime);
-                if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
-                {
-                    //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
-                    if (Vector3.Angle(ElevationPivot.forward, (pos -
-                        Transform.position)) < @params.MaxAngleDifference)
-                    {
-                        if (Owner.InOptimalFiringRange(Target.Position,
-                            Target.CurrentSignature))
-                        {
-                            IncreaseReadiness(deltaTime);
-                        }
-                        Weapon.Shoot(Target);
-                        return;
-                    }
-                }
-                else Target = null;
-            }
-            else
-            {
-                RotateToIdle(deltaTime);
-                UpdateTargets();
-            }
-            DecreaseReadiness(deltaTime);
-        }
-
-        /// <summary>
-        /// Increases readiness on the Weapon.
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        protected void IncreaseReadiness(float deltaTime)
-        {
-            Weapon.IncreaseReadiness(deltaTime);
-        }
-
-        /// <summary>
-        /// Calls DecreaseReadiness on the Weapon.
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        protected void DecreaseReadiness(float deltaTime)
-        {
-            Weapon.DecreaseReadiness(deltaTime);
-        }
 
         #region Turret movement
         /// <summary>

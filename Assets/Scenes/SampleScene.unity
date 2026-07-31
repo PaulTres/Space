@@ -136,6 +136,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1312110429}
     - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
+      propertyPath: <RotationSpeed>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
       propertyPath: cameraData.FreelookCameraPivot
       value: 
       objectReference: {fileID: 1312110428}
@@ -235,39 +239,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   type: 0
-  deleteOwnershipOnDeath: 1
   <Team>k__BackingField: 2
-  tickInterval: 0.5
-  effectOnDeath: {fileID: 0}
-  <EffectScaleFactor>k__BackingField: 1
-  soundDuringDeath:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0
-  <MinimumSignature>k__BackingField: 0
-  <MaxSignature>k__BackingField: 0
-  signatureDecreaseRate: 0.1
-  signatureDecreaseCooldown: 5
-  scanRange: 10
+  unitParameters:
+    TickInterval: 0.2
+    EffectOnDeath: {fileID: 0}
+    <EffectScaleFactor>k__BackingField: 1
+    SoundDuringDeath:
+      clip: {fileID: 0}
+      mixerGroup: {fileID: 0}
+      loop: 0
+      playOnAwake: 0
+      frequentSound: 0
+      mute: 0
+      bypassEffects: 0
+      bypassListenerEffects: 0
+      bypassReverbZones: 0
+      priority: 128
+      volume: 1
+      pitch: 1
+      panStereo: 0
+      spatialBlend: 0
+      reverbZoneMix: 1
+      dopplerLevel: 1
+      spread: 0
+      minDistance: 1
+      maxDistance: 500
+      ignoreListenerVolume: 0
+      ignoreListenerPause: 0
+      rolloffMode: 0
+    <MinimumSignature>k__BackingField: 0
+    <MaxSignature>k__BackingField: 0
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 10
   <MaxVelocityMagnitude>k__BackingField: 5
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 5

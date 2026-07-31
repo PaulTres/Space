@@ -182,59 +182,6 @@ namespace Weapons
     }
 
     /// <summary>
-    /// The turret will only shoot at missiles targeting the ship.
-    /// </summary>
-    public class PDOnlyStance : TurretStance
-    {
-        public override void UpdateTargets()
-        {
-            if (TurretData.TargetMissiles)
-            {
-                (var count, var missiles) = Owner.GetMissiles();
-                //Debug.Log(count);
-                if (count > 0)
-                {
-                    var currentM = Target.NotNullAndActive() ? Target as Missile : null;
-                    bool targetIsAimedAtOwner = currentM != null && currentM.Target.IsEqual(Owner);
-                    if (!targetIsAimedAtOwner && currentM != null) Target = null;
-                    float bestScore = EvaluateTarget(Target);
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        if (missiles[i] == null || !missiles[i].gameObject.activeSelf) continue;
-                        var m = missiles[i].transform.GetComponentViaRegister<Missile>();
-                        if (m == null || !IsTargetValid(m) || m.TargetedDamage >= m.MaxHP) continue;
-
-                        if (m.Target.IsEqual(Owner))
-                        {
-                            if (Target == null)
-                            {
-                                Target = m;
-                                targetIsAimedAtOwner = true;
-                                bestScore = EvaluateTarget(m);
-                            }
-                            else
-                            {
-                                var score = EvaluateTarget(m);
-                                if (score > bestScore)
-                                {
-                                    bestScore = score;
-                                    Target = m;
-                                }
-                            }
-
-                        }
-                    }
-
-                    if (targetIsAimedAtOwner) return;
-                }
-            }
-
-            if (TurretData.TargetUnits) Target = null;
-        }
-    }
-
-    /// <summary>
     /// The turret will not shoot at anything no matter what.
     /// </summary>
     public class PassiveTurretStance : TurretStance

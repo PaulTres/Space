@@ -18,7 +18,6 @@ public abstract class Unit : MonoBehaviour, IObject
     public class UnitParameters
     {
         public float TickInterval = 0.2f;
-        [Header("Death")]
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
         [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
