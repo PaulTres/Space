@@ -18,6 +18,7 @@ namespace Weapons
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
         protected TrailRenderer trailRenderer;
+        protected Renderer projectileRenderer;
         protected bool inertialDampeners = true;
         protected int team;
         #endregion
@@ -44,14 +45,16 @@ namespace Weapons
                 acceleration = topSpeed / 10;
             }
             Transform.localScale = data.Scale;
-
+            if (projectileRenderer == null) projectileRenderer = GetComponent<Renderer>();
+            if (projectileRenderer != null)
+            {
+                projectileRenderer.material = data.RendererMaterial;
+            }
             if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
             if (trailRenderer != null)
             {
-                trailRenderer.material = data.RendererMaterial;
-                trailRenderer.startWidth = Transform.localScale.y;
-                trailRenderer.endWidth = 0;
-                trailRenderer.time = 1;
+                trailRenderer.material = data.TrailRendererMaterial;
+                trailRenderer.widthCurve = data.TrailRendererCurve;
             }
             inertialDampeners = data.InertialDampeners;
         }

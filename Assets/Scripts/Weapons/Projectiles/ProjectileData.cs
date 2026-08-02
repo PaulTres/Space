@@ -7,6 +7,15 @@ namespace Weapons
         public float TopSpeed, Acceleration, InitialVelocity;
         public bool InertialDampeners = true;
         public Vector3 Scale = Vector3.one;
-        public Material RendererMaterial;
+        public Material RendererMaterial, TrailRendererMaterial;
+        public AnimationCurve TrailRendererCurve;
+
+        protected virtual void Reset()
+        {
+            TrailRendererCurve = new AnimationCurve(
+                new Keyframe(0f, Scale.y),
+                new Keyframe(Scale.y, 0f)
+            );
+        }
     }
 }

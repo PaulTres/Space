@@ -181,6 +181,8 @@ namespace Player
 
             rb.AddForce(intendedVelocity, ForceMode.Acceleration);
             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
+            if (movementVector.z > 0) thrusters.Increase(deltaTime);
+            else thrusters.Decrease(deltaTime);
         }
 
         public void PerformUpdate(float deltaTime)

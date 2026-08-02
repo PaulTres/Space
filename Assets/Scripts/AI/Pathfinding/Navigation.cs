@@ -127,7 +127,9 @@ public class Navigation : Ship
         {
             rb.AddForce(forwardThrust * Time.deltaTime * direction.normalized,
                 ForceMode.Acceleration);
+            if (thrusters != null) thrusters.Increase(deltaTime);
         }
+        else if (thrusters != null) thrusters.Decrease(deltaTime);
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
     }
 

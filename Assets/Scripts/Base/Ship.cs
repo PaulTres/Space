@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
+
 public abstract class Ship : Unit
 {
     #region Fields
@@ -9,6 +10,7 @@ public abstract class Ship : Unit
     [SerializeField] protected float forwardThrust = 1;
     [field: SerializeField] public float RotationSpeed { get; protected set; } = 5;
     [SerializeField] protected float strafeThrust = 1;
+    protected ThrusterGroup thrusters;
     protected Rigidbody rb;
     protected Vector3 angularVelocity;
     public override Vector3 AngularVelocity => angularVelocity;
@@ -21,6 +23,7 @@ public abstract class Ship : Unit
     {
         base.Awake();
         ComponentRegister<IObject>.Register(transform, this);
+        thrusters = GetComponentInChildren<ThrusterGroup>();
         rb = gameObject.GetOrAddComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = false;
