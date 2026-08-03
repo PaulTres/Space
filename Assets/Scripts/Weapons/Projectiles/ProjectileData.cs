@@ -9,6 +9,7 @@ namespace Weapons
         public Vector3 Scale = Vector3.one;
         public Material RendererMaterial, TrailRendererMaterial;
         public AnimationCurve TrailRendererCurve;
+        public override float Speed => (Mathf.Max(InitialVelocity, Acceleration) + TopSpeed) / 2;
 
         protected virtual void Reset()
         {

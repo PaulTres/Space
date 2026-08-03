@@ -1,3 +1,4 @@
+using HybridBT2;
 using UnityEngine;
 using Utilities;
 
@@ -19,13 +20,24 @@ public class Navigation : Ship
     /// will face its velocity.
     /// </summary>
     public RotationTarget RotationTarget { get; set; }
-
     public Vector3 IntendedForward
     {
         get
         {
             if (RotationTarget == null) return Transform.forward;
             return RotationTarget.GetTargetRotation(Transform) * Vector3.forward;
+        }
+    }
+    /// <summary>
+    /// The unit this is currently targeting.
+    /// </summary>
+    public override IObject Target
+    {
+        get
+        {
+            var blackboard = Transform.GetBlackboard();
+            if (blackboard == null) return null;
+            return blackboard.GetData<Unit>(Blackboard.Keys.Target);
         }
     }
 

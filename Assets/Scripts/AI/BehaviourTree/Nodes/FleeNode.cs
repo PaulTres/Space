@@ -23,7 +23,7 @@ public class FleeNode : LeafNodeData
         var target = ctx.GetData<IObject>(Blackboard.Keys.Target);
         //no need to normalize here, we just need the direction
         //this could probably be optimized to only happen once every few ticks
-        ctx.Navigation.SetDestination(ctx.Unit.Position + (ctx.Unit.Position - 
+        ctx.Navigation.SetDestination(ctx.Navigation.Position + (ctx.Navigation.Position - 
             target.Position) * fleeDistance);
         return NodeState.RUNNING;
     };

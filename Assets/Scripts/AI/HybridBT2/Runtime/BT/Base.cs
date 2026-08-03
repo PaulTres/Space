@@ -10,6 +10,7 @@ namespace HybridBT2
         RUNNING,
         FAILURE
     }
+
     public abstract class BaseElement
     {
         public readonly string Name;
@@ -27,6 +28,7 @@ namespace HybridBT2
             return new string('\t', indentation) + Name;
         }
     }
+
     public abstract class BaseElementData : ScriptableObject
     {
         [SerializeField] protected string myName;
@@ -35,6 +37,7 @@ namespace HybridBT2
             get => myName.Length > 0 ? myName : name;
         }
     }
+
     public abstract class Node : BaseElement
     {
         /// <summary>
@@ -126,6 +129,7 @@ namespace HybridBT2
             this.onExit = onExit ?? delegate { };
             Abort += (ctx) => SetState(NodeState.FAILURE, ctx);
         }
+
         /// <summary>
         /// Evaluates all conditions. If one fails, invokes Abort and stops execution.
         /// Otherwise will execute all services, invoke onEnter if the previous state of the node was not
@@ -148,21 +152,25 @@ namespace HybridBT2
 
             ExecuteUnderlyingBehaviour(context);
         }
+
         /// <summary>
         /// Contains the action the node should execute if possible.
         /// </summary>
         /// <param name="context">The context of the agent.</param>
         protected abstract void ExecuteUnderlyingBehaviour(Blackboard context);
+
         public void AddService(Action<Node, Blackboard> service)
         {
             if (service == null) throw new ArgumentNullException($"{this} was passed a null service!");
             services.Add(service);
         }
+
         public void AddCondition(ConditionData data)
         {
             if (data == null) throw new ArgumentNullException($"{this} was passed a null condition!");
             conditions.Add(new(data.Name, data.Function));
         }
+
         /// <summary>
         /// Get this node's name, state, and status of conditions.
         /// </summary>
@@ -183,6 +191,7 @@ namespace HybridBT2
             return s;
         }
     }
+
     public abstract class NodeData : BaseElementData
     {
         /// <summary>
@@ -193,7 +202,9 @@ namespace HybridBT2
         protected virtual Action<Node, Blackboard> onExit { get => delegate { }; }
         public List<ConditionData> Conditions = new();
         public List<ServiceData> Services = new();
+
         protected abstract Node GetNodeInternal();
+
         public virtual Node GetNodeExternal()
         {
             var node = GetNodeInternal();
@@ -203,10 +214,12 @@ namespace HybridBT2
             return node;
         }
     }
+
     public abstract class ConditionData : BaseElementData
     {
         public abstract Func<Node, Blackboard, bool> Function { get; }
     }
+
     public abstract class ServiceData : BaseElementData
     {
         public abstract Action<Node, Blackboard> Action { get; }

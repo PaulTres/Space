@@ -7,7 +7,7 @@ using Utilities;
 
 namespace Weapons
 {
-    public class Bullet : MonoBehaviour, IOwnable
+    public abstract class Bullet : MonoBehaviour, IOwnable
     {
         #region Pool
         public enum Type

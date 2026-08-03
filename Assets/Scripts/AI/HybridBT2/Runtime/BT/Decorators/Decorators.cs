@@ -25,6 +25,7 @@ namespace HybridBT2
         }
         protected abstract string DecoratorInfo(int indentation);
     }
+
     public abstract class DecoratorData : NodeData
     {
         public NodeData Child;

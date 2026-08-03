@@ -8,7 +8,7 @@ namespace Weapons
         #region Utils   
         protected Unit unit;
         /// <summary>
-        /// The unit that owns this Weapon. Lazily initialized by searching for a Unit 
+        /// The unit that owns this Weapon. Lazily initialized by searching for a Navigation 
         /// component in the root of the transform hierarchy.
         /// </summary>
         public Unit Unit

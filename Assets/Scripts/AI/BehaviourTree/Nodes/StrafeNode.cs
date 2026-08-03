@@ -63,8 +63,8 @@ public class StrafeNode : LeafNodeData
                         target.Transform.right * ctx.Navigation.MaxVelocityMagnitude);
                     break;
                 default:
-                    ctx.Navigation.SetDestination(ctx.Unit.Transform.position +
-                        ctx.Unit.Transform.forward * ctx.Navigation.MaxVelocityMagnitude);
+                    ctx.Navigation.SetDestination(ctx.Navigation.Transform.position +
+                        ctx.Navigation.Transform.forward * ctx.Navigation.MaxVelocityMagnitude);
                     break;
             }
         }

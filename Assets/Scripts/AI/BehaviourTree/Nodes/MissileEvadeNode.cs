@@ -21,7 +21,7 @@ public class MissileEvadeNode : LeafNodeData
             if (m != null && m.gameObject.activeSelf)
             {
                 var normal = m.Transform.position - ctx.Position;
-                var direction = Vector3.ProjectOnPlane(normal, ctx.Unit.Forward).normalized;
+                var direction = Vector3.ProjectOnPlane(normal, ctx.Navigation.Forward).normalized;
                 if (direction.magnitude == 0) direction = normal.Perpendicular();
                 if (resetRotationTarget) ctx.Navigation.RotationTarget = null;
                 ctx.Navigation.SetDestination(ctx.Position + direction * directionMagnitude);

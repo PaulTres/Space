@@ -17,8 +17,7 @@ namespace HybridBT2
             AllTurrets
         }
         public readonly Transform Transform;
-        public readonly Unit Unit;
-        public Vector3 Position => Unit.Position;
+        public Vector3 Position => Navigation.Position;
         public readonly Navigation Navigation;
         /// <summary>
         /// Time since last tree tick.
@@ -30,7 +29,6 @@ namespace HybridBT2
         public Blackboard(Transform transform)
         {
             Transform = transform;
-            Unit = transform.GetComponent<Unit>();
             Navigation = transform.GetComponent<Navigation>();
             DeltaTime = 0;
             lastTime = Time.time;

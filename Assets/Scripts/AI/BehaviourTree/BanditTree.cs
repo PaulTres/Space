@@ -18,7 +18,7 @@ public class BanditTree : BT, IRegisterableComponent
         base.Awake();
         EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Register(transform, this);
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Blackboard.Unit), null, Pause);
+        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Blackboard.Navigation), null, Pause);
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class BanditTree : BT, IRegisterableComponent
         float moraleImpact = @event.UnitMoraleWeight * (Mathf.Max(
             maxMoraleImpactRange - dist, 0) / maxMoraleImpactRange);
 
-        if (@event.UnitTeam == Blackboard.Unit.Team)
+        if (@event.UnitTeam == Blackboard.Navigation.Team)
         {
             morale -= moraleImpact;
             Blackboard.SetData(Blackboard.Keys.Morale, morale);
@@ -56,7 +56,7 @@ public class BanditTree : BT, IRegisterableComponent
     }
     protected virtual void OnDestroy()
     {
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Blackboard.Unit), null, Pause);
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Blackboard.Navigation), null, Pause);
         ComponentRegister<BanditTree>.Unregister(transform);
     }
 

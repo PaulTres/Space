@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Weapons
 {
     [CreateAssetMenu(menuName = "Weapons/BulletData", fileName = "BulletData")]
-    public class BulletData : MonoPoolableData<Bullet.Type, Bullet>
+    public abstract class BulletData : MonoPoolableData<Bullet.Type, Bullet>
     {
         public bool DisableOnHit = true;
         public float Damage = 1;
@@ -13,7 +13,10 @@ namespace Weapons
         public Vector3 EffectScale => EffectScaleFactor * Vector3.one;
         public PoolableEffect OnSpawnEffect;
         public PoolableEffect OnHitEffect;
-
+        /// <summary>
+        /// Roughly how fast the bullet can hit the target. Used for AI decision making.
+        /// </summary>
+        public abstract float Speed { get; }
         /// <summary>
         /// Returns an instance of the bullet from the object pool or creates a new one if 
         /// it doesn't exist. Initializes the bullet with the current BulletData.

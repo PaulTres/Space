@@ -11,20 +11,7 @@ namespace Weapons
     {
         #region Fields
         protected IObject target;
-        public IObject Target
-        {
-            get
-            {
-                return target;
-            }
-            set
-            {
-                if (target != value)
-                {
-                    target = value;
-                }
-            }
-        }
+        public override IObject Target => target;
         protected float initialTracking, maxTargetSignature, maxTelemetryBonus;
         public int Index { get; set; }
         protected HPComponent hpComponent;
@@ -79,9 +66,14 @@ namespace Weapons
 
         protected override void OnDisable()
         {
-            Target = null;
+            SetTarget(null);
             if (showOnRadar) this.UnregisterForRadar();
             base.OnDisable();
+        }
+
+        public void SetTarget(IObject newTarget)
+        {
+            target = newTarget;
         }
 
         public override void Initialize(BulletData poolableData)

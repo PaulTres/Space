@@ -223,6 +223,7 @@ namespace Player
         public override void Die(ObjectDestroyed @event)
         {
             GameManager.Player = null;
+            MissionManager.TryGetInstance(true).StopEndTimer();
             UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
             inputReader.DisableCallbacks();
             base.Die(@event);

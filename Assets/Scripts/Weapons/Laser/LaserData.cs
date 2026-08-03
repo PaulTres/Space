@@ -11,5 +11,6 @@ namespace Weapons
         public float OverheatThreshold = 1;
         public float HeatLoss = .4f;
         public float HeatPerShot = .1f;
+        public override float Speed => float.MaxValue;
     }
 }

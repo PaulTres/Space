@@ -6,6 +6,7 @@ namespace Weapons
     {
         #region Fields
         public IObject.Type ObjectType => IObject.Type.Missile;
+        public virtual IObject Target => null;
         protected float topSpeed, acceleration;
         public virtual float TopSpeed => topSpeed;
         protected Vector3 linearVelocity, angularVelocity;

@@ -38,7 +38,7 @@ public interface IObject : IRegisterableComponent
     public Vector3 Position => Transform.position;
     Vector3 AngularVelocity { get; }
     Vector3 LinearVelocity { get; }
-    public virtual IObject Target => null;
+    public IObject Target { get; }
 }
 
 public interface IResettable

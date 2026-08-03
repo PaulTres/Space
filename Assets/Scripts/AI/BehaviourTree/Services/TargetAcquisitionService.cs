@@ -15,17 +15,17 @@ public class TargetAcquisitionService : ServiceData
     {
         Unit bestTarget = null;
         float bestTargetScore = float.MinValue;
-        foreach (var target in ctx.Unit.GetTargets())
+        foreach (var target in ctx.Navigation.GetTargets())
         {
             if (target == null || !target.gameObject.activeSelf) continue;
             if (bestTarget == null)
             {
                 bestTarget = target;
-                bestTargetScore = TargetEvaluation.Evaluate(ctx.Unit, target, MaxRange);
+                bestTargetScore = TargetEvaluation.Evaluate(ctx.Navigation, target, MaxRange);
             }
             else
             {
-                var score = TargetEvaluation.Evaluate(ctx.Unit, target, MaxRange);
+                var score = TargetEvaluation.Evaluate(ctx.Navigation, target, MaxRange);
                 if (score > bestTargetScore + MinUtilityDelta)
                 {
                     bestTarget = target;

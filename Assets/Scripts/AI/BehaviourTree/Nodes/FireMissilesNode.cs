@@ -23,7 +23,7 @@ public class FireMissilesNode : LeafNodeData
             ctx.SetData<Unit>(Blackboard.Keys.Target, null);
             return NodeState.FAILURE;
         }
-        if (Vector3.Distance(ctx.Position, target.Position) > maxRange || !ctx.Unit.InOptimalFiringRange(target)) return NodeState.FAILURE;
+        if (Vector3.Distance(ctx.Position, target.Position) > maxRange || !ctx.Navigation.InOptimalFiringRange(target)) return NodeState.FAILURE;
         //Debug.Log("C");
         Debug.Log($"{ctx.Transform} shooting missiles!");
         foreach (var l in launchers)

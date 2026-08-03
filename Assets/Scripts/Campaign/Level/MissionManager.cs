@@ -29,4 +29,10 @@ public class MissionManager : Singleton<MissionManager>
         //.Log("Ending mission");
         endMissionTimer?.Start();
     }
+
+    public void StopEndTimer()
+    {
+        endMissionTimer?.Stop();
+        endMissionTimer?.Reset();
+    }
 }

@@ -98,6 +98,7 @@ public abstract class Unit : MonoBehaviour, IObject
         }
     }
     public IObject.Type ObjectType => type;
+    public abstract IObject Target { get; }
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.forward;
     public virtual Vector3 Up => Transform.forward;
@@ -113,18 +114,6 @@ public abstract class Unit : MonoBehaviour, IObject
         }
     }
     public Vector3 Position => Transform.position;
-    /// <summary>
-    /// The unit this is currently targeting.
-    /// </summary>
-    public virtual IObject Target
-    {
-        get
-        {
-            var blackboard = Transform.GetBlackboard();
-            if (blackboard == null) return null;
-            return blackboard.GetData<Unit>(Blackboard.Keys.Target);
-        }
-    }
     public bool IsFleeing
     {
         get

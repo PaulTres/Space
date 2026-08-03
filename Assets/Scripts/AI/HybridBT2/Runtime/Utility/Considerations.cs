@@ -6,12 +6,14 @@ namespace HybridBT2
     {
         public abstract float Evaluate(Blackboard context);
     }
+
     [CreateAssetMenu(menuName = "HybridBT2/Considerations/Constant")]
     public class ConstantConsideration : Consideration
     {
         [SerializeField] protected float value;
         public override float Evaluate(Blackboard context) => value;
     }
+
     public abstract class CurveConsideration : Consideration
     {
         [SerializeField] protected AnimationCurve curve;
@@ -31,6 +33,7 @@ namespace HybridBT2
             );
         }
     }
+
     [CreateAssetMenu(menuName = "HybridBT2/Considerations/Composite")]
     public sealed class CompositeConsideration : Consideration
     {
