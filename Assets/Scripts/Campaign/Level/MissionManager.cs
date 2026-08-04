@@ -15,7 +15,6 @@ public class MissionManager : Singleton<MissionManager>
         if (mission != null) Mission.CurrentMission = mission;
         endMissionTimer = new(GlobalConfig.MissionEndDuration);
         endMissionTimer.OnTimerStop += () => GameManager.EndMission();
-
     }
 
     protected void Start()
@@ -37,7 +36,7 @@ public class MissionManager : Singleton<MissionManager>
 
     public void StopEndTimer()
     {
-        endMissionTimer?.Stop();
+        endMissionTimer?.Pause();
         endMissionTimer?.Reset();
     }
 }

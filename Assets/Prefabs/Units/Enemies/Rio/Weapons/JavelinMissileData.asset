@@ -17,7 +17,7 @@ MonoBehaviour:
   RaiseEventOnRecycle: 0
   DisableOnHit: 1
   Damage: 1
-  LifeTime: 30
+  LifeTime: 15
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 0}
   OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
@@ -34,14 +34,14 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0.15
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.13465755
+      outSlope: -0.13465755
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.108108096
     - serializedVersion: 3
-      time: 1
+      time: 0.5
       value: 0
       inSlope: 0
       outSlope: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 1
+  Tracking: 1.2
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 0.1

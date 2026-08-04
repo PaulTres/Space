@@ -491,7 +491,7 @@ MonoBehaviour:
   unitParameters:
     <UnitType>k__BackingField: 0
     TickInterval: 0.2
-    EffectOnDeath: {fileID: 0}
+    EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
     <EffectScaleFactor>k__BackingField: 1
     SoundDuringDeath:
       clip: {fileID: 0}
