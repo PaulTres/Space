@@ -16,7 +16,7 @@ public class TargetInOptimalRangeCondition : ConditionData
         if (target.Active())
         {
             var dist = Vector3.Distance(target.Position, ctx.Position);
-            return minRangeFromTarget < dist && dist <= target.CurrentSignature + ctx.Navigation.ScanRange + buffer;
+            return minRangeFromTarget <= dist && dist <= target.CurrentSignature + ctx.Navigation.ScanRange + buffer;
         }
         return false;
     };

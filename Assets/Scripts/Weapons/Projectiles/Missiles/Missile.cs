@@ -10,8 +10,8 @@ namespace Weapons
     public class Missile : Projectile
     {
         #region Fields
-        protected IObject target;
-        public override IObject Target => target;
+        protected ImprovedMonoBehaviour target;
+        public override ImprovedMonoBehaviour Target => target;
         protected float initialTracking, maxTargetSignature, maxTelemetryBonus;
         public int Index { get; set; }
         protected HPComponent hpComponent;
@@ -55,7 +55,7 @@ namespace Weapons
             TargetedDamage = 0;
             telemetryBonus = 0;
             ComponentRegister<Missile>.Register(Transform, this);
-            if (showOnRadar) this.RegisterForRadar();
+            if (showOnRadar) RegisterForRadar();
         }
 
         protected override void OnDestroy()
@@ -67,11 +67,11 @@ namespace Weapons
         protected override void OnDisable()
         {
             SetTarget(null);
-            if (showOnRadar) this.UnregisterForRadar();
+            if (showOnRadar) UnregisterForRadar();
             base.OnDisable();
         }
 
-        public void SetTarget(IObject newTarget)
+        public void SetTarget(ImprovedMonoBehaviour newTarget)
         {
             target = newTarget;
         }
@@ -119,7 +119,7 @@ namespace Weapons
         /// <param name="dt"></param>
         protected override void RestOfPerformUpdate(float dt)
         {
-            if (Target.NotNullAndActive())
+            if (Target.Active())
             {
                 telemetryBonus = Telemetry();
                 CalculateEffectiveTracking();

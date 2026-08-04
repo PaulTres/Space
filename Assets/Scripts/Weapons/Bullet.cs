@@ -7,7 +7,7 @@ using Utilities;
 
 namespace Weapons
 {
-    public abstract class Bullet : MonoBehaviour, IOwnable
+    public abstract class Bullet : ImprovedMonoBehaviour, IOwnable
     {
         #region Pool
         public enum Type
@@ -65,15 +65,6 @@ namespace Weapons
                         gameObject.layer = GlobalConfig.GetBulletLayer(value.gameObject.layer);
                     }
                 }
-            }
-        }
-        protected Transform tr;
-        public Transform Transform
-        {
-            get
-            {
-                if (tr == null) tr = transform;
-                return tr;
             }
         }
         protected bool disableOnHit = true;

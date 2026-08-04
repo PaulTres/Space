@@ -24,5 +24,31 @@ MonoBehaviour:
   TopSpeed: 20
   Acceleration: 2
   InitialVelocity: 20
+  InertialDampeners: 1
   Scale: {x: 0.15, y: 0.15, z: 0.15}
   RendererMaterial: {fileID: 2100000, guid: 2509e4f2fe29d49448a9753cd4449c25, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 2509e4f2fe29d49448a9753cd4449c25, type: 2}
+  TrailRendererCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.15
+      inSlope: -0.15
+      outSlope: -0.15
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.15
+      outSlope: -0.15
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utilities;
 namespace Weapons
@@ -7,10 +6,10 @@ namespace Weapons
     public class Turret : MonoBehaviour
     {
         #region Fields
-        protected IObject currentTarget;
-        public IObject Target
+        protected ImprovedMonoBehaviour currentTarget;
+        public ImprovedMonoBehaviour Target
         {
-            get => currentTarget.NotNullAndActive() ? currentTarget : null;
+            get => currentTarget.Active() ? currentTarget : null;
             set
             {
                 if (currentTarget != value)
@@ -50,7 +49,7 @@ namespace Weapons
             Owner = GetComponentInParent<Unit>();
             if (RotationPivot == null) RotationPivot = Transform;
             if (ElevationPivot == null) ElevationPivot = Transform;
-            Weapons = GetComponentsInChildren<WeaponBase>().ToList();
+            Weapons = new(GetComponentsInChildren<WeaponBase>());
             turretStances.Add(new AggressiveTurretStance() { Turret = this, TurretData = @params });
             turretStances.Add(new DefensiveTurretStance() { Turret = this, TurretData = @params });
             turretStances.Add(new PassiveTurretStance() { Turret = this, TurretData = @params });
@@ -79,8 +78,10 @@ namespace Weapons
         {
             if (@params.BurstFire)
             {
-                if (Time.time - lastBurstTime > @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
+                Debug.Log("Burst firing");
+                if (Time.time - lastBurstTime >= @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
                 {
+                    Debug.Log("Can burst fire");
                     lastBurstTime = Time.time;
                     int i;
                     for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount); i++)
@@ -118,9 +119,9 @@ namespace Weapons
         public void Tick(float deltaTime)
         {
             if (Owner == null || Owner.IsDying) return;
-            if (Target.NotNullAndActive())
+            if (Target.Active())
             {
-                //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
                 //Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
@@ -163,6 +164,7 @@ namespace Weapons
         }
 
         #region Targeting
+        #region Stance
         /// <summary>
         /// Sets stance index to index%(nr of stances), then calls UpdateTargets.
         /// </summary>
@@ -183,6 +185,7 @@ namespace Weapons
         public void SetDefensiveStance() => SetStanceIndex(1);
 
         public void SetPassiveStance() => SetStanceIndex(2);
+        #endregion
 
         /// <summary>
         /// Returns whether a given position can be targeted by the turret.
@@ -191,8 +194,13 @@ namespace Weapons
         /// <returns></returns>
         public bool IsInAngle(Vector3 position)
         {
+            if (@params.MaxAngleDifference >= 360) return true;
             var dir = (position - Transform.position).normalized;
-            if (Mathf.Abs(Vector3.Dot(Transform.up, dir)) == 1) return false;
+            if (dir.sqrMagnitude == 0) return false;
+            if (Mathf.Abs(Vector3.Dot(Transform.up, dir)) == 1)
+            {
+                return @params.MaxAngleDifference >= 90 || @params.MaxElevation >= 90;
+            }
 
             var localRotation = Quaternion.Inverse(Transform.rotation) *
                 Quaternion.LookRotation(dir, Transform.up);
@@ -213,7 +221,7 @@ namespace Weapons
         /// </summary>
         /// <param name="target">The target to aim at.</param>
         /// <returns>The position to aim at.</returns>
-        public Vector3 ComputeTargetingPosition(IObject target)
+        public Vector3 ComputeTargetingPosition(ImprovedMonoBehaviour target)
         {
             float timeToHit = 0;
             var m = Weapons[0].BulletData as ProjectileData;
@@ -228,16 +236,17 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Returns whether a given target is valid for the turret to aim at. Checks for 
-        /// obstructions, if the target is active, within range, and within the turret's 
-        /// angle limits.
+        /// Returns whether a given target is valid for the turret to aim at. 
+        /// Checks for obstructions, if the target is active, within range, 
+        /// and within the turret's angle limits.
         /// </summary>
         /// <param name="target">The target to check.</param>
         /// <returns>True if the target is valid, false otherwise.</returns>
-        public bool IsTargetValid(IObject target)
+        public bool IsTargetValid(ImprovedMonoBehaviour target)
         {
-            if (!target.NotNullAndActive()) return false;
+            if (!target.Active()) return false;
 
+            if (@params.BurstFire) Debug.Log(target.Transform);
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;
@@ -250,7 +259,7 @@ namespace Weapons
             return true;
         }
 
-        public float EvaluateTarget(IObject target) => @params.EvaluateTarget(this, target);
+        public float EvaluateTarget(ImprovedMonoBehaviour target) => @params.EvaluateTarget(this, target);
 
         /// <summary>
         /// Go over available targets and select the best one based on the turret's 
@@ -263,7 +272,7 @@ namespace Weapons
 
             //Debug.Log($"Turret {transform.name} checking for targets.");
 
-            if (!Target.NotNullAndActive()) Target = null;
+            if (!Target.Active()) Target = null;
             turretStances[currentStanceIndex].UpdateTargets();
         }
         #endregion
@@ -303,6 +312,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         protected void LookAt(Vector3 position, float deltaTime)
         {
+            if (@params.RotSpeed == 0) return;
             Vector3 direction = position - Transform.position;
             if (direction.sqrMagnitude > 0.01)
             {

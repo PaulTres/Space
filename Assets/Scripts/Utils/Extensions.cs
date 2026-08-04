@@ -1,10 +1,8 @@
 using Effects;
 using HP;
 using HybridBT2;
-using Radar;
 using System.Collections.Generic;
 using UnityEngine;
-using Weapons;
 namespace Utilities
 {
     public enum Directions
@@ -22,11 +20,11 @@ namespace Utilities
         public static float GetMoraleWeight(this Unit unit)
         {
             if (unit == null) return 0;
-            return unit.ObjectType switch
+            return unit.UnitType switch
             {
-                IObject.Type.Skiff => 5,
-                IObject.Type.Frigate => 10,
-                IObject.Type.Cruiser => 20,
+                Unit.Type.Skiff => 5,
+                Unit.Type.Frigate => 10,
+                Unit.Type.Cruiser => 20,
                 _ => 0
             };
         }
@@ -38,7 +36,7 @@ namespace Utilities
         /// <param name="unit"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool InOptimalFiringRange(this Unit unit, IObject target)
+        public static bool InOptimalFiringRange(this Unit unit, ImprovedMonoBehaviour target)
         {
             if (unit == null) return false;
             return Vector3.Distance(unit.Position, target.Position) <=
@@ -59,17 +57,7 @@ namespace Utilities
             return Vector3.Distance(targetPosition, unit.Position) <=
                 unit.ScanRange + targetSignature;
         }
-
-        public static bool Active(this Unit unit, bool acceptDying = false)
-        {
-            return unit != null && unit.gameObject.activeSelf && (acceptDying || !unit.IsDying);
-        }
         #endregion
-
-        public static bool Active(this Missile missile)
-        {
-            return missile != null && missile.gameObject.activeSelf;
-        }
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
@@ -81,8 +69,8 @@ namespace Utilities
             PoolableEffect.Spawn(effect, parent, scaleFactor * Vector3.one);
         }
 
-        #region IObject      
-        public static bool NotNullAndActive(this IObject @object, bool allowDying = false)
+        #region ImprovedMonoBehaviour      
+        public static bool Active(this ImprovedMonoBehaviour @object, bool allowDying = false)
         {
             if (@object == null) return false;
             if (@object is Unit unityObj) return unityObj != null &&
@@ -91,28 +79,12 @@ namespace Utilities
             return @object != null && @object.Transform.gameObject.activeSelf;
         }
 
-        public static void RegisterForRadar(this IObject @object)
-        {
-            if (@object == null) throw new System.ArgumentNullException();
-
-            var r = PlayerTargetSystem.TryGetInstance();
-            if (r != null) r.RegisterTarget(@object);
-        }
-
-        public static void UnregisterForRadar(this IObject @object)
-        {
-            if (@object == null) throw new System.ArgumentNullException();
-
-            var r = PlayerTargetSystem.TryGetInstance();
-            if (r != null) r.UnregisterTarget(@object);
-        }
-
-        public static int GetInstanceID(this IObject @object)
+        public static int GetInstanceID(this ImprovedMonoBehaviour @object)
         {
             return @object.Transform.GetInstanceID();
         }
 
-        public static bool IsEqual(this IObject @object, IObject other)
+        public static bool IsEqual(this ImprovedMonoBehaviour @object, ImprovedMonoBehaviour other)
         {
             if (@object == null && other == null) return true;
             if (@object == null || other == null) return false;
@@ -126,7 +98,7 @@ namespace Utilities
         /// <param name="object">The object to get the position for.</param>
         /// <param name="scanner">The scanner unit.</param>
         /// <returns>The position with oscillation applied.</returns>
-        public static Vector3 GetPositionWithOscilation(this IObject @object, Unit scanner)
+        public static Vector3 GetPositionWithOscilation(this ImprovedMonoBehaviour @object, Unit scanner)
         {
             var dist = Mathf.Max((scanner.Transform.position -
                 @object.Transform.position).magnitude -

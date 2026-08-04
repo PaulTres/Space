@@ -20,7 +20,7 @@ public class FleeNode : LeafNodeData
 
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        var target = ctx.GetData<IObject>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         //no need to normalize here, we just need the direction
         //this could probably be optimized to only happen once every few ticks
         ctx.Navigation.SetDestination(ctx.Navigation.Position + (ctx.Navigation.Position - 

@@ -123,7 +123,7 @@ namespace Weapons
         /// <returns></returns>
         public virtual bool CanShoot()
         {
-            return !shotTimer.IsRunning;
+            return shotTimer == null || !shotTimer.IsRunning;
         }
 
         #region Shooting
@@ -133,7 +133,7 @@ namespace Weapons
         /// </summary>
         /// <param name="target">The target to shoot at.</param>
         /// <returns>True if the Weapons successfully fired a shot, false otherwise.</returns>
-        public bool Shoot(IObject target)
+        public bool Shoot(ImprovedMonoBehaviour target)
         {
             if (!CanShoot()) return false;
             Fire(target);
@@ -145,7 +145,7 @@ namespace Weapons
         /// <summary>
         /// Fire once for every shoot point.
         /// </summary>
-        public virtual void Fire(IObject target)
+        public virtual void Fire(ImprovedMonoBehaviour target)
         {
             for (int i = 0; i < shootPoints.Length; i++)
             {
@@ -159,7 +159,7 @@ namespace Weapons
         /// </summary>
         /// <param name="bullet">The bullet to be processed.</param>
         /// <param name="target">The target of the bullet.</param>
-        public virtual void ProcessBullet(Bullet bullet, IObject target)
+        public virtual void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
         {
             Unit.IncreaseSignature(@params.SignatureIncrease);
             bullet.Owner = Unit;

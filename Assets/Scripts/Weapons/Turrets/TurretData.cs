@@ -13,15 +13,14 @@ namespace Weapons
         public bool TargetUnits = true;
         [Tooltip("The score of the current target of the ship will be multiplied by this amount when evaluating targets(divided if negative).")]
         public float CurrentTargetScoreMultiplier = 2;
-        public float EvaluateTarget(Turret shooter, IObject @object)
+        public float EvaluateTarget(Turret shooter, ImprovedMonoBehaviour @object)
         {
             return TargetEvaluation != null ? TargetEvaluation.Evaluate(shooter, @object) : 0;
         }
         #endregion
 
         [Header("Shooting")]
-        [Tooltip("The turret will only fire when the angle between its barrel(s) and the " +
-            "target is <= this value.")]
+        [Tooltip("The turret will only fire when the angle between its barrel(s) and the target is <= this value.")]
         public float MaxAngleDifference = 1;
         public float MaxRange = 100;
         protected float maxRangeSquared = -1;

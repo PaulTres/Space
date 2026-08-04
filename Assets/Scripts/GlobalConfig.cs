@@ -18,10 +18,6 @@ public class GlobalConfig : ScriptableObject
 
                 var handle = Addressables.LoadAssetAsync<GlobalConfig>(addressableAdress);
                 instance = handle.WaitForCompletion();
-                foreach (var a in instance.objectIconsList)
-                {
-                    instance.objectIconsDict.Add(a.Type, a.Icon);
-                }
             }
             return instance;
         }
@@ -31,10 +27,6 @@ public class GlobalConfig : ScriptableObject
     {
         var handle = Addressables.LoadAssetAsync<GlobalConfig>(addressableAdress);
         instance = await handle.Task;
-        foreach (var a in instance.objectIconsList)
-        {
-            instance.objectIconsDict.Add(a.Type, a.Icon);
-        }
     }
     #endregion
 
@@ -44,16 +36,6 @@ public class GlobalConfig : ScriptableObject
     public static float PlayerTargetAngleWeight { get; set; } = 1;
     public static float PlayerTargetDistanceWeight { get; set; } = 1;
     public static float PlayerTargetMaxDistance { get; set; } = 100;
-    [System.Serializable]
-    public class ObjectTypeIconCorrespondence
-    {
-        public IObject.Type Type;
-        public Sprite Icon;
-    }
-    [SerializeField] protected List<ObjectTypeIconCorrespondence> objectIconsList = new();
-    protected Dictionary<IObject.Type, Sprite> objectIconsDict { get; } = new();
-
-    public static Sprite GetIcon(IObject.Type type) => Instance.objectIconsDict[type];
 
     [SerializeField] protected float iconSizeCoefficient = 5;
     public static float IconSizeCoefficient => Instance.iconSizeCoefficient;

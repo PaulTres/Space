@@ -57,10 +57,10 @@ namespace Weapons
             return base.CanShoot() && !overheated;
         }
 
-        public override void ProcessBullet(Bullet bullet, IObject target)
+        public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
         {
-            if (target != null) ((Laser)bullet).Target = target.Transform;
-            else Debug.LogWarning($"{transform} has no target!");
+            if (target != null) ((Laser)bullet).SetTarget(target);
+            else Debug.LogWarning($"Laser {transform} has no target!");
             currentHeat += heatPerShot;
             if (currentHeat > overheatThreshold) overheated = true;
             base.ProcessBullet(bullet, target);

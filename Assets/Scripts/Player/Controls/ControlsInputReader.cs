@@ -94,7 +94,7 @@ namespace Player
 
         public void OnFindTarget(InputAction.CallbackContext context)
         {
-            FindTargetEvent?.Invoke();
+            if (context.started) FindTargetEvent?.Invoke();
         }
     }
 }

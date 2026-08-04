@@ -12,11 +12,18 @@ using Weapons;
 
 [RequireComponent(typeof(HPComponent))]
 [RequireComponent(typeof(ParticleSystem))]
-public abstract class Unit : MonoBehaviour, IObject
+public abstract class Unit : ImprovedMonoBehaviour
 {
+    public enum Type
+    {
+        Skiff,
+        Frigate,
+        Cruiser
+    }
     [System.Serializable]
     public class UnitParameters
     {
+        [field: SerializeField] public Type UnitType { get; protected set; }
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
@@ -33,14 +40,11 @@ public abstract class Unit : MonoBehaviour, IObject
     #region Fields
     #region Misc
     [Header("Unit")]
-    [Tooltip("Used for object pooling for the bullets and for determining loss of morale on ship destruction.")]
-    [SerializeField] protected IObject.Type type;
     /// <summary>
     /// This is used for quick removal from the unit manager lists. 
     /// DO NOT FUCK WITH THIS!
     /// </summary>
     public int UnitManagerIndex { get; set; }
-    [field: SerializeField] public int Team { get; set; }
     [Tooltip("If true, other friendly units will attemt to remain near this unit.")]
     [field: SerializeField] public bool NeedsEscort { get; set; } = false;
     public List<Turret> Turrets { get; protected set; }
@@ -48,13 +52,11 @@ public abstract class Unit : MonoBehaviour, IObject
     /// Fires on every tick. Mainly used to update turrets.
     /// </summary>
     protected Action onTick = delegate { };
-    public bool IsDying { get; protected set; }
     /// <summary>
     /// Plays while the unit explodes. Unit will be disabled once the effect is 
     /// finished playing.
     /// </summary>
     protected ParticleSystem effectDuringDeath;
-    public float CurrentSignature { get; protected set; }
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
@@ -75,6 +77,7 @@ public abstract class Unit : MonoBehaviour, IObject
     #endregion
 
     #region Helpers
+    public Type UnitType => unitParameters.UnitType;
     public float MaxSignature => unitParameters.MaxSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
@@ -99,23 +102,6 @@ public abstract class Unit : MonoBehaviour, IObject
             return IsFleeing ? 0 : unitParameters.ScanRange;
         }
     }
-    public IObject.Type ObjectType => type;
-    public abstract IObject Target { get; }
-    public virtual Vector3 Forward => Transform.forward;
-    public virtual Vector3 Right => Transform.forward;
-    public virtual Vector3 Up => Transform.forward;
-    public virtual Vector3 LinearVelocity => Vector3.zero;
-    public virtual Vector3 AngularVelocity => Vector3.zero;
-    protected Transform tr;
-    public Transform Transform
-    {
-        get
-        {
-            if (tr == null) tr = transform;
-            return tr;
-        }
-    }
-    public Vector3 Position => Transform.position;
     public bool IsFleeing
     {
         get
@@ -148,7 +134,7 @@ public abstract class Unit : MonoBehaviour, IObject
         tickCoroutine = StartCoroutine(Tick());
         CurrentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
-        this.RegisterForRadar();
+        RegisterForRadar();
         signatureDecreaseDelay = Time.time;
     }
 
@@ -169,7 +155,7 @@ public abstract class Unit : MonoBehaviour, IObject
     protected virtual void OnDisable()
     {
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
-        this.UnregisterForRadar();
+        UnregisterForRadar();
         UnitManager.Unregister(this);
         if (IsDying && !effectDuringDeath.isPlaying)
         {

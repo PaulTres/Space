@@ -2,20 +2,13 @@ using UnityEngine;
 using Utilities;
 namespace Weapons
 {
-    public class Projectile : Bullet, IObject
+    public class Projectile : Bullet
     {
         #region Fields
-        public IObject.Type ObjectType => IObject.Type.Missile;
-        public virtual IObject Target => null;
+        public override ImprovedMonoBehaviour Target => null;
         protected float topSpeed, acceleration;
         public virtual float TopSpeed => topSpeed;
         protected Vector3 linearVelocity, angularVelocity;
-        public Vector3 Forward => Transform.forward;
-        public Vector3 Right => Transform.right;
-        public Vector3 Up => Transform.up;
-        public Vector3 LinearVelocity => linearVelocity;
-        public Vector3 AngularVelocity => Vector3.zero;
-        public float CurrentSignature => 0;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
         protected TrailRenderer trailRenderer;

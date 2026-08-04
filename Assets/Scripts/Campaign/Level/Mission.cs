@@ -48,6 +48,7 @@ public abstract class Mission : ScriptableObject
         DynamicGI.UpdateEnvironment();
         CurrentMission = this;
         StartTime = Time.time;
+        Time.timeScale = 1;
         //Debug.Log("Starting mission");
         UnitManager.Clear();
         GameManager.UnitsDestroyed.Clear();

@@ -31,7 +31,7 @@ public class Navigation : Ship
     /// <summary>
     /// The unit this is currently targeting.
     /// </summary>
-    public override IObject Target
+    public override ImprovedMonoBehaviour Target
     {
         get
         {

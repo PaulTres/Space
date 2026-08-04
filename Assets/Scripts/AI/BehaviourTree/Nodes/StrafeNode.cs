@@ -1,6 +1,7 @@
 ﻿using HybridBT2;
 using System;
 using UnityEngine;
+using Utilities;
 [CreateAssetMenu(menuName = "HybridBT2/Leaves/Strafe", fileName = "Strafe")]
 public class StrafeNode : LeafNodeData
 {
@@ -44,13 +45,9 @@ public class StrafeNode : LeafNodeData
 
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        var target = ctx.GetData<IObject>(Blackboard.Keys.Target);
-        if (target == null) return NodeState.FAILURE;
-        if (!target.Transform.gameObject.activeSelf)
-        {
-            ctx.SetData<IObject>(Blackboard.Keys.Target, null);
-            return NodeState.FAILURE;
-        }
+        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        if (!target.Active()) return NodeState.FAILURE;
+        Debug.Log("Strafing");
 
         var currentTicks = n.GetData<int>((int)InternalKeys.CurrentTicks);
         if (currentTicks >= TicksBeforeRepath)

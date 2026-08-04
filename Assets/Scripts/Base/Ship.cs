@@ -22,7 +22,7 @@ public abstract class Ship : Unit
     protected override void Awake()
     {
         base.Awake();
-        ComponentRegister<IObject>.Register(transform, this);
+        ComponentRegister<ImprovedMonoBehaviour>.Register(transform, this);
         thrusters = GetComponentInChildren<ThrusterGroup>();
         rb = gameObject.GetOrAddComponent<Rigidbody>();
         rb.isKinematic = false;

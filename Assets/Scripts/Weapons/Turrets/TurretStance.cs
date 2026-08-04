@@ -1,3 +1,4 @@
+using UnityEngine;
 using Utilities;
 
 namespace Weapons
@@ -9,16 +10,16 @@ namespace Weapons
     {
         public Turret Turret;
         public TurretData TurretData;
-        public IObject Target
+        public ImprovedMonoBehaviour Target
         {
             get => Turret.Target;
             set => Turret.Target = value;
         }
         public Unit Owner => Turret.Owner;
 
-        public bool IsTargetValid(IObject @object) => Turret.IsTargetValid(@object);
+        public bool IsTargetValid(ImprovedMonoBehaviour @object) => Turret.IsTargetValid(@object);
 
-        public float EvaluateTarget(IObject @object) => Turret.EvaluateTarget(@object);
+        public float EvaluateTarget(ImprovedMonoBehaviour @object) => Turret.EvaluateTarget(@object);
 
         public abstract void UpdateTargets();
     }
@@ -30,7 +31,7 @@ namespace Weapons
     {
         public override void UpdateTargets()
         {
-            float bestScore = Target == null ? float.MinValue : EvaluateTarget(Target);
+            float bestScore = Target.Active() ? EvaluateTarget(Target) : float.MinValue;
 
             #region Evaluate missiles
             if (TurretData.TargetMissiles)
@@ -39,7 +40,7 @@ namespace Weapons
                 //Debug.Log(count);
                 if (count > 0)
                 {
-                    var currentM = Target.NotNullAndActive() ? Target as Missile : null;
+                    var currentM = Target.Active() ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.
                         IsEqual(Owner);
 
@@ -103,11 +104,11 @@ namespace Weapons
                 for (int i = 0; i < targets.Count; i++)
                 {
                     if (!IsTargetValid(targets[i])) continue;
-                    //Debug.Log("Evaluating target: " + targets[i].Transform.name);
+                    if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = EvaluateTarget(targets[i]);
-                    //Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
+                    if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !TurretData.AllowZeroScoreTargets) continue;
-                    if (Owner.Target.NotNullAndActive() && targets[i].GetInstanceID() ==
+                    if (Owner.Target.Active() && targets[i].GetInstanceID() ==
                         Owner.Target.GetInstanceID())
                     {
                         if (score >= 0) score *= TurretData.CurrentTargetScoreMultiplier;
@@ -138,7 +139,7 @@ namespace Weapons
                 //Debug.Log(count);
                 if (count > 0)
                 {
-                    var currentM = Target.NotNullAndActive() ? Target as Missile : null;
+                    var currentM = Target.Active() ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.IsEqual(Owner);
                     if (!targetIsAimedAtOwner && currentM != null) Target = null;
                     float bestScore = EvaluateTarget(Target);

@@ -48,6 +48,7 @@ public class HandmadeBattle : Mission
             //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(pos, Quaternion.
                 Euler(spawner.SpawnRotation));
+            unit.SetObjectLayer(GlobalConfig.GetShipLayer(unit.Team));
             unit.gameObject.SetActive(true);
         }
     }

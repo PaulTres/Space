@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HandmadeBattle
   <TimeLimit>k__BackingField: -1
   <Briefing>k__BackingField: No briefing exists.
-  <PlayerPoints>k__BackingField: 2147483646
+  <PlayerPoints>k__BackingField: 2147483638
   <EnemyPoints>k__BackingField: 2147483647
+  skyboxMaterial: {fileID: 2100000, guid: a4be220830e90ea4eb88b48b7fd376ce, type: 2}
   playerSpawnPos: {x: 0, y: 0, z: 0}
   playerSpawnRot: {x: 0, y: 0, z: 0}
   spawns:
@@ -24,4 +25,4 @@ MonoBehaviour:
     <SpawnRadius>k__BackingField: 2
     <Team>k__BackingField: 2
     spawnOptions:
-    - {fileID: 11400000, guid: 090bf946d623b514eb38b213884a5f8f, type: 2}
+    - {fileID: 11400000, guid: f37f16032678f2c48ba5e4118d7e14de, type: 2}

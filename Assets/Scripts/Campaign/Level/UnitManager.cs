@@ -44,7 +44,6 @@ public static class UnitManager
         }
         //Debug.Log($"{ship.Transform} registered on team {team}.");
         ships[team].Add(ship);
-        ship.SetObjectLayer(GlobalConfig.GetShipLayer(team));
         //ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
         ship.UnitManagerIndex = ships[team].Count - 1;
         //Debug.Log($"Registered unit {ship.Transform} with index {ship.UnitManagerIndex}.");
@@ -57,7 +56,7 @@ public static class UnitManager
     /// <param name="ship"></param>
     public static void Unregister(Unit ship)
     {
-        if (!ship.NotNullAndActive() || ship.UnitManagerIndex == -1) return;
+        if (!ship.Active(true) || ship.UnitManagerIndex == -1) return;
         int team = ship.Team;
         if (ships.ContainsKey(team))
         {

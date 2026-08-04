@@ -25,7 +25,7 @@ namespace Radar
         [SerializeField] protected Material neutralMaterial;
         [SerializeField] protected Material neutralTransluscentMaterial;
         protected Stack<BoundingBox> boundingBoxPool { get; } = new();
-        protected readonly Dictionary<IObject, BoundingBox> boundingBoxes = new();
+        protected readonly Dictionary<ImprovedMonoBehaviour, BoundingBox> boundingBoxes = new();
         [Header("Target selection/info")]
         [SerializeField] protected Image secondView;
         [SerializeField] protected Camera secondViewCamera;
@@ -38,7 +38,7 @@ namespace Radar
         {
             get
             {
-                return currentTarget.NotNullAndActive() ? currentTarget : null;
+                return currentTarget.Active() ? currentTarget : null;
             }
             set
             {
@@ -46,6 +46,7 @@ namespace Radar
                 {
                     if (value != null && !value.gameObject.activeSelf) value = null;
                     currentTarget = value;
+                    Debug.Log(value);
                     if (secondView != null) secondView.gameObject.SetActive(value != null);
                     if (secondViewCamera != null) secondViewCamera.gameObject.SetActive(value != null);
                     if (targetInfoText != null) targetInfoText.gameObject.SetActive(value != null);
@@ -97,9 +98,9 @@ namespace Radar
         /// </summary>
         /// <param name="target"></param>
         /// <param name="bbox"></param>
-        protected void ProcessTarget(IObject target, BoundingBox bbox)
+        protected void ProcessTarget(ImprovedMonoBehaviour target, BoundingBox bbox)
         {
-            if (!target.NotNullAndActive() || bbox == null) return;
+            if (!target.Active() || bbox == null) return;
 
             var unit = target as Unit;
             var distance = Vector3.Distance(owner.Position, target.Position);
@@ -170,7 +171,7 @@ namespace Radar
                 #endregion
             }
 
-            if (unit != null && unit.Target == (IObject)GameManager.Player &&
+            if (unit != null && unit.Target == (ImprovedMonoBehaviour)GameManager.Player &&
                 GameManager.Player != null)
             {
                 bbox.LineRenderer.enabled = true;
@@ -189,7 +190,7 @@ namespace Radar
 
         protected void UpdateTargetInfo()
         {
-            if (!CurrentTarget.NotNullAndActive()) return;
+            if (!CurrentTarget.Active()) return;
 
             #region Target view
             if (secondViewCamera != null && secondView != null)
@@ -232,9 +233,9 @@ namespace Radar
             return boundingBoxPool.Pop();
         }
 
-        public void RegisterTarget(IObject target)
+        public void RegisterTarget(ImprovedMonoBehaviour target)
         {
-            if (!target.NotNullAndActive() || target.Transform == transform.root ||
+            if (!target.Active() || target.Transform == transform.root ||
                 boundingBoxes.ContainsKey(target)) return;
 
             var bbox = GetBoundingBox();
@@ -265,11 +266,11 @@ namespace Radar
             boundingBoxes.Add(target, bbox);
         }
 
-        public void UnregisterTarget(IObject target)
+        public void UnregisterTarget(ImprovedMonoBehaviour target)
         {
             if (boundingBoxes.TryGetValue(target, out var bbox))
             {
-                if ((IObject)CurrentTarget == target)
+                if (CurrentTarget == target)
                 {
                     ClearTarget();
                 }
@@ -311,6 +312,7 @@ namespace Radar
             if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
             {
                 previousData.SelectionIcon.gameObject.SetActive(false);
+
             }
             CurrentTarget = unit;
             if (CurrentTarget == null) return;
@@ -330,7 +332,7 @@ namespace Radar
         /// <returns></returns>
         public float EvaluateTarget(Unit target)
         {
-            if (!GameManager.Player.NotNullAndActive() || !target.NotNullAndActive()) return float.MinValue;
+            if (!GameManager.Player.Active() || !target.Active()) return float.MinValue;
 
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;

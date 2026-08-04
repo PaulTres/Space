@@ -18,7 +18,7 @@ public class FaceTargetRotation : RotationTarget
 
     public override Quaternion GetTargetRotation(Transform unit)
     {
-        var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
+        var tr = unit.GetBlackboard().GetData<ImprovedMonoBehaviour>(TargetKey);
         if (tr == null) return unit.rotation;
         var direction = (tr.Position - unit.position).normalized;
         return Quaternion.LookRotation(direction, direction + unit.up);
@@ -34,7 +34,7 @@ public class VerticalFacingRotation : RotationTarget
     }
     public override Quaternion GetTargetRotation(Transform unit)
     {
-        var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
+        var tr = unit.GetBlackboard().GetData<ImprovedMonoBehaviour>(TargetKey);
         if (tr == null) return unit.rotation;
         var dir = tr.Position - unit.position;
         var forward = dir.Perpendicular();
@@ -52,7 +52,7 @@ public class BroadsideFacingRotation : RotationTarget
 
     public override Quaternion GetTargetRotation(Transform unit)
     {
-        var tr = unit.GetBlackboard().GetData<IObject>(TargetKey);
+        var tr = unit.GetBlackboard().GetData<ImprovedMonoBehaviour>(TargetKey);
         if (tr == null) return Quaternion.LookRotation(unit.forward, unit.up);
         var dir = tr.Position - unit.position;
         var forward = Vector3.ProjectOnPlane(unit.forward, dir.normalized).normalized;

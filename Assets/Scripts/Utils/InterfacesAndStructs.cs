@@ -2,45 +2,6 @@ using EventBus;
 using UnityEngine;
 using Utilities;
 
-/// <summary>
-/// Provides linear and angular velocity, transform and a bunch of other bullshit.
-/// </summary>
-public interface IObject : IRegisterableComponent
-{
-    public enum Type
-    {
-        Missile,
-        //tiny baby ship
-        Skiff,
-        //smallest actual line vessel
-        Frigate,
-        //actual line vessel
-        Cruiser
-    }
-
-    public Type ObjectType { get; }
-    /// <summary>
-    /// Returns true if the transform property is not null and the game object is active.
-    /// </summary>
-    public bool Active
-    {
-        get
-        {
-            if (Transform == null) return false;
-            return Transform.gameObject.activeSelf;
-        }
-    }
-    float CurrentSignature { get; }
-    Transform Transform { get; }
-    public Vector3 Forward { get; }
-    public Vector3 Right { get; }
-    public Vector3 Up { get; }
-    public Vector3 Position => Transform.position;
-    Vector3 AngularVelocity { get; }
-    Vector3 LinearVelocity { get; }
-    public IObject Target { get; }
-}
-
 public interface IResettable
 {
     void PerformReset();

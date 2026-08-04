@@ -52,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 0
+  Tracking: 1
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 1

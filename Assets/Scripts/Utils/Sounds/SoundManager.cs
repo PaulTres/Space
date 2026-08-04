@@ -7,7 +7,7 @@ namespace AudioSystem
 {
     public class SoundManager : Singleton<SoundManager>
     {
-        IObjectPool<SoundEmitter> soundEmitterPool;
+        ObjectPool<SoundEmitter> soundEmitterPool;
         readonly List<SoundEmitter> activeSoundEmitters = new();
         public readonly LinkedList<SoundEmitter> FrequentSoundEmitters = new();
 

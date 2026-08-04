@@ -37,7 +37,7 @@ namespace Player
         public override Vector3 Forward => shipBody.forward;
         public override Vector3 Right => shipBody.right;
         public override Vector3 Up => shipBody.up;
-        public override IObject Target
+        public override ImprovedMonoBehaviour Target
         {
             get
             {
@@ -181,8 +181,11 @@ namespace Player
 
             rb.AddForce(intendedVelocity, ForceMode.Acceleration);
             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
-            if (movementVector.z > 0) thrusters.Increase(deltaTime);
-            else thrusters.Decrease(deltaTime);
+            if (thrusters != null)
+            {
+                if (movementVector.z > 0) thrusters.Increase(deltaTime);
+                else thrusters.Decrease(deltaTime);
+            }
         }
 
         public void PerformUpdate(float deltaTime)

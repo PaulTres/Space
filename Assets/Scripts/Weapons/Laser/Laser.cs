@@ -6,8 +6,16 @@ namespace Weapons
     public class Laser : Bullet
     {
         protected float range = 100;
-        public Transform Target { get; set; }
+
         protected LineRenderer lineRenderer;
+
+        protected ImprovedMonoBehaviour target;
+        public override ImprovedMonoBehaviour Target => target;
+
+        public void SetTarget(ImprovedMonoBehaviour target)
+        {
+            this.target = target;
+        }
 
         public override void Initialize(BulletData poolableData)
         {
@@ -33,9 +41,15 @@ namespace Weapons
             else
             {
                 damageInfo.Position = Transform.position;
-                lineRenderer.SetPosition(1, Target.position);
-                Target.TakeDamage(damageInfo);
+                lineRenderer.SetPosition(1, Target.Position);
+                Target.Transform.TakeDamage(damageInfo);
             }
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            SetTarget(null);
         }
     }
 }
