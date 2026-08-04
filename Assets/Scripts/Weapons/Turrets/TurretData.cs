@@ -36,6 +36,10 @@ namespace Weapons
                 return maxRangeSquared;
             }
         }
+        [Header("Burst fire")]
+        public bool BurstFire = false;
+        public float BurstCooldown = 1;
+        public int BurstCount = 1;
         [Header("Turret movement")]
         public float RotSpeed = 50;
         public float MinElevation = -45;

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054ba29207d97c94aa25e1ac59732ab2, type: 3}
+  m_Name: RioRoot
+  m_EditorClassIdentifier: Assembly-CSharp::HybridBT2.SelectorData
+  myName: 
+  AlwaysCheck: 1
+  Conditions: []
+  Services:
+  - {fileID: 11400000, guid: 12a11a2104d92ff418b6e5a3721b5dc7, type: 2}
+  - {fileID: 11400000, guid: 9d5f62d972f42954d91c33409b5509e4, type: 2}
+  Children:
+  - {fileID: 11400000, guid: ca8bc8e0c76bff3419c50a586a1b4a0a, type: 2}
+  - {fileID: 11400000, guid: 86a445bb0a8181542897e17b826b515a, type: 2}
+  - {fileID: 11400000, guid: f47a114369b31f34d95e3161b1c705ea, type: 2}

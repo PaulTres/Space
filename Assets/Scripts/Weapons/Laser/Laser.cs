@@ -32,6 +32,7 @@ namespace Weapons
             if (Target == null) lineRenderer.SetPosition(1, Transform.position + Transform.forward * range);
             else
             {
+                damageInfo.Position = Transform.position;
                 lineRenderer.SetPosition(1, Target.position);
                 Target.TakeDamage(damageInfo);
             }

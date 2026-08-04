@@ -116,6 +116,7 @@ namespace Weapons
                 {
                     return false;
                 }
+                damageInfo.Position = hit.point;
                 OnHit(hit.collider);
                 return disableOnHit;
             }

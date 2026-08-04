@@ -4,14 +4,24 @@ namespace Weapons
 {
     public class LaserWeapon : WeaponBase
     {
-        [SerializeField] protected float heatPerShot = .1f;
-        [SerializeField] protected float overheatThreshold = 1.0f;
-        [SerializeField] protected float heatLoss = .34f;
-        [Tooltip("The weapon will not lose heat until at least this much time has passed after firing last time.")]
-        [SerializeField] protected float heatLossCooldown = .5f;
+        protected float heatPerShot = .1f;
+        protected float overheatThreshold = 1.0f;
+        protected float heatLoss = .34f;
+        protected float heatLossCooldown = .5f;
         protected bool overheated;
         protected float currentHeat;
         protected float lastShotTime;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            var data = @params as LaserWeaponData;
+            if (data == null) throw new System.Exception($"Weapons {name} has no LaserWeaponData!");
+            heatPerShot = data.HeatPerShot;
+            overheatThreshold = data.OverheatThreshold;
+            heatLoss = data.HeatLoss;
+            heatLossCooldown = data.HeatLossCooldown;
+        }
 
         protected override void OnEnable()
         {
@@ -22,10 +32,7 @@ namespace Weapons
         protected void OnDisable()
         {
             var u = GlobalUpdater.TryGetInstance();
-            if (u != null)
-            {
-                u.UnregisterFixedUpdate(PerformFixedUpdate);
-            }
+            if (u != null) u.UnregisterFixedUpdate(PerformFixedUpdate);
         }
 
         public override void PerformReset()

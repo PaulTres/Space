@@ -56,6 +56,8 @@ public struct DamageInfo : IEvent
 {
     public float Amount { get; set; }
     public Unit Source { get; set; }
+    public bool IgnoreArmor { get; set; }
+    public Vector3 Position { get; set; }
 }
 
 public readonly struct ObjectHPChanged : IEvent

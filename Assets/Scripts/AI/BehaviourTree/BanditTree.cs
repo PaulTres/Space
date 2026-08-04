@@ -8,7 +8,7 @@ public class BanditTree : BT, IRegisterableComponent
 {
     public Blackboard Blackboard => blackboard;
     [SerializeField] protected List<Turret> pointDefenseTurrets = new();
-    [SerializeField] protected List<MissileLauncher> missileLaunchers = new();
+    [SerializeField] protected bool affectedByMorale = true;
     [SerializeField] protected float initialMorale = 10;
     [Tooltip("The maximum distance from a morale event at which this unit will be affected.")]
     [SerializeField] protected float maxMoraleImpactRange = 50;
@@ -16,7 +16,7 @@ public class BanditTree : BT, IRegisterableComponent
     protected override void Awake()
     {
         base.Awake();
-        EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
+        if (affectedByMorale) EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Register(transform, this);
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Blackboard.Navigation), null, Pause);
     }
@@ -52,7 +52,7 @@ public class BanditTree : BT, IRegisterableComponent
     protected override void OnDisable()
     {
         base.OnDisable();
-        EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
+        if (affectedByMorale) EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
     }
     protected virtual void OnDestroy()
     {
@@ -66,9 +66,6 @@ public class BanditTree : BT, IRegisterableComponent
     {
         Blackboard.SetData(Blackboard.Keys.Fleeing, false);
         Blackboard.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
-        //Debug.Log(missileLaunchers.Count);
-        Blackboard.SetData(Blackboard.Keys.Launchers, missileLaunchers);
-        //Debug.Log(Blackboard.GetData<List<MissileLauncher>>(Blackboard.Keys.Launchers) == null);
         Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
         Blackboard.SetData(Blackboard.Keys.PDTurrets, pointDefenseTurrets);
         Blackboard.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);

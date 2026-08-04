@@ -1,5 +1,6 @@
 using EventBus;
 using System;
+using System.Collections.Generic;
 using Timers;
 using UnityEngine;
 using Utilities;
@@ -8,6 +9,15 @@ namespace HP
 {
     public class HPComponent : MonoBehaviour, IResettable
     {
+        [System.Serializable]
+        public class ArmorModifier
+        {
+            [field: SerializeField] public Directions Direction { get; protected set; }
+            [Tooltip("Incoming damage is multiplied by this modifier.")]
+            [field: SerializeField] public float Modifier { get; protected set; } = 1;
+        }
+
+        #region Fields
         [field: SerializeField] public float MaxHP { get; set; } = 10;
         protected Transform tr;
         public Transform Transform
@@ -49,6 +59,11 @@ namespace HP
         }
         protected CountdownTimer hpRegainTimer;
         protected bool firedEvent = false;
+        [SerializeField] protected List<ArmorModifier> armorModifiers = new();
+        [Tooltip("This transform is used to determine the direction of incoming damage. If not set, the transform of this component will be used.")]
+        [SerializeField] protected Transform body;
+        #endregion
+
         #region Setup
         protected virtual void Awake()
         {
@@ -64,6 +79,7 @@ namespace HP
                     if (currentHP < minHP) currentHP = minHP;
                 };
             }
+            if (body == null) body = Transform;
         }
 
         public void PerformReset()
@@ -102,12 +118,12 @@ namespace HP
                 return;
             }
             //Debug.Log(damageInfo.Amount);
-            CurrentHP -= damageInfo.Amount;
+            CurrentHP -= CalculateDamage(damageInfo);
             if (CurrentHP <= 0 && !firedEvent)
             {
                 firedEvent = true;
-                ObjectDestroyed @event = new(Transform, damageInfo.Source);
-                EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
+                ObjectDestroyed @event = new(Transform.root, damageInfo.Source);
+                EventBus<ObjectDestroyed>.Raise(Transform.root.GetInstanceID(), @event);
                 return;
             }
             if (currentHP < minHP)
@@ -115,6 +131,20 @@ namespace HP
                 //begin hp regain timer
                 hpRegainTimer.Start();
             }
+        }
+
+        public float CalculateDamage(DamageInfo damageInfo)
+        {
+            if (damageInfo.IgnoreArmor || armorModifiers.IsEmpty()) return damageInfo.Amount;
+            var direction = body.GetDirection(damageInfo.Position);
+            for (int i = 0; i < armorModifiers.Count; i++)
+            {
+                if (armorModifiers[i].Direction == direction)
+                {
+                    return damageInfo.Amount * armorModifiers[i].Modifier;
+                }
+            }
+            return damageInfo.Amount;
         }
     }
 }

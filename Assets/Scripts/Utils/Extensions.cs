@@ -7,13 +7,28 @@ using UnityEngine;
 using Weapons;
 namespace Utilities
 {
+    public enum Directions
+    {
+        Up,
+        Down,
+        Left,
+        Right,
+        Forward,
+        Backward
+    }
     public static class Extensions
     {
         #region Unit
         public static float GetMoraleWeight(this Unit unit)
         {
             if (unit == null) return 0;
-            return 0;
+            return unit.ObjectType switch
+            {
+                IObject.Type.Skiff => 5,
+                IObject.Type.Frigate => 10,
+                IObject.Type.Cruiser => 20,
+                _ => 0
+            };
         }
 
         /// <summary>
@@ -172,6 +187,32 @@ namespace Utilities
         }
 
         #region Transform
+        /// <summary>
+        /// Get the direction from the transform to the target position in terms of the transform's local axes.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="targetPosition"></param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        public static Directions GetDirection(this Transform transform, Vector3 targetPosition)
+        {
+            if (transform == null) throw new System.ArgumentNullException();
+            var direction = (targetPosition - transform.position).normalized;
+            var forward = transform.forward;
+            var right = transform.right;
+            var up = transform.up;
+            float forwardDot = Vector3.Dot(forward, direction);
+            float rightDot = Vector3.Dot(right, direction);
+            float upDot = Vector3.Dot(up, direction);
+            if (forwardDot > 0.707f) return Directions.Forward;
+            if (forwardDot < -0.707f) return Directions.Backward;
+            if (rightDot > 0.707f) return Directions.Right;
+            if (rightDot < -0.707f) return Directions.Left;
+            if (upDot > 0.707f) return Directions.Up;
+            if (upDot < -0.707f) return Directions.Down;
+            return Directions.Forward; // Default case
+        }
+
         public static Blackboard GetBlackboard(this Transform transform)
         {
             if (transform == null) throw new System.ArgumentNullException();

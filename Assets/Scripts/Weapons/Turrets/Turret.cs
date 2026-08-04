@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utilities;
 namespace Weapons
@@ -15,16 +16,16 @@ namespace Weapons
                 if (currentTarget != value)
                 {
                     var m = currentTarget != null ? currentTarget as Missile : null;
-                    if (m.Active()) m.TargetedDamage -= Weapon.DPS;
+                    if (m.Active()) m.TargetedDamage -= DPS;
                     currentTarget = value;
                     m = currentTarget != null ? currentTarget as Missile : null;
-                    if (m.Active()) m.TargetedDamage += Weapon.DPS;
+                    if (m.Active()) m.TargetedDamage += DPS;
                 }
             }
         }
-        public float DPS => Weapon.DPS;
+        public float DPS { get; protected set; }
         public Unit Owner { get; protected set; }
-        [field: SerializeField] public WeaponBase Weapon { get; protected set; }
+        public List<WeaponBase> Weapons { get; protected set; }
         protected Transform tr;
         [field: SerializeField] public Transform RotationPivot { get; protected set; }
         [field: SerializeField] public Transform ElevationPivot { get; protected set; }
@@ -39,14 +40,17 @@ namespace Weapons
         /// </summary>
         protected List<TurretStance> turretStances = new();
         protected int currentStanceIndex = 0;
+        protected float lastBurstTime;
+        protected int weaponBurstIndex;
         #endregion
 
         #region Setup
         protected void Awake()
         {
-            tr = transform;
             Owner = GetComponentInParent<Unit>();
-            if (Weapon == null) Weapon = GetComponentInChildren<WeaponBase>();
+            if (RotationPivot == null) RotationPivot = Transform;
+            if (ElevationPivot == null) ElevationPivot = Transform;
+            Weapons = GetComponentsInChildren<WeaponBase>().ToList();
             turretStances.Add(new AggressiveTurretStance() { Turret = this, TurretData = @params });
             turretStances.Add(new DefensiveTurretStance() { Turret = this, TurretData = @params });
             turretStances.Add(new PassiveTurretStance() { Turret = this, TurretData = @params });
@@ -54,6 +58,9 @@ namespace Weapons
 
         protected virtual void OnEnable()
         {
+            lastBurstTime = float.MinValue;
+            weaponBurstIndex = 0;
+            RecalculateDPS();
             Target = null;
             currentStanceIndex = 0;
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(Tick);
@@ -68,6 +75,40 @@ namespace Weapons
         #endregion
 
         #region Functionality
+        public void Shoot()
+        {
+            if (@params.BurstFire)
+            {
+                if (Time.time - lastBurstTime > @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
+                {
+                    lastBurstTime = Time.time;
+                    int i;
+                    for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount); i++)
+                    {
+                        Weapons[i].Shoot(Target);
+                    }
+                    if (i == Weapons.Count - 1) weaponBurstIndex = 0;
+                    else weaponBurstIndex = i + 1;
+                }
+            }
+            else
+            {
+                foreach (var w in Weapons)
+                {
+                    w.Shoot(Target);
+                }
+            }
+        }
+
+        public void RecalculateDPS()
+        {
+            if (@params.BurstFire)
+            {
+                DPS = Mathf.Min(@params.BurstCount, Weapons.Count) * Weapons[0].DPS / @params.BurstCooldown;
+            }
+            else DPS = Weapons[0].DPS * Weapons.Count;
+        }
+
         /// <summary>
         /// If a target is present and enabled, rotate towards the target, 
         /// shoot and increase readiness. Otherwise decrease readiness and 
@@ -76,6 +117,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public void Tick(float deltaTime)
         {
+            if (Owner == null || Owner.IsDying) return;
             if (Target.NotNullAndActive())
             {
                 //Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
@@ -88,11 +130,8 @@ namespace Weapons
                     if (Vector3.Angle(ElevationPivot.forward, (pos -
                         Transform.position)) < @params.MaxAngleDifference)
                     {
-                        //if (Owner.InOptimalFiringRange(Target.Position,
-                        //   Target.CurrentSignature))
-
+                        Shoot();
                         IncreaseReadiness(deltaTime);
-                        Weapon.Shoot(Target);
                         return;
                     }
                 }
@@ -106,22 +145,21 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Increases readiness on the Weapon.
+        /// Increases readiness on the Weapons.
         /// </summary>
         /// <param name="deltaTime"></param>
         protected void IncreaseReadiness(float deltaTime)
         {
-            //Debug.Log("A");
-            Weapon.IncreaseReadiness(deltaTime);
+            foreach (var w in Weapons) w.IncreaseReadiness(deltaTime);
         }
 
         /// <summary>
-        /// Calls DecreaseReadiness on the Weapon.
+        /// Calls DecreaseReadiness on the Weapons.
         /// </summary>
         /// <param name="deltaTime"></param>
         protected void DecreaseReadiness(float deltaTime)
         {
-            Weapon.DecreaseReadiness(deltaTime);
+            foreach (var w in Weapons) w.DecreaseReadiness(deltaTime);
         }
 
         #region Targeting
@@ -178,7 +216,7 @@ namespace Weapons
         public Vector3 ComputeTargetingPosition(IObject target)
         {
             float timeToHit = 0;
-            var m = Weapon.BulletData as ProjectileData;
+            var m = Weapons[0].BulletData as ProjectileData;
             if (m != null) timeToHit = (target.Transform.position -
                     Transform.position).magnitude / m.TopSpeed;
 

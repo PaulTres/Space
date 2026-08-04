@@ -11,7 +11,6 @@ namespace HybridBT2
             DefaultMorale,
             Morale,
             Target,
-            Launchers,
             TargetPosition,
             PDTurrets,
             AllTurrets

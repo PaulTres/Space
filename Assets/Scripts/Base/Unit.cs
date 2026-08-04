@@ -33,7 +33,7 @@ public abstract class Unit : MonoBehaviour, IObject
     #region Fields
     #region Misc
     [Header("Unit")]
-    [Tooltip("This is mostly used for object pooling for the bullets. Never manually modify.")]
+    [Tooltip("Used for object pooling for the bullets and for determining loss of morale on ship destruction.")]
     [SerializeField] protected IObject.Type type;
     /// <summary>
     /// This is used for quick removal from the unit manager lists. 
@@ -41,6 +41,8 @@ public abstract class Unit : MonoBehaviour, IObject
     /// </summary>
     public int UnitManagerIndex { get; set; }
     [field: SerializeField] public int Team { get; set; }
+    [Tooltip("If true, other friendly units will attemt to remain near this unit.")]
+    [field: SerializeField] public bool NeedsEscort { get; set; } = false;
     public List<Turret> Turrets { get; protected set; }
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
