@@ -97,15 +97,10 @@ namespace HybridBT2
     public class Selector : RegularComposite
     {
         protected int prevChild = -1;
-        protected int currentChild = 0;
 
         public Selector(string name, Action<Node, Blackboard> onEnter = null, Action<Node, Blackboard> onExit = null) : base(name, onEnter, onExit)
         {
-            this.onEnter += (_, _) =>
-            {
-                currentChild = 0;
-                prevChild = -1;
-            };
+            this.onEnter += (_, _) => prevChild = -1;
         }
 
         /// <summary>
@@ -115,27 +110,26 @@ namespace HybridBT2
         /// <param name="context"></param>
         protected override void ExecuteUnderlyingBehaviour(Blackboard context)
         {
-            children[currentChild].Evaluate(context);
-            switch (children[currentChild].State)
+            for (int i = 0; i < children.Count; i++)
             {
-                case NodeState.FAILURE:
-                    currentChild++;
-                    if (currentChild >= children.Count) SetState(NodeState.FAILURE, context);
-                    else SetState(NodeState.RUNNING, context);
-                    break;
-                case NodeState.RUNNING:
-                    if (prevChild != currentChild)
+                if (prevChild != -1 && !children[i].AlwaysCheck && i != prevChild) continue;
+                children[i].Evaluate(context);
+                if (children[i].State == NodeState.FAILURE)
+                {
+                    if (i == children.Count - 1)
                     {
-                        if (prevChild > -1) children[prevChild].Abort(context);
-                        prevChild = currentChild;
+                        SetState(NodeState.FAILURE, context);
+                        return;
                     }
                     SetState(NodeState.RUNNING, context);
-                    break;
-                case NodeState.SUCCESS:
-                    if (prevChild != currentChild) children[prevChild].Abort(context);
-                    SetState(NodeState.SUCCESS, context);
-                    break;
+                    continue;
+                }
+                if (prevChild != -1) children[prevChild].Abort(context);
+                prevChild = i;
+                SetState(children[i].State, context);
+                return;
             }
+            throw new Exception($"{this} did not finish executing main loop!");
         }
     }
 

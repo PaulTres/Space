@@ -43,7 +43,7 @@ namespace Weapons
             Debug.Assert(@params.MaxShotCooldown >= 0, $"{transform} has negative cooldown!");
             if (shootPoints.IsEmpty())
             {
-                Debug.LogWarning($"{transform} has no shoot points!");
+                //Debug.LogWarning($"{transform} has no shoot points!");
                 shootPoints = new Transform[] { transform };
             }
             shotTimer = new(@params.MaxShotCooldown);

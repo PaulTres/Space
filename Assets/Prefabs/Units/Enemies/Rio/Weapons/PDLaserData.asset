@@ -16,7 +16,7 @@ MonoBehaviour:
   Key: 0
   RaiseEventOnRecycle: 0
   DisableOnHit: 1
-  Damage: 1
+  Damage: 0.1
   LifeTime: 0.1
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 0}

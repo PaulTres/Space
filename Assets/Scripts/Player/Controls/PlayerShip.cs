@@ -22,6 +22,7 @@ namespace Player
             public float ZSens = 10;
         }
         public static Camera PlayerCamera { get; protected set; } = null;
+
         #region Fields
         [Header("Player controls")]
         [SerializeField] protected ControlsInputReader inputReader;
@@ -104,10 +105,7 @@ namespace Player
 
         #region Functionality
 
-        protected void OnFindTarget()
-        {
-            PlayerTargetSystem.TryGetInstance().SelectTarget();
-        }
+        protected void OnFindTarget() => PlayerTargetSystem.TryGetInstance().SelectTarget();
 
         protected void OnZoom(float zoom)
         {
@@ -137,6 +135,7 @@ namespace Player
 
         public void PerformFixedUpdate(float deltaTime)
         {
+            //Debug.Log(missileCount);
             Vector3 intendedVelocity;
             if (!Dampeners)
             {

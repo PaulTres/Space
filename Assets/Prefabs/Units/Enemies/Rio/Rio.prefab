@@ -6297,10 +6297,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db62fcb7749c7b74dabb71b2d40c6326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
-  type: 3
   <Team>k__BackingField: 0
   <NeedsEscort>k__BackingField: 0
   unitParameters:
+    <UnitType>k__BackingField: 0
     TickInterval: 0.2
     EffectOnDeath: {fileID: 985664761693772524, guid: e6cb340aac834d7438092fd0e240bfd3, type: 3}
     <EffectScaleFactor>k__BackingField: 1
@@ -6331,7 +6331,7 @@ MonoBehaviour:
     <MaxSignature>k__BackingField: 30
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 10
+    ScanRange: 20
   <MaxVelocityMagnitude>k__BackingField: 20
   forwardThrust: 7
   <RotationSpeed>k__BackingField: 10

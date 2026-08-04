@@ -128,6 +128,7 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     protected virtual void OnEnable()
     {
+        SetObjectLayer(GlobalConfig.GetShipLayer(Team));
         IsDying = false;
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         missileCount = 0;
@@ -159,7 +160,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         UnitManager.Unregister(this);
         if (IsDying && !effectDuringDeath.isPlaying)
         {
-            Debug.Log("Spawning death effect");
+            //Debug.Log("Spawning death effect");
             unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         }
         missileBuffer = null;

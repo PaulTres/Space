@@ -78,17 +78,16 @@ namespace Weapons
         {
             if (@params.BurstFire)
             {
-                Debug.Log("Burst firing");
                 if (Time.time - lastBurstTime >= @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
                 {
-                    Debug.Log("Can burst fire");
+                    Debug.Log("Burst firing " + weaponBurstIndex + " " + Weapons[weaponBurstIndex].CanShoot());
                     lastBurstTime = Time.time;
                     int i;
-                    for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount); i++)
+                    for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount + 1); i++)
                     {
                         Weapons[i].Shoot(Target);
                     }
-                    if (i == Weapons.Count - 1) weaponBurstIndex = 0;
+                    if (i >= Weapons.Count - 1) weaponBurstIndex = 0;
                     else weaponBurstIndex = i + 1;
                 }
             }
@@ -121,16 +120,17 @@ namespace Weapons
             if (Owner == null || Owner.IsDying) return;
             if (Target.Active())
             {
-                if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
+                //Debug.Log($"Turret {transform.name} targeting {Target?.Transform}.");
+                //if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
                 //Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
                     //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
-                    if (Vector3.Angle(ElevationPivot.forward, (pos -
-                        Transform.position)) < @params.MaxAngleDifference)
+                    if (Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
+                        if (@params.TargetMissiles && Owner == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;
@@ -246,7 +246,7 @@ namespace Weapons
         {
             if (!target.Active()) return false;
 
-            if (@params.BurstFire) Debug.Log(target.Transform);
+            //if (@params.BurstFire) Debug.Log(target.Transform);
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;

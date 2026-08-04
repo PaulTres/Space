@@ -486,10 +486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8683930026d904d4ca033d70aae1b3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerShip
-  type: 2
   <Team>k__BackingField: 1
   <NeedsEscort>k__BackingField: 0
   unitParameters:
+    <UnitType>k__BackingField: 0
     TickInterval: 0.2
     EffectOnDeath: {fileID: 0}
     <EffectScaleFactor>k__BackingField: 1
@@ -516,11 +516,11 @@ MonoBehaviour:
       ignoreListenerVolume: 0
       ignoreListenerPause: 0
       rolloffMode: 0
-    <MinimumSignature>k__BackingField: 0
-    <MaxSignature>k__BackingField: 0
+    <MinimumSignature>k__BackingField: 10
+    <MaxSignature>k__BackingField: 30
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 10
+    ScanRange: 20
   <MaxVelocityMagnitude>k__BackingField: 30
   forwardThrust: 12
   <RotationSpeed>k__BackingField: 15

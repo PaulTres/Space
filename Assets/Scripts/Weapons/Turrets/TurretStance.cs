@@ -1,4 +1,3 @@
-using UnityEngine;
 using Utilities;
 
 namespace Weapons
@@ -104,9 +103,9 @@ namespace Weapons
                 for (int i = 0; i < targets.Count; i++)
                 {
                     if (!IsTargetValid(targets[i])) continue;
-                    if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
+                    //if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = EvaluateTarget(targets[i]);
-                    if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
+                    // if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !TurretData.AllowZeroScoreTargets) continue;
                     if (Owner.Target.Active() && targets[i].GetInstanceID() ==
                         Owner.Target.GetInstanceID())

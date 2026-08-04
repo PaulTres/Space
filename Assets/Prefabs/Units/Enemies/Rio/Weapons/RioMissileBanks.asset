@@ -20,9 +20,9 @@ MonoBehaviour:
   CurrentTargetScoreMultiplier: 10
   MaxAngleDifference: 3600
   MaxRange: 100
-  BurstFire: 1
+  BurstFire: 0
   BurstCooldown: 0.5
-  BurstCount: 2
+  BurstCount: 1
   RotSpeed: 0
   MinElevation: -45
   MaxElevation: 90

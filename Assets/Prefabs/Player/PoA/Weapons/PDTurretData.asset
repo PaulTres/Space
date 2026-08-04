@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5114e209f3dd3464aa5e025d9ffe2189, type: 3}
   m_Name: PDTurretData
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.TurretData
-  AllowZeroScoreTarget: 0
-  TargetEvaluation: {fileID: 11400000, guid: 86898a4c586b02e4e8eea371d9a653b8, type: 2}
+  AllowZeroScoreTargets: 0
+  TargetEvaluation: {fileID: 11400000, guid: 24b04e21b9693754492168347cc826df, type: 2}
   MinScoreDelta: 0
   TargetMissiles: 1
   TargetUnits: 1
-  MaxAngleDifference: 1
+  CurrentTargetScoreMultiplier: 2
+  MaxAngleDifference: 10
   MaxRange: 20
+  BurstFire: 0
+  BurstCooldown: 1
+  BurstCount: 1
   RotSpeed: 200
   MinElevation: -20
   MaxElevation: 90
