@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: RioMissileBanks
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.TurretData
   AllowZeroScoreTargets: 0
-  TargetEvaluation: {fileID: 11400000, guid: 86898a4c586b02e4e8eea371d9a653b8, type: 2}
+  TargetEvaluation: {fileID: 11400000, guid: 24b04e21b9693754492168347cc826df, type: 2}
   MinScoreDelta: 0
   TargetMissiles: 0
   TargetUnits: 1
   CurrentTargetScoreMultiplier: 10
   MaxAngleDifference: 3600
   MaxRange: 100
-  BurstFire: 0
-  BurstCooldown: 0.5
-  BurstCount: 1
+  BurstFire: 1
+  BurstCooldown: 1
+  BurstCount: 2
   RotSpeed: 0
   MinElevation: -45
   MaxElevation: 90

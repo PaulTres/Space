@@ -17,7 +17,7 @@ namespace Player
 
         public void ReplanMission()
         {
-            GameManager.LoadLobby();
+            GameManager.LoadMissionSelection();
         }
 
         public void GoToMainMenu()

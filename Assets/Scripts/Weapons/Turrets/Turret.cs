@@ -80,15 +80,16 @@ namespace Weapons
             {
                 if (Time.time - lastBurstTime >= @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
                 {
-                    Debug.Log("Burst firing " + weaponBurstIndex + " " + Weapons[weaponBurstIndex].CanShoot());
+                    //Debug.Log("Burst firing " + weaponBurstIndex + " " + Weapons[weaponBurstIndex].CanShoot());
                     lastBurstTime = Time.time;
                     int i;
-                    for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount + 1); i++)
+                    for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount); i++)
                     {
+                        //Debug.Log($"Turret {transform.name} firing weapon {i} at target {Target.Transform.name}.");
                         Weapons[i].Shoot(Target);
                     }
-                    if (i >= Weapons.Count - 1) weaponBurstIndex = 0;
-                    else weaponBurstIndex = i + 1;
+                    if (i > Weapons.Count - 1) weaponBurstIndex = 0;
+                    else weaponBurstIndex = i;
                 }
             }
             else
@@ -123,7 +124,7 @@ namespace Weapons
                 //Debug.Log($"Turret {transform.name} targeting {Target?.Transform}.");
                 //if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
-                //Debug.DrawLine(Transform.position, pos, Color.red);
+                Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
@@ -269,10 +270,7 @@ namespace Weapons
         public void UpdateTargets()
         {
             if (Owner == null) return;
-
-            //Debug.Log($"Turret {transform.name} checking for targets.");
-
-            if (!Target.Active()) Target = null;
+            //if (!Target.Active()) Target = null;
             turretStances[currentStanceIndex].UpdateTargets();
         }
         #endregion

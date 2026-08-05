@@ -105,7 +105,12 @@ public class GlobalConfig : ScriptableObject
     /// How many seconds to wait between ending the mission and loading the end mission screen.
     /// </summary>
     public static readonly float MissionEndDuration = 7;
-    public static readonly int MainMenuSceneIndex = 1, MissionSceneIndex = 3, EndMissionSceneIndex = 4, LobbySceneIndex = 2;
+    public static readonly int
+        MainMenuSceneIndex = 1,
+        MissionSelectSceneIndex = 2,
+        ShipSelectSceneIndex = 3,
+        MissionSceneIndex = 4,
+        EndMissionSceneIndex = 5;
     #endregion
 
     #region Layers and layer masks

@@ -30,7 +30,7 @@ namespace Player
 
         public void ReturnToLobby()
         {
-            GameManager.LoadLobby();
+            GameManager.LoadMissionSelection();
         }
     }
 }

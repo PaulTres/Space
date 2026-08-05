@@ -49,14 +49,14 @@ public static class GameManager
     {
         currentSave = new(0);
         currentSave.Save();
-        LoadLobby();
+        LoadMissionSelection();
     }
 
     public static void LoadSave(string fileName)
     {
         var s = GameSave.Load(fileName);
         currentSave = s ?? new(0);
-        LoadLobby();
+        LoadMissionSelection();
     }
 
     public static void OnMissionCompleted()
@@ -75,9 +75,14 @@ public static class GameManager
         SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
     }
 
-    public static void LoadLobby()
+    public static void LoadMissionSelection()
     {
-        SceneManager.LoadScene(GlobalConfig.LobbySceneIndex);
+        SceneManager.LoadScene(GlobalConfig.MissionSelectSceneIndex);
+    }
+
+    public static void LoadShipSelect()
+    {
+        SceneManager.LoadScene(GlobalConfig.ShipSelectSceneIndex);
     }
 
     public static void LoadMission()
