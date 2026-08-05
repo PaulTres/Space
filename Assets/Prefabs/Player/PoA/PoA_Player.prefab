@@ -487,6 +487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerShip
   <Team>k__BackingField: 1
+  <IsDying>k__BackingField: 0
   <NeedsEscort>k__BackingField: 0
   unitParameters:
     <UnitType>k__BackingField: 0
@@ -523,7 +524,7 @@ MonoBehaviour:
     ScanRange: 20
   <MaxVelocityMagnitude>k__BackingField: 30
   forwardThrust: 12
-  <RotationSpeed>k__BackingField: 15
+  <RotationSpeed>k__BackingField: 30
   strafeThrust: 6
   inputReader: {fileID: 11400000, guid: cc53166efb1d065419956e281515f266, type: 2}
   shipBody: {fileID: 1474988901592204250}
@@ -554,6 +555,7 @@ MonoBehaviour:
   sendEventOnHPChange: 0
   minHP: 0
   minHPRegainCooldown: 5
+  currentHP: 0
   armorModifiers: []
   body: {fileID: 0}
 --- !u!198 &8531889017233049811

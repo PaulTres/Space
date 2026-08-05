@@ -61,7 +61,12 @@ namespace Utilities
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
-            PoolableEffect.Spawn(effect, position, scaleFactor * Vector3.one);
+            SpawnEffect(effect, position, Quaternion.identity, scaleFactor);
+        }
+
+        public static void SpawnEffect(this PoolableEffect effect, Vector3 position, Quaternion rotation, float scaleFactor)
+        {
+            PoolableEffect.Spawn(effect, position, rotation, scaleFactor * Vector3.one);
         }
 
         public static void SpawnEffect(this PoolableEffect effect, Transform parent, float scaleFactor)

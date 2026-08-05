@@ -104,7 +104,6 @@ namespace Player
         #endregion
 
         #region Functionality
-
         protected void OnFindTarget() => PlayerTargetSystem.TryGetInstance().SelectTarget();
 
         protected void OnZoom(float zoom)

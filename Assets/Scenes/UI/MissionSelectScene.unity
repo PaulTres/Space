@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cbfeafff5eb9d479f702719cee2812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MissionSelectScreen
-  missionBriefingText: {fileID: 0}
-  missionOptions: {fileID: 0}
+  missionBriefingText: {fileID: 573375266}
+  missionOptions: {fileID: 1556805401}
 --- !u!114 &455297282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1747,7 +1747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1535276325}
   m_Layer: 5
-  m_Name: ShipOptions
+  m_Name: Missions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2460,22 +2460,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player.ShipSelectScreen, Assembly-CSharp
-        m_MethodName: BeginMission
+      - m_Target: {fileID: 455297281}
+        m_TargetAssemblyTypeName: Player.MissionSelectScreen, Assembly-CSharp
+        m_MethodName: GoToShipSelect
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1993312967}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-        m_MethodName: set_interactable
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

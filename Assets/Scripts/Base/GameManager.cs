@@ -90,6 +90,11 @@ public static class GameManager
         SceneManager.LoadScene(GlobalConfig.MissionSceneIndex);
     }
 
+    public static void LoadLoadingScreen()
+    {
+        SceneManager.LoadScene(GlobalConfig.LoadingSceneIndex);
+    }
+
     public static void EndMission()
     {
         UnitManager.Clear();

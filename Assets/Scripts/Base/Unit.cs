@@ -160,7 +160,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         UnitManager.Unregister(this);
         if (IsDying && !effectDuringDeath.isPlaying)
         {
-            //Debug.Log("Spawning death effect");
             unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         }
         missileBuffer = null;
@@ -240,13 +239,12 @@ public abstract class Unit : ImprovedMonoBehaviour
         //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
         GameManager.UnitsDestroyed.Add(@event);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
-        UnitManager.Unregister(this);
         EffectDuringDeath.Play();
         if (unitParameters.SoundDuringDeath != null) SoundManager.
             TryGetInstance(true).Play(unitParameters.SoundDuringDeath, transform.position);
         IsDying = true;
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
-        this.UnregisterForRadar();
+        UnregisterForRadar();
         EventBus<UnitDestroyed>.Raise(new(this));
     }
     #endregion

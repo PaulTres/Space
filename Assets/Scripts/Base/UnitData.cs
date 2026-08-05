@@ -50,6 +50,7 @@ public class UnitData : MonoSpawnableData<Unit>
         //}
     }
 
+    public bool ShouldBeDisabled = true;
     public int Points = 1;
     [SerializeField] protected string description;
     public string Description
@@ -59,5 +60,11 @@ public class UnitData : MonoSpawnableData<Unit>
             if (description != null && description.Length > 0) return description;
             return "A " + name + '.';
         }
+    }
+
+    protected void OnValidate()
+    {
+        Debug.Assert(Prefab != null, $"Prefab is null for {this}!");
+        Debug.Assert(!ShouldBeDisabled || !Prefab.gameObject.activeSelf, $"Prefab {Prefab} is active in the scene for {this}!");
     }
 }

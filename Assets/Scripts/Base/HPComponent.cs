@@ -37,7 +37,7 @@ namespace HP
         [SerializeField] protected float minHP = 0;
         [Tooltip("The time it takes for min hp regain to kick in.")]
         [SerializeField] protected float minHPRegainCooldown = 5;
-        protected float currentHP;
+        [SerializeField] protected float currentHP;
         public float CurrentHP
         {
             get => currentHP;
@@ -54,6 +54,11 @@ namespace HP
                             CurrentHP / (MaxHP + float.Epsilon)));
                     }
                     currentHP = value;
+                    foreach (var damageEffect in damageEffects)
+                    {
+                        damageEffect.gameObject.SetActive(currentHP / MaxHP <
+                            damageEffect.DamageThreshold);
+                    }
                 }
             }
         }
@@ -62,6 +67,7 @@ namespace HP
         [SerializeField] protected List<ArmorModifier> armorModifiers = new();
         [Tooltip("This transform is used to determine the direction of incoming damage. If not set, the transform of this component will be used.")]
         [SerializeField] protected Transform body;
+        protected List<DamageEffect> damageEffects = new();
         #endregion
 
         #region Setup
@@ -80,6 +86,7 @@ namespace HP
                 };
             }
             if (body == null) body = Transform;
+            damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
         }
 
         public void PerformReset()
@@ -88,10 +95,7 @@ namespace HP
             CurrentHP = MaxHP;
         }
 
-        protected void OnEnable()
-        {
-            PerformReset();
-        }
+        protected void OnEnable() => PerformReset();
 
         protected void OnDisable()
         {

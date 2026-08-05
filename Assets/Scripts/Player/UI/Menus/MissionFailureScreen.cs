@@ -12,7 +12,7 @@ namespace Player
 
         public void RestartMission()
         {
-            GameManager.LoadMission();
+            GameManager.LoadLoadingScreen();
         }
 
         public void ReplanMission()

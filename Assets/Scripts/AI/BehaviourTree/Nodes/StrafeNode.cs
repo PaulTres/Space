@@ -47,7 +47,7 @@ public class StrafeNode : LeafNodeData
     {
         var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
         if (!target.Active()) return NodeState.FAILURE;
-        Debug.Log("Strafing");
+        //Debug.Log("Strafing");
 
         var currentTicks = n.GetData<int>((int)InternalKeys.CurrentTicks);
         if (currentTicks >= TicksBeforeRepath)

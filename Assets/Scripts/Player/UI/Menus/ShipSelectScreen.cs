@@ -53,13 +53,13 @@ namespace Player
         protected IEnumerator MissionStartCountdown()
         {
             int count = missionStartTimerDuration;
-            while (count >= 0)
+            while (count > 1)
             {
                 count--;
                 timerText.text = $"00:{count:D2}";
                 yield return waitForOneSecond;
             }
-            GameManager.LoadMission();
+            GameManager.LoadLoadingScreen();
         }
         #endregion
     }

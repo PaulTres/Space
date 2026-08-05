@@ -22,7 +22,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     }
     public Vector3 Position => Transform.position;
     public float CurrentSignature { get; protected set; } = 0;
-    public bool IsDying { get; protected set; } = false;
+    [field: SerializeField] public bool IsDying { get; protected set; } = false;
 
     protected void RegisterForRadar()
     {

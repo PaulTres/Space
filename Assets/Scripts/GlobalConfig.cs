@@ -110,7 +110,8 @@ public class GlobalConfig : ScriptableObject
         MissionSelectSceneIndex = 2,
         ShipSelectSceneIndex = 3,
         MissionSceneIndex = 4,
-        EndMissionSceneIndex = 5;
+        EndMissionSceneIndex = 5,
+        LoadingSceneIndex = 6;
     #endregion
 
     #region Layers and layer masks

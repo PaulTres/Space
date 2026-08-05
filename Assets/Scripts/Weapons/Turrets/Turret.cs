@@ -131,7 +131,7 @@ namespace Weapons
                     //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                     if (Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
-                        if (@params.TargetMissiles && Owner == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                        //if (@params.TargetMissiles && Owner == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;

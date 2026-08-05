@@ -132,7 +132,7 @@ namespace Weapons
         protected virtual void OnHit(Collider collider)
         {
             collider.transform.root.TakeDamage(damageInfo);
-            onHitEffect.SpawnEffect(Transform.position, effectScaleFactor);
+            onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }
         #endregion

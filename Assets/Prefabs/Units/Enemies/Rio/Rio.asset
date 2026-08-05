@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Rio
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   Prefab: {fileID: 2915927212568212780, guid: ababb2460a8f8c04a9a0889899df4422, type: 3}
-  Points: 1
+  Points: 2
   description: A dependable cruiser armed with 4 point-defense turrets and 4 missile
     launchers.
