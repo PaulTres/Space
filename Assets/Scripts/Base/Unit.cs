@@ -1,4 +1,3 @@
-using AudioSystem;
 using Effects;
 using EventBus;
 using HP;
@@ -12,6 +11,7 @@ using Weapons;
 
 [RequireComponent(typeof(HPComponent))]
 [RequireComponent(typeof(ParticleSystem))]
+[RequireComponent(typeof(AudioSource))]
 public abstract class Unit : ImprovedMonoBehaviour
 {
     public enum Type
@@ -28,8 +28,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
         [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
-        [Tooltip("Plays while the ship is exploding.")]
-        public SoundData SoundDuringDeath;
         [field: SerializeField] public float MinimumSignature { get; protected set; }
         [field: SerializeField] public float MaxSignature { get; protected set; }
         public float SignatureDecreaseRate = 0.1f;
@@ -37,6 +35,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float SignatureDecreaseCooldown = 5f;
         public float ScanRange = 10;
     }
+
     #region Fields
     #region Misc
     [Header("Unit")]
@@ -57,6 +56,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// finished playing.
     /// </summary>
     protected ParticleSystem effectDuringDeath;
+    protected AudioSource audioSource;
+    [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
@@ -94,6 +95,17 @@ public abstract class Unit : ImprovedMonoBehaviour
             return effectDuringDeath;
         }
     }
+    public AudioSource AudioSource
+    {
+        get
+        {
+            if (audioSource == null)
+            {
+                audioSource = GetComponent<AudioSource>();
+            }
+            return audioSource;
+        }
+    }
     public float EffectScaleFactor => unitParameters.EffectScaleFactor;
     public float ScanRange
     {
@@ -116,9 +128,10 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
     #endregion
 
-    #region Setup
+    #region Setup/Cleanup
     protected virtual void Awake()
     {
+        if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);
         ComponentRegister<Unit>.Register(Transform, this);
@@ -128,14 +141,12 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     protected virtual void OnEnable()
     {
-        SetObjectLayer(GlobalConfig.GetShipLayer(Team));
         IsDying = false;
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         missileCount = 0;
         tickCoroutine = StartCoroutine(Tick());
         CurrentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
-        RegisterForRadar();
         signatureDecreaseDelay = Time.time;
     }
 
@@ -150,19 +161,18 @@ public abstract class Unit : ImprovedMonoBehaviour
         {
             c.gameObject.layer = layer;
         }
-
     }
 
     protected virtual void OnDisable()
     {
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
-        UnregisterForRadar();
         UnitManager.Unregister(this);
         if (IsDying && !effectDuringDeath.isPlaying)
         {
             unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         }
         missileBuffer = null;
+        AudioSource.Stop();
     }
 
     protected virtual void OnDestroy()
@@ -208,6 +218,16 @@ public abstract class Unit : ImprovedMonoBehaviour
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
 
+    public void SetTeam(int team)
+    {
+        if (Team != team)
+        {
+            Team = team;
+            UnitManager.Unregister(this);
+            UnitManager.Register(this);
+        }
+    }
+
     protected virtual void OnDrawGizmos()
     {
         if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
@@ -240,8 +260,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         GameManager.UnitsDestroyed.Add(@event);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
         EffectDuringDeath.Play();
-        if (unitParameters.SoundDuringDeath != null) SoundManager.
-            TryGetInstance(true).Play(unitParameters.SoundDuringDeath, transform.position);
+        AudioSource.Play();
         IsDying = true;
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnregisterForRadar();

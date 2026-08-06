@@ -286,13 +286,14 @@ namespace Radar
             if (GameManager.Player == null) return;
             var targets = GameManager.Player.GetTargets();
             Unit bestCandidate = null;
-            float bestScore = float.MinValue;
+            float bestScore = 0;
             foreach (var target in targets)
             {
                 //compute a score for all of these
-                if (target == null || !target.Transform.gameObject.activeSelf || target.IsEqual(CurrentTarget)) continue;
+                if (target == null || !target.Transform.gameObject.activeSelf ||
+                    target.IsEqual(CurrentTarget)) continue;
                 var score = EvaluateTarget(target);
-                if (score > bestScore && score > 0)
+                if (score > bestScore)
                 {
                     bestCandidate = target;
                     bestScore = score;

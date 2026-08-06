@@ -24,7 +24,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     public float CurrentSignature { get; protected set; } = 0;
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
 
-    protected void RegisterForRadar()
+    public void RegisterForRadar()
     {
         var r = PlayerTargetSystem.TryGetInstance();
         if (r != null)
@@ -33,7 +33,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
         }
     }
 
-    protected void UnregisterForRadar()
+    public void UnregisterForRadar()
     {
         var r = PlayerTargetSystem.TryGetInstance();
         if (r != null)

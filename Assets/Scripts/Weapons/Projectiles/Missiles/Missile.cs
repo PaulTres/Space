@@ -97,8 +97,9 @@ namespace Weapons
         protected float Telemetry()
         {
             if (Owner != null || !Owner.InOptimalFiringRange(target)) return 0;
-            return Mathf.Max(0, Mathf.Min(maxTelemetryBonus, Vector3.Dot(Owner.Forward,
-                (target.Transform.position - Owner.Position).normalized)));
+            return Mathf.Max(0, Mathf.Min(maxTelemetryBonus, Vector3.Dot(
+                Owner.TelemetryOrigin.forward, (target.Transform.position -
+                Owner.TelemetryOrigin.position).normalized)));
         }
 
         protected void CalculateEffectiveTracking()

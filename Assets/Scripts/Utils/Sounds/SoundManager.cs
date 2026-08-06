@@ -46,7 +46,9 @@ namespace AudioSystem
         {
             return soundEmitterPool.Get();
         }
+
         public void Play(SoundData data) => Play(data, Vector3.zero);
+
         public void Play(SoundData data, Vector3 position)
         {
             var s = Get();
@@ -54,6 +56,7 @@ namespace AudioSystem
             s.Initialize(data);
             s.Play();
         }
+
         public void ReturnToPool(SoundEmitter soundEmitter)
         {
             soundEmitterPool.Release(soundEmitter);

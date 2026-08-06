@@ -2,6 +2,7 @@ using AudioSystem;
 using Spawning;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utilities;
 namespace Effects
 {
     public class PoolableEffect : MonoBehaviour
@@ -73,7 +74,7 @@ namespace Effects
 
         protected void OnEnable()
         {
-            if (soundData != null) SoundManager.TryGetInstance(true).Play(soundData, transform.position);
+            soundData.Play(transform.position);
             if (particles != null)
             {
                 for (int i = 0; i < particles.Length; i++)

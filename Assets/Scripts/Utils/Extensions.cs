@@ -1,3 +1,4 @@
+using AudioSystem;
 using Effects;
 using HP;
 using HybridBT2;
@@ -58,6 +59,15 @@ namespace Utilities
                 unit.ScanRange + targetSignature;
         }
         #endregion
+
+        public static void Play(this SoundData soundData, Vector3 position, bool createManager = true)
+        {
+            if (soundData != null)
+            {
+                var m = SoundManager.TryGetInstance(createManager);
+                if (m != null) m.Play(soundData, position);
+            }
+        }
 
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, float scaleFactor)
         {
