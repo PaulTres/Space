@@ -6,11 +6,6 @@ using Utilities;
 using Weapons;
 namespace Player
 {
-    public class WeaponDisplay : MonoBehaviour
-    {
-        public Image WeaponSprite;
-        public Text WeaponButtonText;
-    }
     public class HUD : UISystem
     {
         #region Fields
@@ -91,7 +86,7 @@ namespace Player
         public void UpdateWeaponDisplay(WeaponBase weapon)
         {
             var display = weaponDisplays[weapon];
-            display.WeaponSprite.color = weapon.CanShoot() ? weaponReadyColor : weaponNotReadyColor;
+            //display.WeaponSprite.color = weapon.CanShoot() ? weaponReadyColor : weaponNotReadyColor;
         }
         #endregion
     }

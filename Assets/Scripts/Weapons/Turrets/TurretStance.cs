@@ -33,7 +33,7 @@ namespace Weapons
             float bestScore = Target.Active() ? EvaluateTarget(Target) : float.MinValue;
 
             #region Evaluate missiles
-            if (TurretData.TargetMissiles)
+            if (Turret.TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
                 //Debug.Log(count);
@@ -95,7 +95,7 @@ namespace Weapons
             #endregion
 
             #region Evaluate regular targets
-            if (TurretData.TargetUnits)
+            if (Turret.TargetUnits)
             {
                 var targets = Owner.GetTargets();
                 if (targets.IsEmpty()) return;
@@ -132,7 +132,7 @@ namespace Weapons
     {
         public override void UpdateTargets()
         {
-            if (TurretData.TargetMissiles)
+            if (Turret.TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
                 //Debug.Log(count);
@@ -174,7 +174,7 @@ namespace Weapons
                 }
             }
 
-            if (TurretData.TargetUnits)
+            if (Turret.TargetUnits)
             {
                 Target = Owner.Target;
             }

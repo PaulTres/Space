@@ -1,13 +1,12 @@
 ﻿using EventBus;
 using HybridBT2;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utilities;
 using Weapons;
 public class BanditTree : BT, IRegisterableComponent
 {
     public Blackboard Blackboard => blackboard;
-    [SerializeField] protected List<Turret> pointDefenseTurrets = new();
     [SerializeField] protected bool affectedByMorale = true;
     [SerializeField] protected float initialMorale = 10;
     [Tooltip("The maximum distance from a morale event at which this unit will be affected.")]
@@ -67,7 +66,9 @@ public class BanditTree : BT, IRegisterableComponent
         Blackboard.SetData(Blackboard.Keys.Fleeing, false);
         Blackboard.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
         Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
-        Blackboard.SetData(Blackboard.Keys.PDTurrets, pointDefenseTurrets);
+        Blackboard.SetData(Blackboard.Keys.PDTurrets,
+            GetComponentsInChildren<Turret>().
+            Where(t => t.Parameters.TargetMissiles));
         Blackboard.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);
         Blackboard.SetData(Blackboard.Keys.DefaultMorale, initialMorale);
         Blackboard.SetData(Blackboard.Keys.Morale, initialMorale);

@@ -23,6 +23,8 @@ namespace Weapons
             }
         }
         public float DPS { get; protected set; }
+        public float BulletSpeed => Weapons.IsEmpty() ? 0 : Weapons[0].BulletSpeed;
+        public float SignatureIncrease => Weapons.IsEmpty() ? 0 : Weapons[0].SignatureIncrease * Weapons.Count;
         public Unit Owner { get; protected set; }
         public List<WeaponBase> Weapons { get; protected set; }
         protected Transform tr;
@@ -31,6 +33,9 @@ namespace Weapons
         public Transform Transform => tr != null ? tr : transform;
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
+        public TurretData Parameters => @params;
+        public bool TargetMissiles { get; set; }
+        public bool TargetUnits { get; set; }
         public float MaxRangeSquared => @params.MaxRangeSquared;
         /// <summary>
         /// Stance 0 - aggressive<br/>
@@ -57,6 +62,8 @@ namespace Weapons
 
         protected virtual void OnEnable()
         {
+            TargetMissiles = @params.TargetMissiles;
+            TargetUnits = @params.TargetUnits;
             lastBurstTime = float.MinValue;
             weaponBurstIndex = 0;
             RecalculateDPS();
@@ -283,7 +290,7 @@ namespace Weapons
         protected void RotateToIdle(float deltaTime)
         {
             //Debug.Log("Rotating turret to idle position.");
-            if (RotationPivot.rotation == Quaternion.identity && ElevationPivot.rotation == Quaternion.identity) return;
+            if (@params.RotSpeed == 0 || (RotationPivot.rotation == Quaternion.identity && ElevationPivot.rotation == Quaternion.identity)) return;
 
             if (RotationPivot == ElevationPivot)
             {

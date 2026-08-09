@@ -25,7 +25,9 @@ namespace Weapons
         protected CountdownTimer shotTimer;
         public float CurrentShotCooldown { get; protected set; }
         public BulletData BulletData => @params != null ? @params.BulletData : null;
+        public float BulletSpeed => @params.BulletData != null ? @params.BulletData.Speed : 0;
         public float DPS => @params.BulletData.Damage * shootPoints.Length / CurrentShotCooldown;
+        public float SignatureIncrease => @params.SignatureIncrease;
         #endregion
 
         #region Parameters

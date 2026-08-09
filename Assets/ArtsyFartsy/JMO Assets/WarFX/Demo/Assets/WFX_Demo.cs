@@ -118,7 +118,7 @@ public class WFX_Demo : MonoBehaviour
 			this.GetComponent<Renderer>().enabled = !this.GetComponent<Renderer>().enabled;
 		}
 		
-		if(GUILayout.Button(slowMo ? "Normal Speed" : "Slow Motion", GUILayout.Width(100)))
+		if(GUILayout.Button(slowMo ? "Normal BulletSpeed" : "Slow Motion", GUILayout.Width(100)))
 		{
 			slowMo = !slowMo;
 			if(slowMo)	Time.timeScale = 0.33f;

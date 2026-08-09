@@ -87,11 +87,11 @@ public class CFXEasyEditor : EditorWindow
 		new ParticleSystemModule("Limit Velocity", "ClampVelocityModule"),
 		new ParticleSystemModule("Force", "ForceModule"),
 		new ParticleSystemModule("TextColor over Lifetime", "ColorModule"),
-		new ParticleSystemModule("TextColor by Speed", "ColorBySpeedModule"),
+		new ParticleSystemModule("TextColor by BulletSpeed", "ColorBySpeedModule"),
 		new ParticleSystemModule("Size over Lifetime", "SizeModule"),
-		new ParticleSystemModule("Size by Speed", "SizeBySpeedModule"),
+		new ParticleSystemModule("Size by BulletSpeed", "SizeBySpeedModule"),
 		new ParticleSystemModule("Rotation over Lifetime", "RotationModule"),
-		new ParticleSystemModule("Rotation by Speed", "RotationBySpeedModule"),
+		new ParticleSystemModule("Rotation by BulletSpeed", "RotationBySpeedModule"),
 		new ParticleSystemModule("Collision", "CollisionModule"),
 		new ParticleSystemModule("Sub Emitters", "SubModule"),
 		new ParticleSystemModule("Texture Animation", "UVModule"),
@@ -276,11 +276,11 @@ public class CFXEasyEditor : EditorWindow
 		//----------------------------------------------------------------
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Set Speed", "Changes the simulation speed of the Particle System(s)\n1 = default speed"), GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Set BulletSpeed", "Changes the simulation speed of the Particle System(s)\n1 = default speed"), GUILayout.Width(120)))
 			{
 				applySpeed();
 			}
-			GUILayout.Label("Speed:",GUILayout.Width(110));
+			GUILayout.Label("BulletSpeed:",GUILayout.Width(110));
 			LTScalingValue = EditorGUILayout.FloatField(LTScalingValue,GUILayout.Width(50));
 			if(LTScalingValue < 0.0f) LTScalingValue = 0.0f;
 			else if(LTScalingValue > 9999) LTScalingValue = 9999;
@@ -423,7 +423,7 @@ public class CFXEasyEditor : EditorWindow
 			GUILayout.Space(4);
 			TintStartColor = GUILayout.Toggle(TintStartColor, new GUIContent("Start TextColor", "If checked, the \"Start TextColor\" value(s) will be affected."), EditorStyles.toolbarButton);
 			TintColorModule = GUILayout.Toggle(TintColorModule, new GUIContent("TextColor over Lifetime", "If checked, the \"TextColor over Lifetime\" value(s) will be affected."), EditorStyles.toolbarButton);
-			TintColorSpeedModule = GUILayout.Toggle(TintColorSpeedModule, new GUIContent("TextColor by Speed", "If checked, the \"TextColor by Speed\" value(s) will be affected."), EditorStyles.toolbarButton);
+			TintColorSpeedModule = GUILayout.Toggle(TintColorSpeedModule, new GUIContent("TextColor by BulletSpeed", "If checked, the \"TextColor by BulletSpeed\" value(s) will be affected."), EditorStyles.toolbarButton);
 			GUILayout.Space(4);
 			GUILayout.EndHorizontal();
 			
@@ -1489,7 +1489,7 @@ public class CFXEasyEditor : EditorWindow
 		"InitialModule.startSize.minScalar",
 		"InitialModule.startSpeed.minScalar",
 #endif
-		//Size by Speed
+		//Size by BulletSpeed
 		"SizeBySpeedModule.range.x",
 		"SizeBySpeedModule.range.y",
 		//Velocity over Lifetime

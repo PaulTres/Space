@@ -1,16 +1,10 @@
 using UnityEngine;
-using Utilities;
 namespace Weapons
 {
     public class LaserWeapon : WeaponBase
     {
         protected float heatPerShot = .1f;
-        protected float overheatThreshold = 1.0f;
-        protected float heatLoss = .34f;
-        protected float heatLossCooldown = .5f;
-        protected bool overheated;
-        protected float currentHeat;
-        protected float lastShotTime;
+        protected Heatsink heatsink;
 
         protected override void Awake()
         {
@@ -18,51 +12,20 @@ namespace Weapons
             var data = @params as LaserWeaponData;
             if (data == null) throw new System.Exception($"Weapons {name} has no LaserWeaponData!");
             heatPerShot = data.HeatPerShot;
-            overheatThreshold = data.OverheatThreshold;
-            heatLoss = data.HeatLoss;
-            heatLossCooldown = data.HeatLossCooldown;
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformFixedUpdate);
-        }
-
-        protected void OnDisable()
-        {
-            var u = GlobalUpdater.TryGetInstance();
-            if (u != null) u.UnregisterFixedUpdate(PerformFixedUpdate);
-        }
-
-        public override void PerformReset()
-        {
-            base.PerformReset();
-            overheated = false;
-            lastShotTime = float.MinValue;
-            currentHeat = 0;
-        }
-
-        public void PerformFixedUpdate(float dt)
-        {
-            if (Time.time - lastShotTime >= heatLossCooldown)
-            {
-                currentHeat = Mathf.Max(0, currentHeat - heatLoss * dt);
-                if (currentHeat == 0) overheated = false;
-            }
+            heatsink = transform.root.GetComponentInChildren<Heatsink>();
+            Debug.Assert(heatsink != null, $"No heatsink on {transform.root}!");
         }
 
         public override bool CanShoot()
         {
-            return base.CanShoot() && !overheated;
+            return base.CanShoot() && !heatsink.Overheated;
         }
 
         public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
         {
             if (target != null) ((Laser)bullet).SetTarget(target);
             else Debug.LogWarning($"Laser {transform} has no target!");
-            currentHeat += heatPerShot;
-            if (currentHeat > overheatThreshold) overheated = true;
+            heatsink.IncreaseHeat(heatPerShot);
             base.ProcessBullet(bullet, target);
         }
     }

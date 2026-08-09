@@ -12,8 +12,8 @@ public class MissileEvadeNode : LeafNodeData
     [SerializeField] protected bool resetRotationTarget = true;
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        var pdTurrets = ctx.GetData<List<Turret>>(Blackboard.Keys.PDTurrets);
-        if (pdTurrets.IsEmpty()) return NodeState.FAILURE;
+        var pdTurrets = ctx.GetData<IEnumerable<Turret>>(Blackboard.Keys.PDTurrets);
+        if (pdTurrets == null) return NodeState.FAILURE;
         foreach (var turret in pdTurrets)
         {
             if (turret.Target == null) continue;

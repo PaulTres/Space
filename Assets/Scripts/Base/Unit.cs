@@ -58,6 +58,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected ParticleSystem effectDuringDeath;
     protected AudioSource audioSource;
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
+    [Tooltip("The list of all objects whose layer needs to be changed on spawn.")]
+    [SerializeField] protected List<GameObject> criticalObjects;
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
@@ -131,6 +133,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Setup/Cleanup
     protected virtual void Awake()
     {
+        Debug.Assert(!criticalObjects.IsEmpty());
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);
@@ -156,11 +159,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// <param name="layer"></param>
     public virtual void SetObjectLayer(int layer)
     {
-        gameObject.layer = layer;
-        foreach (var c in GetComponentsInChildren<Collider>())
-        {
-            c.gameObject.layer = layer;
-        }
+        foreach (var c in criticalObjects) c.layer = layer;
     }
 
     protected virtual void OnDisable()

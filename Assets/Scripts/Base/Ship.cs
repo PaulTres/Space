@@ -6,7 +6,6 @@ public abstract class Ship : Unit
 {
     #region Fields
     [Header("Ship")]
-    [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
     [SerializeField] protected float forwardThrust = 1;
     [field: SerializeField] public float RotationSpeed { get; protected set; } = 5;
     [SerializeField] protected float strafeThrust = 1;
