@@ -43,9 +43,22 @@ namespace Weapons
         /// Stance 2 - passive
         /// </summary>
         protected List<TurretStance> turretStances = new();
-        protected int currentStanceIndex = 0;
+        public int CurrentStanceIndex { get; protected set; } = 0;
         protected float lastBurstTime;
         protected int weaponBurstIndex;
+        /// <summary>
+        /// 0 - fully reloaded<br/>
+        /// 1 - just fired<br/>
+        /// </summary>
+        public float ReloadStatus
+        {
+            get
+            {
+                float s = 0;
+                for (int i = 0; i < Weapons.Count; i++) s += Weapons[i].ReloadStatus;
+                return s / Weapons.Count;
+            }
+        }
         #endregion
 
         #region Setup
@@ -68,7 +81,7 @@ namespace Weapons
             weaponBurstIndex = 0;
             RecalculateDPS();
             Target = null;
-            currentStanceIndex = 0;
+            CurrentStanceIndex = 0;
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(Tick);
         }
 
@@ -179,14 +192,14 @@ namespace Weapons
         /// <param name="index"></param>
         public void SetStanceIndex(int index)
         {
-            currentStanceIndex = index % turretStances.Count;
+            CurrentStanceIndex = index % turretStances.Count;
             UpdateTargets();
         }
 
         /// <summary>
         /// Increases stance index by 1, loops around on reaching end of stance list. Then calls UpdateTargets.
         /// </summary>
-        public void CycleStance() => SetStanceIndex(currentStanceIndex + 1);
+        public void CycleStance() => SetStanceIndex(CurrentStanceIndex + 1);
 
         public void SetAggressiveStance() => SetStanceIndex(0);
 
@@ -278,7 +291,7 @@ namespace Weapons
         {
             if (Owner == null) return;
             //if (!Target.Active()) Target = null;
-            turretStances[currentStanceIndex].UpdateTargets();
+            turretStances[CurrentStanceIndex].UpdateTargets();
         }
         #endregion
 

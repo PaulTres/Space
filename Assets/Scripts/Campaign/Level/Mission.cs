@@ -66,6 +66,17 @@ public abstract class Mission : ScriptableObject
 
     public abstract void SpawnUnits();
 
+    public virtual Unit SpawnUnit(UnitData data, Vector3 position, Quaternion rotation, int team, bool setActive = true)
+    {
+        if (data == null) return null;
+        var unit = data.CreateInstance();
+        unit.Team = team;
+        //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
+        unit.Transform.SetPositionAndRotation(position, rotation);
+        unit.gameObject.SetActive(setActive);
+        return unit;
+    }
+
     public virtual void OnAllEnemiesDestroyed()
     {
         //Debug.Log("enemies destroyed");

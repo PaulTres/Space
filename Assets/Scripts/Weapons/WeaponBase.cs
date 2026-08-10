@@ -28,6 +28,10 @@ namespace Weapons
         public float BulletSpeed => @params.BulletData != null ? @params.BulletData.Speed : 0;
         public float DPS => @params.BulletData.Damage * shootPoints.Length / CurrentShotCooldown;
         public float SignatureIncrease => @params.SignatureIncrease;
+        /// <summary>
+        /// 0 means the weapon is fully reloaded, 1 means the weapon just fired and has started reloading.
+        /// </summary>
+        public float ReloadStatus => shotTimer.Progress;
         #endregion
 
         #region Parameters

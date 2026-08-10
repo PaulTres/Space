@@ -15,11 +15,9 @@ public class HandmadeBattle : Mission
 
     public override void SpawnPlayer()
     {
-        var player = UnitData.PlayerChoice.CreateInstance();
-        player.Transform.SetPositionAndRotation(playerSpawnPos, Quaternion.
-            Euler(playerSpawnRot));
         PlayerPoints -= UnitData.PlayerChoice.Points;
-        player.gameObject.SetActive(true);
+        SpawnUnit(UnitData.PlayerChoice, playerSpawnPos, Quaternion.Euler(playerSpawnRot),
+            GlobalConfig.PlayerTeam);
     }
 
     public override void SpawnUnits()
@@ -31,24 +29,19 @@ public class HandmadeBattle : Mission
             UnitData choice = null;
             if (spawner.Team == GlobalConfig.PlayerTeam)
             {
-                choice = spawner.SpawnUnit(allyPoints);
+                choice = spawner.ChooseUnit(allyPoints);
                 allyPoints -= choice.Points;
             }
             else if (spawner.Team == GlobalConfig.EnemyTeam)
             {
-                choice = spawner.SpawnUnit(enemyPoints);
+                choice = spawner.ChooseUnit(enemyPoints);
                 enemyPoints -= choice.Points;
             }
-            else choice = spawner.SpawnUnit(int.MaxValue);
+            else choice = spawner.ChooseUnit(int.MaxValue);
 
-            var pos = spawner.SpawnPosition + Random.insideUnitSphere *
-                spawner.SpawnRadius;
-            var unit = choice.CreateInstance();
-            unit.Team = spawner.Team;
-            //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
-            unit.Transform.SetPositionAndRotation(pos, Quaternion.
-                Euler(spawner.SpawnRotation));
-            unit.gameObject.SetActive(true);
+            SpawnUnit(choice, spawner.SpawnPosition + Random.insideUnitSphere *
+                spawner.SpawnRadius, Quaternion.Euler(spawner.SpawnRotation),
+                spawner.Team);
         }
     }
 }

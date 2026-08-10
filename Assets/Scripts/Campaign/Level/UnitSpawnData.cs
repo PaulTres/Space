@@ -11,7 +11,7 @@ public class UnitSpawnData
     [field: SerializeField] public int Team { get; protected set; } = 1;
     [SerializeField] protected List<UnitData> spawnOptions = new();
 
-    public UnitData SpawnUnit(int maxPoints)
+    public UnitData ChooseUnit(int maxPoints)
     {
         var available = spawnOptions.Where(d => d.Points <= maxPoints).ToList();
         if (available.Count == 0) return null;

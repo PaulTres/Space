@@ -4913,6 +4913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
   <DamageThreshold>k__BackingField: 0.6
+  effect: {fileID: 0}
+  effectScaleFactor: 1
 --- !u!1 &1696509691317725353
 GameObject:
   m_ObjectHideFlags: 0
@@ -10101,6 +10103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageEffect
   <DamageThreshold>k__BackingField: 0.2
+  effect: {fileID: 0}
+  effectScaleFactor: 1
 --- !u!1 &3541937741907236067
 GameObject:
   m_ObjectHideFlags: 0
@@ -11041,6 +11045,8 @@ GameObject:
   - component: {fileID: 2915927212568212780}
   - component: {fileID: 4691404521448116948}
   - component: {fileID: 8646256092955116310}
+  - component: {fileID: 2349703258816028340}
+  - component: {fileID: 5062469542772041986}
   m_Layer: 0
   m_Name: Rio
   m_TagString: Untagged
@@ -15933,42 +15939,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   <Team>k__BackingField: 0
+  <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
   <NeedsEscort>k__BackingField: 0
+  <TelemetryOrigin>k__BackingField: {fileID: 0}
+  criticalObjects:
+  - {fileID: 8898726161923389109}
   unitParameters:
     <UnitType>k__BackingField: 0
     TickInterval: 0.2
     EffectOnDeath: {fileID: 985664761693772524, guid: e6cb340aac834d7438092fd0e240bfd3, type: 3}
     <EffectScaleFactor>k__BackingField: 1
-    SoundDuringDeath:
-      clip: {fileID: 0}
-      mixerGroup: {fileID: 0}
-      loop: 0
-      playOnAwake: 0
-      frequentSound: 0
-      mute: 0
-      bypassEffects: 0
-      bypassListenerEffects: 0
-      bypassReverbZones: 0
-      priority: 128
-      volume: 1
-      pitch: 1
-      panStereo: 0
-      spatialBlend: 0
-      reverbZoneMix: 1
-      dopplerLevel: 1
-      spread: 0
-      minDistance: 1
-      maxDistance: 500
-      ignoreListenerVolume: 0
-      ignoreListenerPause: 0
-      rolloffMode: 0
     <MinimumSignature>k__BackingField: 10
     <MaxSignature>k__BackingField: 30
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 20
-  <MaxVelocityMagnitude>k__BackingField: 20
   forwardThrust: 7
   <RotationSpeed>k__BackingField: 10
   strafeThrust: 4
@@ -16012,14 +15998,144 @@ MonoBehaviour:
   rootData: {fileID: 11400000, guid: f18e665e50909ec4d8de78a516c89f62, type: 2}
   tickInterval: 0.1
   shouldRun: 1
-  pointDefenseTurrets:
-  - {fileID: 2979554078346714191}
-  - {fileID: 8774464275814773053}
-  - {fileID: 4782401451610363308}
-  - {fileID: 1542235695241685777}
   affectedByMorale: 1
   initialMorale: 50
   maxMoraleImpactRange: 50
+--- !u!82 &2349703258816028340
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898726161923389109}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5062469542772041986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8898726161923389109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
+  overheatThreshold: 1
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
+  overheatSound:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &9195094204857064973
 GameObject:
   m_ObjectHideFlags: 0

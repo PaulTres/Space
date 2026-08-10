@@ -128,6 +128,10 @@ namespace HP
                 firedEvent = true;
                 ObjectDestroyed @event = new(Transform.root, damageInfo.Source);
                 EventBus<ObjectDestroyed>.Raise(Transform.root.GetInstanceID(), @event);
+                foreach (var e in damageEffects)
+                {
+                    e.gameObject.SetActive(false);
+                }
                 return;
             }
             if (currentHP < minHP)

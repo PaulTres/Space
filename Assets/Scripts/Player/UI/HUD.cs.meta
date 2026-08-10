@@ -1,2 +1,23 @@
 fileFormatVersion: 2
 guid: a59a6f4c667502d48b79053fb27e491d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - inputReader: {fileID: 11400000, guid: b44ba8df712ee83499feb9dff7f9b917, type: 2}
+  - textParent: {instanceID: 0}
+  - widgetPrefab: {fileID: 5829202150402400054, guid: ec0cbf08acbf8494ca604df770e6e0a1, type: 3}
+  - pauseMenu: {instanceID: 0}
+  - healthBar: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - speedBar: {instanceID: 0}
+  - speedText: {instanceID: 0}
+  - maxSignatureDisplay: {instanceID: 0}
+  - signatureDisplay: {instanceID: 0}
+  - signatureText: {instanceID: 0}
+  - weaponDisplayPrefab: {fileID: 1018467357564154524, guid: cde333dceeb69a242bf1c2e91d17276c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

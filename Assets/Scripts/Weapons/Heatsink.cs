@@ -1,3 +1,4 @@
+using AudioSystem;
 using UnityEngine;
 using Utilities;
 namespace Weapons
@@ -7,8 +8,16 @@ namespace Weapons
         [SerializeField] protected float overheatThreshold = 1.0f;
         [SerializeField] protected float heatLoss = .34f;
         [SerializeField] protected float heatLossCooldown = .5f;
+        [SerializeField] protected SoundData overheatSound;
         public bool Overheated { get; protected set; }
         public float CurrentHeat { get; protected set; }
+        public float OverheatPercentage
+        {
+            get
+            {
+                return Mathf.Clamp01(CurrentHeat / overheatThreshold);
+            }
+        }
         protected float lastShotTime;
 
         protected void OnEnable()
@@ -43,7 +52,14 @@ namespace Weapons
         {
             CurrentHeat += heat;
             lastShotTime = Time.time;
-            if (CurrentHeat >= overheatThreshold) Overheated = true;
+            if (CurrentHeat >= overheatThreshold)
+            {
+                Overheated = true;
+                if (overheatSound != null)
+                {
+                    overheatSound.Play(transform.position);
+                }
+            }
         }
     }
 }

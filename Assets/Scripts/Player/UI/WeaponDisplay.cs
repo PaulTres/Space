@@ -4,7 +4,18 @@ namespace Player
 {
     public class WeaponDisplay : MonoBehaviour
     {
-        [SerializeField] protected Image weaponSprite;
-
+        public Image WeaponIcon;
+        public Image TurretStanceIcon;
+        public Image HeatStatusImage;
+        public Image ReloadStatusImage;
+        protected RectTransform rectTransform;
+        public RectTransform RectTransform
+        {
+            get
+            {
+                if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+                return rectTransform;
+            }
+        }
     }
 }

@@ -47,7 +47,7 @@ public static class UnitManager
         //ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
         ship.UnitManagerIndex = ships[team].Count - 1;
         ship.RegisterForRadar();
-        ship.SetObjectLayer(ship.Team);
+        ship.SetObjectLayer(GlobalConfig.GetShipLayer(ship.Team));
         //Debug.Log($"Registered unit {ship.Transform} with index {ship.UnitManagerIndex}.");
     }
 

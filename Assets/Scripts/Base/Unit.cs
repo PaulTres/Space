@@ -217,7 +217,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
 
-    public void SetTeam(int team)
+    public void ChangeTeam(int team)
     {
         if (Team != team)
         {
@@ -262,7 +262,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         AudioSource.Play();
         IsDying = true;
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
-        UnregisterForRadar();
+        UnitManager.Unregister(this);
         EventBus<UnitDestroyed>.Raise(new(this));
     }
     #endregion

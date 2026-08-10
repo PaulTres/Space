@@ -244,13 +244,12 @@ namespace Radar
             else bbox.BBox.sprite = missileIcon;
             bbox.TimeSinceLastFlicker = Time.time;
 
-            var team = GlobalConfig.GetTeam(target.Transform.gameObject.layer);
-            if (team == GlobalConfig.PlayerTeam)
+            if (target.Team == GlobalConfig.PlayerTeam)
             {
                 bbox.RegularMaterial = allyMaterial;
                 bbox.TransluscentMaterial = allyTransluscentMaterial;
             }
-            else if (team == GlobalConfig.EnemyTeam)
+            else if (target.Team == GlobalConfig.EnemyTeam)
             {
                 bbox.RegularMaterial = enemyMaterial;
                 bbox.TransluscentMaterial = enemyTransluscentMaterial;

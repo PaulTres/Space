@@ -423,6 +423,8 @@ GameObject:
   - component: {fileID: 8032434638253165816}
   - component: {fileID: 8531889017233049811}
   - component: {fileID: 8328031845820354136}
+  - component: {fileID: 4845662217820679823}
+  - component: {fileID: 8715766414754513821}
   m_Layer: 6
   m_Name: PoA_Player
   m_TagString: Untagged
@@ -487,42 +489,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerShip
   <Team>k__BackingField: 1
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
   <NeedsEscort>k__BackingField: 0
+  <TelemetryOrigin>k__BackingField: {fileID: 0}
+  criticalObjects:
+  - {fileID: 1418848531991629598}
+  - {fileID: 7759611164445505276}
   unitParameters:
     <UnitType>k__BackingField: 0
     TickInterval: 0.2
     EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
     <EffectScaleFactor>k__BackingField: 1
-    SoundDuringDeath:
-      clip: {fileID: 0}
-      mixerGroup: {fileID: 0}
-      loop: 0
-      playOnAwake: 0
-      frequentSound: 0
-      mute: 0
-      bypassEffects: 0
-      bypassListenerEffects: 0
-      bypassReverbZones: 0
-      priority: 128
-      volume: 1
-      pitch: 1
-      panStereo: 0
-      spatialBlend: 0
-      reverbZoneMix: 1
-      dopplerLevel: 1
-      spread: 0
-      minDistance: 1
-      maxDistance: 500
-      ignoreListenerVolume: 0
-      ignoreListenerPause: 0
-      rolloffMode: 0
     <MinimumSignature>k__BackingField: 10
     <MaxSignature>k__BackingField: 30
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 20
-  <MaxVelocityMagnitude>k__BackingField: 30
   forwardThrust: 12
   <RotationSpeed>k__BackingField: 30
   strafeThrust: 6
@@ -5361,6 +5344,141 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!82 &4845662217820679823
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226320924230892230}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8715766414754513821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2226320924230892230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
+  overheatThreshold: 1
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
+  overheatSound:
+    clip: {fileID: 8300000, guid: 19bb777c626e24220835300df5aca6b5, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &2319671616056177275
 GameObject:
   m_ObjectHideFlags: 0
@@ -7222,6 +7340,78 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponDisplayPrefab
+      value: 
+      objectReference: {fileID: 1018467357564154524, guid: cde333dceeb69a242bf1c2e91d17276c, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretStanceIcons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretStanceIcons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 21300000, guid: ce683041f000c7c48b73e8fbda566384, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretStanceIcons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 21300000, guid: aecb2ca547319c841a0334e1d2bd558f, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretStanceIcons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: d0bd63dc4e8d4a845a0f198c39644e18, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[0].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: c8a99bdd0f08b8c47af88824e592097b, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[1].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d7dfb09158050b4f87f70dcc341698c, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[0].Heatsink
+      value: 
+      objectReference: {fileID: 8715766414754513821}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[0].ShowReload
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[1].ShowReload
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[0].Turrets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponGroups.Array.data[1].Turrets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'weaponGroups.Array.data[0].Turrets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4631786375040149448}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'weaponGroups.Array.data[0].Turrets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6129584571354584327}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'weaponGroups.Array.data[0].Turrets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2313157591757814742}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'weaponGroups.Array.data[1].Turrets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8238315799343661444}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'weaponGroups.Array.data[1].Turrets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2077640589033100948}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
