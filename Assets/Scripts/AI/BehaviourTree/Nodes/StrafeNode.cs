@@ -23,7 +23,7 @@ public class StrafeNode : LeafNodeData
 
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
-        ((LeafNode)n).SetData((int)InternalKeys.CurrentTicks, 0);
+        ((LeafNode)n).SetData((int)InternalKeys.CurrentTicks, 2 * TicksBeforeRepath);
         switch (TargetFacing)
         {
             case TargetFacingMode.Broadside:
@@ -47,7 +47,7 @@ public class StrafeNode : LeafNodeData
     {
         var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
         if (!target.Active()) return NodeState.FAILURE;
-        Debug.Log("Strafing");
+        //Debug.Log("Strafing");
 
         var currentTicks = n.GetData<int>((int)InternalKeys.CurrentTicks);
         if (currentTicks >= TicksBeforeRepath)
@@ -57,11 +57,11 @@ public class StrafeNode : LeafNodeData
             {
                 case TargetFacingMode.Forward:
                     ctx.Navigation.SetDestination(target.Transform.position +
-                        target.Transform.right * ctx.Navigation.MaxVelocityMagnitude);
+                        target.Transform.right * 1000);
                     break;
                 default:
                     ctx.Navigation.SetDestination(ctx.Navigation.Transform.position +
-                        ctx.Navigation.Transform.forward * ctx.Navigation.MaxVelocityMagnitude);
+                        ctx.Navigation.Transform.forward * 1000);
                     break;
             }
         }

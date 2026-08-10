@@ -31,7 +31,14 @@ namespace Weapons
         /// <summary>
         /// 0 means the weapon is fully reloaded, 1 means the weapon just fired and has started reloading.
         /// </summary>
-        public float ReloadStatus => shotTimer.Progress;
+        public float ReloadStatus
+        {
+            get
+            {
+                if (shotTimer.IsRunning) return shotTimer.Progress;
+                return 0;
+            }
+        }
         #endregion
 
         #region Parameters

@@ -1,3 +1,4 @@
+using Radar;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Player
     public class HUD : UISystem
     {
         [System.Serializable]
-        public class WeaponGroup
+        public class TurretGroup
         {
             public Sprite Icon;
             public List<Turret> Turrets = new();
@@ -31,6 +32,27 @@ namespace Player
             }
         }
 
+        [System.Serializable]
+        public class MissileGroup
+        {
+            public Sprite Icon;
+            public List<MissileLauncher> Launchers = new();
+            public Magazine Magazine;
+            /// <summary>
+            /// 0 - fully reloaded<br/>
+            /// 1 - just fired<br/>
+            /// </summary>
+            public float ReloadStatus
+            {
+                get
+                {
+                    float s = 0;
+                    for (int i = 0; i < Launchers.Count; i++) s += Launchers[i].ReloadStatus;
+                    return s / Launchers.Count;
+                }
+            }
+        }
+
         #region Fields
         [SerializeField] protected Image healthBar;
         [SerializeField] protected TextMeshProUGUI healthText;
@@ -40,12 +62,11 @@ namespace Player
         [SerializeField] protected TextMeshProUGUI signatureText;
         protected PlayerShip player;
         [SerializeField] protected List<Sprite> turretStanceIcons = new();
-        [SerializeField] protected Color weaponReadyColor = Color.green;
-        [SerializeField] protected Color weaponNotReadyColor = Color.red;
         protected Canvas canvas;
-        [SerializeField] protected List<WeaponGroup> weaponGroups = new();
+        [SerializeField] protected List<TurretGroup> turretGroups = new();
+        [SerializeField] protected List<MissileGroup> launcherGroups = new();
         [SerializeField] protected WeaponDisplay weaponDisplayPrefab;
-        protected List<WeaponDisplay> weaponDisplays = new();
+        protected List<WeaponDisplay> turretDisplays = new(), launcherDisplays = new();
         #endregion
 
         #region Setup
@@ -56,18 +77,34 @@ namespace Player
             player = GetComponentInParent<PlayerShip>();
             healthBar.fillAmount = 1;
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
-            var totalSpace = 50 * weaponGroups.Count + (weaponGroups.Count - 1) * 10;
+            var count = turretGroups.Count + launcherGroups.Count;
+            var totalSpace = 50 * count + (count - 1) * 10;
             var startX = -totalSpace / 2;
-            foreach (var weapon in weaponGroups)
+            foreach (var weapon in turretGroups)
             {
                 var display = Instantiate(weaponDisplayPrefab, canvas.transform);
                 display.HeatStatusImage.enabled = weapon.Heatsink != null;
+                display.ReloadStatusImage.enabled = weapon.ShowReload;
                 display.ReloadStatusImage.fillAmount = 0;
                 display.WeaponIcon.sprite = weapon.Icon;
+                display.AmmoText.enabled = false;
                 display.TurretStanceIcon.sprite = turretStanceIcons[weapon.Turrets[0].CurrentStanceIndex];
                 display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
                 startX += 115;
-                weaponDisplays.Add(display);
+                turretDisplays.Add(display);
+            }
+            foreach (var weapon in launcherGroups)
+            {
+                var display = Instantiate(weaponDisplayPrefab, canvas.transform);
+                display.HeatStatusImage.enabled = false;
+                display.ReloadStatusImage.enabled = true;
+                display.ReloadStatusImage.fillAmount = 0;
+                display.WeaponIcon.sprite = weapon.Icon;
+                display.TurretStanceIcon.enabled = false;
+                display.AmmoText.enabled = weapon.Magazine != null;
+                display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
+                startX += 115;
+                launcherDisplays.Add(display);
             }
         }
 
@@ -112,27 +149,57 @@ namespace Player
 
         public void UpdateWeaponDisplays()
         {
-            for (int i = 0; i < weaponDisplays.Count; i++)
+            for (int i = 0; i < turretGroups.Count; i++)
             {
-                if (weaponGroups[i].ShowReload)
+                if (turretGroups[i].ShowReload)
                 {
-                    weaponDisplays[i].ReloadStatusImage.fillAmount = weaponGroups[i].ReloadStatus;
+                    turretDisplays[i].ReloadStatusImage.fillAmount = turretGroups[i].ReloadStatus;
+                    //turretDisplays[i].WeaponIcon.color = Color.Lerp(Color.green, Color.red, turretGroups[i].ReloadStatus);
                 }
-                if (weaponDisplays[i].HeatStatusImage.enabled)
+                if (turretDisplays[i].HeatStatusImage.enabled)
                 {
-                    weaponDisplays[i].HeatStatusImage.fillAmount = weaponGroups[i].Heatsink.OverheatPercentage;
-                    weaponDisplays[i].HeatStatusImage.color = Color.Lerp(Color.blue, Color.red, weaponGroups[i].Heatsink.OverheatPercentage);
+                    turretDisplays[i].HeatStatusImage.fillAmount = turretGroups[i].Heatsink.OverheatPercentage;
+                    turretDisplays[i].HeatStatusImage.color = Color.Lerp(Color.white, Color.red, turretGroups[i].Heatsink.OverheatPercentage);
                 }
+            }
+            for (int i = 0; i < launcherDisplays.Count; i++)
+            {
+                if (launcherDisplays[i].AmmoText.enabled)
+                {
+                    launcherDisplays[i].AmmoText.text = launcherGroups[i].Magazine.AmmoCount.ToString();
+                }
+                launcherDisplays[i].ReloadStatusImage.fillAmount = launcherGroups[i].ReloadStatus;
+            }
+        }
+
+        public void ExecuteAction(int index)
+        {
+            if (index < 0) return;
+            if (index < turretDisplays.Count)
+            {
+                CycleStance(index);
+            }
+            else FireMissiles(index - turretDisplays.Count);
+
+        }
+
+        public void FireMissiles(int missileGroup)
+        {
+            var t = PlayerTargetSystem.TryGetInstance();
+            if (t == null || !t.CurrentTarget.Active()) return;
+            foreach (var launcher in launcherGroups[missileGroup].Launchers)
+            {
+                launcher.Shoot(t.CurrentTarget);
             }
         }
 
         public void CycleStance(int groupIndex)
         {
-            foreach (var turret in weaponGroups[groupIndex].Turrets)
+            foreach (var turret in turretGroups[groupIndex].Turrets)
             {
                 turret.CycleStance();
             }
-            weaponDisplays[groupIndex].TurretStanceIcon.sprite = turretStanceIcons[weaponGroups[groupIndex].Turrets[0].CurrentStanceIndex];
+            turretDisplays[groupIndex].TurretStanceIcon.sprite = turretStanceIcons[turretGroups[groupIndex].Turrets[0].CurrentStanceIndex];
         }
         #endregion
     }

@@ -18,4 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78062bc42f2de4d4a9e4a01da7c321ee, type: 2}
   Services: []
   TargetFacing: 1
-  TicksBeforeRepath: 10
+  TicksBeforeRepath: 5

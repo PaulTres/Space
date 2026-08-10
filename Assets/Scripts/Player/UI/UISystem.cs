@@ -8,12 +8,13 @@ namespace Player
         [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected RectTransform textParent;
         [SerializeField] protected Widget widgetPrefab;
-        [SerializeField] protected GameObject pauseMenu;
+        protected GameObject pauseMenu;
         protected readonly Stack<Widget> textWidgetPool = new();
 
         #region Setup
         protected virtual void Awake()
         {
+            pauseMenu = GetComponentInChildren<PauseScreen>(true).gameObject;
             EventBus<ShowText>.AddActions(SpawnText);
             inputReader.OnEscapeEvent += OpenPauseMenu;
         }

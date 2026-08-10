@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Player
@@ -8,7 +9,9 @@ namespace Player
         public Image TurretStanceIcon;
         public Image HeatStatusImage;
         public Image ReloadStatusImage;
+        public TextMeshProUGUI AmmoText;
         protected RectTransform rectTransform;
+
         public RectTransform RectTransform
         {
             get

@@ -7345,6 +7345,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1018467357564154524, guid: cde333dceeb69a242bf1c2e91d17276c, type: 3}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponGroups.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -7352,6 +7356,14 @@ PrefabInstance:
       propertyPath: turretStanceIcons.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[0].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: c8a99bdd0f08b8c47af88824e592097b, type: 3}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[1].Icon
+      value: 
+      objectReference: {fileID: 21300000, guid: b618a4750ef81c94c8bcde0fae940691, type: 3}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: 'turretStanceIcons.Array.data[0]'
       value: 
@@ -7373,9 +7385,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 9d7dfb09158050b4f87f70dcc341698c, type: 3}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[0].Heatsink
+      value: 
+      objectReference: {fileID: 8715766414754513821}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponGroups.Array.data[0].Heatsink
       value: 
       objectReference: {fileID: 8715766414754513821}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[1].ShowReload
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponGroups.Array.data[0].ShowReload
       value: 1
@@ -7385,6 +7405,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[0].Turrets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: turretGroups.Array.data[1].Turrets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponGroups.Array.data[0].Turrets.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -7392,6 +7420,26 @@ PrefabInstance:
       propertyPath: weaponGroups.Array.data[1].Turrets.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretGroups.Array.data[0].Turrets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4631786375040149448}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretGroups.Array.data[0].Turrets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6129584571354584327}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretGroups.Array.data[0].Turrets.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2313157591757814742}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretGroups.Array.data[1].Turrets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8238315799343661444}
+    - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: 'turretGroups.Array.data[1].Turrets.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2077640589033100948}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: 'weaponGroups.Array.data[0].Turrets.Array.data[0]'
       value: 
