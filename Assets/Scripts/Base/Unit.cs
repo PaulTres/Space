@@ -25,6 +25,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         [field: SerializeField] public Type UnitType { get; protected set; }
         public float TickInterval = 0.2f;
+        public PoolableEffect EffectOnSpawn;
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
         [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
@@ -151,6 +152,10 @@ public abstract class Unit : ImprovedMonoBehaviour
         CurrentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
         signatureDecreaseDelay = Time.time;
+        if (unitParameters.EffectOnDeath != null)
+        {
+            unitParameters.EffectOnDeath.SpawnEffect(Position, EffectScaleFactor);
+        }
     }
 
     /// <summary>

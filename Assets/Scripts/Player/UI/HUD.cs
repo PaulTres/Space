@@ -80,19 +80,6 @@ namespace Player
             var count = turretGroups.Count + launcherGroups.Count;
             var totalSpace = 50 * count + (count - 1) * 10;
             var startX = -totalSpace / 2;
-            foreach (var weapon in turretGroups)
-            {
-                var display = Instantiate(weaponDisplayPrefab, canvas.transform);
-                display.HeatStatusImage.enabled = weapon.Heatsink != null;
-                display.ReloadStatusImage.enabled = weapon.ShowReload;
-                display.ReloadStatusImage.fillAmount = 0;
-                display.WeaponIcon.sprite = weapon.Icon;
-                display.AmmoText.enabled = false;
-                display.TurretStanceIcon.sprite = turretStanceIcons[weapon.Turrets[0].CurrentStanceIndex];
-                display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
-                startX += 115;
-                turretDisplays.Add(display);
-            }
             foreach (var weapon in launcherGroups)
             {
                 var display = Instantiate(weaponDisplayPrefab, canvas.transform);
@@ -105,6 +92,19 @@ namespace Player
                 display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
                 startX += 115;
                 launcherDisplays.Add(display);
+            }
+            foreach (var weapon in turretGroups)
+            {
+                var display = Instantiate(weaponDisplayPrefab, canvas.transform);
+                display.HeatStatusImage.enabled = weapon.Heatsink != null;
+                display.ReloadStatusImage.enabled = weapon.ShowReload;
+                display.ReloadStatusImage.fillAmount = 0;
+                display.WeaponIcon.sprite = weapon.Icon;
+                display.AmmoText.enabled = false;
+                display.TurretStanceIcon.sprite = turretStanceIcons[weapon.Turrets[0].CurrentStanceIndex];
+                display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
+                startX += 115;
+                turretDisplays.Add(display);
             }
         }
 
@@ -175,11 +175,11 @@ namespace Player
         public void ExecuteAction(int index)
         {
             if (index < 0) return;
-            if (index < turretDisplays.Count)
+            if (index < launcherDisplays.Count)
             {
-                CycleStance(index);
+                FireMissiles(index);
             }
-            else FireMissiles(index - turretDisplays.Count);
+            else CycleTurretStance(index - turretDisplays.Count);
 
         }
 
@@ -193,7 +193,7 @@ namespace Player
             }
         }
 
-        public void CycleStance(int groupIndex)
+        public void CycleTurretStance(int groupIndex)
         {
             foreach (var turret in turretGroups[groupIndex].Turrets)
             {
