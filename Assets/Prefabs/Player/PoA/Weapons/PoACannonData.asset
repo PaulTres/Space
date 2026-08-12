@@ -17,4 +17,4 @@ MonoBehaviour:
   RateOfFireRampDown: 1
   MinShotCooldown: 0.5
   SignatureIncrease: 1
-  BulletData: {fileID: 11400000, guid: 21190ed61dd2b8f4396235a6ec5e1560, type: 2}
+  BulletData: {fileID: 11400000, guid: 92688c04144c94f4dbb1abbc4a09816a, type: 2}

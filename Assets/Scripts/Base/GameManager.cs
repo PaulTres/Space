@@ -1,14 +1,16 @@
+using Level;
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utilities;
 
 public static class GameManager
 {
     static GameSave currentSave;
     public static float MissionTime { get; set; } = 0;
     public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
-    public static Unit Player { get; set; } = null;
+    public static PlayerShip Player { get; set; } = null;
     public static int LatestMissionIndex
     {
         get
@@ -97,6 +99,7 @@ public static class GameManager
 
     public static void EndMission()
     {
+        if (!Player.Active()) return;
         UnitManager.Clear();
         OnMissionCompleted();
         MissionTime = Time.time - Mission.CurrentMission.StartTime;

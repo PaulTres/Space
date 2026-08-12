@@ -496,9 +496,11 @@ MonoBehaviour:
   criticalObjects:
   - {fileID: 1418848531991629598}
   - {fileID: 7759611164445505276}
+  <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     <UnitType>k__BackingField: 0
     TickInterval: 0.2
+    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
     <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 10
@@ -516,7 +518,7 @@ MonoBehaviour:
     FreelookCameraPivot: {fileID: 4927202483543695255}
     CameraTransform: {fileID: 1979539058047882969}
     ZoomSpeed: 1
-    MinZoom: -10
+    MinZoom: -20
     MaxZoom: 5
     XSens: 10
     YSens: 10
@@ -7339,6 +7341,10 @@ PrefabInstance:
     - target: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5254128983991761225, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6023708937246449930, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponDisplayPrefab

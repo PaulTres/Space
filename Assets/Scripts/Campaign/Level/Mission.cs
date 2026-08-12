@@ -1,89 +1,77 @@
-using Player;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-public abstract class Mission : ScriptableObject
+namespace Level
 {
-    #region Static stuff
-    public static Mission CurrentMission { get; set; }
-    public static List<Mission> Campaign { get; } = new();
 
-    public static async Task LoadCampaignMissions()
+    public abstract class Mission : ScriptableObject
     {
-        Campaign.Clear();
-        var handle = Addressables.LoadAssetAsync<Campaign>("Campaign");
-        var instance = await handle.Task;
-        foreach (var a in instance.Missions)
+        #region Static stuff
+        public static Mission CurrentMission { get; set; }
+        public static List<Mission> Campaign { get; } = new();
+
+        public static async Task LoadCampaignMissions()
         {
-            Campaign.Add(a);
+            Campaign.Clear();
+            var handle = Addressables.LoadAssetAsync<Campaign>("Campaign");
+            var instance = await handle.Task;
+            foreach (var a in instance.Missions)
+            {
+                Campaign.Add(a);
+            }
         }
-    }
-    #endregion
+        #endregion
 
-    public float StartTime { get; protected set; }
-    /// <summary>
-    /// Time limit for the mission. Ignored if set to <=0.
-    /// </summary>
-    [field: SerializeField] public float TimeLimit { get; protected set; } = -1;
-    [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
-    [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
-    [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
-    [SerializeField] protected Material skyboxMaterial;
+        public float StartTime { get; protected set; }
+        /// <summary>
+        /// Time limit for the mission. Ignored if set to <= 0.
+        /// </summary>
+        [field: SerializeField] public float TimeLimit { get; protected set; } = -1;
+        [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
+        [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
+        [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
+        [SerializeField] protected Material skyboxMaterial;
 
-    public void EndMission()
-    {
-        var m = MissionManager.TryGetInstance();
-        if (m != null) m.EndMission();
-    }
-
-    /// <summary>
-    /// Fires when the mission manager is initialized. Initializes time.
-    /// Should handle environment, spawning etc.
-    /// </summary>
-    public virtual void Initialize()
-    {
-        RenderSettings.skybox = skyboxMaterial;
-        DynamicGI.UpdateEnvironment();
-        CurrentMission = this;
-        StartTime = Time.time;
-        Time.timeScale = 1;
-        //Debug.Log("Starting mission");
-        UnitManager.Clear();
-        GameManager.UnitsDestroyed.Clear();
-        SpawnPlayer();
-        SpawnScenery();
-        SpawnUnits();
-        FinishInitialization();
-    }
-
-    public abstract void FinishInitialization();
-
-    public abstract void SpawnPlayer();
-
-    public virtual void SpawnScenery() { }
-
-    public abstract void SpawnUnits();
-
-    public virtual Unit SpawnUnit(UnitData data, Vector3 position, Quaternion rotation, int team, bool setActive = true)
-    {
-        if (data == null) return null;
-        var unit = data.CreateInstance();
-        unit.Team = team;
-        //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
-        unit.Transform.SetPositionAndRotation(position, rotation);
-        unit.gameObject.SetActive(setActive);
-        return unit;
-    }
-
-    public virtual void OnAllEnemiesDestroyed()
-    {
-        //Debug.Log("enemies destroyed");
-        if (GameManager.Player != null)
+        /// <summary>
+        /// Fires when the mission manager is initialized. Initializes time.
+        /// Should handle environment, spawning etc.
+        /// </summary>
+        public virtual void Initialize()
         {
-            UISystem.ShowText(new(Vector3.zero, 5, "Victory!", Color.green));
-            EndMission();
+            RenderSettings.skybox = skyboxMaterial;
+            DynamicGI.UpdateEnvironment();
+            CurrentMission = this;
+            StartTime = Time.time;
+            Time.timeScale = 1;
+            //Debug.Log("Starting mission");
+            UnitManager.Clear();
+            GameManager.UnitsDestroyed.Clear();
+            SpawnPlayer();
+            SpawnScenery();
+            SpawnUnits();
+            FinishInitialization();
+        }
+
+        public abstract void FinishInitialization();
+
+        public abstract void SpawnPlayer();
+
+        public virtual void SpawnScenery() { }
+
+        public abstract void SpawnUnits();
+
+        public virtual Unit SpawnUnit(UnitData data, Vector3 position, Quaternion rotation, int team, bool setActive = true, bool playSpawnEffect = true)
+        {
+            if (data == null) return null;
+            var unit = data.CreateInstance();
+            unit.Team = team;
+            unit.PlaySpawnEffect = playSpawnEffect;
+            //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
+            unit.Transform.SetPositionAndRotation(position, rotation);
+            unit.gameObject.SetActive(setActive);
+            return unit;
         }
     }
 }

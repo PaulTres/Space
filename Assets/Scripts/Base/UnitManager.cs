@@ -69,9 +69,9 @@ public static class UnitManager
             if (ships[team].Count > index) ships[team][index].UnitManagerIndex = index;
         }
 
-        if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)
-        {
-            Mission.CurrentMission.OnAllEnemiesDestroyed();
-        }
+        //if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)
+        //{
+        //    Mission.CurrentMission.OnAllUnitsDestroyed();
+        //}
     }
 }

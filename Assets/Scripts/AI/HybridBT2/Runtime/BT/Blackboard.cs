@@ -51,10 +51,11 @@ namespace HybridBT2
 
         public void SetData<R>(Keys key, R value) => data[key] = value;
 
-        public R GetData<R>(Keys key)
+        public R GetData<R>(Keys key, bool debug = false)
         {
             if (data.TryGetValue(key, out var value))
             {
+                if (debug) Debug.Log(value);
                 return (R)value;
             }
             //Debug.LogError("Cannot find data for key " + key.ToString());

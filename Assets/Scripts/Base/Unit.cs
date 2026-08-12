@@ -25,6 +25,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         [field: SerializeField] public Type UnitType { get; protected set; }
         public float TickInterval = 0.2f;
+        [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
@@ -61,6 +62,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
     [Tooltip("The list of all objects whose layer needs to be changed on spawn.")]
     [SerializeField] protected List<GameObject> criticalObjects;
+    [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
@@ -141,6 +143,8 @@ public abstract class Unit : ImprovedMonoBehaviour
         ComponentRegister<Unit>.Register(Transform, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);
+        var main = EffectDuringDeath.main;
+        main.stopAction = ParticleSystemStopAction.Disable;
     }
 
     protected virtual void OnEnable()
@@ -152,9 +156,9 @@ public abstract class Unit : ImprovedMonoBehaviour
         CurrentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
         signatureDecreaseDelay = Time.time;
-        if (unitParameters.EffectOnDeath != null)
+        if (PlaySpawnEffect && unitParameters.EffectOnSpawn != null)
         {
-            unitParameters.EffectOnDeath.SpawnEffect(Position, EffectScaleFactor);
+            unitParameters.EffectOnSpawn.SpawnEffect(Position, EffectScaleFactor);
         }
     }
 
@@ -260,6 +264,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// <param name="event"></param>
     public virtual void Die(ObjectDestroyed @event)
     {
+        if (IsDying) return;
         //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
         GameManager.UnitsDestroyed.Add(@event);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);

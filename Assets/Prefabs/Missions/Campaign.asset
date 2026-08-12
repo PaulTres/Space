@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Campaign
   m_EditorClassIdentifier: Assembly-CSharp::Campaign
   Missions:
-  - {fileID: 11400000, guid: 79bc679388a7e534a860b58ebccac176, type: 2}
+  - {fileID: 11400000, guid: 7bbf9ce267f5ec140905f2fd552d2ea9, type: 2}

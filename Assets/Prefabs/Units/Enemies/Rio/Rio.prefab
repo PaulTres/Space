@@ -10400,6 +10400,7 @@ MonoBehaviour:
   readinessDisplays: []
   noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
   fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
+  magazine: {fileID: 0}
 --- !u!1 &5704720739332816648
 GameObject:
   m_ObjectHideFlags: 0
@@ -10822,6 +10823,7 @@ MonoBehaviour:
   readinessDisplays: []
   noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
   fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
+  magazine: {fileID: 0}
 --- !u!1 &7471767466781113794
 GameObject:
   m_ObjectHideFlags: 0
@@ -15945,9 +15947,11 @@ MonoBehaviour:
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   criticalObjects:
   - {fileID: 8898726161923389109}
+  <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
-    <UnitType>k__BackingField: 0
+    <UnitType>k__BackingField: 2
     TickInterval: 0.2
+    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     EffectOnDeath: {fileID: 985664761693772524, guid: e6cb340aac834d7438092fd0e240bfd3, type: 3}
     <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 10
@@ -15999,7 +16003,7 @@ MonoBehaviour:
   tickInterval: 0.1
   shouldRun: 1
   affectedByMorale: 1
-  initialMorale: 50
+  initialMorale: 60
   maxMoraleImpactRange: 50
 --- !u!82 &2349703258816028340
 AudioSource:

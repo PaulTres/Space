@@ -134,11 +134,9 @@ public class Navigation : Ship
         else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
         ApplyDampeners(direction, deltaTime);
-        if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(Mathf.Deg2Rad *
-            angleToForward / 2))
+        if (Vector3.Angle(transform.forward, direction) <= angleToForward)
         {
-            rb.AddForce(forwardThrust * Time.deltaTime * direction.normalized,
-                ForceMode.Acceleration);
+            rb.linearVelocity += forwardThrust * Time.deltaTime * direction.normalized;
             if (thrusters != null) thrusters.Increase(deltaTime);
         }
         else if (thrusters != null) thrusters.Decrease(deltaTime);

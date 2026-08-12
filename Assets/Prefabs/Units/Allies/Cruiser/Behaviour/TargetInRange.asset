@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9079b5116de348e49a4d59dfc643912c, type: 3}
-  m_Name: CruiserInRange
+  m_Name: TargetInRange
   m_EditorClassIdentifier: Assembly-CSharp::TargetInOptimalRangeCondition
   myName: 
+  minRangeFromTarget: -1
   buffer: 0

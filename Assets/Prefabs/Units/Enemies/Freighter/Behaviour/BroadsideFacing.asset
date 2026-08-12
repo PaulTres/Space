@@ -15,9 +15,7 @@ MonoBehaviour:
   myName: 
   AlwaysCheck: 1
   Conditions:
-  - {fileID: 11400000, guid: ff33d5f8a5d6c704ba713c6f4ffdf2b7, type: 2}
+  - {fileID: 11400000, guid: 2aac02796a8120449bafbbaab3f18d18, type: 2}
   Services: []
   TargetFacing: 0
   TicksBeforeRepath: 2
-  StrafeDistance: 0
-  UseSignatureForStrafeDistance: 1

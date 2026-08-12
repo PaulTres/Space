@@ -206,7 +206,7 @@ namespace Utilities
             var comp = ComponentRegister<BanditTree>.Get(transform);
             if (comp != null)
             {
-                return comp.Blackboard;
+                return comp.Context;
             }
             return null;
         }

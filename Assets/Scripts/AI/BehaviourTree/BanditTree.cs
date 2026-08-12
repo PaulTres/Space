@@ -6,7 +6,7 @@ using Utilities;
 using Weapons;
 public class BanditTree : BT, IRegisterableComponent
 {
-    public Blackboard Blackboard => blackboard;
+    public Blackboard Context => blackboard;
     [SerializeField] protected bool affectedByMorale = true;
     [SerializeField] protected float initialMorale = 10;
     [Tooltip("The maximum distance from a morale event at which this unit will be affected.")]
@@ -17,7 +17,7 @@ public class BanditTree : BT, IRegisterableComponent
         base.Awake();
         if (affectedByMorale) EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Register(transform, this);
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Blackboard.Navigation), null, Pause);
+        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
     }
 
     /// <summary>
@@ -30,21 +30,21 @@ public class BanditTree : BT, IRegisterableComponent
     {
         //this should increase morale if an enemy unit is destroyed, and
         //decrease it if an ally is destroyed
-        var morale = Blackboard.GetData<float>(Blackboard.Keys.Morale);
+        var morale = Context.GetData<float>(Blackboard.Keys.Morale);
         var dist = Vector3.Distance(@event.UnitPosition, transform.position);
         float moraleImpact = @event.UnitMoraleWeight * (Mathf.Max(
             maxMoraleImpactRange - dist, 0) / maxMoraleImpactRange);
 
-        if (@event.UnitTeam == Blackboard.Navigation.Team)
+        if (@event.UnitTeam == Context.Navigation.Team)
         {
             morale -= moraleImpact;
-            Blackboard.SetData(Blackboard.Keys.Morale, morale);
-            Blackboard.SetData(Blackboard.Keys.LastMoraleDamageTime, @event.Time);
+            Context.SetData(Blackboard.Keys.Morale, morale);
+            Context.SetData(Blackboard.Keys.LastMoraleDamageTime, @event.Time);
         }
         else if (@event.UnitTeam != GlobalConfig.NeutralTeam)
         {
             morale += moraleImpact;
-            Blackboard.SetData(Blackboard.Keys.Morale, morale);
+            Context.SetData(Blackboard.Keys.Morale, morale);
         }
     }
 
@@ -55,7 +55,7 @@ public class BanditTree : BT, IRegisterableComponent
     }
     protected virtual void OnDestroy()
     {
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Blackboard.Navigation), null, Pause);
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
         ComponentRegister<BanditTree>.Unregister(transform);
     }
 
@@ -63,14 +63,14 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected override void SetupBlackboard()
     {
-        Blackboard.SetData(Blackboard.Keys.Fleeing, false);
-        Blackboard.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
-        Blackboard.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
-        Blackboard.SetData(Blackboard.Keys.PDTurrets,
+        Context.SetData(Blackboard.Keys.Fleeing, false);
+        Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
+        Context.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
+        Context.SetData(Blackboard.Keys.PDTurrets,
             GetComponentsInChildren<Turret>().
             Where(t => t.Parameters.TargetMissiles));
-        Blackboard.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);
-        Blackboard.SetData(Blackboard.Keys.DefaultMorale, initialMorale);
-        Blackboard.SetData(Blackboard.Keys.Morale, initialMorale);
+        Context.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);
+        Context.SetData(Blackboard.Keys.DefaultMorale, initialMorale);
+        Context.SetData(Blackboard.Keys.Morale, initialMorale);
     }
 }

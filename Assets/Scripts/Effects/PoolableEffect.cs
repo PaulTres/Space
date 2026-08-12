@@ -15,7 +15,8 @@ namespace Effects
             MissileExplosionBlue,
             GunshotBlue,
             ExplosionBigGreen,
-            ExplosionBigRed
+            ExplosionBigRed,
+            JumpEffect
         }
         static readonly ObjectPool<Type, PoolableEffect> objectPool = new();
 
@@ -70,6 +71,11 @@ namespace Effects
         protected void Awake()
         {
             particles = GetComponentsInChildren<ParticleSystem>();
+            foreach (var particle in particles)
+            {
+                var p = particle.main;
+                p.stopAction = ParticleSystemStopAction.Disable;
+            }
         }
 
         protected void OnEnable()

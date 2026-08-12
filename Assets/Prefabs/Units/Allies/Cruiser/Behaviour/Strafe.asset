@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StrafeNode
   myName: 
   AlwaysCheck: 1
-  Conditions: []
+  Conditions:
+  - {fileID: 11400000, guid: 2aac02796a8120449bafbbaab3f18d18, type: 2}
   Services: []
   TargetFacing: 0
-  TicksBeforeRepath: 10
-  StrafeDistance: 0
-  UseSignatureForStrafeDistance: 1
+  TicksBeforeRepath: 5

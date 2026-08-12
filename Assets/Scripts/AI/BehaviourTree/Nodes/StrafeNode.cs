@@ -53,16 +53,23 @@ public class StrafeNode : LeafNodeData
         if (currentTicks >= TicksBeforeRepath)
         {
             n.SetData((int)InternalKeys.CurrentTicks, 0);
+            var normal = target.Position - ctx.Position;
             switch (TargetFacing)
             {
                 case TargetFacingMode.Forward:
-                    ctx.Navigation.SetDestination(target.Transform.position +
-                        target.Transform.right * 1000);
-                    break;
+                    {
+                        var projected = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
+                        if (projected.magnitude == 0) projected = ctx.Navigation.Up;
+                        ctx.Navigation.SetDestination(ctx.Position + projected.normalized * 1000);
+                        break;
+                    }
                 default:
-                    ctx.Navigation.SetDestination(ctx.Navigation.Transform.position +
-                        ctx.Navigation.Transform.forward * 1000);
-                    break;
+                    {
+                        var projected = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
+                        if (projected.magnitude == 0) projected = ctx.Navigation.Right;
+                        ctx.Navigation.SetDestination(ctx.Position + projected.normalized * 1000);
+                        break;
+                    }
             }
         }
         else

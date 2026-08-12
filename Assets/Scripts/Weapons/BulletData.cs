@@ -3,7 +3,6 @@ using Spawning;
 using UnityEngine;
 namespace Weapons
 {
-    [CreateAssetMenu(menuName = "Weapons/BulletData", fileName = "BulletData")]
     public abstract class BulletData : MonoPoolableData<Bullet.Type, Bullet>
     {
         [Tooltip("Transform will be disabled on hit if true.")]

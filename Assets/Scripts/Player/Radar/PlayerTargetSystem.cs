@@ -46,7 +46,6 @@ namespace Radar
                 {
                     if (value != null && !value.gameObject.activeSelf) value = null;
                     currentTarget = value;
-                    Debug.Log(value);
                     if (secondView != null) secondView.gameObject.SetActive(value != null);
                     if (secondViewCamera != null) secondViewCamera.gameObject.SetActive(value != null);
                     if (targetInfoText != null) targetInfoText.gameObject.SetActive(value != null);

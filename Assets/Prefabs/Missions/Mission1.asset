@@ -9,20 +9,64 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d06f5b4f0be8fa84e899060d47d2d6ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 7add56d5e84ec094391efa883423a7d0, type: 3}
   m_Name: Mission1
-  m_EditorClassIdentifier: Assembly-CSharp::HandmadeBattle
+  m_EditorClassIdentifier: Assembly-CSharp::Level.FirstMission
   <TimeLimit>k__BackingField: -1
   <Briefing>k__BackingField: No briefing exists.
-  <PlayerPoints>k__BackingField: 2147483638
+  <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647
   skyboxMaterial: {fileID: 2100000, guid: a4be220830e90ea4eb88b48b7fd376ce, type: 2}
-  playerSpawnPos: {x: 0, y: 0, z: 0}
-  playerSpawnRot: {x: 0, y: 0, z: 0}
-  spawns:
-  - <SpawnPosition>k__BackingField: {x: -10, y: 0, z: 30}
-    <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
-    <SpawnRadius>k__BackingField: 2
-    <Team>k__BackingField: 2
+  friendly:
+    <SpawnPosition>k__BackingField: {x: 0, y: 0, z: -30}
+    <SpawnRotation>k__BackingField: {x: 0, y: 0, z: 0}
+    <SpawnRadius>k__BackingField: 0
+    <Team>k__BackingField: 1
     spawnOptions:
-    - {fileID: 11400000, guid: f37f16032678f2c48ba5e4118d7e14de, type: 2}
+    - {fileID: 11400000, guid: 090bf946d623b514eb38b213884a5f8f, type: 2}
+  enemyWaves:
+  - Units:
+    - <SpawnPosition>k__BackingField: {x: 0, y: 0, z: 70}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
+  - Units:
+    - <SpawnPosition>k__BackingField: {x: 0, y: 0, z: 140}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
+    - <SpawnPosition>k__BackingField: {x: 30, y: 0, z: 140}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
+    - <SpawnPosition>k__BackingField: {x: -30, y: 0, z: 140}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
+  - Units:
+    - <SpawnPosition>k__BackingField: {x: 0, y: 0, z: 210}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: f37f16032678f2c48ba5e4118d7e14de, type: 2}
+    - <SpawnPosition>k__BackingField: {x: 50, y: 0, z: 180}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
+    - <SpawnPosition>k__BackingField: {x: -50, y: 0, z: 180}
+      <SpawnRotation>k__BackingField: {x: 0, y: 180, z: 0}
+      <SpawnRadius>k__BackingField: 0
+      <Team>k__BackingField: 2
+      spawnOptions:
+      - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}

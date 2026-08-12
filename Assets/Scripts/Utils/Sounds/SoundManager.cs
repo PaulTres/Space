@@ -20,6 +20,7 @@ namespace AudioSystem
             base.InitializeSingleton();
             InitializePool();
         }
+
         public SoundBuilder CreateSoundBuilder() => new(this);
 
         public bool CanPlaySound(SoundData data)

@@ -1,3 +1,4 @@
+using Level;
 using Radar;
 using UnityEngine;
 using Utilities;
@@ -47,6 +48,7 @@ namespace Player
                 return null;
             }
         }
+        public bool CannotDie { get; set; } = false;
         #endregion
 
         #region Setup
@@ -61,6 +63,7 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
+            CannotDie = false;
             PlayerCamera.fieldOfView = GlobalConfig.FOV;
             GameManager.Player = this;
             Dampeners = true;
@@ -223,8 +226,9 @@ namespace Player
 
         public override void Die(ObjectDestroyed @event)
         {
+            if (CannotDie) return;
             GameManager.Player = null;
-            MissionManager.TryGetInstance(true).StopEndTimer();
+            MissionManager.TryGetInstance(true).StopAllTimers();
             UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
             inputReader.DisableCallbacks();
             base.Die(@event);

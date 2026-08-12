@@ -68,6 +68,15 @@ namespace HP
         [Tooltip("This transform is used to determine the direction of incoming damage. If not set, the transform of this component will be used.")]
         [SerializeField] protected Transform body;
         protected List<DamageEffect> damageEffects = new();
+        protected ImprovedMonoBehaviour improvedMonoBehaviour;
+        public ImprovedMonoBehaviour ImprovedMonoBehaviour
+        {
+            get
+            {
+                if (improvedMonoBehaviour == null) improvedMonoBehaviour = Transform.root.GetComponent<ImprovedMonoBehaviour>();
+                return improvedMonoBehaviour;
+            }
+        }
         #endregion
 
         #region Setup
@@ -121,6 +130,7 @@ namespace HP
                 //Debug.Log("Friendly fire");
                 return;
             }
+            if (ImprovedMonoBehaviour.IsDying) return;
             //Debug.Log(damageInfo.Amount);
             CurrentHP -= CalculateDamage(damageInfo);
             if (CurrentHP <= 0 && !firedEvent)
