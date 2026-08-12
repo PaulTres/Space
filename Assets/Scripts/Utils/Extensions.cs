@@ -20,14 +20,7 @@ namespace Utilities
         #region Unit
         public static float GetMoraleWeight(this Unit unit)
         {
-            if (unit == null) return 0;
-            return unit.UnitType switch
-            {
-                Unit.Type.Skiff => 5,
-                Unit.Type.Frigate => 10,
-                Unit.Type.Cruiser => 20,
-                _ => 0
-            };
+            return unit == null ? 0 : unit.MoraleWeight;
         }
 
         /// <summary>
@@ -77,11 +70,6 @@ namespace Utilities
         public static void SpawnEffect(this PoolableEffect effect, Vector3 position, Quaternion rotation, float scaleFactor)
         {
             PoolableEffect.Spawn(effect, position, rotation, scaleFactor * Vector3.one);
-        }
-
-        public static void SpawnEffect(this PoolableEffect effect, Transform parent, float scaleFactor)
-        {
-            PoolableEffect.Spawn(effect, parent, scaleFactor * Vector3.one);
         }
 
         #region ImprovedMonoBehaviour      

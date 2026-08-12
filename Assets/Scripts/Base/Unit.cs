@@ -23,12 +23,14 @@ public abstract class Unit : ImprovedMonoBehaviour
     [System.Serializable]
     public class UnitParameters
     {
-        [field: SerializeField] public Type UnitType { get; protected set; }
+        [Tooltip("How much morale damage will allies suffer when this unit is destroyed.")]
+        public float MoraleWeight = 10;
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
         [Tooltip("Plays when the ship has finished exploding.")]
         public PoolableEffect EffectOnDeath;
+        [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
         [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
         [field: SerializeField] public float MinimumSignature { get; protected set; }
         [field: SerializeField] public float MaxSignature { get; protected set; }
@@ -59,9 +61,11 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// </summary>
     protected ParticleSystem effectDuringDeath;
     protected AudioSource audioSource;
+    [Tooltip("Telemetry for missiles will be calculated from here. If not set will use the component's transform.")]
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
-    [Tooltip("The list of all objects whose layer needs to be changed on spawn.")]
+    [Tooltip("The list of all objects whose layer needs to be changed on spawn. Should contain only colliders.")]
     [SerializeField] protected List<GameObject> criticalObjects;
+    [Tooltip("If true, the spawn effect will play when the unit is enabled.")]
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     #endregion
 
@@ -83,7 +87,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
-    public Type UnitType => unitParameters.UnitType;
+    public float MoraleWeight => unitParameters.MoraleWeight;
     public float MaxSignature => unitParameters.MaxSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
