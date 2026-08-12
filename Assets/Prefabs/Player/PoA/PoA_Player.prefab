@@ -447,6 +447,7 @@ Transform:
   m_Children:
   - {fileID: 8609302948104996223}
   - {fileID: 1474988901592204250}
+  - {fileID: 6450934023580844879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3028600159600749376
@@ -498,7 +499,7 @@ MonoBehaviour:
   - {fileID: 7759611164445505276}
   <PlaySpawnEffect>k__BackingField: 0
   unitParameters:
-    <UnitType>k__BackingField: 0
+    MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
@@ -542,7 +543,7 @@ MonoBehaviour:
   minHPRegainCooldown: 5
   currentHP: 0
   armorModifiers: []
-  body: {fileID: 0}
+  body: {fileID: 1474988901592204250}
 --- !u!198 &8531889017233049811
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5736,6 +5737,61 @@ MonoBehaviour:
   - {fileID: 6130341653831737686}
   noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
   fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!1 &3399766470945502473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6450934023580844879}
+  - component: {fileID: 2614106285237434893}
+  m_Layer: 11
+  m_Name: Capsule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6450934023580844879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399766470945502473}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0, z: 0.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6766837596616086251}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!136 &2614106285237434893
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399766470945502473}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4042931073088759731
 GameObject:
   m_ObjectHideFlags: 0

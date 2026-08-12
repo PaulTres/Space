@@ -287,6 +287,7 @@ Transform:
   - {fileID: 5594785952275710485}
   - {fileID: 9068449300522950742}
   - {fileID: 2403627698022754533}
+  - {fileID: 5975212119881088383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2980037791619241156
@@ -337,7 +338,7 @@ MonoBehaviour:
   - {fileID: 953749671974777187}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
-    <UnitType>k__BackingField: 0
+    MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
@@ -5470,6 +5471,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3154723758667108999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6375948970968600054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5975212119881088383}
+  - component: {fileID: 1322976147565966269}
+  m_Layer: 11
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5975212119881088383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375948970968600054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3154723758667108999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1322976147565966269
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6375948970968600054}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Height: 8
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &143287908231449650
 PrefabInstance:
   m_ObjectHideFlags: 0
