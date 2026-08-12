@@ -496,7 +496,7 @@ MonoBehaviour:
   criticalObjects:
   - {fileID: 1418848531991629598}
   - {fileID: 7759611164445505276}
-  <PlaySpawnEffect>k__BackingField: 1
+  <PlaySpawnEffect>k__BackingField: 0
   unitParameters:
     <UnitType>k__BackingField: 0
     TickInterval: 0.2

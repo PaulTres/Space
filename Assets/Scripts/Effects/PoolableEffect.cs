@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using Utilities;
 namespace Effects
 {
+
     public class PoolableEffect : MonoBehaviour
     {
         #region Pool
