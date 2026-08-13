@@ -5,8 +5,8 @@ using UnityEngine.AddressableAssets;
 
 namespace Level
 {
-
-    public abstract class Mission : ScriptableObject
+    [CreateAssetMenu(menuName = "Missions/Mission", fileName = "Mission")]
+    public class Mission : ScriptableObject
     {
         #region Static stuff
         public static Mission CurrentMission { get; set; }
@@ -24,54 +24,10 @@ namespace Level
         }
         #endregion
 
-        public float StartTime { get; protected set; }
-        /// <summary>
-        /// Time limit for the mission. Ignored if set to <= 0.
-        /// </summary>
+        [Tooltip("Time limit for the mission. Ignored if set to <= 0.")]
         [field: SerializeField] public float TimeLimit { get; protected set; } = -1;
         [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
         [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
         [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
-        [SerializeField] protected Material skyboxMaterial;
-
-        /// <summary>
-        /// Fires when the mission manager is initialized. Initializes time.
-        /// Should handle environment, spawning etc.
-        /// </summary>
-        public virtual void Initialize()
-        {
-            RenderSettings.skybox = skyboxMaterial;
-            DynamicGI.UpdateEnvironment();
-            CurrentMission = this;
-            StartTime = Time.time;
-            Time.timeScale = 1;
-            //Debug.Log("Starting mission");
-            UnitManager.Clear();
-            GameManager.UnitsDestroyed.Clear();
-            SpawnPlayer();
-            SpawnScenery();
-            SpawnUnits();
-            FinishInitialization();
-        }
-
-        public abstract void FinishInitialization();
-
-        public abstract void SpawnPlayer();
-
-        public virtual void SpawnScenery() { }
-
-        public abstract void SpawnUnits();
-
-        public virtual Unit SpawnUnit(UnitData data, Vector3 position, Quaternion rotation, int team, bool setActive = true, bool playSpawnEffect = true)
-        {
-            if (data == null) return null;
-            var unit = data.CreateInstance();
-            unit.Team = team;
-            unit.PlaySpawnEffect = playSpawnEffect;
-            //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
-            unit.Transform.SetPositionAndRotation(position, rotation);
-            unit.gameObject.SetActive(setActive);
-            return unit;
-        }
     }
 }

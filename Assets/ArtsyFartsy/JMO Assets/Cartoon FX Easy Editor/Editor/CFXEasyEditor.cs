@@ -30,7 +30,7 @@ public class CFXEasyEditor : EditorWindow
 	private float ScalingValue = 2.0f;
 	private float LTScalingValue = 1.0f;
 	
-	//Delay
+	//delay
 	private float DelayValue = 1.0f;
 	
 	//Duration
@@ -302,11 +302,11 @@ public class CFXEasyEditor : EditorWindow
 		//----------------------------------------------------------------
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Set Delay", "Changes the delay of the Particle System(s)"), GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Set delay", "Changes the delay of the Particle System(s)"), GUILayout.Width(120)))
 			{
 				applyDelay();
 			}
-			GUILayout.Label("Delay :",GUILayout.Width(110));
+			GUILayout.Label("delay :",GUILayout.Width(110));
 			DelayValue = EditorGUILayout.FloatField(DelayValue,GUILayout.Width(50));
 			if(DelayValue < 0.0f) DelayValue = 0.0f;
 			else if(DelayValue > 9999f) DelayValue = 9999f;

@@ -9,6 +9,7 @@ namespace Weapons
     {
         public Turret Turret;
         public TurretData TurretData;
+
         public ImprovedMonoBehaviour Target
         {
             get => Turret.Target;
@@ -18,7 +19,7 @@ namespace Weapons
 
         public bool IsTargetValid(ImprovedMonoBehaviour @object) => Turret.IsTargetValid(@object);
 
-        public float EvaluateTarget(ImprovedMonoBehaviour @object) => Turret.EvaluateTarget(@object);
+        public float EvaluateTarget(ImprovedMonoBehaviour @object) => TurretData.EvaluateTarget(Turret, @object);
 
         public abstract void UpdateTargets();
     }
@@ -97,6 +98,7 @@ namespace Weapons
             #region Evaluate regular targets
             if (Turret.TargetUnits)
             {
+
                 var targets = Owner.GetTargets();
                 if (targets.IsEmpty()) return;
 
@@ -105,10 +107,13 @@ namespace Weapons
                     if (!IsTargetValid(targets[i])) continue;
                     //if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = EvaluateTarget(targets[i]);
+                    //if (Turret.Owner == GameManager.Player && !Turret.TargetMissiles && Owner.Target.Active())
+
                     //if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !TurretData.AllowZeroScoreTargets) continue;
-                    if (Owner.Target.Active() && targets[i].GetInstanceID() ==
-                        Owner.Target.GetInstanceID())
+
+                    if (Owner.Target.Active() && targets[i].Transform.root.GetInstanceID() ==
+                        Owner.Target.Transform.root.GetInstanceID())
                     {
                         if (score >= 0) score *= TurretData.CurrentTargetScoreMultiplier;
                         else score /= TurretData.CurrentTargetScoreMultiplier;

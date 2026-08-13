@@ -431,7 +431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6766837596616086251
 Transform:
   m_ObjectHideFlags: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   criticalObjects:
   - {fileID: 1418848531991629598}
   - {fileID: 7759611164445505276}
-  <PlaySpawnEffect>k__BackingField: 0
+  <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
@@ -512,6 +512,7 @@ MonoBehaviour:
   forwardThrust: 12
   <RotationSpeed>k__BackingField: 30
   strafeThrust: 6
+  <Dampeners>k__BackingField: 1
   inputReader: {fileID: 11400000, guid: cc53166efb1d065419956e281515f266, type: 2}
   shipBody: {fileID: 1474988901592204250}
   cameraData:
@@ -544,6 +545,8 @@ MonoBehaviour:
   currentHP: 0
   armorModifiers: []
   body: {fileID: 1474988901592204250}
+  effectOnDamage: {fileID: 0}
+  effectScaleFactor: 1
 --- !u!198 &8531889017233049811
 ParticleSystem:
   m_ObjectHideFlags: 0

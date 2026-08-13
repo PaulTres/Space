@@ -108,8 +108,9 @@ namespace Player
             }
         }
 
-        protected void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             var u = GlobalUpdater.TryGetInstance();
             if (u != null) u.UnregisterLateUpdate(PerformLateUpdate);
         }

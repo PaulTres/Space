@@ -35,7 +35,7 @@ public class GlobalConfig : ScriptableObject
     public static float FOV { get; set; } = 90;
     public static float PlayerTargetAngleWeight { get; set; } = 1;
     public static float PlayerTargetDistanceWeight { get; set; } = 1;
-    public static float PlayerTargetMaxDistance { get; set; } = 100;
+    public static float PlayerTargetMaxDistance { get; set; } = 1000;
 
     [SerializeField] protected float iconSizeCoefficient = 5;
     public static float IconSizeCoefficient => Instance.iconSizeCoefficient;
@@ -110,9 +110,8 @@ public class GlobalConfig : ScriptableObject
         MainMenuSceneIndex = 1,
         MissionSelectSceneIndex = 2,
         ShipSelectSceneIndex = 3,
-        MissionSceneIndex = 4,
-        EndMissionSceneIndex = 5,
-        LoadingSceneIndex = 6;
+        LoadingSceneIndex = 4,
+        EndMissionSceneIndex = 5;
     #endregion
 
     #region Layers and layer masks
@@ -152,14 +151,14 @@ public class GlobalConfig : ScriptableObject
     /// <summary>
     /// Returns a layer that a bullet should use, given the layer of its owner.
     /// </summary>
-    /// <param name="ownerLayer"></param>
+    /// <param name="ownerTeam"></param>
     /// <returns></returns>
-    public static int GetBulletLayer(int ownerLayer)
+    public static int GetBulletLayer(int ownerTeam)
     {
-        return ownerLayer switch
+        return ownerTeam switch
         {
-            6 => 7,
-            8 => 9,
+            1 => 7,
+            2 => 9,
             _ => 10
         };
     }

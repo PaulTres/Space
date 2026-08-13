@@ -68,7 +68,7 @@ namespace Weapons
                     if (value != null)
                     {
                         EventBus<PoolableRecycled>.AddActions(value.GetInstanceID(), null, ClearOwner);
-                        gameObject.layer = GlobalConfig.GetBulletLayer(value.gameObject.layer);
+                        gameObject.layer = GlobalConfig.GetBulletLayer(value.Team);
                     }
                 }
             }

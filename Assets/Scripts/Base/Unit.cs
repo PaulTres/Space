@@ -179,7 +179,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
-        if (IsDying && !effectDuringDeath.isPlaying)
+        //only generate the effect when the scene is loaded (not unloading) and the unit is in the process of dying
+        if (IsDying && !effectDuringDeath.isPlaying && gameObject.scene.isLoaded)
         {
             unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         }
@@ -229,16 +230,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// <returns></returns>
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
-
-    public void ChangeTeam(int team)
-    {
-        if (Team != team)
-        {
-            Team = team;
-            UnitManager.Unregister(this);
-            UnitManager.Register(this);
-        }
-    }
 
     protected virtual void OnDrawGizmos()
     {

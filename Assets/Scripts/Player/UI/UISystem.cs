@@ -20,7 +20,7 @@ namespace Player
             inputReader.OnEscapeEvent += OpenPauseMenu;
         }
 
-        protected void OnDisable()
+        protected virtual void OnDisable()
         {
             inputReader.OnEscapeEvent -= OpenPauseMenu;
             currentWidget = null;

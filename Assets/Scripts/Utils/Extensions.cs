@@ -78,7 +78,6 @@ namespace Utilities
             if (@object == null) return false;
             if (@object is Unit unityObj) return unityObj != null &&
                     @object.Transform.gameObject.activeSelf && (allowDying || !unityObj.IsDying);
-            if (@object is Object obj) return obj != null && @object.Transform.gameObject.activeSelf;
             return @object != null && @object.Transform.gameObject.activeSelf;
         }
 

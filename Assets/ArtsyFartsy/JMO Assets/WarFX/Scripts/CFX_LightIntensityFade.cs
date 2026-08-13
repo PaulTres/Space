@@ -11,7 +11,7 @@ public class CFX_LightIntensityFade : MonoBehaviour
 	// Duration of the onDeathEffect.
 	public float duration = 1.0f;
 	
-	// Delay of the onDeathEffect.
+	// delay of the onDeathEffect.
 	public float delay = 0.0f;
 	
 	/// Final intensity of the light.

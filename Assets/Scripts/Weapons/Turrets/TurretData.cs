@@ -13,6 +13,7 @@ namespace Weapons
         public bool TargetUnits = true;
         [Tooltip("The score of the current target of the ship will be multiplied by this amount when evaluating targets(divided if negative).")]
         public float CurrentTargetScoreMultiplier = 2;
+
         public float EvaluateTarget(Turret shooter, ImprovedMonoBehaviour @object)
         {
             return TargetEvaluation != null ? TargetEvaluation.Evaluate(shooter, @object) : 0;
@@ -23,18 +24,7 @@ namespace Weapons
         [Tooltip("The turret will only fire when the angle between its barrel(s) and the target is <= this value.")]
         public float MaxAngleDifference = 1;
         public float MaxRange = 100;
-        protected float maxRangeSquared = -1;
-        public float MaxRangeSquared
-        {
-            get
-            {
-                if (maxRangeSquared < 0)
-                {
-                    maxRangeSquared = MaxRange * MaxRange;
-                }
-                return maxRangeSquared;
-            }
-        }
+        public float MaxRangeSquared => MaxRange * MaxRange;
         [Header("Burst fire")]
         public bool BurstFire = false;
         public float BurstCooldown = 1;

@@ -12,7 +12,11 @@ namespace Weapons
 
         public override float Evaluate(Turret shooter, ImprovedMonoBehaviour target)
         {
-            var dir = target.Transform.position - shooter.Transform.position;
+            //if (shooter.Owner == GameManager.Player && !shooter.TargetMissiles && shooter.Owner.Target.Active())
+            //{
+            //    Debug.Log(shooter.MaxRangeSquared);
+            //}
+            var dir = target.Transform.position - shooter.Owner.Transform.position;
             return Mathf.Max(shooter.MaxRangeSquared - dir.sqrMagnitude, 0) / shooter.MaxRangeSquared;
         }
     }

@@ -32,6 +32,17 @@ public static class UnitManager
 
     public static List<Unit> GetTargets(int myTeam)
     {
+        //string s = "";
+        //foreach (var kvp in ships)
+        //{
+        //    s += $"{kvp.Key}: ";
+        //    foreach (var ship in kvp.Value)
+        //    {
+        //        s += $"{ship.transform};";
+        //    }
+        //    s += '\n';
+        //}
+        //Debug.Log(s);
         return ships.Where(kv => kv.Key != myTeam).SelectMany(kv => kv.Value).ToList();
     }
 
@@ -49,7 +60,6 @@ public static class UnitManager
         }
         //Debug.Log($"{ship.Transform} registered on team {team}.");
         ships[team].Add(ship);
-        //ship.gameObject.layer = GlobalConfig.GetShipLayer(team);
         ship.UnitManagerIndex = ships[team].Count - 1;
         ship.RegisterForRadar();
         ship.SetObjectLayer(GlobalConfig.GetShipLayer(ship.Team));

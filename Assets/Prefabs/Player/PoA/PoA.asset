@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PoA
   m_EditorClassIdentifier: Assembly-CSharp::UnitData
   Prefab: {fileID: 2258113681808944998, guid: fe9cd4d00b9476a4fbe65f0ab0775935, type: 3}
-  ShouldBeDisabled: 0
+  ShouldBeDisabled: 1
   Points: 1
+  MissionRequirement: -1
   description: Iconic af.

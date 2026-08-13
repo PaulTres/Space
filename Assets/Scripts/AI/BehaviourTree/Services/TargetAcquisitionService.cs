@@ -1,6 +1,7 @@
 ﻿using HybridBT2;
 using System;
 using UnityEngine;
+using Utilities;
 using Weapons;
 
 [CreateAssetMenu(menuName = "HybridBT2/Services/TargetAcquisition", fileName = "TargetAcquisition")]
@@ -11,13 +12,14 @@ public class TargetAcquisitionService : ServiceData
     public float MinUtilityDelta = 0;
     public float MaxRange = 100;
     public TargetEvaluation TargetEvaluation;
+
     public override Action<Node, Blackboard> Action => (n, ctx) =>
     {
         Unit bestTarget = null;
         float bestTargetScore = float.MinValue;
         foreach (var target in ctx.Navigation.GetTargets())
         {
-            if (target == null || !target.gameObject.activeSelf) continue;
+            if (!target.Active()) continue;
             if (bestTarget == null)
             {
                 bestTarget = target;

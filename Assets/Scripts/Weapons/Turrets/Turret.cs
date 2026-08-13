@@ -138,13 +138,13 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public void Tick(float deltaTime)
         {
-            if (Owner == null || Owner.IsDying) return;
+            if (!Owner.Active()) return;
             if (Target.Active())
             {
                 //Debug.Log($"Turret {transform.name} targeting {Target?.Transform}.");
                 //if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
-                Debug.DrawLine(Transform.position, pos, Color.red);
+                //Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
@@ -280,8 +280,6 @@ namespace Weapons
             return true;
         }
 
-        public float EvaluateTarget(ImprovedMonoBehaviour target) => @params.EvaluateTarget(this, target);
-
         /// <summary>
         /// Go over available targets and select the best one based on the turret's 
         /// parameters. If a target is already selected, it will only be replaced if 
@@ -289,8 +287,7 @@ namespace Weapons
         /// </summary>
         public void UpdateTargets()
         {
-            if (Owner == null) return;
-            //if (!Target.Active()) Target = null;
+            if (!Owner.Active()) return;
             turretStances[CurrentStanceIndex].UpdateTargets();
         }
         #endregion

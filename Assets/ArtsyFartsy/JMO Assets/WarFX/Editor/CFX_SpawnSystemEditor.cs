@@ -4,7 +4,7 @@ using System.Collections;
 
 // Cartoon FX  - (c) 2012-2016 Jean Moreno
 
-// CFX Spawn System Editor interface
+// CFX ActivateUnits System Editor interface
 
 [CustomEditor(typeof(CFX_SpawnSystem))]
 public class CFX_SpawnSystemEditor : Editor
@@ -76,7 +76,7 @@ public class CFX_SpawnSystemEditor : Editor
 #endif
 
 		EditorGUILayout.PropertyField(p_hideObjectsInHierarchy, getGuiContent("Hide preloaded objects in Hierarchy", "Will prevent the preloaded instances to show in the Hierarchy"));
-		EditorGUILayout.PropertyField(p_spawnAsChildren, getGuiContent("Spawn as children of this GameObject", "Will place the preloaded instances under this GameObject, for better organization of the Hierarchy"));
+		EditorGUILayout.PropertyField(p_spawnAsChildren, getGuiContent("ActivateUnits as children of this GameObject", "Will place the preloaded instances under this GameObject, for better organization of the Hierarchy"));
 
 		EditorGUILayout.PropertyField(p_onlyGetInactiveObjects, getGuiContent("Only retrieve inactive GameObjects", "Will only return preloaded instances if they are inactive.\nThis means that you have to deactivate the GameObject before being able to reuse it\n(this is already handled on Cartoon FX effects with the CFX_AutoDestructShuriken script)"));
 		bool guiEnabled = GUI.enabled;
@@ -109,7 +109,7 @@ public class CFX_SpawnSystemEditor : Editor
 #if UNITY_4_2
 				Undo.RegisterUndo(target, "change Spawn System object to preload");
 #else
-				Undo.RecordObject(target, "change Spawn System object to preload");
+				Undo.RecordObject(target, "change ActivateUnits System object to preload");
 #endif
 				(this.target as CFX_SpawnSystem).objectsToPreload[i] = obj;
 			}
@@ -123,7 +123,7 @@ public class CFX_SpawnSystemEditor : Editor
 #if UNITY_4_2
 				Undo.RegisterUndo(target, "change Spawn System preload count");
 #else
-				Undo.RecordObject(target, "change Spawn System preload count");
+				Undo.RecordObject(target, "change ActivateUnits System preload count");
 #endif
 				(this.target as CFX_SpawnSystem).objectsToPreloadTimes[i] = nb;
 			}
@@ -140,7 +140,7 @@ public class CFX_SpawnSystemEditor : Editor
 #if UNITY_4_2
 				Undo.RegisterUndo(target, string.Format("remove {0} from Spawn System", objectName));
 #else
-				Undo.RecordObject(target, string.Format("remove {0} from Spawn System", objectName));
+				Undo.RecordObject(target, string.Format("remove {0} from ActivateUnits System", objectName));
 #endif
 				ArrayUtility.RemoveAt<GameObject>(ref (this.target as CFX_SpawnSystem).objectsToPreload, i);
 				ArrayUtility.RemoveAt<int>(ref (this.target as CFX_SpawnSystem).objectsToPreloadTimes, i);
@@ -178,7 +178,7 @@ public class CFX_SpawnSystemEditor : Editor
 #if UNITY_4_2
 							Undo.RegisterUndo(target, string.Format("add {0} to Spawn System", o.name));
 #else
-							Undo.RecordObject(target, string.Format("add {0} to Spawn System", o.name));
+							Undo.RecordObject(target, string.Format("add {0} to ActivateUnits System", o.name));
 #endif
 							ArrayUtility.Add<GameObject>(ref (this.target as CFX_SpawnSystem).objectsToPreload, (GameObject)o);
 							ArrayUtility.Add<int>(ref (this.target as CFX_SpawnSystem).objectsToPreloadTimes, 1);

@@ -10,34 +10,36 @@ namespace Level
     public class MissionManager : Singleton<MissionManager>
     {
         protected ObjectPool<CountdownTimer> timerPool;
+        protected ObjectPool<CountdownTimer> timerPoolProperty
+        {
+            get
+            {
+                timerPool ??= new(() => new CountdownTimer(1),
+                 (t) => t.OnTimerStop = () => OnTimerStop(t),
+                 null, (t) => t?.Dispose());
+                return timerPool;
+            }
+        }
         protected HashSet<CountdownTimer> activeTimers = new();
-        [Tooltip("Set to null for normal behaviour. If assigned, the set mission will " +
-            "be player no matter what.")]
-        [SerializeField] protected Mission mission;
+        public static float StartTime { get; protected set; }
 
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
-            timerPool = new(() => new CountdownTimer(1),
-                (t) => t.OnTimerStop = () => OnTimerStop(t),
-                null, (t) => t?.Dispose());
-            if (mission != null) Mission.CurrentMission = mission;
-        }
-
-        protected void Start()
-        {
-            Mission.CurrentMission.Initialize();
+            Time.timeScale = 1;
+            StartTime = Time.time;
+            GameManager.UnitsDestroyed.Clear();
         }
 
         protected override void ClearSingleton()
         {
             base.ClearSingleton();
-            timerPool.Clear();
+            timerPoolProperty.Clear();
         }
 
         protected void OnTimerStop(CountdownTimer t, bool removeFromSet = true)
         {
-            timerPool.Release(t);
+            timerPoolProperty.Release(t);
             if (removeFromSet) activeTimers.Remove(t);
             t.OnTimerStop = null;
         }
@@ -58,15 +60,19 @@ namespace Level
         /// </summary>
         /// <param name="action"></param>
         /// <param name="delay"></param>
-        public void ExecuteAction(System.Action action, float delay)
+        public void ExecuteAction(System.Action action, float delay = 0)
         {
-            if (delay == 0) action();
+            if (delay == 0)
+            {
+                action();
+            }
             else
             {
-                var timer = timerPool.Get();
+                var timer = timerPoolProperty.Get();
                 timer.Reset(delay);
                 timer.OnTimerStop += action;
                 timer.Start();
+                activeTimers.Add(timer);
             }
         }
 

@@ -9,8 +9,14 @@ public static class GameManager
 {
     static GameSave currentSave;
     public static float MissionTime { get; set; } = 0;
+    /// <summary>
+    /// All the units that have been destroyed over the course of a mission.
+    /// </summary>
     public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
     public static PlayerShip Player { get; set; } = null;
+    /// <summary>
+    /// The latest mission the player can play.
+    /// </summary>
     public static int LatestMissionIndex
     {
         get
@@ -19,6 +25,9 @@ public static class GameManager
             return Mathf.Min(currentSave.CurrentMissionIndex, Mission.Campaign.Count - 1);
         }
     }
+    /// <summary>
+    /// The mission the player has chosen to play.
+    /// </summary>
     public static int ChosenMissionIndex { get; set; }
 
     #region Pausing
@@ -89,7 +98,7 @@ public static class GameManager
 
     public static void LoadMission()
     {
-        SceneManager.LoadScene(GlobalConfig.MissionSceneIndex);
+        LoadMission(ChosenMissionIndex);
     }
 
     public static void LoadLoadingScreen()
@@ -97,12 +106,21 @@ public static class GameManager
         SceneManager.LoadScene(GlobalConfig.LoadingSceneIndex);
     }
 
+    /// <summary>
+    /// Will load the scene with name "Mission_{index+1}".
+    /// </summary>
+    /// <param name="index"></param>
+    public static void LoadMission(int index)
+    {
+        SceneManager.LoadScene($"Mission_{index + 1}");
+    }
+
     public static void EndMission()
     {
         if (!Player.Active()) return;
         UnitManager.Clear();
         OnMissionCompleted();
-        MissionTime = Time.time - Mission.CurrentMission.StartTime;
+        MissionTime = Time.time - MissionManager.StartTime;
         SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
     }
     #endregion

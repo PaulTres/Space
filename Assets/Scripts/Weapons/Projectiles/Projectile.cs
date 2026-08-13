@@ -60,7 +60,7 @@ namespace Weapons
             if (Owner.Active())
             {
                 team = Owner.Team;
-                gameObject.layer = GlobalConfig.GetBulletLayer(Owner.gameObject.layer);
+                gameObject.layer = GlobalConfig.GetBulletLayer(Owner.Team);
             }
             else
             {

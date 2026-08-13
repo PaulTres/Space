@@ -21,7 +21,11 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
             return tr;
         }
     }
-    public Vector3 Position => Transform.position;
+    public Vector3 Position
+    {
+        get => Transform.position;
+        set => Transform.position = value;
+    }
     public float CurrentSignature { get; protected set; } = 0;
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
 

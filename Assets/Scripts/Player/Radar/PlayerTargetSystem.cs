@@ -90,9 +90,10 @@ namespace Radar
             {
                 ProcessTarget(target, bbox);
             }
-            UpdateTargetInfo();
+            UpdateCurrentTargetInfo();
         }
 
+        #region Bounding boxes
         /// <summary>
         /// Handles bounding box and other UI aspects of objects.
         /// </summary>
@@ -103,9 +104,10 @@ namespace Radar
             if (!target.Active() || bbox == null) return;
 
             var unit = target as Unit;
-            var distance = Vector3.Distance(owner.Position, target.Position);
+            var directionToTarget = target.Position - owner.Position;
+            var distance = directionToTarget.magnitude;
             Vector3 viewportPos = cam.WorldToViewportPoint(target.Position);
-            if (viewportPos.z <= 0)
+            if (viewportPos.z <= 0 || Vector3.Dot(cam.transform.forward, directionToTarget) <= 0)
             {
                 bbox.Hide();
             }
@@ -188,42 +190,6 @@ namespace Radar
             else bbox.LineRenderer.enabled = false;
         }
 
-        protected void UpdateTargetInfo()
-        {
-            if (!CurrentTarget.Active()) return;
-
-            #region Target view
-            if (secondViewCamera != null && secondView != null)
-            {
-                var direction = (transform.root.position -
-                    CurrentTarget.Position).normalized;
-                if (direction.magnitude < CurrentTarget.EffectScaleFactor * 2)
-                {
-                    secondViewCamera.gameObject.SetActive(false);
-                    secondView.gameObject.SetActive(false);
-                }
-                else
-                {
-                    secondViewCamera.gameObject.SetActive(true);
-                    secondView.gameObject.SetActive(true);
-                    secondViewCamera.transform.position = CurrentTarget.Position +
-                        direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor * 2);
-                    secondViewCamera.transform.LookAt(CurrentTarget.Position);
-                }
-            }
-            #endregion
-
-            #region Text
-            if (targetInfoText != null)
-            {
-                string enemyTarget = CurrentTarget.Target == null ? "None" :
-                    CurrentTarget == GameManager.Player ? "You" :
-                    CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
-                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}";
-            }
-            #endregion
-        }
-
         protected BoundingBox GetBoundingBox()
         {
             if (boundingBoxPool.Count == 0)
@@ -278,8 +244,45 @@ namespace Radar
                 boundingBoxPool.Push(bbox);
             }
         }
+        #endregion
 
-        #region Target selection
+        #region Current target
+        protected void UpdateCurrentTargetInfo()
+        {
+            if (!CurrentTarget.Active()) return;
+
+            #region Target view
+            if (secondViewCamera != null && secondView != null)
+            {
+                var direction = (transform.root.position -
+                    CurrentTarget.Position).normalized;
+                if (direction.magnitude < CurrentTarget.EffectScaleFactor * 2)
+                {
+                    secondViewCamera.gameObject.SetActive(false);
+                    secondView.gameObject.SetActive(false);
+                }
+                else
+                {
+                    secondViewCamera.gameObject.SetActive(true);
+                    secondView.gameObject.SetActive(true);
+                    secondViewCamera.transform.position = CurrentTarget.Position +
+                        direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor * 2);
+                    secondViewCamera.transform.LookAt(CurrentTarget.Position);
+                }
+            }
+            #endregion
+
+            #region Text
+            if (targetInfoText != null)
+            {
+                string enemyTarget = CurrentTarget.Target == null ? "None" :
+                    CurrentTarget == GameManager.Player ? "You" :
+                    CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
+                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}";
+            }
+            #endregion
+        }
+
         public void SelectTarget()
         {
             if (GameManager.Player == null) return;
@@ -289,8 +292,7 @@ namespace Radar
             foreach (var target in targets)
             {
                 //compute a score for all of these
-                if (target == null || !target.Transform.gameObject.activeSelf ||
-                    target.IsEqual(CurrentTarget)) continue;
+                if (!target.Active() || target.IsEqual(CurrentTarget)) continue;
                 var score = EvaluateTarget(target);
                 if (score > bestScore)
                 {

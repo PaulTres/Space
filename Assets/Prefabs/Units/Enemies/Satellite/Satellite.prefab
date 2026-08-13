@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 4533265603820184394}
   - component: {fileID: 6067096471059556910}
   - component: {fileID: 194535318599805816}
+  - component: {fileID: 1902264513512752685}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -219,10 +220,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &6992461607628556299
 MonoBehaviour:
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  <MaxHP>k__BackingField: 20
+  <MaxHP>k__BackingField: 15
   sendEventOnHPChange: 0
   minHP: 0
   minHPRegainCooldown: 5
@@ -5160,7 +5161,7 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 0
   <IsDying>k__BackingField: 0
-  <NeedsEscort>k__BackingField: 0
+  <NeedsEscort>k__BackingField: 1
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   criticalObjects:
   - {fileID: 4179041048704021814}
@@ -5171,11 +5172,11 @@ MonoBehaviour:
     EffectOnSpawn: {fileID: 0}
     EffectOnDeath: {fileID: 985664761693772524, guid: 541c8a67962268c449224e76266e987d, type: 3}
     <EffectScaleFactor>k__BackingField: 1
-    <MinimumSignature>k__BackingField: 0
-    <MaxSignature>k__BackingField: 0
+    <MinimumSignature>k__BackingField: 100
+    <MaxSignature>k__BackingField: 100
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 10
+    ScanRange: 40
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 5
   strafeThrust: 1
@@ -5184,6 +5185,44 @@ MonoBehaviour:
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
   checker: {fileID: 0}
+--- !u!114 &1902264513512752685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557512565161722091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
+  overheatThreshold: 10
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
+  overheatSound:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &5656807936535734269
 GameObject:
   m_ObjectHideFlags: 0

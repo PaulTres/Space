@@ -25,6 +25,7 @@ namespace Player
             foreach (var data in UnitData.AvailablePlayerOptions)
             {
                 if (data.Points > Mission.CurrentMission.PlayerPoints) continue;
+                if (data.MissionRequirement >= GameManager.LatestMissionIndex) continue;
                 playerOptions.options.Add(new(data.name));
             }
             SetPlayerChoice(0);

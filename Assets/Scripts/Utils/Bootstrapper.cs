@@ -29,6 +29,7 @@ namespace Utilities
             SceneManager.activeSceneChanged += (s1, s2) =>
             {
                 Time.timeScale = 1;
+                //UnitManager.Clear();
                 //EventBus.EventBusUtil.ClearAllBuses();
             };
             VideoSettingsMenu.LoadVideoSettings();

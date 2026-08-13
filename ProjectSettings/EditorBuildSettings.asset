@@ -18,14 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/ShipSelectScene.unity
     guid: 14c187260e462d44d874e55c5e3ddb26
   - enabled: 1
-    path: Assets/Scenes/MissionScene.unity
-    guid: da254feee5a710940852ed5c4b3681df
+    path: Assets/Scenes/UI/LoadingScreen.unity
+    guid: e9194122af0db3540a98f5ca6f5f14e3
   - enabled: 1
     path: Assets/Scenes/UI/MissionEndScene.unity
     guid: 576d6d5a223fa7543a5b2f99aff7848b
   - enabled: 1
-    path: Assets/Scenes/UI/LoadingScreen.unity
-    guid: e9194122af0db3540a98f5ca6f5f14e3
+    path: Assets/Scenes/Levels/Mission_1.unity
+    guid: 3b87292512a47224991ac2d572e13bd2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_2.unity
+    guid: 9083efaf13a033949a4f6b5e158acb1f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e9b56aff646072449b96023a82fb1103, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

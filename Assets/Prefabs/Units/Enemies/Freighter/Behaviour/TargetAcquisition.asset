@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetAcquisitionService
   myName: 
   MinUtilityDelta: 0
-  MaxRange: 100
+  MaxRange: 1000
   TargetEvaluation: {fileID: 11400000, guid: 86898a4c586b02e4e8eea371d9a653b8, type: 2}
