@@ -14,7 +14,7 @@ public abstract class Ship : Unit
     protected Vector3 angularVelocity;
     public override Vector3 AngularVelocity => angularVelocity;
     public override Vector3 LinearVelocity => rb != null ? rb.linearVelocity : Vector3.zero;
-    public bool Dampeners { get; protected set; }
+    [field: SerializeField] public bool Dampeners { get; protected set; } = true;
     #endregion
 
     #region Setup
@@ -33,7 +33,6 @@ public abstract class Ship : Unit
     protected override void OnEnable()
     {
         base.OnEnable();
-        Dampeners = true;
         angularVelocity = Vector3.zero;
         rb.linearVelocity = Vector3.zero;
     }

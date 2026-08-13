@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Spawning
 {
+
+    public readonly struct PoolableRecycled : IEvent { }
+
     public abstract class MonoPoolableData<K, T> : MonoSpawnableData<T> where T : MonoBehaviour
     {
         public K Key;

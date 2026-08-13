@@ -15,6 +15,11 @@ public static class UnitManager
 
     public static void Clear() => ships.Clear();
 
+    public static IEnumerable<Unit> GetAllShips()
+    {
+        return ships.SelectMany(kv => kv.Value);
+    }
+
     /// <summary>
     /// Get all the ships belonging to a specific team.
     /// </summary>

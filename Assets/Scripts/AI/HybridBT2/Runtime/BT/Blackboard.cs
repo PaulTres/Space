@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons;
 namespace HybridBT2
 {
     public class Blackboard : IResettable
@@ -24,6 +25,7 @@ namespace HybridBT2
         public float DeltaTime { get; protected set; }
         protected Dictionary<Keys, object> data = new();
         protected float lastTime;
+        public HashSet<IThreat> Threats { get; protected set; } = new();
 
         public Blackboard(Transform transform)
         {

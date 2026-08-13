@@ -1,3 +1,4 @@
+using Effects;
 using EventBus;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,7 @@ namespace HP
                 value = Mathf.Clamp(value, 0, MaxHP);
                 if (currentHP != value)
                 {
-                    if (sendEventOnHPChange)
-                    {
-                        OnDamageTaken?.Invoke();
-                        EventBus<ObjectHPChanged>.Raise(Transform.GetInstanceID(),
-                            new ObjectHPChanged(CurrentHP,
-                            CurrentHP / (MaxHP + float.Epsilon)));
-                    }
+                    if (sendEventOnHPChange) OnDamageTaken?.Invoke();
                     currentHP = value;
                     foreach (var damageEffect in damageEffects)
                     {
@@ -77,6 +72,8 @@ namespace HP
                 return improvedMonoBehaviour;
             }
         }
+        [SerializeField] protected PoolableEffect effectOnDamage;
+        [SerializeField] protected float effectScaleFactor = 1;
         #endregion
 
         #region Setup
@@ -144,6 +141,7 @@ namespace HP
                 }
                 return;
             }
+            effectOnDamage.SpawnEffect(damageInfo.Position, effectScaleFactor);
             if (currentHP < minHP)
             {
                 //begin hp regain timer

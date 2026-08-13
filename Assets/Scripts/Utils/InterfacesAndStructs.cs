@@ -7,11 +7,6 @@ public interface IResettable
     void PerformReset();
 }
 
-public interface IOwnable : IRegisterableComponent
-{
-    Unit Owner { get; }
-}
-
 #region Event bus stuff
 public struct DamageInfo : IEvent
 {
@@ -19,17 +14,6 @@ public struct DamageInfo : IEvent
     public Unit Source { get; set; }
     public bool IgnoreArmor { get; set; }
     public Vector3 Position { get; set; }
-}
-
-public readonly struct ObjectHPChanged : IEvent
-{
-    public readonly float CurrentHP, CurrentHPPercentage;
-
-    public ObjectHPChanged(float currentHP, float currentHPPercentage)
-    {
-        CurrentHP = currentHP;
-        CurrentHPPercentage = currentHPPercentage;
-    }
 }
 
 /// <summary>
@@ -85,8 +69,6 @@ public readonly struct UnitDestroyed : IEvent
         Time = UnityEngine.Time.time;
     }
 }
-
-public readonly struct PoolableRecycled : IEvent { }
 
 public readonly struct ShowText : IEvent
 {

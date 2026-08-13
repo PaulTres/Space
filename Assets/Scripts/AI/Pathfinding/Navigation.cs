@@ -133,7 +133,7 @@ public class Navigation : Ship
         if (UpdateRotation) Face(direction, deltaTime);
         else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
-        ApplyDampeners(direction, deltaTime);
+        if (Dampeners) ApplyDampeners(direction, deltaTime);
         if (Vector3.Angle(transform.forward, direction) <= angleToForward)
         {
             rb.linearVelocity += forwardThrust * Time.deltaTime * direction.normalized;

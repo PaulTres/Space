@@ -14,6 +14,8 @@ public class StrafeNode : LeafNodeData
 
     public TargetFacingMode TargetFacing;
     public int TicksBeforeRepath = 10;
+    [SerializeField] protected float strafeMagnitude = 100;
+    [SerializeField] protected float strafeDistance = 50;
 
     protected enum InternalKeys
     {
@@ -54,29 +56,30 @@ public class StrafeNode : LeafNodeData
         {
             n.SetData((int)InternalKeys.CurrentTicks, 0);
             var normal = target.Position - ctx.Position;
+            var destination = Vector3.zero;
             switch (TargetFacing)
             {
                 case TargetFacingMode.Forward:
                     {
-                        var projected = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
-                        if (projected.magnitude == 0) projected = ctx.Navigation.Up;
-                        ctx.Navigation.SetDestination(ctx.Position + projected.normalized * 1000);
+                        destination = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
+                        if (destination.magnitude == 0) destination = ctx.Navigation.Up;
                         break;
                     }
                 default:
                     {
-                        var projected = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
-                        if (projected.magnitude == 0) projected = ctx.Navigation.Right;
-                        ctx.Navigation.SetDestination(ctx.Position + projected.normalized * 1000);
+                        destination = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
+                        if (destination.magnitude == 0) destination = ctx.Navigation.Right;
                         break;
                     }
             }
+            destination = ctx.Position + destination.normalized * strafeMagnitude;
+            var dirToTarget = destination - target.Position;
+            ctx.Navigation.SetDestination(dirToTarget.normalized * strafeDistance);
         }
         else
         {
             n.SetData((int)InternalKeys.CurrentTicks, currentTicks + 1);
         }
-
         return NodeState.RUNNING;
     };
 }

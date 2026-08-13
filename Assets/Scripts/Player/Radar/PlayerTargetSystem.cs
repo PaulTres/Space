@@ -30,9 +30,6 @@ namespace Radar
         [SerializeField] protected Image secondView;
         [SerializeField] protected Camera secondViewCamera;
         [SerializeField] protected TextMeshProUGUI targetInfoText;
-        /// <summary>
-        /// This timer determines how often the bounding boxes are reordered.
-        /// </summary>
         protected Unit currentTarget;
         public Unit CurrentTarget
         {
@@ -71,6 +68,10 @@ namespace Radar
         {
             CurrentTarget = null;
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
+            foreach (var unit in UnitManager.GetAllShips())
+            {
+                RegisterTarget(unit);
+            }
         }
 
         protected void OnDisable()

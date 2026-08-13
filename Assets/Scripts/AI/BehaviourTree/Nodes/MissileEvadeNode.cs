@@ -10,6 +10,12 @@ public class MissileEvadeNode : LeafNodeData
 {
     [SerializeField] protected float directionMagnitude = 10;
     [SerializeField] protected bool resetRotationTarget = true;
+
+    protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
+    {
+        if (resetRotationTarget) ctx.Navigation.RotationTarget = null;
+    };
+
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
         var pdTurrets = ctx.GetData<IEnumerable<Turret>>(Blackboard.Keys.PDTurrets);
@@ -23,7 +29,6 @@ public class MissileEvadeNode : LeafNodeData
                 var normal = m.Transform.position - ctx.Position;
                 var direction = Vector3.ProjectOnPlane(normal, ctx.Navigation.Forward).normalized;
                 if (direction.magnitude == 0) direction = normal.Perpendicular();
-                if (resetRotationTarget) ctx.Navigation.RotationTarget = null;
                 ctx.Navigation.SetDestination(ctx.Position + direction * directionMagnitude);
                 return NodeState.RUNNING;
             }

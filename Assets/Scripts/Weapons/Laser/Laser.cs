@@ -22,7 +22,7 @@ namespace Weapons
             base.Initialize(poolableData);
             if (poolableData is not LaserData laserData)
             {
-                Debug.LogError("Invalid poolable data for Laser.");
+                Debug.LogError("Invalid poolable data for laser.");
                 return;
             }
             if (lineRenderer == null) lineRenderer = GetComponent<LineRenderer>();

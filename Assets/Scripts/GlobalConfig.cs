@@ -101,6 +101,7 @@ public class GlobalConfig : ScriptableObject
     /// Might be worth expanding to 100.
     /// </summary>
     public static readonly int MaxMissileCheckBufferSize = 50;
+    public static readonly int MaxLanceCheckBufferSize = 50;
     /// <summary>
     /// How many seconds to wait between ending the mission and loading the end mission screen.
     /// </summary>
@@ -115,6 +116,12 @@ public class GlobalConfig : ScriptableObject
     #endregion
 
     #region Layers and layer masks
+    /// <summary>
+    /// Returns the mask that a lance should use to check for targets.
+    /// </summary>
+    /// <returns></returns>
+    public static LayerMask LanceCheckMask => 1 << 0 | 1 << 6 | 1 << 8;
+
     /// <summary>
     /// Returns the layer mask that an object should use to check for enemy bullets.
     /// </summary>

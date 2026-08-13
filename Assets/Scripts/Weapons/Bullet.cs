@@ -7,6 +7,11 @@ using Utilities;
 
 namespace Weapons
 {
+    public interface IOwnable : IRegisterableComponent
+    {
+        Unit Owner { get; }
+    }
+
     public abstract class Bullet : ImprovedMonoBehaviour, IOwnable
     {
         #region Pool
@@ -14,7 +19,8 @@ namespace Weapons
         {
             Laser,
             BasicShell,
-            Missile
+            Missile,
+            Lance
         }
         static readonly ObjectPool<Type, Bullet> objectPool = new();
 
@@ -67,6 +73,7 @@ namespace Weapons
                 }
             }
         }
+
         protected bool disableOnHit = true;
         protected float lifeTime;
         protected PoolableEffect onSpawnEffect, onHitEffect;
@@ -131,6 +138,8 @@ namespace Weapons
 
         protected virtual void OnHit(Collider collider)
         {
+            var t = collider.transform.root;
+            if (t == Owner) return;
             collider.transform.root.TakeDamage(damageInfo);
             onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);

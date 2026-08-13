@@ -11,7 +11,10 @@ public class BanditTree : BT, IRegisterableComponent
     [SerializeField] protected float initialMorale = 10;
     [Tooltip("The maximum distance from a morale event at which this unit will be affected.")]
     [SerializeField] protected float maxMoraleImpactRange = 50;
+    [Tooltip("How many Threats can this AI account for at the same time.")]
+    [SerializeField] protected int maxThreats = 1;
 
+    #region Setup
     protected override void Awake()
     {
         base.Awake();
@@ -19,6 +22,34 @@ public class BanditTree : BT, IRegisterableComponent
         ComponentRegister<BanditTree>.Register(transform, this);
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
     }
+
+    protected override void SetupBlackboard()
+    {
+        Context.SetData(Blackboard.Keys.Fleeing, false);
+        Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
+        Context.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
+        Context.SetData(Blackboard.Keys.PDTurrets,
+            GetComponentsInChildren<Turret>().
+            Where(t => t.Parameters.TargetMissiles));
+        Context.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);
+        Context.SetData(Blackboard.Keys.DefaultMorale, initialMorale);
+        Context.SetData(Blackboard.Keys.Morale, initialMorale);
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        if (affectedByMorale) EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
+        ComponentRegister<BanditTree>.Unregister(transform);
+    }
+    #endregion
+
+    public void SetTarget(Unit target) => blackboard.SetData(Blackboard.Keys.Target, target);
 
     /// <summary>
     /// Fires when a unit is destroyed on the field. Increases morale if an enemy 
@@ -48,29 +79,14 @@ public class BanditTree : BT, IRegisterableComponent
         }
     }
 
-    protected override void OnDisable()
+    public void ReceiveThreat(IThreat threat)
     {
-        base.OnDisable();
-        if (affectedByMorale) EventBus<UnitDestroyed>.RemoveActions(OnUnitDestroyed);
-    }
-    protected virtual void OnDestroy()
-    {
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
-        ComponentRegister<BanditTree>.Unregister(transform);
+        if (Context.Threats.Count < maxThreats)
+        {
+            Context.Threats.Add(threat);
+            threat.OnThreatOver += RemoveThreat;
+        }
     }
 
-    public void SetTarget(Unit target) => blackboard.SetData(Blackboard.Keys.Target, target);
-
-    protected override void SetupBlackboard()
-    {
-        Context.SetData(Blackboard.Keys.Fleeing, false);
-        Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
-        Context.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);
-        Context.SetData(Blackboard.Keys.PDTurrets,
-            GetComponentsInChildren<Turret>().
-            Where(t => t.Parameters.TargetMissiles));
-        Context.SetData(Blackboard.Keys.LastMoraleDamageTime, Time.time);
-        Context.SetData(Blackboard.Keys.DefaultMorale, initialMorale);
-        Context.SetData(Blackboard.Keys.Morale, initialMorale);
-    }
+    public void RemoveThreat(IThreat threat) => Context.Threats.Remove(threat);
 }

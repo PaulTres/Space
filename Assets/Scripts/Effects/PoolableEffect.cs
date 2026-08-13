@@ -43,13 +43,11 @@ namespace Effects
 
         public static void Spawn(PoolableEffect effect, Vector3 position, Quaternion rotation, Vector3 scale)
         {
-            if (effect != null)
-            {
-                if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
-                e.transform.SetPositionAndRotation(position, rotation);
-                e.transform.localScale = scale;
-                e.gameObject.SetActive(true);
-            }
+            if (effect == null) return;
+            if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
+            e.transform.SetPositionAndRotation(position, rotation);
+            e.transform.localScale = scale;
+            e.gameObject.SetActive(true);
         }
         #endregion
 
