@@ -2,10 +2,9 @@ using HybridBT2;
 using UnityEngine;
 using Utilities;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Navigation : Ship
 {
-    public void SetDestination(Vector3? destination) => Destination = destination;
+    #region Fields
     public Vector3? Destination { get; protected set; }
     public bool HasDestination => Destination != null;
     [Header("Parameters")]
@@ -40,6 +39,7 @@ public class Navigation : Ship
             return blackboard.GetData<Unit>(Blackboard.Keys.Target);
         }
     }
+    #endregion
 
     #region Setup
     protected override void Awake()
@@ -69,6 +69,8 @@ public class Navigation : Ship
                 UnregisterUpdate(PerformUpdate);
     }
     #endregion
+
+    public void SetDestination(Vector3? destination) => Destination = destination;
 
     protected void PerformUpdate(float deltaTime)
     {

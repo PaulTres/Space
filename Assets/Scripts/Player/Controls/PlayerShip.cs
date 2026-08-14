@@ -4,7 +4,6 @@ using UnityEngine;
 using Utilities;
 namespace Player
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class PlayerShip : Ship
     {
         [System.Serializable]

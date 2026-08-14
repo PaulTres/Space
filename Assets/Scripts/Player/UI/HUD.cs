@@ -154,13 +154,23 @@ namespace Player
             {
                 if (turretGroups[i].ShowReload)
                 {
-                    turretDisplays[i].ReloadStatusImage.fillAmount = turretGroups[i].ReloadStatus;
-                    //turretDisplays[i].WeaponIcon.color = Color.Lerp(Color.green, Color.red, turretGroups[i].ReloadStatus);
+                    turretDisplays[i].ReloadStatusImage.fillAmount =
+                        turretGroups[i].ReloadStatus;
                 }
                 if (turretDisplays[i].HeatStatusImage.enabled)
                 {
-                    turretDisplays[i].HeatStatusImage.fillAmount = turretGroups[i].Heatsink.OverheatPercentage;
-                    turretDisplays[i].HeatStatusImage.color = Color.Lerp(Color.white, Color.red, turretGroups[i].Heatsink.OverheatPercentage);
+                    turretDisplays[i].HeatStatusImage.fillAmount = turretGroups[i].
+                        Heatsink.OverheatPercentage;
+                    if (turretGroups[i].Heatsink.Overheated)
+                    {
+                        turretDisplays[i].HeatStatusImage.color = Color.red;
+                    }
+                    else
+                    {
+                        turretDisplays[i].HeatStatusImage.color = Color.Lerp(
+                            Color.white, Color.red, turretGroups[i].Heatsink.
+                            OverheatPercentage);
+                    }
                 }
             }
             for (int i = 0; i < launcherDisplays.Count; i++)

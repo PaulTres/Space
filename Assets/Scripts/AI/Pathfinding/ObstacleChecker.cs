@@ -45,6 +45,7 @@ public class ObstacleChecker : ScriptableObject
         }
         return Vector3.zero;
     }
+
     public void Draw(Transform origin)
     {
         if (!Debug) return;

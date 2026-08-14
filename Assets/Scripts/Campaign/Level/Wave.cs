@@ -9,18 +9,18 @@ namespace Level
 {
     public class Wave : MonoBehaviour
     {
-        protected List<Spawner> spawners;
+        protected List<NPCSpawner> spawners;
         [SerializeField] protected float delay = 0;
         [SerializeField] protected float minDistanceFromPlayer = 0;
         [SerializeField] protected bool facePlayer = false;
         [SerializeField] protected bool spawnOnAwake = true;
-        [SerializeField] protected UnityEvent onAllUnitsDestroyed;
+        [SerializeField] protected UnityEvent onAllUnitsSpawned, onAllUnitsDestroyed;
         protected List<Unit> units = new();
         protected int unitCount;
 
         protected void Awake()
         {
-            spawners = GetComponentsInChildren<Spawner>().ToList();
+            spawners = GetComponentsInChildren<NPCSpawner>().ToList();
             SpawnInactive();
             if (spawnOnAwake) SpawnWithDelay();
         }
@@ -70,6 +70,7 @@ namespace Level
                 units[i].gameObject.SetActive(true);
             }
             units = null;
+            onAllUnitsSpawned?.Invoke();
         }
     }
 }

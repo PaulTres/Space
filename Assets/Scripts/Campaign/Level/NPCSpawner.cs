@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Level
 {
-    public class Spawner : MonoBehaviour
+    public class NPCSpawner : MonoBehaviour
     {
         [SerializeField] protected List<UnitData> spawnOptions = new();
         [SerializeField] protected float spawnRadius = 0;
@@ -13,7 +13,7 @@ namespace Level
 
         public void OnDrawGizmos()
         {
-            Gizmos.color = team == GlobalConfig.PlayerTeam ? Color.green : Color.red;
+            Gizmos.color = team == GlobalConfig.PlayerTeam ? Color.blue : Color.red;
             Gizmos.DrawWireSphere(transform.position, Mathf.Max(spawnRadius, 1));
         }
 

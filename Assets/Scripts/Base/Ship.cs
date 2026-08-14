@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class Ship : Unit
 {
     #region Fields

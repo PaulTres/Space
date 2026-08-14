@@ -160,56 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 175601912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
-  spawnOptions:
-  - {fileID: 11400000, guid: f37f16032678f2c48ba5e4118d7e14de, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
---- !u!1 &438660800
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 438660801}
-  - component: {fileID: 438660802}
-  m_Layer: 0
-  m_Name: Spawner (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &438660801
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438660800}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1290785004}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &438660802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 438660800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
@@ -258,14 +209,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 442161643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &487572209
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,14 +258,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 487572209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &517345454
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,14 +307,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 517345454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &531159667
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,14 +356,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 531159667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &871555742
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,14 +405,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 871555742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &967065116
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,14 +454,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 967065116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &972225796
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,14 +503,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 972225796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &1021162876
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +608,6 @@ Transform:
   m_Children:
   - {fileID: 175601913}
   - {fileID: 1790573880}
-  - {fileID: 438660801}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1339681657
@@ -701,14 +651,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1339681657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 235244ffc4780084880e9922963335c5, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &1537111361
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,14 +700,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1537111361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
   - {fileID: 11400000, guid: 7814f8c4772f7c9418a484a99d5450df, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 0
+  playSpawnEffect: 1
 --- !u!1 &1758843703
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +847,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1790573879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:

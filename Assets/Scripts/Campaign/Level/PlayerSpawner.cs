@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Level
 {
@@ -6,6 +7,7 @@ namespace Level
     {
         [SerializeField] protected float delay = 0;
         [SerializeField] protected bool playSpawnEffect = true;
+        [SerializeField] protected UnityEvent onPlayerSpawned;
 
         protected void Awake()
         {
@@ -25,6 +27,7 @@ namespace Level
             //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(transform.position, transform.rotation);
             unit.gameObject.SetActive(true);
+            onPlayerSpawned?.Invoke();
         }
     }
 }

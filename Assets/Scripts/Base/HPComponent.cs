@@ -20,6 +20,8 @@ namespace HP
 
         #region Fields
         [field: SerializeField] public float MaxHP { get; set; } = 10;
+        [Tooltip("The unit will spawn with maxHP*this number.")]
+        [Range(0, 1)][SerializeField] protected float startingHPFraction = 1;
         protected Transform tr;
         public Transform Transform
         {
@@ -98,7 +100,7 @@ namespace HP
         public void PerformReset()
         {
             firedEvent = false;
-            CurrentHP = MaxHP;
+            CurrentHP = MaxHP * startingHPFraction;
         }
 
         protected void OnEnable() => PerformReset();
