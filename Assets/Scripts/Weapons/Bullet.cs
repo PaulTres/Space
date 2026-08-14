@@ -114,7 +114,7 @@ namespace Weapons
 
         protected virtual void OnDisable()
         {
-            Owner = null;
+            ClearOwner();
             var u = GlobalUpdater.TryGetInstance();
             if (u != null) u.UnregisterFixedUpdate(PerformUpdate);
             Release(this);

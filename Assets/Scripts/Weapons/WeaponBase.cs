@@ -162,7 +162,7 @@ namespace Weapons
         {
             for (int i = 0; i < shootPoints.Length; i++)
             {
-                ProcessBullet(@params.GetInstance(shootPoints[i]), target);
+                ProcessBullet(@params.GetInstance(shootPoints[i]), target, shootPoints[i]);
             }
         }
 
@@ -172,7 +172,7 @@ namespace Weapons
         /// </summary>
         /// <param name="bullet">The bullet to be processed.</param>
         /// <param name="target">The target of the bullet.</param>
-        public virtual void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
+        public virtual void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {
             Unit.IncreaseSignature(@params.SignatureIncrease);
             bullet.Owner = Unit;

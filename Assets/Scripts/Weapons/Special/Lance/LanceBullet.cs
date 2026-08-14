@@ -1,25 +1,31 @@
 using AudioSystem;
 using System;
+using System.Collections.Generic;
 using Timers;
 using UnityEngine;
 using Utilities;
 
 namespace Weapons
 {
-    public class Lance : Bullet, IThreat
+    public class LanceBullet : Bullet, IThreat
     {
-        public override ImprovedMonoBehaviour Target => null;
+        protected ImprovedMonoBehaviour target;
+        public override ImprovedMonoBehaviour Target => target;
         protected Collider[] buffer;
         protected int colliderCount;
         protected float range, radius;
         protected CountdownTimer telegraphTimer;
         [SerializeField] protected Renderer telegraphRenderer, damageRenderer;
         protected Color telegraphColor, telegraphTransparent, damageColor, damageTransparent;
-        protected float maxLifeTime;
+        protected float maxLifeTime, timerProgressTrackingThreshold, delay;
         protected SoundData soundData, telegraphSound;
-
+        /// <summary>
+        /// The lance bullet will follow this object's position and rotation while telegraphing.
+        /// </summary>
+        public Transform ShootPoint { get; set; }
         public event Action<IThreat> OnThreatOver = delegate { };
 
+        #region Setup
         protected override void Awake()
         {
             base.Awake();
@@ -57,15 +63,18 @@ namespace Weapons
             damageRenderer.material = data.DamageMaterial;
             telegraphRenderer.material = data.TelegraphMaterial;
             damageRenderer.material.color = damageTransparent;
-            lifeTime += data.Delay;
+            delay = data.Delay;
+            lifeTime += delay;
             maxLifeTime = lifeTime;
             soundData = data.FireSound;
             telegraphSound = data.TelegraphSound;
+            timerProgressTrackingThreshold = data.TimerProgressTrackingThreshold;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+            ShootPoint = null;
             OnThreatOver(this);
             OnThreatOver = delegate { };
         }
@@ -75,6 +84,12 @@ namespace Weapons
             base.OnDestroy();
             telegraphTimer?.Dispose();
         }
+        #endregion
+
+        public void SetTarget(ImprovedMonoBehaviour target)
+        {
+            this.target = target;
+        }
 
         protected override void PerformUpdate(float dt)
         {
@@ -82,11 +97,22 @@ namespace Weapons
             {
                 //adjust telegraph renderer
                 telegraphRenderer.material.color = Color.Lerp(telegraphColor, telegraphTransparent, telegraphTimer.Progress);
-                Debug.Log(telegraphRenderer.material.color.a);
+                //Debug.Log(telegraphRenderer.material.color.a);
+                //set position and rotation
+                if (ShootPoint != null && Owner.Active(true))
+                {
+                    Transform.position = ShootPoint.position;
+                    if (target.Active() && telegraphTimer.Progress > timerProgressTrackingThreshold)
+                    {
+                        //track target
+                        Transform.LookAt(target.Position);
+                    }
+                    //else Transform.rotation = ShootPoint.rotation;
+                }
             }
             else
             {
-                damageRenderer.material.color = Color.Lerp(damageColor, damageTransparent, lifeTime / maxLifeTime);
+                damageRenderer.material.color = Color.Lerp(damageTransparent, damageColor, lifeTime / (maxLifeTime - delay));
             }
             base.PerformUpdate(dt);
         }
@@ -117,7 +143,12 @@ namespace Weapons
             telegraphRenderer.material.color = new(0, 0, 0, 0);
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);
-            for (int i = 0; i < colliderCount; i++) OnHit(buffer[i]);
+            HashSet<int> hits = new();
+            for (int i = 0; i < colliderCount; i++)
+            {
+                var t = buffer[i].transform.root;
+                if (hits.Add(t.GetInstanceID())) OnHit(buffer[i]);
+            }
         }
 
         public Vector3 DodgeDirection(ImprovedMonoBehaviour threatenedObject)

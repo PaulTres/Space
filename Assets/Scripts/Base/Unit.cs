@@ -141,7 +141,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Setup/Cleanup
     protected virtual void Awake()
     {
-        Debug.Assert(!criticalObjects.IsEmpty());
+        Debug.Assert(!criticalObjects.IsEmpty(), $"{Transform} has no critical objects set!");
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);

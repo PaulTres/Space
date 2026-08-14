@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb4f106f74f8bd4492f562b69d0a8df, type: 3}
+  m_Name: LanceData
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.LanceData
+  Prefab: {fileID: 4209824609268020035, guid: 5963e1fb807e36141a5d833bc474433e, type: 3}
+  Key: 3
+  RaiseEventOnRecycle: 0
+  DisableOnHit: 1
+  Damage: 1
+  LifeTime: 0.5
+  EffectScaleFactor: 1
+  OnSpawnEffect: {fileID: 0}
+  OnHitEffect: {fileID: 0}
+  TelegraphMaterial: {fileID: 2100000, guid: 5fa39d218277de64bb45c5a980925352, type: 2}
+  DamageMaterial: {fileID: 2100000, guid: a424596a0d930d54eb614b75e532e35a, type: 2}
+  Delay: 2
+  Range: 200
+  Radius: 10
+  TelegraphSound:
+    clip: {fileID: 8300000, guid: c03a39b31e5bb4031a273590ec24dfb1, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+  FireSound:
+    clip: {fileID: 8300000, guid: 57fd38b20a876d940aa6e6604a4eaf64, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0

@@ -23,7 +23,7 @@ namespace Weapons
 
         protected virtual void OnValidate()
         {
-            Debug.Assert(BulletData != null);
+            Debug.Assert(BulletData != null, $"{this} has no bullet data!");
         }
 
         public Bullet GetInstance(Transform point) => BulletData.GetInstance(point);
