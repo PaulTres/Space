@@ -247,7 +247,7 @@ namespace Weapons
             float timeToHit = 0;
             var m = Weapons[0].BulletData as ProjectileData;
             if (m != null) timeToHit = (target.Transform.position -
-                    Transform.position).magnitude / m.TopSpeed;
+                    Transform.position).magnitude / (m.Speed + Mathf.Epsilon);
 
             //Debug.Log(timeToHit);
             var futureTargetPos = target.GetPositionWithOscilation(Owner) +

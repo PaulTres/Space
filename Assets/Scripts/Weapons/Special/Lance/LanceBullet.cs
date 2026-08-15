@@ -7,7 +7,7 @@ using Utilities;
 
 namespace Weapons
 {
-    public class LanceBullet : Bullet, IThreat
+    public class LanceBullet : Projectile, IThreat
     {
         protected ImprovedMonoBehaviour target;
         public override ImprovedMonoBehaviour Target => target;
@@ -16,13 +16,10 @@ namespace Weapons
         protected float range, radius;
         protected CountdownTimer telegraphTimer;
         [SerializeField] protected Renderer telegraphRenderer, damageRenderer;
+        [SerializeField] protected Transform lancePivot;
         protected Color telegraphColor, telegraphTransparent, damageColor, damageTransparent;
         protected float maxLifeTime, timerProgressTrackingThreshold, delay;
         protected SoundData soundData, telegraphSound;
-        /// <summary>
-        /// The lance bullet will follow this object's position and rotation while telegraphing.
-        /// </summary>
-        public Transform ShootPoint { get; set; }
         public event Action<IThreat> OnThreatOver = delegate { };
 
         #region Setup
@@ -35,6 +32,7 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
+            collisionMask = 0;
             Telegraph();
         }
 
@@ -54,7 +52,7 @@ namespace Weapons
             else telegraphTimer.Reset(data.Delay);
             radius = data.Radius;
             range = data.Range;
-            Transform.localScale = new(radius * 2, radius * 2, range / 2);
+            lancePivot.localScale = new(radius * 2, radius * 2, range / 2);
             disableOnHit = false;
             telegraphColor = data.TelegraphMaterial.color;
             telegraphTransparent = new(telegraphColor.r, telegraphColor.g, telegraphColor.b, 0);
@@ -74,7 +72,6 @@ namespace Weapons
         protected override void OnDisable()
         {
             base.OnDisable();
-            ShootPoint = null;
             OnThreatOver(this);
             OnThreatOver = delegate { };
         }
@@ -99,15 +96,10 @@ namespace Weapons
                 telegraphRenderer.material.color = Color.Lerp(telegraphColor, telegraphTransparent, telegraphTimer.Progress);
                 //Debug.Log(telegraphRenderer.material.color.a);
                 //set position and rotation
-                if (ShootPoint != null && Owner.Active(true))
+                if (target.Active() && telegraphTimer.Progress > timerProgressTrackingThreshold)
                 {
-                    Transform.position = ShootPoint.position;
-                    if (target.Active() && telegraphTimer.Progress > timerProgressTrackingThreshold)
-                    {
-                        //track target
-                        Transform.LookAt(target.Position);
-                    }
-                    //else Transform.rotation = ShootPoint.rotation;
+                    //track target
+                    lancePivot.LookAt(target.Position);
                 }
             }
             else
@@ -136,6 +128,8 @@ namespace Weapons
 
         public void DealDamage()
         {
+            acceleration = 0;
+            linearVelocity = Vector3.zero;
             OnThreatOver(this);
             telegraphRenderer.enabled = false;
             damageRenderer.enabled = true;

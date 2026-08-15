@@ -14,7 +14,7 @@ namespace Weapons
         protected virtual void Reset()
         {
             TrailRendererCurve = new AnimationCurve(
-                new Keyframe(0f, Scale.y),
+                new Keyframe(1f, Scale.y),
                 new Keyframe(Scale.y, 0f)
             );
         }

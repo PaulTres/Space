@@ -6,9 +6,8 @@ namespace Weapons
     {
         public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {
-            var lance = (LanceBullet)bullet;
-            lance.ShootPoint = shootPoint;
-            lance.SetTarget(target);
+            //Debug.Log((LanceBullet)bullet);
+            ((LanceBullet)bullet).SetTarget(target);
             base.ProcessBullet(bullet, target, shootPoint);
         }
     }
