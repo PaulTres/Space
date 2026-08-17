@@ -83,8 +83,7 @@ namespace Weapons
         #region Setup
         protected virtual void Awake()
         {
-            tr = transform;
-            ComponentRegister<IOwnable>.Register(tr, this);
+            ComponentRegister<IOwnable>.Register(Transform, this);
         }
 
         protected virtual void OnEnable()
@@ -122,7 +121,7 @@ namespace Weapons
 
         protected virtual void OnDestroy()
         {
-            ComponentRegister<IOwnable>.Unregister(tr);
+            ComponentRegister<IOwnable>.Unregister(Transform);
         }
         #endregion
 

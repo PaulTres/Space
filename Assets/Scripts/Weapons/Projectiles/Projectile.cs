@@ -85,13 +85,13 @@ namespace Weapons
         /// <param name="dt"></param>
         protected virtual void RestOfPerformUpdate(float dt)
         {
-            linearVelocity += acceleration * dt * tr.forward;
+            linearVelocity += acceleration * dt * Transform.forward;
             if (inertialDampeners)
             {
-                linearVelocity = Vector3.Project(linearVelocity, tr.forward);
+                linearVelocity = Vector3.Project(linearVelocity, Transform.forward);
             }
             linearVelocity = Vector3.ClampMagnitude(linearVelocity, TopSpeed);
-            tr.position += dt * linearVelocity;
+            Transform.position += dt * linearVelocity;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Weapons
         /// <returns></returns>
         protected virtual bool CheckCollisions(float dt)
         {
-            if (Physics.Raycast(tr.position, linearVelocity, out RaycastHit hit,
+            if (Physics.Raycast(Transform.position, linearVelocity, out RaycastHit hit,
                 linearVelocity.magnitude * dt, collisionMask))
             {
                 if (GlobalConfig.GetTeam(hit.transform.root.gameObject.layer) == team)

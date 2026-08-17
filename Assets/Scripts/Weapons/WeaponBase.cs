@@ -6,12 +6,12 @@ namespace Weapons
     public abstract class WeaponBase : MonoBehaviour, IResettable
     {
         #region Utils   
-        protected Unit unit;
+        Unit unit;
         /// <summary>
         /// The unit that owns this Weapons. Lazily initialized by searching for a Navigation 
         /// component in the root of the transform hierarchy.
         /// </summary>
-        public Unit Unit
+        public Unit UnitProperty
         {
             get
             {
@@ -150,7 +150,7 @@ namespace Weapons
         public bool Shoot(ImprovedMonoBehaviour target)
         {
             if (!CanShoot()) return false;
-            if (@params.RequiresOptimalFiringRange && !unit.InOptimalFiringRange(target)) return false;
+            if (@params.RequiresOptimalFiringRange && !UnitProperty.InOptimalFiringRange(target)) return false;
             Fire(target);
             shotTimer.Reset(CurrentShotCooldown);
             shotTimer.Start();
@@ -176,8 +176,8 @@ namespace Weapons
         /// <param name="target">The target of the bullet.</param>
         public virtual void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {
-            Unit.IncreaseSignature(@params.SignatureIncrease);
-            bullet.Owner = Unit;
+            UnitProperty.IncreaseSignature(@params.SignatureIncrease);
+            bullet.Owner = UnitProperty;
             bullet.gameObject.SetActive(true);
         }
         #endregion

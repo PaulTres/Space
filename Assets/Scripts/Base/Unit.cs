@@ -43,7 +43,7 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     #region Fields
     #region Misc
-    [Header("Unit")]
+    [Header("UnitProperty")]
     /// <summary>
     /// This is used for quick removal from the unit manager lists. 
     /// DO NOT FUCK WITH THIS!
@@ -57,7 +57,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// </summary>
     protected Action onTick = delegate { };
     /// <summary>
-    /// Plays while the unit explodes. Unit will be disabled once the effect is 
+    /// Plays while the unit explodes. UnitProperty will be disabled once the effect is 
     /// finished playing.
     /// </summary>
     protected ParticleSystem effectDuringDeath;

@@ -107,7 +107,7 @@ namespace Weapons
                     if (!IsTargetValid(targets[i])) continue;
                     //if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = EvaluateTarget(targets[i]);
-                    //if (Turret.Unit == GameManager.Player && !Turret.TargetMissiles && Unit.Target.Active())
+                    //if (Turret.UnitProperty == GameManager.Player && !Turret.TargetMissiles && UnitProperty.Target.Active())
 
                     //if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !TurretData.AllowZeroScoreTargets) continue;

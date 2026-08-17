@@ -125,14 +125,14 @@ namespace Weapons
                 telemetryBonus = Telemetry();
                 CalculateEffectiveTracking();
 
-                Vector3 directionToTarget = (Target.Transform.position - tr.position).normalized;
+                Vector3 directionToTarget = (Target.Transform.position - Transform.position).normalized;
 
                 //Quaternion newRotation = Quaternion.RotateTowards(tr.rotation, Quaternion.l)
-                Vector3 newDirection = Vector3.RotateTowards(tr.forward, directionToTarget,
+                Vector3 newDirection = Vector3.RotateTowards(Transform.forward, directionToTarget,
                     EffectiveTracking * dt, 0);
 
-                Quaternion prevRotation = tr.rotation;
-                tr.rotation = Quaternion.LookRotation(newDirection);
+                Quaternion prevRotation = Transform.rotation;
+                Transform.rotation = Quaternion.LookRotation(newDirection);
 
                 Quaternion rotationDelta = (transform.rotation * Quaternion.Inverse(prevRotation)).normalized;
                 rotationDelta.ToAngleAxis(out float angleInDegrees, out Vector3 axis);

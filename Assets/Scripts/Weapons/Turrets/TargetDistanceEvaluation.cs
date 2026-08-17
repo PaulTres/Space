@@ -12,7 +12,7 @@ namespace Weapons
 
         public override float Evaluate(Turret shooter, ImprovedMonoBehaviour target)
         {
-            //if (shooter.Unit == GameManager.Player && !shooter.TargetMissiles && shooter.Unit.Target.Active())
+            //if (shooter.UnitProperty == GameManager.Player && !shooter.TargetMissiles && shooter.UnitProperty.Target.Active())
             //{
             //    Debug.Log(shooter.MaxRangeSquared);
             //}

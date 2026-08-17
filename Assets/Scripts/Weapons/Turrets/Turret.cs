@@ -119,6 +119,7 @@ namespace Weapons
             {
                 foreach (var w in Weapons)
                 {
+                    //if (Target == GameManager.Player) Debug.Log(w.transform);
                     w.Shoot(Target);
                 }
             }
@@ -152,9 +153,9 @@ namespace Weapons
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
                     //if (Target == GameManager.Player && !@params.TargetMissiles) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
-                    if (Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
+                    if (@params.MaxAngleDifference >= 360 || Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
-                        //if (@params.TargetMissiles && Unit == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                        //if (!@params.TargetMissiles && Target == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;

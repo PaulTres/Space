@@ -12,7 +12,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     public virtual Vector3 Up => Transform.up;
     public virtual Vector3 LinearVelocity => Vector3.zero;
     public virtual Vector3 AngularVelocity => Vector3.zero;
-    protected Transform tr;
+    Transform tr;
     public Transform Transform
     {
         get
