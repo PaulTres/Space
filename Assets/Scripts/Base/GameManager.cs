@@ -7,6 +7,22 @@ using Utilities;
 
 public static class GameManager
 {
+    static PlayerControls inputActions;
+    /// <summary>
+    /// PlayerControls global instance.
+    /// </summary>
+    public static PlayerControls InputActions
+    {
+        get
+        {
+            if (inputActions == null)
+            {
+                inputActions = new();
+                inputActions.Enable();
+            }
+            return inputActions;
+        }
+    }
     static GameSave currentSave;
     public static float MissionTime { get; set; } = 0;
     /// <summary>

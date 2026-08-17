@@ -1,10 +1,11 @@
 using Level;
 using Radar;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Utilities;
 namespace Player
 {
-    public class PlayerShip : Ship
+    public class PlayerShip : Ship, PlayerControls.IBasicControlsActions
     {
         [System.Serializable]
         public class CameraData
@@ -25,7 +26,6 @@ namespace Player
 
         #region Fields
         [Header("Player controls")]
-        [SerializeField] protected ControlsInputReader inputReader;
         [SerializeField] protected Transform shipBody;
         [SerializeField] protected CameraData cameraData;
         [Header("UI")]
@@ -56,7 +56,7 @@ namespace Player
             base.Awake();
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
-            inputReader.EnablePlayerActions();
+            GameManager.InputActions.BasicControls.SetCallbacks(this);
         }
 
         protected override void OnEnable()
@@ -69,13 +69,6 @@ namespace Player
             freeLook = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            inputReader.MoveEvent += OnMove;
-            inputReader.RollEvent += OnRoll;
-            inputReader.ZoomEvent += OnZoom;
-            inputReader.ResetEvent += OnResetCamera;
-            inputReader.FreeLookToggleEvent += OnFreeLookToggle;
-            inputReader.DampenerToggleEvent += OnDampenerToggle;
-            inputReader.FindTargetEvent += OnFindTarget;
             GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformFixedUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
@@ -88,8 +81,7 @@ namespace Player
             PlayerCamera = null;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            inputReader.DisableCallbacks();
-
+            DisableCallbacks();
             var i = GlobalUpdater.TryGetInstance();
             if (i != null)
             {
@@ -103,36 +95,60 @@ namespace Player
                 Instantiate(missionFailureScreenPrefab, transform.position, transform.rotation);
             }
         }
+
+        protected void DisableCallbacks()
+        {
+            GameManager.InputActions.BasicControls.RemoveCallbacks(this);
+        }
         #endregion
 
         #region Functionality
-        protected void OnFindTarget() => PlayerTargetSystem.TryGetInstance().SelectTarget();
 
-        protected void OnZoom(float zoom)
+        #region Controls
+        public void OnFindTarget(InputAction.CallbackContext context)
+        {
+            if (context.started) PlayerTargetSystem.TryGetInstance().SelectTarget();
+        }
+
+        public void OnZoom(InputAction.CallbackContext context)
         {
             cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y,
-               Mathf.Clamp(cam.localPosition.z + zoom * cameraData.ZoomSpeed, cameraData.MinZoom, cameraData.MaxZoom));
+               Mathf.Clamp(cam.localPosition.z + context.ReadValue<float>() * cameraData.ZoomSpeed, cameraData.MinZoom, cameraData.MaxZoom));
         }
+
+        public void OnReset(InputAction.CallbackContext context)
+        {
+            if (context.started) OnResetCamera();
+        }
+
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            movementVector = context.ReadValue<Vector3>();
+        }
+
+        public void OnRoll(InputAction.CallbackContext context)
+        {
+            rollInput = context.ReadValue<float>();
+        }
+
+        public void OnFreeLookToggle(InputAction.CallbackContext context)
+        {
+            if (context.started) freeLook = !freeLook;
+        }
+
+        public void OnToggleDampeners(InputAction.CallbackContext context)
+        {
+            if (context.started) Dampeners = !Dampeners;
+        }
+
+        public void OnMouseLook(InputAction.CallbackContext context) { }
+        #endregion
 
         protected void OnResetCamera()
         {
             cam.localPosition = defaultCamPos;
             cameraData.FreelookCameraPivot.localRotation = Quaternion.identity;
         }
-
-        protected void OnMove(Vector3 movementVector)
-        {
-            this.movementVector = movementVector;
-        }
-
-        protected void OnRoll(float rollValue)
-        {
-            rollInput = rollValue;
-        }
-
-        protected void OnFreeLookToggle(float value) => freeLook = value > .5f;
-
-        protected void OnDampenerToggle() => Dampeners = !Dampeners;
 
         public void PerformFixedUpdate(float deltaTime)
         {
@@ -207,18 +223,19 @@ namespace Player
 
         public void PerformLateUpdate(float deltaTime)
         {
+            var lookDelta = GameManager.InputActions.BasicControls.MouseLook.ReadValue<Vector2>();
             if (freeLook)
             {
                 cameraData.FreelookCameraPivot.Rotate(
-                    -deltaTime * inputReader.LookDelta.y * cameraData.XSens,
-                    deltaTime * inputReader.LookDelta.x * cameraData.YSens,
+                    -deltaTime * lookDelta.y * cameraData.XSens,
+                    deltaTime * lookDelta.x * cameraData.YSens,
                     deltaTime * rollInput * cameraData.ZSens);
             }
             else
             {
                 cameraData.CameraPivot.Rotate(
-                    -deltaTime * inputReader.LookDelta.y * cameraData.XSens,
-                    deltaTime * inputReader.LookDelta.x * cameraData.YSens,
+                    -deltaTime * lookDelta.y * cameraData.XSens,
+                    deltaTime * lookDelta.x * cameraData.YSens,
                     deltaTime * rollInput * cameraData.ZSens);
             }
         }
@@ -229,7 +246,7 @@ namespace Player
             GameManager.Player = null;
             MissionManager.TryGetInstance(true).StopAllTimers();
             UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
-            inputReader.DisableCallbacks();
+            DisableCallbacks();
             base.Die(@event);
         }
         #endregion

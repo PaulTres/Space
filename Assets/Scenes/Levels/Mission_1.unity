@@ -201,12 +201,15 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 1
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1758843704}
         m_TargetAssemblyTypeName: Level.Wave, Assembly-CSharp
-        m_MethodName: SpawnWithDelay
+        m_MethodName: Spawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -459,6 +462,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Level.PlayerSpawner
   delay: 0
   playSpawnEffect: 1
+  onPlayerSpawned:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1021162878
 Transform:
   m_ObjectHideFlags: 0
@@ -507,7 +513,10 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 0
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1764093793}
@@ -549,8 +558,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1532441326}
-  - component: {fileID: 1532441325}
   - component: {fileID: 1532441324}
+  - component: {fileID: 1532441325}
   m_Layer: 0
   m_Name: Friendly
   m_TagString: Untagged
@@ -567,7 +576,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532441323}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b3908fab23634bba86b13138e958b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
@@ -591,7 +600,10 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 1
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1532441326
@@ -691,12 +703,15 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 0
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1290785003}
+      - m_Target: {fileID: 1758843704}
         m_TargetAssemblyTypeName: Level.Wave, Assembly-CSharp
-        m_MethodName: SpawnWithDelay
+        m_MethodName: Spawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -542,6 +542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Level.PlayerSpawner
   delay: 0
   playSpawnEffect: 1
+  onPlayerSpawned:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1021162878
 Transform:
   m_ObjectHideFlags: 0
@@ -590,7 +593,10 @@ MonoBehaviour:
   minDistanceFromPlayer: 100
   facePlayer: 1
   spawnOnAwake: 1
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1290785004
@@ -741,7 +747,10 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 1
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls: []
 --- !u!4 &1758843705
@@ -888,7 +897,10 @@ MonoBehaviour:
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 1
-  onAllUnitsDestroyed:
+  OnAllUnitsSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1764093793}

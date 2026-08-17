@@ -1,11 +1,11 @@
 using EventBus;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 namespace Player
 {
-    public class UISystem : MonoBehaviour
+    public class UISystem : MonoBehaviour, PlayerControls.IUIActions
     {
-        [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected RectTransform textParent;
         [SerializeField] protected Widget widgetPrefab;
         protected GameObject pauseMenu;
@@ -17,12 +17,12 @@ namespace Player
         {
             pauseMenu = GetComponentInChildren<PauseScreen>(true).gameObject;
             EventBus<ShowText>.AddActions(SpawnText);
-            inputReader.OnEscapeEvent += OpenPauseMenu;
+            GameManager.InputActions.UI.SetCallbacks(this);
         }
 
         protected virtual void OnDisable()
         {
-            inputReader.OnEscapeEvent -= OpenPauseMenu;
+            GameManager.InputActions.UI.RemoveCallbacks(this);
             currentWidget = null;
         }
 
@@ -34,9 +34,9 @@ namespace Player
         }
         #endregion
 
-        public void OpenPauseMenu()
+        public void OnEscape(InputAction.CallbackContext context)
         {
-            pauseMenu.SetActive(true);
+            if (context.started) pauseMenu.SetActive(true);
         }
 
         #region Widgets 

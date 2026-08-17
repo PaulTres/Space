@@ -1,31 +1,30 @@
 using HP;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 namespace Player
 {
-    public class PlayerGameUI : MonoBehaviour
+    public class PlayerGameUI : MonoBehaviour, PlayerControls.IUIActions
     {
-        [SerializeField] protected UIInputReader inputReader;
         [SerializeField] protected GameObject pauseMenu;
         [SerializeField] protected Image hullImage;
         protected HPComponent hpComponent;
 
         protected void Awake()
         {
-            inputReader.EnablePlayerActions();
             hpComponent = GetComponentInParent<HPComponent>();
             hpComponent.OnDamageTaken += UpdateHullImage;
         }
 
         protected void OnEnable()
         {
-            inputReader.OnEscapeEvent += OnEscapeEvent;
+            GameManager.InputActions.UI.SetCallbacks(this);
             hullImage.fillAmount = 1;
         }
 
         protected void OnDisable()
         {
-            inputReader.DisablePlayerActions();
+            GameManager.InputActions.UI.RemoveCallbacks(this);
         }
 
         protected void UpdateHullImage()
@@ -33,9 +32,9 @@ namespace Player
             hullImage.fillAmount = hpComponent.CurrentHP / hpComponent.MaxHP;
         }
 
-        protected void OnEscapeEvent()
+        public void OnEscape(InputAction.CallbackContext context)
         {
-            pauseMenu.SetActive(true);
+            if (context.started) pauseMenu.SetActive(true);
         }
     }
 }

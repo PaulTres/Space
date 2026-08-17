@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 namespace Player
 {
-    public class MenuPDA : MonoBehaviour
+    public class MenuPDA : MonoBehaviour, PlayerControls.IUIActions
     {
-        [SerializeField] protected UIInputReader inputReader;
         protected Stack<Window> windows = new();
         [SerializeField] protected Window[] initialWindows;
         public Window Top => windows.Peek();
+
         protected virtual void OnEnable()
         {
-            inputReader.EnablePlayerActions();
-            inputReader.OnEscapeEvent += Pop;
+            GameManager.InputActions.UI.SetCallbacks(this);
             if (initialWindows != null)
             {
                 for (int i = 0; i < initialWindows.Length; i++)
@@ -20,12 +20,13 @@ namespace Player
                 }
             }
         }
+
         protected virtual void OnDisable()
         {
-            inputReader.OnEscapeEvent -= Pop;
-            //inputReader.DisablePlayerActions();
             while (windows.Count > 0) Pop(true);
+            GameManager.InputActions.UI.RemoveCallbacks(this);
         }
+
         public void AddOnTop(Window window, bool deactivatePrev = true)
         {
             if (window == null)
@@ -42,6 +43,7 @@ namespace Player
             //Debug.Log(System.DateTime.Now + " opening " + window.gameObject);
             window.Activate();
         }
+
         public void CloseWindow(Window window)
         {
             while (windows.Count > 0)
@@ -52,10 +54,14 @@ namespace Player
                 if (p == window) break;
             }
         }
-        public virtual void Pop()
+
+        public void OnEscape(InputAction.CallbackContext context)
         {
-            Pop(false);
+            if (context.started) Pop();
         }
+
+        public virtual void Pop() => Pop(false);
+
         public Window Pop(bool allowEmpty, bool activatePrevious = true)
         {
             if (windows.Count == 0) return null;
