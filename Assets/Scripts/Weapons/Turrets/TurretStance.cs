@@ -15,7 +15,7 @@ namespace Weapons
             get => Turret.Target;
             set => Turret.Target = value;
         }
-        public Unit Owner => Turret.Owner;
+        public Unit Owner => Turret.Unit;
 
         public bool IsTargetValid(ImprovedMonoBehaviour @object) => Turret.IsTargetValid(@object);
 
@@ -107,7 +107,7 @@ namespace Weapons
                     if (!IsTargetValid(targets[i])) continue;
                     //if (TurretData.BurstFire) Debug.Log("Evaluating target: " + targets[i].Transform.name);
                     var score = EvaluateTarget(targets[i]);
-                    //if (Turret.Owner == GameManager.Player && !Turret.TargetMissiles && Owner.Target.Active())
+                    //if (Turret.Unit == GameManager.Player && !Turret.TargetMissiles && Unit.Target.Active())
 
                     //if (TurretData.BurstFire) Debug.Log($"Target {targets[i].Transform.name} scored {score}.");
                     if (score <= 0 && !TurretData.AllowZeroScoreTargets) continue;

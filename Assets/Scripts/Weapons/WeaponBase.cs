@@ -39,6 +39,7 @@ namespace Weapons
                 return 0;
             }
         }
+        public bool RequiresOptimalFiringRange => @params.RequiresOptimalFiringRange;
         #endregion
 
         #region Parameters
@@ -107,7 +108,7 @@ namespace Weapons
         #endregion
 
         /// <summary>
-        /// Increases Weapons rate of fire.
+        /// Increases weapon rate of fire.
         /// </summary>
         /// <param name="deltaTime"></param>
         public virtual void IncreaseReadiness(float deltaTime)
@@ -119,7 +120,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Decreases Weapons rate of fire.
+        /// Decreases weapon rate of fire.
         /// </summary>
         /// <param name="deltaTime"></param>
         public virtual void DecreaseReadiness(float deltaTime)
@@ -131,7 +132,7 @@ namespace Weapons
         }
 
         /// <summary>
-        /// Checks if the Weapons can shoot by using the shot cooldown timer.
+        /// Checks if the weapon can shoot by using the shot cooldown timer.
         /// </summary>
         /// <returns></returns>
         public virtual bool CanShoot()
@@ -149,6 +150,7 @@ namespace Weapons
         public bool Shoot(ImprovedMonoBehaviour target)
         {
             if (!CanShoot()) return false;
+            if (@params.RequiresOptimalFiringRange && !unit.InOptimalFiringRange(target)) return false;
             Fire(target);
             shotTimer.Reset(CurrentShotCooldown);
             shotTimer.Start();

@@ -34,6 +34,7 @@ namespace Level
         protected override void ClearSingleton()
         {
             base.ClearSingleton();
+            StopAllTimers();
             timerPoolProperty.Clear();
         }
 
@@ -81,8 +82,8 @@ namespace Level
             if (GameManager.Player != null)
             {
                 GameManager.Player.CannotDie = true;
-                UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionEndDuration, text, Color.green));
-                ExecuteAction(() => GameManager.EndMission(), GlobalConfig.MissionEndDuration);
+                UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionSuccessEndDuration, text, Color.green));
+                ExecuteAction(() => GameManager.EndMission(), GlobalConfig.MissionSuccessEndDuration);
             }
         }
 
@@ -91,8 +92,8 @@ namespace Level
             if (GameManager.Player != null)
             {
                 GameManager.Player.CannotDie = true;
-                UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionEndDuration, text, Color.red));
-                ExecuteAction(() => GameManager.Player.gameObject.SetActive(false), GlobalConfig.MissionEndDuration);
+                UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
+                ExecuteAction(() => GameManager.Player.gameObject.SetActive(false), GlobalConfig.MissionFailureEndDuration);
             }
         }
     }

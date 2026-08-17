@@ -7,6 +7,7 @@ using Utilities;
 
 namespace Level
 {
+
     public class Wave : MonoBehaviour
     {
         protected List<NPCSpawner> spawners;
@@ -14,7 +15,7 @@ namespace Level
         [SerializeField] protected float minDistanceFromPlayer = 0;
         [SerializeField] protected bool facePlayer = false;
         [SerializeField] protected bool spawnOnAwake = true;
-        [SerializeField] protected UnityEvent onAllUnitsSpawned, onAllUnitsDestroyed;
+        public UnityEvent OnAllUnitsSpawned, OnAllUnitsDestroyed;
         protected List<Unit> units = new();
         protected int unitCount;
 
@@ -22,20 +23,27 @@ namespace Level
         {
             spawners = GetComponentsInChildren<NPCSpawner>().ToList();
             SpawnInactive();
-            if (spawnOnAwake) SpawnWithDelay();
+            if (spawnOnAwake) Spawn();
         }
 
+        /// <summary>
+        /// Fires when a unit in the wave is destroyed.
+        /// </summary>
+        /// <param name="event"></param>
         public void OnUnitDestroyed(ObjectDestroyed @event)
         {
             EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
             unitCount--;
             if (unitCount <= 0)
             {
-                //Debug.Log("Wave destroyed");
-                onAllUnitsDestroyed?.Invoke();
+                //Debug.Log("ConcreteWave destroyed");
+                OnAllUnitsDestroyed?.Invoke();
             }
         }
 
+        /// <summary>
+        /// Spawns all units without activating them. Called in Awake.
+        /// </summary>
         public void SpawnInactive()
         {
             unitCount = 0;
@@ -50,10 +58,17 @@ namespace Level
             }
         }
 
-        public void SpawnWithDelay()
+        /// <summary>
+        /// Calls ActivateUnits with a delay.
+        /// </summary>
+        public void Spawn()
         {
             MissionManager.TryGetInstance(true).ExecuteAction(ActivateUnits, delay);
         }
+
+        /// <summary>
+        /// Calls SpawnInactive if necessary, then activates all units.
+        /// </summary>
         protected void ActivateUnits()
         {
             if (units.IsEmpty()) SpawnInactive();
@@ -70,7 +85,7 @@ namespace Level
                 units[i].gameObject.SetActive(true);
             }
             units = null;
-            onAllUnitsSpawned?.Invoke();
+            OnAllUnitsSpawned?.Invoke();
         }
     }
 }

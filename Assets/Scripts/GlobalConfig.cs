@@ -103,9 +103,13 @@ public class GlobalConfig : ScriptableObject
     public static readonly int MaxMissileCheckBufferSize = 50;
     public static readonly int MaxLanceCheckBufferSize = 50;
     /// <summary>
-    /// How many seconds to wait between ending the mission and loading the end mission screen.
+    /// How many seconds to wait between ending the mission and loading the end mission screen upon mission success.
     /// </summary>
-    public static readonly float MissionEndDuration = 7;
+    public static readonly float MissionSuccessEndDuration = 7;
+    /// <summary>
+    /// How many seconds to wait between ending the mission and loading the end mission screen upon mission failure.
+    /// </summary>
+    public static readonly float MissionFailureEndDuration = 3;
     public static readonly int
         MainMenuSceneIndex = 1,
         MissionSelectSceneIndex = 2,

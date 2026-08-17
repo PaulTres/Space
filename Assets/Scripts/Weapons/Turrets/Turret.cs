@@ -25,7 +25,10 @@ namespace Weapons
         public float DPS { get; protected set; }
         public float BulletSpeed => Weapons.IsEmpty() ? 0 : Weapons[0].BulletSpeed;
         public float SignatureIncrease => Weapons.IsEmpty() ? 0 : Weapons[0].SignatureIncrease * Weapons.Count;
-        public Unit Owner { get; protected set; }
+        /// <summary>
+        /// The unit owning this turret.
+        /// </summary>
+        public Unit Unit { get; protected set; }
         public List<WeaponBase> Weapons { get; protected set; }
         protected Transform tr;
         [field: SerializeField] public Transform RotationPivot { get; protected set; }
@@ -64,7 +67,7 @@ namespace Weapons
         #region Setup
         protected void Awake()
         {
-            Owner = GetComponentInParent<Unit>();
+            Unit = GetComponentInParent<Unit>();
             if (RotationPivot == null) RotationPivot = Transform;
             if (ElevationPivot == null) ElevationPivot = Transform;
             Weapons = new(GetComponentsInChildren<WeaponBase>());
@@ -138,7 +141,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public void Tick(float deltaTime)
         {
-            if (!Owner.Active()) return;
+            if (!Unit.Active()) return;
             if (Target.Active())
             {
                 //Debug.Log($"Turret {transform.name} targeting {Target?.Transform}.");
@@ -151,7 +154,7 @@ namespace Weapons
                     //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                     if (Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
-                        //if (@params.TargetMissiles && Owner == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                        //if (@params.TargetMissiles && Unit == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;
@@ -250,7 +253,7 @@ namespace Weapons
                     Transform.position).magnitude / (m.Speed + Mathf.Epsilon);
 
             //Debug.Log(timeToHit);
-            var futureTargetPos = target.GetPositionWithOscilation(Owner) +
+            var futureTargetPos = target.GetPositionWithOscilation(Unit) +
                 target.LinearVelocity * timeToHit;
 
             return futureTargetPos;
@@ -266,6 +269,7 @@ namespace Weapons
         public bool IsTargetValid(ImprovedMonoBehaviour target)
         {
             if (!target.Active()) return false;
+            if (Weapons[0].RequiresOptimalFiringRange && !Unit.InOptimalFiringRange(target)) return false;
 
             //if (@params.BurstFire) Debug.Log(target.Transform);
             var dir = target.Transform.position - Transform.position;
@@ -287,7 +291,7 @@ namespace Weapons
         /// </summary>
         public void UpdateTargets()
         {
-            if (!Owner.Active()) return;
+            if (!Unit.Active()) return;
             turretStances[CurrentStanceIndex].UpdateTargets();
         }
         #endregion
