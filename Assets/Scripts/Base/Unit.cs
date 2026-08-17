@@ -234,11 +234,11 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Transform.position, ScanRange);
+        //if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
+        //Gizmos.color = Color.blue;
+        //Gizmos.DrawWireSphere(Transform.position, ScanRange);
     }
 
     public void IncreaseSignature(float amount)

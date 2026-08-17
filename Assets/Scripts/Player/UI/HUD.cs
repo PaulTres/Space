@@ -154,13 +154,11 @@ namespace Player
             {
                 if (turretGroups[i].ShowReload)
                 {
-                    turretDisplays[i].ReloadStatusImage.fillAmount =
-                        turretGroups[i].ReloadStatus;
+                    turretDisplays[i].ReloadStatusImage.fillAmount = turretGroups[i].ReloadStatus;
                 }
                 if (turretDisplays[i].HeatStatusImage.enabled)
                 {
-                    turretDisplays[i].HeatStatusImage.fillAmount = turretGroups[i].
-                        Heatsink.OverheatPercentage;
+                    turretDisplays[i].HeatStatusImage.fillAmount = turretGroups[i].Heatsink.OverheatPercentage;
                     if (turretGroups[i].Heatsink.Overheated)
                     {
                         turretDisplays[i].HeatStatusImage.color = Color.red;
@@ -183,18 +181,25 @@ namespace Player
             }
         }
 
-        public void ExecuteAction(int index)
+        /// <summary>
+        /// Only fires one launcher at a time at most.
+        /// </summary>
+        /// <param name="missileGroup"></param>
+        public void TapFireMissiles(int missileGroup)
         {
-            if (index < 0) return;
-            if (index < launcherDisplays.Count)
+            var t = PlayerTargetSystem.TryGetInstance();
+            if (t == null || !t.CurrentTarget.Active()) return;
+            foreach (var launcher in launcherGroups[missileGroup].Launchers)
             {
-                FireMissiles(index);
+                if (launcher.Shoot(t.CurrentTarget)) break;
             }
-            else CycleTurretStance(index - turretDisplays.Count);
-
         }
 
-        public void FireMissiles(int missileGroup)
+        /// <summary>
+        /// Fires all launcher in selected group.
+        /// </summary>
+        /// <param name="missileGroup"></param>
+        public void FireAllMissiles(int missileGroup)
         {
             var t = PlayerTargetSystem.TryGetInstance();
             if (t == null || !t.CurrentTarget.Active()) return;
@@ -204,6 +209,10 @@ namespace Player
             }
         }
 
+        /// <summary>
+        /// Cycles the stance of all turrets in the selected group.
+        /// </summary>
+        /// <param name="groupIndex"></param>
         public void CycleTurretStance(int groupIndex)
         {
             foreach (var turret in turretGroups[groupIndex].Turrets)

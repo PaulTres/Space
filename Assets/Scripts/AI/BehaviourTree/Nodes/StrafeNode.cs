@@ -14,8 +14,9 @@ public class StrafeNode : LeafNodeData
 
     public TargetFacingMode TargetFacing;
     public int TicksBeforeRepath = 10;
-    [SerializeField] protected float strafeMagnitude = 100;
-    [SerializeField] protected float strafeDistance = 50;
+    [SerializeField] protected float strafeMagnitude = 50;
+    public bool UseOptimalFiringRange = true;
+    [SerializeField] protected float distanceBuffer = 0;
 
     protected enum InternalKeys
     {
@@ -40,11 +41,6 @@ public class StrafeNode : LeafNodeData
         }
     };
 
-    protected override Action<Node, Blackboard> onExit => (n, ctx) =>
-    {
-        ctx.Navigation.RotationTarget = null;
-    };
-
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
         var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
@@ -56,25 +52,32 @@ public class StrafeNode : LeafNodeData
         {
             n.SetData((int)InternalKeys.CurrentTicks, 0);
             var normal = target.Position - ctx.Position;
-            var destination = Vector3.zero;
+            var strafeDirection = Vector3.zero;
             switch (TargetFacing)
             {
                 case TargetFacingMode.Forward:
                     {
-                        destination = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
-                        if (destination.magnitude == 0) destination = ctx.Navigation.Up;
+                        strafeDirection = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
+                        if (strafeDirection.magnitude < 0.1f) strafeDirection = ctx.Navigation.Up;
+                        Debug.DrawRay(ctx.Position, strafeDirection, Color.white, 2);
                         break;
                     }
                 default:
                     {
-                        destination = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
-                        if (destination.magnitude == 0) destination = ctx.Navigation.Right;
+                        strafeDirection = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
+                        if (strafeDirection.magnitude < .1f) strafeDirection = ctx.Navigation.Right;
                         break;
                     }
             }
-            destination = ctx.Position + destination.normalized * strafeMagnitude;
-            var dirToTarget = destination - target.Position;
-            ctx.Navigation.SetDestination(dirToTarget.normalized * strafeDistance);
+            //Debug.Log("Strafing");
+            var destination = ctx.Position + strafeDirection * strafeMagnitude;
+            //Debug.DrawRay(ctx.Position, strafeDirection * strafeMagnitude, Color.yellow, 2);
+            var targetToDestination = (destination - target.Position).normalized;
+            var dist = UseOptimalFiringRange ? target.CurrentSignature +
+                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
+            destination = target.Position + targetToDestination * dist;
+            //Debug.DrawLine(ctx.Position, destination, Color.blue);
+            ctx.Navigation.SetDestination(destination);
         }
         else
         {

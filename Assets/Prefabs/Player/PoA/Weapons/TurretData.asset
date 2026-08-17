@@ -19,7 +19,7 @@ MonoBehaviour:
   TargetUnits: 1
   CurrentTargetScoreMultiplier: 100000
   MaxAngleDifference: 1
-  MaxRange: 100
+  MaxRange: 0
   BurstFire: 0
   BurstCooldown: 1
   BurstCount: 1

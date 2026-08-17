@@ -5,12 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "HybridBT2/Leaves/Retreat", fileName = "Retreat")]
 public class RetreatNode : LeafNodeData
 {
-    [SerializeField] protected bool maintainFacing;
-    [SerializeField] protected float retreatDistance = 1000;
+    [SerializeField] protected bool maintainFacing = true;
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
-        if (!maintainFacing) ctx.Navigation.RotationTarget = null;
+        if (!maintainFacing)
+        {
+            ctx.Navigation.RotationTarget = null;
+            Debug.Log("A");
+        }
     };
+
 
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
@@ -19,7 +23,7 @@ public class RetreatNode : LeafNodeData
         //no need to normalize here, we just need the direction
         //this could probably be optimized to only happen once every few ticks
         ctx.Navigation.SetDestination(ctx.Navigation.Position + (ctx.Navigation.Position -
-            target.Position) * retreatDistance);
+            target.Position).normalized);
         return NodeState.RUNNING;
     };
 }

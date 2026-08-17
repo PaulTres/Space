@@ -144,14 +144,14 @@ namespace Weapons
             if (!Unit.Active()) return;
             if (Target.Active())
             {
-                //Debug.Log($"Turret {transform.name} targeting {Target?.Transform}.");
+                //if (Target == GameManager.Player) Debug.Log($"Turret {transform.name} targeting {Target.Transform}.");
                 //if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
                 //Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
-                    //Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                    //if (Target == GameManager.Player && !@params.TargetMissiles) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                     if (Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
                         //if (@params.TargetMissiles && Unit == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");

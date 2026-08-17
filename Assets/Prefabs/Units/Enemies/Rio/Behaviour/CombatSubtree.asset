@@ -18,6 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ff33d5f8a5d6c704ba713c6f4ffdf2b7, type: 2}
   Services: []
   Children:
-  - {fileID: 11400000, guid: 6f2f9396e28cf0841bbca6158bc436ce, type: 2}
   - {fileID: 11400000, guid: 0b3652c35a8bc45428cc1ecca487762b, type: 2}
   - {fileID: 11400000, guid: 863212a87ed914f419b55c5f4bf4717a, type: 2}

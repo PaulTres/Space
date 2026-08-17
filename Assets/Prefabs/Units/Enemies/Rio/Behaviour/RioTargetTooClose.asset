@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RioTargetTooClose
   m_EditorClassIdentifier: Assembly-CSharp::TargetTooCloseCondition
   myName: 
-  minRangeFromTarget: 30
+  minRangeFromTarget: 20

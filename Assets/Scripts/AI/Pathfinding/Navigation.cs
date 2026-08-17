@@ -5,10 +5,11 @@ using Utilities;
 public class Navigation : Ship
 {
     #region Fields
+    protected readonly Collider[] buffer = new Collider[10];
     public Vector3? Destination { get; protected set; }
     public bool HasDestination => Destination != null;
     [Header("Parameters")]
-    [SerializeField] protected Transform navPivot;
+    public Transform NavPivot { get; set; }
     [field: SerializeField] public float StopDistance { get; set; } = 0.5f;
     public float angleToForward = 10;
     protected float radAngleToForward;
@@ -45,12 +46,12 @@ public class Navigation : Ship
     protected override void Awake()
     {
         base.Awake();
-        if (navPivot == null)
+        if (NavPivot == null)
         {
-            navPivot = new GameObject("Auto-generated nav pivot").transform;
-            navPivot.SetPositionAndRotation(transform.position, transform.rotation);
-            navPivot.parent = transform;
-            Debug.LogWarning($"Created new nav pivot for {transform}.");
+            NavPivot = new GameObject("Auto-generated nav pivot").transform;
+            NavPivot.SetPositionAndRotation(transform.position, transform.rotation);
+            NavPivot.parent = transform;
+            //Debug.LogWarning($"Created new nav pivot for {transform}.");
         }
         radAngleToForward = Mathf.Rad2Deg * angleToForward / 2;
     }
@@ -79,7 +80,7 @@ public class Navigation : Ship
             if (Dampeners) ApplyDampeners(Vector3.zero, deltaTime);
             return;
         }
-        navPivot.LookAt(Destination.Value);
+        NavPivot.LookAt(Destination.Value);
         Vector3 direction = Destination.Value - transform.position;
         if (direction.magnitude <= StopDistance || Vector3.Distance(transform.position,
             Destination.Value) <= StopDistance)
@@ -87,13 +88,14 @@ public class Navigation : Ship
             Destination = null;
             return;
         }
-        if (!checker.CheckForward(transform, direction.normalized))
+        if (!checker.CheckForward(this, direction.normalized, buffer))
         {
             MoveTowards(direction, deltaTime);
         }
         else
         {
-            var point = checker.RunCheck(navPivot);
+            //Debug.Log("A");
+            var point = checker.RunCheck(this, buffer);
             MoveTowards(point, deltaTime);
         }
     }
@@ -138,7 +140,7 @@ public class Navigation : Ship
         if (Dampeners) ApplyDampeners(direction, deltaTime);
         if (Vector3.Angle(transform.forward, direction) <= angleToForward)
         {
-            rb.linearVelocity += forwardThrust * Time.deltaTime * direction.normalized;
+            rb.linearVelocity += forwardThrust * deltaTime * direction.normalized;
             if (thrusters != null) thrusters.Increase(deltaTime);
         }
         else if (thrusters != null) thrusters.Decrease(deltaTime);
@@ -156,7 +158,7 @@ public class Navigation : Ship
         if (checker != null)
         {
             Gizmos.color = Color.white;
-            checker.Draw(navPivot != null ? navPivot : transform);
+            checker.Draw(NavPivot != null ? NavPivot : transform, buffer);
         }
         Gizmos.color = Color.green;
         Gizmos.DrawRay(transform.position, LinearVelocity);

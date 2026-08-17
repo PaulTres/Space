@@ -8,8 +8,8 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
     public abstract ImprovedMonoBehaviour Target { get; }
     public virtual Vector3 Forward => Transform.forward;
-    public virtual Vector3 Right => Transform.forward;
-    public virtual Vector3 Up => Transform.forward;
+    public virtual Vector3 Right => Transform.right;
+    public virtual Vector3 Up => Transform.up;
     public virtual Vector3 LinearVelocity => Vector3.zero;
     public virtual Vector3 AngularVelocity => Vector3.zero;
     protected Transform tr;

@@ -18,3 +18,4 @@ MonoBehaviour:
   MinShotCooldown: 0.5
   SignatureIncrease: 1
   BulletData: {fileID: 11400000, guid: 92688c04144c94f4dbb1abbc4a09816a, type: 2}
+  RequiresOptimalFiringRange: 0
