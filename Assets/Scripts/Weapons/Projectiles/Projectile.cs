@@ -12,7 +12,23 @@ namespace Weapons
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
         protected TrailRenderer trailRenderer;
+        public TrailRenderer TrailRendererProperty
+        {
+            get
+            {
+                if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
+                return trailRenderer;
+            }
+        }
         protected Renderer projectileRenderer;
+        public Renderer ProjectileRendererProperty
+        {
+            get
+            {
+                if (projectileRenderer == null) projectileRenderer = GetComponent<Renderer>();
+                return projectileRenderer;
+            }
+        }
         protected bool inertialDampeners = true;
         protected int team;
         #endregion
@@ -39,17 +55,9 @@ namespace Weapons
                 acceleration = topSpeed / 10;
             }
             Transform.localScale = data.Scale;
-            if (projectileRenderer == null) projectileRenderer = GetComponent<Renderer>();
-            if (projectileRenderer != null)
-            {
-                projectileRenderer.material = data.RendererMaterial;
-            }
-            if (trailRenderer == null) trailRenderer = GetComponent<TrailRenderer>();
-            if (trailRenderer != null)
-            {
-                trailRenderer.material = data.TrailRendererMaterial;
-                trailRenderer.widthCurve = data.TrailRendererCurve;
-            }
+            ProjectileRendererProperty.material = data.RendererMaterial;
+            TrailRendererProperty.material = data.TrailRendererMaterial;
+            TrailRendererProperty.widthCurve = data.TrailRendererCurve;
             inertialDampeners = data.InertialDampeners;
         }
 
@@ -69,6 +77,7 @@ namespace Weapons
             }
             collisionMask = GlobalConfig.GetBulletCollisionMask(gameObject.layer);
             angularVelocity = Vector3.zero;
+            TrailRendererProperty.Clear();
         }
         #endregion
 
