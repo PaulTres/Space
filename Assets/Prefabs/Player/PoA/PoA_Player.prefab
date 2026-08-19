@@ -7531,7 +7531,7 @@ PrefabInstance:
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Icon
       value: 
-      objectReference: {fileID: 21300000, guid: 4d1a775e9a72e024a99b3314a5a64f9d, type: 3}
+      objectReference: {fileID: 21300000, guid: 98be93167ed6cd54d82a8e882da6f3e1, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[0].Heatsink
       value: 

@@ -28,7 +28,7 @@ namespace Weapons
         public override float TopSpeed => topSpeed * (1 + telemetryBonus);
         protected float telemetryBonus = 0;
         protected bool showOnRadar = false;
-        protected float targetedCount;
+        protected float targetedDamage;
         /// <summary>
         /// How much damage is this targeted by. Used to prevent all turrets from 
         /// shooting at the same missile. Replaced old system to account for tanky 
@@ -36,8 +36,8 @@ namespace Weapons
         /// </summary>
         public float TargetedDamage
         {
-            get => targetedCount;
-            set => targetedCount = Mathf.Max(value, 0);
+            get => targetedDamage;
+            set => targetedDamage = Mathf.Max(value, 0);
         }
         public float MaxHP => HPComponent.MaxHP;
         #endregion
@@ -52,7 +52,6 @@ namespace Weapons
         protected override void OnEnable()
         {
             base.OnEnable();
-            TargetedDamage = 0;
             telemetryBonus = 0;
             if (showOnRadar) RegisterForRadar();
         }
@@ -67,6 +66,7 @@ namespace Weapons
         protected override void OnDisable()
         {
             SetTarget(null);
+            TargetedDamage = 0;
             if (showOnRadar) UnregisterForRadar();
             base.OnDisable();
         }
@@ -78,6 +78,7 @@ namespace Weapons
 
         public override void Initialize(BulletData poolableData)
         {
+            TargetedDamage = 0;
             ComponentRegister<Missile>.Register(Transform, this);
             base.Initialize(poolableData);
             if (poolableData is not MissileData missileData)

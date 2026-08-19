@@ -145,7 +145,8 @@ namespace Weapons
                 {
                     var currentM = Target.Active() ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.IsEqual(Owner);
-                    if (!targetIsAimedAtOwner && currentM != null) Target = null;
+                    //if (Owner == GameManager.Player&&Target.Active() && currentM == null) Debug.Log(targetIsAimedAtOwner);
+                    if (!targetIsAimedAtOwner) Target = null;
                     float bestScore = Target == null ? float.MinValue : EvaluateTarget(Target);
 
                     for (int i = 0; i < count; i++)
@@ -167,6 +168,7 @@ namespace Weapons
                                 var score = EvaluateTarget(m);
                                 if (score > bestScore)
                                 {
+                                    targetIsAimedAtOwner = true;
                                     bestScore = score;
                                     Target = m;
                                 }
