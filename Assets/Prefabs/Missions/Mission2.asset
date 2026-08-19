@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Mission2
   m_EditorClassIdentifier: Assembly-CSharp::Level.Mission
   <TimeLimit>k__BackingField: -1
-  <Briefing>k__BackingField: No briefing exists.
+  briefing: Battlegroup 7 has been tasked with destroying enemy forward defense clusters
+    and listening posts. Heavy enemy opposition is expected. Rapid demolition and
+    withdrawal advised.
+  afterActionReport: Several hostile installations have been successfully neutralized,
+    however the full scale of the enemy response is concerning. They appear to have
+    completed their reconnaisance and are now engaging Commonwealth battlegroups
+    in force.
   <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647

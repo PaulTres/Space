@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 175601913}
   - component: {fileID: 175601914}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: RioSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,7 +709,7 @@ MonoBehaviour:
   OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758843704}
+      - m_Target: {fileID: 1290785003}
         m_TargetAssemblyTypeName: Level.Wave, Assembly-CSharp
         m_MethodName: Spawn
         m_Mode: 1

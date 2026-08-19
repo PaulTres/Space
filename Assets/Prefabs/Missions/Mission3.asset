@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6941af62494cba9498bb58e3cc5cbabd, type: 3}
+  m_Name: Mission3
+  m_EditorClassIdentifier: Assembly-CSharp::Level.Mission
+  <TimeLimit>k__BackingField: -1
+  briefing: Battlegroup 8 has been under heavy attack by the Phi hostiles, and their
+    mothership has been isolated by enemy wolfpacks. Battlegroup 7 is to hold off
+    the enemy assault until reinforcements arrive from groups 4 and 6.
+  afterActionReport: Hostile wolfpacks have been driven back. However, enemy assaults
+    throughout known space are increasing in intensity, and there have been reports
+    of planet-cracking weapons being deployed.
+  <PlayerPoints>k__BackingField: 2147483647
+  <EnemyPoints>k__BackingField: 2147483647

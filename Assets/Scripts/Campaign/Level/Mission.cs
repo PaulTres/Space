@@ -26,7 +26,10 @@ namespace Level
 
         [Tooltip("Time limit for the mission. Ignored if set to <= 0.")]
         [field: SerializeField] public float TimeLimit { get; protected set; } = -1;
-        [field: SerializeField] public string Briefing { get; set; } = "No briefing exists.";
+        [SerializeField][TextArea(15, 20)] protected string briefing = "No briefing exists.";
+        [SerializeField][TextArea(15, 20)] protected string afterActionReport = "All quiet on the gay front.";
+        public string Briefing => briefing;
+        public string AfterActionReport => afterActionReport;
         [field: SerializeField] public int PlayerPoints { get; protected set; } = int.MaxValue;
         [field: SerializeField] public int EnemyPoints { get; protected set; } = int.MaxValue;
     }

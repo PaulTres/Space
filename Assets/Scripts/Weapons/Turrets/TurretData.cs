@@ -13,6 +13,7 @@ namespace Weapons
         public bool TargetUnits = true;
         [Tooltip("The score of the current target of the ship will be multiplied by this amount when evaluating targets(divided if negative).")]
         public float CurrentTargetScoreMultiplier = 2;
+        public bool AccountForObstructions = true;
 
         public float EvaluateTarget(Turret shooter, ImprovedMonoBehaviour @object)
         {

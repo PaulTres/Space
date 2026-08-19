@@ -120,10 +120,21 @@ public class GlobalConfig : ScriptableObject
 
     #region Layers and layer masks
     /// <summary>
+    /// This layer mask is used to check for obstructions on spawn.
+    /// </summary>
+    public static LayerMask SpawnCheckLayerMask => 1 << 0 | 1 << 11;
+    /// <summary>
     /// Returns the mask that a lance should use to check for targets.
     /// </summary>
     /// <returns></returns>
     public static LayerMask LanceCheckMask => 1 << 0 | 1 << 6 | 1 << 8;
+
+    public static int GetCollisionLayer(int unitTeam)
+    {
+        if (unitTeam == PlayerTeam) return 11;
+        if (unitTeam == EnemyTeam) return 12;
+        return 0;
+    }
 
     /// <summary>
     /// Returns the layer mask that an object should use to check for enemy bullets.
@@ -171,9 +182,9 @@ public class GlobalConfig : ScriptableObject
     /// Returns the layer mask that a turret should use to check for obstructions. This is 
     /// used to prevent turrets from trying to shoot through asteroids and other objects.
     /// </summary>
-    /// <param name="shooterLayer">The layer of the turret object</param>
+    /// <param name="shooterTeam">The team of the turret object</param>
     /// <returns></returns>
-    public static LayerMask GetTurretObstructionMask(int shooterLayer)
+    public static LayerMask GetTurretObstructionMask(int shooterTeam)
     {
         return 1 << 0;
     }

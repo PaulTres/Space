@@ -68,15 +68,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "FindTarget",
-                    "type": "Button",
-                    "id": "b19d7053-90f4-4cda-8d36-839e44c18c73",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -266,17 +257,6 @@
                     "action": "ToggleDampeners",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ed0e30d9-e61e-45e0-abc7-832f239ba021",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "FindTarget",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -313,24 +293,64 @@
             "id": "5bea49af-72b2-4f18-8862-0ffba008ac3d",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "ExecuteAction",
                     "type": "PassThrough",
                     "id": "91256219-16ac-4c65-a042-d942707d4ad9",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "Tap",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "FindTarget",
+                    "type": "Button",
+                    "id": "4d06172c-85ee-4e3c-bd99-000770e16711",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cycle",
+                    "type": "Button",
+                    "id": "2f142a15-9ac9-4a59-b02a-0c47f71015e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "11dcb47a-d5a6-4632-9f6a-c451c228e0d5",
-                    "path": "<Keyboard>/1",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "ExecuteAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7466895d-8daf-43f0-8287-ad9093433372",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FindTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46fb0742-61fb-40df-b3e3-f5541be7aa63",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cycle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

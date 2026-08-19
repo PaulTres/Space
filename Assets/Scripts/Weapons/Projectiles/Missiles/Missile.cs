@@ -54,13 +54,13 @@ namespace Weapons
             base.OnEnable();
             TargetedDamage = 0;
             telemetryBonus = 0;
-            ComponentRegister<Missile>.Register(Transform, this);
             if (showOnRadar) RegisterForRadar();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            ComponentRegister<Missile>.Unregister(Transform);
             EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetInstanceID(this));
         }
 
@@ -78,6 +78,7 @@ namespace Weapons
 
         public override void Initialize(BulletData poolableData)
         {
+            ComponentRegister<Missile>.Register(Transform, this);
             base.Initialize(poolableData);
             if (poolableData is not MissileData missileData)
             {

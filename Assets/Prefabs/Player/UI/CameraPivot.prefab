@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 162256100182776692}
   - component: {fileID: 1937755094760775425}
   - component: {fileID: 6023708937246449930}
+  - component: {fileID: 1341088141097745748}
   m_Layer: 6
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -84,7 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a59a6f4c667502d48b79053fb27e491d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.HUD
-  inputReader: {fileID: 11400000, guid: b44ba8df712ee83499feb9dff7f9b917, type: 2}
   textParent: {fileID: 3089513961058513832}
   widgetPrefab: {fileID: 5829202150402400054, guid: ec0cbf08acbf8494ca604df770e6e0a1, type: 3}
   healthBar: {fileID: 7519591301086121730}
@@ -94,10 +94,25 @@ MonoBehaviour:
   maxSignatureDisplay: {fileID: 6610803416912335002}
   signatureDisplay: {fileID: 8160792506907912008}
   signatureText: {fileID: 8249842429373430254}
-  turretStanceIcons: []
-  turretGroups: []
-  launcherGroups: []
+  turretStanceIcons:
+  - {fileID: 21300000, guid: 0341c949024cdde48901c2e187c4827b, type: 3}
+  - {fileID: 21300000, guid: f6e6d9747f07546449b9e4dc0ffe05de, type: 3}
+  - {fileID: 21300000, guid: 20577a0696d2c0247a0156d6adf445b8, type: 3}
   weaponDisplayPrefab: {fileID: 1018467357564154524, guid: cde333dceeb69a242bf1c2e91d17276c, type: 3}
+--- !u!114 &1341088141097745748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 30823223772318358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24dc42f464c88be45b394dc7f5537d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player.PlayerWeapons
+  <LauncherGroups>k__BackingField: []
+  <TurretGroups>k__BackingField: []
 --- !u!1 &122630562925509492
 GameObject:
   m_ObjectHideFlags: 0
@@ -12198,10 +12213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed59614af8b50014eae012081cfe7e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.PauseScreen
-  inputReader: {fileID: 11400000, guid: b44ba8df712ee83499feb9dff7f9b917, type: 2}
   initialWindows:
   - {fileID: 6774662534052573047}
   stopTime: 1
+  sendEvent: 1
 --- !u!1 &8026588741312156007
 GameObject:
   m_ObjectHideFlags: 0

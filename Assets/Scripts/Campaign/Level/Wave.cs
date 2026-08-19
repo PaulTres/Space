@@ -16,7 +16,7 @@ namespace Level
         [SerializeField] protected bool facePlayer = false;
         [SerializeField] protected bool spawnOnAwake = true;
         public UnityEvent OnAllUnitsSpawned, OnAllUnitsDestroyed;
-        protected List<Unit> units = new();
+        protected List<Unit> units;
         protected int unitCount;
 
         protected void Awake()
@@ -46,12 +46,16 @@ namespace Level
         /// </summary>
         public void SpawnInactive()
         {
+            units = new();
             unitCount = 0;
             foreach (var spawner in spawners)
             {
                 var unit = spawner.Spawn();
-                //if (unit == null) continue;
-                //Debug.Log(unit.transform);
+                if (unit == null)
+                {
+                    Debug.LogError($"{spawner.transform.name} spawned empty unit!");
+                    continue;
+                }//Debug.Log(unit.transform);
                 unitCount++;
                 units.Add(unit);
                 EventBus<ObjectDestroyed>.AddActions(unit.Transform.root.GetInstanceID(), OnUnitDestroyed);
@@ -79,8 +83,12 @@ namespace Level
                 {
                     units[i].Position = units[i].Position + (units[i].Position -
                         GameManager.Player.Position).normalized * minDistanceFromPlayer;
-                    if (facePlayer) units[i].Transform.LookAt(GameManager.Player.Position);
                 }
+                while (Physics.CheckSphere(units[i].Position, units[i].SpawnCheckRadius, GlobalConfig.SpawnCheckLayerMask))
+                {
+                    units[i].Position -= units[i].Forward * units[i].SpawnCheckRadius;
+                }
+                if (facePlayer && GameManager.Player != null) units[i].Transform.LookAt(GameManager.Player.Position);
                 //Debug.Log(units[i].transform);
                 units[i].gameObject.SetActive(true);
             }

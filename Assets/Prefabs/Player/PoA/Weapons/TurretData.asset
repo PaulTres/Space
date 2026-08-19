@@ -17,9 +17,10 @@ MonoBehaviour:
   MinScoreDelta: 0
   TargetMissiles: 0
   TargetUnits: 1
-  CurrentTargetScoreMultiplier: 100000
+  CurrentTargetScoreMultiplier: 10
+  AccountForObstructions: 1
   MaxAngleDifference: 1
-  MaxRange: 0
+  MaxRange: 70
   BurstFire: 0
   BurstCooldown: 1
   BurstCount: 1

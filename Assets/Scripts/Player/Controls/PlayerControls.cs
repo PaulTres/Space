@@ -154,15 +154,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""FindTarget"",
-                    ""type"": ""Button"",
-                    ""id"": ""b19d7053-90f4-4cda-8d36-839e44c18c73"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -352,17 +343,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleDampeners"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed0e30d9-e61e-45e0-abc7-832f239ba021"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FindTarget"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -399,24 +379,64 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""5bea49af-72b2-4f18-8862-0ffba008ac3d"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""ExecuteAction"",
                     ""type"": ""PassThrough"",
                     ""id"": ""91256219-16ac-4c65-a042-d942707d4ad9"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": ""Tap"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""FindTarget"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d06172c-85ee-4e3c-bd99-000770e16711"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cycle"",
+                    ""type"": ""Button"",
+                    ""id"": ""2f142a15-9ac9-4a59-b02a-0c47f71015e8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""11dcb47a-d5a6-4632-9f6a-c451c228e0d5"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""ExecuteAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7466895d-8daf-43f0-8287-ad9093433372"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FindTarget"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""46fb0742-61fb-40df-b3e3-f5541be7aa63"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cycle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -434,13 +454,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_BasicControls_Zoom = m_BasicControls.FindAction("Zoom", throwIfNotFound: true);
         m_BasicControls_Reset = m_BasicControls.FindAction("Reset", throwIfNotFound: true);
         m_BasicControls_ToggleDampeners = m_BasicControls.FindAction("ToggleDampeners", throwIfNotFound: true);
-        m_BasicControls_FindTarget = m_BasicControls.FindAction("FindTarget", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         // Weapons
         m_Weapons = asset.FindActionMap("Weapons", throwIfNotFound: true);
-        m_Weapons_Newaction = m_Weapons.FindAction("New action", throwIfNotFound: true);
+        m_Weapons_ExecuteAction = m_Weapons.FindAction("ExecuteAction", throwIfNotFound: true);
+        m_Weapons_FindTarget = m_Weapons.FindAction("FindTarget", throwIfNotFound: true);
+        m_Weapons_Cycle = m_Weapons.FindAction("Cycle", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -530,7 +551,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicControls_Zoom;
     private readonly InputAction m_BasicControls_Reset;
     private readonly InputAction m_BasicControls_ToggleDampeners;
-    private readonly InputAction m_BasicControls_FindTarget;
     /// <summary>
     /// Provides access to input actions defined in input action map "BasicControls".
     /// </summary>
@@ -570,10 +590,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BasicControls/ToggleDampeners".
         /// </summary>
         public InputAction @ToggleDampeners => m_Wrapper.m_BasicControls_ToggleDampeners;
-        /// <summary>
-        /// Provides access to the underlying input action "BasicControls/FindTarget".
-        /// </summary>
-        public InputAction @FindTarget => m_Wrapper.m_BasicControls_FindTarget;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -621,9 +637,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleDampeners.started += instance.OnToggleDampeners;
             @ToggleDampeners.performed += instance.OnToggleDampeners;
             @ToggleDampeners.canceled += instance.OnToggleDampeners;
-            @FindTarget.started += instance.OnFindTarget;
-            @FindTarget.performed += instance.OnFindTarget;
-            @FindTarget.canceled += instance.OnFindTarget;
         }
 
         /// <summary>
@@ -656,9 +669,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleDampeners.started -= instance.OnToggleDampeners;
             @ToggleDampeners.performed -= instance.OnToggleDampeners;
             @ToggleDampeners.canceled -= instance.OnToggleDampeners;
-            @FindTarget.started -= instance.OnFindTarget;
-            @FindTarget.performed -= instance.OnFindTarget;
-            @FindTarget.canceled -= instance.OnFindTarget;
         }
 
         /// <summary>
@@ -792,7 +802,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Weapons
     private readonly InputActionMap m_Weapons;
     private List<IWeaponsActions> m_WeaponsActionsCallbackInterfaces = new List<IWeaponsActions>();
-    private readonly InputAction m_Weapons_Newaction;
+    private readonly InputAction m_Weapons_ExecuteAction;
+    private readonly InputAction m_Weapons_FindTarget;
+    private readonly InputAction m_Weapons_Cycle;
     /// <summary>
     /// Provides access to input actions defined in input action map "Weapons".
     /// </summary>
@@ -805,9 +817,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public WeaponsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Weapons/Newaction".
+        /// Provides access to the underlying input action "Weapons/ExecuteAction".
         /// </summary>
-        public InputAction @Newaction => m_Wrapper.m_Weapons_Newaction;
+        public InputAction @ExecuteAction => m_Wrapper.m_Weapons_ExecuteAction;
+        /// <summary>
+        /// Provides access to the underlying input action "Weapons/FindTarget".
+        /// </summary>
+        public InputAction @FindTarget => m_Wrapper.m_Weapons_FindTarget;
+        /// <summary>
+        /// Provides access to the underlying input action "Weapons/Cycle".
+        /// </summary>
+        public InputAction @Cycle => m_Wrapper.m_Weapons_Cycle;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -834,9 +854,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_WeaponsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_WeaponsActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @ExecuteAction.started += instance.OnExecuteAction;
+            @ExecuteAction.performed += instance.OnExecuteAction;
+            @ExecuteAction.canceled += instance.OnExecuteAction;
+            @FindTarget.started += instance.OnFindTarget;
+            @FindTarget.performed += instance.OnFindTarget;
+            @FindTarget.canceled += instance.OnFindTarget;
+            @Cycle.started += instance.OnCycle;
+            @Cycle.performed += instance.OnCycle;
+            @Cycle.canceled += instance.OnCycle;
         }
 
         /// <summary>
@@ -848,9 +874,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="WeaponsActions" />
         private void UnregisterCallbacks(IWeaponsActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @ExecuteAction.started -= instance.OnExecuteAction;
+            @ExecuteAction.performed -= instance.OnExecuteAction;
+            @ExecuteAction.canceled -= instance.OnExecuteAction;
+            @FindTarget.started -= instance.OnFindTarget;
+            @FindTarget.performed -= instance.OnFindTarget;
+            @FindTarget.canceled -= instance.OnFindTarget;
+            @Cycle.started -= instance.OnCycle;
+            @Cycle.performed -= instance.OnCycle;
+            @Cycle.canceled -= instance.OnCycle;
         }
 
         /// <summary>
@@ -940,13 +972,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnToggleDampeners(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "FindTarget" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFindTarget(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -971,11 +996,25 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IWeaponsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ExecuteAction" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnExecuteAction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FindTarget" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFindTarget(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cycle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCycle(InputAction.CallbackContext context);
     }
 }

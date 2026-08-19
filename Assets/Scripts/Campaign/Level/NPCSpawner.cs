@@ -34,7 +34,11 @@ namespace Level
 
         protected Unit SpawnUnit(UnitData data)
         {
-            if (data == null) return null;
+            if (data == null)
+            {
+                Debug.LogError($"{transform.name} has no spawn data!");
+                return null;
+            }
             var unit = data.CreateInstance();
             unit.Team = team;
             unit.PlaySpawnEffect = playSpawnEffect;

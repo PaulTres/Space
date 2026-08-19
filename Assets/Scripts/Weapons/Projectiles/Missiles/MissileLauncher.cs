@@ -5,6 +5,7 @@ namespace Weapons
     public class MissileLauncher : WeaponBase
     {
         [SerializeField] protected Magazine magazine;
+        public Magazine Magazine => magazine;
 
         public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {

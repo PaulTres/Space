@@ -276,8 +276,9 @@ namespace Weapons
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;
-            if (Physics.Linecast(Transform.position, target.Transform.position,
-                GlobalConfig.GetTurretObstructionMask(Transform.root.gameObject.layer)))
+            if (@params.AccountForObstructions && Physics.Linecast(
+                Transform.position, target.Transform.position,
+                GlobalConfig.GetTurretObstructionMask(Unit.Team)))
             {
                 Debug.Log("obstructed");
                 return false;

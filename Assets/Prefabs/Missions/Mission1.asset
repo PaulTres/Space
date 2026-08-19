@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Mission1
   m_EditorClassIdentifier: Assembly-CSharp::Level.Mission
   <TimeLimit>k__BackingField: -1
-  <Briefing>k__BackingField: No briefing exists.
+  briefing: Battlegroup 7 has been ordered to conduct anti-piracy patrols in sector
+    Gamma. There have been increased reports of trader and law enforcement vessels
+    being engaged by unknown hostiles.
+  afterActionReport: Hostile vessel debris does not match any known ship configuration.
+    We can only conclude that this is a new, hostile force conducting probing attacks
+    in preparation for a large scale offensive. The enemy has been designated Phi
+    aliens. As per the Horizon contingency, the Commonwealth will counterattack on
+    every front simultaneously.
   <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647

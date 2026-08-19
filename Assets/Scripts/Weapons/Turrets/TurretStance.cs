@@ -140,20 +140,20 @@ namespace Weapons
             if (Turret.TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
-                //Debug.Log(count);
+                //if (Turret.Unit == GameManager.Player) Debug.Log(count);
                 if (count > 0)
                 {
                     var currentM = Target.Active() ? Target as Missile : null;
                     bool targetIsAimedAtOwner = currentM != null && currentM.Target.IsEqual(Owner);
                     if (!targetIsAimedAtOwner && currentM != null) Target = null;
-                    float bestScore = EvaluateTarget(Target);
+                    float bestScore = Target == null ? float.MinValue : EvaluateTarget(Target);
 
                     for (int i = 0; i < count; i++)
                     {
                         if (missiles[i] == null || !missiles[i].gameObject.activeSelf) continue;
                         var m = missiles[i].transform.GetComponentViaRegister<Missile>();
                         if (m == null || !IsTargetValid(m) || m.TargetedDamage >= m.MaxHP) continue;
-
+                        //Debug.Log(m);
                         if (m.Target.IsEqual(Owner))
                         {
                             if (Target == null)

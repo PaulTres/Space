@@ -1,3 +1,4 @@
+using Level;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -7,7 +8,7 @@ namespace Player
 {
     public class EndMissionScreen : MenuPDA
     {
-        [SerializeField] protected TextMeshProUGUI playerKills;
+        [SerializeField] protected TextMeshProUGUI playerKills, afterActionReport;
 
         protected override void OnEnable()
         {
@@ -17,6 +18,7 @@ namespace Player
 
         public void PopulateText(List<ObjectDestroyed> unitsDestroyed)
         {
+            afterActionReport.text = Mission.CurrentMission.AfterActionReport;
             playerKills.text = "Kills:";
             var killCounts = unitsDestroyed.Where(a => a.KillerName.
                 Contains("Player")).GroupBy(a => a.VictimName).

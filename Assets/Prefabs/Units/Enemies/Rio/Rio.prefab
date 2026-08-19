@@ -11173,6 +11173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
   <MaxHP>k__BackingField: 20
+  startingHPFraction: 1
   sendEventOnHPChange: 0
   minHP: 0
   minHPRegainCooldown: 5
@@ -11181,6 +11182,8 @@ MonoBehaviour:
   - <Direction>k__BackingField: 5
     <Modifier>k__BackingField: 2
   body: {fileID: 0}
+  effectOnDamage: {fileID: 0}
+  effectScaleFactor: 1
 --- !u!198 &6770020914205370101
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -15996,14 +15999,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db62fcb7749c7b74dabb71b2d40c6326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
-  <Team>k__BackingField: 0
+  <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
   <NeedsEscort>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
-  criticalObjects:
+  collisionCheckers:
+  - {fileID: 8118270104947697541}
+  damageTakingObjects:
   - {fileID: 8898726161923389109}
-  <PlaySpawnEffect>k__BackingField: 1
+  <PlaySpawnEffect>k__BackingField: 0
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
@@ -16015,10 +16020,11 @@ MonoBehaviour:
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 20
+    SpawnCheckRadius: 2
   forwardThrust: 7
-  <RotationSpeed>k__BackingField: 10
-  strafeThrust: 4
-  navPivot: {fileID: 3008707030436351168}
+  <RotationSpeed>k__BackingField: 50
+  strafeThrust: 5
+  <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
   checker: {fileID: 11400000, guid: 90f2d877d97c0a5449fc58496e66730d, type: 2}
@@ -16061,6 +16067,7 @@ MonoBehaviour:
   affectedByMorale: 1
   initialMorale: 60
   maxMoraleImpactRange: 50
+  maxThreats: 1
 --- !u!82 &2349703258816028340
 AudioSource:
   m_ObjectHideFlags: 0

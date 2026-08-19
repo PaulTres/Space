@@ -39,6 +39,8 @@ public abstract class Unit : ImprovedMonoBehaviour
         [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
         public float SignatureDecreaseCooldown = 5f;
         public float ScanRange = 10;
+        [Tooltip("On spawn, the unit will check for obstructions in a sphere of this radius.")]
+        public float SpawnCheckRadius = 5;
     }
 
     #region Fields
@@ -64,8 +66,10 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected AudioSource audioSource;
     [Tooltip("Telemetry for missiles will be calculated from here. If not set will use the component's transform.")]
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
-    [Tooltip("The list of all objects whose layer needs to be changed on spawn. Should contain only colliders.")]
-    [SerializeField] protected List<GameObject> criticalObjects;
+    [Tooltip("These objects will have their layer changed to better account for collisions.")]
+    [SerializeField] protected List<GameObject> collisionCheckers;
+    [Tooltip("The list of all objects whose layer needs to be changed for taking damage on spawn. Should contain only colliders.")]
+    [SerializeField] protected List<GameObject> damageTakingObjects;
     [Tooltip("If true, the spawn effect will play when the unit is enabled.")]
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     #endregion
@@ -88,6 +92,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
     public float MaxSignature => unitParameters.MaxSignature;
     protected WaitForSeconds wait;
@@ -141,7 +146,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Setup/Cleanup
     protected virtual void Awake()
     {
-        Debug.Assert(!criticalObjects.IsEmpty(), $"{Transform} has no critical objects set!");
+        Debug.Assert(!damageTakingObjects.IsEmpty(), $"{Transform} has no critical objects set!");
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);
@@ -168,12 +173,15 @@ public abstract class Unit : ImprovedMonoBehaviour
     }
 
     /// <summary>
-    /// Sets the layer of all important objects to a specified layer.
+    /// Sets the layers of all important objects.
     /// </summary>
     /// <param name="layer"></param>
-    public virtual void SetObjectLayer(int layer)
+    public virtual void SetObjectLayer()
     {
-        foreach (var c in criticalObjects) c.layer = layer;
+        Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
+        Debug.Assert(collisionCheckers.Count > 0, $"{Transform} has no objects for handling collisions!");
+        foreach (var c in damageTakingObjects) c.layer = GlobalConfig.GetShipLayer(Team);
+        foreach (var c in collisionCheckers) c.layer = GlobalConfig.GetCollisionLayer(Team);
     }
 
     protected virtual void OnDisable()
@@ -234,11 +242,13 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        //if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
-        //Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(Transform.position, ScanRange);
+        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Transform.position, ScanRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
     }
 
     public void IncreaseSignature(float amount)

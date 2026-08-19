@@ -16,8 +16,8 @@ TagManager:
   - Ship2
   - Projectile2
   - ProjectileNeutral
-  - CollisionLayer
-  - 
+  - CollisionLayer1
+  - CollisionLayer2
   - 
   - 
   - 

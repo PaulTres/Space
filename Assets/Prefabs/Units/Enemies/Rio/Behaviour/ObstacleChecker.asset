@@ -16,8 +16,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 2049
-  collisionCheckRadius: 1.5
-  collisionCheckDistance: 3
+  collisionCheckRadius: 2
+  collisionCheckDistance: 4.5
   offsetPointsZ: 0100000000000000ffffffff
   offsetPointsX: 0000000001000000ffffffff
   offsetPointsY: 0000000001000000ffffffff

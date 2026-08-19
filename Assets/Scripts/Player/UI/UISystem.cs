@@ -28,7 +28,6 @@ namespace Player
 
         protected virtual void OnDestroy()
         {
-
             textWidgetPool.Clear();
             EventBus<ShowText>.RemoveActions(SpawnText);
         }

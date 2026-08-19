@@ -1,3 +1,4 @@
+using EventBus;
 using Level;
 using Radar;
 using UnityEngine;
@@ -73,11 +74,13 @@ namespace Player
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
             OnResetCamera();
+            EventBus<PauseScreen.PauseEvent>.AddActions(OnPauseEvent);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
+            EventBus<PauseScreen.PauseEvent>.RemoveActions(OnPauseEvent);
             PlayerCamera = null;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -105,6 +108,12 @@ namespace Player
         #region Functionality
 
         #region Controls
+        public void OnPauseEvent(PauseScreen.PauseEvent pauseEvent)
+        {
+            if (pauseEvent.Paused) DisableCallbacks();
+            else GameManager.InputActions.BasicControls.SetCallbacks(this);
+        }
+
         public void OnFindTarget(InputAction.CallbackContext context)
         {
             if (context.started) PlayerTargetSystem.TryGetInstance().SelectTarget();

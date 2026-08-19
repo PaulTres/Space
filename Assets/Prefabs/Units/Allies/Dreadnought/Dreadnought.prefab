@@ -279,6 +279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2151775802061740296}
+  - component: {fileID: 8564475451535721006}
   m_Layer: 0
   m_Name: PDGrid
   m_TagString: Untagged
@@ -309,6 +310,44 @@ Transform:
   - {fileID: 6729933788648644162}
   m_Father: {fileID: 1154501830181603266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8564475451535721006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321459591160170650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
+  overheatThreshold: 20
+  heatLoss: 0.34
+  heatLossCooldown: 0.5
+  overheatSound:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &1352440837569760340
 GameObject:
   m_ObjectHideFlags: 0
@@ -15838,7 +15877,9 @@ MonoBehaviour:
   <IsDying>k__BackingField: 0
   <NeedsEscort>k__BackingField: 1
   <TelemetryOrigin>k__BackingField: {fileID: 0}
-  criticalObjects:
+  collisionCheckers:
+  - {fileID: 6925981963127992980}
+  damageTakingObjects:
   - {fileID: 6245463321369931082}
   - {fileID: 5997751787457478246}
   <PlaySpawnEffect>k__BackingField: 1
@@ -15853,11 +15894,11 @@ MonoBehaviour:
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 10
+    SpawnCheckRadius: 2
   forwardThrust: 1
   <RotationSpeed>k__BackingField: 5
   strafeThrust: 1
   <Dampeners>k__BackingField: 1
-  navPivot: {fileID: 0}
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
   checker: {fileID: 11400000, guid: 780234fdb2593a044a83b9a40aeb61df, type: 2}
