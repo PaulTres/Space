@@ -60,8 +60,8 @@ namespace Weapons
                 //Debug.LogWarning($"{transform} has no shoot points!");
                 shootPoints = new Transform[] { transform };
             }
-            shotTimer = new(@params.MaxShotCooldown);
             CurrentShotCooldown = @params.MaxShotCooldown;
+            shotTimer = new(CurrentShotCooldown);
             if (!readinessDisplays.IsEmpty())
             {
                 foreach (var display in readinessDisplays)
@@ -81,8 +81,14 @@ namespace Weapons
         /// </summary>
         public virtual void PerformReset()
         {
-            shotTimer.Reset(@params.MaxShotCooldown);
             CurrentShotCooldown = @params.MaxShotCooldown;
+            shotTimer.Reset(CurrentShotCooldown);
+            if (!@params.StartLoaded) shotTimer.Start();
+        }
+
+        protected virtual void OnDisable()
+        {
+            shotTimer?.Stop();
         }
 
         protected virtual void OnDestroy()

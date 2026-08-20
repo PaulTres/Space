@@ -22,6 +22,8 @@ namespace Weapons
         public BulletData BulletData;
         [Tooltip("If true, this weapon will only fire when the target is in optimal firing range of the shooter.")]
         public bool RequiresOptimalFiringRange = true;
+        [Tooltip("If true, the weapon will be ready to fire the moment the owner spawns.")]
+        public bool StartLoaded = true;
 
         protected virtual void OnValidate()
         {
