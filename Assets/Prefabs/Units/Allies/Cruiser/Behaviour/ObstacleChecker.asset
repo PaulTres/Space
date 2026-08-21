@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a554ffd04baef504ba4eaf197d57143d, type: 3}
   m_Name: ObstacleChecker
   m_EditorClassIdentifier: Assembly-CSharp::ObstacleChecker
-  Debug: 1
+  Debug: 0
   collisionMask:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 6145
   collisionCheckRadius: 1
   collisionCheckDistance: 1
   offsetPointsZ: 0100000000000000ffffffff

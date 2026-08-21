@@ -4,7 +4,7 @@ using UnityEngine;
 public class ObstacleChecker : ScriptableObject
 {
     public bool Debug = false;
-    public LayerMask collisionMask = 1 << 0 | 1 << 11;
+    public LayerMask collisionMask = 1 << 0 | 1 << 11 | 1 << 12;
     public float collisionCheckRadius = 1f, collisionCheckDistance = 1f;
     public int[] offsetPointsZ = new int[3] { 1, 0, -1 },
         offsetPointsX = new int[3] { 0, 1, -1 },
