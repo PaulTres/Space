@@ -6,28 +6,45 @@ namespace Level
 {
     public class SafeZone : MonoBehaviour
     {
-        protected HashSet<Unit> unitsInSafeZone = new();
+        protected static HashSet<SafeZone> safeZones = new();
 
-        protected void OnTriggerEnter(Collider other)
+        public static bool InSafeZone(Unit unit)
         {
-            var unit = other.transform.root.GetComponentViaRegister<Unit>();
-            if (unit.Active() && unitsInSafeZone.Add(unit)) unit.SafeZoneCount++;
+            if (!unit.Active()) return false;
+            foreach (var zone in safeZones)
+            {
+                if (zone == null || !zone.enabled) continue;
+                if (Vector3.Distance(unit.Position, zone.Position) <= zone.radius) return true;
+            }
+            return false;
         }
 
-        protected void OnTriggerExit(Collider other)
+        [SerializeField] protected float radius = 1000;
+        protected Transform tr;
+        public Transform Transform
         {
-            var unit = other.transform.root.GetComponentViaRegister<Unit>();
-            if (unit.Active() && unitsInSafeZone.Remove(unit)) unit.SafeZoneCount--;
+            get
+            {
+                if (tr == null) tr = transform;
+                return tr;
+            }
+        }
+        public Vector3 Position => Transform.position;
+
+        protected void OnEnable()
+        {
+            safeZones.Add(this);
         }
 
         protected void OnDisable()
         {
-            foreach (var unit in unitsInSafeZone)
-            {
-                if (!unit.Active()) continue;
-                unit.SafeZoneCount--;
-            }
-            unitsInSafeZone.Clear();
+            safeZones.Remove(this);
+        }
+
+        protected void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(Position, radius);
         }
     }
 }

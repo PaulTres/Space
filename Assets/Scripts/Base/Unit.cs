@@ -2,11 +2,9 @@ using Effects;
 using EventBus;
 using HP;
 using HybridBT2;
-using Level;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Timers;
 using UnityEngine;
 using Utilities;
 using Weapons;
@@ -88,42 +86,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
-    protected CountdownTimer envDamageTimer;
-    protected int safeZoneCount = 0;
-    /// <summary>
-    /// How many safe zones are covering this unit. If zero and in a dangerous environment, this unit will take damage.
-    /// </summary>
-    public int SafeZoneCount
-    {
-        get
-        {
-            return safeZoneCount;
-        }
-        set
-        {
-            value = Mathf.Max(0, value);
-            if (safeZoneCount != value)
-            {
-                safeZoneCount = value;
-                if (safeZoneCount > 0)
-                {
-                    envDamageTimer?.Stop();
-                }
-                else
-                {
-                    var i = EnvironmentDamage.TryGetInstance();
-                    if (i == null) return;
-                    if (envDamageTimer == null)
-                    {
-                        envDamageTimer = new(i.Interval);
-                        envDamageTimer.OnTimerStop += DealEnvironmentDamage;
-                    }
-                    envDamageTimer.Start();
-                }
-            }
-        }
-    }
-
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
     public float MaxSignature => unitParameters.MaxSignature;
@@ -179,7 +141,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Setup/Cleanup
     protected virtual void Awake()
     {
-        Debug.Assert(!damageTakingObjects.IsEmpty(), $"{Transform} has no critical objects set!");
+        //Debug.Assert(!damageTakingObjects.IsEmpty(), $"{Transform} has no critical objects set!");
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);
@@ -229,13 +191,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         AudioSource.Stop();
         missileBuffer = null;
         AudioSource.Stop();
-        envDamageTimer?.Stop();
     }
 
     protected virtual void OnDestroy()
     {
         onTick = null;
-        envDamageTimer?.Dispose();
         EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetInstanceID(this));
         ComponentRegister<Unit>.Unregister(transform);
     }
@@ -306,17 +266,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
         EventBus<UnitDestroyed>.Raise(new(this));
-    }
-
-    public void DealEnvironmentDamage()
-    {
-        if (safeZoneCount > 0 || !this.Active()) return;
-        var u = EnvironmentDamage.TryGetInstance();
-        if (u != null)
-        {
-            u.DealDamage(this);
-            envDamageTimer.Start();
-        }
     }
     #endregion
 

@@ -124,7 +124,7 @@ namespace HP
 
         public void TakeDamage(DamageInfo damageInfo)
         {
-            if (damageInfo.Source.Team == transform.root.GetTeam())
+            if (damageInfo.Source != null && damageInfo.Source.Team == transform.root.GetTeam())
             {
                 //Debug.Log("Friendly fire");
                 return;
