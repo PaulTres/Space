@@ -226,9 +226,6 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 4111061145657378536}
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1634145199033709852
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +490,7 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <NeedsEscort>k__BackingField: 0
+  <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 3399766470945502473}
@@ -5365,7 +5362,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5754,10 +5751,6 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 8193619022986780990}
   - {fileID: 8412240930616235562}
-  readinessDisplays:
-  - {fileID: 6130341653831737686}
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &3341386976082710316
 GameObject:
   m_ObjectHideFlags: 0
@@ -5804,9 +5797,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 84dfa7308c0cd19479e0880347b3352a, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 198877904454626256}
 --- !u!1 &3399766470945502473
 GameObject:
@@ -6108,9 +6098,6 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 2286655736557394615}
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &4934526136339367206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6176,10 +6163,6 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 3414908800723255318}
   - {fileID: 3857089936284256022}
-  readinessDisplays:
-  - {fileID: 5483439274258603010}
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &5073423070173737914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,9 +6409,6 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 65718ba16fb704248bc5be129f48b2a0, type: 2}
   shootPoints:
   - {fileID: 9197534594434857916}
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &5573951942689996867
 GameObject:
   m_ObjectHideFlags: 0
@@ -6506,9 +6486,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 84dfa7308c0cd19479e0880347b3352a, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 198877904454626256}
 --- !u!1 &5883244461419736920
 GameObject:

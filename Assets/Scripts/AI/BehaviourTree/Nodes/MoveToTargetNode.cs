@@ -52,7 +52,7 @@ public class MoveToTargetNode : LeafNodeData
             return NodeState.RUNNING;
         }
 
-        if (ReturnSuccessOnReach && Vector3.Distance(ctx.Transform.position, tr.position) <
+        if (ReturnSuccessOnReach && Vector3.Distance(ctx.Position, tr.position) <
             ctx.Navigation.StopDistance)
         {
             return NodeState.SUCCESS;

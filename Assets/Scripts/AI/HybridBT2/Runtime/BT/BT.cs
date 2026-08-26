@@ -43,7 +43,7 @@ namespace HybridBT2
         protected virtual void OnDisable()
         {
             blackboard.Clear();
-            StopCoroutine(coroutine);
+            if (coroutine != null) StopCoroutine(coroutine);
         }
 
         public void PerformReset()

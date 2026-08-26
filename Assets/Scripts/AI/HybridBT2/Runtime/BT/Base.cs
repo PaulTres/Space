@@ -167,8 +167,8 @@ namespace HybridBT2
 
         public void AddCondition(ConditionData data)
         {
-            if (data == null) throw new ArgumentNullException($"{this} was passed a null condition!");
-            conditions.Add(new(data.Name, data.Function));
+            if (data == null) Debug.LogError($"{this} was passed a null condition!");
+            else conditions.Add(new(data.Name, data.Function));
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ public class StrafeNode : LeafNodeData
 
     public TargetFacingMode TargetFacing;
     public int TicksBeforeRepath = 10;
-    [SerializeField] protected float strafeMagnitude = 50;
+    [SerializeField] protected float strafeMagnitude = 10;
     public bool UseOptimalFiringRange = true;
     [SerializeField] protected float distanceBuffer = 0;
 

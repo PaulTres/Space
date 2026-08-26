@@ -13,6 +13,8 @@ public class BanditTree : BT, IRegisterableComponent
     [SerializeField] protected float maxMoraleImpactRange = 50;
     [Tooltip("How many Threats can this AI account for at the same time.")]
     [SerializeField] protected int maxThreats = 1;
+    [Tooltip("Only friendly units with an escort value higher than this are eligible for escort duty.")]
+    [SerializeField] protected float minEscortValue = 10;
 
     #region Setup
     protected override void Awake()
@@ -25,6 +27,7 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected override void SetupBlackboard()
     {
+        Context.SetData(Blackboard.Keys.MinEscortValue, minEscortValue);
         Context.SetData(Blackboard.Keys.Fleeing, false);
         Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
         Context.SetData(Blackboard.Keys.TargetPosition, Vector3.zero);

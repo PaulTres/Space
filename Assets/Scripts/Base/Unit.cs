@@ -2,9 +2,11 @@ using Effects;
 using EventBus;
 using HP;
 using HybridBT2;
+using Level;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Timers;
 using UnityEngine;
 using Utilities;
 using Weapons;
@@ -15,12 +17,6 @@ using Weapons;
 [RequireComponent(typeof(AudioSource))]
 public abstract class Unit : ImprovedMonoBehaviour
 {
-    public enum Type
-    {
-        Skiff,
-        Frigate,
-        Cruiser
-    }
     [System.Serializable]
     public class UnitParameters
     {
@@ -45,14 +41,14 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     #region Fields
     #region Misc
-    [Header("UnitProperty")]
+    [Header("Unit")]
     /// <summary>
     /// This is used for quick removal from the unit manager lists. 
     /// DO NOT FUCK WITH THIS!
     /// </summary>
     public int UnitManagerIndex { get; set; }
-    [Tooltip("If true, other friendly units will attemt to remain near this unit.")]
-    [field: SerializeField] public bool NeedsEscort { get; set; } = false;
+    [Tooltip("The higher this value, the more likely other ships are to attempt to guard this vessel.")]
+    [field: SerializeField] public float EscortValue { get; set; } = 0;
     public List<Turret> Turrets { get; protected set; }
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
@@ -92,6 +88,42 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    protected CountdownTimer envDamageTimer;
+    protected int safeZoneCount = 0;
+    /// <summary>
+    /// How many safe zones are covering this unit. If zero and in a dangerous environment, this unit will take damage.
+    /// </summary>
+    public int SafeZoneCount
+    {
+        get
+        {
+            return safeZoneCount;
+        }
+        set
+        {
+            value = Mathf.Max(0, value);
+            if (safeZoneCount != value)
+            {
+                safeZoneCount = value;
+                if (safeZoneCount > 0)
+                {
+                    envDamageTimer?.Stop();
+                }
+                else
+                {
+                    var i = EnvironmentDamage.TryGetInstance();
+                    if (i == null) return;
+                    if (envDamageTimer == null)
+                    {
+                        envDamageTimer = new(i.Interval);
+                        envDamageTimer.OnTimerStop += DealEnvironmentDamage;
+                    }
+                    envDamageTimer.Start();
+                }
+            }
+        }
+    }
+
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
     public float MaxSignature => unitParameters.MaxSignature;
@@ -117,6 +149,7 @@ public abstract class Unit : ImprovedMonoBehaviour
             if (audioSource == null)
             {
                 audioSource = GetComponent<AudioSource>();
+                Debug.Assert(audioSource.playOnAwake == false);
             }
             return audioSource;
         }
@@ -193,13 +226,16 @@ public abstract class Unit : ImprovedMonoBehaviour
         {
             unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
         }
+        AudioSource.Stop();
         missileBuffer = null;
         AudioSource.Stop();
+        envDamageTimer?.Stop();
     }
 
     protected virtual void OnDestroy()
     {
         onTick = null;
+        envDamageTimer?.Dispose();
         EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetInstanceID(this));
         ComponentRegister<Unit>.Unregister(transform);
     }
@@ -230,7 +266,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         //Debug.Log(missileCount);
     }
 
-
     public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
 
     /// <summary>
@@ -240,16 +275,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
 
-    protected virtual void OnDrawGizmos()
-    {
-        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(Transform.position, ScanRange);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
-    }
+    public List<Unit> GetAllies() => UnitManager.GetShips(Team);
 
     public void IncreaseSignature(float amount)
     {
@@ -280,6 +306,35 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
         EventBus<UnitDestroyed>.Raise(new(this));
+    }
+
+    public void DealEnvironmentDamage()
+    {
+        if (safeZoneCount > 0 || !this.Active()) return;
+        var u = EnvironmentDamage.TryGetInstance();
+        if (u != null)
+        {
+            u.DealDamage(this);
+            envDamageTimer.Start();
+        }
+    }
+    #endregion
+
+    #region Debugging
+    protected virtual void OnDrawGizmos()
+    {
+        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(Transform.position, ScanRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
+    }
+
+    protected virtual void OnValidate()
+    {
+        Debug.Assert(!AudioSource.playOnAwake, $"{Transform}'s audio source is set to play in Awake!");
     }
     #endregion
 }

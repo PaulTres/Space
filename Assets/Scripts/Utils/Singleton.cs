@@ -5,6 +5,7 @@ namespace Utilities
     {
         protected static T instance;
         public static bool HasInstance => instance != null;
+
         /// <summary>
         /// Returns the singleton instance. If null and createOnMissing is true, 
         /// will create a new instance. Should be called with false in OnDisable/OnDestroy, 
@@ -16,11 +17,10 @@ namespace Utilities
         public static T TryGetInstance(bool createOnMissing = false)
         {
             if (HasInstance) return instance;
-            if (!createOnMissing) return null;
-
             instance = FindAnyObjectByType<T>();
             if (instance == null)
             {
+                if (!createOnMissing) return null;
                 var go = new GameObject(typeof(T).Name + " Auto-Generated");
                 instance = go.AddComponent<T>();
             }

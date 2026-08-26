@@ -155,7 +155,7 @@ namespace Weapons
                     //if (Target == GameManager.Player && !@params.TargetMissiles) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                     if (@params.MaxAngleDifference >= 360 || Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
-                        //if (!@params.TargetMissiles && Target == GameManager.Player) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
+                        //if (@params.BurstFire) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;
@@ -353,6 +353,11 @@ namespace Weapons
         /// <param name="deltaTime">The time elapsed since the last update.</param>
         protected void RotateUnified(Vector3 direction, float deltaTime)
         {
+            if (@params.RotSpeed >= 360)
+            {
+                RotationPivot.rotation = Quaternion.LookRotation(direction, Transform.up);
+                return;
+            }
             var newRotation = Quaternion.LookRotation(direction, Transform.up);
             var targetRot = Quaternion.RotateTowards(RotationPivot.rotation,
                 newRotation, deltaTime * @params.RotSpeed);

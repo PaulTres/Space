@@ -15,9 +15,11 @@ namespace Effects
             MissileExplosionPurple,
             MissileExplosionBlue,
             GunshotBlue,
+            ExplosionBigPurple,
             ExplosionBigGreen,
             ExplosionBigRed,
-            JumpEffect
+            JumpEffect,
+            ShadowPDLaserShot
         }
         static readonly ObjectPool<Type, PoolableEffect> objectPool = new();
 

@@ -14,9 +14,11 @@ namespace HybridBT2
             Target,
             TargetPosition,
             PDTurrets,
-            AllTurrets
+            AllTurrets,
+            MinEscortValue,
+            EscortCandidate
         }
-        public readonly Transform Transform;
+
         public Vector3 Position => Navigation.Position;
         public readonly Navigation Navigation;
         /// <summary>
@@ -29,7 +31,6 @@ namespace HybridBT2
 
         public Blackboard(Transform transform)
         {
-            Transform = transform;
             Navigation = transform.GetComponent<Navigation>();
             DeltaTime = 0;
             lastTime = Time.time;

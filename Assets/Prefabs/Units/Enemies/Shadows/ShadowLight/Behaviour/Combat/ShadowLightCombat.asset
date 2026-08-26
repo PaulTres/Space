@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65215b31be91bb344b7ca27d099bab90, type: 3}
+  m_Name: ShadowLightCombat
+  m_EditorClassIdentifier: Assembly-CSharp::HybridBT2.UtilityWrapperData
+  myName: 
+  AlwaysCheck: 1
+  Conditions: []
+  Services: []
+  Child: {fileID: 11400000, guid: 2168892eb553c144d931546a9bc013da, type: 2}
+  Consideration: {fileID: 11400000, guid: 5a945a09b97497d4aa21c85b56f3a8de, type: 2}

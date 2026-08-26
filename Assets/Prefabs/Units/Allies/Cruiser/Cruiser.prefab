@@ -155,9 +155,6 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 4440183957383060605}
   - {fileID: 3675284398190978406}
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &1769083625646738161
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +271,7 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
-  <NeedsEscort>k__BackingField: 1
+  <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 3631141983087515181}
@@ -319,6 +316,7 @@ MonoBehaviour:
   initialMorale: 10
   maxMoraleImpactRange: 50
   maxThreats: 1
+  minEscortValue: 10
 --- !u!114 &2823749670721077900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5156,7 +5154,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -6025,9 +6023,6 @@ MonoBehaviour:
   shootPoints:
   - {fileID: 5786125438283946014}
   - {fileID: 7298034220520001478}
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1 &6033900855380238085
 GameObject:
   m_ObjectHideFlags: 0

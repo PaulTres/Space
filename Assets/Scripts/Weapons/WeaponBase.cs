@@ -46,8 +46,6 @@ namespace Weapons
         [SerializeField] protected WeaponData @params;
         [Tooltip("A separate bullet will be spawned with the position and rotation of each of these objects.")]
         [SerializeField] protected Transform[] shootPoints;
-        [SerializeField] protected Renderer[] readinessDisplays;
-        [SerializeField] protected Color noReadinessColor = Color.black, fullReadinessColor = Color.green;
         #endregion
 
         #region Setup
@@ -62,13 +60,6 @@ namespace Weapons
             }
             CurrentShotCooldown = @params.MaxShotCooldown;
             shotTimer = new(CurrentShotCooldown);
-            if (!readinessDisplays.IsEmpty())
-            {
-                foreach (var display in readinessDisplays)
-                {
-                    display.material.EnableKeyword("_EMISSION");
-                }
-            }
         }
 
         protected virtual void OnEnable()
@@ -98,20 +89,6 @@ namespace Weapons
         #endregion
 
         #region Functionality
-        #region Display
-        public void UpdateReadinessRenderers()
-        {
-            if (readinessDisplays.IsEmpty()) return;
-            //we need 0 when CurrentShotCooldown==@params.MaxShotCooldown and 1 when CurrentShotCooldown==@params.MinShotCooldown
-            float lerpValue = (@params.MaxShotCooldown - CurrentShotCooldown) / (@params.MaxShotCooldown - @params.MinShotCooldown);
-            var newColor = Color.Lerp(noReadinessColor, fullReadinessColor, lerpValue);
-            //Debug.Log(lerpValue);
-            for (int i = 0; i < readinessDisplays.Length; i++)
-            {
-                readinessDisplays[i].material.SetColor("_EmissionColor", newColor);
-            }
-        }
-        #endregion
 
         /// <summary>
         /// Increases weapon rate of fire.
@@ -122,7 +99,6 @@ namespace Weapons
             //Debug.Log("Increasing readiness: " + CurrentShotCooldown);
             CurrentShotCooldown = Mathf.Max(@params.MinShotCooldown,
                 CurrentShotCooldown - @params.RateOfFireRampUp * deltaTime);
-            UpdateReadinessRenderers();
         }
 
         /// <summary>
@@ -134,7 +110,6 @@ namespace Weapons
             //Debug.Log("Decreasing readiness: " + CurrentShotCooldown);
             CurrentShotCooldown = Mathf.Min(@params.MaxShotCooldown,
                 CurrentShotCooldown + @params.RateOfFireRampDown * deltaTime);
-            UpdateReadinessRenderers();
         }
 
         /// <summary>

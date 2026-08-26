@@ -6,7 +6,7 @@ namespace Weapons
     {
         public float TopSpeed, Acceleration, InitialVelocity;
         public bool InertialDampeners = true;
-        public Vector3 Scale = Vector3.one;
+        public float ScaleFactor = .1f;
         public Material RendererMaterial, TrailRendererMaterial;
         public AnimationCurve TrailRendererCurve;
         public override float Speed => (Mathf.Max(InitialVelocity, Acceleration) + TopSpeed) / 2;
@@ -14,8 +14,8 @@ namespace Weapons
         protected virtual void Reset()
         {
             TrailRendererCurve = new AnimationCurve(
-                new Keyframe(1f, Scale.y),
-                new Keyframe(Scale.y, 0f)
+                new Keyframe(0f, ScaleFactor),
+                new Keyframe(1, 0f)
             );
         }
     }

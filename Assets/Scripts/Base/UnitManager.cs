@@ -30,6 +30,11 @@ public static class UnitManager
         return ships.ContainsKey(team) ? ships[team].ToList() : new();
     }
 
+    /// <summary>
+    /// Get all ships which are not in a specific team.
+    /// </summary>
+    /// <param name="myTeam"></param>
+    /// <returns></returns>
     public static List<Unit> GetTargets(int myTeam)
     {
         //string s = "";

@@ -54,7 +54,7 @@ namespace Weapons
                 Debug.LogWarning($"Projectile acceleration should not be 0. Setting acceleration to 10% of top speed on {transform}.");
                 acceleration = topSpeed / 10;
             }
-            Transform.localScale = data.Scale;
+            Transform.localScale = Vector3.one * data.ScaleFactor;
             ProjectileRendererProperty.material = data.RendererMaterial;
             TrailRendererProperty.material = data.TrailRendererMaterial;
             TrailRendererProperty.widthCurve = data.TrailRendererCurve;

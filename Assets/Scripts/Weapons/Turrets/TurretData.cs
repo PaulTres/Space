@@ -22,7 +22,7 @@ namespace Weapons
         #endregion
 
         [Header("Shooting")]
-        [Tooltip("The turret will only fire when the angle between its barrel(s) and the target is <= this value.")]
+        [Tooltip("The turret will only fire when the angle between its barrel(s) and the target is <= this value. Ignored if >= 360.")]
         public float MaxAngleDifference = 1;
         public float MaxRange = 100;
         public float MaxRangeSquared => MaxRange * MaxRange;

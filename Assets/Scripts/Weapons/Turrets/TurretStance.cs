@@ -181,7 +181,7 @@ namespace Weapons
                 }
             }
 
-            if (Turret.TargetUnits)
+            if (Turret.TargetUnits && !Turret.TargetMissiles)
             {
                 Target = Owner.Target;
             }
