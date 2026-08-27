@@ -32,6 +32,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Mission_3.unity
     guid: fba6afb23fb36bc44a961698b2ac9cf4
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_4.unity
+    guid: 7c7aba0b94c15784c81b6d6a39c1bc1d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_5.unity
+    guid: 73fa4557976ff4b49947d3e4aa0d07e0
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_6.unity
+    guid: 68796e110afb5b94d920c110d4de78d1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_7.unity
+    guid: f9e26fa8523a1824a834c7c6ed0f2440
+  - enabled: 1
+    path: Assets/Scenes/Levels/Mission_8.unity
+    guid: 1c1a128e4cf5cfa4ab3aef6d4207952f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e9b56aff646072449b96023a82fb1103, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

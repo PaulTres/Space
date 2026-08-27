@@ -285,7 +285,7 @@ namespace Radar
 
         public void SelectTarget()
         {
-            if (GameManager.Player == null) return;
+            if (GameManager.Player == null || Time.timeScale == 0) return;
             var targets = GameManager.Player.GetTargets();
             Unit bestCandidate = null;
             float bestScore = 0;
@@ -309,7 +309,6 @@ namespace Radar
         /// <param name="unit"></param>
         protected void TargetSelected(Unit unit)
         {
-            if (GameManager.IsPaused) return;
             if (unit == CurrentTarget) return;
             if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
             {

@@ -1,0 +1,1 @@
+Scenes need to be named Mission_{index} for the code to work, blame Unity for not letting me assign scenes in the inspector. Most mission scenes will need the basic manager prefab, check in Assets\Prefabs\Misc\General.

@@ -46,31 +46,6 @@ public static class GameManager
     /// </summary>
     public static int ChosenMissionIndex { get; set; }
 
-    #region Pausing
-    public static bool IsPaused => Time.timeScale == 0f;
-
-    public static void Pause()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 0;
-    }
-
-    public static void TogglePause()
-    {
-        Cursor.visible = !Cursor.visible;
-        Cursor.lockState = IsPaused ? CursorLockMode.Locked : CursorLockMode.None;
-        Time.timeScale = IsPaused ? 1f : 0f;
-    }
-
-    public static void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-    #endregion
-
     #region Progress
     public static void NewGame()
     {

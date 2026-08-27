@@ -110,8 +110,18 @@ namespace Player
         #region Controls
         public void OnPauseEvent(PauseScreen.PauseEvent pauseEvent)
         {
-            if (pauseEvent.Paused) DisableCallbacks();
-            else GameManager.InputActions.BasicControls.SetCallbacks(this);
+            if (pauseEvent.Paused)
+            {
+                DisableCallbacks();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                GameManager.InputActions.BasicControls.SetCallbacks(this);
+            }
         }
 
         public void OnFindTarget(InputAction.CallbackContext context)

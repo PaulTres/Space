@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using Utilities;
+
 [CreateAssetMenu(menuName = "HybridBT2/Leaves/Strafe", fileName = "Strafe")]
 public class StrafeNode : LeafNodeData
 {

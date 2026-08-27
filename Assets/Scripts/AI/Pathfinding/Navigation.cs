@@ -5,7 +5,7 @@ using Utilities;
 public class Navigation : Ship
 {
     #region Fields
-    protected readonly Collider[] buffer = new Collider[10];
+    protected Collider[] buffer = new Collider[10];
     public Vector3? Destination { get; protected set; }
     public bool HasDestination => Destination != null;
     [Header("Parameters")]
@@ -65,9 +65,9 @@ public class Navigation : Ship
     protected override void OnDisable()
     {
         base.OnDisable();
+        buffer = null;
         RotationTarget = null;
-        if (GlobalUpdater.TryGetInstance() != null) GlobalUpdater.TryGetInstance().
-                UnregisterUpdate(PerformUpdate);
+        if (GlobalUpdater.TryGetInstance() != null) GlobalUpdater.TryGetInstance().UnregisterUpdate(PerformUpdate);
     }
     #endregion
 

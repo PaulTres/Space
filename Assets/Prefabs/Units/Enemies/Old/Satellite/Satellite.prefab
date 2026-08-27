@@ -46,9 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: a5350e9544353ec43a81dfc3eb8fc9e4, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 0}
 --- !u!1 &4250357141012221571
 GameObject:
@@ -151,9 +148,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: a5350e9544353ec43a81dfc3eb8fc9e4, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 0}
 --- !u!1 &5557512565161722091
 GameObject:
@@ -5062,7 +5056,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5162,7 +5156,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 0
   <IsDying>k__BackingField: 0
-  <NeedsEscort>k__BackingField: 1
+  <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 4250357141012221571}
@@ -5272,9 +5266,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: a5350e9544353ec43a81dfc3eb8fc9e4, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 0}
 --- !u!1 &7254597585454590831
 GameObject:
@@ -10174,9 +10165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: a5350e9544353ec43a81dfc3eb8fc9e4, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
   magazine: {fileID: 0}
 --- !u!1 &8456541338435178137
 GameObject:
@@ -10291,9 +10279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
   shootPoints: []
-  readinessDisplays: []
-  noReadinessColor: {r: 0, g: 0, b: 0, a: 1}
-  fullReadinessColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!1001 &3836933158138955879
 PrefabInstance:
   m_ObjectHideFlags: 0
