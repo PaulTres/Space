@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StrafeNode
   myName: 
   AlwaysCheck: 1
-  Conditions: []
+  Conditions:
+  - {fileID: 11400000, guid: 38d37c5f60924414dbf88cf6017171e0, type: 2}
   Services: []
   TargetFacing: 1
   TicksBeforeRepath: 10

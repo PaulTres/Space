@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f88d065489945a4b9f9a49c9a48c333, type: 3}
+  m_Name: ShadowMediumStrafe
+  m_EditorClassIdentifier: Assembly-CSharp::StrafeNode
+  myName: 
+  AlwaysCheck: 1
+  Conditions:
+  - {fileID: 11400000, guid: db1a7fd70d1ecb940b37d09f9955c24a, type: 2}
+  Services: []
+  TargetFacing: 0
+  TicksBeforeRepath: 10
+  strafeMagnitude: 10
+  UseOptimalFiringRange: 1
+  distanceBuffer: -10

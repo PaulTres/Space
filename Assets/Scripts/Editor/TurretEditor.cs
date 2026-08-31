@@ -8,7 +8,8 @@ public class TurretEditor : Editor
     private void OnSceneGUI()
     {
         Turret turret = (Turret)target;
-        Handles.color = Color.white;
+        if (turret.Parameters.MaxAngleDifference >= 360) return;
+        Handles.color = Color.softGreen;
         var maxRotation = turret.Parameters.MaxRot;
         var minRotation = turret.Parameters.MinRot;
         var maxRotPos = Mathf.Sin(maxRotation * Mathf.Deg2Rad) * turret.Transform.right + Mathf.Cos(maxRotation * Mathf.Deg2Rad) * turret.transform.forward;
@@ -16,7 +17,7 @@ public class TurretEditor : Editor
         Handles.DrawLine(turret.Transform.position + maxRotPos, turret.Transform.position);
         Handles.DrawLine(turret.Transform.position, turret.Transform.position + minRotPos);
         Handles.DrawWireArc(turret.Transform.position, turret.Transform.up, minRotPos, Mathf.Abs(maxRotation) + Mathf.Abs(minRotation), 1);
-
+        Handles.color = Color.softRed;
         var maxElevation = turret.Parameters.MaxElevation;
         var minElevation = turret.Parameters.MinElevation;
         var maxElevationPos = Mathf.Sin(maxElevation * Mathf.Deg2Rad) * turret.Transform.up + Mathf.Cos(maxElevation * Mathf.Deg2Rad) * turret.transform.forward;

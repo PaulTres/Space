@@ -10,7 +10,7 @@ public class TargetAcquisitionService : ServiceData
     [Tooltip("The minimum difference in utility score between the best target and the next " +
         "best target for the best target to be selected.")]
     public float MinUtilityDelta = 0;
-    public float MaxRange = 100;
+    public float MaxRange = 1000;
     public TargetEvaluation TargetEvaluation;
 
     public override Action<Node, Blackboard> Action => (n, ctx) =>
