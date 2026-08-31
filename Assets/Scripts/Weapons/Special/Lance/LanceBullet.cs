@@ -15,8 +15,7 @@ namespace Weapons
         protected int colliderCount;
         protected float range, radius;
         protected CountdownTimer telegraphTimer;
-        [SerializeField] protected Renderer telegraphRenderer, damageRenderer;
-        [SerializeField] protected Transform lancePivot;
+        [SerializeField] protected ParticleSystem telegraphVisuals, damageVisuals;
         protected Color telegraphColor, telegraphTransparent, damageColor, damageTransparent;
         protected float maxLifeTime, timerProgressTrackingThreshold, delay;
         protected SoundData soundData, telegraphSound;
@@ -52,15 +51,7 @@ namespace Weapons
             else telegraphTimer.Reset(data.Delay);
             radius = data.Radius;
             range = data.Range;
-            lancePivot.localScale = new(radius * 2, radius * 2, range / 2);
             disableOnHit = false;
-            telegraphColor = data.TelegraphMaterial.color;
-            telegraphTransparent = new(telegraphColor.r, telegraphColor.g, telegraphColor.b, 0);
-            damageColor = data.DamageMaterial.color;
-            damageTransparent = new(damageColor.r, damageColor.g, damageColor.b, 0);
-            damageRenderer.material = data.DamageMaterial;
-            telegraphRenderer.material = data.TelegraphMaterial;
-            damageRenderer.material.color = damageTransparent;
             delay = data.Delay;
             lifeTime += delay;
             maxLifeTime = lifeTime;
@@ -92,29 +83,22 @@ namespace Weapons
         {
             if (telegraphTimer.IsRunning)
             {
-                //adjust telegraph renderer
-                telegraphRenderer.material.color = Color.Lerp(telegraphColor, telegraphTransparent, telegraphTimer.Progress);
-                //Debug.Log(telegraphRenderer.material.color.a);
-                //set position and rotation
                 if (target.Active() && telegraphTimer.Progress > timerProgressTrackingThreshold)
                 {
                     //track target
-                    lancePivot.LookAt(target.Position);
+                    Transform.LookAt(target.Position);
                 }
-            }
-            else
-            {
-                damageRenderer.material.color = Color.Lerp(damageTransparent, damageColor, lifeTime / (maxLifeTime - delay));
             }
             base.PerformUpdate(dt);
         }
 
         public void Telegraph()
         {
+            telegraphVisuals.Play();
             telegraphTimer.Start();
             telegraphSound.Play(Position);
-            telegraphRenderer.enabled = true;
-            damageRenderer.enabled = false;
+            telegraphVisuals.gameObject.SetActive(true);
+            telegraphVisuals.gameObject.SetActive(false);
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);
             for (int i = 0; i < colliderCount; i++)
@@ -131,10 +115,11 @@ namespace Weapons
             acceleration = 0;
             linearVelocity = Vector3.zero;
             OnThreatOver(this);
-            telegraphRenderer.enabled = false;
-            damageRenderer.enabled = true;
+            telegraphVisuals.Stop();
+            telegraphVisuals.Clear();
+            damageVisuals.gameObject.SetActive(true);
             soundData?.Play(Position);
-            telegraphRenderer.material.color = new(0, 0, 0, 0);
+            damageVisuals.Play();
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);
             HashSet<int> hits = new();

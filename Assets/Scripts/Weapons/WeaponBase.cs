@@ -145,6 +145,7 @@ namespace Weapons
         {
             for (int i = 0; i < shootPoints.Length; i++)
             {
+                if (shootPoints[i] == null || !shootPoints[i].gameObject.activeSelf) continue;
                 ProcessBullet(@params.GetInstance(shootPoints[i]), target, shootPoints[i]);
             }
         }

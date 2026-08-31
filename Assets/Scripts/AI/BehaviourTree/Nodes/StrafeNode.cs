@@ -13,16 +13,39 @@ public class StrafeNode : LeafNodeData
         Vertical
     }
 
+    public enum StrafeDirection
+    {
+        Vertical,
+        Horizontal,
+        Forward
+    }
+
     public TargetFacingMode TargetFacing;
     public int TicksBeforeRepath = 10;
     [SerializeField] protected float strafeMagnitude = 10;
     public bool UseOptimalFiringRange = true;
     [SerializeField] protected float distanceBuffer = 0;
+    [SerializeField]
+    protected StrafeDirection[] strafeDirections = new StrafeDirection[3]
+    {
+        StrafeDirection.Forward,StrafeDirection.Horizontal,StrafeDirection.Vertical
+    };
 
     protected enum InternalKeys
     {
         CurrentTicks,
         PrevDirection
+    }
+
+    protected Vector3 GetStrafeDirection(Transform transform, StrafeDirection strafeDirection)
+    {
+        return strafeDirection switch
+        {
+            StrafeDirection.Horizontal => transform.right,
+            StrafeDirection.Vertical => transform.up,
+            StrafeDirection.Forward => transform.forward,
+            _ => throw new Exception($"Invalid strafe direction: {strafeDirection}")
+        };
     }
 
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
@@ -54,21 +77,11 @@ public class StrafeNode : LeafNodeData
             n.SetData((int)InternalKeys.CurrentTicks, 0);
             var normal = target.Position - ctx.Position;
             var strafeDirection = Vector3.zero;
-            switch (TargetFacing)
+
+            for (int i = 0; i < strafeDirections.Length; i++)
             {
-                case TargetFacingMode.Forward:
-                    {
-                        strafeDirection = Vector3.ProjectOnPlane(ctx.Navigation.Right, normal);
-                        if (strafeDirection.magnitude < 0.1f) strafeDirection = ctx.Navigation.Up;
-                        Debug.DrawRay(ctx.Position, strafeDirection, Color.white, 2);
-                        break;
-                    }
-                default:
-                    {
-                        strafeDirection = Vector3.ProjectOnPlane(ctx.Navigation.Forward, normal);
-                        if (strafeDirection.magnitude < .1f) strafeDirection = ctx.Navigation.Right;
-                        break;
-                    }
+                strafeDirection = Vector3.ProjectOnPlane(GetStrafeDirection(ctx.Navigation.Transform, strafeDirections[i]), normal);
+                if (strafeDirection.magnitude > 0.3f) break;
             }
             //Debug.Log("Strafing");
             var destination = ctx.Position + strafeDirection * strafeMagnitude;

@@ -8,6 +8,7 @@ public class TurretEditor : Editor
     private void OnSceneGUI()
     {
         Turret turret = (Turret)target;
+        if (turret.Parameters == null) return;
         if (turret.Parameters.MaxAngleDifference >= 360) return;
         Handles.color = Color.softGreen;
         var maxRotation = turret.Parameters.MaxRot;
