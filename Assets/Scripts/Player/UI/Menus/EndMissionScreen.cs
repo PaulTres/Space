@@ -25,7 +25,7 @@ namespace Player
                 Select(a => new KeyValuePair<string, int>(a.Key, a.Count()));
             foreach (var pair in killCounts)
             {
-                playerKills.text += '\n' + pair.Key + " x " + pair.Value;
+                playerKills.text += '\n' + pair.Value + " x " + pair.Key;
             }
             playerKills.SetAllDirty();
         }

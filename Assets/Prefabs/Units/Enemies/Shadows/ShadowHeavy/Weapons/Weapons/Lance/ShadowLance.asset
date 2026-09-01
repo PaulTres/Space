@@ -52,13 +52,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Delay: 2
+  Delay: 3
   Range: 200
   Radius: 10
   TimerProgressTrackingThreshold: 0.5
   TelegraphSound:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1c807b6ba8fb9544d9c02bf47d9ce979, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
     ignoreListenerPause: 0
     rolloffMode: 0
   FireSound:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
+    clip: {fileID: 8300000, guid: 57fd38b20a876d940aa6e6604a4eaf64, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0

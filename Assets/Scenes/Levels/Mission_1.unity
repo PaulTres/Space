@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
   spawnRadius: 0
   team: 2
   playSpawnEffect: 1

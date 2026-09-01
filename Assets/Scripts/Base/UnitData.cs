@@ -68,6 +68,6 @@ public class UnitData : MonoSpawnableData<Unit>
     protected void OnValidate()
     {
         Debug.Assert(Prefab != null, $"Prefab is null for {this}!");
-        Debug.Assert(!ShouldBeDisabled || !Prefab.gameObject.activeSelf, $"Prefab {Prefab} is active in the scene for {this}!");
+        Debug.Assert(!ShouldBeDisabled || !Prefab.gameObject.activeSelf, $"Prefab {Prefab} is active for {this}!");
     }
 }

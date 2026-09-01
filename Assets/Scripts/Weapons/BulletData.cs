@@ -41,6 +41,7 @@ namespace Weapons
                 Debug.LogError($"Lifetime <= 0 for {this}!");
                 LifeTime = 1;
             }
+            Debug.Assert(Prefab != null && !Prefab.gameObject.activeSelf, $"{this} has null or invalid prefab!");
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Player
 
         public void Open()
         {
-            MenuPDA.AddOnTop(this, true);
+            MenuPDA.AddOnTop(this);
         }
 
         public void Close()
