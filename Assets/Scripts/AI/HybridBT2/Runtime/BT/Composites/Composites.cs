@@ -97,6 +97,10 @@ namespace HybridBT2
     public class Selector : RegularComposite
     {
         protected int prevChild = -1;
+        /// <summary>
+        /// Added here for testing purposes. Returns the index of the child that was previously executed. -1 if none.
+        /// </summary>
+        public int PrevChild => prevChild;
 
         public Selector(string name, Action<Node, Blackboard> onEnter = null, Action<Node, Blackboard> onExit = null) : base(name, onEnter, onExit)
         {

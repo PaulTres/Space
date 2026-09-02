@@ -82,17 +82,17 @@ namespace Weapons
         #endregion
 
         #region Functionality
-        protected override void PerformUpdate(float dt)
+        protected override void PerformFixedUpdate(float dt)
         {
-            base.PerformUpdate(dt);
-            if (!CheckCollisions(dt)) RestOfPerformUpdate(dt);
+            base.PerformFixedUpdate(dt);
+            if (!CheckCollisions(dt)) RestOfPerformFixedUpdate(dt);
         }
 
         /// <summary>
         /// Updates and applies linear velocity.
         /// </summary>
         /// <param name="dt"></param>
-        protected virtual void RestOfPerformUpdate(float dt)
+        protected virtual void RestOfPerformFixedUpdate(float dt)
         {
             linearVelocity += acceleration * dt * Transform.forward;
             if (inertialDampeners)

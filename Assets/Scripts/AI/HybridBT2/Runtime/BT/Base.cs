@@ -114,7 +114,7 @@ namespace HybridBT2
         {
             get
             {
-                return alwaysCheck ?? false;
+                return alwaysCheck ?? true;
             }
             set
             {
@@ -169,6 +169,12 @@ namespace HybridBT2
         {
             if (data == null) Debug.LogError($"{this} was passed a null condition!");
             else conditions.Add(new(data.Name, data.Function));
+        }
+
+        public void AddCondition(string name, Func<Node, Blackboard, bool> function)
+        {
+            if (function == null) throw new ArgumentNullException($"{this} was passed a null condition!");
+            conditions.Add(new(name, function));
         }
 
         /// <summary>

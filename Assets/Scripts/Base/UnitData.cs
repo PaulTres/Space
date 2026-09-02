@@ -8,6 +8,7 @@ using UnityEngine.AddressableAssets;
 [CreateAssetMenu(menuName = "ScriptableObjects/UnitData", fileName = "UnitData")]
 public class UnitData : MonoSpawnableData<Unit>
 {
+    #region Statics
     public static int PlayerChoiceIndex { get; set; } = 0;
     public static List<UnitData> AvailablePlayerOptions { get; } = new();
     public static UnitData PlayerChoice => AvailablePlayerOptions[PlayerChoiceIndex];
@@ -20,6 +21,14 @@ public class UnitData : MonoSpawnableData<Unit>
         {
             var playerHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
                 PlayerOptionsAddressableTag, (data) => AvailablePlayerOptions.Add(data));
+            AvailablePlayerOptions.Sort((a, b) =>
+            {
+                if (a.MissionRequirement != b.MissionRequirement)
+                {
+                    return a.MissionRequirement.CompareTo(b.MissionRequirement);
+                }
+                return a.name.CompareTo(b.name);
+            });
             await playerHandle.Task;
         }
         catch (Exception e)
@@ -49,6 +58,7 @@ public class UnitData : MonoSpawnableData<Unit>
         //    //Debug.LogException(e);
         //}
     }
+    #endregion
 
     public bool ShouldBeDisabled = true;
     public int Points = 1;

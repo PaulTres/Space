@@ -79,7 +79,7 @@ namespace Weapons
             this.target = target;
         }
 
-        protected override void PerformUpdate(float dt)
+        protected override void PerformFixedUpdate(float dt)
         {
             if (telegraphTimer.IsRunning)
             {
@@ -89,7 +89,7 @@ namespace Weapons
                     Transform.LookAt(target.Position);
                 }
             }
-            base.PerformUpdate(dt);
+            base.PerformFixedUpdate(dt);
         }
 
         public void Telegraph()

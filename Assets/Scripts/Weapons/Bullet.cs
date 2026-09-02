@@ -89,7 +89,7 @@ namespace Weapons
         protected virtual void OnEnable()
         {
             onSpawnEffect.SpawnEffect(Transform.position, effectScaleFactor);
-            GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformUpdate);
+            GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformFixedUpdate);
         }
 
         public virtual void Initialize(BulletData poolableData)
@@ -115,7 +115,7 @@ namespace Weapons
         {
             ClearOwner();
             var u = GlobalUpdater.TryGetInstance();
-            if (u != null) u.UnregisterFixedUpdate(PerformUpdate);
+            if (u != null) u.UnregisterFixedUpdate(PerformFixedUpdate);
             Release(this);
         }
 
@@ -126,7 +126,7 @@ namespace Weapons
         #endregion
 
         #region Functionality
-        protected virtual void PerformUpdate(float dt)
+        protected virtual void PerformFixedUpdate(float dt)
         {
             lifeTime -= dt;
             if (lifeTime <= 0)

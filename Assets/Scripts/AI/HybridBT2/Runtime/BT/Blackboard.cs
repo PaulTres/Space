@@ -25,13 +25,18 @@ namespace HybridBT2
         /// Time since last tree tick.
         /// </summary>
         public float DeltaTime { get; protected set; }
+        /// <summary>
+        /// This should only be used for tests. Use Tick() instead, which will automatically calculate the delta time.
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        public void SetDeltaTime(float deltaTime) => DeltaTime = deltaTime;
         protected Dictionary<Keys, object> data = new();
         protected float lastTime;
         public HashSet<IThreat> Threats { get; protected set; } = new();
 
         public Blackboard(Transform transform)
         {
-            Navigation = transform.GetComponent<Navigation>();
+            if (transform != null) Navigation = transform.GetComponent<Navigation>();
             DeltaTime = 0;
             lastTime = Time.time;
         }

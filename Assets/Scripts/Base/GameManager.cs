@@ -38,9 +38,10 @@ public static class GameManager
         get
         {
             if (currentSave == null) return 0;
-            return Mathf.Min(currentSave.CurrentMissionIndex, Mission.Campaign.Count - 1);
+            return Mathf.Min(currentSave.CurrentMissionIndex, Mission.Campaign.Count);
         }
     }
+    public static bool CampaignCompleted => LatestMissionIndex >= Mission.Campaign.Count;
     /// <summary>
     /// The mission the player has chosen to play.
     /// </summary>
@@ -65,7 +66,7 @@ public static class GameManager
     {
         if (ChosenMissionIndex == LatestMissionIndex)
         {
-            currentSave.CurrentMissionIndex = Mathf.Min(Mission.Campaign.Count - 1, ChosenMissionIndex + 1);
+            currentSave.CurrentMissionIndex++;
             currentSave.Save();
         }
     }

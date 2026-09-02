@@ -18,6 +18,7 @@ namespace HybridBT2
         /// Updated every time GetUtility is called.
         /// </summary>
         public float Score { get; protected set; }
+
         public UtilityWrapper(string name, Consideration consideration,
             Action<Node, Blackboard> onEnter, Action<Node, Blackboard> onExit) : base(name, onEnter, onExit)
         {

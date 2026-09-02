@@ -22,8 +22,8 @@ namespace Player
                 //Debug.Log(i);
                 missionOptions.options.Add(new(Mission.Campaign[i].name));
             }
-            missionOptions.SetValueWithoutNotify(Mathf.Min(GameManager.LatestMissionIndex, missionOptions.options.Count - 1));
-            SetMissionChoice(Mathf.Min(GameManager.LatestMissionIndex, missionOptions.options.Count - 1));
+            missionOptions.SetValueWithoutNotify(GameManager.LatestMissionIndex);
+            SetMissionChoice(GameManager.LatestMissionIndex);
         }
 
         #endregion

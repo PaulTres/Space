@@ -120,7 +120,7 @@ namespace Weapons
         /// Calculates and applies tracking and linear velocity.
         /// </summary>
         /// <param name="dt"></param>
-        protected override void RestOfPerformUpdate(float dt)
+        protected override void RestOfPerformFixedUpdate(float dt)
         {
             if (Target.Active())
             {
@@ -142,7 +142,7 @@ namespace Weapons
 
                 angularVelocity = axis * (angleInDegrees * Mathf.Deg2Rad) / dt;
             }
-            base.RestOfPerformUpdate(dt);
+            base.RestOfPerformFixedUpdate(dt);
         }
 
         /// <summary>

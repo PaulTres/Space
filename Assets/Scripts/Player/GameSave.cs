@@ -10,10 +10,8 @@ namespace Player
     {
         public static readonly string Name = "GameSave";
         public static readonly List<string> Saves = new List<string>();
-
         public readonly long dateTimeBinary;
         public int CurrentMissionIndex { get; set; } = 0;
-
 
         [JsonConstructor]
         public GameSave([JsonProperty("LatestMissionIndex")] int index)

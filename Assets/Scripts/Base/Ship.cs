@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using Utilities;
 
@@ -24,7 +23,7 @@ public abstract class Ship : Unit
         base.Awake();
         ComponentRegister<ImprovedMonoBehaviour>.Register(transform, this);
         thrusters = GetComponentInChildren<ThrusterGroup>();
-        rb = gameObject.GetOrAddComponent<Rigidbody>();
+        rb = Transform.GetOrAddComponent<Rigidbody>();
         rb.isKinematic = false;
         rb.useGravity = false;
         rb.freezeRotation = true;
