@@ -21,7 +21,8 @@ namespace Weapons
             BasicShell,
             RegularMissile,
             ShadowMissile,
-            Lance
+            Lance,
+            MACRound
         }
         static readonly ObjectPool<Type, Bullet> objectPool = new();
 

@@ -1,3 +1,4 @@
+using AudioSystem;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class GlobalConfig : ScriptableObject
         {
             if (instance == null)
             {
-
                 var handle = Addressables.LoadAssetAsync<GlobalConfig>(addressableAdress);
                 instance = handle.WaitForCompletion();
             }
@@ -32,6 +32,8 @@ public class GlobalConfig : ScriptableObject
 
     #region UI
     [Header("UI")]
+    [SerializeField] protected SoundData clickSound;
+    public static SoundData ClickSound => Instance.clickSound;
     public static float FOV { get; set; } = 90;
     public static float PlayerTargetAngleWeight { get; set; } = 1;
     public static float PlayerTargetDistanceWeight { get; set; } = 1;

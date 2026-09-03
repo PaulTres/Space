@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 953988925140793162}
   - component: {fileID: 7377462339952860894}
   - component: {fileID: 4652603591391868719}
+  - component: {fileID: 262147046203630752}
   m_Layer: 5
   m_Name: Close_Button_Medium
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &262147046203630752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268029499960346525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &3394961777028216876
 GameObject:
   m_ObjectHideFlags: 0

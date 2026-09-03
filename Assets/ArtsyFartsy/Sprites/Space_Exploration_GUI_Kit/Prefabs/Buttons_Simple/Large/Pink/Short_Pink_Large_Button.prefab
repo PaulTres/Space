@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9101979433101458001}
   - component: {fileID: 7018517561437487905}
   - component: {fileID: 2929938353213862622}
+  - component: {fileID: -5349694115007142310}
   m_Layer: 5
   m_Name: Short_Pink_Large_Button
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5349694115007142310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272216899391044601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &8281913507807726211
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +237,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

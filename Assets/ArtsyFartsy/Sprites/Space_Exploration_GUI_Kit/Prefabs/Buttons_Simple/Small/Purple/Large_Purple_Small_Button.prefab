@@ -103,6 +103,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 5
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -148,6 +149,7 @@ GameObject:
   - component: {fileID: 5457739168799432538}
   - component: {fileID: 6896725766277449165}
   - component: {fileID: 7034242800116242856}
+  - component: {fileID: -3261044825377208020}
   m_Layer: 5
   m_Name: Large_Purple_Small_Button
   m_TagString: Untagged
@@ -257,3 +259,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3261044825377208020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6852365476767164249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook

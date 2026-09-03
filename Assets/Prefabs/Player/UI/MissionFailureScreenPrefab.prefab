@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 5362616432566543178}
   - component: {fileID: 515473255067967524}
   - component: {fileID: 6326613415126829985}
+  - component: {fileID: 1907827507313896038}
   m_Layer: 5
   m_Name: GoToMenu
   m_TagString: Untagged
@@ -238,6 +239,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1907827507313896038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564129428762626068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &3089543800771284367
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,7 +533,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MissionFailureScreen
   delayBeforeShowing: 1
-  canvas: {fileID: 342189961809663070}
 --- !u!81 &2941916668368914544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -753,6 +765,7 @@ GameObject:
   - component: {fileID: 1100683074813662876}
   - component: {fileID: 1933764410795613448}
   - component: {fileID: 5508702193431314705}
+  - component: {fileID: 8611461399971906617}
   m_Layer: 5
   m_Name: Replan
   m_TagString: Untagged
@@ -874,6 +887,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8611461399971906617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6309942882852920950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &6387316593675637313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,6 +1127,7 @@ GameObject:
   - component: {fileID: 1150115280542835342}
   - component: {fileID: 1050567067369679161}
   - component: {fileID: 4628822039261298373}
+  - component: {fileID: -5111592425121644558}
   m_Layer: 5
   m_Name: Restart
   m_TagString: Untagged
@@ -1223,3 +1249,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-5111592425121644558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8589221053636306918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook

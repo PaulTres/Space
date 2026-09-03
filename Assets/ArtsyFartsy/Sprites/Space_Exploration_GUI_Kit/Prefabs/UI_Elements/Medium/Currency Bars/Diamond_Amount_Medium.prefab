@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 829682123028925933}
   - component: {fileID: 2038386509915126052}
   - component: {fileID: 657364998617974736}
+  - component: {fileID: 7223117017793564682}
   m_Layer: 5
   m_Name: Plus Button
   m_TagString: Untagged
@@ -408,6 +409,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -536,5 +538,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7465764765716815148, guid: e2d5d33fec8d9be40a81d8aaf8f706b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7223117017793564682}
   m_SourcePrefab: {fileID: 100100000, guid: e2d5d33fec8d9be40a81d8aaf8f706b6, type: 3}
+--- !u!114 &7223117017793564682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7103922346852454754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook

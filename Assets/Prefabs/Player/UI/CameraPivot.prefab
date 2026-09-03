@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 5502448558450687096}
   - component: {fileID: 6367159237531322158}
   - component: {fileID: 3309181087826561171}
+  - component: {fileID: -5423434596270103129}
   m_Layer: 6
   m_Name: Higher
   m_TagString: Untagged
@@ -469,6 +470,7 @@ GameObject:
   - component: {fileID: 7565033516593053806}
   - component: {fileID: 1251230844531651477}
   - component: {fileID: 8001394244733608787}
+  - component: {fileID: -4337934568992781246}
   m_Layer: 6
   m_Name: Audio
   m_TagString: Untagged
@@ -5737,6 +5739,7 @@ GameObject:
   - component: {fileID: 3014581971033228691}
   - component: {fileID: 51721645964926787}
   - component: {fileID: 1743185096083738643}
+  - component: {fileID: 932903445911676571}
   m_Layer: 6
   m_Name: Options
   m_TagString: Untagged
@@ -6598,6 +6601,7 @@ GameObject:
   - component: {fileID: 3259460578726642560}
   - component: {fileID: 4910634606290786410}
   - component: {fileID: 5984009100261923184}
+  - component: {fileID: -8971222808677735604}
   m_Layer: 6
   m_Name: Yes
   m_TagString: Untagged
@@ -7292,6 +7296,7 @@ GameObject:
   - component: {fileID: 4471423340601926804}
   - component: {fileID: 6932451712112594874}
   - component: {fileID: 7540543184535416535}
+  - component: {fileID: -3024481955994050603}
   m_Layer: 6
   m_Name: Resume
   m_TagString: Untagged
@@ -9182,6 +9187,7 @@ GameObject:
   - component: {fileID: 5409440386022447730}
   - component: {fileID: 3141289913170633337}
   - component: {fileID: 4165820343615958086}
+  - component: {fileID: 5717380571383910113}
   m_Layer: 6
   m_Name: Video
   m_TagString: Untagged
@@ -9315,6 +9321,7 @@ GameObject:
   - component: {fileID: 3366128881984210738}
   - component: {fileID: 4561621447420109872}
   - component: {fileID: 3227694510046605874}
+  - component: {fileID: 2426272970598148385}
   m_Layer: 6
   m_Name: ExitToMainMenu
   m_TagString: Untagged
@@ -10734,6 +10741,7 @@ GameObject:
   - component: {fileID: 7536066145983086111}
   - component: {fileID: 4117138935471416112}
   - component: {fileID: 1766529090327864848}
+  - component: {fileID: 6210367299825222134}
   m_Layer: 6
   m_Name: Lower
   m_TagString: Untagged
@@ -13323,6 +13331,7 @@ GameObject:
   - component: {fileID: 8948617323417130712}
   - component: {fileID: 8294442904081716683}
   - component: {fileID: 1774489761629228371}
+  - component: {fileID: -8434184725947278226}
   m_Layer: 6
   m_Name: No
   m_TagString: Untagged
@@ -14161,5 +14170,140 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7173980200709933336, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
       insertIndex: 5
       addedObject: {fileID: 934092084821065063}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7972562850241173293, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3024481955994050603}
+    - targetCorrespondingSourceObject: {fileID: 6602249654543393013, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932903445911676571}
+    - targetCorrespondingSourceObject: {fileID: 1611793209038201583, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2426272970598148385}
+    - targetCorrespondingSourceObject: {fileID: 3950775792018921102, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8434184725947278226}
+    - targetCorrespondingSourceObject: {fileID: 1785597702144426014, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8971222808677735604}
+    - targetCorrespondingSourceObject: {fileID: 8069971364281564455, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5717380571383910113}
+    - targetCorrespondingSourceObject: {fileID: 7286238023438439943, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4337934568992781246}
+    - targetCorrespondingSourceObject: {fileID: 4361933536628103790, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6210367299825222134}
+    - targetCorrespondingSourceObject: {fileID: 5221062863112625791, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5423434596270103129}
   m_SourcePrefab: {fileID: 100100000, guid: 63629e20e84e6e7489e71dbde496868a, type: 3}
+--- !u!114 &-5423434596270103129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234333643187129295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &-4337934568992781246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382436439163006705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &932903445911676571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890843235529626721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &-8971222808677735604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655187968869064735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &-3024481955994050603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144339956748988651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &5717380571383910113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371168596862737602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &2426272970598148385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4396752925370622596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &6210367299825222134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6422659849446197852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
+--- !u!114 &-8434184725947278226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037484667948805290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook

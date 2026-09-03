@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 7639962351761823058}
   - component: {fileID: 7805740252906040378}
   - component: {fileID: 1836563963503700681}
+  - component: {fileID: 2832566036228598811}
   m_Layer: 5
   m_Name: Back_Button_Medium
   m_TagString: Untagged
@@ -208,3 +209,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2832566036228598811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6967465733109240045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook

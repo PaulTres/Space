@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: b6cf7f9587bc5ac428cb339b4ac76569
   m_SerializeEntries:
+  - m_GUID: 4af1c2d10737e194bb5401b0fca00255
+    m_Address: Assets/Prefabs/Player/Paris/Paris_Player.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Player
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 58c2177626d458a4896e6d8e83d46477
     m_Address: Campaign
     m_ReadOnly: 0

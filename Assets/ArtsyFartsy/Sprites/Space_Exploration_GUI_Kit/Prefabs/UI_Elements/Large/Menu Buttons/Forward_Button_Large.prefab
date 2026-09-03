@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 654997114215252518}
   - component: {fileID: 7369729343666086190}
   - component: {fileID: 1366979971046324353}
+  - component: {fileID: 5610774297189765536}
   m_Layer: 5
   m_Name: Forward_Button_Large
   m_TagString: Untagged
@@ -133,6 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5610774297189765536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5587582031706600495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &6273788315404338918
 GameObject:
   m_ObjectHideFlags: 0

@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 8512290411048858966}
   - component: {fileID: 3530467849695408802}
   - component: {fileID: 2524921969192157013}
+  - component: {fileID: 3331131361229362754}
   m_Layer: 5
   m_Name: Plus Button
   m_TagString: Untagged
@@ -195,6 +196,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3331131361229362754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497737458620633034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &6255177863863982083
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,6 +421,7 @@ MonoBehaviour:
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

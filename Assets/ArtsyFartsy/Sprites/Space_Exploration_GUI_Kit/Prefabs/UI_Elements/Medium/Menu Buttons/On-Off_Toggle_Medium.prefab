@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4387766053013962280}
   - component: {fileID: 1578375032936634659}
   - component: {fileID: 5132978093075852752}
+  - component: {fileID: -6259277647456795222}
   m_Layer: 5
   m_Name: Off(inactive)
   m_TagString: Untagged
@@ -132,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-6259277647456795222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231958705588586879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &684344810209242091
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +157,7 @@ GameObject:
   - component: {fileID: 6071267940133923670}
   - component: {fileID: 2307452853453132721}
   - component: {fileID: 5568642376114877593}
+  - component: {fileID: 234670522038350207}
   m_Layer: 5
   m_Name: ON(inactive)
   m_TagString: Untagged
@@ -264,6 +278,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &234670522038350207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684344810209242091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &902498892062041178
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +343,7 @@ GameObject:
   - component: {fileID: 6231834024538509793}
   - component: {fileID: 3226310042221069912}
   - component: {fileID: 5210121267186876865}
+  - component: {fileID: -6797493659393342609}
   m_Layer: 5
   m_Name: Off(active)
   m_TagString: Untagged
@@ -437,6 +464,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-6797493659393342609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092354362939342511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &4180752165352832239
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +537,7 @@ GameObject:
   - component: {fileID: 7160219407322711774}
   - component: {fileID: 426499087927388326}
   - component: {fileID: 4183988059074531730}
+  - component: {fileID: -4841631736083927662}
   m_Layer: 5
   m_Name: ON(active)
   m_TagString: Untagged
@@ -618,6 +658,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-4841631736083927662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815518375859945889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!1 &9001823119503471085
 GameObject:
   m_ObjectHideFlags: 0
