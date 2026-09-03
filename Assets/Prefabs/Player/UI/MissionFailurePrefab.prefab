@@ -519,6 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab578992f4453f4bba48b7b4f41e3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.MissionFailureScreen
+  delayBeforeShowing: 1
+  canvas: {fileID: 342189961809663070}
 --- !u!81 &2941916668368914544
 AudioListener:
   m_ObjectHideFlags: 0

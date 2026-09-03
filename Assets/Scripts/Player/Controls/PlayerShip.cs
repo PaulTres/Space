@@ -24,6 +24,7 @@ namespace Player
             public float ZSens = 10;
         }
         public static Camera PlayerCamera { get; protected set; } = null;
+        public static bool PlayerDead { get; protected set; } = false;
 
         #region Fields
         [Header("Player controls")]
@@ -55,6 +56,7 @@ namespace Player
         protected override void Awake()
         {
             base.Awake();
+            PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
             GameManager.InputActions.BasicControls.SetCallbacks(this);
@@ -95,6 +97,7 @@ namespace Player
             if (IsDying)
             {
                 //spawn mission failure screen
+                PlayerDead = true;
                 Instantiate(missionFailureScreenPrefab, transform.position, transform.rotation);
             }
         }
