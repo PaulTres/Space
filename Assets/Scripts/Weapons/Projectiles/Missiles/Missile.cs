@@ -5,8 +5,6 @@ using UnityEngine;
 using Utilities;
 namespace Weapons
 {
-    [RequireComponent(typeof(HPComponent))]
-    [RequireComponent(typeof(SphereCollider))]
     public class Missile : Projectile
     {
         #region Fields
@@ -39,7 +37,14 @@ namespace Weapons
             get => targetedDamage;
             set => targetedDamage = Mathf.Max(value, 0);
         }
-        public float MaxHP => HPComponent.MaxHP;
+        public float MaxHP
+        {
+            get
+            {
+                if (HPComponent == null) return 0;
+                return HPComponent.MaxHP;
+            }
+        }
         #endregion
 
         #region Setup
@@ -87,7 +92,7 @@ namespace Weapons
                     $"got {poolableData.GetType()}");
             }
             initialTracking = missileData.Tracking;
-            HPComponent.MaxHP = missileData.HP;
+            if (missileData.HP > 0 && HPComponent != null) HPComponent.MaxHP = missileData.HP;
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;
             onDeathEffect = missileData.OnDeathEffect;

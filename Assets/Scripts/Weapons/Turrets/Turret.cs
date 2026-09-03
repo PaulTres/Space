@@ -36,6 +36,10 @@ namespace Weapons
         public Transform Transform => tr != null ? tr : transform;
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
+        [field: SerializeField] public float MinElevation { get; protected set; } = -45;
+        [field: SerializeField] public float MaxElevation { get; protected set; } = 90;
+        [field: SerializeField] public float MinRot { get; protected set; } = -190;
+        [field: SerializeField] public float MaxRot { get; protected set; } = 190;
         public TurretData Parameters => @params;
         public bool TargetMissiles { get; set; }
         public bool TargetUnits { get; set; }
@@ -73,7 +77,6 @@ namespace Weapons
             Weapons = new(GetComponentsInChildren<WeaponBase>());
             turretStances.Add(new AggressiveTurretStance() { Turret = this, TurretData = @params });
             turretStances.Add(new DefensiveTurretStance() { Turret = this, TurretData = @params });
-            turretStances.Add(new PassiveTurretStance() { Turret = this, TurretData = @params });
         }
 
         protected virtual void OnEnable()
@@ -224,17 +227,17 @@ namespace Weapons
             if (dir.sqrMagnitude == 0) return false;
             if (Mathf.Abs(Vector3.Dot(Transform.up, dir)) == 1)
             {
-                return @params.MaxAngleDifference >= 90 || @params.MaxElevation >= 90;
+                return @params.MaxAngleDifference >= 90 || MaxElevation >= 90;
             }
 
             var localRotation = Quaternion.Inverse(Transform.rotation) *
                 Quaternion.LookRotation(dir, Transform.up);
 
             var y = Extensions.NormalizeAngle(localRotation.eulerAngles.y);
-            if (y < @params.MinRot || y > @params.MaxRot) return false;
+            if (y < MinRot || y > MaxRot) return false;
 
             var x = Extensions.NormalizeAngle(localRotation.eulerAngles.x);
-            if (x < -@params.MaxElevation || x > -@params.MinElevation) return false;
+            if (x < -MaxElevation || x > -MinElevation) return false;
 
             return true;
         }
@@ -364,9 +367,9 @@ namespace Weapons
 
             RotationPivot.rotation = targetRot;
             var targetYaw = Mathf.Clamp(Extensions.NormalizeAngle(RotationPivot.
-                localRotation.eulerAngles.y), @params.MinRot, @params.MaxRot);
+                localRotation.eulerAngles.y), MinRot, MaxRot);
             var targetPitch = Mathf.Clamp(Extensions.NormalizeAngle(RotationPivot.
-                localRotation.eulerAngles.x), -@params.MaxElevation, -@params.MinElevation);
+                localRotation.eulerAngles.x), -MaxElevation, -MinElevation);
 
             RotationPivot.localRotation = Quaternion.Euler(targetPitch, targetYaw, 0);
         }
@@ -385,7 +388,7 @@ namespace Weapons
                 newRotation, deltaTime * @params.RotSpeed);
             RotationPivot.rotation = horizTargetRot;
             var targetYaw = Mathf.Clamp(Extensions.NormalizeAngle(RotationPivot.
-                localRotation.eulerAngles.y), @params.MinRot, @params.MaxRot);
+                localRotation.eulerAngles.y), MinRot, MaxRot);
             RotationPivot.localRotation = Quaternion.Euler(0, targetYaw, 0);
 
             //newRotation = Quaternion.LookRotation(direction, Transform.up);
@@ -393,7 +396,7 @@ namespace Weapons
                 newRotation, deltaTime * @params.RotSpeed);
             ElevationPivot.rotation = elevTargetRot;
             var targetPitch = Mathf.Clamp(Extensions.NormalizeAngle(ElevationPivot.
-                localRotation.eulerAngles.x), -@params.MaxElevation, -@params.MinElevation);
+                localRotation.eulerAngles.x), -MaxElevation, -MinElevation);
             //var targetPitch=Mathf.Clamp(ElevationPivot.localRotation.x,)
             ElevationPivot.localRotation = Quaternion.Euler(targetPitch, 0, 0);
 

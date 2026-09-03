@@ -2,6 +2,7 @@ using EventBus;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utilities;
 namespace Player
 {
     public class UISystem : MonoBehaviour, PlayerControls.IUIActions
@@ -60,6 +61,7 @@ namespace Player
             w.RectTransform.anchoredPosition = @event.AnchoredPosition;
             w.gameObject.SetActive(true);
             currentWidget = w;
+            @event.Sound?.Play(transform.position);
         }
 
         protected void ReleaseWidget(Widget widget)

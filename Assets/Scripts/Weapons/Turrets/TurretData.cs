@@ -32,9 +32,5 @@ namespace Weapons
         public int BurstCount = 1;
         [Header("Turret movement")]
         public float RotSpeed = 50;
-        public float MinElevation = -45;
-        public float MaxElevation = 90;
-        public float MinRot = -190;
-        public float MaxRot = 190;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using Utilities;
 namespace Effects
 {
-
     public class PoolableEffect : MonoBehaviour
     {
         #region Pool
@@ -19,7 +18,10 @@ namespace Effects
             ExplosionBigGreen,
             ExplosionBigRed,
             JumpEffect,
-            ShadowPDLaserShot
+            ShadowPDLaserShot,
+            ShadowExplosionSmall,
+            HumanExplosionSmall,
+            MissileLaunchYellow
         }
         static readonly ObjectPool<Type, PoolableEffect> objectPool = new();
 
@@ -63,6 +65,7 @@ namespace Effects
             foreach (var particle in particles)
             {
                 var p = particle.main;
+                p.loop = false;
                 p.stopAction = ParticleSystemStopAction.Disable;
             }
         }

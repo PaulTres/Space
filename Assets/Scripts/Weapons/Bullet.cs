@@ -19,7 +19,8 @@ namespace Weapons
         {
             Laser,
             BasicShell,
-            Missile,
+            RegularMissile,
+            ShadowMissile,
             Lance
         }
         static readonly ObjectPool<Type, Bullet> objectPool = new();

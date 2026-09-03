@@ -13,7 +13,19 @@ namespace Player
     [System.Serializable]
     public class TurretGroup : WeaponGroup
     {
-        public List<Turret> Turrets = new();
+        [SerializeField] protected Transform turretParent;
+        protected List<Turret> turrets = new();
+        public List<Turret> Turrets
+        {
+            get
+            {
+                if (turrets.IsEmpty())
+                {
+                    turretParent.GetComponentsInChildren(true, turrets);
+                }
+                return turrets;
+            }
+        }
         public Heatsink Heatsink;
         /// <summary>
         /// 0 - fully reloaded<br/>
@@ -33,7 +45,19 @@ namespace Player
     [System.Serializable]
     public class MissileGroup : WeaponGroup
     {
-        public List<MissileLauncher> Launchers = new();
+        [SerializeField] protected Transform missileLauncherParent;
+        protected List<MissileLauncher> launchers = new();
+        public List<MissileLauncher> Launchers
+        {
+            get
+            {
+                if (launchers.IsEmpty())
+                {
+                    missileLauncherParent.GetComponentsInChildren(true, launchers);
+                }
+                return launchers;
+            }
+        }
         public Magazine Magazine
         {
             get

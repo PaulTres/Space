@@ -1,3 +1,4 @@
+using AudioSystem;
 using EventBus;
 using UnityEngine;
 using Utilities;
@@ -77,19 +78,21 @@ public readonly struct ShowText : IEvent
     public readonly string Text;
     public readonly Color TextColor;
     public readonly float LifeTime;
+    public readonly SoundData Sound;
 
     public ShowText(Vector3 anchoredPosition, Vector2 anchorMax, Vector2 anchorMin,
-        float lifeTime, string text, Color color)
+        float lifeTime, string text, Color color, SoundData sound = null)
     {
         AnchoredPosition = anchoredPosition;
         LifeTime = lifeTime;
         AnchorMax = anchorMax;
         AnchorMin = anchorMin;
+        Sound = sound;
         Text = text;
         TextColor = color;
     }
 
-    public ShowText(Vector3 anchoredPosition, float lifeTime, string text, Color color)
+    public ShowText(Vector3 anchoredPosition, float lifeTime, string text, Color color, SoundData sound = null)
     {
         AnchoredPosition = anchoredPosition;
         LifeTime = lifeTime;
@@ -97,6 +100,7 @@ public readonly struct ShowText : IEvent
         AnchorMin = new(0.5f, 0.5f);
         Text = text;
         TextColor = color;
+        Sound = sound;
     }
 }
 #endregion

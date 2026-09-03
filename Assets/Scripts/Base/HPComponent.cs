@@ -75,6 +75,8 @@ namespace HP
             }
         }
         [SerializeField] protected PoolableEffect effectOnDamage;
+        [Tooltip("The threshold of damage at which the damage effect will be played.")]
+        [SerializeField] protected float damageThreshold = 0.5f;
         [SerializeField] protected float effectScaleFactor = 1;
         #endregion
 
@@ -131,7 +133,8 @@ namespace HP
             }
             if (ImprovedMonoBehaviour.IsDying) return;
             //Debug.Log(damageInfo.Amount);
-            CurrentHP -= CalculateDamage(damageInfo);
+            var damage = CalculateDamage(damageInfo);
+            CurrentHP -= damage;
             if (CurrentHP <= 0 && !firedEvent)
             {
                 firedEvent = true;
@@ -143,7 +146,7 @@ namespace HP
                 }
                 return;
             }
-            effectOnDamage.SpawnEffect(damageInfo.Position, effectScaleFactor);
+            if (damage >= damageThreshold) effectOnDamage.SpawnEffect(damageInfo.Position, effectScaleFactor);
             if (currentHP < minHP)
             {
                 //begin hp regain timer

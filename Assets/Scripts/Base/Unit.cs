@@ -11,8 +11,7 @@ using Weapons;
 
 
 [RequireComponent(typeof(HPComponent))]
-[RequireComponent(typeof(ParticleSystem))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(UnitDeathEffects))]
 public abstract class Unit : ImprovedMonoBehaviour
 {
     [System.Serializable]
@@ -23,8 +22,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
-        [Tooltip("Plays when the ship has finished exploding.")]
-        public PoolableEffect EffectOnDeath;
         [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
         [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
         [field: SerializeField] public float MinimumSignature { get; protected set; }
@@ -52,12 +49,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// Fires on every tick. Mainly used to update turrets.
     /// </summary>
     protected Action onTick = delegate { };
-    /// <summary>
-    /// Plays while the unit explodes. UnitProperty will be disabled once the effect is 
-    /// finished playing.
-    /// </summary>
-    protected ParticleSystem effectDuringDeath;
-    protected AudioSource audioSource;
     [Tooltip("Telemetry for missiles will be calculated from here. If not set will use the component's transform.")]
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
     [Tooltip("These objects will have their layer changed to better account for collisions.")]
@@ -69,6 +60,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
+    protected UnitDeathEffects deathEffects;
 
     #region HP
     protected HPComponent hpComponent;
@@ -86,36 +78,20 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    public UnitDeathEffects UnitDeathEffects
+    {
+        get
+        {
+            if (deathEffects == null) deathEffects = GetComponentInChildren<UnitDeathEffects>();
+            return deathEffects;
+        }
+    }
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
     public float MaxSignature => unitParameters.MaxSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
-    public ParticleSystem EffectDuringDeath
-    {
-        get
-        {
-            if (effectDuringDeath == null)
-            {
-                effectDuringDeath = GetComponent<ParticleSystem>();
-                //effectDuringDeath.loop = false;
-            }
-            return effectDuringDeath;
-        }
-    }
-    public AudioSource AudioSource
-    {
-        get
-        {
-            if (audioSource == null)
-            {
-                audioSource = GetComponent<AudioSource>();
-                Debug.Assert(audioSource.playOnAwake == false);
-            }
-            return audioSource;
-        }
-    }
     public float EffectScaleFactor => unitParameters.EffectScaleFactor;
     public float ScanRange
     {
@@ -148,8 +124,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         ComponentRegister<Unit>.Register(Transform, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);
-        var main = EffectDuringDeath.main;
-        main.stopAction = ParticleSystemStopAction.Disable;
     }
 
     protected virtual void OnEnable()
@@ -183,14 +157,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
-        //only generate the effect when the scene is loaded (not unloading) and the unit is in the process of dying
-        if (IsDying && !effectDuringDeath.isPlaying && gameObject.scene.isLoaded)
-        {
-            unitParameters.EffectOnDeath.SpawnEffect(Transform.position, unitParameters.EffectScaleFactor);
-        }
-        AudioSource.Stop();
         missileBuffer = null;
-        AudioSource.Stop();
     }
 
     protected virtual void OnDestroy()
@@ -260,12 +227,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
         GameManager.UnitsDestroyed.Add(@event);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
-        EffectDuringDeath.Play();
-        AudioSource.Play();
         IsDying = true;
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
         EventBus<UnitDestroyed>.Raise(new(this));
+        UnitDeathEffects.PlayDeathEffects();
     }
     #endregion
 
@@ -279,11 +245,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
-    }
-
-    protected virtual void OnValidate()
-    {
-        Debug.Assert(!AudioSource.playOnAwake, $"{Transform}'s audio source is set to play in Awake!");
     }
     #endregion
 }

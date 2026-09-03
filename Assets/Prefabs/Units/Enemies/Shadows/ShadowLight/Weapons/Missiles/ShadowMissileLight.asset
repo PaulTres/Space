@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShadowMissileLight
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileData
   Prefab: {fileID: 2013506230279709725, guid: 5f3ff8a9e7181d74d991f38cf24839c2, type: 3}
-  Key: 2
+  Key: 3
   RaiseEventOnRecycle: 0
   DisableOnHit: 1
   Damage: 1
