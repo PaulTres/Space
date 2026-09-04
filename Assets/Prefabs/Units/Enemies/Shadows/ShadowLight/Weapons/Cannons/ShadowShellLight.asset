@@ -22,7 +22,7 @@ MonoBehaviour:
   OnSpawnEffect: {fileID: 985664761693772524, guid: 57485f16f0edf1d4385b2ab98ded1192, type: 3}
   OnHitEffect: {fileID: 0}
   TopSpeed: 10
-  Acceleration: 0
+  Acceleration: 1
   InitialVelocity: 10
   InertialDampeners: 1
   ScaleFactor: 0.3

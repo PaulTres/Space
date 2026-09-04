@@ -46,8 +46,7 @@ namespace Weapons
         public float MaxRangeSquared => @params.MaxRangeSquared;
         /// <summary>
         /// Stance 0 - aggressive<br/>
-        /// Stance 1 - defensive<br/>
-        /// Stance 2 - passive
+        /// Stance 1 - defensive
         /// </summary>
         protected List<TurretStance> turretStances = new();
         public int CurrentStanceIndex { get; protected set; } = 0;

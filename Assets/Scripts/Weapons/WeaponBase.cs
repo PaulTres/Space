@@ -59,7 +59,7 @@ namespace Weapons
                 shootPoints = new Transform[] { transform };
             }
             CurrentShotCooldown = @params.MaxShotCooldown;
-            shotTimer = new(CurrentShotCooldown);
+            shotTimer ??= new(CurrentShotCooldown);
         }
 
         protected virtual void OnEnable()
@@ -72,6 +72,7 @@ namespace Weapons
         /// </summary>
         public virtual void PerformReset()
         {
+            shotTimer ??= new CountdownTimer(@params.MaxShotCooldown);
             CurrentShotCooldown = @params.MaxShotCooldown;
             shotTimer.Reset(CurrentShotCooldown);
             if (!@params.StartLoaded) shotTimer.Start();
@@ -84,7 +85,7 @@ namespace Weapons
 
         protected virtual void OnDestroy()
         {
-            shotTimer.Dispose();
+            shotTimer?.Dispose();
         }
         #endregion
 

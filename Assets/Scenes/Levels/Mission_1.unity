@@ -537,6 +537,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a06e2597efc893544a2d0a470cf241aa, type: 3}
+--- !u!114 &1156619159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5047494723204293062, guid: a06e2597efc893544a2d0a470cf241aa, type: 3}
+  m_PrefabInstance: {fileID: 1156619158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56bdbfaf1425eba42a0ad1aa7c17ecdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Level.MissionManager
 --- !u!1 &1290785002
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,8 +587,8 @@ MonoBehaviour:
   OnAllUnitsDestroyed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Level.MissionManager, Assembly-CSharp
+      - m_Target: {fileID: 1156619159}
+        m_TargetAssemblyTypeName: Level.MissionManager, SpaceAssembly
         m_MethodName: MissionVictory
         m_Mode: 5
         m_Arguments:
@@ -637,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Spawner
   spawnOptions:
-  - {fileID: 11400000, guid: 090bf946d623b514eb38b213884a5f8f, type: 2}
+  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
   spawnRadius: 0
   team: 1
   playSpawnEffect: 1
@@ -654,7 +665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Wave
   delay: 0
-  minDistanceFromPlayer: 0
+  minDistanceFromPlayer: 3
   facePlayer: 0
   spawnOnAwake: 1
   OnAllUnitsSpawned:

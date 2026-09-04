@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 namespace HybridBT2
 {
+
     /// <summary>
     /// Base behaviour tree class. Contains a blackboard and root node.
     /// </summary>
@@ -59,7 +60,7 @@ namespace HybridBT2
             while (gameObject.activeSelf)
             {
                 yield return intervalWait;
-                //yield return pauseWait;
+                yield return pauseWait;
                 Root.Evaluate(blackboard);
                 blackboard.Tick(tickInterval);
             }
@@ -76,5 +77,7 @@ namespace HybridBT2
         /// Sets shouldRun to true, resuming the tree.
         /// </summary>
         public void Resume() => shouldRun = true;
+
+        public void GetInfo() => Root.GetInfo(0);
     }
 }

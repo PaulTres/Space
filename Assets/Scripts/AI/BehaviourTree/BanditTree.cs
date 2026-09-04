@@ -27,6 +27,7 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected override void SetupBlackboard()
     {
+        Debug.Assert(minEscortValue > Context.Navigation.EscortValue, $"The min escort value ({minEscortValue}) is less than or equal to the unit's escort value ({Context.Navigation.EscortValue}). The unit will misbehave if it has an escort node.");
         Context.SetData(Blackboard.Keys.MinEscortValue, minEscortValue);
         Context.SetData(Blackboard.Keys.Fleeing, false);
         Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());

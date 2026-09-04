@@ -29,7 +29,7 @@ namespace HybridBT2
 
         protected float EvaluateCandidate(Unit candidate, Blackboard context, float minEscortValue)
         {
-            if (!candidate.Active()) return 0;
+            if (!candidate.Active()) return float.MinValue;
             return Mathf.Clamp01(candidate.EscortValue / (minEscortValue * minEscortValue + Mathf.Epsilon)) * Mathf.Clamp01(maxRange - Vector3.Distance(candidate.Position, context.Position) / maxRange);
         }
     }

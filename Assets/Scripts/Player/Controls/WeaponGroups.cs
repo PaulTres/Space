@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Utilities;
 using Weapons;
 namespace Player
@@ -8,6 +9,8 @@ namespace Player
     {
         public Sprite Icon;
         public abstract float ReloadStatus { get; }
+        public UnityEvent OnSelected;
+        public UnityEvent OnDeselected;
     }
 
     [System.Serializable]

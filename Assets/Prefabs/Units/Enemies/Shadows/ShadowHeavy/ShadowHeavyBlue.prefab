@@ -51,6 +51,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 2ffe6e12b2cf73149b4634253d43c792, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &585743332396264831
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +170,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 2ce43e37aea483b46a75b626e16bdef3, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!114 &9060337855830235714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,6 +593,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 2ce43e37aea483b46a75b626e16bdef3, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!114 &2432332894552077048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10432,6 +10444,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 9b9e018ab8341bb4c985d0efb655862d, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &4460982073047889467
 GameObject:
   m_ObjectHideFlags: 0
@@ -10747,6 +10763,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 9b9e018ab8341bb4c985d0efb655862d, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &6249882244818109750
 GameObject:
   m_ObjectHideFlags: 0
@@ -11147,6 +11167,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 2ce43e37aea483b46a75b626e16bdef3, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!114 &2569516512143134932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11329,7 +11353,6 @@ MonoBehaviour:
     MoraleWeight: 40
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 0}
-    EffectOnDeath: {fileID: 0}
     <EffectScaleFactor>k__BackingField: 5
     <MinimumSignature>k__BackingField: 50
     <MaxSignature>k__BackingField: 150
@@ -11363,7 +11386,7 @@ MonoBehaviour:
   initialMorale: 10
   maxMoraleImpactRange: 50
   maxThreats: 1
-  minEscortValue: 10
+  minEscortValue: 100
 --- !u!114 &5827143685740396587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11435,6 +11458,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 9b9e018ab8341bb4c985d0efb655862d, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &8680484726366836057
 GameObject:
   m_ObjectHideFlags: 0

@@ -331,15 +331,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092095188590390936}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4061246301123054090}
   - {fileID: 2155968053988197174}
   - {fileID: 5144108926896246547}
-  m_Father: {fileID: 3595800475799806543}
+  m_Father: {fileID: 6827729835398802640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878223450263047779
 GameObject:
@@ -504,7 +504,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6827729835398802640}
-  - {fileID: 7519820566637534331}
   - {fileID: 1067446117089023578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -592,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Player.PlayerShip
   <Team>k__BackingField: 0
-  <MaxVelocityMagnitude>k__BackingField: 5
+  <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
@@ -618,9 +617,9 @@ MonoBehaviour:
   <Dampeners>k__BackingField: 1
   shipBody: {fileID: 6827729835398802640}
   cameraData:
-    CameraPivot: {fileID: 0}
-    FreelookCameraPivot: {fileID: 0}
-    CameraTransform: {fileID: 0}
+    CameraPivot: {fileID: 1067446117089023578}
+    FreelookCameraPivot: {fileID: 4452590473923054770}
+    CameraTransform: {fileID: 7120907571766429180}
     ZoomSpeed: 1
     MinZoom: -10
     MaxZoom: 5
@@ -764,7 +763,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2155968053988197174}
-  - component: {fileID: 6536165606099122605}
   - component: {fileID: 6471668936904131488}
   m_Layer: 0
   m_Name: Missiles
@@ -792,25 +790,6 @@ Transform:
   - {fileID: 281788188451928787}
   m_Father: {fileID: 7519820566637534331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6536165606099122605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7251216188120964021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 88a5e7c8bc8a5004fbc7318feda96fc7, type: 2}
-  <MinElevation>k__BackingField: -45
-  <MaxElevation>k__BackingField: 90
-  <MinRot>k__BackingField: -190
-  <MaxRot>k__BackingField: 190
 --- !u!114 &6471668936904131488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,6 +1630,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
   m_PrefabInstance: {fileID: 3042429816649202869}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4452590473923054770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1725484202626281479, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+  m_PrefabInstance: {fileID: 3042429816649202869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7120907571766429180 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5254128983991761225, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+  m_PrefabInstance: {fileID: 3042429816649202869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3339979905224060546
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2167,6 +2156,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b2d7444ec0bb96429c3239476728aed, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5950016811965406379}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b2d7444ec0bb96429c3239476728aed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7519820566637534331}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b2d7444ec0bb96429c3239476728aed, type: 3}
 --- !u!4 &6827729835398802640 stripped

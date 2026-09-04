@@ -45,6 +45,7 @@ namespace AudioSystem
 
         public SoundEmitter Get()
         {
+            if (soundEmitterPool == null) InitializePool();
             return soundEmitterPool.Get();
         }
 

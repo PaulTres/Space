@@ -15,7 +15,13 @@ public class TargetInOptimalRangeCondition : ConditionData
         var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
         if (target.Active())
         {
+            //Debug.Log($"TargetInOptimalRangeCondition: target={target}, minRangeFromTarget={minRangeFromTarget}, maxRange={target.CurrentSignature + ctx.Navigation.ScanRange + buffer}");
             var dist = Vector3.Distance(target.Position, ctx.Position);
+            if (target == GameManager.Player && Name.Contains("Medium"))
+            {
+                //Debug.Log($"TargetInOptimalRangeCondition: dist={dist}, minRangeFromTarget={minRangeFromTarget}, maxRange={target.CurrentSignature + ctx.Navigation.ScanRange + buffer}");
+            }
+            //if (Name.Contains("Medium")) Debug.Log($"TargetInOptimalRangeCondition: dist={dist}, minRangeFromTarget={minRangeFromTarget}, maxRange={target.CurrentSignature + ctx.Navigation.ScanRange + buffer}");
             return minRangeFromTarget <= dist && dist <= target.CurrentSignature + ctx.Navigation.ScanRange + buffer;
         }
         return false;

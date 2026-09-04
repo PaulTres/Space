@@ -115,15 +115,14 @@ MonoBehaviour:
   <EscortValue>k__BackingField: 20
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
-  - {fileID: 8708023256627723192}
+  - {fileID: 3437810654484111270}
   damageTakingObjects:
-  - {fileID: 559443161338865368}
+  - {fileID: 2928620861723319269}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    EffectOnDeath: {fileID: 985664761693772524, guid: e6cb340aac834d7438092fd0e240bfd3, type: 3}
     <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 20
     <MaxSignature>k__BackingField: 70
@@ -157,7 +156,7 @@ MonoBehaviour:
   initialMorale: 100
   maxMoraleImpactRange: 50
   maxThreats: 1
-  minEscortValue: 10
+  minEscortValue: 30
 --- !u!114 &2680985556489724662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +383,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 6c3ef151e5a747044a0607c9afa87a39, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &4255570123090604896
 GameObject:
   m_ObjectHideFlags: 0
@@ -5376,6 +5379,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: e68b5d433da5c32499f6fcf9d03505af, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!114 &6973538277073366622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,6 +5445,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: e68b5d433da5c32499f6fcf9d03505af, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!114 &1283066561332028112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5610,6 +5621,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 6c3ef151e5a747044a0607c9afa87a39, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &7947851115247805409
 GameObject:
   m_ObjectHideFlags: 0
@@ -5926,10 +5941,41 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2928620861723319269}
   m_SourcePrefab: {fileID: 100100000, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
 --- !u!4 &8322856368576503919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
   m_PrefabInstance: {fileID: 8361496449164560260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8704166607991732949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
+  m_PrefabInstance: {fileID: 8361496449164560260}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &2928620861723319269
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704166607991732949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.1}

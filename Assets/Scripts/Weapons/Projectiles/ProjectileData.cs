@@ -4,7 +4,7 @@ namespace Weapons
     [CreateAssetMenu(menuName = "Weapons/Projectile Data", fileName = "Projectile Data")]
     public class ProjectileData : BulletData
     {
-        public float TopSpeed, Acceleration, InitialVelocity;
+        public float TopSpeed = 20, Acceleration = 1, InitialVelocity = 10;
         public bool InertialDampeners = true;
         public float ScaleFactor = .1f;
         public Material RendererMaterial, TrailRendererMaterial;

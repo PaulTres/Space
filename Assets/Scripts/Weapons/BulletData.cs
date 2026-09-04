@@ -5,6 +5,7 @@ namespace Weapons
 {
     public abstract class BulletData : MonoPoolableData<Bullet.Type, Bullet>
     {
+        public bool ValidateData = true;
         [Tooltip("Transform will be disabled on hit if true.")]
         public bool DisableOnHit = true;
         public float Damage = 1;
@@ -36,6 +37,7 @@ namespace Weapons
 
         protected virtual void OnValidate()
         {
+            if (!ValidateData) return;
             if (LifeTime <= 0)
             {
                 Debug.LogError($"Lifetime <= 0 for {this}!");

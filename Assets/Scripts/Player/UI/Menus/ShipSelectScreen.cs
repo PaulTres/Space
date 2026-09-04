@@ -15,7 +15,7 @@ namespace Player
         #region Setup
         protected void OnEnable()
         {
-            timerText.text = $"Start: {missionStartTimerDuration}";
+            timerText.text = $"00:{missionStartTimerDuration:D2}";
             PopulatePlayerChoiceDropdown();
         }
 

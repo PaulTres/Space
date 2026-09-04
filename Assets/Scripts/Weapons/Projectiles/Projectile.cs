@@ -43,13 +43,13 @@ namespace Weapons
             }
             topSpeed = data.TopSpeed;
             initialVelocity = data.InitialVelocity;
-            if (topSpeed <= 0)
+            if (topSpeed <= 0 && data.ValidateData)
             {
-                Debug.LogWarning($"Missile top speed set to 0 or lower on {transform}");
+                Debug.LogWarning($"Projectile top speed set to 0 or lower on {transform}");
                 if (topSpeed < 0) topSpeed = 0;
             }
             acceleration = data.Acceleration;
-            if (acceleration <= 0)
+            if (acceleration <= 0 && data.ValidateData)
             {
                 Debug.LogWarning($"Projectile acceleration should not be 0. Setting acceleration to 10% of top speed on {transform}.");
                 acceleration = topSpeed / 10;

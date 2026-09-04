@@ -27,20 +27,23 @@ public class InterceptNode : LeafNodeData
             ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
         }
     };
+
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
         var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (!target.Active()) return NodeState.FAILURE;
-
-        var targetPos = target.Position;
-        if ((targetPos - n.GetData<Vector3>((int)InternalKeys.TargetPrevPos)).sqrMagnitude > InterceptError * InterceptError)
+        if ((target.Position - n.GetData<Vector3>((int)InternalKeys.TargetPrevPos)).sqrMagnitude > InterceptError * InterceptError)
         {
-            n.SetData((int)InternalKeys.TargetPrevPos, targetPos);
+            n.SetData((int)InternalKeys.TargetPrevPos, target.Position);
             var dir = ctx.Position - target.Position;
             var dist = UseOptimalFiringRange ? target.CurrentSignature +
                 ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
             ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
         }
+        var d = UseOptimalFiringRange ? target.CurrentSignature +
+                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
+        if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + d);
+
         return NodeState.RUNNING;
     };
 }

@@ -39,8 +39,17 @@ namespace Player
             {
                 var newValue = (currentWeaponIndex + 1) % (LauncherGroups.Count + TurretGroups.Count);
                 OnWeaponsCycled?.Invoke((currentWeaponIndex, newValue));
+                GetWeaponGroup(currentWeaponIndex)?.OnDeselected?.Invoke();
+                GetWeaponGroup(newValue)?.OnSelected?.Invoke();
                 currentWeaponIndex = newValue;
             }
+        }
+
+        public WeaponGroup GetWeaponGroup(int index)
+        {
+            if (index < LauncherGroups.Count) return LauncherGroups[index];
+            else if (index - LauncherGroups.Count < TurretGroups.Count) return TurretGroups[index - LauncherGroups.Count];
+            else return null;
         }
 
         public void OnExecuteAction(InputAction.CallbackContext context)

@@ -52,9 +52,9 @@ public abstract class Unit : ImprovedMonoBehaviour
     [Tooltip("Telemetry for missiles will be calculated from here. If not set will use the component's transform.")]
     [field: SerializeField] public Transform TelemetryOrigin { get; protected set; }
     [Tooltip("These objects will have their layer changed to better account for collisions.")]
-    [SerializeField] protected List<GameObject> collisionCheckers;
+    [SerializeField] protected List<Collider> collisionCheckers;
     [Tooltip("The list of all objects whose layer needs to be changed for taking damage on spawn. Should contain only colliders.")]
-    [SerializeField] protected List<GameObject> damageTakingObjects;
+    [SerializeField] protected List<Collider> damageTakingObjects;
     [Tooltip("If true, the spawn effect will play when the unit is enabled.")]
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     #endregion
@@ -149,8 +149,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
         Debug.Assert(collisionCheckers.Count > 0, $"{Transform} has no objects for handling collisions!");
-        foreach (var c in damageTakingObjects) c.layer = GlobalConfig.GetShipLayer(Team);
-        foreach (var c in collisionCheckers) c.layer = GlobalConfig.GetCollisionLayer(Team);
+        foreach (var c in damageTakingObjects) c.gameObject.layer = GlobalConfig.GetShipLayer(Team);
+        foreach (var c in collisionCheckers) c.gameObject.layer = GlobalConfig.GetCollisionLayer(Team);
     }
 
     protected virtual void OnDisable()
