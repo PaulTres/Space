@@ -49,8 +49,8 @@ namespace Effects
         {
             if (effect == null) return;
             if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
-            e.transform.SetPositionAndRotation(position, rotation);
-            e.transform.localScale = scale;
+            e.Transform.SetPositionAndRotation(position, rotation);
+            e.Transform.localScale = scale;
             e.gameObject.SetActive(true);
         }
         #endregion
@@ -58,6 +58,15 @@ namespace Effects
         [field: SerializeField] public Type PoolKey { get; protected set; }
         protected ParticleSystem[] particles;
         [SerializeField] protected SoundData soundData;
+        protected Transform tr;
+        public Transform Transform
+        {
+            get
+            {
+                if (tr == null) tr = transform;
+                return tr;
+            }
+        }
 
         protected void Awake()
         {
@@ -72,7 +81,7 @@ namespace Effects
 
         protected void OnEnable()
         {
-            soundData?.Play(transform.position);
+            soundData.Play(transform.position);
             if (particles != null)
             {
                 for (int i = 0; i < particles.Length; i++)

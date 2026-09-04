@@ -15,6 +15,7 @@ namespace Utilities
         Forward,
         Backward
     }
+
     public static class Extensions
     {
         #region Unit

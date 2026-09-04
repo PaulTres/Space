@@ -12,10 +12,15 @@ namespace Level
         public static bool InSafeZone(Unit unit)
         {
             if (!unit.Active()) return false;
+            return InSafeZone(unit.Position);
+        }
+
+        public static bool InSafeZone(Vector3 position)
+        {
             foreach (var zone in safeZones)
             {
                 if (zone == null || !zone.enabled) continue;
-                if (Vector3.Distance(unit.Position, zone.Position) <= zone.radius) return true;
+                if (Vector3.Distance(position, zone.Position) <= zone.radius) return true;
             }
             return false;
         }
