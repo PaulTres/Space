@@ -645,9 +645,9 @@ MonoBehaviour:
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
-  - {fileID: 7300904212776311474}
+  - {fileID: 5224508505823418278}
   damageTakingObjects:
-  - {fileID: 5949860478945030911}
+  - {fileID: 3068925871141862646}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10

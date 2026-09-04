@@ -13,7 +13,7 @@ namespace Weapons
             if (data == null) throw new System.Exception($"Weapons {name} has no LaserWeaponData!");
             heatPerShot = data.HeatPerShot;
             heatsink = transform.root.GetComponentInChildren<Heatsink>();
-            Debug.Assert(heatsink != null, $"No heatsink on {transform.root}!");
+            Debug.Assert(heatsink != null, $"{transform.root} has no heatsink for lasers!");
         }
 
         public override bool CanShoot()
@@ -23,6 +23,7 @@ namespace Weapons
 
         public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {
+            Debug.Log($"LaserWeapon {transform} processing bullet {bullet} with target {target} at shootPoint {shootPoint}");
             if (target != null) ((Laser)bullet).SetTarget(target);
             else Debug.LogWarning($"Laser {transform} has no target!");
             heatsink.IncreaseHeat(heatPerShot);

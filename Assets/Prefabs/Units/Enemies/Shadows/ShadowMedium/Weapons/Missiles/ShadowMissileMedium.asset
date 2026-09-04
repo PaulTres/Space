@@ -15,6 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 2013506230279709725, guid: 5f3ff8a9e7181d74d991f38cf24839c2, type: 3}
   Key: 3
   RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
   Damage: 1
   LifeTime: 20
@@ -52,7 +53,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 0
+  Tracking: 10
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 0.1

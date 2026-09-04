@@ -57,6 +57,7 @@ MonoBehaviour:
   armorModifiers: []
   body: {fileID: 0}
   effectOnDamage: {fileID: 0}
+  damageThreshold: 0.5
   effectScaleFactor: 1
 --- !u!135 &8357492232402145335
 SphereCollider:
@@ -214,15 +215,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.04
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.04
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.04
+      value: 0.39999998
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_LocalPosition.x

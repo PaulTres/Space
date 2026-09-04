@@ -32,5 +32,12 @@ namespace Weapons
         public int BurstCount = 1;
         [Header("Turret movement")]
         public float RotSpeed = 50;
+
+        protected void OnValidate()
+        {
+            Debug.Assert(RotSpeed >= 0, $"Turret rotation speed must be >= 0 on {this}.");
+            if (name.Contains("PD") && !TargetMissiles) Debug.LogWarning("TurretData is named PD but TargetMissiles is false. This may be a mistake.");
+            Debug.Assert(TargetEvaluation != null, $"TargetEvaluation must be assigned on {this}.");
+        }
     }
 }

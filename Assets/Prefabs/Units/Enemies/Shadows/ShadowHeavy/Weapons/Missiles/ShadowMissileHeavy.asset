@@ -15,6 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 2013506230279709725, guid: 5f3ff8a9e7181d74d991f38cf24839c2, type: 3}
   Key: 3
   RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
   Damage: 4
   LifeTime: 20
@@ -26,8 +27,8 @@ MonoBehaviour:
   InitialVelocity: 5
   InertialDampeners: 1
   ScaleFactor: 1
-  RendererMaterial: {fileID: 2100000, guid: 36f8720fe02cffd4da0c210adafbad7e, type: 2}
-  TrailRendererMaterial: {fileID: 2100000, guid: 6a0539dab7c0f7542979c1f54f7c310e, type: 2}
+  RendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
   TrailRendererCurve:
     serializedVersion: 2
     m_Curve:
@@ -52,7 +53,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 0
+  Tracking: 10
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 0.5

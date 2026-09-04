@@ -5,7 +5,7 @@ namespace Weapons
     [CreateAssetMenu(menuName = "Weapons/Missile Data", fileName = "Missile Data")]
     public class MissileData : ProjectileData
     {
-        public float Tracking, MaxTargetSignature, MaxTelemetryBonus = 0.7f, HP = .1f;
+        public float Tracking = 10, MaxTargetSignature, MaxTelemetryBonus = 0.7f, HP = .1f;
         public PoolableEffect OnDeathEffect;
         public bool ShowOnRadar = false;
 

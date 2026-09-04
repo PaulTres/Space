@@ -15,8 +15,7 @@ MonoBehaviour:
   myName: 
   AlwaysCheck: 1
   Conditions: []
-  Services:
-  - {fileID: 11400000, guid: 4ceb34716f2365549ac1c3bfd61839ae, type: 2}
+  Services: []
   InterceptError: 1
   UseOptimalFiringRange: 1
   distanceBuffer: -10

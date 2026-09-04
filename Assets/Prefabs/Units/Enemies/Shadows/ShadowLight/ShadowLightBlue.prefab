@@ -146,6 +146,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
   params: {fileID: 11400000, guid: 6a59c4d8d74d9594e8a422cf0993deff, type: 2}
+  <MinElevation>k__BackingField: -45
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -190
+  <MaxRot>k__BackingField: 190
 --- !u!1 &2030571594334976142
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,15 +259,14 @@ MonoBehaviour:
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
-  - {fileID: 5263800661496257158}
+  - {fileID: 6663940830056700868}
   damageTakingObjects:
-  - {fileID: 2030571594334976142}
+  - {fileID: 3947328160120870552}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    EffectOnDeath: {fileID: 985664761693772524, guid: e6cb340aac834d7438092fd0e240bfd3, type: 3}
     <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 10
     <MaxSignature>k__BackingField: 50
