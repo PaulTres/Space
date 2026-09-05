@@ -51,7 +51,7 @@ namespace Weapons
         protected override void Awake()
         {
             base.Awake();
-            EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);
+            EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(this), Die);
         }
 
         protected override void OnEnable()
@@ -65,7 +65,7 @@ namespace Weapons
         {
             base.OnDestroy();
             ComponentRegister<Missile>.Unregister(Transform);
-            EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetInstanceID(this));
+            EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetTransformInstanceID(this));
         }
 
         protected override void OnDisable()

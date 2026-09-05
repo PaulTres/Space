@@ -73,7 +73,14 @@ namespace Utilities
             PoolableEffect.Spawn(effect, position, rotation, scaleFactor * Vector3.one);
         }
 
-        #region ImprovedMonoBehaviour      
+        #region ImprovedMonoBehaviour  
+        /// <summary>
+        /// Returns true if the ImprovedMonoBehaviour is not null, its GameObject 
+        /// is active, and if it is not dying (unless allowDying is true).
+        /// </summary>
+        /// <param name="object"></param>
+        /// <param name="allowDying"></param>
+        /// <returns></returns>
         public static bool Active(this ImprovedMonoBehaviour @object, bool allowDying = false)
         {
             if (@object == null) return false;
@@ -82,7 +89,12 @@ namespace Utilities
             return @object != null && @object.Transform.gameObject.activeSelf;
         }
 
-        public static int GetInstanceID(this ImprovedMonoBehaviour @object)
+        /// <summary>
+        /// Returns the instance ID of the ImprovedMonoBehaviour's Transform. This is used to uniquely identify the object in the scene.
+        /// </summary>
+        /// <param name="object"></param>
+        /// <returns></returns>
+        public static int GetTransformInstanceID(this ImprovedMonoBehaviour @object)
         {
             return @object.Transform.GetInstanceID();
         }
@@ -112,6 +124,19 @@ namespace Utilities
         }
         #endregion
 
+        #region Collections
+        public static string Output<T>(this ICollection<T> collection)
+        {
+            if (collection == null) return "null";
+            if (collection.Count == 0) return "empty";
+            var output = $"Count: {collection.Count}\n";
+            foreach (var item in collection)
+            {
+                output += $"{item}\n";
+            }
+            return output;
+        }
+
         /// <summary>
         /// Returns true if the collection is null or has no elements in it.
         /// </summary>
@@ -136,6 +161,7 @@ namespace Utilities
                 (ts[r], ts[i]) = (ts[i], ts[r]);
             }
         }
+        #endregion
 
         /// <summary>
         /// If an angle is > 180, will subtract 360. If it is < 180, will add 360.

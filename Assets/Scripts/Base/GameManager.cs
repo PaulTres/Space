@@ -28,7 +28,7 @@ public static class GameManager
     /// <summary>
     /// All the units that have been destroyed over the course of a mission.
     /// </summary>
-    public static List<ObjectDestroyed> UnitsDestroyed { get; } = new();
+    public static List<UnitDestroyed> UnitsDestroyed { get; } = new();
     public static PlayerShip Player { get; set; } = null;
     /// <summary>
     /// The latest mission the player can play.

@@ -1,4 +1,3 @@
-using EventBus;
 using System.Collections.Generic;
 using UnityEngine;
 using Utilities;
@@ -37,26 +36,13 @@ namespace Level
         }
         public Vector3 Position => Transform.position;
 
-        protected void OnEnable()
-        {
-            EventBus<ObjectDestroyed>.AddActions(Transform.root.GetInstanceID(), null, OnDeath);
-            safeZones.Add(this);
-        }
+        protected void OnEnable() => safeZones.Add(this);
 
-        protected void OnDisable()
-        {
-            safeZones.Remove(this);
-            EventBus<ObjectDestroyed>.RemoveActions(Transform.root.GetInstanceID(), null, OnDeath);
-        }
-
-        protected void OnDeath()
-        {
-            gameObject.SetActive(false);
-        }
+        protected void OnDisable() => safeZones.Remove(this);
 
         protected void OnDrawGizmos()
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(Position, radius);
         }
     }

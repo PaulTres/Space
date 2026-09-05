@@ -121,9 +121,9 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(unitParameters.TickInterval);
-        ComponentRegister<Unit>.Register(Transform, this);
+        ComponentRegister<Unit>.Register(Transform.root, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(this), Die);
+        EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(this), Die);
     }
 
     protected virtual void OnEnable()
@@ -163,8 +163,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected virtual void OnDestroy()
     {
         onTick = null;
-        EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetInstanceID(this));
-        ComponentRegister<Unit>.Unregister(transform);
+        EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetTransformInstanceID(this));
+        ComponentRegister<Unit>.Unregister(Transform.root);
     }
     #endregion
 
@@ -224,13 +224,15 @@ public abstract class Unit : ImprovedMonoBehaviour
     public virtual void Die(ObjectDestroyed @event)
     {
         if (IsDying) return;
-        //Debug.Log($"{Transform} with index {UnitManagerIndex} is dead.");
-        GameManager.UnitsDestroyed.Add(@event);
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(this), Die);
         IsDying = true;
+        //Debug.Log($"{Transform} is dead.");
+        UnitDestroyed unitDestroyed = new(this, @event.Killer);
+        GameManager.UnitsDestroyed.Add(unitDestroyed);
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetTransformInstanceID(this), Die);
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
-        EventBus<UnitDestroyed>.Raise(new(this));
+        //Debug.Log(unitDestroyed);
+        EventBus<UnitDestroyed>.Raise(unitDestroyed);
         UnitDeathEffects.PlayDeathEffects();
     }
     #endregion

@@ -32,6 +32,7 @@ namespace Level
         /// <param name="event"></param>
         public void OnUnitDestroyed(ObjectDestroyed @event)
         {
+            //Debug.Log($"Wave.OnUnitDestroyed: {@event}");
             EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
             unitCount--;
             if (unitCount <= 0)
@@ -58,7 +59,7 @@ namespace Level
                 }//Debug.Log(unit.transform);
                 unitCount++;
                 units.Add(unit);
-                EventBus<ObjectDestroyed>.AddActions(unit.Transform.root.GetInstanceID(), OnUnitDestroyed);
+                EventBus<ObjectDestroyed>.AddActions(unit.GetTransformInstanceID(), OnUnitDestroyed);
             }
         }
 

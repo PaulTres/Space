@@ -1,5 +1,4 @@
 using Effects;
-using EventBus;
 using Spawning;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,11 +64,9 @@ namespace Weapons
             {
                 if (value != damageInfo.Source)
                 {
-                    if (damageInfo.Source != null) EventBus<PoolableRecycled>.RemoveActions(damageInfo.Source.GetInstanceID(), null, ClearOwner);
                     damageInfo.Source = value;
                     if (value != null)
                     {
-                        EventBus<PoolableRecycled>.AddActions(value.GetInstanceID(), null, ClearOwner);
                         gameObject.layer = GlobalConfig.GetBulletLayer(value.Team);
                     }
                 }
@@ -105,17 +102,8 @@ namespace Weapons
             effectScaleFactor = poolableData.EffectScaleFactor;
         }
 
-        /// <summary>
-        /// Set the owner to null without changing the bullet's layer.
-        /// </summary>
-        public void ClearOwner()
-        {
-            Owner = null;
-        }
-
         protected virtual void OnDisable()
         {
-            ClearOwner();
             var u = GlobalUpdater.TryGetInstance();
             if (u != null) u.UnregisterFixedUpdate(PerformFixedUpdate);
             Release(this);

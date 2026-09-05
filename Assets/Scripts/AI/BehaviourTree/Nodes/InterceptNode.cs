@@ -42,7 +42,7 @@ public class InterceptNode : LeafNodeData
         }
         var d = UseOptimalFiringRange ? target.CurrentSignature +
                 ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
-        if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + d);
+        //if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + d);
 
         return NodeState.RUNNING;
     };

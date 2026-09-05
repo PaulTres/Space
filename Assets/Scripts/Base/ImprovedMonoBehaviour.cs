@@ -4,8 +4,8 @@ using Utilities;
 
 public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableComponent
 {
-    [field: SerializeField] public int Team { get; set; }
-    [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 5f;
+    [field: SerializeField] public int Team { get; set; } = 1;
+    [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 20f;
     public abstract ImprovedMonoBehaviour Target { get; }
     public virtual Vector3 Forward => Transform.forward;
     public virtual Vector3 Right => Transform.right;

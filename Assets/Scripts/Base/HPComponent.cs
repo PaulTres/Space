@@ -138,7 +138,7 @@ namespace HP
             if (CurrentHP <= 0 && !firedEvent)
             {
                 firedEvent = true;
-                ObjectDestroyed @event = new(Transform.root, damageInfo.Source);
+                ObjectDestroyed @event = new(Transform.root.GetInstanceID(), damageInfo.Source);
                 EventBus<ObjectDestroyed>.Raise(Transform.root.GetInstanceID(), @event);
                 foreach (var e in damageEffects)
                 {

@@ -1,4 +1,3 @@
-using UnityEngine;
 using Utilities;
 
 namespace Weapons
@@ -38,7 +37,7 @@ namespace Weapons
             if (Turret.TargetMissiles)
             {
                 (var count, var missiles) = Owner.GetMissiles();
-                if (Turret.Unit.Team == 1) Debug.Log(count);
+                //if (Turret.Unit.Team == 1) Debug.Log(count);
                 if (count > 0)
                 {
                     var currentM = Target.Active() ? Target as Missile : null;

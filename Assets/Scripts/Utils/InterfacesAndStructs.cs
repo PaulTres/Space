@@ -18,56 +18,50 @@ public struct DamageInfo : IEvent
 }
 
 /// <summary>
-/// Fires when an HPComponent reaches 0 hp.
+/// Fires when an HPComponent reaches 0 hp. Should only be used to trigger death and level events.
 /// </summary>
 public readonly struct ObjectDestroyed : IEvent
 {
-    public readonly int VictimID, KillerID, VictimTeam, KillerTeam;
-    public readonly string VictimName, KillerName;
+    public readonly Unit Killer;
+    public readonly int VictimID;
 
-    public ObjectDestroyed(Transform victim, Transform killer)
+    public ObjectDestroyed(int victimID, Unit killer)
     {
-        VictimID = victim.GetInstanceID();
-        VictimName = victim.name.Replace("(Clone)", "");
-        VictimTeam = GlobalConfig.GetTeam(victim.gameObject.layer);
-        KillerID = killer.GetInstanceID();
-        KillerName = killer.name.Replace("(Clone)", "");
-        KillerTeam = GlobalConfig.GetTeam(killer.gameObject.layer);
+        VictimID = victimID;
+        Killer = killer;
     }
+}
 
-    public ObjectDestroyed(Transform victim, Unit killer)
+/// <summary>
+/// Fires when a unit is destroyed. Used to calculate morale loss and to keep track of kills.
+/// </summary>
+public readonly struct UnitDestroyed : IEvent
+{
+    public readonly int VictimTeam;
+    public readonly string VictimName;
+    public readonly int VictimID;
+    public readonly float UnitMoraleWeight;
+    public readonly Vector3 UnitPosition;
+    public readonly float Time;
+    public readonly int KillerTeam;
+    public readonly string KillerName;
+
+    public UnitDestroyed(Unit unit, Unit killer)
     {
-        VictimID = victim.GetInstanceID();
-        VictimName = victim.name.Replace("(Clone)", "");
-        VictimTeam = GlobalConfig.GetTeam(victim.gameObject.layer);
-        KillerID = killer.Transform.GetInstanceID();
+        VictimTeam = unit.Team;
+        VictimID = unit.GetTransformInstanceID();
+        VictimName = unit.Transform.name.Replace("(Clone)", "");
+        UnitMoraleWeight = unit.GetMoraleWeight();
+        UnitPosition = unit.Position;
+        Time = UnityEngine.Time.time;
+        KillerTeam = killer.Team;
         KillerName = killer.Transform.name.Replace("(Clone)", "");
-        KillerTeam = GlobalConfig.GetTeam(killer.gameObject.layer);
     }
 
     public override string ToString()
     {
-        if (VictimTeam == 0)
-        {
-            Debug.Log($"{VictimName} was neutral.");
-        }
         return $"<color={GlobalConfig.GetTeamColor(VictimTeam).colorTag}>{VictimName} " +
             $"<color=black>destroyed by <color={GlobalConfig.GetTeamColor(KillerTeam).colorTag}>{KillerName}";
-    }
-}
-
-public readonly struct UnitDestroyed : IEvent
-{
-    public readonly int UnitTeam;
-    public readonly float UnitMoraleWeight;
-    public readonly Vector3 UnitPosition;
-    public readonly float Time;
-    public UnitDestroyed(Unit unit)
-    {
-        UnitTeam = unit.Team;
-        UnitMoraleWeight = unit.GetMoraleWeight();
-        UnitPosition = unit.Position;
-        Time = UnityEngine.Time.time;
     }
 }
 

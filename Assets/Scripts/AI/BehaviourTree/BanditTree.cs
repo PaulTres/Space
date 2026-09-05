@@ -22,7 +22,7 @@ public class BanditTree : BT, IRegisterableComponent
         base.Awake();
         if (affectedByMorale) EventBus<UnitDestroyed>.AddActions(OnUnitDestroyed);
         ComponentRegister<BanditTree>.Register(transform, this);
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
+        EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
     }
 
     protected override void SetupBlackboard()
@@ -48,7 +48,7 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected virtual void OnDestroy()
     {
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetInstanceID(Context.Navigation), null, Pause);
+        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
         ComponentRegister<BanditTree>.Unregister(transform);
     }
     #endregion
@@ -70,13 +70,13 @@ public class BanditTree : BT, IRegisterableComponent
         float moraleImpact = @event.UnitMoraleWeight * (Mathf.Max(
             maxMoraleImpactRange - dist, 0) / maxMoraleImpactRange);
 
-        if (@event.UnitTeam == Context.Navigation.Team)
+        if (@event.VictimTeam == Context.Navigation.Team)
         {
             morale -= moraleImpact;
             Context.SetData(Blackboard.Keys.Morale, morale);
             Context.SetData(Blackboard.Keys.LastMoraleDamageTime, @event.Time);
         }
-        else if (@event.UnitTeam != GlobalConfig.NeutralTeam)
+        else if (@event.VictimTeam != GlobalConfig.NeutralTeam)
         {
             morale += moraleImpact;
             Context.SetData(Blackboard.Keys.Morale, morale);

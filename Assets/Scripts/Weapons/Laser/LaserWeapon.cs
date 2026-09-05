@@ -23,7 +23,7 @@ namespace Weapons
 
         public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
         {
-            Debug.Log($"LaserWeapon {transform} processing bullet {bullet} with target {target} at shootPoint {shootPoint}");
+            //Debug.Log($"LaserWeapon {transform} processing bullet {bullet} with target {target} at shootPoint {shootPoint}");
             if (target != null) ((Laser)bullet).SetTarget(target);
             else Debug.LogWarning($"Laser {transform} has no target!");
             heatsink.IncreaseHeat(heatPerShot);

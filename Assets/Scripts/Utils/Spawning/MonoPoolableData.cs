@@ -1,16 +1,11 @@
-using EventBus;
 using UnityEngine;
 
 namespace Spawning
 {
 
-    public readonly struct PoolableRecycled : IEvent { }
-
     public abstract class MonoPoolableData<K, T> : MonoSpawnableData<T> where T : MonoBehaviour
     {
         public K Key;
-        [Tooltip("If true, raises a PoolableRecycled event when an instance is recycled.")]
-        public bool RaiseEventOnRecycle = false;
 
         /// <summary>
         /// Returns an instance of the poolable object at the position and rotation of the point.
@@ -23,7 +18,6 @@ namespace Spawning
         {
             var instance = GetInstance();
             instance.transform.SetPositionAndRotation(position, rotation);
-            if (RaiseEventOnRecycle) EventBus<PoolableRecycled>.Raise(new());
             return instance;
         }
 
