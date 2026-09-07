@@ -89,7 +89,7 @@ namespace Effects
 
         protected void OnEnable()
         {
-            Debug.Log($"Playing effect: {PoolKey}");
+            //Debug.Log($"Playing effect: {PoolKey}");
             soundData.Play(transform.position);
             if (!Particles.IsEmpty())
             {

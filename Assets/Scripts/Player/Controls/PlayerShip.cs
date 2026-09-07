@@ -65,13 +65,16 @@ namespace Player
         }
 
         /// <summary>
-        /// Delayed by .1 seconds to ensure smoother player spawning.
+        /// Delayed by 1 second to ensure smoother player spawning.
         /// </summary>
         public void EnableCallbacks()
         {
             GameManager.InputActions.BasicControls.SetCallbacks(this);
         }
 
+        /// <summary>
+        /// Delayed by .1 seconds for smoother viewing of jump effects.
+        /// </summary>
         public void EnableCamera()
         {
             PlayerCamera.enabled = true;
