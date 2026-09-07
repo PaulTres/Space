@@ -5198,22 +5198,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1358106517}
     m_Modifications:
-    - target: {fileID: 2023115578106479088, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2893821987572126553, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3126085568767304242, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3603302726388109132, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4734487984217637949, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
       propertyPath: m_Name
       value: Options
@@ -5296,10 +5280,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6288557633370099815, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9219932880230908348, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

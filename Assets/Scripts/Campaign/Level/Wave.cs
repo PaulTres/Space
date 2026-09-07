@@ -7,7 +7,6 @@ using Utilities;
 
 namespace Level
 {
-
     public class Wave : MonoBehaviour
     {
         protected List<NPCSpawner> spawners;

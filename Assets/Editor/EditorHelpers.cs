@@ -1,9 +1,10 @@
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
 
-public class ButtonSoundHooker
+public class EditorHelpers
 {
     [MenuItem("Tools/Add Sound Hook To All Buttons")]
     public static void AddHookToAllButtons()
@@ -37,7 +38,7 @@ public class ButtonSoundHooker
         }
 
         // 2. All Buttons currently in open scenes (catches non-prefab instances)
-        Button[] sceneButtons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+        Button[] sceneButtons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (Button btn in sceneButtons)
         {
             if (btn.GetComponent<ButtonSoundHook>() == null)
@@ -49,5 +50,13 @@ public class ButtonSoundHooker
 
         AssetDatabase.SaveAssets();
         Debug.Log($"Added ButtonSoundHook to {prefabCount} prefab buttons and {sceneCount} scene buttons.");
+    }
+
+
+    [MenuItem("Tools/Start game")]
+    public static void LoadBootstrapperScene()
+    {
+        EditorSceneManager.OpenScene("Assets/Scenes/BootstrapperScene.unity");
+        EditorApplication.isPlaying = true;
     }
 }

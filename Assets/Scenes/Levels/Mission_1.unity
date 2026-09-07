@@ -667,7 +667,7 @@ MonoBehaviour:
   delay: 0
   minDistanceFromPlayer: 3
   facePlayer: 0
-  spawnOnAwake: 1
+  spawnOnAwake: 0
   OnAllUnitsSpawned:
     m_PersistentCalls:
       m_Calls: []

@@ -74,18 +74,6 @@ public readonly struct ShowText : IEvent
     public readonly float LifeTime;
     public readonly SoundData Sound;
 
-    public ShowText(Vector3 anchoredPosition, Vector2 anchorMax, Vector2 anchorMin,
-        float lifeTime, string text, Color color, SoundData sound = null)
-    {
-        AnchoredPosition = anchoredPosition;
-        LifeTime = lifeTime;
-        AnchorMax = anchorMax;
-        AnchorMin = anchorMin;
-        Sound = sound;
-        Text = text;
-        TextColor = color;
-    }
-
     public ShowText(Vector3 anchoredPosition, float lifeTime, string text, Color color, SoundData sound = null)
     {
         AnchoredPosition = anchoredPosition;

@@ -57,7 +57,26 @@ namespace Effects
 
         [field: SerializeField] public Type PoolKey { get; protected set; }
         protected ParticleSystem[] particles;
+        public ParticleSystem[] Particles
+        {
+            get
+            {
+                if (particles.IsEmpty() && !audioOnly)
+                {
+                    particles = GetComponentsInChildren<ParticleSystem>();
+                    foreach (var particle in particles)
+                    {
+                        var p = particle.main;
+                        p.loop = false;
+                        p.stopAction = ParticleSystemStopAction.Disable;
+                    }
+                }
+                return particles;
+            }
+        }
         [SerializeField] protected SoundData soundData;
+        [Tooltip("If set to true, the script will not check for particle effects with GetComponent and will only play the sound effect.")]
+        [SerializeField] protected bool audioOnly = false;
         protected Transform tr;
         public Transform Transform
         {
@@ -68,25 +87,15 @@ namespace Effects
             }
         }
 
-        protected void Awake()
-        {
-            particles = GetComponentsInChildren<ParticleSystem>();
-            foreach (var particle in particles)
-            {
-                var p = particle.main;
-                p.loop = false;
-                p.stopAction = ParticleSystemStopAction.Disable;
-            }
-        }
-
         protected void OnEnable()
         {
+            Debug.Log($"Playing effect: {PoolKey}");
             soundData.Play(transform.position);
-            if (particles != null)
+            if (!Particles.IsEmpty())
             {
-                for (int i = 0; i < particles.Length; i++)
+                for (int i = 0; i < Particles.Length; i++)
                 {
-                    particles[i].Play();
+                    Particles[i].Play();
                 }
             }
         }

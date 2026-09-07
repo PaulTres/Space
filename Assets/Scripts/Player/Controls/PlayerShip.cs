@@ -50,6 +50,7 @@ namespace Player
             }
         }
         public bool CannotDie { get; set; } = false;
+        public event System.Action<bool> OnDampenersChanged;
         #endregion
 
         #region Setup
@@ -100,6 +101,7 @@ namespace Player
                 PlayerDead = true;
                 Instantiate(missionFailureScreenPrefab, transform.position, transform.rotation);
             }
+            OnDampenersChanged = null;
         }
 
         protected void DisableCallbacks()
@@ -160,7 +162,11 @@ namespace Player
 
         public void OnToggleDampeners(InputAction.CallbackContext context)
         {
-            if (context.started) Dampeners = !Dampeners;
+            if (context.started)
+            {
+                Dampeners = !Dampeners;
+                OnDampenersChanged?.Invoke(Dampeners);
+            }
         }
 
         public void OnMouseLook(InputAction.CallbackContext context) { }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileData
   Prefab: {fileID: 3846582215461886678, guid: 5d3396fc602c4aa479b19becfcf466d0, type: 3}
   Key: 2
-  RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
   Damage: 1
   LifeTime: 20
@@ -23,7 +23,7 @@ MonoBehaviour:
   OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
   TopSpeed: 40
   Acceleration: 5
-  InitialVelocity: 10
+  InitialVelocity: 40
   InertialDampeners: 1
   ScaleFactor: 0.1
   RendererMaterial: {fileID: 2100000, guid: 2717e9cd8dbd4464d86960218f25345c, type: 2}

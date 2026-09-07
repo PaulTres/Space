@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 namespace Player
 {
+
     public class Widget : MonoBehaviour
     {
         protected RectTransform rectTransform;

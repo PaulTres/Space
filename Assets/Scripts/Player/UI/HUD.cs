@@ -28,6 +28,7 @@ namespace Player
                 return playerWeapons;
             }
         }
+        [SerializeField] protected TextMeshProUGUI dampenerText;
         #endregion
 
         #region Setup
@@ -38,6 +39,9 @@ namespace Player
             player = GetComponentInParent<PlayerShip>();
             healthBar.fillAmount = 1;
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
+            player.OnDampenersChanged += UpdateDampenerText;
+            UpdateDampenerText(player.Dampeners);
+            #region Weapons
             var count = PlayerWeaponsProperty.TurretGroups.Count +
                 PlayerWeaponsProperty.LauncherGroups.Count;
             var totalSpace = 50 * count + (count - 1) * 10;
@@ -77,6 +81,7 @@ namespace Player
             };
             PlayerWeaponsProperty.OnWeaponsCycled += OnWeaponsCycled;
             OnWeaponsCycled((-1, 0));
+            #endregion
         }
 
         protected override void OnDisable()
@@ -98,6 +103,11 @@ namespace Player
             UpdateSpeedBar();
             UpdateSignatureDisplay();
             UpdateWeaponDisplays();
+        }
+
+        public void UpdateDampenerText(bool value)
+        {
+            dampenerText.text = value ? "DAMPENERS ON" : "DAMPENERS OFF";
         }
 
         public void UpdateHealthBar()

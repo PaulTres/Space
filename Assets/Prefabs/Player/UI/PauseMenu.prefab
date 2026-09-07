@@ -1863,10 +1863,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Options
       objectReference: {fileID: 0}
-    - target: {fileID: 4734487984217637949, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6288557633370099815, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1950,37 +1946,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8058084908187074580, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4735211526998485640}
-    - targetCorrespondingSourceObject: {fileID: 7293499693055666996, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9071905196570332752}
-    - targetCorrespondingSourceObject: {fileID: 4369317114644408157, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2919361046702059340}
-    - targetCorrespondingSourceObject: {fileID: 5214795317034165068, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6019486233210647809}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
---- !u!1 &117691596705302646 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4369317114644408157, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-  m_PrefabInstance: {fileID: 4395778382223191851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2919361046702059340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117691596705302646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!114 &3164101083546269390 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1651083894095944165, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
@@ -1992,59 +1959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de04dd40de0229c479e282b49a51f6f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player.Window
---- !u!1 &5968642391986171711 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8058084908187074580, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-  m_PrefabInstance: {fileID: 4395778382223191851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-4735211526998485640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5968642391986171711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
---- !u!1 &6356626854794871839 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7293499693055666996, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-  m_PrefabInstance: {fileID: 4395778382223191851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9071905196570332752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6356626854794871839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
 --- !u!224 &7657668576154337100 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6288557633370099815, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
   m_PrefabInstance: {fileID: 4395778382223191851}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8457300023975087207 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5214795317034165068, guid: 258e278bc6eef2349bde1b16f140b1fc, type: 3}
-  m_PrefabInstance: {fileID: 4395778382223191851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-6019486233210647809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8457300023975087207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d3dd04d5190048ac8664ac944422f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Utilities.ButtonSoundHook
