@@ -36,10 +36,14 @@ namespace Weapons
         public Transform Transform => tr != null ? tr : transform;
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
+        [Range(-91, 0)]
         [field: SerializeField] public float MinElevation { get; protected set; } = -45;
+        [Range(0, 91)]
         [field: SerializeField] public float MaxElevation { get; protected set; } = 90;
-        [field: SerializeField] public float MinRot { get; protected set; } = -190;
-        [field: SerializeField] public float MaxRot { get; protected set; } = 190;
+        [Range(-181, 0)]
+        [field: SerializeField] public float MinRot { get; protected set; } = -181;
+        [Range(0, 181)]
+        [field: SerializeField] public float MaxRot { get; protected set; } = 181;
         public TurretData Parameters => @params;
         public bool TargetMissiles { get; set; }
         public bool TargetUnits { get; set; }
