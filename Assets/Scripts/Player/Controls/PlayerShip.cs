@@ -60,7 +60,21 @@ namespace Player
             PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
+            MissionManager.TryGetInstance(true).ExecuteAction(EnableCamera, 0.1f);
+            MissionManager.TryGetInstance(true).ExecuteAction(EnableCallbacks, 1f);
+        }
+
+        /// <summary>
+        /// Delayed by .1 seconds to ensure smoother player spawning.
+        /// </summary>
+        public void EnableCallbacks()
+        {
             GameManager.InputActions.BasicControls.SetCallbacks(this);
+        }
+
+        public void EnableCamera()
+        {
+            PlayerCamera.enabled = true;
         }
 
         protected override void OnEnable()

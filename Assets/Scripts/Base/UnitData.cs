@@ -66,12 +66,13 @@ public class UnitData : MonoSpawnableData<Unit>
     public int MissionRequirement = -1;
     [TextArea(15, 20)]
     [SerializeField] protected string description;
+    public string Name => name.Replace("(Clone)", "").Replace("_Player", "").Trim();
     public string Description
     {
         get
         {
             if (description != null && description.Length > 0) return description;
-            return "A " + name + '.';
+            return "A " + Name + '.';
         }
     }
 

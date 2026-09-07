@@ -114,10 +114,8 @@ public class GlobalConfig : ScriptableObject
     public static readonly float MissionFailureEndDuration = 3;
     public static readonly int
         MainMenuSceneIndex = 1,
-        MissionSelectSceneIndex = 2,
-        ShipSelectSceneIndex = 3,
-        LoadingSceneIndex = 4,
-        EndMissionSceneIndex = 5;
+        MissionSceneIndex = 2,
+        EndMissionSceneIndex = 3;
     #endregion
 
     #region Layers and layer masks

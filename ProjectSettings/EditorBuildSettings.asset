@@ -12,14 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MainMenu.unity
     guid: 158bf9a1c5c987c41b1cdd45651022b5
   - enabled: 1
-    path: Assets/Scenes/UI/MissionSelectScene.unity
+    path: Assets/Scenes/UI/MissionScene.unity
     guid: a851b7e07414ea244b556489711c2666
-  - enabled: 1
-    path: Assets/Scenes/UI/ShipSelectScene.unity
-    guid: 14c187260e462d44d874e55c5e3ddb26
-  - enabled: 1
-    path: Assets/Scenes/UI/LoadingScreen.unity
-    guid: e9194122af0db3540a98f5ca6f5f14e3
   - enabled: 1
     path: Assets/Scenes/UI/MissionEndScene.unity
     guid: 576d6d5a223fa7543a5b2f99aff7848b

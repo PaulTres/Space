@@ -31,7 +31,7 @@ namespace Player
 
             foreach (var pair in killCounts)
             {
-                playerKills.text += "\n\n" + pair.Value + " x " + pair.Key;
+                playerKills.text += "\n" + pair.Value + " x " + pair.Key;
             }
             playerKills.SetAllDirty();
         }

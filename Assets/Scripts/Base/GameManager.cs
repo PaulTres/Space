@@ -80,22 +80,12 @@ public static class GameManager
 
     public static void LoadMissionSelection()
     {
-        SceneManager.LoadScene(GlobalConfig.MissionSelectSceneIndex);
-    }
-
-    public static void LoadShipSelect()
-    {
-        SceneManager.LoadScene(GlobalConfig.ShipSelectSceneIndex);
+        SceneManager.LoadScene(GlobalConfig.MissionSceneIndex);
     }
 
     public static void LoadMission()
     {
         LoadMission(ChosenMissionIndex);
-    }
-
-    public static void LoadLoadingScreen()
-    {
-        SceneManager.LoadScene(GlobalConfig.LoadingSceneIndex);
     }
 
     /// <summary>
@@ -104,6 +94,8 @@ public static class GameManager
     /// <param name="index"></param>
     public static void LoadMission(int index)
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         SceneManager.LoadScene($"Mission_{index + 1}");
     }
 

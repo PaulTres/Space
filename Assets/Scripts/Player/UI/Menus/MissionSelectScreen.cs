@@ -36,7 +36,5 @@ namespace Player
         }
 
         public void BackToMenu() => GameManager.LoadMainMenu();
-
-        public void GoToShipSelect() => GameManager.LoadShipSelect();
     }
 }

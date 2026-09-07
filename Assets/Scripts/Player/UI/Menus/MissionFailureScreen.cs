@@ -54,7 +54,7 @@ namespace Player
 
         public void RestartMission()
         {
-            GameManager.LoadLoadingScreen();
+            GameManager.LoadMission();
         }
 
         public void ReplanMission()

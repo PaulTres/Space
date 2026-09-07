@@ -26,7 +26,7 @@ namespace Player
             {
                 if (data.Points > Mission.CurrentMission.PlayerPoints) continue;
                 if (data.MissionRequirement >= GameManager.LatestMissionIndex) continue;
-                playerOptions.options.Add(new(data.name));
+                playerOptions.options.Add(new(data.Name));
             }
             SetPlayerChoice(0);
             playerOptions.SetValueWithoutNotify(0);
@@ -61,7 +61,7 @@ namespace Player
                 timerText.text = $"00:{count:D2}";
                 yield return waitForOneSecond;
             }
-            GameManager.LoadLoadingScreen();
+            GameManager.LoadMission();
         }
         #endregion
     }

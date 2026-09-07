@@ -70,6 +70,7 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+  audioOnly: 0
 --- !u!198 &4918853256161837267
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 10
       minScalar: 1
       maxCurve:
         serializedVersion: 2
