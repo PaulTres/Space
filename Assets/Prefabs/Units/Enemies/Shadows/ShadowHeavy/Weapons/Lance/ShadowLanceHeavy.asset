@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aeb4f106f74f8bd4492f562b69d0a8df, type: 3}
-  m_Name: ShadowLance
+  m_Name: ShadowLanceHeavy
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LanceData
   Prefab: {fileID: 3060560570612828636, guid: d90e4d40500de5f409a4357b82682efb, type: 3}
   Key: 4

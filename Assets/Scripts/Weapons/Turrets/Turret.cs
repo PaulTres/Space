@@ -37,7 +37,7 @@ namespace Weapons
         public Vector3 Forward => ElevationPivot.forward;
         [SerializeField] protected TurretData @params;
         [Range(-91, 0)]
-        [field: SerializeField] public float MinElevation { get; protected set; } = -45;
+        [field: SerializeField] public float MinElevation { get; protected set; } = -90;
         [Range(0, 91)]
         [field: SerializeField] public float MaxElevation { get; protected set; } = 90;
         [Range(-181, 0)]

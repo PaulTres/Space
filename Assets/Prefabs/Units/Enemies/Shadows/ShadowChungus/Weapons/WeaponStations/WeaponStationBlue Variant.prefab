@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3399303389270484578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6364685682485017526}
+  - component: {fileID: 5420242036917178520}
+  m_Layer: 0
+  m_Name: Cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6364685682485017526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399303389270484578}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5409022035582512710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5420242036917178520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3399303389270484578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9efb0f05974f348888b4719273a8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Cannon
+  params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
+  shootPoints: []
+--- !u!1 &6916756682678645281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260874955018893947}
+  - component: {fileID: 429720835022936567}
+  m_Layer: 0
+  m_Name: Cannon (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &260874955018893947
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916756682678645281}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5409022035582512710}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &429720835022936567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6916756682678645281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9efb0f05974f348888b4719273a8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Cannon
+  params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
+  shootPoints: []
+--- !u!1001 &5157623371509247053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 191161681866770233, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_Name
+      value: WeaponStationBlue Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319582936323820871, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6af14c8dd15ef8142bafff2a5e7ebe68, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 901630060269158923, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6364685682485017526}
+    - targetCorrespondingSourceObject: {fileID: 901630060269158923, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 260874955018893947}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7756835116518912502, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 460165294075970658}
+  m_SourcePrefab: {fileID: 100100000, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+--- !u!1 &3185838590952021435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7756835116518912502, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+  m_PrefabInstance: {fileID: 5157623371509247053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &460165294075970658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185838590952021435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  <RotationPivot>k__BackingField: {fileID: 0}
+  <ElevationPivot>k__BackingField: {fileID: 0}
+  params: {fileID: 11400000, guid: e69925e79780c6448b5336571dc3f0c9, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
+--- !u!4 &5409022035582512710 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 901630060269158923, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
+  m_PrefabInstance: {fileID: 5157623371509247053}
+  m_PrefabAsset: {fileID: 0}

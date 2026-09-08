@@ -23,7 +23,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
         [field: SerializeField] public float MinimumSignature { get; protected set; }
-        [field: SerializeField] public float MaxSignature { get; protected set; }
+        [field: SerializeField] public float MaximumSignature { get; protected set; }
         public float SignatureDecreaseRate = 0.1f;
         [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
         public float SignatureDecreaseCooldown = 5f;
@@ -81,7 +81,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     }
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
-    public float MaxSignature => unitParameters.MaxSignature;
+    public float MaxSignature => unitParameters.MaximumSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
@@ -204,7 +204,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public void IncreaseSignature(float amount)
     {
         signatureDecreaseDelay = Time.time;
-        currentSignature = Mathf.Min(unitParameters.MaxSignature, CurrentSignature + amount);
+        currentSignature = Mathf.Min(unitParameters.MaximumSignature, CurrentSignature + amount);
     }
 
     protected virtual void DecreaseSignature(float deltaTime)
@@ -237,9 +237,10 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Debugging
     protected virtual void OnDrawGizmos()
     {
-        if (!Application.IsPlaying(this)) currentSignature = unitParameters.MinimumSignature;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
+        Gizmos.DrawWireSphere(Transform.position, unitParameters.MinimumSignature);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(Transform.position, unitParameters.MaximumSignature);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
         Gizmos.color = Color.green;

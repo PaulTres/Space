@@ -43,17 +43,13 @@ namespace HP
                 {
                     if (sendEventOnHPChange) OnDamageTaken?.Invoke();
                     currentHP = value;
-                    foreach (var damageEffect in damageEffects)
-                    {
-                        damageEffect.gameObject.SetActive(currentHP / MaxHP <
-                            damageEffect.DamageThreshold);
-                    }
+                    UpdateDamageEffects();
                 }
             }
         }
         protected CountdownTimer hpRegainTimer;
         protected bool firedEvent = false;
-        protected List<DamageEffect> damageEffects = new();
+        [SerializeField] protected List<DamageEffect> damageEffects = new();
         protected ImprovedMonoBehaviour improvedMonoBehaviour;
         public ImprovedMonoBehaviour ImprovedMonoBehaviour
         {
@@ -80,7 +76,7 @@ namespace HP
                     if (currentHP < minHP) currentHP = minHP;
                 };
             }
-            damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
+            if (damageEffects.IsEmpty()) damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
         }
 
         public void PerformReset()
@@ -122,10 +118,10 @@ namespace HP
                 firedEvent = true;
                 ObjectDestroyed @event = new(Transform.GetInstanceID(), damageInfo.Source);
                 EventBus<ObjectDestroyed>.Raise(Transform.GetInstanceID(), @event);
-                foreach (var e in damageEffects)
-                {
-                    e.gameObject.SetActive(false);
-                }
+                //foreach (var e in damageEffects)
+                //{
+                //    e.gameObject.SetActive(false);
+                //}
                 return;
             }
             if (damageInfo.Amount >= damageThreshold) effectOnDamage.SpawnEffect(damageInfo.Position, effectScaleFactor);
@@ -135,5 +131,20 @@ namespace HP
                 hpRegainTimer.Start();
             }
         }
+
+        protected void OnValidate()
+        {
+            if (damageEffects.IsEmpty()) damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
+        }
+
+        protected void UpdateDamageEffects()
+        {
+            foreach (var damageEffect in damageEffects)
+            {
+                damageEffect.gameObject.SetActive(currentHP / MaxHP <
+                    damageEffect.DamageThreshold);
+            }
+        }
+
     }
 }

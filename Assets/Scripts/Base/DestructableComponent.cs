@@ -5,7 +5,7 @@ using UnityEngine;
 using Utilities;
 
 [RequireComponent(typeof(HPComponent))]
-public class WeaponStation : ImprovedMonoBehaviour
+public class DestructableComponent : ImprovedMonoBehaviour
 {
     public override Vector3 LinearVelocity => OwningUnit.LinearVelocity;
     public override Vector3 AngularVelocity => OwningUnit.AngularVelocity;
@@ -28,9 +28,15 @@ public class WeaponStation : ImprovedMonoBehaviour
 
     protected void OnEnable()
     {
+        if (remains != null) remains.SetActive(false);
         Team = OwningUnit.Team;
         UnitManager.Register(this);
         EventBus<ObjectDestroyed>.AddActions(this.GetTransformInstanceID(), Die);
+    }
+
+    protected void OnValidate()
+    {
+        if (remains != null) remains.SetActive(false);
     }
 
     public override void SetObjectLayer()

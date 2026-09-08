@@ -9,6 +9,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     /// DO NOT FUCK WITH THIS!
     /// </summary>
     public int UnitManagerIndex { get; set; } = -1;
+    [Tooltip("Team 1 is player team, team 2 is enemy team.")]
     [field: SerializeField] public int Team { get; set; } = 1;
     [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 20f;
     public abstract ImprovedMonoBehaviour Target { get; }

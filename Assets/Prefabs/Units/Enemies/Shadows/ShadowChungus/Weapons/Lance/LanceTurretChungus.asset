@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5114e209f3dd3464aa5e025d9ffe2189, type: 3}
-  m_Name: LanceTurret
+  m_Name: LanceTurretChungus
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.TurretData
   AllowZeroScoreTargets: 0
   TargetEvaluation: {fileID: 11400000, guid: 24b04e21b9693754492168347cc826df, type: 2}

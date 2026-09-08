@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad3433ad3521184488d385d17e51507, type: 3}
   m_Name: Chungus
   m_EditorClassIdentifier: SpaceAssembly::UnitData
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 3656737314857615257, guid: e93eb97cb2c6fec4ab3a6a181430a12a, type: 3}
   ShouldBeDisabled: 1
   Points: 1
   MissionRequirement: -1
