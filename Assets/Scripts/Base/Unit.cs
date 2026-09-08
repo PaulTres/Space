@@ -22,8 +22,6 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
-        [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
-        [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
         [field: SerializeField] public float MinimumSignature { get; protected set; }
         [field: SerializeField] public float MaxSignature { get; protected set; }
         public float SignatureDecreaseRate = 0.1f;
@@ -37,13 +35,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Fields
     #region Misc
     [Header("Unit")]
-    /// <summary>
-    /// This is used for quick removal from the unit manager lists. 
-    /// DO NOT FUCK WITH THIS!
-    /// </summary>
-    public int UnitManagerIndex { get; set; }
-    [Tooltip("The higher this value, the more likely other ships are to attempt to guard this vessel.")]
-    [field: SerializeField] public float EscortValue { get; set; } = 0;
     public List<Turret> Turrets { get; protected set; }
     /// <summary>
     /// Fires on every tick. Mainly used to update turrets.
@@ -54,9 +45,11 @@ public abstract class Unit : ImprovedMonoBehaviour
     [Tooltip("These objects will have their layer changed to better account for collisions.")]
     [SerializeField] protected List<Collider> collisionCheckers;
     [Tooltip("The list of all objects whose layer needs to be changed for taking damage on spawn. Should contain only colliders.")]
-    [SerializeField] protected List<Collider> damageTakingObjects;
+    [SerializeField] protected List<DamageReceiver> damageTakingObjects;
     [Tooltip("If true, the spawn effect will play when the unit is enabled.")]
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
+    protected float currentSignature = 0;
+    public override float CurrentSignature => currentSignature;
     #endregion
 
     [SerializeField] protected UnitParameters unitParameters;
@@ -92,7 +85,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
-    public float EffectScaleFactor => unitParameters.EffectScaleFactor;
     public float ScanRange
     {
         get
@@ -132,7 +124,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         missileCount = 0;
         tickCoroutine = StartCoroutine(Tick());
-        CurrentSignature = unitParameters.MinimumSignature;
+        currentSignature = unitParameters.MinimumSignature;
         UnitManager.Register(this);
         signatureDecreaseDelay = Time.time;
         if (PlaySpawnEffect && unitParameters.EffectOnSpawn != null)
@@ -145,7 +137,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// Sets the layers of all important objects.
     /// </summary>
     /// <param name="layer"></param>
-    public virtual void SetObjectLayer()
+    public override void SetObjectLayer()
     {
         Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
         Debug.Assert(collisionCheckers.Count > 0, $"{Transform} has no objects for handling collisions!");
@@ -199,21 +191,21 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// Returns a list of all units that are on a different Team than this unit.
     /// </summary>
     /// <returns></returns>
-    public List<Unit> GetTargets() => UnitManager.GetTargets(Team);
+    public List<ImprovedMonoBehaviour> GetTargets() => UnitManager.GetTargets(Team);
     #endregion
 
-    public List<Unit> GetAllies() => UnitManager.GetShips(Team);
+    public List<ImprovedMonoBehaviour> GetAllies() => UnitManager.GetShips(Team);
 
     public void IncreaseSignature(float amount)
     {
         signatureDecreaseDelay = Time.time;
-        CurrentSignature = Mathf.Min(unitParameters.MaxSignature, CurrentSignature + amount);
+        currentSignature = Mathf.Min(unitParameters.MaxSignature, CurrentSignature + amount);
     }
 
     protected virtual void DecreaseSignature(float deltaTime)
     {
         if (Time.time - signatureDecreaseDelay < unitParameters.SignatureDecreaseCooldown) return;
-        CurrentSignature = Mathf.Max(unitParameters.MinimumSignature,
+        currentSignature = Mathf.Max(unitParameters.MinimumSignature,
             CurrentSignature - unitParameters.SignatureDecreaseRate * deltaTime);
     }
 
@@ -240,7 +232,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Debugging
     protected virtual void OnDrawGizmos()
     {
-        if (!Application.IsPlaying(this)) CurrentSignature = unitParameters.MinimumSignature;
+        if (!Application.IsPlaying(this)) currentSignature = unitParameters.MinimumSignature;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
         Gizmos.color = Color.blue;

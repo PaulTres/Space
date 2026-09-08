@@ -9,13 +9,13 @@ public static class UnitManager
     /// <summary>
     /// All active ships. The key is a ship's Team.
     /// </summary>
-    readonly static Dictionary<int, List<Unit>> ships = new();
+    readonly static Dictionary<int, List<ImprovedMonoBehaviour>> ships = new();
     public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
     public static int EnemyCount => ships[GlobalConfig.EnemyTeam].Count;
 
     public static void Clear() => ships.Clear();
 
-    public static IEnumerable<Unit> GetAllShips()
+    public static IEnumerable<ImprovedMonoBehaviour> GetAllShips()
     {
         return ships.SelectMany(kv => kv.Value);
     }
@@ -25,7 +25,7 @@ public static class UnitManager
     /// </summary>
     /// <param name="team"></param>
     /// <returns></returns>
-    public static List<Unit> GetShips(int team)
+    public static List<ImprovedMonoBehaviour> GetShips(int team)
     {
         return ships.ContainsKey(team) ? ships[team].ToList() : new();
     }
@@ -35,7 +35,7 @@ public static class UnitManager
     /// </summary>
     /// <param name="myTeam"></param>
     /// <returns></returns>
-    public static List<Unit> GetTargets(int myTeam)
+    public static List<ImprovedMonoBehaviour> GetTargets(int myTeam)
     {
         //string s = "";
         //foreach (var kvp in ships)
@@ -51,7 +51,7 @@ public static class UnitManager
         return ships.Where(kv => kv.Key != myTeam).SelectMany(kv => kv.Value).ToList();
     }
 
-    public static void Register(Unit ship)
+    public static void Register(ImprovedMonoBehaviour ship)
     {
         if (ship == null)
         {
@@ -76,7 +76,7 @@ public static class UnitManager
     /// it can try to unregister again and that fucks with everything.
     /// </summary>
     /// <param name="ship"></param>
-    public static void Unregister(Unit ship)
+    public static void Unregister(ImprovedMonoBehaviour ship)
     {
         ship.UnregisterForRadar();
         if (!ship.Active(true) || ship.UnitManagerIndex == -1) return;

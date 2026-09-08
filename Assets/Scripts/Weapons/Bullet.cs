@@ -67,19 +67,24 @@ namespace Weapons
                     damageInfo.Source = value;
                     if (value != null)
                     {
-                        gameObject.layer = GlobalConfig.GetBulletLayer(value.Team);
+                        SetObjectLayer();
                     }
                 }
             }
         }
-
         protected bool disableOnHit = true;
         protected float lifeTime;
         protected PoolableEffect onSpawnEffect, onHitEffect;
         protected float effectScaleFactor;
+        public override float CurrentSignature => 0;
         #endregion
 
         #region Setup
+        public override void SetObjectLayer()
+        {
+            gameObject.layer = GlobalConfig.GetBulletLayer(Owner.Team);
+        }
+
         protected virtual void Awake()
         {
             ComponentRegister<IOwnable>.Register(Transform, this);
@@ -127,9 +132,8 @@ namespace Weapons
 
         protected virtual void OnHit(Collider collider)
         {
-            var t = collider.transform.root;
-            if (t == Owner) return;
-            collider.transform.root.TakeDamage(damageInfo);
+            if (collider.transform.root == Owner) return;
+            collider.transform.TakeDamage(damageInfo);
             onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }

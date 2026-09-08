@@ -13,7 +13,7 @@ namespace Level
         [SerializeField] protected int[] targetTeams = new int[] { 1 };
         public float Interval => interval;
         protected DamageInfo damageInfo;
-        protected Dictionary<Unit, float> damageIntervals = new();
+        protected Dictionary<ImprovedMonoBehaviour, float> damageIntervals = new();
 
         protected override void InitializeSingleton()
         {
@@ -57,7 +57,7 @@ namespace Level
             }
         }
 
-        protected void DealDamage(Unit unit)
+        protected void DealDamage(ImprovedMonoBehaviour unit)
         {
             //Debug.Log($"Damaging {unit}");
             unit.Transform.TakeDamage(damageInfo);

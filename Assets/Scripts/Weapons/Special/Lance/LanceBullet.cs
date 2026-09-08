@@ -125,7 +125,7 @@ namespace Weapons
             HashSet<int> hits = new();
             for (int i = 0; i < colliderCount; i++)
             {
-                var t = buffer[i].transform.root;
+                var t = buffer[i].transform.parent != null ? buffer[i].transform.parent : buffer[i].transform;
                 if (hits.Add(t.GetInstanceID())) OnHit(buffer[i]);
             }
         }

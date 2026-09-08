@@ -12,7 +12,7 @@ public class TargetInOptimalRangeCondition : ConditionData
     [SerializeField] protected float buffer = 0;
     public override Func<Node, Blackboard, bool> Function => (n, ctx) =>
     {
-        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (target.Active())
         {
             //Debug.Log($"TargetInOptimalRangeCondition: target={target}, minRangeFromTarget={minRangeFromTarget}, maxRange={target.CurrentSignature + ctx.Navigation.ScanRange + buffer}");

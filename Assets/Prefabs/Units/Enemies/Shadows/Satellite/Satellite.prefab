@@ -84,8 +84,6 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers: []
-  body: {fileID: 0}
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -123,18 +121,18 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 5681176053543418369}
   damageTakingObjects:
-  - {fileID: 675643974911587713}
+  - {fileID: 3241190921106244426}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 0}
-    <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 0
     <MaxSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
@@ -498,6 +496,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dfb790659471ab14288b1af8d3dac723, type: 3}
       insertIndex: -1
       addedObject: {fileID: 675643974911587713}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dfb790659471ab14288b1af8d3dac723, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3241190921106244426}
   m_SourcePrefab: {fileID: 100100000, guid: dfb790659471ab14288b1af8d3dac723, type: 3}
 --- !u!1 &3803838334846037624 stripped
 GameObject:
@@ -527,6 +528,22 @@ CapsuleCollider:
   m_Height: 9
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3241190921106244426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3803838334846037624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 62546170232985336}
+  armorModifiers: []
+  body: {fileID: 0}
 --- !u!4 &4576257981052794050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfb790659471ab14288b1af8d3dac723, type: 3}

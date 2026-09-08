@@ -67,7 +67,7 @@ public class StrafeNode : LeafNodeData
 
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (!target.Active()) return NodeState.FAILURE;
         //if (Name.Contains("Medium")) Debug.Log("Strafing " + target);
 

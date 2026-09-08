@@ -8,7 +8,7 @@ namespace Level
     {
         protected static HashSet<SafeZone> safeZones = new();
 
-        public static bool InSafeZone(Unit unit)
+        public static bool InSafeZone(ImprovedMonoBehaviour unit)
         {
             if (!unit.Active()) return false;
             return InSafeZone(unit.Position);

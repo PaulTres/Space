@@ -10,7 +10,7 @@ public class DefensivePostureNode : LeafNodeData
 {
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (!target.Active()) return NodeState.FAILURE;
         foreach (var turret in ctx.GetData<List<Turret>>(Blackboard.Keys.AllTurrets))
         {

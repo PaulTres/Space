@@ -15,7 +15,7 @@ public class TargetAcquisitionService : ServiceData
 
     public override Action<Node, Blackboard> Action => (n, ctx) =>
     {
-        Unit bestTarget = null;
+        ImprovedMonoBehaviour bestTarget = null;
         float bestTargetScore = float.MinValue;
         foreach (var target in ctx.Navigation.GetTargets())
         {

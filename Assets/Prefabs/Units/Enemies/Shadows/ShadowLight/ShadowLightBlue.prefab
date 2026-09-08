@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 3947328160120870552}
   - component: {fileID: 2453980469892618478}
   - component: {fileID: 1902977087149361923}
+  - component: {fileID: 7722082318002812990}
   m_Layer: 0
   m_Name: ShadowLightBlue
   m_TagString: Untagged
@@ -236,8 +237,6 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers: []
-  body: {fileID: 0}
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -256,18 +255,18 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 6663940830056700868}
   damageTakingObjects:
-  - {fileID: 3947328160120870552}
+  - {fileID: 7722082318002812990}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 10
     <MaxSignature>k__BackingField: 50
     SignatureDecreaseRate: 0.1
@@ -343,6 +342,22 @@ MonoBehaviour:
   count: 3
   effectScaleFactor: 1
   finalEffectScaleFactor: 4
+--- !u!114 &7722082318002812990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030571594334976142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 6915273950413581737}
+  armorModifiers: []
+  body: {fileID: 0}
 --- !u!1 &4891043787746463599
 GameObject:
   m_ObjectHideFlags: 0

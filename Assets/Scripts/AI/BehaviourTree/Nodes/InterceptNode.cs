@@ -17,7 +17,7 @@ public class InterceptNode : LeafNodeData
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
         ctx.Navigation.RotationTarget = new FaceTargetRotation(Blackboard.Keys.Target);
-        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (target.Active())
         {
             ((LeafNode)n).SetData((int)InternalKeys.TargetPrevPos, target.Position);

@@ -5362,7 +5362,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7344368368762803236}
+  m_Father: {fileID: 9199295379219707793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5102391649214837498
 MeshFilter:
@@ -5421,6 +5421,78 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2403054996595401736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9199295379219707793}
+  - component: {fileID: 7555629313023739390}
+  - component: {fileID: 4157057268716219425}
+  m_Layer: 0
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9199295379219707793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403054996595401736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 668044644700267716}
+  - {fileID: 4574217913593359660}
+  m_Father: {fileID: 7344368368762803236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7555629313023739390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403054996595401736}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 16}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4157057268716219425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403054996595401736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 2365639470239944223}
+  armorModifiers: []
+  body: {fileID: 0}
 --- !u!1 &2409095575381040503
 GameObject:
   m_ObjectHideFlags: 0
@@ -11085,12 +11157,6 @@ MonoBehaviour:
   minHP: 40
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers:
-  - <Direction>k__BackingField: 4
-    <Modifier>k__BackingField: 0.5
-  - <Direction>k__BackingField: 5
-    <Modifier>k__BackingField: 1.2
-  body: {fileID: 0}
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -11109,19 +11175,19 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 100
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 5586086991175637683}
   damageTakingObjects:
-  - {fileID: 3683637876793033781}
-  - {fileID: 4558754421140404493}
+  - {fileID: 4157057268716219425}
+  - {fileID: 8614688761047979986}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 50
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <EffectScaleFactor>k__BackingField: 5
     <MinimumSignature>k__BackingField: 30
     <MaxSignature>k__BackingField: 100
     SignatureDecreaseRate: 0.1
@@ -11201,6 +11267,7 @@ GameObject:
   - component: {fileID: 1324492221081754313}
   - component: {fileID: 7534087973146003617}
   - component: {fileID: 4558754421140404493}
+  - component: {fileID: 8614688761047979986}
   m_Layer: 0
   m_Name: RotatingSection
   m_TagString: Untagged
@@ -11261,6 +11328,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 6, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8614688761047979986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997751787457478246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 2365639470239944223}
+  armorModifiers: []
+  body: {fileID: 0}
 --- !u!1 &6245463321369931082
 GameObject:
   m_ObjectHideFlags: 0
@@ -11270,7 +11353,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7344368368762803236}
-  - component: {fileID: 3683637876793033781}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -11292,36 +11374,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6074759401019103789}
-  - {fileID: 668044644700267716}
-  - {fileID: 4574217913593359660}
   - {fileID: 1324492221081754313}
   - {fileID: 6526273451392803134}
   - {fileID: 7222199280763586320}
+  - {fileID: 9199295379219707793}
   m_Father: {fileID: 1154501830181603266}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &3683637876793033781
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6245463321369931082}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Height: 18
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6925981963127992980
 GameObject:
   m_ObjectHideFlags: 0
@@ -11425,9 +11483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3136c0bcbe84f4289ea4f05bea403b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ThrusterGroup
-  minScale: 0
-  maxScale: 1
-  scaleFactor: 1
+  minScale: {x: 0.1, y: 0.1, z: 0.1}
+  maxScale: {x: 1, y: 1, z: 1}
+  scaleFactor: {x: 1, y: 1, z: 1}
 --- !u!1 &7750225631516639160
 GameObject:
   m_ObjectHideFlags: 0
@@ -11525,7 +11583,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7344368368762803236}
+  m_Father: {fileID: 9199295379219707793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1172359410510083027
 MeshFilter:

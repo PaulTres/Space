@@ -31,8 +31,8 @@ namespace Radar
         [SerializeField] protected Image secondView;
         [SerializeField] protected Camera secondViewCamera;
         [SerializeField] protected TextMeshProUGUI targetInfoText;
-        protected Unit currentTarget;
-        public Unit CurrentTarget
+        protected ImprovedMonoBehaviour currentTarget;
+        public ImprovedMonoBehaviour CurrentTarget
         {
             get
             {
@@ -293,7 +293,7 @@ namespace Radar
         {
             if (GameManager.Player == null || Time.timeScale == 0) return;
             var targets = GameManager.Player.GetTargets();
-            Unit bestCandidate = null;
+            ImprovedMonoBehaviour bestCandidate = null;
             float bestScore = 0;
             foreach (var target in targets)
             {
@@ -313,7 +313,7 @@ namespace Radar
         /// Fires when a new target has been selected.
         /// </summary>
         /// <param name="unit"></param>
-        protected void TargetSelected(Unit unit)
+        protected void TargetSelected(ImprovedMonoBehaviour unit)
         {
             if (unit == CurrentTarget) return;
             if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
@@ -337,7 +337,7 @@ namespace Radar
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public float EvaluateTarget(Unit target)
+        public float EvaluateTarget(ImprovedMonoBehaviour target)
         {
             if (!GameManager.Player.Active() || !target.Active()) return float.MinValue;
 

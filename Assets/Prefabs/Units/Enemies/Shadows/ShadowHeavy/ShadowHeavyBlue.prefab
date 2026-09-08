@@ -10988,6 +10988,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4996277621583982225}
   - component: {fileID: 7002944125283959535}
+  - component: {fileID: 4219994171728010802}
   m_Layer: 0
   m_Name: DamageChecker
   m_TagString: Untagged
@@ -11033,6 +11034,22 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4219994171728010802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178871984881096886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 3538863795599878826}
+  armorModifiers: []
+  body: {fileID: 0}
 --- !u!1 &7413816497280604648
 GameObject:
   m_ObjectHideFlags: 0
@@ -11322,8 +11339,6 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers: []
-  body: {fileID: 0}
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -11342,18 +11357,18 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 50
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 1329890387165328382}
   damageTakingObjects:
-  - {fileID: 7002944125283959535}
+  - {fileID: 4219994171728010802}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 40
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 0}
-    <EffectScaleFactor>k__BackingField: 5
     <MinimumSignature>k__BackingField: 50
     <MaxSignature>k__BackingField: 150
     SignatureDecreaseRate: 0.1

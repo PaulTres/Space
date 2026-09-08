@@ -11,7 +11,7 @@ namespace HybridBT2
         {
             var minEscortValue = context.GetData<float>(Blackboard.Keys.MinEscortValue);
             var allies = context.Navigation.GetAllies();
-            var bestCandidate = context.GetData<Unit>(Blackboard.Keys.EscortCandidate);
+            var bestCandidate = context.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.EscortCandidate);
             var bestScore = EvaluateCandidate(bestCandidate, context, minEscortValue);
             foreach (var ally in allies)
             {
@@ -27,7 +27,7 @@ namespace HybridBT2
             return bestScore;
         }
 
-        protected float EvaluateCandidate(Unit candidate, Blackboard context, float minEscortValue)
+        protected float EvaluateCandidate(ImprovedMonoBehaviour candidate, Blackboard context, float minEscortValue)
         {
             if (!candidate.Active()) return float.MinValue;
             return Mathf.Clamp01(candidate.EscortValue / (minEscortValue * minEscortValue + Mathf.Epsilon)) * Mathf.Clamp01(maxRange - Vector3.Distance(candidate.Position, context.Position) / maxRange);

@@ -4,6 +4,11 @@ using Utilities;
 
 public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableComponent
 {
+    /// <summary>
+    /// This is used for quick removal from the unit manager lists. 
+    /// DO NOT FUCK WITH THIS!
+    /// </summary>
+    public int UnitManagerIndex { get; set; } = -1;
     [field: SerializeField] public int Team { get; set; } = 1;
     [field: SerializeField] public float MaxVelocityMagnitude { get; protected set; } = 20f;
     public abstract ImprovedMonoBehaviour Target { get; }
@@ -26,9 +31,11 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
         get => Transform.position;
         set => Transform.position = value;
     }
-    public float CurrentSignature { get; protected set; } = 0;
+    public abstract float CurrentSignature { get; }
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
-
+    [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
+    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
+    [field: SerializeField] public float EscortValue { get; protected set; } = 0;
     public void RegisterForRadar()
     {
         var r = PlayerTargetSystem.TryGetInstance();
@@ -46,4 +53,6 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
             r.UnregisterTarget(this);
         }
     }
+
+    public abstract void SetObjectLayer();
 }

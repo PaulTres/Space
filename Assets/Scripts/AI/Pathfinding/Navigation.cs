@@ -37,7 +37,7 @@ public class Navigation : Ship
         {
             var blackboard = Transform.GetBlackboard();
             if (blackboard == null) return null;
-            return blackboard.GetData<Unit>(Blackboard.Keys.Target);
+            return blackboard.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         }
     }
     #endregion

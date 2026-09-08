@@ -88,12 +88,6 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers:
-  - <Direction>k__BackingField: 2
-    <Modifier>k__BackingField: 0.5
-  - <Direction>k__BackingField: 3
-    <Modifier>k__BackingField: 0.5
-  body: {fileID: 0}
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -112,18 +106,18 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 20
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 3437810654484111270}
   damageTakingObjects:
-  - {fileID: 2928620861723319269}
+  - {fileID: 4231781807680790968}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <EffectScaleFactor>k__BackingField: 1
     <MinimumSignature>k__BackingField: 20
     <MaxSignature>k__BackingField: 70
     SignatureDecreaseRate: 0.1
@@ -5945,6 +5939,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2928620861723319269}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4231781807680790968}
   m_SourcePrefab: {fileID: 100100000, guid: 4f04d3d5958b1b442b85a380fb35bf3c, type: 3}
 --- !u!4 &8322856368576503919 stripped
 Transform:
@@ -5979,3 +5976,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.1}
+--- !u!114 &4231781807680790968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704166607991732949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 3551944777785059265}
+  armorModifiers: []
+  body: {fileID: 0}

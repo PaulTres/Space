@@ -9,7 +9,7 @@ public class TargetTooCloseCondition : ConditionData
     [SerializeField] protected float minRangeFromTarget = 10;
     public override Func<Node, Blackboard, bool> Function => (n, ctx) =>
     {
-        var target = ctx.GetData<Unit>(Blackboard.Keys.Target);
+        var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (target.Active())
         {
             var dist = Vector3.Distance(target.Position, ctx.Position);

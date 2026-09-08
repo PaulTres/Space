@@ -53,7 +53,7 @@ public class BanditTree : BT, IRegisterableComponent
     }
     #endregion
 
-    public void SetTarget(Unit target) => blackboard.SetData(Blackboard.Keys.Target, target);
+    public void SetTarget(ImprovedMonoBehaviour target) => blackboard.SetData(Blackboard.Keys.Target, target);
 
     /// <summary>
     /// Fires when a unit is destroyed on the field. Increases morale if an enemy 
