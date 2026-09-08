@@ -110,6 +110,7 @@ namespace Radar
             if (viewportPos.z <= 0 || Vector3.Dot(cam.transform.forward, directionToTarget) <= 0)
             {
                 bbox.Hide();
+                if (CurrentTarget == target) ClearTarget();
             }
             else
             {
@@ -249,7 +250,11 @@ namespace Radar
         #region Current target
         protected void UpdateCurrentTargetInfo()
         {
-            if (!CurrentTarget.Active()) return;
+            if (!CurrentTarget.Active())
+            {
+                SelectTarget();
+                return;
+            }
 
             #region Target view
             if (secondViewCamera != null && secondView != null)
