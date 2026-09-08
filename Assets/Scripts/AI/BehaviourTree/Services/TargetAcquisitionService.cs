@@ -20,7 +20,7 @@ public class TargetAcquisitionService : ServiceData
         foreach (var target in ctx.Navigation.GetTargets())
         {
             if (!target.Active()) continue;
-            if (bestTarget == null)
+            if (!bestTarget.Active())
             {
                 bestTarget = target;
                 bestTargetScore = TargetEvaluation.Evaluate(ctx.Navigation, target, MaxRange);

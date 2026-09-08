@@ -302,10 +302,10 @@ namespace Utilities
         public static bool TakeDamage(this Transform transform, DamageInfo damageInfo)
         {
             if (transform == null) throw new System.ArgumentNullException();
-            if (transform.parent != null)
-            {
-                Debug.LogWarning($"{transform} has parent!");
-            }
+            //if (transform.parent != null)
+            //{
+            //    Debug.LogWarning($"{transform} has parent!");
+            //}
             return HPComponent.TakeDamage(transform, damageInfo);
         }
         #endregion
