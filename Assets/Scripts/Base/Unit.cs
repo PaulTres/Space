@@ -133,6 +133,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         }
     }
 
+    protected void OnValidate()
+    {
+        if (damageTakingObjects.IsEmpty()) damageTakingObjects = new(GetComponentsInChildren<DamageReceiver>());
+    }
+
     /// <summary>
     /// Sets the layers of all important objects.
     /// </summary>

@@ -30,6 +30,8 @@ namespace HP
         protected void OnValidate()
         {
             if (hpComponents.IsEmpty()) hpComponents.Add(transform.root.GetComponent<HPComponent>());
+            if (body == null) body = transform;
+            Debug.Assert(GetComponent<Collider>() != null, $"{this} has no collider!");
         }
 
         public void ReceiveDamage(DamageInfo damageInfo)

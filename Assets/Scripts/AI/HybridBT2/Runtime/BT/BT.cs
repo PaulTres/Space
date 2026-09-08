@@ -16,14 +16,14 @@ namespace HybridBT2
         /// </summary>
         [SerializeField] protected float tickInterval = 0.1f;
         protected WaitForSeconds intervalWait;
-        [SerializeField] protected bool shouldRun = true;
+        [SerializeField] protected bool shouldTick = true;
         protected WaitUntil pauseWait;
         public Node Root { get; protected set; }
         protected Coroutine coroutine;
         protected virtual void Awake()
         {
             intervalWait = new WaitForSeconds(tickInterval);
-            pauseWait = new WaitUntil(() => shouldRun);
+            pauseWait = new WaitUntil(() => shouldTick);
             blackboard = new(transform);
             SetupBlackboard();
             SetupTree();
@@ -71,12 +71,12 @@ namespace HybridBT2
         /// <summary>
         /// Sets shouldRun to false, pausing the tree.
         /// </summary>
-        public void Pause() => shouldRun = false;
+        public void Pause() => shouldTick = false;
 
         /// <summary>
         /// Sets shouldRun to true, resuming the tree.
         /// </summary>
-        public void Resume() => shouldRun = true;
+        public void Resume() => shouldTick = true;
 
         public void GetInfo() => Root.GetInfo(0);
     }
