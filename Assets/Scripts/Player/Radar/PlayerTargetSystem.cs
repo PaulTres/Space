@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utilities;
+using Weapons;
 
 namespace Radar
 {
@@ -207,8 +208,8 @@ namespace Radar
 
             var bbox = GetBoundingBox();
             bbox.SelectionIcon.gameObject.SetActive(false);
-            if (target is Unit) bbox.BBox.sprite = unitIcon;
-            else bbox.BBox.sprite = missileIcon;
+            if (target is Missile) bbox.BBox.sprite = missileIcon;
+            else bbox.BBox.sprite = unitIcon;
             bbox.TimeSinceLastFlicker = Time.time;
 
             if (target.Team == GlobalConfig.PlayerTeam)
