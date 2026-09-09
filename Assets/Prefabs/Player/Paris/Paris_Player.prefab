@@ -579,6 +579,7 @@ GameObject:
   - component: {fileID: 6114580988537041869}
   - component: {fileID: 9152097467561610138}
   - component: {fileID: 3012432211672356045}
+  - component: {fileID: -8535140189346285341}
   m_Layer: 0
   m_Name: Paris_Player
   m_TagString: Untagged
@@ -648,6 +649,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -698,7 +700,7 @@ MonoBehaviour:
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 10
-    <MaxSignature>k__BackingField: 40
+    <MaximumSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 40
@@ -719,6 +721,23 @@ MonoBehaviour:
     YSens: 10
     ZSens: 10
   missionFailureScreenPrefab: {fileID: 3564781924928465574, guid: 01e313aa3a2e5b24d87c6332bfd75666, type: 3}
+--- !u!114 &-8535140189346285341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5591316177035398655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 6114580988537041869}
+  - {fileID: 6114580988537041869}
+  armorModifiers: []
+  body: {fileID: 3595800475799806543}
 --- !u!1 &6399239034432718752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1064,7 @@ MonoBehaviour:
   hpComponents:
   - {fileID: 6114580988537041869}
   armorModifiers: []
-  body: {fileID: 0}
+  body: {fileID: 6790984358760154163}
 --- !u!1 &8598028535274035795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1288,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3062505588509733537, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
   m_PrefabInstance: {fileID: 283728352245987236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4542128832266773985 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393511530080375365, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+  m_PrefabInstance: {fileID: 283728352245987236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
 --- !u!1001 &434340381319696058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1471,6 +1501,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+--- !u!114 &3288823323681355013 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393511530080375365, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+  m_PrefabInstance: {fileID: 1251116784120883008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
 --- !u!4 &4313578237545977313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3062505588509733537, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
@@ -1569,6 +1610,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+--- !u!114 &3410203080080554057 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393511530080375365, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+  m_PrefabInstance: {fileID: 1417396757341596172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
 --- !u!4 &4119577925851257005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3062505588509733537, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
@@ -1778,6 +1830,10 @@ PrefabInstance:
       value: CameraPivot
       objectReference: {fileID: 0}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: weaponParent
+      value: 
+      objectReference: {fileID: 7519820566637534331}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1792,11 +1848,11 @@ PrefabInstance:
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Icon
       value: 
-      objectReference: {fileID: 21300000, guid: 71ef384979ff75f4990c1dde652054b4, type: 3}
+      objectReference: {fileID: 21300000, guid: cc2721dc8706a474b97273837abcf0b7, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[1].Icon
       value: 
-      objectReference: {fileID: 21300000, guid: 98be93167ed6cd54d82a8e882da6f3e1, type: 3}
+      objectReference: {fileID: 21300000, guid: 71ef384979ff75f4990c1dde652054b4, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[0].Heatsink
       value: 
@@ -1853,6 +1909,94 @@ PrefabInstance:
       propertyPath: <LauncherGroups>k__BackingField.Array.data[1].missileLauncherParent
       value: 
       objectReference: {fileID: 2155968053988197174}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[0]'
+      value: 
+      objectReference: {fileID: 972097174639076724}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1815242829072618397}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1342386541222476999}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5287071369828853563}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[4]'
+      value: 
+      objectReference: {fileID: 4251386176934321407}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8736371197731392290}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[6]'
+      value: 
+      objectReference: {fileID: 6615403323123752951}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[7]'
+      value: 
+      objectReference: {fileID: 7164220421889528256}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[8]'
+      value: 
+      objectReference: {fileID: 92063257954449763}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[9]'
+      value: 
+      objectReference: {fileID: 3410203080080554057}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <LauncherGroups>k__BackingField.Array.data[0].<Launchers>k__BackingField.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <LauncherGroups>k__BackingField.Array.data[1].<Launchers>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[10]'
+      value: 
+      objectReference: {fileID: 3288823323681355013}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[11]'
+      value: 
+      objectReference: {fileID: 5856754851740863360}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[12]'
+      value: 
+      objectReference: {fileID: 7078110482002761140}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<TurretGroups>k__BackingField.Array.data[0].<Turrets>k__BackingField.Array.data[13]'
+      value: 
+      objectReference: {fileID: 4542128832266773985}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<LauncherGroups>k__BackingField.Array.data[0].<Launchers>k__BackingField.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3197575346345325830}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<LauncherGroups>k__BackingField.Array.data[0].<Launchers>k__BackingField.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4317383745048709646}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<LauncherGroups>k__BackingField.Array.data[0].<Launchers>k__BackingField.Array.data[2]'
+      value: 
+      objectReference: {fileID: 5629699532554954150}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<LauncherGroups>k__BackingField.Array.data[0].<Launchers>k__BackingField.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7439703795401963631}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: '<LauncherGroups>k__BackingField.Array.data[1].<Launchers>k__BackingField.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3158683005105750661}
     - target: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2777,6 +2921,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+--- !u!114 &7078110482002761140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393511530080375365, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+  m_PrefabInstance: {fileID: 6828192119077226481}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
 --- !u!4 &8377443066327151952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3062505588509733537, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
@@ -3098,6 +3253,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3062505588509733537, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
   m_PrefabInstance: {fileID: 7908247229688273349}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5856754851740863360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393511530080375365, guid: bcdb4247fb44e6b46bc3265485d00a63, type: 3}
+  m_PrefabInstance: {fileID: 7908247229688273349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
 --- !u!1001 &8477903236568675710
 PrefabInstance:
   m_ObjectHideFlags: 0

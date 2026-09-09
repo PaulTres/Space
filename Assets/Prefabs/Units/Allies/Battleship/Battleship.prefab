@@ -4701,13 +4701,14 @@ GameObject:
   - component: {fileID: 7845196837702936039}
   - component: {fileID: 7142450015847698968}
   - component: {fileID: 7330998637363168038}
+  - component: {fileID: -5783222725238521083}
   m_Layer: 0
   m_Name: Battleship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1516456623235755632
 Transform:
   m_ObjectHideFlags: 0
@@ -4861,6 +4862,22 @@ MonoBehaviour:
   maxMoraleImpactRange: 50
   maxThreats: 1
   minEscortValue: 10
+--- !u!114 &-5783222725238521083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7794661767852036283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 592059275374208862}
+  armorModifiers: []
+  body: {fileID: 1516456623235755632}
 --- !u!1 &7936553125248723275
 GameObject:
   m_ObjectHideFlags: 0

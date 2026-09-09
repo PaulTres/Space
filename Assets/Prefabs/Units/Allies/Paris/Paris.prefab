@@ -532,6 +532,7 @@ GameObject:
   - component: {fileID: 8816192484886637703}
   - component: {fileID: 2816690635338162874}
   - component: {fileID: 2894286689850492222}
+  - component: {fileID: 8644684158347698461}
   m_Layer: 0
   m_Name: Paris
   m_TagString: Untagged
@@ -601,6 +602,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -651,7 +653,7 @@ MonoBehaviour:
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 10
-    <MaxSignature>k__BackingField: 40
+    <MaximumSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 40
@@ -677,12 +679,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::BanditTree
   rootData: {fileID: 11400000, guid: 5c0e06a38f539d741b16131c3b300c81, type: 2}
   tickInterval: 0.1
-  shouldRun: 1
+  shouldTick: 1
   affectedByMorale: 1
   initialMorale: 10
   maxMoraleImpactRange: 50
   maxThreats: 1
   minEscortValue: 10
+--- !u!114 &8644684158347698461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5913593474198598188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 1165391356843051798}
+  - {fileID: 1165391356843051798}
+  armorModifiers: []
+  body: {fileID: 147972872536715424}
 --- !u!1 &5949860478945030911
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,7 +771,7 @@ MonoBehaviour:
   hpComponents:
   - {fileID: 1165391356843051798}
   armorModifiers: []
-  body: {fileID: 0}
+  body: {fileID: 1946442582899961581}
 --- !u!1 &6483922507246829846
 GameObject:
   m_ObjectHideFlags: 0

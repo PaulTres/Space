@@ -29,9 +29,17 @@ namespace HP
 
         protected void OnValidate()
         {
-            if (hpComponents.IsEmpty()) hpComponents.Add(transform.root.GetComponent<HPComponent>());
+            if (hpComponents.IsEmpty())
+            {
+                hpComponents ??= new();
+                if (TryGetComponent<HPComponent>(out var hp))
+                {
+                    hpComponents.Add(hp);
+                }
+                else if (!TryGetComponent<Collider>(out _)) Debug.LogError($"{this} has no collider or HPComponent!");
+                if (transform.root.TryGetComponent<HPComponent>(out var hproot)) hpComponents.Add(hproot);
+            }
             if (body == null) body = transform;
-            Debug.Assert(GetComponent<Collider>() != null, $"{this} has no collider!");
         }
 
         public void ReceiveDamage(DamageInfo damageInfo)

@@ -54,6 +54,15 @@ namespace Weapons
             EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(this), Die);
         }
 
+        protected void OnValidate()
+        {
+            if (HPComponent != null && GetComponent<DamageReceiver>() == null)
+            {
+                gameObject.AddComponent<DamageReceiver>();
+                Debug.LogWarning($"Adding DamageReceiver to {this}.");
+            }
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();

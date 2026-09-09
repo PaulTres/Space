@@ -41,7 +41,10 @@ namespace Weapons
             {
                 damageInfo.Position = Transform.position;
                 lineRenderer.SetPosition(1, Target.Position);
-                Target.Transform.TakeDamage(damageInfo);
+                if (!Target.Transform.TakeDamage(damageInfo))
+                {
+                    Debug.LogError($"{Target} cannot take damage!");
+                }
             }
         }
 

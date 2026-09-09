@@ -1428,6 +1428,7 @@ GameObject:
   - component: {fileID: 4668281039910969074}
   - component: {fileID: 3656737314857615257}
   - component: {fileID: 4163382755847972170}
+  - component: {fileID: 2398756502134485688}
   m_Layer: 0
   m_Name: ShadowChungus
   m_TagString: Untagged
@@ -1594,7 +1595,23 @@ MonoBehaviour:
   initialMorale: 10
   maxMoraleImpactRange: 0
   maxThreats: 1
-  minEscortValue: 1000
+  minEscortValue: 2000
+--- !u!114 &2398756502134485688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7286455426397343272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 517454534649041658}
+  armorModifiers: []
+  body: {fileID: 4312180902114681716}
 --- !u!1 &8261766306148284041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,9 +1858,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2014,8 +2039,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5348603838390333307, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
       propertyPath: damageEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935656938246102672, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: hpComponents.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5935656938246102672, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2034,9 +2067,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450028404799532896}
     m_Modifications:
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 3940441512815643122, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4986799426494950260, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_Name
@@ -2144,9 +2185,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2244,9 +2293,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450028404799532896}
     m_Modifications:
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 3940441512815643122, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4986799426494950260, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_Name
@@ -2459,9 +2516,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629104211777852899, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2598,9 +2663,17 @@ PrefabInstance:
       propertyPath: <MinRot>k__BackingField
       value: -110
       objectReference: {fileID: 0}
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: hpComponents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     - target: {fileID: 3940441512815643122, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: damageEffects.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4986799426494950260, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_Name
@@ -2710,8 +2783,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5348603838390333307, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
       propertyPath: damageEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5935656938246102672, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: hpComponents.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5935656938246102672, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: 'hpComponents.Array.data[1]'
+      value: 
+      objectReference: {fileID: 517454534649041658}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

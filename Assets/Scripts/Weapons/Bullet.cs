@@ -133,7 +133,10 @@ namespace Weapons
         protected virtual void OnHit(Collider collider)
         {
             if (collider.transform.root == Owner) return;
-            collider.transform.TakeDamage(damageInfo);
+            if (!collider.transform.TakeDamage(damageInfo))
+            {
+                Debug.LogError($"{collider.transform} on {collider.transform.root} cannot take damage!");
+            }
             onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }

@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 8683930026d904d4ca033d70aae1b3ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - <TelemetryOrigin>k__BackingField: {instanceID: 0}
+  - shipBody: {instanceID: 0}
+  - missionFailureScreenPrefab: {fileID: 3564781924928465574, guid: 01e313aa3a2e5b24d87c6332bfd75666, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

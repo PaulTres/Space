@@ -1,18 +1,44 @@
 using EventBus;
 using Radar;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
+using Weapons;
 namespace Player
 {
     public class PlayerWeapons : MonoBehaviour, PlayerControls.IWeaponsActions
     {
+        [SerializeField] protected Transform weaponParent;
         [field: SerializeField] public List<MissileGroup> LauncherGroups { get; protected set; } = new();
         [field: SerializeField] public List<TurretGroup> TurretGroups { get; protected set; } = new();
         protected int currentWeaponIndex;
         public event System.Action<(int oldValue, int newValue)> OnWeaponsCycled = delegate { };
         public event System.Action<int> OnTurretGroupStanceChange = delegate { };
+
+        protected void OnValidate()
+        {
+            if (weaponParent != null && LauncherGroups.IsEmpty() && TurretGroups.IsEmpty())
+            {
+                for (int i = 0; i < weaponParent.childCount; i++)
+                {
+                    //this object holds a number of weapons
+                    var child = weaponParent.GetChild(i);
+                    var turrets = child.GetComponentsInChildren<Turret>();
+                    if (turrets.IsEmpty())
+                    {
+                        //this is a launcher group
+                        var launchers = child.GetComponentsInChildren<MissileLauncher>();
+                        LauncherGroups.Add(new(launchers.ToList()));
+                    }
+                    else
+                    {
+                        TurretGroups.Add(new(turrets.ToList(), child.GetComponent<Heatsink>()));
+                    }
+                }
+            }
+        }
 
         protected void OnEnable()
         {

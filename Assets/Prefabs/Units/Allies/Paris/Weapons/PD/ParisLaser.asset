@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserData
   Prefab: {fileID: 2413865486779744704, guid: 0d8a9c41e8bf00541a449784a8c5cf81, type: 3}
   Key: 0
-  RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
   Damage: 0.1
   LifeTime: 0.1
   EffectScaleFactor: 1
-  OnSpawnEffect: {fileID: 0}
+  OnSpawnEffect: {fileID: 2825562334673829259, guid: 256f8d48de981d746b5c02a056ff1ff4, type: 3}
   OnHitEffect: {fileID: 0}
   LaserMaterial: {fileID: 2100000, guid: 9e022624886155b4f8269a1941a81e80, type: 2}
   Range: 10

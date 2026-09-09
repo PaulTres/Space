@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3950755723759291956}
   - component: {fileID: 3362071636971823934}
   - component: {fileID: 1647784664865523117}
+  - component: {fileID: -2447305844440636970}
   m_Layer: 0
   m_Name: MissilePrefab
   m_TagString: Untagged
@@ -51,6 +52,8 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 5
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
+  <EscortValue>k__BackingField: 0
 --- !u!114 &3950755723759291956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,8 +72,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers: []
-  body: {fileID: 0}
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -205,6 +207,22 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &-2447305844440636970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5827623675657470318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 3950755723759291956}
+  armorModifiers: []
+  body: {fileID: 5236883667746761860}
 --- !u!1 &6219096169325047226
 GameObject:
   m_ObjectHideFlags: 0

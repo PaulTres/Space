@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3617145878084377368}
   - component: {fileID: 769438905589229889}
   - component: {fileID: 2680985556489724662}
+  - component: {fileID: -1052543775741083883}
   m_Layer: 0
   m_Name: ShadowMediumBlue
   m_TagString: Untagged
@@ -172,6 +173,23 @@ MonoBehaviour:
   count: 3
   effectScaleFactor: 1
   finalEffectScaleFactor: 1
+--- !u!114 &-1052543775741083883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559443161338865368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 3551944777785059265}
+  - {fileID: 3551944777785059265}
+  armorModifiers: []
+  body: {fileID: 4417876685502028470}
 --- !u!1 &1407200627766093388
 GameObject:
   m_ObjectHideFlags: 0

@@ -1578,6 +1578,7 @@ GameObject:
   - component: {fileID: 2365639470239944223}
   - component: {fileID: 2632581874572510729}
   - component: {fileID: 6801072724722852307}
+  - component: {fileID: -6447535271087096248}
   m_Layer: 0
   m_Name: Dreadnought
   m_TagString: Untagged
@@ -1718,6 +1719,23 @@ MonoBehaviour:
   count: 3
   effectScaleFactor: 2
   finalEffectScaleFactor: 10
+--- !u!114 &-6447535271087096248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791388006214924271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 2365639470239944223}
+  - {fileID: 2365639470239944223}
+  armorModifiers: []
+  body: {fileID: 1154501830181603266}
 --- !u!1 &5874578777951851942
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad3433ad3521184488d385d17e51507, type: 3}
+  m_Name: Battleship_Player
+  m_EditorClassIdentifier: SpaceAssembly::UnitData
+  Prefab: {fileID: 6247310597283390784, guid: 62097f2c4a526334fabbcf590aabf768, type: 3}
+  ShouldBeDisabled: 1
+  Points: 1
+  MissionRequirement: 3
+  description: A big dick ship.

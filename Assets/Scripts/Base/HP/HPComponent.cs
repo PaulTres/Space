@@ -134,7 +134,13 @@ namespace HP
 
         protected void OnValidate()
         {
-            if (damageEffects.IsEmpty()) damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
+            if (damageEffects.IsEmpty()) damageEffects = new(Transform.GetComponentsInChildren<DamageEffect>(true));
+            if (Transform.GetComponentsInChildren<DamageReceiver>() == null) Debug.LogError($"{Transform} has no damage receivers!");
+            if (GetComponent<DamageReceiver>() == null)
+            {
+                Debug.Log($"{this} has no damage receiver, adding damage receiver!");
+                gameObject.AddComponent<DamageReceiver>();
+            }
         }
 
         protected void UpdateDamageEffects()

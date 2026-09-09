@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8357492232402145335}
   - component: {fileID: 2013506230279709725}
   - component: {fileID: 3835524401592815783}
+  - component: {fileID: 1733551273504999502}
+  - component: {fileID: -8338691024620695889}
   m_Layer: 0
   m_Name: ShadowMissile
   m_TagString: Untagged
@@ -54,8 +56,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
-  armorModifiers: []
-  body: {fileID: 0}
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -95,6 +96,8 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 5
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
+  <EscortValue>k__BackingField: 0
 --- !u!96 &3835524401592815783
 TrailRenderer:
   serializedVersion: 4
@@ -205,6 +208,38 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1733551273504999502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318567833550473040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 6746794150451261355}
+  armorModifiers: []
+  body: {fileID: 4720492596371498824}
+--- !u!114 &-8338691024620695889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318567833550473040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 6746794150451261355}
+  armorModifiers: []
+  body: {fileID: 4720492596371498824}
 --- !u!1001 &6291705274110494791
 PrefabInstance:
   m_ObjectHideFlags: 0

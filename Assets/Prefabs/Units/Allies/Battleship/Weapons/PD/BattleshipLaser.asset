@@ -19,7 +19,7 @@ MonoBehaviour:
   Damage: 1
   LifeTime: 0.2
   EffectScaleFactor: 1
-  OnSpawnEffect: {fileID: 0}
+  OnSpawnEffect: {fileID: 2825562334673829259, guid: 256f8d48de981d746b5c02a056ff1ff4, type: 3}
   OnHitEffect: {fileID: 0}
   LaserMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
   Range: 10
