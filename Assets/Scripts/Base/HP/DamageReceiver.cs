@@ -37,7 +37,16 @@ namespace HP
                     hpComponents.Add(hp);
                 }
                 else if (!TryGetComponent<Collider>(out _)) Debug.LogError($"{this} has no collider or HPComponent!");
-                if (transform.root.TryGetComponent<HPComponent>(out var hproot)) hpComponents.Add(hproot);
+                //if we do not have a parent, this is equivalent to the previous code block
+                if (transform.parent != null && transform.root.TryGetComponent<HPComponent>(out var hproot)) hpComponents.Add(hproot);
+            }
+            else
+            {
+                var set = new HashSet<HPComponent>(hpComponents);
+                if (set.Count != hpComponents.Count)
+                {
+                    Debug.LogError($"{this} has duplicated hp components!");
+                }
             }
             if (body == null) body = transform;
         }

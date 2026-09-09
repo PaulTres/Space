@@ -46,8 +46,7 @@ namespace Weapons
             if (Prefab == null) Debug.LogWarning($"{this} has no prefab!");
             else if (Prefab.gameObject.activeSelf)
             {
-                Debug.LogWarning($"{this} has active prefab! Deactivating!");
-                Prefab.gameObject.SetActive(false);
+                Debug.LogWarning($"{this} has active prefab!");
             }
         }
     }

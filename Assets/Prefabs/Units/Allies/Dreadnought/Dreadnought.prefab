@@ -1733,7 +1733,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 2365639470239944223}
-  - {fileID: 2365639470239944223}
   armorModifiers: []
   body: {fileID: 1154501830181603266}
 --- !u!1 &5874578777951851942

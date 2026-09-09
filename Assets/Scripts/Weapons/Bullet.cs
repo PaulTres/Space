@@ -137,6 +137,7 @@ namespace Weapons
             {
                 Debug.LogError($"{collider.transform} on {collider.transform.root} cannot take damage!");
             }
+            //Debug.Log($"{collider.transform} on {collider.transform.root} taking {damageInfo.Amount} damage.");
             onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }

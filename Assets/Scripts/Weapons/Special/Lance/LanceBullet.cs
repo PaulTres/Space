@@ -63,6 +63,8 @@ namespace Weapons
         protected override void OnDisable()
         {
             base.OnDisable();
+            damageVisuals.Stop();
+            telegraphVisuals.Stop();
             OnThreatOver(this);
             OnThreatOver = delegate { };
         }
@@ -97,8 +99,6 @@ namespace Weapons
             telegraphVisuals.Play();
             telegraphTimer.Start();
             telegraphSound.Play(Position);
-            telegraphVisuals.gameObject.SetActive(true);
-            telegraphVisuals.gameObject.SetActive(false);
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);
             for (int i = 0; i < colliderCount; i++)
@@ -117,7 +117,6 @@ namespace Weapons
             OnThreatOver(this);
             telegraphVisuals.Stop();
             telegraphVisuals.Clear();
-            damageVisuals.gameObject.SetActive(true);
             soundData?.Play(Position);
             damageVisuals.Play();
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,

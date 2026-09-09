@@ -136,6 +136,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected void OnValidate()
     {
         if (damageTakingObjects.IsEmpty()) damageTakingObjects = new(GetComponentsInChildren<DamageReceiver>());
+        Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
+        Debug.Assert(!collisionCheckers.IsEmpty(), $"{Transform} has no objects for handling collisions!");
     }
 
     /// <summary>
@@ -144,8 +146,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// <param name="layer"></param>
     public override void SetObjectLayer()
     {
-        Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
-        Debug.Assert(collisionCheckers.Count > 0, $"{Transform} has no objects for handling collisions!");
         foreach (var c in damageTakingObjects) c.gameObject.layer = GlobalConfig.GetShipLayer(Team);
         foreach (var c in collisionCheckers) c.gameObject.layer = GlobalConfig.GetCollisionLayer(Team);
     }

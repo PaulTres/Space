@@ -111,7 +111,7 @@ namespace HP
                 return;
             }
             if (ImprovedMonoBehaviour.IsDying) return;
-            //Debug.Log(damageInfo.Amount);
+            //Debug.Log($"{this} took {damageInfo.Amount} damage from {damageInfo.Source}.");
             CurrentHP -= damageInfo.Amount;
             if (CurrentHP <= 0 && !firedEvent)
             {

@@ -4888,6 +4888,8 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 5
   <IsDying>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 1
+  <EscortValue>k__BackingField: 0
   telegraphVisuals: {fileID: 6651112694018524881}
   damageVisuals: {fileID: 2053141017700823499}
 --- !u!33 &1688197602563682699
