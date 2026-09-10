@@ -9,16 +9,17 @@ namespace Player
     {
         [SerializeField] protected RectTransform textParent;
         [SerializeField] protected Widget widgetPrefab;
-        protected GameObject pauseMenu;
+        protected PauseScreen pauseMenu;
         protected readonly Stack<Widget> textWidgetPool = new();
         protected Widget currentWidget;
 
         #region Setup
         protected virtual void Awake()
         {
-            pauseMenu = GetComponentInChildren<PauseScreen>(true).gameObject;
+            pauseMenu = GetComponentInChildren<PauseScreen>(true);
             EventBus<ShowText>.AddActions(SpawnText);
             GameManager.InputActions.UI.SetCallbacks(this);
+            Debug.Assert(!pauseMenu.gameObject.activeSelf, $" Pause menu is active for {transform.root}!");
         }
 
         protected virtual void OnDisable()
@@ -36,7 +37,11 @@ namespace Player
 
         public void OnEscape(InputAction.CallbackContext context)
         {
-            if (context.started) pauseMenu.SetActive(true);
+            if (context.started && !pauseMenu.gameObject.activeSelf)
+            {
+                //Debug.Log("Pressed escape. Pausing.");
+                pauseMenu.gameObject.SetActive(true);
+            }
         }
 
         #region Widgets 

@@ -191,7 +191,7 @@ MonoBehaviour:
     rolloffMode: 0
   fireOnEnable: 1
   delay: 7
-  text: The turrets on your ship will fire automatically
+  text: The turrets on your ship will fire automatically.
 --- !u!1 &175601912
 GameObject:
   m_ObjectHideFlags: 0

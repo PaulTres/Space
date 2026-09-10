@@ -1,5 +1,6 @@
 using Level;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 namespace Player
@@ -9,6 +10,7 @@ namespace Player
         [SerializeField] protected int missionStartTimerDuration = 5;
         [SerializeField] protected TextMeshProUGUI timerText, shipDescriptionText;
         [SerializeField] protected TMP_Dropdown playerOptions;
+        protected List<UnitData> playerOptionsList;
         protected WaitForSeconds waitForOneSecond = new(1);
         protected Coroutine coroutine;
 
@@ -22,10 +24,12 @@ namespace Player
         protected void PopulatePlayerChoiceDropdown()
         {
             playerOptions.ClearOptions();
+            playerOptionsList = new();
             foreach (var data in UnitData.AvailablePlayerOptions)
             {
                 if (data.Points > Mission.CurrentMission.PlayerPoints) continue;
                 if (data.MissionRequirement >= GameManager.LatestMissionIndex) continue;
+                playerOptionsList.Add(data);
                 playerOptions.options.Add(new(data.Name));
             }
             SetPlayerChoice(0);
@@ -40,8 +44,8 @@ namespace Player
 
         public void SetPlayerChoice(int index)
         {
-            UnitData.PlayerChoiceIndex = index;
-            shipDescriptionText.text = "Ship description:\n" + UnitData.AvailablePlayerOptions[index].Description;
+            UnitData.PlayerChoice = playerOptionsList[index];
+            shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice;
         }
 
         public void GoToMissionSelect() => GameManager.LoadMissionSelection();

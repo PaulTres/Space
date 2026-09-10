@@ -11,7 +11,7 @@ namespace Player
 
         protected virtual void OnEnable()
         {
-            GameManager.InputActions.UI.SetCallbacks(this);
+            GameManager.InputActions.UI.AddCallbacks(this);
             if (initialWindows != null)
             {
                 for (int i = 0; i < initialWindows.Length; i++)
@@ -57,7 +57,7 @@ namespace Player
 
         public void OnEscape(InputAction.CallbackContext context)
         {
-            if (context.started) Pop();
+            if (context.started && gameObject.activeSelf) Pop();
         }
 
         public virtual void Pop() => Pop(false);

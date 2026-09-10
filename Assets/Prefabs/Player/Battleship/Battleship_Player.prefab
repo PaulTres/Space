@@ -4842,7 +4842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Player.PlayerShip
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 15
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
   <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
@@ -4859,9 +4859,9 @@ MonoBehaviour:
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 20
     <MaximumSignature>k__BackingField: 100
-    SignatureDecreaseRate: 0.1
+    SignatureDecreaseRate: 1
     SignatureDecreaseCooldown: 5
-    ScanRange: 10
+    ScanRange: 80
     SpawnCheckRadius: 5
   forwardThrust: 10
   <RotationSpeed>k__BackingField: 50
@@ -4873,8 +4873,8 @@ MonoBehaviour:
     FreelookCameraPivot: {fileID: 8101518667013758480}
     CameraTransform: {fileID: 3419969936061290334}
     ZoomSpeed: 1
-    MinZoom: -10
-    MaxZoom: 5
+    MinZoom: -80
+    MaxZoom: 10
     XSens: 10
     YSens: 10
     ZSens: 10
@@ -6723,6 +6723,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5235665622525413771, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235665622525413771, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5254128983991761225, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_LocalPosition.y
       value: 4
@@ -6730,6 +6738,10 @@ PrefabInstance:
     - target: {fileID: 5254128983991761225, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_LocalPosition.z
       value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956176956115542087, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

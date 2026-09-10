@@ -9,9 +9,8 @@ using UnityEngine.AddressableAssets;
 public class UnitData : MonoSpawnableData<Unit>
 {
     #region Statics
-    public static int PlayerChoiceIndex { get; set; } = 0;
     public static List<UnitData> AvailablePlayerOptions { get; } = new();
-    public static UnitData PlayerChoice => AvailablePlayerOptions[PlayerChoiceIndex];
+    public static UnitData PlayerChoice { get; set; }
     public static List<UnitData> AvailableAllyUnits { get; } = new();
     public static List<UnitData> AvailableEnemyUnits { get; } = new();
 

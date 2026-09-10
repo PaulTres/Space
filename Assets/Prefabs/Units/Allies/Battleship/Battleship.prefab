@@ -4833,7 +4833,7 @@ MonoBehaviour:
     <MaximumSignature>k__BackingField: 100
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 40
+    ScanRange: 80
     SpawnCheckRadius: 10
   forwardThrust: 10
   <RotationSpeed>k__BackingField: 50

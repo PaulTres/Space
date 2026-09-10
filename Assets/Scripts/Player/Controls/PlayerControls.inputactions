@@ -34,13 +34,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "FreeLookToggle",
-                    "type": "Button",
+                    "name": "FreeLook",
+                    "type": "Value",
                     "id": "5db847f9-926a-4ad9-95c7-0e94377a6c17",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Zoom",
@@ -199,7 +199,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "FreeLookToggle",
+                    "action": "FreeLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -120,13 +120,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""FreeLookToggle"",
-                    ""type"": ""Button"",
+                    ""name"": ""FreeLook"",
+                    ""type"": ""Value"",
                     ""id"": ""5db847f9-926a-4ad9-95c7-0e94377a6c17"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Zoom"",
@@ -285,7 +285,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""FreeLookToggle"",
+                    ""action"": ""FreeLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -450,7 +450,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_BasicControls_Move = m_BasicControls.FindAction("Move", throwIfNotFound: true);
         m_BasicControls_Roll = m_BasicControls.FindAction("Roll", throwIfNotFound: true);
         m_BasicControls_MouseLook = m_BasicControls.FindAction("MouseLook", throwIfNotFound: true);
-        m_BasicControls_FreeLookToggle = m_BasicControls.FindAction("FreeLookToggle", throwIfNotFound: true);
+        m_BasicControls_FreeLook = m_BasicControls.FindAction("FreeLook", throwIfNotFound: true);
         m_BasicControls_Zoom = m_BasicControls.FindAction("Zoom", throwIfNotFound: true);
         m_BasicControls_Reset = m_BasicControls.FindAction("Reset", throwIfNotFound: true);
         m_BasicControls_ToggleDampeners = m_BasicControls.FindAction("ToggleDampeners", throwIfNotFound: true);
@@ -547,7 +547,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_BasicControls_Move;
     private readonly InputAction m_BasicControls_Roll;
     private readonly InputAction m_BasicControls_MouseLook;
-    private readonly InputAction m_BasicControls_FreeLookToggle;
+    private readonly InputAction m_BasicControls_FreeLook;
     private readonly InputAction m_BasicControls_Zoom;
     private readonly InputAction m_BasicControls_Reset;
     private readonly InputAction m_BasicControls_ToggleDampeners;
@@ -575,9 +575,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MouseLook => m_Wrapper.m_BasicControls_MouseLook;
         /// <summary>
-        /// Provides access to the underlying input action "BasicControls/FreeLookToggle".
+        /// Provides access to the underlying input action "BasicControls/FreeLook".
         /// </summary>
-        public InputAction @FreeLookToggle => m_Wrapper.m_BasicControls_FreeLookToggle;
+        public InputAction @FreeLook => m_Wrapper.m_BasicControls_FreeLook;
         /// <summary>
         /// Provides access to the underlying input action "BasicControls/Zoom".
         /// </summary>
@@ -625,9 +625,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseLook.started += instance.OnMouseLook;
             @MouseLook.performed += instance.OnMouseLook;
             @MouseLook.canceled += instance.OnMouseLook;
-            @FreeLookToggle.started += instance.OnFreeLookToggle;
-            @FreeLookToggle.performed += instance.OnFreeLookToggle;
-            @FreeLookToggle.canceled += instance.OnFreeLookToggle;
+            @FreeLook.started += instance.OnFreeLook;
+            @FreeLook.performed += instance.OnFreeLook;
+            @FreeLook.canceled += instance.OnFreeLook;
             @Zoom.started += instance.OnZoom;
             @Zoom.performed += instance.OnZoom;
             @Zoom.canceled += instance.OnZoom;
@@ -657,9 +657,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseLook.started -= instance.OnMouseLook;
             @MouseLook.performed -= instance.OnMouseLook;
             @MouseLook.canceled -= instance.OnMouseLook;
-            @FreeLookToggle.started -= instance.OnFreeLookToggle;
-            @FreeLookToggle.performed -= instance.OnFreeLookToggle;
-            @FreeLookToggle.canceled -= instance.OnFreeLookToggle;
+            @FreeLook.started -= instance.OnFreeLook;
+            @FreeLook.performed -= instance.OnFreeLook;
+            @FreeLook.canceled -= instance.OnFreeLook;
             @Zoom.started -= instance.OnZoom;
             @Zoom.performed -= instance.OnZoom;
             @Zoom.canceled -= instance.OnZoom;
@@ -945,12 +945,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMouseLook(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "FreeLookToggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "FreeLook" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnFreeLookToggle(InputAction.CallbackContext context);
+        void OnFreeLook(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

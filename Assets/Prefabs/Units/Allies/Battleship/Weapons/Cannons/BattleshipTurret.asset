@@ -20,7 +20,7 @@ MonoBehaviour:
   CurrentTargetScoreMultiplier: 2
   AccountForObstructions: 1
   MaxAngleDifference: 1
-  MaxRange: 100
+  MaxRange: 150
   BurstFire: 1
   BurstCooldown: 0.1
   BurstCount: 1

@@ -51,6 +51,7 @@ namespace Player
         }
         public bool CannotDie { get; set; } = false;
         public event System.Action<bool> OnDampenersChanged;
+        protected bool callbacksEnabled;
         #endregion
 
         #region Setup
@@ -60,6 +61,7 @@ namespace Player
             PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
+            callbacksEnabled = false;
             MissionManager.TryGetInstance(true).ExecuteAction(EnableCamera, 0.1f);
             MissionManager.TryGetInstance(true).ExecuteAction(EnableCallbacks, 1f);
         }
@@ -70,6 +72,7 @@ namespace Player
         public void EnableCallbacks()
         {
             GameManager.InputActions.BasicControls.SetCallbacks(this);
+            callbacksEnabled = true;
         }
 
         /// <summary>
@@ -78,6 +81,7 @@ namespace Player
         public void EnableCamera()
         {
             PlayerCamera.enabled = true;
+            ResetCamera();
         }
 
         protected override void OnEnable()
@@ -93,7 +97,7 @@ namespace Player
             GlobalUpdater.TryGetInstance(true).RegisterFixedUpdate(PerformFixedUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
-            OnResetCamera();
+            ResetCamera();
             EventBus<PauseScreen.PauseEvent>.AddActions(OnPauseEvent);
         }
 
@@ -159,7 +163,7 @@ namespace Player
 
         public void OnReset(InputAction.CallbackContext context)
         {
-            if (context.started) OnResetCamera();
+            if (context.started && !freeLook) ResetCamera();
         }
 
         public void OnMove(InputAction.CallbackContext context)
@@ -172,9 +176,9 @@ namespace Player
             rollInput = context.ReadValue<float>();
         }
 
-        public void OnFreeLookToggle(InputAction.CallbackContext context)
+        public void OnFreeLook(InputAction.CallbackContext context)
         {
-            if (context.started) freeLook = !freeLook;
+            freeLook = context.ReadValue<float>() > 0.5f;
         }
 
         public void OnToggleDampeners(InputAction.CallbackContext context)
@@ -189,7 +193,7 @@ namespace Player
         public void OnMouseLook(InputAction.CallbackContext context) { }
         #endregion
 
-        protected void OnResetCamera()
+        protected void ResetCamera()
         {
             cam.localPosition = defaultCamPos;
             cameraData.FreelookCameraPivot.localRotation = Quaternion.identity;
@@ -268,6 +272,7 @@ namespace Player
 
         public void PerformLateUpdate(float deltaTime)
         {
+            if (!PlayerCamera.enabled && !callbacksEnabled) return;
             var lookDelta = GameManager.InputActions.BasicControls.MouseLook.ReadValue<Vector2>();
             if (freeLook)
             {

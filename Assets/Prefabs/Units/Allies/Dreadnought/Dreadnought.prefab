@@ -1739,7 +1739,7 @@ MonoBehaviour:
     <MaximumSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 40
+    ScanRange: 80
     SpawnCheckRadius: 15
   forwardThrust: 30
   <RotationSpeed>k__BackingField: 40

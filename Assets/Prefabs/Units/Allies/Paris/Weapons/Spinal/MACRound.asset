@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileData
   Prefab: {fileID: 3846582215461886678, guid: 73fd103ea51ee7e42a98b5b363d3e11c, type: 3}
   Key: 5
-  RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
-  Damage: 15
+  Damage: 20
   LifeTime: 20
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 6332652951562218706, guid: f42cd35e2a769904dbc1196ae0676d85, type: 3}

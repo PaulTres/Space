@@ -10,7 +10,12 @@ namespace Player
         {
             dropdown.ClearOptions();
             dropdown.AddOptions(GameSave.GetSaveFileNames());
-            dropdown.SetValueWithoutNotify(0);
+            if (dropdown.options.Count > 0)
+            {
+                dropdown.interactable = true;
+                dropdown.SetValueWithoutNotify(0);
+            }
+            else dropdown.interactable = false;
         }
 
         protected void OnEnable()
