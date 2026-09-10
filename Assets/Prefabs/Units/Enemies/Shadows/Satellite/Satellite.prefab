@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 62546170232985336}
   - component: {fileID: 782196528803592247}
   - component: {fileID: 3631511395967583101}
+  - component: {fileID: 2935612521407029362}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -84,6 +85,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -134,7 +136,7 @@ MonoBehaviour:
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 0}
     <MinimumSignature>k__BackingField: 0
-    <MaxSignature>k__BackingField: 0
+    <MaximumSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 10
@@ -146,6 +148,22 @@ MonoBehaviour:
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
   checker: {fileID: 0}
+--- !u!114 &2935612521407029362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471856228708017344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+  hpComponents:
+  - {fileID: 62546170232985336}
+  armorModifiers: []
+  body: {fileID: 4574056048664456169}
 --- !u!1 &1647923958169389802
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +561,7 @@ MonoBehaviour:
   hpComponents:
   - {fileID: 62546170232985336}
   armorModifiers: []
-  body: {fileID: 0}
+  body: {fileID: 4576257981052794050}
 --- !u!4 &4576257981052794050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dfb790659471ab14288b1af8d3dac723, type: 3}

@@ -113,7 +113,7 @@ namespace Player
         public void UpdateHealthBar()
         {
             healthBar.fillAmount = Mathf.Max(0, player.CurrentHPPercentage);
-            healthText.text = $"{(int)player.CurrentHP}/{(int)player.MaxHP}";
+            healthText.text = $"HP: {(int)player.CurrentHP}/{(int)player.MaxHP}";
         }
 
         public void UpdateSpeedBar()

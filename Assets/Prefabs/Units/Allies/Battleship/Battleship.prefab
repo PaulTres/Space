@@ -4816,8 +4816,8 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
-  <EscortValue>k__BackingField: 0
+  <EffectScaleFactor>k__BackingField: 5
+  <EscortValue>k__BackingField: 2000
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 755234975869852870}
@@ -4829,15 +4829,15 @@ MonoBehaviour:
     MoraleWeight: 100
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 15
+    <MinimumSignature>k__BackingField: 20
     <MaximumSignature>k__BackingField: 100
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 40
     SpawnCheckRadius: 10
-  forwardThrust: 1
-  <RotationSpeed>k__BackingField: 5
-  strafeThrust: 1
+  forwardThrust: 10
+  <RotationSpeed>k__BackingField: 50
+  strafeThrust: 10
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10

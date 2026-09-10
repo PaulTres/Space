@@ -4842,7 +4842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Player.PlayerShip
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 20
+  <MaxVelocityMagnitude>k__BackingField: 15
   <IsDying>k__BackingField: 0
   <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
@@ -4857,15 +4857,15 @@ MonoBehaviour:
     MoraleWeight: 10
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 0
-    <MaximumSignature>k__BackingField: 0
+    <MinimumSignature>k__BackingField: 20
+    <MaximumSignature>k__BackingField: 100
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 10
     SpawnCheckRadius: 5
-  forwardThrust: 1
-  <RotationSpeed>k__BackingField: 5
-  strafeThrust: 1
+  forwardThrust: 10
+  <RotationSpeed>k__BackingField: 50
+  strafeThrust: 10
   <Dampeners>k__BackingField: 1
   shipBody: {fileID: 695045858638863067}
   cameraData:

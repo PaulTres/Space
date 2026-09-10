@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LanceData
   Prefab: {fileID: 3060560570612828636, guid: d90e4d40500de5f409a4357b82682efb, type: 3}
   Key: 4
-  RaiseEventOnRecycle: 0
+  ValidateData: 1
   DisableOnHit: 1
   Damage: 1
   LifeTime: 20
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 0}
   OnHitEffect: {fileID: 0}
-  TopSpeed: 0
-  Acceleration: 0
+  TopSpeed: 5
+  Acceleration: 2
   InitialVelocity: 0
   InertialDampeners: 1
   ScaleFactor: 0.1
-  RendererMaterial: {fileID: 0}
-  TrailRendererMaterial: {fileID: 0}
+  RendererMaterial: {fileID: 2100000, guid: 2717e9cd8dbd4464d86960218f25345c, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 36f8720fe02cffd4da0c210adafbad7e, type: 2}
   TrailRendererCurve:
     serializedVersion: 2
     m_Curve:

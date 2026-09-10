@@ -22,14 +22,21 @@ namespace Level
         }
         protected HashSet<CountdownTimer> activeTimers = new();
         public static float StartTime { get; protected set; }
+        /// <summary>
+        /// If true, victory/failure can no longer occur.
+        /// </summary>
+        public bool LockMissionState { get; protected set; }
 
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
+            LockMissionState = false;
             Time.timeScale = 1;
             StartTime = Time.time;
             GameManager.UnitsDestroyed.Clear();
         }
+
+        protected void OnEnable() => LockMissionState = false;
 
         protected override void ClearSingleton()
         {
@@ -79,8 +86,10 @@ namespace Level
 
         public void MissionVictory(string text = "Victory!")
         {
-            if (GameManager.Player != null)
+            if (LockMissionState) Debug.Log("Mission state locked.");
+            if (!LockMissionState && GameManager.Player.Active())
             {
+                LockMissionState = true;
                 GameManager.Player.CannotDie = true;
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionSuccessEndDuration, text, Color.green));
                 ExecuteAction(() => GameManager.EndMission(), GlobalConfig.MissionSuccessEndDuration);
@@ -96,8 +105,10 @@ namespace Level
         /// <param name="text"></param>
         public void MissionFailed(string text = "Defeat")
         {
-            if (GameManager.Player != null)
+            if (LockMissionState) Debug.Log("Mission state locked.");
+            if (!LockMissionState && GameManager.Player.Active())
             {
+                LockMissionState = true;
                 GameManager.Player.CannotDie = true;
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
                 ExecuteAction(() => GameManager.Player.gameObject.SetActive(false), GlobalConfig.MissionFailureEndDuration);
