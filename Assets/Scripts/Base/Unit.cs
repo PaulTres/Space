@@ -1,7 +1,6 @@
 using Effects;
 using EventBus;
 using HP;
-using HybridBT2;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public class UnitParameters
     {
         [Tooltip("How much morale damage will allies suffer when this unit is destroyed.")]
-        public float MoraleWeight = 10;
+        public int MoraleWeight = 10;
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
@@ -71,6 +70,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    public PoolableEffect SpawnEffect => unitParameters.EffectOnSpawn;
     public UnitDeathEffects UnitDeathEffects
     {
         get
@@ -80,7 +80,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         }
     }
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
-    public float MoraleWeight => unitParameters.MoraleWeight;
+    public int MoraleWeight => unitParameters.MoraleWeight;
     public float MaximumSignature => unitParameters.MaximumSignature;
     public float MinimumSignature => unitParameters.MinimumSignature;
     protected WaitForSeconds wait;
@@ -93,13 +93,11 @@ public abstract class Unit : ImprovedMonoBehaviour
             return IsFleeing ? 0 : unitParameters.ScanRange;
         }
     }
-    public bool IsFleeing
+    public float CurrentMorale
     {
         get
         {
-            var b = Transform.GetBlackboard();
-            if (b == null) return false;
-            return b.GetData<bool>(Blackboard.Keys.Fleeing);
+            return UnitManager.GetMorale(Team);
         }
     }
     protected Collider[] missileBuffer;
@@ -227,6 +225,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public virtual void Die(ObjectDestroyed @event)
     {
         if (IsDying) return;
+        if (@event.Killer == null && IsFleeing) return;
         IsDying = true;
         //Debug.Log($"{Transform} is dead.");
         UnitDestroyed unitDestroyed = new(this, @event.Killer);

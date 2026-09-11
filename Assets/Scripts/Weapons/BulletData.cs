@@ -9,7 +9,7 @@ namespace Weapons
         [Tooltip("Transform will be disabled on hit if true.")]
         public bool DisableOnHit = true;
         public float Damage = 1;
-        public float LifeTime = 20;
+        public float LifeTime = 10;
         [Tooltip("Scale of effects spawned by this bullet. Affects the scale of the bullet.")]
         public float EffectScaleFactor = 1;
         public Vector3 EffectScale => EffectScaleFactor * Vector3.one;

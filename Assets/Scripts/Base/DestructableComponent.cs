@@ -9,7 +9,7 @@ public class DestructableComponent : ImprovedMonoBehaviour
 {
     public override Vector3 LinearVelocity => OwningUnit.LinearVelocity;
     public override Vector3 AngularVelocity => OwningUnit.AngularVelocity;
-    public override ImprovedMonoBehaviour Target => null;
+    public override ImprovedMonoBehaviour Target => OwningUnit.Target;
     protected Unit unit;
     public Unit OwningUnit
     {
@@ -25,6 +25,7 @@ public class DestructableComponent : ImprovedMonoBehaviour
     [Tooltip("When the object is destroyed the owning unit will receive this much damage.")]
     [SerializeField] protected float damageOnDestroy;
     public override float CurrentSignature => OwningUnit.CurrentSignature;
+    public override bool IsFleeing => OwningUnit.IsFleeing;
 
     protected void OnEnable()
     {

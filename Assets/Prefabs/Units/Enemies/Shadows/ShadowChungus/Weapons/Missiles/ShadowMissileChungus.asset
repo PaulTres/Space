@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileData
   Prefab: {fileID: 2013506230279709725, guid: 5f3ff8a9e7181d74d991f38cf24839c2, type: 3}
   Key: 3
-  RaiseEventOnRecycle: 0
   ValidateData: 1
   DisableOnHit: 1
   Damage: 4
-  LifeTime: 20
+  LifeTime: 10
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 0}
   OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}

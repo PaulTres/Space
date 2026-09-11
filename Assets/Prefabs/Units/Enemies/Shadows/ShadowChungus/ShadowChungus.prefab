@@ -1525,8 +1525,8 @@ MonoBehaviour:
   explosionOriginsParent: {fileID: 3401860231242572748}
   interval: 0.5
   count: 7
-  effectScaleFactor: 1
-  finalEffectScaleFactor: 5
+  effectScaleFactor: 10
+  finalEffectScaleFactor: 50
 --- !u!114 &3656737314857615257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1591,9 +1591,6 @@ MonoBehaviour:
   rootData: {fileID: 11400000, guid: 6f53823f22765b94f8dc5741243eb488, type: 2}
   tickInterval: 0.1
   shouldTick: 1
-  affectedByMorale: 0
-  initialMorale: 10
-  maxMoraleImpactRange: 0
   maxThreats: 1
   minEscortValue: 2000
 --- !u!114 &2398756502134485688

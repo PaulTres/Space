@@ -118,18 +118,23 @@ namespace HybridBT2
             {
                 if (prevChild != -1 && !children[i].AlwaysCheck && i != prevChild) continue;
                 children[i].Evaluate(context);
+                //Debug.Log($"{Name} has evaluated {children[i].Name}.");
                 if (children[i].State == NodeState.FAILURE)
                 {
                     if (i == children.Count - 1)
                     {
+                        //Debug.Log($"{Name} has failed all children!");
                         SetState(NodeState.FAILURE, context);
                         return;
                     }
                     SetState(NodeState.RUNNING, context);
                     continue;
                 }
-                if (prevChild != -1) children[prevChild].Abort(context);
-                prevChild = i;
+                if (prevChild != -1 && i != prevChild)
+                {
+                    children[prevChild].Abort(context);
+                    prevChild = i;
+                }
                 SetState(children[i].State, context);
                 return;
             }

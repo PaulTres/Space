@@ -63,25 +63,16 @@ public class GlobalConfig : ScriptableObject
     #endregion
 
     #region Misc
+
+    #region Fleeing
     /// <summary>
     /// It will take this amount of time for bounding boxes of fleeing enemies to 
     /// switch between on and off.
     /// </summary>
-    public static readonly float FlickerInterval = 0.5f;
-    /// <summary>
-    /// Morale needs to be <= to InitialMorale* this value for the unit to flee.
-    /// </summary>
-    public static readonly float MoraleFleeThreshold = 0;
-    /// <summary>
-    /// Morale needs to be at least InitialMorale* this value for the unit 
-    /// to stop fleeing.
-    /// </summary>
-    public static readonly float MoraleRecoverThreshold = .5f;
-    /// <summary>
-    /// Morale will only replenish after this much time has passed since 
-    /// the last morale damage.
-    /// </summary>
-    public static readonly float MoraleRechargeCooldown = 10;
+    public static float FlickerInterval => Instance.flickerInterval;
+    [SerializeField] protected float flickerInterval = 1;
+    #endregion
+
     /// <summary>
     /// When this ship is spawned, no other ships should be around it in this radius.
     /// </summary>
@@ -242,14 +233,16 @@ public class GlobalConfig : ScriptableObject
     #endregion
 
     #region Difficulty
+    [Header("Difficulty")]
+
+    [SerializeField] protected List<float> allyHPModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemyHPModifiers = new() { .75f, 1, 1.25f };
     public static float GetHPModifier(int team)
     {
         if (team == PlayerTeam) return Instance.allyTrackingModifiers[GameManager.Difficulty];
         if (team == EnemyTeam) return Instance.enemyTrackingModifiers[GameManager.Difficulty];
         return 1;
     }
-    [SerializeField] protected List<float> allyHPModifiers = new() { 1.25f, 1, 1f };
-    [SerializeField] protected List<float> enemyHPModifiers = new() { .75f, 1, 1.25f };
 
     public static float GetTrackingModifier(int team)
     {

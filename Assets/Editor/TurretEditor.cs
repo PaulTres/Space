@@ -17,7 +17,7 @@ public class TurretEditor : Editor
         var minRotPos = Mathf.Sin(minRotation * Mathf.Deg2Rad) * turret.Transform.right + Mathf.Cos(minRotation * Mathf.Deg2Rad) * turret.transform.forward;
         Handles.DrawLine(turret.Transform.position + maxRotPos, turret.Transform.position);
         Handles.DrawLine(turret.Transform.position, turret.Transform.position + minRotPos);
-        Handles.DrawWireArc(turret.Transform.position, turret.Transform.up, minRotPos, Mathf.Abs(maxRotation) + Mathf.Abs(minRotation), 1);
+        Handles.DrawWireArc(turret.Transform.position, turret.Transform.up, minRotPos, Mathf.Abs(maxRotation) + Mathf.Abs(minRotation), turret.Parameters.MaxRange);
         Handles.color = Color.softRed;
         var maxElevation = turret.MaxElevation;
         var minElevation = turret.MinElevation;
@@ -25,6 +25,6 @@ public class TurretEditor : Editor
         var minElevationPos = Mathf.Sin(minElevation * Mathf.Deg2Rad) * turret.Transform.up + Mathf.Cos(minElevation * Mathf.Deg2Rad) * turret.transform.forward;
         Handles.DrawLine(turret.Transform.position + maxElevationPos, turret.Transform.position);
         Handles.DrawLine(turret.Transform.position, turret.Transform.position + minElevationPos);
-        Handles.DrawWireArc(turret.Transform.position, turret.Transform.right, maxElevationPos, Mathf.Abs(maxElevation) + Mathf.Abs(minElevation), 1);
+        Handles.DrawWireArc(turret.Transform.position, turret.Transform.right, maxElevationPos, Mathf.Abs(maxElevation) + Mathf.Abs(minElevation), turret.Parameters.MaxRange);
     }
 }

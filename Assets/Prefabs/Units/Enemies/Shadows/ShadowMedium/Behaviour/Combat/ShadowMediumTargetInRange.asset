@@ -38,4 +38,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   returnZeroForInfinity: 1
   maxRange: 200
-  objectKey: 4
+  objectKey: 1

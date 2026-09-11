@@ -70,6 +70,8 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+  audioOnly: 0
+  lifetime: 3
 --- !u!1 &3440386896652761076
 GameObject:
   m_ObjectHideFlags: 0

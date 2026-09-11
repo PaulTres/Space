@@ -7,6 +7,11 @@ namespace HybridBT2
         public BT Tree;
         public TextMeshProUGUI text;
 
+        public void OnValidate()
+        {
+            if (text == null) text = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
         private void Update()
         {
             if (Tree != null && text != null)

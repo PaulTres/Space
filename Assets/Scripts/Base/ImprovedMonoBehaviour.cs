@@ -1,3 +1,4 @@
+using HybridBT2;
 using Radar;
 using UnityEngine;
 using Utilities;
@@ -25,6 +26,15 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
         {
             if (tr == null) tr = transform;
             return tr;
+        }
+    }
+    public virtual bool IsFleeing
+    {
+        get
+        {
+            var b = Transform.GetBlackboard();
+            if (b == null) return false;
+            return b.GetData<bool>(Blackboard.Keys.Fleeing);
         }
     }
     public Vector3 Position

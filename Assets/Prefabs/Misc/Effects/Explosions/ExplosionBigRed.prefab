@@ -4941,4 +4941,4 @@ MonoBehaviour:
     ignoreListenerPause: 0
     rolloffMode: 0
   audioOnly: 0
-  lifetime: 10
+  lifetime: 3

@@ -36,3 +36,60 @@ MonoBehaviour:
     ignoreListenerPause: 0
     rolloffMode: 0
   iconSizeCoefficient: 50
+  flickerInterval: 0.25
+  allyHPModifiers:
+  - 1.25
+  - 1
+  - 1
+  enemyHPModifiers:
+  - 0.75
+  - 1
+  - 1.25
+  allyTrackingModifiers:
+  - 1.25
+  - 1
+  - 1
+  enemyTrackingModifiers:
+  - 0.75
+  - 1
+  - 1.25
+  allyDamageModifiers:
+  - 1.25
+  - 1
+  - 1
+  enemyDamageModifiers:
+  - 0.75
+  - 1
+  - 1.25
+  allySpeedModifiers:
+  - 1.25
+  - 1
+  - 1
+  enemySpeedModifiers:
+  - 0.75
+  - 1
+  - 1.25
+  allyProjectileSpeedModifiers:
+  - 1.25
+  - 1
+  - 1
+  enemyProjectileSpeedModifiers:
+  - 0.75
+  - 1
+  - 1.25
+  allyScanRangeModifiers:
+  - 1.1
+  - 1
+  - 1
+  enemyScanRangeModifiers:
+  - 0.9
+  - 1
+  - 1.1
+  allySignatureModifiers:
+  - 1.1
+  - 1
+  - 1
+  enemySignatureModifiers:
+  - 0.9
+  - 1
+  - 1.1

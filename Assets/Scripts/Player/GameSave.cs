@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 using Utilities;
 namespace Player
 {
@@ -47,8 +48,16 @@ namespace Player
             var dir = new DirectoryInfo(GlobalConfig.SaveFileLocation);
             foreach (var file in dir.GetFiles("GameSave_*"))
             {
-                Saves.Add(file.Name);
-                fileNames.Add(ConvertFileName(file.Name));
+                try
+                {
+                    var _ = GameSave.Load(file.Name);
+                    Saves.Add(file.Name);
+                    fileNames.Add(ConvertFileName(file.Name));
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex.Message);
+                }
             }
             return fileNames;
         }

@@ -54,8 +54,16 @@ public readonly struct UnitDestroyed : IEvent
         UnitMoraleWeight = unit.GetMoraleWeight();
         UnitPosition = unit.Position;
         Time = UnityEngine.Time.time;
-        KillerTeam = killer.Team;
-        KillerName = killer.Transform.name.Replace("(Clone)", "");
+        if (killer != null)
+        {
+            KillerTeam = killer.Team;
+            KillerName = killer.Transform.name.Replace("(Clone)", "");
+        }
+        else
+        {
+            KillerTeam = 0;
+            KillerName = "";
+        }
     }
 
     public override string ToString()

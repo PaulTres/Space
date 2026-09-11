@@ -237,6 +237,7 @@ MonoBehaviour:
   minHP: 0
   minHPRegainCooldown: 5
   currentHP: 0
+  damageEffects: []
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
@@ -268,7 +269,7 @@ MonoBehaviour:
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 10
-    <MaxSignature>k__BackingField: 50
+    <MaximumSignature>k__BackingField: 0
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 20
@@ -317,10 +318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BanditTree
   rootData: {fileID: 11400000, guid: b83767601bdd0074882d1a7002757f25, type: 2}
   tickInterval: 0.1
-  shouldRun: 1
-  affectedByMorale: 1
-  initialMorale: 20
-  maxMoraleImpactRange: 50
+  shouldTick: 1
   maxThreats: 1
   minEscortValue: 10
 --- !u!114 &1902977087149361923
@@ -339,9 +337,9 @@ MonoBehaviour:
   finalEffect: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   explosionOriginsParent: {fileID: 6416665111217952267}
   interval: 0.5
-  count: 3
+  count: 0
   effectScaleFactor: 1
-  finalEffectScaleFactor: 4
+  finalEffectScaleFactor: 10
 --- !u!114 &7722082318002812990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +355,7 @@ MonoBehaviour:
   hpComponents:
   - {fileID: 6915273950413581737}
   armorModifiers: []
-  body: {fileID: 0}
+  body: {fileID: 3400584777054074995}
 --- !u!1 &4891043787746463599
 GameObject:
   m_ObjectHideFlags: 0

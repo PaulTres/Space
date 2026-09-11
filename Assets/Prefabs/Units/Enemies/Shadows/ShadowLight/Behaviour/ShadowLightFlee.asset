@@ -17,4 +17,6 @@ MonoBehaviour:
   Conditions:
   - {fileID: 11400000, guid: 69d8c64557ab98a45a32e0ac3c25a341, type: 2}
   Services: []
+  jumpEffect: {fileID: 0}
   fleeDistance: 1000
+  ticksUntilJump: 50

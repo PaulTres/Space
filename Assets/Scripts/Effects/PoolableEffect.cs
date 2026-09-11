@@ -69,8 +69,6 @@ namespace Effects
                     foreach (var particle in particles)
                     {
                         var p = particle.main;
-                        p.loop = false;
-                        p.stopAction = ParticleSystemStopAction.Disable;
                     }
                 }
                 return particles;
@@ -112,7 +110,7 @@ namespace Effects
 
         protected void OnDisable()
         {
-            lifetimeTimer?.Stop();
+            lifetimeTimer?.Pause();
             Release(this);
         }
 

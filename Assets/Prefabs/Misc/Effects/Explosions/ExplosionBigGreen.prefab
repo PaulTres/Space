@@ -4940,3 +4940,5 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+  audioOnly: 0
+  lifetime: 3

@@ -17,7 +17,5 @@ MonoBehaviour:
   Conditions: []
   Services:
   - {fileID: 11400000, guid: 2411e31f082eef34ba7534cae9ef10c7, type: 2}
-  - {fileID: 11400000, guid: fa29d6de4b18fbc4eb796fffc02a0cb2, type: 2}
   Children:
-  - {fileID: 11400000, guid: 61a9835a5c22cd048ad5dde52fbb62b9, type: 2}
   - {fileID: 11400000, guid: 01e752ee98c1b784cb362a7f85f8fc9d, type: 2}

@@ -10,6 +10,8 @@ public static class UnitManager
     /// All active ships. The key is a ship's Team.
     /// </summary>
     readonly static Dictionary<int, List<ImprovedMonoBehaviour>> ships = new();
+    readonly static Dictionary<int, int> moraleValues = new();
+    public static int GetMorale(int team) => moraleValues[team];
     public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
     public static int EnemyCount => ships[GlobalConfig.EnemyTeam].Count;
 
@@ -62,12 +64,19 @@ public static class UnitManager
         if (!ships.ContainsKey(team))
         {
             ships[team] = new();
+            moraleValues[team] = 0;
         }
         //Debug.Log($"{ship.Transform} registered on team {team}.");
         ships[team].Add(ship);
         ship.UnitManagerIndex = ships[team].Count - 1;
         ship.RegisterForRadar();
         ship.SetObjectLayer();
+        var unit = ship as Unit;
+        if (unit != null)
+        {
+            moraleValues[team] = moraleValues[team] + unit.MoraleWeight;
+        }
+
         //Debug.Log($"Registered unit {ship.Transform} with index {ship.UnitManagerIndex}.");
     }
 
@@ -87,6 +96,11 @@ public static class UnitManager
             ships[team].RemoveAtSwapBack(ship.UnitManagerIndex);
             ship.UnitManagerIndex = -1;
             if (ships[team].Count > index) ships[team][index].UnitManagerIndex = index;
+            var unit = ship as Unit;
+            if (unit != null)
+            {
+                moraleValues[team] = moraleValues[team] - unit.MoraleWeight;
+            }
         }
 
         //if (ships[GlobalConfig.EnemyTeam].Count == 0 && Mission.CurrentMission != null)

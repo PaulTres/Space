@@ -20,12 +20,8 @@ MonoBehaviour:
   CurrentTargetScoreMultiplier: 2
   AccountForObstructions: 1
   MaxAngleDifference: 1
-  MaxRange: 100
+  MaxRange: 150
   BurstFire: 1
   BurstCooldown: 0.3
   BurstCount: 1
   RotSpeed: 361
-  MinElevation: -90
-  MaxElevation: 90
-  MinRot: -190
-  MaxRot: 190

@@ -104,18 +104,18 @@ namespace Radar
         {
             if (!target.Active() || bbox == null) return;
 
-            var unit = target as Unit;
             var directionToTarget = target.Position - owner.Position;
             var distance = directionToTarget.magnitude;
             Vector3 viewportPos = cam.WorldToViewportPoint(target.Position);
             if (viewportPos.z <= 0 || Vector3.Dot(cam.transform.forward, directionToTarget) <= 0)
             {
                 bbox.Hide();
+                //Debug.Log($"Hidden bounding box for unit {target}");
                 if (CurrentTarget == target) ClearTarget();
             }
             else
             {
-                bbox.Show();
+                //bbox.Show();
 
                 #region Bounding box position
                 Vector2 screenPos = new(
@@ -152,44 +152,53 @@ namespace Radar
                 else bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
                 #endregion
 
-                #region Fleeing
-                if (unit != null)
+                #region Fleeing/Enemy target
+                if (target.Active())
                 {
-                    if (unit.IsFleeing)
+                    if (target.IsFleeing)
                     {
                         //flicker the bounding box and distance text
+                        //Debug.Log($"{Time.time - bbox.TimeSinceLastFlicker} vs {GlobalConfig.FlickerInterval}");
                         if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)
                         {
-                            bbox.BBox.enabled = !bbox.BBox.enabled;
-                            bbox.DistanceText.enabled = !bbox.DistanceText.enabled;
+                            var toggle = bbox.BBox.enabled;
+                            //Debug.Log(bbox.BBox.enabled);
+                            bbox.BBox.enabled = !toggle;
+                            //Debug.Log(bbox.BBox.enabled);
+                            bbox.DistanceText.enabled = !toggle;
                             bbox.TimeSinceLastFlicker = Time.time;
+                            //Debug.Log("Flicker: " + toggle);
+                            //Debug.Log("Finally: " + bbox.BBox.enabled);
                         }
                         bbox.LineRenderer.enabled = false;
                     }
                     else
                     {
+                        //Debug.LogWarning($"{unit} is not fleeing: {unit.CurrentMorale}");
                         bbox.BBox.enabled = true;
+                        //if (target.Transform.name.Contains("Weapon")) Debug.Log(target.Transform);
                         bbox.DistanceText.enabled = true;
+                        var unit = target as Unit;
+                        if (unit != null && target.Team != GlobalConfig.PlayerTeam && target.Target == GameManager.Player && GameManager.Player.Active())
+                        {
+                            bbox.LineRenderer.enabled = true;
+                            bbox.LineRenderer.SetPosition(0, target.Position);
+                            bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
+                            if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
+                            {
+                                bbox.LineRenderer.material = bbox.DottedLineMaterial;
+                                bbox.LineRenderer.material.mainTextureScale =
+                                    new Vector2(distance / 2, 1f);
+                            }
+                            else bbox.LineRenderer.material = bbox.RegularLineMaterial;
+                        }
+                        else bbox.LineRenderer.enabled = false;
                     }
+                    //Debug.Log("Finally2: " + bbox.BBox.enabled);
                 }
                 #endregion
-            }
 
-            if (unit != null && unit.Target == (ImprovedMonoBehaviour)GameManager.Player &&
-                GameManager.Player != null)
-            {
-                bbox.LineRenderer.enabled = true;
-                bbox.LineRenderer.SetPosition(0, unit.Position);
-                bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
-                if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
-                {
-                    bbox.LineRenderer.material = bbox.DottedLineMaterial;
-                    bbox.LineRenderer.material.mainTextureScale =
-                        new Vector2(distance / 2, 1f);
-                }
-                else bbox.LineRenderer.material = bbox.RegularLineMaterial;
             }
-            else bbox.LineRenderer.enabled = false;
         }
 
         protected BoundingBox GetBoundingBox()
@@ -206,8 +215,9 @@ namespace Radar
             if (!target.Active() || target.Transform == transform.root ||
                 boundingBoxes.ContainsKey(target)) return;
 
+            //Debug.Log($"{target} registered");
             var bbox = GetBoundingBox();
-            bbox.SelectionIcon.gameObject.SetActive(false);
+            bbox.SelectionIcon.enabled = false;
             if (target is Missile) bbox.BBox.sprite = missileIcon;
             else bbox.BBox.sprite = unitIcon;
             bbox.TimeSinceLastFlicker = Time.time;
@@ -237,6 +247,7 @@ namespace Radar
         {
             if (boundingBoxes.TryGetValue(target, out var bbox))
             {
+                //Debug.Log($"{target} unregistered");
                 if (CurrentTarget == target)
                 {
                     ClearTarget();
@@ -253,6 +264,8 @@ namespace Radar
         {
             if (!CurrentTarget.Active())
             {
+                secondViewCamera.gameObject.SetActive(false);
+                secondView.gameObject.SetActive(false);
                 SelectTarget();
                 return;
             }
@@ -260,8 +273,7 @@ namespace Radar
             #region Target view
             if (secondViewCamera != null && secondView != null)
             {
-                var direction = (transform.root.position -
-                    CurrentTarget.Position).normalized;
+                var direction = transform.root.position - CurrentTarget.Position;
                 if (direction.magnitude < CurrentTarget.EffectScaleFactor * 2)
                 {
                     secondViewCamera.gameObject.SetActive(false);
@@ -272,7 +284,7 @@ namespace Radar
                     secondViewCamera.gameObject.SetActive(true);
                     secondView.gameObject.SetActive(true);
                     secondViewCamera.transform.position = CurrentTarget.Position +
-                        direction * Mathf.Max(2, CurrentTarget.EffectScaleFactor * 2);
+                        direction.normalized * Mathf.Max(5, CurrentTarget.EffectScaleFactor * 2);
                     secondViewCamera.transform.LookAt(CurrentTarget.Position);
                 }
             }
@@ -316,10 +328,10 @@ namespace Radar
         protected void TargetSelected(ImprovedMonoBehaviour unit)
         {
             if (unit == CurrentTarget) return;
+            //Debug.Log("Target selected: " + unit);
             if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
             {
-                previousData.SelectionIcon.gameObject.SetActive(false);
-
+                previousData.SelectionIcon.enabled = false;
             }
             CurrentTarget = unit;
             if (CurrentTarget == null) return;
@@ -329,7 +341,7 @@ namespace Radar
                 ClearTarget();
                 return;
             }
-            data.SelectionIcon.gameObject.SetActive(true);
+            data.SelectionIcon.enabled = true;
         }
 
         /// <summary>
@@ -360,7 +372,7 @@ namespace Radar
             if (CurrentTarget == null) return;
             if (boundingBoxes.TryGetValue(CurrentTarget, out var data))
             {
-                data.SelectionIcon.gameObject.SetActive(false);
+                data.SelectionIcon.enabled = false;
             }
             CurrentTarget = null;
         }

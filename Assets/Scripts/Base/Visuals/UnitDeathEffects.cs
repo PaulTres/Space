@@ -57,6 +57,7 @@ public class UnitDeathEffects : MonoBehaviour
             j = (j + 1) % explosionOrigins.Count;
             yield return wait;
         }
+        //if (transform.name.Contains("Chungus")) Debug.Log("Spawning final death effect: " + finalEffect);
         finalEffect.SpawnEffect(transform.position, finalEffectScaleFactor);
         transform.root.gameObject.SetActive(false);
     }
