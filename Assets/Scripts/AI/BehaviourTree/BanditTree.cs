@@ -1,6 +1,7 @@
 ﻿using EventBus;
 using HybridBT2;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Utilities;
 using Weapons;
@@ -25,9 +26,18 @@ public class BanditTree : BT, IRegisterableComponent
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
     }
 
+    protected void OnValidate()
+    {
+        var currentEscortValue = GetComponent<Navigation>().EscortValue;
+        if (minEscortValue <= currentEscortValue)
+        {
+            Debug.LogError($"The min escort value ({minEscortValue}) is less than or equal to {transform.root}'s escort value ({currentEscortValue}). The unit will misbehave if it has an escort node. Doubling min escort value for this.");
+            minEscortValue = (currentEscortValue + 1) * 2;
+        }
+    }
+
     protected override void SetupBlackboard()
     {
-        Debug.Assert(minEscortValue > Context.Navigation.EscortValue, $"The min escort value ({minEscortValue}) is less than or equal to the unit's escort value ({Context.Navigation.EscortValue}). The unit will misbehave if it has an escort node.");
         Context.SetData(Blackboard.Keys.MinEscortValue, minEscortValue);
         Context.SetData(Blackboard.Keys.Fleeing, false);
         Context.SetData(Blackboard.Keys.AllTurrets, GetComponentsInChildren<Turret>());
@@ -93,4 +103,15 @@ public class BanditTree : BT, IRegisterableComponent
     }
 
     public void RemoveThreat(IThreat threat) => Context.Threats.Remove(threat);
+
+    protected void OnDrawGizmosSelected()
+    {
+        if (!EditorApplication.isPlaying) return;
+        var e = Context.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.EscortCandidate);
+        if (e.Active())
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(Context.Navigation.Position, e.Position);
+        }
+    }
 }

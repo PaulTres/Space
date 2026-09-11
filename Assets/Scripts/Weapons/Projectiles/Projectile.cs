@@ -41,14 +41,15 @@ namespace Weapons
             {
                 throw new System.ArgumentException($"Expected {typeof(ProjectileData)}, got {poolableData.GetType()}");
             }
-            topSpeed = data.TopSpeed;
-            initialVelocity = data.InitialVelocity;
+            var speedModifier = GlobalConfig.GetProjectileSpeedModifier(Team);
+            topSpeed = data.TopSpeed * speedModifier;
             if (topSpeed <= 0 && data.ValidateData)
             {
                 Debug.LogWarning($"Projectile top speed set to 0 or lower on {transform}");
                 if (topSpeed < 0) topSpeed = 0;
             }
-            acceleration = data.Acceleration;
+            initialVelocity = data.InitialVelocity * speedModifier;
+            acceleration = data.Acceleration * speedModifier;
             if (acceleration <= 0 && data.ValidateData)
             {
                 Debug.LogWarning($"Projectile acceleration should not be 0. Setting acceleration to 10% of top speed on {transform}.");

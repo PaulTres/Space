@@ -22,8 +22,8 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
-        [field: SerializeField] public float MinimumSignature { get; protected set; }
-        [field: SerializeField] public float MaximumSignature { get; protected set; }
+        [field: SerializeField] public float MinimumSignature { get; set; }
+        [field: SerializeField] public float MaximumSignature { get; set; }
         public float SignatureDecreaseRate = 0.1f;
         [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
         public float SignatureDecreaseCooldown = 5f;
@@ -81,7 +81,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     }
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
     public float MoraleWeight => unitParameters.MoraleWeight;
-    public float MaxSignature => unitParameters.MaximumSignature;
+    public float MaximumSignature => unitParameters.MaximumSignature;
+    public float MinimumSignature => unitParameters.MinimumSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
@@ -116,6 +117,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         ComponentRegister<Unit>.Register(Transform.root, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(this), Die);
+        MaxVelocityMagnitude *= GlobalConfig.GetUnitSpeedModifier(Team);
+        var signatureModifier = GlobalConfig.GetSignatureModifier(Team);
+        unitParameters.MaximumSignature *= signatureModifier;
+        unitParameters.MinimumSignature *= signatureModifier;
+        unitParameters.ScanRange *= GlobalConfig.GetScanRangeModifier(Team);
     }
 
     protected virtual void OnEnable()
@@ -124,7 +130,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         missileBuffer = new Collider[GlobalConfig.MaxMissileCheckBufferSize];
         missileCount = 0;
         tickCoroutine = StartCoroutine(Tick());
-        currentSignature = unitParameters.MinimumSignature;
+        currentSignature = MinimumSignature;
         UnitManager.Register(this);
         signatureDecreaseDelay = Time.time;
         if (PlaySpawnEffect && unitParameters.EffectOnSpawn != null)
@@ -204,13 +210,13 @@ public abstract class Unit : ImprovedMonoBehaviour
     public void IncreaseSignature(float amount)
     {
         signatureDecreaseDelay = Time.time;
-        currentSignature = Mathf.Min(unitParameters.MaximumSignature, CurrentSignature + amount);
+        currentSignature = Mathf.Min(MaximumSignature, CurrentSignature + amount);
     }
 
     protected virtual void DecreaseSignature(float deltaTime)
     {
         if (Time.time - signatureDecreaseDelay < unitParameters.SignatureDecreaseCooldown) return;
-        currentSignature = Mathf.Max(unitParameters.MinimumSignature,
+        currentSignature = Mathf.Max(MinimumSignature,
             CurrentSignature - unitParameters.SignatureDecreaseRate * deltaTime);
     }
 
@@ -238,13 +244,18 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, unitParameters.MinimumSignature);
+        Gizmos.DrawWireSphere(Transform.position, MinimumSignature);
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(Transform.position, unitParameters.MaximumSignature);
+        Gizmos.DrawWireSphere(Transform.position, MaximumSignature);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
+        if (Target.Active())
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(Transform.position, Target.Position);
+        }
     }
     #endregion
 }

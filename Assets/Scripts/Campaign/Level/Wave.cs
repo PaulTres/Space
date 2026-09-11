@@ -20,7 +20,7 @@ namespace Level
 
         protected void Awake()
         {
-            spawners = GetComponentsInChildren<NPCSpawner>().ToList();
+            spawners = GetComponentsInChildren<NPCSpawner>(true).ToList();
             SpawnInactive();
             if (spawnOnAwake) Spawn();
         }
@@ -55,7 +55,8 @@ namespace Level
                 {
                     Debug.LogError($"{spawner.transform.name} spawned empty unit!");
                     continue;
-                }//Debug.Log(unit.transform);
+                }
+                //Debug.Log(unit.transform);
                 unitCount++;
                 units.Add(unit);
                 EventBus<ObjectDestroyed>.AddActions(unit.GetTransformInstanceID(), OnUnitDestroyed);

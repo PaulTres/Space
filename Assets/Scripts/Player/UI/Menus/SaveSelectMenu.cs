@@ -23,9 +23,9 @@ namespace Player
             PopulateDropdown();
         }
 
-        public void NewGame()
+        public void NewGame(int difficulty)
         {
-            GameManager.NewGame();
+            GameManager.NewGame(difficulty);
         }
 
         public void Load()
@@ -35,6 +35,7 @@ namespace Player
                 GameManager.LoadSave(GameSave.Saves[dropdown.value]);
             }
         }
+
         public void DeleteFile()
         {
             GameSave.DeleteSave(GameSave.ConvertToFileName(dropdown.options[dropdown.value].text));

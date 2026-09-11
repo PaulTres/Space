@@ -100,7 +100,7 @@ namespace Weapons
                 throw new System.ArgumentException($"Expected {typeof(MissileData)}, " +
                     $"got {poolableData.GetType()}");
             }
-            initialTracking = missileData.Tracking;
+            initialTracking = missileData.Tracking * GlobalConfig.GetTrackingModifier(Team);
             if (missileData.HP > 0 && HPComponent != null) HPComponent.MaxHP = missileData.HP;
             maxTargetSignature = missileData.MaxTargetSignature;
             maxTelemetryBonus = missileData.MaxTelemetryBonus;

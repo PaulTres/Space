@@ -7,8 +7,8 @@ namespace Weapons
     {
         [field: SerializeField] public int InitialAmmoCount { get; protected set; } = 50;
         public int AmmoCount { get; protected set; }
-        [SerializeField] protected float ammoReplenishmentTime=10;
-        [SerializeField] protected int ammoReplenishmentAmount=2;
+        [SerializeField] protected float ammoReplenishmentTime = 10;
+        [SerializeField] protected int ammoReplenishmentAmount = 2;
         protected CountdownTimer ammoReplenishmentTimer;
 
         protected void Awake()
@@ -25,11 +25,14 @@ namespace Weapons
             AmmoCount = InitialAmmoCount;
         }
 
+        /// <summary>
+        /// Reduce ammo count by 1.
+        /// </summary>
         public void Consume()
         {
             if (AmmoCount <= 0) return;
             AmmoCount -= 1;
-            if(AmmoCount<=0)
+            if (AmmoCount <= 0)
             {
                 ammoReplenishmentTimer.Start();
             }

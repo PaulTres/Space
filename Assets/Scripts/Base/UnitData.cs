@@ -61,7 +61,7 @@ public class UnitData : MonoSpawnableData<Unit>
 
     public bool ShouldBeDisabled = true;
     public int Points = 1;
-    [Tooltip("Only used for the player. A ship cannot be used in a mission before this one has been completed.")]
+    [Tooltip("Only used for the player. A ship cannot be used before this mission has been completed.")]
     public int MissionRequirement = -1;
     [TextArea(15, 20)]
     [SerializeField] protected string description;

@@ -82,6 +82,11 @@ namespace Weapons
             turretStances.Add(new DefensiveTurretStance() { Turret = this, TurretData = @params });
         }
 
+        protected void OnValidate()
+        {
+            if (transform != transform.root) Debug.Assert(@params != null, $"{this} on {transform.root} has no parameters!");
+        }
+
         protected virtual void OnEnable()
         {
             TargetMissiles = @params.TargetMissiles;

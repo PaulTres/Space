@@ -55,23 +55,12 @@ namespace Player
         #endregion
 
         #region Setup
-        protected override void Awake()
-        {
-            base.Awake();
-            PlayerDead = false;
-            PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
-            defaultCamPos = cameraData.CameraTransform.localPosition;
-            callbacksEnabled = false;
-            MissionManager.TryGetInstance(true).ExecuteAction(EnableCamera, 0.1f);
-            MissionManager.TryGetInstance(true).ExecuteAction(EnableCallbacks, 1f);
-        }
-
         /// <summary>
         /// Delayed by 1 second to ensure smoother player spawning.
         /// </summary>
         public void EnableCallbacks()
         {
-            GameManager.InputActions.BasicControls.SetCallbacks(this);
+            GameManager.InputActions.BasicControls.AddCallbacks(this);
             callbacksEnabled = true;
         }
 
@@ -87,7 +76,13 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
+            PlayerDead = false;
+            PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
+            defaultCamPos = cameraData.CameraTransform.localPosition;
             CannotDie = false;
+            callbacksEnabled = false;
+            MissionManager.TryGetInstance(true).ExecuteAction(EnableCamera, 0.1f);
+            MissionManager.TryGetInstance(true).ExecuteAction(EnableCallbacks, 1f);
             PlayerCamera.fieldOfView = GlobalConfig.FOV;
             GameManager.Player = this;
             Dampeners = true;

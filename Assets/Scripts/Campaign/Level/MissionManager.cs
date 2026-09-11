@@ -1,3 +1,4 @@
+using Effects;
 using Player;
 using System.Collections.Generic;
 using Timers;
@@ -30,6 +31,7 @@ namespace Level
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
+            PoolableEffect.ClearPool();
             LockMissionState = false;
             Time.timeScale = 1;
             StartTime = Time.time;
@@ -43,6 +45,7 @@ namespace Level
             base.ClearSingleton();
             StopAllTimers();
             timerPoolProperty.Clear();
+            PoolableEffect.ClearPool();
         }
 
         protected void OnTimerStop(CountdownTimer t, bool removeFromSet = true)

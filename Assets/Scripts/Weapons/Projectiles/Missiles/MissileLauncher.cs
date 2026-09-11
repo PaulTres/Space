@@ -7,7 +7,7 @@ namespace Weapons
         [SerializeField] protected Magazine magazine;
         public Magazine Magazine => magazine;
 
-        public override void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
+        protected override void PerformBulletInitialization(Bullet bullet, ImprovedMonoBehaviour target)
         {
             if (magazine != null)
             {
@@ -16,7 +16,6 @@ namespace Weapons
             }
             if (target != null) ((Missile)bullet).SetTarget(target);
             else Debug.LogWarning($"Missile launcher {transform} was not passed a target!");
-            base.ProcessBullet(bullet, target, shootPoint);
         }
     }
 }

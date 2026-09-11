@@ -28,6 +28,10 @@ public abstract class Ship : Unit
         rb.useGravity = false;
         rb.freezeRotation = true;
         rb.linearDamping = 0;
+        var speedModifier = GlobalConfig.GetUnitSpeedModifier(Team);
+        strafeThrust *= speedModifier;
+        forwardThrust *= speedModifier;
+        RotationSpeed *= speedModifier;
     }
 
     protected override void OnEnable()

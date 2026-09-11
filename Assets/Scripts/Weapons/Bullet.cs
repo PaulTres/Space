@@ -54,10 +54,6 @@ namespace Weapons
         {
             get
             {
-                if (damageInfo.Source == null)
-                {
-                    return null;
-                }
                 return damageInfo.Source;
             }
             set
@@ -68,6 +64,7 @@ namespace Weapons
                     if (value != null)
                     {
                         SetObjectLayer();
+                        Team = value.Team;
                     }
                 }
             }
@@ -100,7 +97,7 @@ namespace Weapons
         {
             poolKey = poolableData.Key;
             disableOnHit = poolableData.DisableOnHit;
-            damageInfo.Amount = poolableData.Damage;
+            damageInfo.Amount = poolableData.Damage * GlobalConfig.GetDamageModifier(Team);
             lifeTime = poolableData.LifeTime;
             onSpawnEffect = poolableData.OnSpawnEffect;
             onHitEffect = poolableData.OnHitEffect;

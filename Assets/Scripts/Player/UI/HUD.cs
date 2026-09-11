@@ -124,8 +124,8 @@ namespace Player
 
         public void UpdateSignatureDisplay()
         {
-            var percentage = player.CurrentSignature / (player.MaxSignature + Mathf.Epsilon);
-            signatureText.text = $"{(int)player.CurrentSignature}/{(int)player.MaxSignature}";
+            var percentage = player.CurrentSignature / (player.MaximumSignature + Mathf.Epsilon);
+            signatureText.text = $"{(int)player.CurrentSignature}/{(int)player.MaximumSignature}";
             signatureDisplay.rectTransform.localScale = percentage * maxSignatureDisplay.rectTransform.localScale;
         }
 

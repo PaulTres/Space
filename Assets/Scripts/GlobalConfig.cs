@@ -240,4 +240,80 @@ public class GlobalConfig : ScriptableObject
         return layerTeamCorrespondence[objectLayer];
     }
     #endregion
+
+    #region Difficulty
+    public static float GetHPModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allyTrackingModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyTrackingModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allyHPModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemyHPModifiers = new() { .75f, 1, 1.25f };
+
+    public static float GetTrackingModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allyTrackingModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyTrackingModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allyTrackingModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemyTrackingModifiers = new() { .75f, 1, 1.25f };
+
+    public static float GetDamageModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allyDamageModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyDamageModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allyDamageModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemyDamageModifiers = new() { .75f, 1, 1.25f };
+
+    public static float GetUnitSpeedModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allySpeedModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemySpeedModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allySpeedModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemySpeedModifiers = new() { .75f, 1, 1.25f };
+
+    public static float GetProjectileSpeedModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allyProjectileSpeedModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyProjectileSpeedModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allyProjectileSpeedModifiers = new() { 1.25f, 1, 1f };
+    [SerializeField] protected List<float> enemyProjectileSpeedModifiers = new() { .75f, 1, 1.25f };
+
+    public static float GetScanRangeModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allyScanRangeModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyScanRangeModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allyScanRangeModifiers = new() { 1.1f, 1, 1f };
+    [SerializeField] protected List<float> enemyScanRangeModifiers = new() { .9f, 1, 1.1f };
+
+    public static float GetSignatureModifier(int team)
+    {
+        if (team == PlayerTeam) return Instance.allySignatureModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemySignatureModifiers[GameManager.Difficulty];
+        return 1;
+    }
+    [SerializeField] protected List<float> allySignatureModifiers = new() { 1.1f, 1, 1f };
+    [SerializeField] protected List<float> enemySignatureModifiers = new() { .9f, 1, 1.1f };
+
+    public static string DifficultyText(int difficulty)
+    {
+        return difficulty switch
+        {
+            0 => "Easy",
+            1 => "Normal",
+            2 => "Hard",
+            _ => "Undefined difficulty"
+        };
+    }
+    #endregion
 }

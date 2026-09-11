@@ -12,12 +12,14 @@ namespace Player
         public static readonly List<string> Saves = new List<string>();
         public readonly long dateTimeBinary;
         public int CurrentMissionIndex { get; set; } = 0;
+        public readonly int Difficulty;
 
         [JsonConstructor]
-        public GameSave([JsonProperty("LatestMissionIndex")] int index)
+        public GameSave([JsonProperty("LatestMissionIndex")] int index, [JsonProperty("Difficulty")] int difficulty)
         {
             dateTimeBinary = DateTime.Now.ToBinary();
             CurrentMissionIndex = index;
+            Difficulty = difficulty;
         }
 
         public override string ToString()

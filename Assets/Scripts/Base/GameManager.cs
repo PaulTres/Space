@@ -41,6 +41,18 @@ public static class GameManager
             return Mathf.Min(currentSave.CurrentMissionIndex, Mission.Campaign.Count);
         }
     }
+    public static int Difficulty
+    {
+        get
+        {
+            if (currentSave == null)
+            {
+                //Debug.LogWarning("No save file found!");
+                return 1;
+            }
+            return currentSave.Difficulty;
+        }
+    }
     public static bool CampaignCompleted => LatestMissionIndex >= Mission.Campaign.Count;
     /// <summary>
     /// The mission the player has chosen to play.
@@ -48,9 +60,9 @@ public static class GameManager
     public static int ChosenMissionIndex { get; set; }
 
     #region Progress
-    public static void NewGame()
+    public static void NewGame(int difficulty)
     {
-        currentSave = new(0);
+        currentSave = new(0, difficulty);
         currentSave.Save();
         LoadMissionSelection();
     }
@@ -58,7 +70,8 @@ public static class GameManager
     public static void LoadSave(string fileName)
     {
         var s = GameSave.Load(fileName);
-        currentSave = s ?? new(0);
+        if (s == null) return;
+        currentSave = s;
         LoadMissionSelection();
     }
 

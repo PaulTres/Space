@@ -82,6 +82,7 @@ namespace HP
         public void PerformReset()
         {
             firedEvent = false;
+            MaxHP *= GlobalConfig.GetHPModifier(ImprovedMonoBehaviour.Team);
             CurrentHP = MaxHP * startingHPFraction;
         }
 

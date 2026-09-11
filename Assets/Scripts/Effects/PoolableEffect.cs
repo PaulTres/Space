@@ -1,5 +1,6 @@
 using AudioSystem;
 using Spawning;
+using Timers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utilities;
@@ -78,6 +79,7 @@ namespace Effects
         [SerializeField] protected SoundData soundData;
         [Tooltip("If set to true, the script will not check for particle effects with GetComponent and will only play the sound effect.")]
         [SerializeField] protected bool audioOnly = false;
+        [SerializeField] protected float lifetime = 5;
         protected Transform tr;
         public Transform Transform
         {
@@ -87,9 +89,16 @@ namespace Effects
                 return tr;
             }
         }
+        protected CountdownTimer lifetimeTimer;
 
         protected void OnEnable()
         {
+            if (lifetimeTimer == null)
+            {
+                lifetimeTimer = new(lifetime);
+                lifetimeTimer.OnTimerStop += () => gameObject.SetActive(false);
+            }
+            lifetimeTimer.Start();
             //Debug.Log($"Playing effect: {PoolKey}");
             soundData.Play(transform.position);
             if (!Particles.IsEmpty())
@@ -100,9 +109,16 @@ namespace Effects
                 }
             }
         }
+
         protected void OnDisable()
         {
+            lifetimeTimer?.Stop();
             Release(this);
+        }
+
+        protected void OnDestroy()
+        {
+            lifetimeTimer?.Dispose();
         }
     }
 }

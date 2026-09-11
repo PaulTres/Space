@@ -88,6 +88,7 @@ namespace Weapons
                 if (target.Active() && telegraphTimer.Progress > timerProgressTrackingThreshold)
                 {
                     //track target
+                    //Debug.Log("Tracking " + target);
                     Transform.LookAt(target.Position);
                 }
             }

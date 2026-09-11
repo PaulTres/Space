@@ -25,10 +25,12 @@ namespace Player
         {
             playerOptions.ClearOptions();
             playerOptionsList = new();
+            UnitData.AvailablePlayerOptions.Sort((u1, u2) => u2.MissionRequirement.CompareTo(u1.MissionRequirement));
             foreach (var data in UnitData.AvailablePlayerOptions)
             {
                 if (data.Points > Mission.CurrentMission.PlayerPoints) continue;
-                if (data.MissionRequirement >= GameManager.LatestMissionIndex) continue;
+                //Debug.Log("Considering " + data.Name + ": " + data.MissionRequirement + "; " + GameManager.LatestMissionIndex);
+                if (data.MissionRequirement > GameManager.LatestMissionIndex) continue;
                 playerOptionsList.Add(data);
                 playerOptions.options.Add(new(data.Name));
             }
@@ -45,7 +47,7 @@ namespace Player
         public void SetPlayerChoice(int index)
         {
             UnitData.PlayerChoice = playerOptionsList[index];
-            shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice;
+            shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice.Description;
         }
 
         public void GoToMissionSelect() => GameManager.LoadMissionSelection();

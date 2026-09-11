@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 1601307851477807870}
   - component: {fileID: 1465000094776453281}
   m_Layer: 0
-  m_Name: Integrated (3)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &1700261710837518039
 GameObject:
@@ -802,7 +802,7 @@ GameObject:
   - component: {fileID: 374220017841859627}
   - component: {fileID: 3576436021159923746}
   m_Layer: 0
-  m_Name: Integrated (1)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -837,7 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &2918617844185437483
 GameObject:
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 5878676710061991174}
   - component: {fileID: 6469811055309194708}
   m_Layer: 0
-  m_Name: Integrated (6)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -903,7 +903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &2953729292324385384
 GameObject:
@@ -934,7 +934,7 @@ GameObject:
   - component: {fileID: 360028272890956619}
   - component: {fileID: 8354029370133370434}
   m_Layer: 0
-  m_Name: Integrated (7)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -969,7 +969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &3200606404892237295
 GameObject:
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 8812378214676269867}
   - component: {fileID: 3736319001486444573}
   m_Layer: 0
-  m_Name: Integrated
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &3975938247226524839
 GameObject:
@@ -1097,7 +1097,7 @@ GameObject:
   - component: {fileID: 6153228638494193775}
   - component: {fileID: 253856713958759677}
   m_Layer: 0
-  m_Name: Integrated (4)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &4174044015691863414
 GameObject:
@@ -1558,7 +1558,7 @@ GameObject:
   - component: {fileID: 1826363357171245363}
   - component: {fileID: 8145436724078512445}
   m_Layer: 0
-  m_Name: Integrated (2)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1593,7 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &5791388006214924271
 GameObject:
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  <MaxHP>k__BackingField: 100
+  <MaxHP>k__BackingField: 150
   startingHPFraction: 1
   sendEventOnHPChange: 0
   minHP: 40
@@ -2204,7 +2204,7 @@ GameObject:
   - component: {fileID: 8174302054000772353}
   - component: {fileID: 4840906788211814255}
   m_Layer: 0
-  m_Name: Integrated (5)
+  m_Name: DreadnoughtPDTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2239,7 +2239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
   <RotationPivot>k__BackingField: {fileID: 0}
   <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 8fab79657bfbac341b3c92502f58562f, type: 2}
+  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -2256,7 +2256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: 6ef41f8bc641b0a4a8aede38e03a3d18, type: 2}
+  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
   shootPoints: []
 --- !u!1 &7765642925470857398
 GameObject:

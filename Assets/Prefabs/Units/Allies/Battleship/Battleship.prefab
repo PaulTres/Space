@@ -4861,7 +4861,7 @@ MonoBehaviour:
   initialMorale: 10
   maxMoraleImpactRange: 50
   maxThreats: 1
-  minEscortValue: 10
+  minEscortValue: 3002
 --- !u!114 &-5783222725238521083
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,4 +19,4 @@ MonoBehaviour:
   SignatureIncrease: 1
   BulletData: {fileID: 11400000, guid: 727142cc1609e2444a017a61fe167c38, type: 2}
   RequiresOptimalFiringRange: 0
-  StartLoaded: 0
+  StartLoaded: 1

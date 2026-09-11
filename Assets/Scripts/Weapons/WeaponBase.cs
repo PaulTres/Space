@@ -147,7 +147,7 @@ namespace Weapons
             for (int i = 0; i < shootPoints.Length; i++)
             {
                 if (shootPoints[i] == null || !shootPoints[i].gameObject.activeSelf) continue;
-                ProcessBullet(@params.GetInstance(shootPoints[i]), target, shootPoints[i]);
+                ProcessBullet(@params.GetInstance(shootPoints[i]), target);
             }
         }
 
@@ -157,12 +157,20 @@ namespace Weapons
         /// </summary>
         /// <param name="bullet">The bullet to be processed.</param>
         /// <param name="target">The target of the bullet.</param>
-        public virtual void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target, Transform shootPoint)
+        public void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
         {
             UnitProperty.IncreaseSignature(@params.SignatureIncrease);
             bullet.Owner = UnitProperty;
+            PerformBulletInitialization(bullet, target);
             bullet.gameObject.SetActive(true);
         }
+
+        /// <summary>
+        /// Initializes the bullet with extra information, such as its target.
+        /// </summary>
+        /// <param name="bullet"></param>
+        /// <param name="target"></param>
+        protected abstract void PerformBulletInitialization(Bullet bullet, ImprovedMonoBehaviour target);
         #endregion
         #endregion
     }
