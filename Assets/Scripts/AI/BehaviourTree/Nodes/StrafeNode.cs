@@ -30,6 +30,10 @@ public class StrafeNode : LeafNodeData
     {
         StrafeDirection.Forward,StrafeDirection.Horizontal,StrafeDirection.Vertical
     };
+    /// <summary>
+    /// The strafe distance will never exceed this value. Used to prevent ships from strafing outside their weapon range.
+    /// </summary>
+    [SerializeField] protected float maxDistance = 80;
 
     protected enum InternalKeys
     {
@@ -87,8 +91,8 @@ public class StrafeNode : LeafNodeData
             var destination = ctx.Position + strafeDirection * strafeMagnitude;
             //Debug.DrawRay(ctx.Position, strafeDirection * strafeMagnitude, Color.yellow, 2);
             var targetToDestination = (destination - target.Position).normalized;
-            var dist = UseOptimalFiringRange ? target.CurrentSignature +
-                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
+            var dist = Mathf.Max(UseOptimalFiringRange ? target.CurrentSignature +
+                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer, maxDistance);
             destination = target.Position + targetToDestination * dist;
             //Debug.DrawLine(ctx.Position, destination, Color.blue);
             ctx.Navigation.SetDestination(destination);
