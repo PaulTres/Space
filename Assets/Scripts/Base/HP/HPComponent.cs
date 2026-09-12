@@ -63,6 +63,8 @@ namespace HP
         [Tooltip("The threshold of damage at which the damage effect will be played.")]
         [SerializeField] protected float damageThreshold = 0.5f;
         [SerializeField] protected float effectScaleFactor = 1;
+        [Tooltip("If true, this entity will not take damage.")]
+        [SerializeField] protected bool invulnerable = false;
         #endregion
 
         #region Setup
@@ -106,6 +108,7 @@ namespace HP
 
         public void TakeDamage(DamageInfo damageInfo)
         {
+            if (invulnerable) return;
             if (damageInfo.Source != null && damageInfo.Source.Team == transform.root.GetTeam())
             {
                 //Debug.Log("Friendly fire");

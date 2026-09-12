@@ -106,7 +106,8 @@ public class GlobalConfig : ScriptableObject
     public static readonly int
         MainMenuSceneIndex = 1,
         MissionSceneIndex = 2,
-        EndMissionSceneIndex = 3;
+        EndMissionSceneIndex = 3,
+        TutorialSceneIndex = 4;
     #endregion
 
     #region Layers and layer masks

@@ -9,7 +9,7 @@ namespace Level
         [SerializeField] protected List<UnitData> spawnOptions = new();
         [SerializeField] protected float spawnRadius = 0;
         [SerializeField] protected int team = 2;
-        [SerializeField] protected bool playSpawnEffect = true;
+        [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
 
         public void OnDrawGizmos()
         {
@@ -41,7 +41,7 @@ namespace Level
             }
             var unit = data.CreateInstance();
             unit.Team = team;
-            unit.PlaySpawnEffect = playSpawnEffect;
+            unit.PlaySpawnEffect = PlaySpawnEffect;
             //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(transform.position +
                 Random.insideUnitSphere * spawnRadius, transform.rotation);

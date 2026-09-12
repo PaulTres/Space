@@ -86,6 +86,11 @@ public static class GameManager
     #endregion
 
     #region Scene loading
+    public static void LoadTutorial()
+    {
+        SceneManager.LoadScene(GlobalConfig.TutorialSceneIndex);
+    }
+
     public static void LoadMainMenu()
     {
         SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);

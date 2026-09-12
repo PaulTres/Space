@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/MissionEndScene.unity
     guid: 576d6d5a223fa7543a5b2f99aff7848b
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: fb3f44fc9c8d6b34695091db3c1ecf6d
+  - enabled: 1
     path: Assets/Scenes/Levels/Mission_1.unity
     guid: 3b87292512a47224991ac2d572e13bd2
   - enabled: 1

@@ -3,6 +3,14 @@ namespace Player
 {
     public class MainMenu : MenuPDA
     {
+        [SerializeField] protected UnitData playerTutorialShip;
+
+        public void StartTutorial()
+        {
+            UnitData.PlayerChoice = playerTutorialShip;
+            GameManager.LoadTutorial();
+        }
+
         public override void Pop()
         {
             if (windows.Count == 1) initialWindows[1].Open();
