@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4668620982466433134
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Effects.PoolableEffect
   <PoolKey>k__BackingField: 12
   soundData:
-    clip: {fileID: 8300000, guid: d75f22ad3b736aa45acee5411178f1f9, type: 3}
+    clip: {fileID: 8300000, guid: e07faa26d7d74e348b43973cb93fa6bd, type: 3}
     mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
@@ -69,3 +69,4 @@ MonoBehaviour:
     ignoreListenerPause: 0
     rolloffMode: 0
   audioOnly: 1
+  lifetime: 5
