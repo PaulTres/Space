@@ -119,6 +119,68 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &256802138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 256802139}
+  - component: {fileID: 256802140}
+  m_Layer: 0
+  m_Name: Spawner (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &256802139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256802138}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.31, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1767256463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &256802140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256802138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &551301342
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,12 +226,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
-  - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
-  - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &682669005
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,12 +288,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
-  - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
-  - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &757338408
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,10 +465,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 824b7fb2ed79769419defdcf5e7cb76f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 824b7fb2ed79769419defdcf5e7cb76f, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &991411004
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,12 +626,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1001 &1403585677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,6 +966,7 @@ Transform:
   m_Children:
   - {fileID: 1772789831}
   - {fileID: 682669006}
+  - {fileID: 256802139}
   - {fileID: 551301343}
   m_Father: {fileID: 1681664675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -915,12 +1015,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
-  - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
-  - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1973821508
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,12 +1077,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1975495547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,12 +1141,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
-  - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

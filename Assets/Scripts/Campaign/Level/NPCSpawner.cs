@@ -1,15 +1,41 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Level
 {
     public class NPCSpawner : MonoBehaviour
     {
-        [SerializeField] protected List<UnitData> spawnOptions = new();
+        [System.Serializable]
+        public class SpawnerInput
+        {
+            [Tooltip("Used to make things easier to track. Do not change in inspector.")]
+            public string Difficulty;
+            public List<UnitData> Options = new();
+
+            public SpawnerInput(List<UnitData> options) => Options = options;
+        }
+
+        [Tooltip("The system will pick from the option closest to the current difficulty: 0-Easy; 1-Normal;2-Hard.")]
+        [SerializeField] protected List<SpawnerInput> spawnOptions = new();
         [SerializeField] protected float spawnRadius = 0;
         [SerializeField] protected int team = 2;
         [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
+
+        protected void OnValidate()
+        {
+            for (int i = 0; i < spawnOptions.Count; i++)
+            {
+                spawnOptions[i].Difficulty = GlobalConfig.DifficultyText(i);
+                foreach (var option in spawnOptions[i].Options)
+                {
+                    if (option == null) continue;
+                    if (option.name.Contains("Player") || option.name.Contains("Tutorial"))
+                    {
+                        Debug.LogError($"{GlobalConfig.DifficultyText(i)} difficulty spawn options on {transform} contain player ships!");
+                    }
+                }
+            }
+        }
 
         public void OnDrawGizmos()
         {
@@ -19,17 +45,8 @@ namespace Level
 
         public Unit Spawn()
         {
-            return SpawnUnit(spawnOptions[Random.Range(0, spawnOptions.Count)]);
-        }
-
-        public Unit Spawn(out int pointCost, int maxPoints = int.MaxValue)
-        {
-            pointCost = 0;
-            var available = spawnOptions.Where(d => d.Points <= maxPoints).ToList();
-            if (available.Count == 0) return null;
-            var index = Random.Range(0, available.Count);
-            pointCost = available[index].Points;
-            return SpawnUnit(available[index]);
+            var spawnOption = spawnOptions[Mathf.Min(spawnOptions.Count - 1, GameManager.Difficulty)];
+            return SpawnUnit(spawnOption.Options[Random.Range(0, spawnOptions.Count)]);
         }
 
         protected Unit SpawnUnit(UnitData data)

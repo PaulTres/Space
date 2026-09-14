@@ -164,11 +164,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &74496547
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &153333258
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,96 +179,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 74496548}
-  - component: {fileID: 74496549}
+  - component: {fileID: 153333259}
+  - component: {fileID: 153333260}
   m_Layer: 0
-  m_Name: Spawner (3)
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &74496548
+--- !u!4 &153333259
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74496547}
+  m_GameObject: {fileID: 153333258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 7.64, z: -5.56}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2091044324}
+  m_Father: {fileID: 672898956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &74496549
+--- !u!114 &153333260
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 74496547}
+  m_GameObject: {fileID: 153333258}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &142306640
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 142306641}
-  - component: {fileID: 142306642}
-  m_Layer: 0
-  m_Name: Spawner (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &142306641
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142306640}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 7.64, z: 5.61}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 274444444}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &142306642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 142306640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &168836473
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,46 +280,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &274444443
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 274444444}
-  m_Layer: 0
-  m_Name: Group1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &274444444
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274444443}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 15.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2015098314}
-  - {fileID: 727256096}
-  - {fileID: 1189268022}
-  - {fileID: 670693940}
-  - {fileID: 142306641}
-  m_Father: {fileID: 1070845392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &298128165
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +355,7 @@ Transform:
   - {fileID: 168836474}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &389485383
+--- !u!1 &409014205
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -427,8 +363,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 389485384}
-  - component: {fileID: 389485385}
+  - component: {fileID: 409014206}
+  - component: {fileID: 409014207}
   m_Layer: 0
   m_Name: Spawner (1)
   m_TagString: Untagged
@@ -436,39 +372,54 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &389485384
+--- !u!4 &409014206
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389485383}
+  m_GameObject: {fileID: 409014205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.27, y: 0, z: -5.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1720805615}
+  m_Father: {fileID: 672898956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &389485385
+--- !u!114 &409014207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389485383}
+  m_GameObject: {fileID: 409014205}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &593667643
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &444408005
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,47 +427,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 593667644}
-  - component: {fileID: 593667645}
+  - component: {fileID: 444408006}
+  - component: {fileID: 444408007}
   m_Layer: 0
-  m_Name: Spawner (2)
+  m_Name: Spawner (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &593667644
+--- !u!4 &444408006
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593667643}
+  m_GameObject: {fileID: 444408005}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 0, z: 5.61}
+  m_LocalPosition: {x: -4.27, y: 0, z: -5.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2091044324}
+  m_Father: {fileID: 2128918862}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &593667645
+--- !u!114 &444408007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593667643}
+  m_GameObject: {fileID: 444408005}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &609430501
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,11 +528,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &670693939
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &672898955
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -574,8 +556,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 670693940}
-  - component: {fileID: 670693941}
+  - component: {fileID: 672898956}
+  m_Layer: 0
+  m_Name: Group1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &672898956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672898955}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -18.7, y: 0, z: -18.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 153333259}
+  - {fileID: 409014206}
+  - {fileID: 1125447748}
+  - {fileID: 802277645}
+  - {fileID: 1549377867}
+  m_Father: {fileID: 1070845392}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &802277644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 802277645}
+  - component: {fileID: 802277646}
   m_Layer: 0
   m_Name: Spawner (2)
   m_TagString: Untagged
@@ -583,185 +601,54 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &670693940
+--- !u!4 &802277645
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670693939}
+  m_GameObject: {fileID: 802277644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.76, y: 0, z: 5.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 274444444}
+  m_Father: {fileID: 672898956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &670693941
+--- !u!114 &802277646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670693939}
+  m_GameObject: {fileID: 802277644}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &727256095
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 727256096}
-  - component: {fileID: 727256097}
-  m_Layer: 0
-  m_Name: Spawner (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &727256096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727256095}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 0, z: -5.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 274444444}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &727256097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 727256095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
---- !u!1 &759206580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 759206581}
-  - component: {fileID: 759206582}
-  m_Layer: 0
-  m_Name: Spawner (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &759206581
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759206580}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 7.64, z: 5.61}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1720805615}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &759206582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 759206580}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
---- !u!1 &773768075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 773768076}
-  - component: {fileID: 773768077}
-  m_Layer: 0
-  m_Name: Spawner (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &773768076
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773768075}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 0, z: 5.61}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1720805615}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &773768077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773768075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &842447638
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,10 +694,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &890797017
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,59 +746,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &908793329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 908793330}
-  - component: {fileID: 908793331}
-  m_Layer: 0
-  m_Name: Spawner (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &908793330
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908793329}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 7.64, z: -5.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1720805615}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &908793331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908793329}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &925916606
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,10 +798,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &960934578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,10 +850,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &990489611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,59 +902,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &1053550119
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1053550120}
-  - component: {fileID: 1053550121}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1053550120
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053550119}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1720805615}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1053550121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1053550119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1069251328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,10 +966,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 8a5b5df90fb8d984abc08818ac8b0b8a, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 8a5b5df90fb8d984abc08818ac8b0b8a, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1070845390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,12 +1039,11 @@ Transform:
   - {fileID: 1069251329}
   - {fileID: 1235550156}
   - {fileID: 1834926615}
-  - {fileID: 2091044324}
-  - {fileID: 274444444}
-  - {fileID: 1720805615}
+  - {fileID: 672898956}
+  - {fileID: 2128918862}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!1 &1085825991
+--- !u!1 &1125447747
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1234,47 +1051,63 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1085825992}
-  - component: {fileID: 1085825993}
+  - component: {fileID: 1125447748}
+  - component: {fileID: 1125447749}
   m_Layer: 0
-  m_Name: Spawner (4)
+  m_Name: Spawner (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1085825992
+--- !u!4 &1125447748
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085825991}
+  m_GameObject: {fileID: 1125447747}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 7.64, z: 5.61}
+  m_LocalPosition: {x: -4.27, y: 7.64, z: -5.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2091044324}
+  m_Father: {fileID: 672898956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1085825993
+--- !u!114 &1125447749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085825991}
+  m_GameObject: {fileID: 1125447747}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1178299392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,10 +1153,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1180104069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,108 +1205,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &1189268021
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1189268022}
-  - component: {fileID: 1189268023}
-  m_Layer: 0
-  m_Name: Spawner (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1189268022
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189268021}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 7.64, z: -5.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 274444444}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1189268023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189268021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
---- !u!1 &1231162718
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1231162719}
-  - component: {fileID: 1231162720}
-  m_Layer: 0
-  m_Name: Spawner (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1231162719
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231162718}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.27, y: 0, z: -5.56}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2091044324}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1231162720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231162718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1235550155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,59 +1257,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 8a5b5df90fb8d984abc08818ac8b0b8a, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 8a5b5df90fb8d984abc08818ac8b0b8a, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
---- !u!1 &1246226926
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1246226927}
-  - component: {fileID: 1246226928}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1246226927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246226926}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2091044324}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1246226928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1246226926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1349502973
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,10 +1308,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1362013720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,10 +1372,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1001 &1403585677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1735,6 +1460,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bdbfaf1425eba42a0ad1aa7c17ecdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.MissionManager
+--- !u!1 &1502952209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1502952210}
+  - component: {fileID: 1502952211}
+  m_Layer: 0
+  m_Name: Spawner (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1502952210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502952209}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.76, y: 7.64, z: 5.61}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128918862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1502952211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502952209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &1549377866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1549377867}
+  - component: {fileID: 1549377868}
+  m_Layer: 0
+  m_Name: Spawner (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1549377867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549377866}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.76, y: 7.64, z: 5.61}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 672898956}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1549377868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549377866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1653937041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,10 +1611,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1688518999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,10 +1663,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1702685406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,46 +1715,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &1720805614
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1720805615}
-  m_Layer: 0
-  m_Name: Group1 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1720805615
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720805614}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9, y: 31.8, z: 15.03}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1053550120}
-  - {fileID: 389485384}
-  - {fileID: 908793330}
-  - {fileID: 773768076}
-  - {fileID: 759206581}
-  m_Father: {fileID: 1070845392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1727117513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,6 +1771,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1782635816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1782635817}
+  - component: {fileID: 1782635818}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1782635817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782635816}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128918862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1782635818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782635816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: 4b87e353b0d37e4479d7613f09c88d0f, type: 2}
+    - {fileID: 11400000, guid: a262b0ad39f813c48ac48259ef4ba623, type: 2}
+    - {fileID: 11400000, guid: d72da2ee32839424a9036e68d1a59277, type: 2}
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1834926614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,10 +1916,143 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &1855557843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1855557844}
+  - component: {fileID: 1855557845}
+  m_Layer: 0
+  m_Name: Spawner (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1855557844
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855557843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.27, y: 7.64, z: -5.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128918862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1855557845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855557843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &1870625268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1870625269}
+  - component: {fileID: 1870625270}
+  m_Layer: 0
+  m_Name: Spawner (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1870625269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870625268}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.76, y: 0, z: 5.61}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128918862}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870625270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870625268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
+  spawnOptions:
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Normal
+    Options:
+    - {fileID: 11400000, guid: 347b8a4b236e3cd4cab4343fe3845ee6, type: 2}
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+  - Difficulty: Hard
+    Options:
+    - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
+    - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+  spawnRadius: 0
+  team: 2
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &1884977790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,95 +2098,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
---- !u!1 &2015098313
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2015098314}
-  - component: {fileID: 2015098315}
-  m_Layer: 0
-  m_Name: Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2015098314
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015098313}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 274444444}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2015098315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015098313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aff75f72752b554ca5424ad6519b03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
-  spawnOptions:
-  - {fileID: 11400000, guid: caed01eac8133724c8f7365a6e4a544e, type: 2}
-  spawnRadius: 0
-  team: 2
-  playSpawnEffect: 1
---- !u!1 &2091044323
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2091044324}
-  m_Layer: 0
-  m_Name: Group1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2091044324
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2091044323}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.9, y: 31.8, z: -18.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1246226927}
-  - {fileID: 1231162719}
-  - {fileID: 74496548}
-  - {fileID: 593667644}
-  - {fileID: 1085825992}
-  m_Father: {fileID: 1070845392}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1 &2105725430
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,10 +2150,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 465fd66d863c9cc45a410c2eb94622fe, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: ce13fc8a58f23dc4f9f66b636a318f8c, type: 2}
+    - {fileID: 11400000, guid: b3af62f7f8d74e244a7f4a2b1933b486, type: 2}
+    - {fileID: 11400000, guid: 6e46bddf8d323824884b21b90456ab2b, type: 2}
   spawnRadius: 0
   team: 2
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
+--- !u!1 &2128918861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128918862}
+  m_Layer: 0
+  m_Name: Group1 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2128918862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128918861}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 17.9, y: 0, z: -49.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1782635817}
+  - {fileID: 444408006}
+  - {fileID: 1855557844}
+  - {fileID: 1870625269}
+  - {fileID: 1502952210}
+  m_Father: {fileID: 1070845392}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136733240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,10 +2239,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+  - Difficulty: Easy
+    Options:
+    - {fileID: 11400000, guid: 85a46cf421dc85f4382999f7eeb7b60f, type: 2}
+    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
   spawnRadius: 0
   team: 1
-  playSpawnEffect: 1
+  <PlaySpawnEffect>k__BackingField: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

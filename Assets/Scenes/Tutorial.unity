@@ -838,7 +838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: bb550552e8f310d44bb49d44974edae9, type: 2}
+  - Options:
+    - {fileID: 11400000, guid: bb550552e8f310d44bb49d44974edae9, type: 2}
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
@@ -1120,7 +1121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: e00494ae7fe795c438bcec36138e96a2, type: 2}
+  - Options:
+    - {fileID: 11400000, guid: e00494ae7fe795c438bcec36138e96a2, type: 2}
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
@@ -1671,7 +1673,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
-  - {fileID: 11400000, guid: bb550552e8f310d44bb49d44974edae9, type: 2}
+  - Options:
+    - {fileID: 11400000, guid: bb550552e8f310d44bb49d44974edae9, type: 2}
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1

@@ -29,6 +29,8 @@ namespace Player
             }
         }
         [SerializeField] protected TextMeshProUGUI dampenerText;
+        [Tooltip("All weapon displays will be children of this object.")]
+        [SerializeField] protected RectTransform weaponDisplayParent;
         #endregion
 
         #region Setup
@@ -41,6 +43,7 @@ namespace Player
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
             player.OnDampenersChanged += UpdateDampenerText;
             UpdateDampenerText(player.Dampeners);
+
             #region Weapons
             var count = PlayerWeaponsProperty.TurretGroups.Count +
                 PlayerWeaponsProperty.LauncherGroups.Count;
@@ -48,7 +51,7 @@ namespace Player
             var startX = -totalSpace / 2;
             foreach (var weapon in PlayerWeaponsProperty.LauncherGroups)
             {
-                var display = Instantiate(weaponDisplayPrefab, canvas.transform);
+                var display = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
                 display.HeatStatusImage.enabled = false;
                 display.ReloadStatusImage.enabled = true;
                 display.ReloadStatusImage.fillAmount = 0;
@@ -62,7 +65,7 @@ namespace Player
             }
             foreach (var weapon in PlayerWeaponsProperty.TurretGroups)
             {
-                var display = Instantiate(weaponDisplayPrefab, canvas.transform);
+                var display = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
                 display.HeatStatusImage.enabled = weapon.Heatsink != null;
                 display.ReloadStatusImage.enabled = true;
                 display.ReloadStatusImage.fillAmount = 0;

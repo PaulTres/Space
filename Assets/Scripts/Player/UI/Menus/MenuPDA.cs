@@ -51,7 +51,14 @@ namespace Player
                 var p = windows.Pop();
                 p.Deactivate();
                 //Debug.Log(System.DateTime.Now + " deactivated " + p.transform);
-                if (p == window) break;
+                if (p == window)
+                {
+                    if (windows.Count > 0)
+                    {
+                        windows.Peek().Activate();
+                    }
+                    break;
+                }
             }
         }
 
