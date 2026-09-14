@@ -47,8 +47,6 @@ namespace Player
             #region Weapons
             var count = PlayerWeaponsProperty.TurretGroups.Count +
                 PlayerWeaponsProperty.LauncherGroups.Count;
-            var totalSpace = 50 * count + (count - 1) * 10;
-            var startX = -totalSpace / 2;
             foreach (var weapon in PlayerWeaponsProperty.LauncherGroups)
             {
                 var display = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
@@ -58,9 +56,7 @@ namespace Player
                 display.WeaponIcon.sprite = weapon.Icon;
                 display.TurretStanceIcon.enabled = false;
                 display.AmmoText.enabled = weapon.Magazine != null;
-                display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
                 display.SelectionIcon.enabled = false;
-                startX += 115;
                 launcherDisplays.Add(display);
             }
             foreach (var weapon in PlayerWeaponsProperty.TurretGroups)
@@ -72,9 +68,7 @@ namespace Player
                 display.WeaponIcon.sprite = weapon.Icon;
                 display.AmmoText.enabled = false;
                 display.TurretStanceIcon.sprite = turretStanceIcons[weapon.Turrets[0].CurrentStanceIndex];
-                display.RectTransform.anchoredPosition = new Vector3(startX, 40, 0);
                 display.SelectionIcon.enabled = false;
-                startX += 115;
                 turretDisplays.Add(display);
             }
             PlayerWeaponsProperty.OnTurretGroupStanceChange += (i) =>
