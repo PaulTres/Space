@@ -4810,6 +4810,7 @@ MonoBehaviour:
   effectOnDamage: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
 --- !u!114 &7845196837702936039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6570,6 +6571,10 @@ PrefabInstance:
     - target: {fileID: 30823223772318358, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_Name
       value: CameraPivot
+      objectReference: {fileID: 0}
+    - target: {fileID: 598183238920001898, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponParent

@@ -14,6 +14,7 @@ namespace AudioSystem
         AudioSource audioSource;
         Coroutine playingCoroutine;
         public Transform Transform { get; protected set; }
+
         void Awake()
         {
             audioSource = transform.GetOrAddComponent<AudioSource>();
