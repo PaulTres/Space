@@ -21,14 +21,19 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
-        [field: SerializeField] public float MinimumSignature { get; set; }
-        [field: SerializeField] public float MaximumSignature { get; set; }
+        [field: SerializeField] public float MinimumSignature { get; set; } = 20;
+        [field: SerializeField] public float MaximumSignature { get; set; } = 100;
         public float SignatureDecreaseRate = 0.1f;
         [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
         public float SignatureDecreaseCooldown = 5f;
         public float ScanRange = 10;
         [Tooltip("On spawn, the unit will check for obstructions in a sphere of this radius.")]
         public float SpawnCheckRadius = 5;
+
+        public void Validate()
+        {
+            MaximumSignature = Mathf.Max(MinimumSignature, MaximumSignature);
+        }
     }
 
     #region Fields
@@ -142,6 +147,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (damageTakingObjects.IsEmpty()) damageTakingObjects = new(GetComponentsInChildren<DamageReceiver>());
         Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
         Debug.Assert(!collisionCheckers.IsEmpty(), $"{Transform} has no objects for handling collisions!");
+        unitParameters?.Validate();
     }
 
     /// <summary>

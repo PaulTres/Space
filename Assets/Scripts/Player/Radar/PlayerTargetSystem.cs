@@ -111,11 +111,13 @@ namespace Radar
             {
                 bbox.Hide();
                 //Debug.Log($"Hidden bounding box for unit {target}");
-                if (CurrentTarget == target) ClearTarget();
+                //if (CurrentTarget == target) ClearTarget();
             }
+            //handle bounding box
             else
             {
-                //bbox.Show();
+                bbox.Show();
+                if (target == currentTarget) bbox.SelectionIcon.enabled = true;
 
                 #region Bounding box position
                 Vector2 screenPos = new(
@@ -152,52 +154,53 @@ namespace Radar
                 else bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
                 #endregion
 
-                #region Fleeing/Enemy target
-                if (target.Active())
+                #region Fleeing
+                if (target.IsFleeing)
                 {
-                    if (target.IsFleeing)
+                    //flicker the bounding box and distance text
+                    //Debug.Log($"{Time.time - bbox.TimeSinceLastFlicker} vs {GlobalConfig.FlickerInterval}");
+                    if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)
                     {
-                        //flicker the bounding box and distance text
-                        //Debug.Log($"{Time.time - bbox.TimeSinceLastFlicker} vs {GlobalConfig.FlickerInterval}");
-                        if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)
-                        {
-                            var toggle = bbox.BBox.enabled;
-                            //Debug.Log(bbox.BBox.enabled);
-                            bbox.BBox.enabled = !toggle;
-                            //Debug.Log(bbox.BBox.enabled);
-                            bbox.DistanceText.enabled = !toggle;
-                            bbox.TimeSinceLastFlicker = Time.time;
-                            //Debug.Log("Flicker: " + toggle);
-                            //Debug.Log("Finally: " + bbox.BBox.enabled);
-                        }
-                        bbox.LineRenderer.enabled = false;
+                        var toggle = bbox.BBox.enabled;
+                        //Debug.Log(bbox.BBox.enabled);
+                        bbox.BBox.enabled = !toggle;
+                        //Debug.Log(bbox.BBox.enabled);
+                        bbox.DistanceText.enabled = !toggle;
+                        bbox.TimeSinceLastFlicker = Time.time;
+                        //Debug.Log("Flicker: " + toggle);
+                        //Debug.Log("Finally: " + bbox.BBox.enabled);
                     }
-                    else
-                    {
-                        //Debug.LogWarning($"{unit} is not fleeing: {unit.CurrentMorale}");
-                        bbox.BBox.enabled = true;
-                        //if (target.Transform.name.Contains("Weapon")) Debug.Log(target.Transform);
-                        bbox.DistanceText.enabled = true;
-                        var unit = target as Unit;
-                        if (unit != null && target.Team != GlobalConfig.PlayerTeam && target.Target == GameManager.Player && GameManager.Player.Active())
-                        {
-                            bbox.LineRenderer.enabled = true;
-                            bbox.LineRenderer.SetPosition(0, target.Position);
-                            bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
-                            if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
-                            {
-                                bbox.LineRenderer.material = bbox.DottedLineMaterial;
-                                bbox.LineRenderer.material.mainTextureScale =
-                                    new Vector2(distance / 2, 1f);
-                            }
-                            else bbox.LineRenderer.material = bbox.RegularLineMaterial;
-                        }
-                        else bbox.LineRenderer.enabled = false;
-                    }
-                    //Debug.Log("Finally2: " + bbox.BBox.enabled);
+                    bbox.LineRenderer.enabled = false;
+                }
+                else
+                {
+                    bbox.BBox.enabled = true;
+                    bbox.DistanceText.enabled = true;
                 }
                 #endregion
 
+            }
+            if (target.IsFleeing)
+            {
+                bbox.LineRenderer.enabled = false;
+            }
+            else
+            {
+                var unit = target as Unit;
+                if (unit != null && target.Team != GlobalConfig.PlayerTeam && target.Target == GameManager.Player && GameManager.Player.Active())
+                {
+                    bbox.LineRenderer.enabled = true;
+                    bbox.LineRenderer.SetPosition(0, target.Position);
+                    bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
+                    if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
+                    {
+                        bbox.LineRenderer.material = bbox.DottedLineMaterial;
+                        bbox.LineRenderer.material.mainTextureScale =
+                            new Vector2(distance / 2, 1f);
+                    }
+                    else bbox.LineRenderer.material = bbox.RegularLineMaterial;
+                }
+                else bbox.LineRenderer.enabled = false;
             }
         }
 
@@ -306,19 +309,22 @@ namespace Radar
             if (GameManager.Player == null || Time.timeScale == 0) return;
             var targets = GameManager.Player.GetTargets();
             ImprovedMonoBehaviour bestCandidate = null;
-            float bestScore = 0;
+            float bestScore = float.MinValue;
+            bool targetInFov = false;
             foreach (var target in targets)
             {
                 //compute a score for all of these
                 if (!target.Active() || target.IsEqual(CurrentTarget)) continue;
-                var score = EvaluateTarget(target);
+                var score = EvaluateTarget(target, out var inFov);
+                if (!inFov && targetInFov) continue;
                 if (score > bestScore)
                 {
+                    targetInFov = inFov;
                     bestCandidate = target;
                     bestScore = score;
                 }
             }
-            TargetSelected(bestCandidate);
+            TargetSelected(bestCandidate.Active() ? bestCandidate : currentTarget);
         }
 
         /// <summary>
@@ -331,6 +337,7 @@ namespace Radar
             //Debug.Log("Target selected: " + unit);
             if (CurrentTarget != null && boundingBoxes.TryGetValue(CurrentTarget, out var previousData))
             {
+                //Debug.Log("Disabling selection icon of previous target.");
                 previousData.SelectionIcon.enabled = false;
             }
             CurrentTarget = unit;
@@ -349,15 +356,15 @@ namespace Radar
         /// </summary>
         /// <param name="target"></param>
         /// <returns></returns>
-        public float EvaluateTarget(ImprovedMonoBehaviour target)
+        public float EvaluateTarget(ImprovedMonoBehaviour target, out bool inFov)
         {
+            inFov = false;
             if (!GameManager.Player.Active() || !target.Active()) return float.MinValue;
 
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;
-
             var angleScore = Vector3.Dot(direction.normalized, cam.transform.forward);
-            if (angleScore <= 0) return 0;
+            inFov = angleScore > 0;
             var distanceScore = (GlobalConfig.PlayerTargetMaxDistance - distance) /
                 GlobalConfig.PlayerTargetMaxDistance;
             return angleScore * GlobalConfig.PlayerTargetAngleWeight + distanceScore *

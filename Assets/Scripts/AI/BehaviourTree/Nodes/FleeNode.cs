@@ -11,15 +11,15 @@ public class FleeNode : LeafNodeData
     [Tooltip("Effect to play when jumping. If null, will play the unit's spawn effect.")]
     [SerializeField] protected PoolableEffect jumpEffect;
     [SerializeField] protected float fleeDistance = 1000;
-    [Tooltip("This many ticks must pass until the unit can jump out of the battle.")]
-    [SerializeField] protected float ticksUntilJump = 50;
+    [Tooltip("This much time must pass in seconds until the unit can jump out of the battle.")]
+    [SerializeField] protected int requiredJumpCharge = 50;
 
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
         ctx.Navigation.RotationTarget = null;
         //Debug.Log($"{ctx.Navigation} is fleeing!");
         ctx.SetData(Blackboard.Keys.Fleeing, true);
-        ((LeafNode)n).SetData(0, 0);
+        ((LeafNode)n).SetData<float>(0, 0);
     };
 
     protected override Action<Node, Blackboard> onExit => (n, ctx) =>
@@ -53,8 +53,8 @@ public class FleeNode : LeafNodeData
             ctx.Navigation.SetDestination(ctx.Navigation.Position +
                 (ctx.Navigation.Position - target.Position) * fleeDistance);
         }
-        var jumpCharge = n.GetData<int>(0);
-        if (jumpCharge >= ticksUntilJump)
+        var jumpCharge = n.GetData<float>(0);
+        if (jumpCharge >= requiredJumpCharge)
         {
             //jump
             if (jumpEffect != null) jumpEffect.SpawnEffect(ctx.Position, ctx.Navigation.EffectScaleFactor);
@@ -64,7 +64,7 @@ public class FleeNode : LeafNodeData
         }
         else
         {
-            jumpCharge++;
+            jumpCharge += ctx.DeltaTime;
             //Debug.Log("Charging jump: " + jumpCharge + '/' + ticksUntilJump);
             n.SetData(0, jumpCharge);
         }

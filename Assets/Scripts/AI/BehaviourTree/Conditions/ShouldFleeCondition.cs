@@ -23,7 +23,7 @@ public class ShouldFleeCondition : ConditionData
             myMorale = UnitManager.GetMorale(GlobalConfig.EnemyTeam);
             enemyMorale = UnitManager.GetMorale(GlobalConfig.PlayerTeam);
         }
-        else throw new Exception($"{ctx.Navigation} is not on a team!");
+        else throw new Exception($"{ctx.Navigation} is on invalid team {ctx.Navigation.Team}!");
         //if (!(myMorale * moraleFleeThreshold <= enemyMorale)) Debug.Log($"{myMorale * moraleFleeThreshold} vs {enemyMorale}");
         return myMorale * moraleFleeThreshold <= enemyMorale;
     };

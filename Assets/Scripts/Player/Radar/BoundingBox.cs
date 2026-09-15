@@ -29,7 +29,7 @@ namespace Radar
         {
             //BBox.color = new Color(1, 1, 1, 0);
             BBox.enabled = true;
-            SelectionIcon.enabled = true;
+            //SelectionIcon.enabled = true;
             DistanceText.enabled = true;
         }
 
