@@ -117,7 +117,7 @@ namespace Radar
             else
             {
                 bbox.Show();
-                if (target == currentTarget) bbox.SelectionIcon.enabled = true;
+                //if (target == currentTarget) bbox.SelectionIcon.enabled = true;
 
                 #region Bounding box position
                 Vector2 screenPos = new(
@@ -161,12 +161,7 @@ namespace Radar
                     //Debug.Log($"{Time.time - bbox.TimeSinceLastFlicker} vs {GlobalConfig.FlickerInterval}");
                     if (Time.time - bbox.TimeSinceLastFlicker > GlobalConfig.FlickerInterval)
                     {
-                        var toggle = bbox.BBox.enabled;
-                        //Debug.Log(bbox.BBox.enabled);
-                        bbox.BBox.enabled = !toggle;
-                        //Debug.Log(bbox.BBox.enabled);
-                        bbox.DistanceText.enabled = !toggle;
-                        bbox.TimeSinceLastFlicker = Time.time;
+                        bbox.Flicker();
                         //Debug.Log("Flicker: " + toggle);
                         //Debug.Log("Finally: " + bbox.BBox.enabled);
                     }

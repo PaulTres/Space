@@ -28,16 +28,27 @@ namespace Radar
         public void Show()
         {
             //BBox.color = new Color(1, 1, 1, 0);
-            BBox.enabled = true;
+            BBox.gameObject.SetActive(true);
             //SelectionIcon.enabled = true;
-            DistanceText.enabled = true;
+            // DistanceText.enabled = true;
+        }
+
+        public void Flicker()
+        {
+            var toggle = BBox.enabled;
+            //Debug.Log(bbox.BBox.enabled);
+            BBox.enabled = !toggle;
+            //Debug.Log(bbox.BBox.enabled);
+            DistanceText.enabled = !toggle;
+            TimeSinceLastFlicker = Time.time;
         }
 
         public void Hide()
         {
-            BBox.enabled = false;
-            SelectionIcon.enabled = false;
-            DistanceText.enabled = false;
+            //BBox.enabled = false;
+            //SelectionIcon.enabled = false;
+            //DistanceText.enabled = false;
+            BBox.gameObject.SetActive(false);
         }
     }
 }
