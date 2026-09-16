@@ -1,17 +1,19 @@
 ﻿using HybridBT2;
 using System;
 using UnityEngine;
+using Utilities;
 
 [CreateAssetMenu(menuName = "HybridBT2/Leaves/Retreat", fileName = "Retreat")]
 public class RetreatNode : LeafNodeData
 {
     [SerializeField] protected bool maintainFacing = true;
+
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
         if (!maintainFacing)
         {
             ctx.Navigation.RotationTarget = null;
-            Debug.Log("A");
+            //Debug.Log("A");
         }
     };
 
@@ -20,10 +22,15 @@ public class RetreatNode : LeafNodeData
     {
         //Debug.Log("Retreating");
         var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
+        if (!target.InOptimalFiringRange(ctx.Navigation))
+        {
+            //Debug.Log($"Retreat successfull!{Vector3.Distance(target.Position, ctx.Position)}-:-{target.ScanRange + ctx.Navigation.CurrentSignature}");
+            return NodeState.SUCCESS;
+        }
         //no need to normalize here, we just need the direction
         //this could probably be optimized to only happen once every few ticks
         ctx.Navigation.SetDestination(ctx.Navigation.Position + (ctx.Navigation.Position -
-            target.Position).normalized);
+            target.Position));
         return NodeState.RUNNING;
     };
 }

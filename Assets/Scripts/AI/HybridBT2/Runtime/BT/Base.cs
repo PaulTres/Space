@@ -127,6 +127,7 @@ namespace HybridBT2
         {
             this.onEnter = onEnter ?? delegate { };
             this.onExit = onExit ?? delegate { };
+            Abort ??= delegate { };
             Abort += (ctx) => SetState(NodeState.FAILURE, ctx);
         }
 

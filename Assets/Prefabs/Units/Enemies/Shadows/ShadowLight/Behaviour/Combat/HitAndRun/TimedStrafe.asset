@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181bcb58e3a588f48884b9fca340b185, type: 3}
+  m_Name: TimedStrafe
+  m_EditorClassIdentifier: SpaceAssembly::HybridBT2.TimeLimitDecoratorData
+  myName: 
+  AlwaysCheck: 1
+  Conditions:
+  - {fileID: 11400000, guid: 38d37c5f60924414dbf88cf6017171e0, type: 2}
+  Services: []
+  Child: {fileID: 11400000, guid: e3e2f13f2ef35ec46919ab32d8ebc0fb, type: 2}
+  MaxTime: 1

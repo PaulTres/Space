@@ -7,6 +7,7 @@ namespace HybridBT2
     {
         [Tooltip("Maximum time in seconds that an action is allowed to execute for.")]
         public float MaxTime = 60;
+
         protected override Node GetNodeInternal()
         {
             return new TimeLimit(Name, MaxTime, onEnter, onExit);

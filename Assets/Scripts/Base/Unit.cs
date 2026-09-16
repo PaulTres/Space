@@ -85,7 +85,7 @@ public abstract class Unit : ImprovedMonoBehaviour
         }
     }
     public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
-    public int MoraleWeight => unitParameters.MoraleWeight;
+    public override int MoraleWeight => unitParameters.MoraleWeight;
     public float MaximumSignature => unitParameters.MaximumSignature;
     public float MinimumSignature => unitParameters.MinimumSignature;
     protected WaitForSeconds wait;

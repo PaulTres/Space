@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ShouldFlee
   m_EditorClassIdentifier: Assembly-CSharp::ShouldFleeCondition
   myName: 
+  moraleFleeThreshold: 3

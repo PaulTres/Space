@@ -7,6 +7,7 @@ public class DebugService : ServiceData
 {
     public override Action<Node, Blackboard> Action => (n, ctx) =>
     {
-        Debug.Log($"DebugService: Node={n.Name}, {n.State}");
+        if (n.Parent == null) Debug.Log($"DebugService: Node={n.Name}, {n.State}");
+        else Debug.Log($"DebugService: Node={n.Name}, {n.State} with parent {n.Parent.Name}");
     };
 }

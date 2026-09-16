@@ -37,6 +37,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
             return b.GetData<bool>(Blackboard.Keys.Fleeing);
         }
     }
+    public virtual int MoraleWeight => 0;
     public Vector3 Position
     {
         get => Transform.position;

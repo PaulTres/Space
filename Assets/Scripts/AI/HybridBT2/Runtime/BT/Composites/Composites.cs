@@ -67,7 +67,11 @@ namespace HybridBT2
 
         public Sequence(string name, Action<Node, Blackboard> onEnter = null, Action<Node, Blackboard> onExit = null) : base(name, onEnter, onExit)
         {
-            this.onEnter += (_, _) => currentChild = 0;
+            this.onEnter += (_, _) =>
+            {
+                currentChild = 0;
+                //Debug.Log($"Entering {Name}");
+            };
         }
 
         /// <summary>
@@ -77,6 +81,7 @@ namespace HybridBT2
         protected override void ExecuteUnderlyingBehaviour(Blackboard context)
         {
             children[currentChild].Evaluate(context);
+            //Debug.Log($"{Name} evaluated {children[currentChild].Name} with state {children[currentChild].State}.");
             switch (children[currentChild].State)
             {
                 case NodeState.FAILURE:
@@ -130,12 +135,13 @@ namespace HybridBT2
                     SetState(NodeState.RUNNING, context);
                     continue;
                 }
+                //if (Name.Contains("HitAndRun")) Debug.Log(Name + ": " + i + "-" + children[i].Name);
                 if (prevChild != -1 && i != prevChild)
                 {
                     children[prevChild].Abort(context);
-                    prevChild = i;
                 }
-                SetState(children[i].State, context);
+                prevChild = i;
+                SetState(children[prevChild].State, context);
                 return;
             }
             throw new Exception($"{this} did not finish executing main loop!");
