@@ -16,9 +16,16 @@ namespace Weapons
         public float RateOfFireRampDown = 1f;
         [Tooltip("Minimum shot cooldown.")]
         public float MinShotCooldown = 1;
+        [SerializeField]
+        protected AnimationCurve readinessCurve = new(
+                new Keyframe(0f, 1f),
+                new Keyframe(1f, 0f)
+            );
+        [Tooltip("Editor only. Will reset the value of the curve to a downward slope.")]
+        [SerializeField] protected bool resetCurve;
         [Tooltip("The amount by which the owner's signature will increase with every shot.")]
         public float SignatureIncrease = 1;
-        [Tooltip("The bullet this Weapons will fire.")]
+        [Tooltip("The bullet this weapon will fire.")]
         public BulletData BulletData;
         [Tooltip("If true, this weapon will only fire when the target is in optimal firing range of the shooter.")]
         public bool RequiresOptimalFiringRange = true;
@@ -28,7 +35,21 @@ namespace Weapons
         protected virtual void OnValidate()
         {
             Debug.Assert(BulletData != null, $"{this} has no bullet data!");
+            readinessCurve ??= new AnimationCurve(
+                new Keyframe(0f, 1f),
+                new Keyframe(1f, 0f)
+            );
+            if (resetCurve)
+            {
+                resetCurve = false;
+                readinessCurve = new AnimationCurve(
+                new Keyframe(0f, 1f),
+                new Keyframe(1f, 0f)
+            );
+            }
         }
+
+        public float GetCurveValue(float value) => Mathf.Clamp01(readinessCurve.Evaluate(value));
 
         public Bullet GetInstance(Transform point) => BulletData.GetInstance(point);
     }

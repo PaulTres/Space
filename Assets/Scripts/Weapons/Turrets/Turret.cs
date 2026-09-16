@@ -187,7 +187,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         protected void IncreaseReadiness(float deltaTime)
         {
-            foreach (var w in Weapons) w.IncreaseReadiness(deltaTime);
+            for (int i = 0; i < Weapons.Count; ++i) Weapons[i].IncreaseReadiness(deltaTime);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         protected void DecreaseReadiness(float deltaTime)
         {
-            foreach (var w in Weapons) w.DecreaseReadiness(deltaTime);
+            for (int i = 0; i < Weapons.Count; ++i) Weapons[i].DecreaseReadiness(deltaTime);
         }
 
         #region Targeting

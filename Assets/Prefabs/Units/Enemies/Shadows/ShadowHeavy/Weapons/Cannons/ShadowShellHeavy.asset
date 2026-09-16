@@ -17,7 +17,7 @@ MonoBehaviour:
   ValidateData: 1
   DisableOnHit: 1
   Damage: 3
-  LifeTime: 20
+  LifeTime: 5
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 985664761693772524, guid: 57485f16f0edf1d4385b2ab98ded1192, type: 3}
   OnHitEffect: {fileID: 0}
@@ -27,7 +27,7 @@ MonoBehaviour:
   InertialDampeners: 1
   ScaleFactor: 0.4
   RendererMaterial: {fileID: 2100000, guid: 36f8720fe02cffd4da0c210adafbad7e, type: 2}
-  TrailRendererMaterial: {fileID: 2100000, guid: 6a0539dab7c0f7542979c1f54f7c310e, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 36f8720fe02cffd4da0c210adafbad7e, type: 2}
   TrailRendererCurve:
     serializedVersion: 2
     m_Curve:

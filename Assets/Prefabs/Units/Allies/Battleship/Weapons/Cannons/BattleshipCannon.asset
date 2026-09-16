@@ -14,8 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.WeaponData
   MaxShotCooldown: 5
   RateOfFireRampUp: 0.2
-  RateOfFireRampDown: 1
+  RateOfFireRampDown: 0.2
   MinShotCooldown: 1
+  readinessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0022812
+      inSlope: -2.9420002
+      outSlope: -2.9420002
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.047297295
+    - serializedVersion: 3
+      time: 1
+      value: 0.0019226074
+      inSlope: 1.1660819
+      outSlope: 1.1660819
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10969961
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  resetCurve: 0
   SignatureIncrease: 1
   BulletData: {fileID: 11400000, guid: 17e4dad9a68573b45b7062730d3533eb, type: 2}
   RequiresOptimalFiringRange: 0

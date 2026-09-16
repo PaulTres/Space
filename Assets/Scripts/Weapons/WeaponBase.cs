@@ -5,7 +5,7 @@ namespace Weapons
 {
     public abstract class WeaponBase : MonoBehaviour, IResettable
     {
-        #region Utils   
+        #region Helpers
         Unit unit;
         /// <summary>
         /// The unit that owns this Weapons. Lazily initialized by searching for a Navigation 
@@ -23,10 +23,24 @@ namespace Weapons
             }
         }
         protected CountdownTimer shotTimer;
-        public float CurrentShotCooldown { get; protected set; }
+        protected float currentShotCooldown;
+        protected float readinessValue;
+        public float ReadinessValue
+        {
+            get => readinessValue;
+            set
+            {
+                if (readinessValue != value)
+                {
+                    readinessValue = value;
+                    currentShotCooldown = Mathf.Lerp(@params.MinShotCooldown, @params.MaxShotCooldown, @params.GetCurveValue(readinessValue));
+                }
+            }
+        }
+
         public BulletData BulletData => @params != null ? @params.BulletData : null;
         public float BulletSpeed => @params.BulletData != null ? @params.BulletData.Speed : 0;
-        public float DPS => @params.BulletData.Damage * shootPoints.Length / CurrentShotCooldown;
+        public float DPS => @params.BulletData.Damage * shootPoints.Length / currentShotCooldown;
         public float SignatureIncrease => @params.SignatureIncrease;
         /// <summary>
         /// 0 means the weapon is fully reloaded, 1 means the weapon just fired and has started reloading.
@@ -58,8 +72,9 @@ namespace Weapons
                 //Debug.LogWarning($"{transform} has no shoot points!");
                 shootPoints = new Transform[] { transform };
             }
-            CurrentShotCooldown = @params.MaxShotCooldown;
-            shotTimer ??= new(CurrentShotCooldown);
+            //currentShotCooldown = @params.MaxShotCooldown;
+            ReadinessValue = 0;
+            shotTimer ??= new(currentShotCooldown);
         }
 
         protected virtual void OnEnable()
@@ -73,8 +88,9 @@ namespace Weapons
         public virtual void PerformReset()
         {
             shotTimer ??= new CountdownTimer(@params.MaxShotCooldown);
-            CurrentShotCooldown = @params.MaxShotCooldown;
-            shotTimer.Reset(CurrentShotCooldown);
+            //currentShotCooldown = @params.MaxShotCooldown;
+            ReadinessValue = 0;
+            shotTimer.Reset(currentShotCooldown);
             if (!@params.StartLoaded) shotTimer.Start();
         }
 
@@ -97,9 +113,10 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public virtual void IncreaseReadiness(float deltaTime)
         {
-            //Debug.Log("Increasing readiness: " + CurrentShotCooldown);
-            CurrentShotCooldown = Mathf.Max(@params.MinShotCooldown,
-                CurrentShotCooldown - @params.RateOfFireRampUp * deltaTime);
+            if (@params.RateOfFireRampUp > 0)
+            {
+                ReadinessValue = Mathf.Min(1, ReadinessValue + deltaTime * @params.RateOfFireRampUp);
+            }
         }
 
         /// <summary>
@@ -108,9 +125,10 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         public virtual void DecreaseReadiness(float deltaTime)
         {
-            //Debug.Log("Decreasing readiness: " + CurrentShotCooldown);
-            CurrentShotCooldown = Mathf.Min(@params.MaxShotCooldown,
-                CurrentShotCooldown + @params.RateOfFireRampDown * deltaTime);
+            if (@params.RateOfFireRampDown > 0)
+            {
+                ReadinessValue = Mathf.Max(0, ReadinessValue - deltaTime * @params.RateOfFireRampDown);
+            }
         }
 
         /// <summary>
@@ -134,7 +152,7 @@ namespace Weapons
             if (!CanShoot()) return false;
             if (@params.RequiresOptimalFiringRange && !UnitProperty.InOptimalFiringRange(target)) return false;
             Fire(target);
-            shotTimer.Reset(CurrentShotCooldown);
+            shotTimer.Reset(currentShotCooldown);
             shotTimer.Start();
             return true;
         }
