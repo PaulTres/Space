@@ -1,4 +1,3 @@
-using UnityEngine;
 using Utilities;
 
 namespace Weapons
@@ -183,7 +182,7 @@ namespace Weapons
             }
             else
             {
-                Debug.Log($"{Turret} on {Turret.transform.root} is in defensive stance!");
+                //Debug.Log($"{Turret} on {Turret.transform.root} is in defensive stance!");
                 Target = null;
             }
             //if (Turret.TargetUnits && !Turret.TargetMissiles)
