@@ -23,6 +23,9 @@ namespace Weapons
             }
         }
         public float DPS { get; protected set; }
+        /// <summary>
+        /// Returns BulletSpeed value of first weapon.
+        /// </summary>
         public float BulletSpeed => Weapons.IsEmpty() ? 0 : Weapons[0].BulletSpeed;
         public float SignatureIncrease => Weapons.IsEmpty() ? 0 : Weapons[0].SignatureIncrease * Weapons.Count;
         /// <summary>
@@ -53,7 +56,20 @@ namespace Weapons
         /// Stance 1 - defensive
         /// </summary>
         protected List<TurretStance> turretStances = new();
-        public int CurrentStanceIndex { get; protected set; } = 0;
+        protected int currentStanceIndex = 0;
+        public int CurrentStanceIndex
+        {
+            get => currentStanceIndex;
+            set
+            {
+                value %= turretStances.Count;
+                if (currentStanceIndex != value)
+                {
+                    currentStanceIndex = value;
+                    UpdateTargets();
+                }
+            }
+        }
         protected float lastBurstTime;
         protected int weaponBurstIndex;
         /// <summary>
@@ -154,6 +170,7 @@ namespace Weapons
         public void Tick(float deltaTime)
         {
             if (!Unit.Active()) return;
+            RecalculateDPS();
             if (Target.Active())
             {
                 //if (Target == GameManager.Player) Debug.Log($"Turret {transform.name} targeting {Target.Transform}.");
@@ -202,25 +219,13 @@ namespace Weapons
         #region Targeting
         #region Stance
         /// <summary>
-        /// Sets stance index to index%(nr of stances), then calls UpdateTargets.
-        /// </summary>
-        /// <param name="index"></param>
-        public void SetStanceIndex(int index)
-        {
-            CurrentStanceIndex = index % turretStances.Count;
-            UpdateTargets();
-        }
-
-        /// <summary>
         /// Increases stance index by 1, loops around on reaching end of stance list. Then calls UpdateTargets.
         /// </summary>
-        public void CycleStance() => SetStanceIndex(CurrentStanceIndex + 1);
+        public void CycleStance() => CurrentStanceIndex++;
 
-        public void SetAggressiveStance() => SetStanceIndex(0);
+        public void SetAggressiveStance() => CurrentStanceIndex = 0;
 
-        public void SetDefensiveStance() => SetStanceIndex(1);
-
-        public void SetPassiveStance() => SetStanceIndex(2);
+        public void SetDefensiveStance() => CurrentStanceIndex = 1;
         #endregion
 
         /// <summary>

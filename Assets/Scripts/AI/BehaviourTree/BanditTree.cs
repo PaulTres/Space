@@ -62,6 +62,7 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected void OnDrawGizmosSelected()
     {
+        if (Context == null) return;
         var e = Context.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.EscortCandidate);
         if (e.Active())
         {

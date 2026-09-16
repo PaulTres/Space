@@ -74,6 +74,7 @@ namespace Weapons
         protected PoolableEffect onSpawnEffect, onHitEffect;
         protected float effectScaleFactor;
         public override float CurrentSignature => 0;
+        public override float ScanRange => 0;
         #endregion
 
         #region Setup

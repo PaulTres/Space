@@ -25,6 +25,7 @@ public class DestructableComponent : ImprovedMonoBehaviour
     [Tooltip("When the object is destroyed the owning unit will receive this much damage.")]
     [SerializeField] protected float damageOnDestroy;
     public override float CurrentSignature => OwningUnit.CurrentSignature;
+    public override float ScanRange => OwningUnit.ScanRange;
     public override bool IsFleeing => OwningUnit.IsFleeing;
 
     protected void OnEnable()

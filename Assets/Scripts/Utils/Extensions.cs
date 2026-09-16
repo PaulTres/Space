@@ -31,7 +31,7 @@ namespace Utilities
         /// <param name="unit"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool InOptimalFiringRange(this Unit unit, ImprovedMonoBehaviour target)
+        public static bool InOptimalFiringRange(this ImprovedMonoBehaviour unit, ImprovedMonoBehaviour target)
         {
             if (unit == null) return false;
             return Vector3.Distance(unit.Position, target.Position) <=

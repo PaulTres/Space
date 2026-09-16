@@ -1,3 +1,4 @@
+using UnityEngine;
 using Utilities;
 
 namespace Weapons
@@ -180,11 +181,15 @@ namespace Weapons
                     if (targetIsAimedAtOwner) return;
                 }
             }
-
-            if (Turret.TargetUnits && !Turret.TargetMissiles)
+            else
             {
-                Target = Owner.Target;
+                Debug.Log($"{Turret} on {Turret.transform.root} is in defensive stance!");
+                Target = null;
             }
+            //if (Turret.TargetUnits && !Turret.TargetMissiles)
+            //{
+            //    Target = Owner.Target;
+            //}
         }
     }
 

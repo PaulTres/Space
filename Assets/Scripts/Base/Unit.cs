@@ -32,7 +32,7 @@ public abstract class Unit : ImprovedMonoBehaviour
 
         public void Validate()
         {
-            MaximumSignature = Mathf.Max(MinimumSignature, MaximumSignature);
+            MaximumSignature = Mathf.Max(MinimumSignature + 1, MaximumSignature);
         }
     }
 
@@ -91,7 +91,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
-    public float ScanRange
+    public override float ScanRange
     {
         get
         {

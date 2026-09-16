@@ -20,11 +20,9 @@ public class InterceptNode : LeafNodeData
         var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (target.Active())
         {
-            ((LeafNode)n).SetData((int)InternalKeys.TargetPrevPos, target.Position);
-            var dir = ctx.Position - target.Position;
-            var dist = UseOptimalFiringRange ? target.CurrentSignature +
-                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
-            ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
+            var node = (LeafNode)n;
+            node.SetData((int)InternalKeys.TargetPrevPos, target.Position);
+            Repath(target, node, ctx);
         }
     };
 
@@ -34,16 +32,18 @@ public class InterceptNode : LeafNodeData
         if (!target.Active()) return NodeState.FAILURE;
         if ((target.Position - n.GetData<Vector3>((int)InternalKeys.TargetPrevPos)).sqrMagnitude > InterceptError * InterceptError)
         {
-            n.SetData((int)InternalKeys.TargetPrevPos, target.Position);
-            var dir = ctx.Position - target.Position;
-            var dist = UseOptimalFiringRange ? target.CurrentSignature +
-                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
-            ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
+            Repath(target, n, ctx);
         }
-        var d = UseOptimalFiringRange ? target.CurrentSignature +
-                ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
-        //if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + d);
-
         return NodeState.RUNNING;
     };
+
+    protected void Repath(ImprovedMonoBehaviour target, LeafNode n, Blackboard ctx)
+    {
+        n.SetData((int)InternalKeys.TargetPrevPos, target.Position);
+        var dir = ctx.Position - target.Position;
+        var dist = UseOptimalFiringRange ? target.CurrentSignature +
+            ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
+        ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
+        //if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + dist);
+    }
 }

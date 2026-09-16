@@ -92,11 +92,12 @@ public class StrafeNode : LeafNodeData
             var destination = ctx.Position + strafeDirection * strafeMagnitude;
             //Debug.DrawRay(ctx.Position, strafeDirection * strafeMagnitude, Color.yellow, 2);
             var targetToDestination = (destination - target.Position).normalized;
-            var dist = Mathf.Max(UseOptimalFiringRange ? target.CurrentSignature +
+            var dist = Mathf.Min(UseOptimalFiringRange ? target.CurrentSignature +
                 ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer, maxDistance);
             destination = target.Position + targetToDestination * dist;
             //Debug.DrawLine(ctx.Position, destination, Color.blue);
             ctx.Navigation.SetDestination(destination);
+            //Debug.Log(Vector3.Distance(destination, target.Position) + "-:-" + dist);
         }
         else
         {

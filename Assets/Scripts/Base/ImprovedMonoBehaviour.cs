@@ -43,6 +43,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
         set => Transform.position = value;
     }
     public abstract float CurrentSignature { get; }
+    public abstract float ScanRange { get; }
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
     [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
     [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;

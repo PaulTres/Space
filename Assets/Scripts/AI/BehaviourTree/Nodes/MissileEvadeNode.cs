@@ -22,7 +22,7 @@ public class MissileEvadeNode : LeafNodeData
         if (pdTurrets == null) return NodeState.FAILURE;
         foreach (var turret in pdTurrets)
         {
-            if (turret.Target == null) continue;
+            if (turret == null || turret.Target == null) continue;
             var m = turret.Target as Missile;
             if (m != null && m.gameObject.activeSelf)
             {
