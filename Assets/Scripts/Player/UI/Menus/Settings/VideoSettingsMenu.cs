@@ -8,9 +8,9 @@ namespace Player
     {
         [SerializeField] protected Slider fovSlider;
         [SerializeField] protected TextMeshProUGUI fovText;
-        [SerializeField] TextMeshProUGUI qualityText;
-        [SerializeField] Toggle vSyncToggle, fullscreenToggle;
-        [SerializeField] TMP_Dropdown resolutionDropdown;
+        [SerializeField] protected TextMeshProUGUI qualityText;
+        [SerializeField] protected Toggle vSyncToggle, fullscreenToggle;
+        [SerializeField] protected TMP_Dropdown resolutionDropdown;
 
         protected Resolution[] resolutions;
 

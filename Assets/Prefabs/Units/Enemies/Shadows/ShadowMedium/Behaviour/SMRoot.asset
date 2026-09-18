@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054ba29207d97c94aa25e1ac59732ab2, type: 3}
+  m_Name: SMRoot
+  m_EditorClassIdentifier: Assembly-CSharp::HybridBT2.SelectorData
+  myName: 
+  AlwaysCheck: 1
+  Conditions: []
+  Services:
+  - {fileID: 11400000, guid: 5aab3c9a7c1c4d246a8004f8d5b9f195, type: 2}
+  Children:
+  - {fileID: 11400000, guid: 308406fe178b08c42acd4aa990d37bc6, type: 2}
+  - {fileID: 11400000, guid: d6fb19ef5c92e4948b3923abb67a5ffc, type: 2}

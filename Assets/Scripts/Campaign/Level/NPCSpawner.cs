@@ -46,7 +46,7 @@ namespace Level
         public Unit Spawn()
         {
             var spawnOption = spawnOptions[Mathf.Min(spawnOptions.Count - 1, GameManager.Difficulty)];
-            return SpawnUnit(spawnOption.Options[Random.Range(0, spawnOptions.Count)]);
+            return SpawnUnit(spawnOption.Options[Random.Range(0, spawnOption.Options.Count)]);
         }
 
         protected Unit SpawnUnit(UnitData data)

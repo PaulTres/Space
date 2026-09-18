@@ -60,6 +60,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!135 &8357492232402145335
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -307,7 +309,7 @@ PrefabInstance:
     - target: {fileID: -5754084199372789682, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300002, guid: 30b0c87680e76604a959637052b5e8ac, type: 3}
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 919132149155446097, guid: beef92652924e2c449e5dd6685e67905, type: 3}
       propertyPath: m_Name
       value: Torpedo

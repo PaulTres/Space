@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b11e73730a8634c9f53723e3dca065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Level.Wave
-  delay: 20
+  delay: 5
   minDistanceFromPlayer: 0
   facePlayer: 0
   spawnOnAwake: 1

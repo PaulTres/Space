@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::HP.HPComponent
-  <MaxHP>k__BackingField: 10
+  <MaxHP>k__BackingField: 20
   startingHPFraction: 1
   sendEventOnHPChange: 0
   minHP: 0
@@ -93,6 +93,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &324377250581909725
 MonoBehaviour:
   m_ObjectHideFlags: 0

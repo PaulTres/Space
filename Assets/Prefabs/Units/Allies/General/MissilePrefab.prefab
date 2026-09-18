@@ -76,6 +76,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!135 &3362071636971823934
 SphereCollider:
   m_ObjectHideFlags: 0

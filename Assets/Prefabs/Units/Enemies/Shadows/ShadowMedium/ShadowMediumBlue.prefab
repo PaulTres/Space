@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HP.HPComponent
-  <MaxHP>k__BackingField: 10
+  <MaxHP>k__BackingField: 25
   startingHPFraction: 1
   sendEventOnHPChange: 0
   minHP: 0
@@ -94,6 +94,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &3617145878084377368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,11 +120,11 @@ MonoBehaviour:
   - {fileID: 4231781807680790968}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
-    MoraleWeight: 10
+    MoraleWeight: 25
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 20
-    <MaximumSignature>k__BackingField: 0
+    <MaximumSignature>k__BackingField: 21
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 30
@@ -149,9 +151,6 @@ MonoBehaviour:
   rootData: {fileID: 11400000, guid: fc84ab6c383263b4d915a7c75d647150, type: 2}
   tickInterval: 0.1
   shouldTick: 1
-  affectedByMorale: 1
-  initialMorale: 100
-  maxMoraleImpactRange: 50
   maxThreats: 1
   minEscortValue: 30
 --- !u!114 &2680985556489724662

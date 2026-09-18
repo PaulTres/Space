@@ -1508,6 +1508,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &4668281039910969074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1560,7 +1562,7 @@ MonoBehaviour:
   - {fileID: 2278613767829424322}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
-    MoraleWeight: 1000
+    MoraleWeight: 300
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
     <MinimumSignature>k__BackingField: 40

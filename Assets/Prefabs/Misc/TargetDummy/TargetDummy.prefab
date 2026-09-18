@@ -130,17 +130,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::HP.HPComponent
-  <MaxHP>k__BackingField: 10
+  <MaxHP>k__BackingField: 1000
   startingHPFraction: 1
   sendEventOnHPChange: 0
-  minHP: 0
-  minHPRegainCooldown: 5
+  minHP: 1000
+  minHPRegainCooldown: 1
   currentHP: 0
   damageEffects: []
   effectOnDamage: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
-  invulnerable: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &5477538681752144312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +206,7 @@ MonoBehaviour:
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 0}
     <MinimumSignature>k__BackingField: 20
-    <MaximumSignature>k__BackingField: 20
+    <MaximumSignature>k__BackingField: 21
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 10

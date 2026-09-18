@@ -4179,7 +4179,7 @@ MonoBehaviour:
   initialWindows:
   - {fileID: 1967482597}
   - {fileID: 245509234}
-  playerTutorialShip: {fileID: 11400000, guid: d449d6cb8d5f81548ba687e3a03b8ce6, type: 2}
+  playerTutorialShip: {fileID: 11400000, guid: 46246d779567f1b40a1942e4e60884d6, type: 2}
 --- !u!1 &1365692574
 GameObject:
   m_ObjectHideFlags: 0

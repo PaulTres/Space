@@ -25,6 +25,7 @@ namespace Level
         }
 
         [SerializeField] protected float radius = 1000;
+        [SerializeField] protected bool setOwnSize = true;
         protected Transform tr;
         public Transform Transform
         {
@@ -44,6 +45,11 @@ namespace Level
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawWireSphere(Position, radius);
+        }
+
+        protected void OnValidate()
+        {
+            if (setOwnSize) transform.localScale = Vector3.one * radius;
         }
     }
 }

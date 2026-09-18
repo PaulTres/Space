@@ -10,12 +10,27 @@ namespace Weapons
         public Material RendererMaterial, TrailRendererMaterial;
         public AnimationCurve TrailRendererCurve;
         public override float Speed => (Mathf.Max(InitialVelocity, Acceleration) + TopSpeed) / 2;
+        [SerializeField] protected bool resetCurve = true;
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            if (resetCurve)
+            {
+                resetCurve = false;
+                TrailRendererCurve = new AnimationCurve(
+                    new Keyframe(0f, ScaleFactor),
+                    new Keyframe(.35f, 0f)
+                );
+            }
+        }
+
 
         protected virtual void Reset()
         {
             TrailRendererCurve = new AnimationCurve(
                 new Keyframe(0f, ScaleFactor),
-                new Keyframe(1, 0f)
+                new Keyframe(.35f, 0f)
             );
         }
     }
