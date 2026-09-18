@@ -87,7 +87,7 @@ namespace Player
                     //Debug.Log("Firing all");
                     FireAllMissiles(currentWeaponIndex);
                 }
-                else if (context.started)
+                else if (context.performed)
                 {
                     //Debug.Log("Tap firing");
                     TapFireMissiles(currentWeaponIndex);

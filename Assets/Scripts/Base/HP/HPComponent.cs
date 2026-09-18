@@ -65,6 +65,7 @@ namespace HP
         [SerializeField] protected float effectScaleFactor = 1;
         [Tooltip("If true, this entity will not take damage.")]
         [SerializeField] protected bool invulnerable = false;
+        [SerializeField] protected bool debug;
         #endregion
 
         #region Setup
@@ -111,11 +112,11 @@ namespace HP
             if (invulnerable) return;
             if (damageInfo.Source != null && damageInfo.Source.Team == transform.root.GetTeam())
             {
-                //Debug.Log("Friendly fire");
+                if (debug) Debug.Log("Friendly fire");
                 return;
             }
             if (ImprovedMonoBehaviour.IsDying) return;
-            //Debug.Log($"{this} took {damageInfo.Amount} damage from {damageInfo.Source}.");
+            if (debug) Debug.Log($"{this} took {damageInfo.Amount} damage from {damageInfo.Source}.");
             CurrentHP -= damageInfo.Amount;
             if (CurrentHP <= 0 && !firedEvent)
             {

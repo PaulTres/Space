@@ -22,10 +22,6 @@ MonoBehaviour:
   MaxAngleDifference: 1
   MaxRange: 100
   BurstFire: 1
-  BurstCooldown: 0.3
+  BurstCooldown: 0.2
   BurstCount: 1
   RotSpeed: 361
-  MinElevation: -90
-  MaxElevation: 90
-  MinRot: -190
-  MaxRot: 190

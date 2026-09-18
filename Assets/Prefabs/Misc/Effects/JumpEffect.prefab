@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Effects.PoolableEffect
   <PoolKey>k__BackingField: 7
   soundData:
-    clip: {fileID: 8300000, guid: 2b683f4620fb54345a21340ae3153cb4, type: 3}
+    clip: {fileID: 8300000, guid: 4fe02fae12f39ca4fa9bfb6003e1f34c, type: 3}
     mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
@@ -71,6 +71,7 @@ MonoBehaviour:
     ignoreListenerPause: 0
     rolloffMode: 0
   audioOnly: 0
+  lifetime: 3
 --- !u!198 &4918853256161837267
 ParticleSystem:
   m_ObjectHideFlags: 0

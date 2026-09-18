@@ -7,6 +7,7 @@ using Utilities;
 public class RetreatNode : LeafNodeData
 {
     [SerializeField] protected bool maintainFacing = true;
+    [SerializeField] protected float randomRadius = 1;
 
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
@@ -15,6 +16,7 @@ public class RetreatNode : LeafNodeData
             ctx.Navigation.RotationTarget = null;
             //Debug.Log("A");
         }
+        ((LeafNode)n).SetData(0, UnityEngine.Random.insideUnitSphere * randomRadius);
     };
 
 
@@ -30,7 +32,7 @@ public class RetreatNode : LeafNodeData
         //no need to normalize here, we just need the direction
         //this could probably be optimized to only happen once every few ticks
         ctx.Navigation.SetDestination(ctx.Navigation.Position + (ctx.Navigation.Position -
-            target.Position));
+            target.Position) * 10 + n.GetData<Vector3>(0));
         return NodeState.RUNNING;
     };
 }

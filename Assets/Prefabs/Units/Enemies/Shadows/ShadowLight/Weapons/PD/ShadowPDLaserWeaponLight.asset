@@ -15,7 +15,7 @@ MonoBehaviour:
   MaxShotCooldown: 0.3
   RateOfFireRampUp: 0
   RateOfFireRampDown: 1
-  MinShotCooldown: 0.3
+  MinShotCooldown: 0.2
   readinessCurve:
     serializedVersion: 2
     m_Curve:
