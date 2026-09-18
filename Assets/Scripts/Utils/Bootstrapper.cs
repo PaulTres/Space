@@ -10,7 +10,7 @@ namespace Utilities
 {
     public class Bootstrapper : MonoBehaviour
     {
-        [Tooltip("The audio mixer to use for audio settings.")]
+        [Tooltip("The audioClip mixer to use for audioClip settings.")]
         [SerializeField] protected AudioMixer audioMixer;
 
         protected async void Start()

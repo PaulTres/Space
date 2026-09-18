@@ -24,6 +24,7 @@ namespace Weapons
         public float EffectiveTracking { get; protected set; }
         protected PoolableEffect onDeathEffect;
         public override float TopSpeed => topSpeed * (1 + telemetryBonus);
+        public override float Acceleration => acceleration * (1 + telemetryBonus);
         protected float telemetryBonus = 0;
         protected bool showOnRadar = false;
         protected float targetedDamage;
@@ -113,9 +114,9 @@ namespace Weapons
         protected float Telemetry()
         {
             if (Owner != null || !Owner.InOptimalFiringRange(target)) return 0;
-            return Mathf.Max(0, Mathf.Min(maxTelemetryBonus, Vector3.Dot(
-                Owner.TelemetryOrigin.forward, (target.Transform.position -
-                Owner.TelemetryOrigin.position).normalized)));
+            var dot = Vector3.Dot(Owner.TelemetryOrigin.forward, (target.Transform.position - Owner.TelemetryOrigin.position).normalized);
+            if (dot < 0.5f) return 0;
+            return Mathf.Max(0, Mathf.Min(dot, maxTelemetryBonus));
         }
 
         protected void CalculateEffectiveTracking()

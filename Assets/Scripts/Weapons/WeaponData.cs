@@ -43,10 +43,11 @@ namespace Weapons
             {
                 resetCurve = false;
                 readinessCurve = new AnimationCurve(
-                new Keyframe(0f, 1f),
-                new Keyframe(1f, 0f)
-            );
+                    new Keyframe(0f, 1f),
+                    new Keyframe(1f, 0f)
+                );
             }
+            MinShotCooldown = Mathf.Min(MinShotCooldown, MaxShotCooldown);
         }
 
         public float GetCurveValue(float value) => Mathf.Clamp01(readinessCurve.Evaluate(value));

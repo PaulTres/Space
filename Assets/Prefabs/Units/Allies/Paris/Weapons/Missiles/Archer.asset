@@ -17,7 +17,7 @@ MonoBehaviour:
   ValidateData: 1
   DisableOnHit: 1
   Damage: 1
-  LifeTime: 20
+  LifeTime: 7
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 6332652951562218706, guid: f42cd35e2a769904dbc1196ae0676d85, type: 3}
   OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
@@ -52,7 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 10
+  Tracking: 5
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 0.1

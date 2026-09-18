@@ -12,8 +12,9 @@ namespace Weapons
             var data = @params as LaserWeaponData;
             if (data == null) throw new System.Exception($"Weapons {name} has no LaserWeaponData!");
             heatPerShot = data.HeatPerShot;
-            heatsink = transform.root.GetComponentInChildren<Heatsink>();
+            heatsink = transform.GetComponentInParent<Heatsink>();
             Debug.Assert(heatsink != null, $"{transform.root} has no heatsink for lasers!");
+            //if (transform.root.name.Contains("Shadow")) Debug.Log(currentShotCooldown);
         }
 
         public override bool CanShoot()

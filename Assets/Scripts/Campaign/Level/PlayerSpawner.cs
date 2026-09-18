@@ -1,8 +1,10 @@
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Level
 {
+    [RequireComponent(typeof(OSTTrigger))]
     public class PlayerSpawner : MonoBehaviour
     {
         [SerializeField] protected float delay = 0;
@@ -27,6 +29,7 @@ namespace Level
             //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(transform.position, transform.rotation);
             unit.gameObject.SetActive(true);
+            GetComponent<OSTTrigger>().SetOST();
             onPlayerSpawned?.Invoke();
         }
     }

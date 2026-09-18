@@ -24,7 +24,7 @@ namespace Weapons
         }
         protected CountdownTimer shotTimer;
         protected float currentShotCooldown;
-        protected float readinessValue;
+        protected float readinessValue = -1;
         public float ReadinessValue
         {
             get => readinessValue;
@@ -34,6 +34,7 @@ namespace Weapons
                 {
                     readinessValue = value;
                     currentShotCooldown = Mathf.Lerp(@params.MinShotCooldown, @params.MaxShotCooldown, @params.GetCurveValue(readinessValue));
+                    //if (transform.root.name.Contains("Shadow") && transform.name.Contains("PD")) Debug.Log($"Curve value: {@params.GetCurveValue(readinessValue)}");
                 }
             }
         }

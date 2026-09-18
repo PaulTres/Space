@@ -8,6 +8,7 @@ namespace Weapons
         public override ImprovedMonoBehaviour Target => null;
         protected float topSpeed, acceleration;
         public virtual float TopSpeed => topSpeed;
+        public virtual float Acceleration => acceleration;
         protected Vector3 linearVelocity, angularVelocity;
         protected LayerMask collisionMask = 1 << 0 | 1 << 6;
         protected float initialVelocity;
@@ -95,7 +96,7 @@ namespace Weapons
         /// <param name="dt"></param>
         protected virtual void RestOfPerformFixedUpdate(float dt)
         {
-            linearVelocity += acceleration * dt * Transform.forward;
+            linearVelocity += Acceleration * dt * Transform.forward;
             if (inertialDampeners)
             {
                 linearVelocity = Vector3.Project(linearVelocity, Transform.forward);
