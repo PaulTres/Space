@@ -7,7 +7,7 @@ public abstract class Ship : Unit
     #region Fields
     [Header("Ship")]
     [SerializeField] protected float forwardThrust = 1;
-    [field: SerializeField] public float RotationSpeed { get; protected set; } = 5;
+    [field: SerializeField] public float RotationSpeed { get; protected set; } = 50;
     [SerializeField] protected float strafeThrust = 1;
     protected ThrusterGroup thrusters;
     protected Rigidbody rb;

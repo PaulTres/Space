@@ -3,14 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 namespace Player
 {
     public class ShipSelectScreen : MonoBehaviour
     {
         [SerializeField] protected int missionStartTimerDuration = 5;
-        [SerializeField] protected TextMeshProUGUI timerText, shipDescriptionText;
+        [SerializeField] protected TextMeshProUGUI timerText;
         [SerializeField] protected TMP_Dropdown playerOptions;
-        protected List<UnitData> playerOptionsList;
+        [Header("Current ship info")]
+        [SerializeField] protected TextMeshProUGUI shipDescriptionText;
+        [SerializeField] protected Transform previewModelAzimuth, previewModelRoll;
+        [SerializeField] protected Slider azimuthSlider, pitchSlider;
+        protected List<PlayerData> playerOptionsList;
         protected WaitForSeconds waitForOneSecond = new(1);
         protected Coroutine coroutine;
 
@@ -48,6 +53,25 @@ namespace Player
         {
             UnitData.PlayerChoice = playerOptionsList[index];
             shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice.Description;
+            for (int i = 0; i < previewModelRoll.childCount; i++)
+            {
+                Destroy(previewModelRoll.GetChild(i).gameObject);
+            }
+            previewModelAzimuth.localRotation = Quaternion.identity;
+            previewModelRoll.localRotation = Quaternion.identity;
+            Instantiate(UnitData.PlayerChoice.PreviewModel, previewModelRoll);
+            azimuthSlider.SetValueWithoutNotify(0);
+            pitchSlider.SetValueWithoutNotify(0);
+        }
+
+        public void ChangeModelAzimuth(float value)
+        {
+            previewModelAzimuth.localRotation = Quaternion.Euler(0, value, 0);
+        }
+
+        public void ChangeModelPitch(float value)
+        {
+            previewModelRoll.localRotation = Quaternion.Euler(0, 0, value);
         }
 
         public void GoToMissionSelect() => GameManager.LoadMissionSelection();

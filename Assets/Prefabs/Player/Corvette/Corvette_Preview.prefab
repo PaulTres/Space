@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1799371607571100539
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722613068655648296, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109907238248407258, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_Name
+      value: Player_Corvette_Preview Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7109907238248407258, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1383912304719610485, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 6078632239765645774, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 8175108895417524106, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 4853517699977681407, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 6549245893966160710, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 1163433114998954577, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 8160502029407307757, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 4823099040961155926, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 7977341279741464413, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 7712778554268613975, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 8522171356487916105, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 2058805685153218230, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 742483995288978157, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 4682736997449594085, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 5288730168815367008, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 452717109602977633, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    - {fileID: 7444664925600824953, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}

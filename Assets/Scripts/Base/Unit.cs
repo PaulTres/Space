@@ -21,12 +21,12 @@ public abstract class Unit : ImprovedMonoBehaviour
         public float TickInterval = 0.2f;
         [Tooltip("Plays when the ship is spawned in.")]
         public PoolableEffect EffectOnSpawn;
-        [field: SerializeField] public float MinimumSignature { get; set; } = 20;
-        [field: SerializeField] public float MaximumSignature { get; set; } = 100;
+        [field: SerializeField] public float MinimumSignature { get; set; } = 10;
+        [field: SerializeField] public float MaximumSignature { get; set; } = 50;
         public float SignatureDecreaseRate = 0.1f;
         [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
         public float SignatureDecreaseCooldown = 5f;
-        public float ScanRange = 10;
+        public float ScanRange = 30;
         [Tooltip("On spawn, the unit will check for obstructions in a sphere of this radius.")]
         public float SpawnCheckRadius = 5;
 
@@ -75,6 +75,11 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    public UnitParameters Parameters
+    {
+        set => unitParameters = value;
+        get => unitParameters;
+    }
     public PoolableEffect SpawnEffect => unitParameters.EffectOnSpawn;
     public UnitDeathEffects UnitDeathEffects
     {

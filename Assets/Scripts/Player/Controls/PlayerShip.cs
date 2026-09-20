@@ -52,6 +52,9 @@ namespace Player
         public bool CannotDie { get; set; } = false;
         public event System.Action<bool> OnDampenersChanged;
         protected bool callbacksEnabled;
+        #region Sounds
+        protected AudioSource engineAudioSource;
+        #endregion
         #endregion
 
         #region Setup
@@ -76,6 +79,7 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
+            engineAudioSource = GetComponent<AudioSource>();
             PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
@@ -245,6 +249,14 @@ namespace Player
             {
                 if (movementVector.z > 0) thrusters.Increase(deltaTime);
                 else thrusters.Decrease(deltaTime);
+            }
+            if (engineAudioSource != null)
+            {
+                if (movementVector.sqrMagnitude > 0)
+                {
+                    if (!engineAudioSource.isPlaying) engineAudioSource.Play();
+                }
+                else if (engineAudioSource.isPlaying) engineAudioSource.Stop();
             }
         }
 

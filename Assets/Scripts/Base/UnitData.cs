@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using static Unit;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/UnitData", fileName = "UnitData")]
 public class UnitData : MonoSpawnableData<Unit>
 {
     #region Statics
-    public static List<UnitData> AvailablePlayerOptions { get; } = new();
-    public static UnitData PlayerChoice { get; set; }
+    public static List<PlayerData> AvailablePlayerOptions { get; } = new();
+    public static PlayerData PlayerChoice { get; set; }
     public static List<UnitData> AvailableAllyUnits { get; } = new();
     public static List<UnitData> AvailableEnemyUnits { get; } = new();
 
@@ -18,7 +19,7 @@ public class UnitData : MonoSpawnableData<Unit>
     {
         try
         {
-            var playerHandle = Addressables.LoadAssetsAsync<UnitData>(GlobalConfig.
+            var playerHandle = Addressables.LoadAssetsAsync<PlayerData>(GlobalConfig.
                 PlayerOptionsAddressableTag, (data) => AvailablePlayerOptions.Add(data));
             AvailablePlayerOptions.Sort((a, b) =>
             {
@@ -61,8 +62,6 @@ public class UnitData : MonoSpawnableData<Unit>
 
     public bool ShouldBeDisabled = true;
     public int Points = 1;
-    [Tooltip("Only used for the player. A ship cannot be used before this mission has been completed.")]
-    public int MissionRequirement = -1;
     [TextArea(15, 20)]
     [SerializeField] protected string description;
     public string Name => name.Replace("(Clone)", "").Replace("_Player", "").Trim();
@@ -74,10 +73,25 @@ public class UnitData : MonoSpawnableData<Unit>
             return "A " + Name + '.';
         }
     }
+    [SerializeField] protected UnitParameters unitParameters;
+    [SerializeField] protected bool takeParametersFromPrefab = true;
 
-    protected void OnValidate()
+    public override Unit CreateInstance()
+    {
+        var a = base.CreateInstance();
+        a.Parameters = unitParameters;
+        return a;
+    }
+
+    protected virtual void OnValidate()
     {
         Debug.Assert(Prefab != null, $"Prefab is null for {this}!");
         Debug.Assert(!ShouldBeDisabled || !Prefab.gameObject.activeSelf, $"Prefab {Prefab} is active for {this}!");
+        if (takeParametersFromPrefab && Prefab != null)
+        {
+            takeParametersFromPrefab = false;
+            unitParameters = Prefab.Parameters;
+            Debug.Log($"{this} taking parameters from prefab {Prefab}.");
+        }
     }
 }

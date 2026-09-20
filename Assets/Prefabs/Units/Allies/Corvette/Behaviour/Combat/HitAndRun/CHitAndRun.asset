@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054ba29207d97c94aa25e1ac59732ab2, type: 3}
+  m_Name: CHitAndRun
+  m_EditorClassIdentifier: SpaceAssembly::HybridBT2.SelectorData
+  myName: 
+  AlwaysCheck: 1
+  Conditions:
+  - {fileID: 11400000, guid: ca7e369cb626d5444a4b5396e06ba72a, type: 2}
+  Services: []
+  Children:
+  - {fileID: 11400000, guid: fd34a1f3838075d46ab1ebd476841174, type: 2}
+  - {fileID: 11400000, guid: 9914b3e7ebacc974a8c7476b5c0cf922, type: 2}

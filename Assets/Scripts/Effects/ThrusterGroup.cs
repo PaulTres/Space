@@ -4,7 +4,7 @@ using Utilities;
 
 public class ThrusterGroup : MonoBehaviour
 {
-    [SerializeField] protected Vector3 minScale = Vector3.one * .1f;
+    [SerializeField] protected Vector3 minScale = new(1, 1, .1f);
     [SerializeField] protected Vector3 maxScale = Vector3.one;
     [Tooltip("Multiplier applied to delta time when increasing or decreasing thruster size.")]
     [SerializeField] protected Vector3 scaleFactor = Vector3.one;
@@ -25,7 +25,7 @@ public class ThrusterGroup : MonoBehaviour
         }
         if (editorTest)
         {
-            editorTest = false;
+            //editorTest = false;
             SetScale(testScale);
         }
     }

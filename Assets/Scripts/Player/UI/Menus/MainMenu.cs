@@ -3,7 +3,7 @@ namespace Player
 {
     public class MainMenu : MenuPDA
     {
-        [SerializeField] protected UnitData playerTutorialShip;
+        [SerializeField] protected PlayerData playerTutorialShip;
 
         public void StartTutorial()
         {

@@ -14,7 +14,7 @@ public class UnitDeathEffects : MonoBehaviour
     protected List<Transform> explosionOrigins = new();
     [SerializeField] protected float interval = .5f;
     [SerializeField] protected float count = 3;
-    [SerializeField] protected float effectScaleFactor = 1, finalEffectScaleFactor = 1;
+    [SerializeField] protected float effectScaleFactor = 1, finalEffectScaleFactor = 5;
     protected Coroutine coroutine;
     protected WaitForSeconds wait;
 
