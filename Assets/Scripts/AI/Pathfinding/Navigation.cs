@@ -2,6 +2,7 @@ using HybridBT2;
 using UnityEngine;
 using Utilities;
 
+[RequireComponent(typeof(BanditTree))]
 public class Navigation : Ship
 {
     #region Fields

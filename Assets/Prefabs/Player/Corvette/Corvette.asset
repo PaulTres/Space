@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfedb6d21c35d604881cb6821d618a01, type: 3}
   m_Name: Corvette
   m_EditorClassIdentifier: SpaceAssembly::PlayerData
-  Prefab: {fileID: 1383912304719610485, guid: 77037b7bacccf4b4ea8ceeedf993a5d7, type: 3}
+  Prefab: {fileID: 7233467996577603207, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
   ShouldBeDisabled: 1
   Points: 1
   description: 
@@ -28,4 +28,4 @@ MonoBehaviour:
     SpawnCheckRadius: 5
   takeParametersFromPrefab: 0
   MissionRequirement: -1
-  PreviewModel: {fileID: 1368982344630054227, guid: 22c6c945af094ac4d90dce3bbd3a553f, type: 3}
+  PreviewModel: {fileID: 4327527961887937450, guid: 8efb6099072603548ae87118340928ec, type: 3}

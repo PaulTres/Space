@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Utilities;
 
@@ -23,10 +24,14 @@ public class ThrusterGroup : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++) thrusterEffects.Add(transform.GetChild(i));
         }
-        if (editorTest)
+        if (editorTest && !EditorApplication.isPlaying)
         {
             //editorTest = false;
             SetScale(testScale);
+            testScale = new Vector3(
+                Mathf.Clamp(testScale.x, minScale.x, maxScale.x),
+                Mathf.Clamp(testScale.y, minScale.y, maxScale.y),
+                Mathf.Clamp(testScale.z, minScale.z, maxScale.z));
         }
     }
 

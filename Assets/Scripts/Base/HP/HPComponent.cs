@@ -62,7 +62,7 @@ namespace HP
         [SerializeField] protected PoolableEffect effectOnDamage;
         [Tooltip("The threshold of damage at which the damage effect will be played.")]
         [SerializeField] protected float damageThreshold = 0.5f;
-        [SerializeField] protected float effectScaleFactor = 1;
+        [SerializeField] protected float effectScaleFactor = .5f;
         [Tooltip("If true, this entity will not take damage.")]
         [SerializeField] protected bool invulnerable = false;
         [SerializeField] protected bool debug;

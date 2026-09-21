@@ -27,6 +27,7 @@ namespace Level
             unit.Team = GlobalConfig.PlayerTeam;
             unit.PlaySpawnEffect = playSpawnEffect;
             //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
+            unit.name = unit.name.Replace("Player", "").Replace("_", "");
             unit.Transform.SetPositionAndRotation(transform.position, transform.rotation);
             unit.gameObject.SetActive(true);
             GetComponent<OSTTrigger>().SetOST();

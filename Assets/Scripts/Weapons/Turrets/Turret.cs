@@ -101,6 +101,8 @@ namespace Weapons
         protected void OnValidate()
         {
             if (transform != transform.root) Debug.Assert(@params != null, $"{this} on {transform.root} has no parameters!");
+            if (RotationPivot == null) RotationPivot = Transform;
+            if (ElevationPivot == null) ElevationPivot = Transform;
         }
 
         protected virtual void OnEnable()

@@ -31,12 +31,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a8e97c822e00ea649b91a76b709b41d7
-    m_Address: Assets/Prefabs/Player/Paris/Paris.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Player
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d449d6cb8d5f81548ba687e3a03b8ce6
     m_Address: Assets/Prefabs/Player/Battleship/Battleship_Player.asset
     m_ReadOnly: 0

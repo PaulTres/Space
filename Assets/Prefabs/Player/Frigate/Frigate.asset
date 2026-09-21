@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfedb6d21c35d604881cb6821d618a01, type: 3}
+  m_Name: Frigate
+  m_EditorClassIdentifier: SpaceAssembly::PlayerData
+  Prefab: {fileID: 7941437171246025092, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+  ShouldBeDisabled: 1
+  Points: 1
+  description: The larger cousin of the corvette, this ship sports heavier armor
+    and armament and an improved sensor suite, at the cost of reduced agility and
+    increased signature..
+  unitParameters:
+    MoraleWeight: 10
+    TickInterval: 0.2
+    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+    <MinimumSignature>k__BackingField: 20
+    <MaximumSignature>k__BackingField: 80
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 50
+    SpawnCheckRadius: 6
+  takeParametersFromPrefab: 0
+  MissionRequirement: 2
+  PreviewModel: {fileID: 4850350667949547758, guid: 1102a947feb5710469117754d97c3135, type: 3}

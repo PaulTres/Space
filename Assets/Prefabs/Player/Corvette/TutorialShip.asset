@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfedb6d21c35d604881cb6821d618a01, type: 3}
   m_Name: TutorialShip
   m_EditorClassIdentifier: SpaceAssembly::PlayerData
-  Prefab: {fileID: 4806948260955247559, guid: 3ef9ccc55eadb9a4a80cca5c30af2aed, type: 3}
+  Prefab: {fileID: 8652306919859902006, guid: a0b27737459ee254fac516457950d529, type: 3}
   ShouldBeDisabled: 1
   Points: 1
   description: 

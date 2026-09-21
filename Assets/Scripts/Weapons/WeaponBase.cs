@@ -68,6 +68,11 @@ namespace Weapons
         #endregion
 
         #region Setup
+        protected void OnValidate()
+        {
+            if (shootPoints.IsEmpty()) shootPoints = new Transform[] { transform };
+        }
+
         protected virtual void Awake()
         {
             Debug.Assert(@params != null, $"{transform} has no Weapons parameters!");
