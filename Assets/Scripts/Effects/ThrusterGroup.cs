@@ -15,6 +15,7 @@ public class ThrusterGroup : MonoBehaviour
 
     protected void OnEnable()
     {
+        editorTest = false;
         SetScale(minScale);
     }
 
@@ -24,7 +25,7 @@ public class ThrusterGroup : MonoBehaviour
         {
             for (int i = 0; i < transform.childCount; i++) thrusterEffects.Add(transform.GetChild(i));
         }
-        if (editorTest && !EditorApplication.isPlaying)
+        if (editorTest)
         {
             //editorTest = false;
             SetScale(testScale);

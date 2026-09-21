@@ -314,8 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 2614708294082672166}
   magazine: {fileID: 0}
 --- !u!1 &1257122253931334607
 GameObject:
@@ -365,9 +366,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 88a5e7c8bc8a5004fbc7318feda96fc7, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 4896502162690219387}
+  <ElevationPivot>k__BackingField: {fileID: 4896502162690219387}
+  params: {fileID: 11400000, guid: 807ec4ea6de7f454eb24212b22a09ef0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -495,9 +496,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 1515411805762385534}
+  <ElevationPivot>k__BackingField: {fileID: 1515411805762385534}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -514,8 +515,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 1515411805762385534}
 --- !u!1 &1700261710837518039
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,8 +562,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 2470245879321529585}
   magazine: {fileID: 0}
 --- !u!1 &1782047238128776795
 GameObject:
@@ -835,9 +838,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 8942560537340087679}
+  <ElevationPivot>k__BackingField: {fileID: 8942560537340087679}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -854,8 +857,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 8942560537340087679}
 --- !u!1 &2918617844185437483
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,9 +905,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 868393469472632507}
+  <ElevationPivot>k__BackingField: {fileID: 868393469472632507}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -920,8 +924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 868393469472632507}
 --- !u!1 &2953729292324385384
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,9 +972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 6729933788648644162}
+  <ElevationPivot>k__BackingField: {fileID: 6729933788648644162}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -986,8 +991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 6729933788648644162}
 --- !u!1 &3200606404892237295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1064,9 +1070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 223342634985786629}
+  <ElevationPivot>k__BackingField: {fileID: 223342634985786629}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1083,8 +1089,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 223342634985786629}
 --- !u!1 &3975938247226524839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,9 +1137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 8696765381729195127}
+  <ElevationPivot>k__BackingField: {fileID: 8696765381729195127}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1149,8 +1156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 8696765381729195127}
 --- !u!1 &4174044015691863414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,8 +1473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 8395417844131697046}
   magazine: {fileID: 0}
 --- !u!1 &5391001820883480248
 GameObject:
@@ -1543,8 +1552,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 8139427528470656300}
   magazine: {fileID: 0}
 --- !u!1 &5550956937340738942
 GameObject:
@@ -1591,9 +1601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 4343272142817045468}
+  <ElevationPivot>k__BackingField: {fileID: 4343272142817045468}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -1610,8 +1620,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 4343272142817045468}
 --- !u!1 &5791388006214924271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 30
+  <MaxVelocityMagnitude>k__BackingField: 10
   <IsDying>k__BackingField: 0
   <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 100
@@ -1730,22 +1741,23 @@ MonoBehaviour:
   collisionCheckers:
   - {fileID: 5586086991175637683}
   damageTakingObjects:
-  - {fileID: 4157057268716219425}
+  - {fileID: -6447535271087096248}
   - {fileID: 8614688761047979986}
+  - {fileID: 4157057268716219425}
   <PlaySpawnEffect>k__BackingField: 1
   unitParameters:
     MoraleWeight: 200
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 30
-    <MaximumSignature>k__BackingField: 31
+    <MinimumSignature>k__BackingField: 60
+    <MaximumSignature>k__BackingField: 200
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
     ScanRange: 80
     SpawnCheckRadius: 15
-  forwardThrust: 30
-  <RotationSpeed>k__BackingField: 40
-  strafeThrust: 30
+  forwardThrust: 10
+  <RotationSpeed>k__BackingField: 20
+  strafeThrust: 5
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -1765,10 +1777,10 @@ MonoBehaviour:
   effectDuringDeath: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   finalEffect: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   explosionOriginsParent: {fileID: 3988468671292186863}
-  interval: 0.5
-  count: 3
-  effectScaleFactor: 2
-  finalEffectScaleFactor: 10
+  interval: 0.25
+  count: 8
+  effectScaleFactor: 4
+  finalEffectScaleFactor: 20
 --- !u!114 &-6447535271087096248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,8 +1999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 5880388974176840359}
   magazine: {fileID: 0}
 --- !u!1 &6826328342408970602
 GameObject:
@@ -2034,8 +2047,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 7746786460584767969}
   magazine: {fileID: 0}
 --- !u!1 &6925981963127992980
 GameObject:
@@ -2136,8 +2150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 8479066736981537566}
   magazine: {fileID: 0}
 --- !u!1 &7239595765750501639
 GameObject:
@@ -2187,9 +2202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 88a5e7c8bc8a5004fbc7318feda96fc7, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 3984184025898419372}
+  <ElevationPivot>k__BackingField: {fileID: 3984184025898419372}
+  params: {fileID: 11400000, guid: 807ec4ea6de7f454eb24212b22a09ef0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -2239,9 +2254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 6e83c0fc2673d254db3190a77e514dc0, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 1409316940673891122}
+  <ElevationPivot>k__BackingField: {fileID: 1409316940673891122}
+  params: {fileID: 11400000, guid: ff757d8e232f74840939289aa438a997, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -2258,8 +2273,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991f2039650c1a64fb0493bde99359ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
-  params: {fileID: 11400000, guid: a7e9285891575a44ea06f0d8a7a63243, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: dd3f416dc41bda9429f8d95c99b6ab78, type: 2}
+  shootPoints:
+  - {fileID: 1409316940673891122}
 --- !u!1 &7765642925470857398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,9 +2324,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
-  params: {fileID: 11400000, guid: 88a5e7c8bc8a5004fbc7318feda96fc7, type: 2}
+  <RotationPivot>k__BackingField: {fileID: 705394481052201104}
+  <ElevationPivot>k__BackingField: {fileID: 705394481052201104}
+  params: {fileID: 11400000, guid: 807ec4ea6de7f454eb24212b22a09ef0, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
   <MinRot>k__BackingField: -190
@@ -2449,8 +2465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 6849449235175454145}
   magazine: {fileID: 0}
 --- !u!1 &8561682638615356270
 GameObject:
@@ -2529,8 +2546,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 7307372809124740601}
   magazine: {fileID: 0}
 --- !u!1 &8824384060949052343
 GameObject:
@@ -2576,8 +2594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 3630054102425829526}
   magazine: {fileID: 0}
 --- !u!1 &8968054630268172088
 GameObject:
@@ -2623,8 +2642,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 8248320332374948997}
   magazine: {fileID: 0}
 --- !u!1 &9070899448573693353
 GameObject:
@@ -2760,8 +2780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
-  params: {fileID: 11400000, guid: 79390ca6b9eaaac44932d9cb389f62d6, type: 2}
-  shootPoints: []
+  params: {fileID: 11400000, guid: 022bb42a7cb58ac4a9e758acc9480a83, type: 2}
+  shootPoints:
+  - {fileID: 4058311327582768672}
   magazine: {fileID: 0}
 --- !u!1001 &1834924760874913658
 PrefabInstance:

@@ -15,5 +15,15 @@ MonoBehaviour:
   Prefab: {fileID: 869663278291791814, guid: 398d9007a06829842be7ea502c4d7b17, type: 3}
   ShouldBeDisabled: 1
   Points: 1
-  MissionRequirement: -1
   description: 
+  unitParameters:
+    MoraleWeight: 200
+    TickInterval: 0.2
+    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+    <MinimumSignature>k__BackingField: 60
+    <MaximumSignature>k__BackingField: 200
+    SignatureDecreaseRate: 0.1
+    SignatureDecreaseCooldown: 5
+    ScanRange: 80
+    SpawnCheckRadius: 15
+  takeParametersFromPrefab: 0
