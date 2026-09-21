@@ -259,7 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 2936430226561886086}
   magazine: {fileID: 0}
 --- !u!1 &774593773413929585
 GameObject:
@@ -519,7 +520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: 50f1a8c44085c2540a12e440627ef720, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6363158328736825077}
 --- !u!114 &1589431688585848239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,7 +1605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: 50f1a8c44085c2540a12e440627ef720, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 8790829610938791979}
 --- !u!114 &1196607311068048026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2040,7 +2043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 884294290853878421}
   magazine: {fileID: 0}
 --- !u!1 &6607713091641064411
 GameObject:
@@ -2530,7 +2534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 362613799950397271}
   magazine: {fileID: 0}
 --- !u!1 &7652457627130930784
 GameObject:
@@ -2577,7 +2582,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 1104536905290140250}
   magazine: {fileID: 0}
 --- !u!1 &7669211597398602420
 GameObject:
@@ -2959,7 +2965,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 7873370700347196141}
   magazine: {fileID: 0}
 --- !u!1 &8480232319870596122
 GameObject:
@@ -3048,7 +3055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8401642456857426593
 Transform:
   m_ObjectHideFlags: 0
@@ -3259,7 +3266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: ee38cdde7ee1d6344a30e022766a7c07, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6293910193127515569}
   magazine: {fileID: 0}
 --- !u!1 &9137535822175454342
 GameObject:

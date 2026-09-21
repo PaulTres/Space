@@ -50,7 +50,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6717120728570219876, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
       propertyPath: m_Name
-      value: Player_Corvette Variant
+      value: TutorialShip
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519565663567784279, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
+      propertyPath: ammoReplenishmentTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8519565663567784279, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
+      propertyPath: ammoReplenishmentAmount
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8991542081120678977, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
       propertyPath: invulnerable

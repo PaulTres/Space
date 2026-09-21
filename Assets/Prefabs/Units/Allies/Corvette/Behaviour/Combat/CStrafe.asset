@@ -22,5 +22,5 @@ MonoBehaviour:
   strafeMagnitude: 10
   UseOptimalFiringRange: 1
   distanceBuffer: -10
-  strafeDirections: 020000000100000000000000
+  strafeDirections: 010000000000000002000000
   maxDistance: 80
