@@ -115,7 +115,7 @@ namespace Level
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
-                ExecuteAction(() => GameManager.Player.gameObject.SetActive(false), GlobalConfig.MissionFailureEndDuration);
+                ExecuteAction(() => GameManager.Player.MissionFailed(), GlobalConfig.MissionFailureEndDuration);
             }
         }
     }

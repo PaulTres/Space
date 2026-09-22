@@ -392,7 +392,7 @@ MonoBehaviour:
   spawnOptions:
   - Difficulty: Easy
     Options:
-    - {fileID: 11400000, guid: 49b86baa349d9134d9cf4e7131874b35, type: 2}
+    - {fileID: 11400000, guid: ca80600cada3f0147b1eb800a55dbb36, type: 2}
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1

@@ -16,7 +16,7 @@ namespace Level
         [SerializeField] protected bool spawnOnAwake = true;
         public UnityEvent OnAllUnitsSpawned, OnAllUnitsDestroyed;
         protected List<Unit> units;
-        protected int unitCount;
+        protected int unitCount = 0;
 
         protected void Awake()
         {
@@ -31,12 +31,12 @@ namespace Level
         /// <param name="event"></param>
         public void OnUnitDestroyed(ObjectDestroyed @event)
         {
-            //Debug.Log($"Wave.OnUnitDestroyed: {@event}");
+            Debug.Log($"Wave.OnUnitDestroyed: {@event}");
             EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
             unitCount--;
             if (unitCount <= 0)
             {
-                //Debug.Log("ConcreteWave destroyed");
+                Debug.Log($"{transform} destroyed");
                 OnAllUnitsDestroyed?.Invoke();
             }
         }

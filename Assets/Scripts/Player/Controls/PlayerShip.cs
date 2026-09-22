@@ -306,6 +306,12 @@ namespace Player
             DisableCallbacks();
             base.Die(@event);
         }
+
+        public void MissionFailed()
+        {
+            IsDying = true;
+            gameObject.SetActive(false);
+        }
         #endregion
     }
 }

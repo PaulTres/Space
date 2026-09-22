@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utilities;
 
 namespace Level
 {
@@ -25,16 +26,32 @@ namespace Level
         {
             for (int i = 0; i < spawnOptions.Count; i++)
             {
+                List<PlayerData> toRemove = null;
                 spawnOptions[i].Difficulty = GlobalConfig.DifficultyText(i);
                 foreach (var option in spawnOptions[i].Options)
                 {
-                    if (option == null) continue;
-                    if (option.name.Contains("Player") || option.name.Contains("Tutorial"))
+                    if (option == null)
                     {
-                        Debug.LogError($"{GlobalConfig.DifficultyText(i)} difficulty spawn options on {transform} contain player ships!");
+                        Debug.LogWarning($"{GlobalConfig.DifficultyText(i)} difficulty spawn options on {transform} contain empty ships!");
+                        continue;
+                    }
+                    var a = option as PlayerData;
+                    if (a != null)
+                    {
+                        Debug.LogError($"{GlobalConfig.DifficultyText(i)} difficulty spawn options on {transform} contain player ships: {a}! Removing!");
+                        toRemove ??= new();
+                        toRemove.Add(a);
+                    }
+                }
+                if (!toRemove.IsEmpty())
+                {
+                    foreach (var a in toRemove)
+                    {
+                        spawnOptions[i].Options.Remove(a);
                     }
                 }
             }
+
         }
 
         public void OnDrawGizmos()

@@ -11,7 +11,7 @@ public class UnitDeathEffects : MonoBehaviour
     [Tooltip("Will play this effect at the end of the death sequence.")]
     [SerializeField] protected PoolableEffect finalEffect;
     [SerializeField] protected Transform explosionOriginsParent;
-    protected List<Transform> explosionOrigins = new();
+    [SerializeField] protected List<Transform> explosionOrigins = new();
     [SerializeField] protected float interval = .5f;
     [SerializeField] protected float count = 3;
     [SerializeField] protected float effectScaleFactor = 1, finalEffectScaleFactor = 5;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 782196528803592247}
   - component: {fileID: 3631511395967583101}
   - component: {fileID: 2935612521407029362}
+  - component: {fileID: 5834217629255433718}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -89,6 +90,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &782196528803592247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +107,8 @@ MonoBehaviour:
   effectDuringDeath: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   finalEffect: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   explosionOriginsParent: {fileID: 5648411613077108597}
+  explosionOrigins:
+  - {fileID: 3283974195354147744}
   interval: 0.5
   count: 3
   effectScaleFactor: 0.1
@@ -121,9 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Navigation
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 20
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
@@ -131,19 +135,7 @@ MonoBehaviour:
   damageTakingObjects:
   - {fileID: 3241190921106244426}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 0}
-    <MinimumSignature>k__BackingField: 0
-    <MaximumSignature>k__BackingField: 0
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 10
-    SpawnCheckRadius: 5
-  forwardThrust: 1
-  <RotationSpeed>k__BackingField: 5
-  strafeThrust: 1
+  <Parameters>k__BackingField: {fileID: 5834217629255433718}
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -164,6 +156,32 @@ MonoBehaviour:
   - {fileID: 62546170232985336}
   armorModifiers: []
   body: {fileID: 4574056048664456169}
+--- !u!114 &5834217629255433718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471856228708017344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
+  MaxVelocityMagnitude: 30
+  MoraleWeight: 10
+  TickInterval: 0.2
+  EffectOnSpawn: {fileID: 0}
+  MinimumSignature: 10
+  MaximumSignature: 50
+  SignatureDecreaseRate: 0.1
+  SignatureDecreaseCooldown: 5
+  ScanRange: 30
+  SpawnCheckRadius: 5
+  EffectScaleFactor: 1
+  ForwardThrust: 15
+  StrafeThrust: 15
+  RotationSpeed: 50
 --- !u!1 &1647923958169389802
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,8 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  <RotationPivot>k__BackingField: {fileID: 5148691603424548254}
+  <ElevationPivot>k__BackingField: {fileID: 5148691603424548254}
   params: {fileID: 11400000, guid: d1f37f08525345f48bf60b72f0659d86, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
@@ -317,7 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: d535c5639df8cb4458babc1d5b39975d, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 5148691603424548254}
 --- !u!114 &6039548699851361486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,8 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  <RotationPivot>k__BackingField: {fileID: 3948264059839932059}
+  <ElevationPivot>k__BackingField: {fileID: 3948264059839932059}
   params: {fileID: 11400000, guid: d1773223d648b4141b388c0b445e49e9, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
@@ -453,7 +472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 72703f626daec094796a1c53f5b5fbb2, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 568696518030576296}
   magazine: {fileID: 0}
 --- !u!1001 &4037647620155364137
 PrefabInstance:
