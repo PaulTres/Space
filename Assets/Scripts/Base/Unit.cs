@@ -11,31 +11,9 @@ using Weapons;
 
 [RequireComponent(typeof(HPComponent))]
 [RequireComponent(typeof(UnitDeathEffects))]
+[RequireComponent(typeof(ShipParameters))]
 public abstract class Unit : ImprovedMonoBehaviour
 {
-    [System.Serializable]
-    public class UnitParameters
-    {
-        [Tooltip("How much morale damage will allies suffer when this unit is destroyed.")]
-        public int MoraleWeight = 10;
-        public float TickInterval = 0.2f;
-        [Tooltip("Plays when the ship is spawned in.")]
-        public PoolableEffect EffectOnSpawn;
-        [field: SerializeField] public float MinimumSignature { get; set; } = 10;
-        [field: SerializeField] public float MaximumSignature { get; set; } = 50;
-        public float SignatureDecreaseRate = 0.1f;
-        [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
-        public float SignatureDecreaseCooldown = 5f;
-        public float ScanRange = 30;
-        [Tooltip("On spawn, the unit will check for obstructions in a sphere of this radius.")]
-        public float SpawnCheckRadius = 5;
-
-        public void Validate()
-        {
-            MaximumSignature = Mathf.Max(MinimumSignature + 1, MaximumSignature);
-        }
-    }
-
     #region Fields
     #region Misc
     [Header("Unit")]
@@ -56,7 +34,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public override float CurrentSignature => currentSignature;
     #endregion
 
-    [SerializeField] protected UnitParameters unitParameters;
+    [field: SerializeField] public ShipParameters Parameters { get; protected set; }
     protected UnitDeathEffects deathEffects;
 
     #region HP
@@ -75,12 +53,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
-    public UnitParameters Parameters
-    {
-        set => unitParameters = value;
-        get => unitParameters;
-    }
-    public PoolableEffect SpawnEffect => unitParameters.EffectOnSpawn;
+    public override float EffectScaleFactor => Parameters.EffectScaleFactor;
+    public PoolableEffect SpawnEffect => Parameters.EffectOnSpawn;
     public UnitDeathEffects UnitDeathEffects
     {
         get
@@ -89,10 +63,10 @@ public abstract class Unit : ImprovedMonoBehaviour
             return deathEffects;
         }
     }
-    public float SpawnCheckRadius => unitParameters.SpawnCheckRadius;
-    public override int MoraleWeight => unitParameters.MoraleWeight;
-    public float MaximumSignature => unitParameters.MaximumSignature;
-    public float MinimumSignature => unitParameters.MinimumSignature;
+    public float SpawnCheckRadius => Parameters.SpawnCheckRadius;
+    public override int MoraleWeight => Parameters.MoraleWeight;
+    public float MaximumSignature => Parameters.MaximumSignature;
+    public float MinimumSignature => Parameters.MinimumSignature;
     protected WaitForSeconds wait;
     protected Coroutine tickCoroutine;
     protected float signatureDecreaseDelay;
@@ -100,7 +74,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         get
         {
-            return IsFleeing ? 0 : unitParameters.ScanRange;
+            return IsFleeing ? 0 : Parameters.ScanRange;
         }
     }
     public float CurrentMorale
@@ -121,15 +95,15 @@ public abstract class Unit : ImprovedMonoBehaviour
         //Debug.Assert(!damageTakingObjects.IsEmpty(), $"{Transform} has no critical objects set!");
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
-        wait = new(unitParameters.TickInterval);
+        wait = new(Parameters.TickInterval);
         ComponentRegister<Unit>.Register(Transform.root, this);
         foreach (var t in Turrets) onTick += t.UpdateTargets;
         EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(this), Die);
         MaxVelocityMagnitude *= GlobalConfig.GetUnitSpeedModifier(Team);
         var signatureModifier = GlobalConfig.GetSignatureModifier(Team);
-        unitParameters.MaximumSignature *= signatureModifier;
-        unitParameters.MinimumSignature *= signatureModifier;
-        unitParameters.ScanRange *= GlobalConfig.GetScanRangeModifier(Team);
+        Parameters.MaximumSignature *= signatureModifier;
+        Parameters.MinimumSignature *= signatureModifier;
+        Parameters.ScanRange *= GlobalConfig.GetScanRangeModifier(Team);
     }
 
     protected virtual void OnEnable()
@@ -141,9 +115,9 @@ public abstract class Unit : ImprovedMonoBehaviour
         currentSignature = MinimumSignature;
         UnitManager.Register(this);
         signatureDecreaseDelay = Time.time;
-        if (PlaySpawnEffect && unitParameters.EffectOnSpawn != null)
+        if (PlaySpawnEffect && Parameters.EffectOnSpawn != null)
         {
-            unitParameters.EffectOnSpawn.SpawnEffect(Position, EffectScaleFactor);
+            Parameters.EffectOnSpawn.SpawnEffect(Position, EffectScaleFactor);
         }
     }
 
@@ -152,7 +126,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (damageTakingObjects.IsEmpty()) damageTakingObjects = new(GetComponentsInChildren<DamageReceiver>());
         Debug.Assert(damageTakingObjects.Count > 0, $"{Transform} has no objects for taking damage!");
         Debug.Assert(!collisionCheckers.IsEmpty(), $"{Transform} has no objects for handling collisions!");
-        unitParameters?.Validate();
+        if (Parameters == null)
+        {
+            Parameters = GetComponent<ShipParameters>();
+            MaxVelocityMagnitude = Parameters.MaxVelocityMagnitude;
+        }
     }
 
     /// <summary>
@@ -194,7 +172,7 @@ public abstract class Unit : ImprovedMonoBehaviour
             yield return wait;
             GetSurroundingMissiles();
             onTick?.Invoke();
-            DecreaseSignature(unitParameters.TickInterval);
+            DecreaseSignature(Parameters.TickInterval);
         }
     }
 
@@ -224,9 +202,9 @@ public abstract class Unit : ImprovedMonoBehaviour
 
     protected virtual void DecreaseSignature(float deltaTime)
     {
-        if (Time.time - signatureDecreaseDelay < unitParameters.SignatureDecreaseCooldown) return;
+        if (Time.time - signatureDecreaseDelay < Parameters.SignatureDecreaseCooldown) return;
         currentSignature = Mathf.Max(MinimumSignature,
-            CurrentSignature - unitParameters.SignatureDecreaseRate * deltaTime);
+            CurrentSignature - Parameters.SignatureDecreaseRate * deltaTime);
     }
 
     /// <summary>
@@ -266,6 +244,8 @@ public abstract class Unit : ImprovedMonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawLine(Transform.position, Target.Position);
         }
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(Transform.position, EffectScaleFactor);
     }
     #endregion
 }

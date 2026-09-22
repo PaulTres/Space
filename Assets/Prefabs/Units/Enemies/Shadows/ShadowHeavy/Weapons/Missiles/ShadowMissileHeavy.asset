@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileData
   Prefab: {fileID: 2013506230279709725, guid: 5f3ff8a9e7181d74d991f38cf24839c2, type: 3}
   Key: 3
-  RaiseEventOnRecycle: 0
   ValidateData: 1
   DisableOnHit: 1
   Damage: 4
@@ -22,9 +21,9 @@ MonoBehaviour:
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 0}
   OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
-  TopSpeed: 25
+  TopSpeed: 50
   Acceleration: 5
-  InitialVelocity: 5
+  InitialVelocity: 20
   InertialDampeners: 1
   ScaleFactor: 1
   RendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
@@ -34,7 +33,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.1
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -42,7 +41,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
+      time: 0.35
       value: 0
       inSlope: 0
       outSlope: 0
@@ -53,6 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  resetCurve: 0
   Tracking: 10
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7

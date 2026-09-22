@@ -73,6 +73,7 @@ namespace Weapons
         protected float lifeTime;
         protected PoolableEffect onSpawnEffect, onHitEffect;
         protected float effectScaleFactor;
+        public override float EffectScaleFactor => effectScaleFactor;
         public override float CurrentSignature => 0;
         public override float ScanRange => 0;
         #endregion

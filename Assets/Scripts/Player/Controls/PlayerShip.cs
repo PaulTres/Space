@@ -36,7 +36,7 @@ namespace Player
         protected Vector3 movementVector;
         protected bool freeLook;
         protected float rollInput;
-        protected Transform cam => cameraData.CameraTransform;
+        public Transform Cam => cameraData.CameraTransform;
         public override Vector3 Forward => shipBody.forward;
         public override Vector3 Right => shipBody.right;
         public override Vector3 Up => shipBody.up;
@@ -156,8 +156,8 @@ namespace Player
 
         public void OnZoom(InputAction.CallbackContext context)
         {
-            cam.localPosition = new Vector3(cam.localPosition.x, cam.localPosition.y,
-               Mathf.Clamp(cam.localPosition.z + context.ReadValue<float>() * cameraData.ZoomSpeed, cameraData.MinZoom, cameraData.MaxZoom));
+            Cam.localPosition = new Vector3(Cam.localPosition.x, Cam.localPosition.y,
+               Mathf.Clamp(Cam.localPosition.z + context.ReadValue<float>() * cameraData.ZoomSpeed, cameraData.MinZoom, cameraData.MaxZoom));
         }
 
         public void OnReset(InputAction.CallbackContext context)
@@ -194,7 +194,7 @@ namespace Player
 
         protected void ResetCamera()
         {
-            cam.localPosition = defaultCamPos;
+            Cam.localPosition = defaultCamPos;
             cameraData.FreelookCameraPivot.localRotation = Quaternion.identity;
         }
 
@@ -204,9 +204,9 @@ namespace Player
             Vector3 intendedVelocity;
             if (!Dampeners)
             {
-                intendedVelocity = movementVector.z * forwardThrust * shipBody.forward +
-                    movementVector.x * strafeThrust * shipBody.right +
-                    movementVector.y * strafeThrust * shipBody.up;
+                intendedVelocity = movementVector.z * ForwardThrust * shipBody.forward +
+                    movementVector.x * StrafeThrust * shipBody.right +
+                    movementVector.y * StrafeThrust * shipBody.up;
             }
             else
             {
@@ -215,7 +215,7 @@ namespace Player
                 {
                     //apply counterforce
                     var error = Vector3.ClampMagnitude(Vector3.Project(LinearVelocity,
-                        Right), strafeThrust);
+                        Right), StrafeThrust);
                     intendedVelocity -= error;
                 }
 
@@ -223,7 +223,7 @@ namespace Player
                 {
                     //apply counterforce
                     var error = Vector3.ClampMagnitude(Vector3.Project(LinearVelocity,
-                        Up), strafeThrust);
+                        Up), StrafeThrust);
                     intendedVelocity -= error;
                 }
 
@@ -232,15 +232,15 @@ namespace Player
                     var error = Vector3.Project(LinearVelocity, Forward);
                     if (Vector3.Dot(error, Forward) < 0)
                     {
-                        error = Vector3.ClampMagnitude(error, strafeThrust);
+                        error = Vector3.ClampMagnitude(error, StrafeThrust);
                     }
-                    else error = Vector3.ClampMagnitude(error, forwardThrust);
+                    else error = Vector3.ClampMagnitude(error, ForwardThrust);
                     intendedVelocity -= error;
                 }
 
-                intendedVelocity += movementVector.z * forwardThrust * shipBody.forward +
-                    movementVector.x * strafeThrust * shipBody.right +
-                    movementVector.y * strafeThrust * shipBody.up;
+                intendedVelocity += movementVector.z * ForwardThrust * shipBody.forward +
+                    movementVector.x * StrafeThrust * shipBody.right +
+                    movementVector.y * StrafeThrust * shipBody.up;
             }
 
             rb.AddForce(intendedVelocity, ForceMode.Acceleration);

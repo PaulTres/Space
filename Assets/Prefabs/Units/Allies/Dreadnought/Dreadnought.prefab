@@ -1715,7 +1715,7 @@ MonoBehaviour:
   - {fileID: 4569408500921534910}
   - {fileID: 8566181946016584266}
   - {fileID: 1605212292017356688}
-  effectOnDamage: {fileID: 0}
+  effectOnDamage: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0

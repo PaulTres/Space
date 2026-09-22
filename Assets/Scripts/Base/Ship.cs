@@ -5,10 +5,9 @@ using Utilities;
 public abstract class Ship : Unit
 {
     #region Fields
-    [Header("Ship")]
-    [SerializeField] protected float forwardThrust = 1;
-    [field: SerializeField] public float RotationSpeed { get; protected set; } = 50;
-    [SerializeField] protected float strafeThrust = 1;
+    public float ForwardThrust => Parameters.ForwardThrust;
+    public float RotationSpeed => Parameters.RotationSpeed;
+    public float StrafeThrust => Parameters.StrafeThrust;
     protected ThrusterGroup thrusters;
     protected Rigidbody rb;
     protected Vector3 angularVelocity;
@@ -29,9 +28,9 @@ public abstract class Ship : Unit
         rb.freezeRotation = true;
         rb.linearDamping = 0;
         var speedModifier = GlobalConfig.GetUnitSpeedModifier(Team);
-        strafeThrust *= speedModifier;
-        forwardThrust *= speedModifier;
-        RotationSpeed *= speedModifier;
+        Parameters.StrafeThrust *= speedModifier;
+        Parameters.ForwardThrust *= speedModifier;
+        Parameters.RotationSpeed *= speedModifier;
     }
 
     protected override void OnEnable()

@@ -3049,6 +3049,7 @@ GameObject:
   - component: {fileID: 5116531328898741344}
   - component: {fileID: 7987621152319063558}
   - component: {fileID: 6817029928100313654}
+  - component: {fileID: 4154133033822401550}
   m_Layer: 0
   m_Name: IPCFrigate
   m_TagString: Untagged
@@ -3173,9 +3174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Navigation
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 20
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 5
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
@@ -3187,19 +3187,7 @@ MonoBehaviour:
   - {fileID: 7723822516522480258}
   - {fileID: 809488385176420615}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 20
-    <MaximumSignature>k__BackingField: 80
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 50
-    SpawnCheckRadius: 6
-  forwardThrust: 15
-  <RotationSpeed>k__BackingField: 40
-  strafeThrust: 10
+  <Parameters>k__BackingField: {fileID: 4154133033822401550}
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -3221,6 +3209,32 @@ MonoBehaviour:
   shouldTick: 1
   maxThreats: 1
   minEscortValue: 10
+--- !u!114 &4154133033822401550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8774651058757072463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
+  MaxVelocityMagnitude: 25
+  MoraleWeight: 25
+  TickInterval: 0.2
+  EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+  MinimumSignature: 30
+  MaximumSignature: 80
+  SignatureDecreaseRate: 0.1
+  SignatureDecreaseCooldown: 5
+  ScanRange: 60
+  SpawnCheckRadius: 5
+  EffectScaleFactor: 1
+  ForwardThrust: 20
+  StrafeThrust: 15
+  RotationSpeed: 50
 --- !u!1 &8924171453400903611
 GameObject:
   m_ObjectHideFlags: 0

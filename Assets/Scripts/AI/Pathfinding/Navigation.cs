@@ -81,7 +81,7 @@ public class Navigation : Ship
             return;
         }
         NavPivot.LookAt(Destination.Value);
-        Vector3 direction = Destination.Value - transform.position;
+        Vector3 direction = Destination.Value - Transform.position;
         if (direction.magnitude <= StopDistance || Vector3.Distance(transform.position,
             Destination.Value) <= StopDistance)
         {
@@ -129,7 +129,7 @@ public class Navigation : Ship
     protected void ApplyDampeners(Vector3 intendedVelocity, float deltaTime)
     {
         rb.linearVelocity = Vector3.MoveTowards(rb.linearVelocity,
-            intendedVelocity, strafeThrust * deltaTime);
+            intendedVelocity, StrafeThrust * deltaTime);
     }
 
     protected void MoveTowards(Vector3 direction, float deltaTime)
@@ -140,7 +140,7 @@ public class Navigation : Ship
         if (Dampeners) ApplyDampeners(direction, deltaTime);
         if (Vector3.Angle(transform.forward, direction) <= angleToForward)
         {
-            rb.linearVelocity += forwardThrust * deltaTime * direction.normalized;
+            rb.linearVelocity += ForwardThrust * deltaTime * direction.normalized;
             if (thrusters != null) thrusters.Increase(deltaTime);
         }
         else if (thrusters != null) thrusters.Decrease(deltaTime);

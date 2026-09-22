@@ -24,6 +24,8 @@ public class DestructableComponent : ImprovedMonoBehaviour
     [SerializeField] protected PoolableEffect effectOnDestruction;
     [Tooltip("When the object is destroyed the owning unit will receive this much damage.")]
     [SerializeField] protected float damageOnDestroy;
+    [SerializeField] protected float effectScaleFactor = 1;
+    public override float EffectScaleFactor => effectScaleFactor;
     public override float CurrentSignature => OwningUnit.CurrentSignature;
     public override float ScanRange => OwningUnit.ScanRange;
     public override bool IsFleeing => OwningUnit.IsFleeing;
@@ -59,7 +61,7 @@ public class DestructableComponent : ImprovedMonoBehaviour
         //Debug.Log($"{Transform} is dead.");
         UnitManager.Unregister(this);
         if (remains != null) remains.SetActive(true);
-        effectOnDestruction.SpawnEffect(Position, EffectScaleFactor);
+        effectOnDestruction.SpawnEffect(Position, effectScaleFactor);
         var damageInfo = new DamageInfo
         {
             Position = Position,

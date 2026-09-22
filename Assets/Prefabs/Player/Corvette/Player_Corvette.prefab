@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Player.PlayerShip
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 20
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
   <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
@@ -237,9 +237,9 @@ MonoBehaviour:
     SignatureDecreaseCooldown: 5
     ScanRange: 30
     SpawnCheckRadius: 5
-  forwardThrust: 1
+  forwardThrust: 25
   <RotationSpeed>k__BackingField: 50
-  strafeThrust: 1
+  strafeThrust: 20
   <Dampeners>k__BackingField: 1
   shipBody: {fileID: 6003703947580855234}
   cameraData:

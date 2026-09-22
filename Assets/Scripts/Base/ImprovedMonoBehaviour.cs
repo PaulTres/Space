@@ -45,9 +45,9 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     }
     public abstract float CurrentSignature { get; }
     public abstract float ScanRange { get; }
+    public abstract float EffectScaleFactor { get; }
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
     [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
-    [field: SerializeField] public float EffectScaleFactor { get; protected set; } = 1;
     [field: SerializeField] public float EscortValue { get; protected set; } = 0;
     public void RegisterForRadar()
     {

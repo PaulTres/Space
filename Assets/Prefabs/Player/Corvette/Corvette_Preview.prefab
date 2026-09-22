@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704390426362774997, guid: a0b27737459ee254fac516457950d529, type: 3}
       propertyPath: m_Name
-      value: ModelPreview
+      value: Corvette_Preview
       objectReference: {fileID: 0}
     - target: {fileID: 4704390426362774997, guid: a0b27737459ee254fac516457950d529, type: 3}
       propertyPath: m_IsActive
@@ -74,9 +74,11 @@ PrefabInstance:
     - {fileID: 3003893937359333346, guid: a0b27737459ee254fac516457950d529, type: 3}
     - {fileID: 7142217120570642922, guid: a0b27737459ee254fac516457950d529, type: 3}
     - {fileID: 7676232514515359343, guid: a0b27737459ee254fac516457950d529, type: 3}
+    - {fileID: 8158233766027696982, guid: a0b27737459ee254fac516457950d529, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4950282350977309558, guid: a0b27737459ee254fac516457950d529, type: 3}
     - {fileID: 4832317168440400336, guid: a0b27737459ee254fac516457950d529, type: 3}
+    - {fileID: 3077852530729894470, guid: a0b27737459ee254fac516457950d529, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0b27737459ee254fac516457950d529, type: 3}

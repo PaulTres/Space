@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using static Unit;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/UnitData", fileName = "UnitData")]
 public class UnitData : MonoSpawnableData<Unit>
@@ -73,25 +72,10 @@ public class UnitData : MonoSpawnableData<Unit>
             return "A " + Name + '.';
         }
     }
-    [SerializeField] protected UnitParameters unitParameters;
-    [SerializeField] protected bool takeParametersFromPrefab = true;
-
-    public override Unit CreateInstance()
-    {
-        var a = base.CreateInstance();
-        a.Parameters = unitParameters;
-        return a;
-    }
 
     protected virtual void OnValidate()
     {
         Debug.Assert(Prefab != null, $"Prefab is null for {this}!");
         Debug.Assert(!ShouldBeDisabled || !Prefab.gameObject.activeSelf, $"Prefab {Prefab} is active for {this}!");
-        if (takeParametersFromPrefab && Prefab != null)
-        {
-            takeParametersFromPrefab = false;
-            unitParameters = Prefab.Parameters;
-            Debug.Log($"{this} taking parameters from prefab {Prefab}.");
-        }
     }
 }

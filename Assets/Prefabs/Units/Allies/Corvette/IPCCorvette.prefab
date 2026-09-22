@@ -434,7 +434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: 33351deda03674e4daf602b9e315ad0c, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6041571760282536286}
 --- !u!1 &1498834086568838665
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: f026778b6e4b19149b9c0be1c83a5615, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 4588839310122184212}
   magazine: {fileID: 0}
 --- !u!1 &1544887369226751858
 GameObject:
@@ -1153,7 +1155,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: f026778b6e4b19149b9c0be1c83a5615, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 8901028044798908854}
   magazine: {fileID: 0}
 --- !u!1 &5782399580956495474
 GameObject:
@@ -1532,6 +1535,7 @@ GameObject:
   - component: {fileID: 8175108895417524106}
   - component: {fileID: 482791805492824087}
   - component: {fileID: 2560528211201968833}
+  - component: {fileID: 5968943782017760857}
   m_Layer: 0
   m_Name: IPCCorvette
   m_TagString: Untagged
@@ -1602,7 +1606,7 @@ MonoBehaviour:
   currentHP: 0
   damageEffects:
   - {fileID: 6940619438003792112}
-  effectOnDamage: {fileID: 0}
+  effectOnDamage: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
@@ -1655,9 +1659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Navigation
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 20
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
@@ -1670,19 +1673,7 @@ MonoBehaviour:
   - {fileID: 7515538951725004324}
   - {fileID: 7032982446730799323}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 10
-    <MaximumSignature>k__BackingField: 50
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 30
-    SpawnCheckRadius: 3
-  forwardThrust: 15
-  <RotationSpeed>k__BackingField: 50
-  strafeThrust: 10
+  <Parameters>k__BackingField: {fileID: 5968943782017760857}
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -1704,6 +1695,32 @@ MonoBehaviour:
   shouldTick: 1
   maxThreats: 1
   minEscortValue: 10
+--- !u!114 &5968943782017760857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7109907238248407258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
+  MaxVelocityMagnitude: 30
+  MoraleWeight: 10
+  TickInterval: 0.2
+  EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+  MinimumSignature: 20
+  MaximumSignature: 50
+  SignatureDecreaseRate: 0.1
+  SignatureDecreaseCooldown: 5
+  ScanRange: 40
+  SpawnCheckRadius: 5
+  EffectScaleFactor: 0.5
+  ForwardThrust: 25
+  StrafeThrust: 20
+  RotationSpeed: 50
 --- !u!1 &7321848386537317646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1849,7 +1866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: f026778b6e4b19149b9c0be1c83a5615, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 4806759336014697490}
   magazine: {fileID: 0}
 --- !u!1 &8313424006740695234
 GameObject:

@@ -15,7 +15,6 @@ MonoBehaviour:
   Prefab: {fileID: 482791805492824087, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
   ShouldBeDisabled: 1
   Points: 1
-  MissionRequirement: -1
   description: 
   unitParameters:
     MoraleWeight: 10
