@@ -111,12 +111,13 @@ namespace Level
             if (LockMissionState) Debug.Log("Mission state locked.");
             if (!LockMissionState && GameManager.Player.Active())
             {
-                Debug.Log("Defeat");
+                //Debug.Log("Defeat");
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
                 ExecuteAction(() => GameManager.Player.MissionFailed(), GlobalConfig.MissionFailureEndDuration);
             }
+            //else Debug.Log("Player: " + GameManager.Player.Active());
         }
     }
 }

@@ -50,7 +50,7 @@ MonoBehaviour:
     mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
-    frequentSound: 1
+    frequentSound: 0
     mute: 0
     bypassEffects: 0
     bypassListenerEffects: 0

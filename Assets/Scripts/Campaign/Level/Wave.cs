@@ -20,6 +20,7 @@ namespace Level
 
         protected void Awake()
         {
+            if (transform.name.Equals("Friendly")) OnAllUnitsDestroyed.AddListener(() => Debug.Log("A"));
             spawners = GetComponentsInChildren<NPCSpawner>(true).ToList();
             SpawnInactive();
             if (spawnOnAwake) Spawn();
@@ -31,12 +32,12 @@ namespace Level
         /// <param name="event"></param>
         public void OnUnitDestroyed(ObjectDestroyed @event)
         {
-            Debug.Log($"Wave.OnUnitDestroyed: {@event}");
+            //Debug.Log($"Wave.OnUnitDestroyed: {@event}");
             EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
             unitCount--;
             if (unitCount <= 0)
             {
-                Debug.Log($"{transform} destroyed");
+                //if (transform.name.Equals("Friendly")) Debug.Log($"{transform} destroyed: {OnAllUnitsDestroyed == null}.");
                 OnAllUnitsDestroyed?.Invoke();
             }
         }

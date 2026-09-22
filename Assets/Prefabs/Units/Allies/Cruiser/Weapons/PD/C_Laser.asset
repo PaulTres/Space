@@ -16,11 +16,11 @@ MonoBehaviour:
   Key: 0
   ValidateData: 1
   DisableOnHit: 1
-  Damage: 0.1
+  Damage: 0.5
   LifeTime: 0.1
   EffectScaleFactor: 1
-  OnSpawnEffect: {fileID: 0}
-  OnHitEffect: {fileID: 2825562334673829259, guid: f1f6a180614883b4a860afa131a73cb0, type: 3}
+  OnSpawnEffect: {fileID: 2825562334673829259, guid: f1f6a180614883b4a860afa131a73cb0, type: 3}
+  OnHitEffect: {fileID: 0}
   LaserMaterial: {fileID: 2100000, guid: 9e022624886155b4f8269a1941a81e80, type: 2}
   Range: 10
   LineWidth: 0.1

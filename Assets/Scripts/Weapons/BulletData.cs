@@ -48,6 +48,7 @@ namespace Weapons
             {
                 Debug.LogWarning($"{this} has active prefab!");
             }
+            if (OnSpawnEffect == null) Debug.LogWarning($"{this} has no effect on spawn!");
         }
     }
 }

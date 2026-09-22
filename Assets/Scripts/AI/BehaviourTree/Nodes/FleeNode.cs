@@ -12,7 +12,7 @@ public class FleeNode : LeafNodeData
     [SerializeField] protected PoolableEffect jumpEffect;
     [SerializeField] protected float fleeDistance = 1000;
     [Tooltip("This much time must pass in seconds until the unit can jump out of the battle.")]
-    [SerializeField] protected int requiredJumpCharge = 50;
+    [SerializeField] protected int requiredJumpCharge = 5;
 
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {

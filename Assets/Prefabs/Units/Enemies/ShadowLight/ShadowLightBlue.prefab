@@ -146,10 +146,10 @@ MonoBehaviour:
   <RotationPivot>k__BackingField: {fileID: 3906928593270123133}
   <ElevationPivot>k__BackingField: {fileID: 3906928593270123133}
   params: {fileID: 11400000, guid: 6a59c4d8d74d9594e8a422cf0993deff, type: 2}
-  <MinElevation>k__BackingField: -45
+  <MinElevation>k__BackingField: -90
   <MaxElevation>k__BackingField: 90
-  <MinRot>k__BackingField: -190
-  <MaxRot>k__BackingField: 190
+  <MinRot>k__BackingField: -100
+  <MaxRot>k__BackingField: 100
 --- !u!1 &2030571594334976142
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +326,10 @@ MonoBehaviour:
   effectDuringDeath: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   finalEffect: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   explosionOriginsParent: {fileID: 6416665111217952267}
+  explosionOrigins:
+  - {fileID: 8518595530262455468}
+  - {fileID: 6818798968260738064}
+  - {fileID: 2144426898891625647}
   interval: 0.5
   count: 0
   effectScaleFactor: 1

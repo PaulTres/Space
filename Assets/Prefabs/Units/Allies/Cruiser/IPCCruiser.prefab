@@ -317,7 +317,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 973707587532016634}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 2
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 3
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 1
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 6248035035681808015}
 --- !u!1 &2125750419183422791
 GameObject:
@@ -538,7 +544,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 973707587532016634}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 2
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 3
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 1
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 7468530246111521922}
 --- !u!1 &3392254027149511206
 GameObject:
@@ -1176,7 +1188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 973707587532016634}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 2
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 3
+    <Modifier>k__BackingField: 0.5
+  - <Direction>k__BackingField: 1
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 1955120915635093136}
 --- !u!114 &1936352104582084672
 MonoBehaviour:
@@ -1193,6 +1211,10 @@ MonoBehaviour:
   effectDuringDeath: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   finalEffect: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
   explosionOriginsParent: {fileID: 6837485730963013489}
+  explosionOrigins:
+  - {fileID: 6467592474566528232}
+  - {fileID: 6248035035681808015}
+  - {fileID: 7468530246111521922}
   interval: 0.27
   count: 5
   effectScaleFactor: 2

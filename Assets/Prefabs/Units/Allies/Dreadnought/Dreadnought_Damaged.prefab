@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2365639470239944223, guid: 26e430188ba83064198afe5b84504fc5, type: 3}
       propertyPath: startingHPFraction
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5791388006214924271, guid: 26e430188ba83064198afe5b84504fc5, type: 3}
       propertyPath: m_Name
