@@ -1268,7 +1268,7 @@ MonoBehaviour:
   EffectScaleFactor: 1
   ForwardThrust: 15
   StrafeThrust: 10
-  RotationSpeed: 50
+  RotationSpeed: 30
 --- !u!1 &5293841921732065999
 GameObject:
   m_ObjectHideFlags: 0

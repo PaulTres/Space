@@ -1637,6 +1637,7 @@ GameObject:
   - component: {fileID: 2632581874572510729}
   - component: {fileID: 6801072724722852307}
   - component: {fileID: -6447535271087096248}
+  - component: {fileID: 6018992707332476661}
   m_Layer: 0
   m_Name: Dreadnought
   m_TagString: Untagged
@@ -1733,9 +1734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Navigation
   <Team>k__BackingField: 1
-  <MaxVelocityMagnitude>k__BackingField: 10
+  <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 100
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
@@ -1745,19 +1745,7 @@ MonoBehaviour:
   - {fileID: 8614688761047979986}
   - {fileID: 4157057268716219425}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 200
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 60
-    <MaximumSignature>k__BackingField: 200
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 80
-    SpawnCheckRadius: 15
-  forwardThrust: 10
-  <RotationSpeed>k__BackingField: 20
-  strafeThrust: 5
+  <Parameters>k__BackingField: {fileID: 6018992707332476661}
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -1797,6 +1785,32 @@ MonoBehaviour:
   - {fileID: 2365639470239944223}
   armorModifiers: []
   body: {fileID: 1154501830181603266}
+--- !u!114 &6018992707332476661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5791388006214924271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
+  MaxVelocityMagnitude: 10
+  MoraleWeight: 10
+  TickInterval: 0.2
+  EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+  MinimumSignature: 10
+  MaximumSignature: 50
+  SignatureDecreaseRate: 0.1
+  SignatureDecreaseCooldown: 5
+  ScanRange: 30
+  SpawnCheckRadius: 5
+  EffectScaleFactor: 1
+  ForwardThrust: 10
+  StrafeThrust: 5
+  RotationSpeed: 20
 --- !u!1 &5874578777951851942
 GameObject:
   m_ObjectHideFlags: 0

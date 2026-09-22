@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  <RotationPivot>k__BackingField: {fileID: 3906928593270123133}
+  <ElevationPivot>k__BackingField: {fileID: 3906928593270123133}
   params: {fileID: 11400000, guid: 6a59c4d8d74d9594e8a422cf0993deff, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 2453980469892618478}
   - component: {fileID: 1902977087149361923}
   - component: {fileID: 7722082318002812990}
+  - component: {fileID: 970454256636518834}
   m_Layer: 0
   m_Name: ShadowLightBlue
   m_TagString: Untagged
@@ -241,6 +242,8 @@ MonoBehaviour:
   effectOnDamage: {fileID: 0}
   damageThreshold: 0.5
   effectScaleFactor: 1
+  invulnerable: 0
+  debug: 0
 --- !u!114 &1774245944367702902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +259,6 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
@@ -264,19 +266,7 @@ MonoBehaviour:
   damageTakingObjects:
   - {fileID: 7722082318002812990}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 10
-    <MaximumSignature>k__BackingField: 0
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 20
-    SpawnCheckRadius: 2
-  forwardThrust: 30
-  <RotationSpeed>k__BackingField: 60
-  strafeThrust: 60
+  <Parameters>k__BackingField: {fileID: 970454256636518834}
   <Dampeners>k__BackingField: 1
   <StopDistance>k__BackingField: 0.5
   angleToForward: 10
@@ -356,6 +346,32 @@ MonoBehaviour:
   - {fileID: 6915273950413581737}
   armorModifiers: []
   body: {fileID: 3400584777054074995}
+--- !u!114 &970454256636518834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2030571594334976142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
+  MaxVelocityMagnitude: 30
+  MoraleWeight: 10
+  TickInterval: 0.2
+  EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+  MinimumSignature: 10
+  MaximumSignature: 50
+  SignatureDecreaseRate: 0.1
+  SignatureDecreaseCooldown: 5
+  ScanRange: 30
+  SpawnCheckRadius: 3
+  EffectScaleFactor: 0.5
+  ForwardThrust: 25
+  StrafeThrust: 25
+  RotationSpeed: 40
 --- !u!1 &4891043787746463599
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +454,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.25
   m_Height: 3
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -487,7 +503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
   params: {fileID: 11400000, guid: 770abfe915846004b992607c1afb1cb7, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 991794896181824855}
 --- !u!1 &7873745860024249811
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
   params: {fileID: 11400000, guid: 770abfe915846004b992607c1afb1cb7, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 4034182841248761096}
 --- !u!1 &9214517669697830153
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
   params: {fileID: 11400000, guid: 770abfe915846004b992607c1afb1cb7, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 3753076075513049982}
 --- !u!1001 &4395547189181203004
 PrefabInstance:
   m_ObjectHideFlags: 0
