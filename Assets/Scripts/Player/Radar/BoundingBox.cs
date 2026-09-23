@@ -36,9 +36,9 @@ namespace Radar
         public void Flicker()
         {
             var toggle = BBox.enabled;
-            //Debug.Log(bbox.BBox.enabled);
+            //Debugging.Log(bbox.BBox.enabled);
             BBox.enabled = !toggle;
-            //Debug.Log(bbox.BBox.enabled);
+            //Debugging.Log(bbox.BBox.enabled);
             DistanceText.enabled = !toggle;
             TimeSinceLastFlicker = Time.time;
         }

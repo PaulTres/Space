@@ -70,7 +70,7 @@ namespace HybridBT2
             this.onEnter += (_, _) =>
             {
                 currentChild = 0;
-                //Debug.Log($"Entering {Name}");
+                //Debugging.Log($"Entering {Name}");
             };
         }
 
@@ -81,7 +81,7 @@ namespace HybridBT2
         protected override void ExecuteUnderlyingBehaviour(Blackboard context)
         {
             children[currentChild].Evaluate(context);
-            //Debug.Log($"{Name} evaluated {children[currentChild].Name} with state {children[currentChild].State}.");
+            //Debugging.Log($"{Name} evaluated {children[currentChild].Name} with state {children[currentChild].State}.");
             switch (children[currentChild].State)
             {
                 case NodeState.FAILURE:
@@ -123,19 +123,19 @@ namespace HybridBT2
             {
                 if (prevChild != -1 && !children[i].AlwaysCheck && i != prevChild) continue;
                 children[i].Evaluate(context);
-                //Debug.Log($"{Name} has evaluated {children[i].Name}.");
+                //Debugging.Log($"{Name} has evaluated {children[i].Name}.");
                 if (children[i].State == NodeState.FAILURE)
                 {
                     if (i == children.Count - 1)
                     {
-                        //Debug.Log($"{Name} has failed all children!");
+                        //Debugging.Log($"{Name} has failed all children!");
                         SetState(NodeState.FAILURE, context);
                         return;
                     }
                     SetState(NodeState.RUNNING, context);
                     continue;
                 }
-                //if (Name.Contains("HitAndRun")) Debug.Log(Name + ": " + i + "-" + children[i].Name);
+                //if (Name.Contains("HitAndRun")) Debugging.Log(Name + ": " + i + "-" + children[i].Name);
                 if (prevChild != -1 && i != prevChild)
                 {
                     children[prevChild].Abort(context);

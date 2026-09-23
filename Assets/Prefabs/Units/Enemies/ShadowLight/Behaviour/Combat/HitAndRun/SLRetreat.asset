@@ -17,3 +17,4 @@ MonoBehaviour:
   Conditions: []
   Services: []
   maintainFacing: 1
+  randomRadius: 1

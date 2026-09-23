@@ -76,7 +76,7 @@ namespace Level
             var unit = data.CreateInstance();
             unit.Team = team;
             unit.PlaySpawnEffect = PlaySpawnEffect;
-            //Debug.Log($"Team of {unit.Transform} is {unit.Team}.");
+            //Debugging.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(transform.position +
                 Random.insideUnitSphere * spawnRadius, transform.rotation);
             return unit;

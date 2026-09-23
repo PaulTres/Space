@@ -14,7 +14,7 @@ namespace Weapons
             heatPerShot = data.HeatPerShot;
             heatsink = transform.GetComponentInParent<Heatsink>();
             Debug.Assert(heatsink != null, $"{transform.root} has no heatsink for lasers!");
-            //if (transform.root.name.Contains("Shadow")) Debug.Log(currentShotCooldown);
+            //if (transform.root.name.Contains("Shadow")) Debugging.Log(currentShotCooldown);
         }
 
         public override bool CanShoot()

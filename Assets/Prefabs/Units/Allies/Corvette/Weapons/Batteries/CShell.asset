@@ -16,7 +16,7 @@ MonoBehaviour:
   Key: 1
   ValidateData: 1
   DisableOnHit: 1
-  Damage: 1
+  Damage: 2
   LifeTime: 10
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 985664761693772524, guid: f94698d05bc40c34d8938048281bd674, type: 3}

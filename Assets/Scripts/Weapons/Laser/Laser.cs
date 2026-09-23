@@ -45,7 +45,7 @@ namespace Weapons
                 {
                     Debug.LogError($"{Target} cannot take damage!");
                 }
-                //Debug.Log(Target);
+                //Debugging.Log(Target);
             }
         }
 

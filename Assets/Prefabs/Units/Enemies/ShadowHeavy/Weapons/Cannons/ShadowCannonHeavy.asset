@@ -13,9 +13,34 @@ MonoBehaviour:
   m_Name: ShadowCannonHeavy
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.WeaponData
   MaxShotCooldown: 5
-  RateOfFireRampUp: 0.1
+  RateOfFireRampUp: 0.05
   RateOfFireRampDown: 1
-  MinShotCooldown: 1
+  MinShotCooldown: 4
+  readinessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  resetCurve: 0
   SignatureIncrease: 1
   BulletData: {fileID: 11400000, guid: 2c108f56cc0baa04d93018b6239e1e83, type: 2}
   RequiresOptimalFiringRange: 0

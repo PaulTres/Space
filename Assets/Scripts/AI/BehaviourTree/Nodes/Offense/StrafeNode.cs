@@ -22,8 +22,8 @@ public class StrafeNode : LeafNodeData
     }
 
     public TargetFacingMode TargetFacing;
-    public int TicksBeforeRepath = 10;
-    [SerializeField] protected float strafeMagnitude = 10;
+    public int TicksBeforeRepath = 0;
+    [SerializeField] protected float strafeMagnitude = 1;
     public bool UseOptimalFiringRange = true;
     [SerializeField] protected float distanceBuffer = 0;
     [SerializeField]
@@ -31,10 +31,10 @@ public class StrafeNode : LeafNodeData
     {
         StrafeDirection.Forward,StrafeDirection.Horizontal,StrafeDirection.Vertical
     };
-    /// <summary>
-    /// The strafe distance will never exceed this value. Used to prevent ships from strafing outside their weapon range.
-    /// </summary>
+    [Tooltip("The strafe distance will never exceed this value. Used to prevent ships from strafing outside their weapon range.")]
     [SerializeField] protected float maxDistance = 80;
+    [Tooltip("The distance between the initial destination and intended destination will never exceed this value.")]
+    [SerializeField] protected float maxDistanceDelta = 10;
 
     protected enum InternalKeys
     {
@@ -42,13 +42,13 @@ public class StrafeNode : LeafNodeData
         PrevDirection
     }
 
-    protected Vector3 GetStrafeDirection(Transform transform, StrafeDirection strafeDirection)
+    protected Vector3 GetStrafeDirection(Ship ship, StrafeDirection strafeDirection)
     {
         return strafeDirection switch
         {
-            StrafeDirection.Horizontal => transform.right,
-            StrafeDirection.Vertical => transform.up,
-            StrafeDirection.Forward => transform.forward,
+            StrafeDirection.Horizontal => ship.Right,
+            StrafeDirection.Vertical => ship.Up,
+            StrafeDirection.Forward => ship.Forward,
             _ => throw new Exception($"Invalid strafe direction: {strafeDirection}")
         };
     }
@@ -85,16 +85,16 @@ public class StrafeNode : LeafNodeData
 
             for (int i = 0; i < strafeDirections.Length; i++)
             {
-                strafeDirection = Vector3.ProjectOnPlane(GetStrafeDirection(ctx.Navigation.Transform, strafeDirections[i]), normal);
+                strafeDirection = Vector3.ProjectOnPlane(GetStrafeDirection(ctx.Navigation, strafeDirections[i]), normal);
                 if (strafeDirection.magnitude > 0.3f) break;
             }
             //Debug.Log("Strafing");
             var destination = ctx.Position + strafeDirection * strafeMagnitude;
             //Debug.DrawRay(ctx.Position, strafeDirection * strafeMagnitude, Color.yellow, 2);
-            var targetToDestination = (destination - target.Position).normalized;
+            var targetToDestination = destination - target.Position;
             var dist = Mathf.Min(UseOptimalFiringRange ? target.CurrentSignature +
                 ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer, maxDistance);
-            destination = target.Position + targetToDestination * dist;
+            destination = target.Position + targetToDestination.normalized * Mathf.Min(dist, targetToDestination.magnitude + maxDistanceDelta);
             //Debug.DrawLine(ctx.Position, destination, Color.blue);
             ctx.Navigation.SetDestination(destination);
             //Debug.Log(Vector3.Distance(destination, target.Position) + "-:-" + dist);

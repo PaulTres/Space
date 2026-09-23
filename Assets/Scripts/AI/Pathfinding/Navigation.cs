@@ -51,7 +51,7 @@ public class Navigation : Ship
             NavPivot = new GameObject("Auto-generated nav pivot").transform;
             NavPivot.SetPositionAndRotation(transform.position, transform.rotation);
             NavPivot.parent = transform;
-            //Debug.LogWarning($"Created new nav pivot for {transform}.");
+            //Debugging.LogWarning($"Created new nav pivot for {transform}.");
         }
         radAngleToForward = Mathf.Rad2Deg * angleToForward / 2;
     }
@@ -77,7 +77,7 @@ public class Navigation : Ship
     {
         if (Destination == null)
         {
-            if (Dampeners) ApplyDampeners(Vector3.zero, deltaTime);
+            if (Dampeners) ApplyThrust(Vector3.zero, deltaTime);
             return;
         }
         NavPivot.LookAt(Destination.Value);
@@ -95,7 +95,7 @@ public class Navigation : Ship
         }
         else
         {
-            //Debug.Log("A");
+            //Debug.Log("Obstacle detected!");
             var point = checker.RunCheck(this, buffer);
             MoveTowards(point, deltaTime);
         }
@@ -121,27 +121,14 @@ public class Navigation : Ship
         Face(Quaternion.LookRotation(direction, direction + transform.up), deltaTime);
     }
 
-    /// <summary>
-    /// Slowly adjust the rigidbody's linear velocity towards the intended velocity, 
-    /// simulating a dampening effect.
-    /// </summary>
-    /// <param name="intendedVelocity">The target velocity to move towards.</param>
-    /// <param name="deltaTime">The time elapsed since the last update.</param>
-    protected void ApplyDampeners(Vector3 intendedVelocity, float deltaTime)
-    {
-        rb.linearVelocity = Vector3.MoveTowards(rb.linearVelocity,
-            intendedVelocity, StrafeThrust * deltaTime);
-    }
-
     protected void MoveTowards(Vector3 direction, float deltaTime)
     {
         if (UpdateRotation) Face(direction, deltaTime);
         else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
         Vector3 input = transform.InverseTransformDirection(direction.normalized);
-
-        if (Vector3.Angle(transform.forward, direction) > angleToForward)
-            input.z = 0f; // don't apply forward thrust unless roughly facing target
+        //Debugging.DrawRay(transform.position, direction.normalized * 100);
+        //if (Vector3.Angle(transform.forward, direction) > angleToForward) input.z = 0f; // don't apply forward thrust unless roughly facing target
 
         ApplyThrust(input, deltaTime);
     }

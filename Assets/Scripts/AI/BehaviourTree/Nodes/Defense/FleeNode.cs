@@ -17,7 +17,7 @@ public class FleeNode : LeafNodeData
     protected override Action<Node, Blackboard> onEnter => (n, ctx) =>
     {
         ctx.Navigation.RotationTarget = null;
-        //Debug.Log($"{ctx.Navigation} is fleeing!");
+        //Debugging.Log($"{ctx.Navigation} is fleeing!");
         ctx.SetData(Blackboard.Keys.Fleeing, true);
         ((LeafNode)n).SetData<float>(0, 0);
     };
@@ -38,7 +38,7 @@ public class FleeNode : LeafNodeData
         //}
         //else throw new Exception($"{ctx.Navigation} is not on a team!");
         //var moraleFleeThreshold = 3;
-        //Debug.Log($"{myMorale * moraleFleeThreshold} vs {enemyMorale}");
+        //Debugging.Log($"{myMorale * moraleFleeThreshold} vs {enemyMorale}");
 
         ctx.SetData(Blackboard.Keys.Fleeing, false);
     };
@@ -65,7 +65,7 @@ public class FleeNode : LeafNodeData
         else
         {
             jumpCharge += ctx.DeltaTime;
-            //Debug.Log("Charging jump: " + jumpCharge + '/' + ticksUntilJump);
+            //Debugging.Log("Charging jump: " + jumpCharge + '/' + ticksUntilJump);
             n.SetData(0, jumpCharge);
         }
         return NodeState.RUNNING;

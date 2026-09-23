@@ -106,7 +106,7 @@ public abstract class Ship : Unit
             if (counterForceMultiplier > 0)
             {
                 var counterForce = counterForceMultiplier * GlobalConfig.VelocitySoftCapCoefficient * deltaTime * rb.linearVelocity;
-                rb.linearVelocity -= counterForce;
+                rb.linearVelocity -= counterForce * (MaxVelocityMagnitude - intendedVelocity.magnitude);
             }
         }
     }

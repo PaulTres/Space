@@ -34,7 +34,7 @@ namespace Weapons
                 {
                     readinessValue = value;
                     currentShotCooldown = Mathf.Lerp(@params.MinShotCooldown, @params.MaxShotCooldown, @params.GetCurveValue(readinessValue));
-                    //if (transform.root.name.Contains("Shadow") && transform.name.Contains("PD")) Debug.Log($"Curve value: {@params.GetCurveValue(readinessValue)}");
+                    //if (transform.root.name.Contains("Shadow") && transform.name.Contains("PD")) Debugging.Log($"Curve value: {@params.GetCurveValue(readinessValue)}");
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace Weapons
             Debug.Assert(@params.MaxShotCooldown >= 0, $"{transform} has negative cooldown!");
             if (shootPoints.IsEmpty())
             {
-                //Debug.LogWarning($"{transform} has no shoot points!");
+                //Debugging.LogWarning($"{transform} has no shoot points!");
                 shootPoints = new Transform[] { transform };
             }
             //currentShotCooldown = @params.MaxShotCooldown;

@@ -62,7 +62,11 @@ namespace HybridBT2
         public TimeLimit(string name, float maxTime, Action<Node, Blackboard> onEnter, Action<Node, Blackboard> onExit) : base(name, onEnter, onExit)
         {
             MaxTime = maxTime;
-            this.onEnter += (_, _) => StartTime = 0;
+            this.onEnter += (_, _) =>
+            {
+                //Debugging.Log("Resetting start time to " + 0);
+                StartTime = 0;
+            };
         }
         protected override string DecoratorInfo(int indentation)
         {

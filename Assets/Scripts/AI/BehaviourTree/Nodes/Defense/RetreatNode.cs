@@ -14,7 +14,6 @@ public class RetreatNode : LeafNodeData
         if (!maintainFacing)
         {
             ctx.Navigation.RotationTarget = null;
-            //Debug.Log("A");
         }
         ((LeafNode)n).SetData(0, UnityEngine.Random.insideUnitSphere * randomRadius);
     };
@@ -22,11 +21,9 @@ public class RetreatNode : LeafNodeData
 
     protected override Func<LeafNode, Blackboard, NodeState> onEvaluate => (n, ctx) =>
     {
-        //Debug.Log("Retreating");
         var target = ctx.GetData<ImprovedMonoBehaviour>(Blackboard.Keys.Target);
         if (!target.InOptimalFiringRange(ctx.Navigation))
         {
-            //Debug.Log($"Retreat successfull!{Vector3.Distance(target.Position, ctx.Position)}-:-{target.ScanRange + ctx.Navigation.CurrentSignature}");
             return NodeState.SUCCESS;
         }
         //no need to normalize here, we just need the direction

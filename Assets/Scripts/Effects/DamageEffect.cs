@@ -13,7 +13,7 @@ public class DamageEffect : MonoBehaviour
 
     protected void OnEnable()
     {
-        //Debug.Log("DamageEffect enabled");
+        //Debugging.Log("DamageEffect enabled");
         if (particles == null) particles = GetComponent<ParticleSystem>();
         if (tr == null) tr = transform;
         particles.Play();

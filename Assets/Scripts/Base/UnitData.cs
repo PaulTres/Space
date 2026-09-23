@@ -43,7 +43,7 @@ public class UnitData : MonoSpawnableData<Unit>
         //}
         //catch (Exception e)
         //{
-        //    //Debug.LogException(e);
+        //    //Debugging.LogException(e);
         //}
 
         //try
@@ -54,7 +54,7 @@ public class UnitData : MonoSpawnableData<Unit>
         //}
         //catch (Exception e)
         //{
-        //    //Debug.LogException(e);
+        //    //Debugging.LogException(e);
         //}
     }
     #endregion

@@ -7,7 +7,7 @@ namespace Weapons
     {
         [SerializeField] protected float overheatThreshold = 1.0f;
         [SerializeField] protected float heatLoss = .34f;
-        [SerializeField] protected float heatLossCooldown = .5f;
+        [SerializeField] protected float heatLossCooldown = 2f;
         [SerializeField] protected SoundData overheatSound;
         public bool Overheated { get; protected set; }
         public float CurrentHeat { get; protected set; }
@@ -55,10 +55,7 @@ namespace Weapons
             if (CurrentHeat >= overheatThreshold)
             {
                 Overheated = true;
-                if (overheatSound != null)
-                {
-                    overheatSound.Play(transform.position);
-                }
+                overheatSound?.Play(transform.position);
             }
         }
     }

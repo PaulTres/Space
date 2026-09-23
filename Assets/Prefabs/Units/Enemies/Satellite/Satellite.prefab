@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1135744426836265173}
   - component: {fileID: 62546170232985336}
   - component: {fileID: 782196528803592247}
-  - component: {fileID: 3631511395967583101}
   - component: {fileID: 2935612521407029362}
   - component: {fileID: 5834217629255433718}
+  - component: {fileID: 568885492946791619}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -114,34 +114,6 @@ MonoBehaviour:
   count: 0
   effectScaleFactor: 1
   finalEffectScaleFactor: 3.4
---- !u!114 &3631511395967583101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 471856228708017344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db62fcb7749c7b74dabb71b2d40c6326, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Navigation
-  <Team>k__BackingField: 2
-  <MaxVelocityMagnitude>k__BackingField: 30
-  <IsDying>k__BackingField: 0
-  <EscortValue>k__BackingField: 0
-  <TelemetryOrigin>k__BackingField: {fileID: 0}
-  collisionCheckers:
-  - {fileID: 2402209039077652550}
-  damageTakingObjects:
-  - {fileID: 2935612521407029362}
-  - {fileID: 6308112266851948967}
-  <PlaySpawnEffect>k__BackingField: 1
-  <Parameters>k__BackingField: {fileID: 5834217629255433718}
-  <Dampeners>k__BackingField: 1
-  <StopDistance>k__BackingField: 0.5
-  angleToForward: 10
-  checker: {fileID: 0}
 --- !u!114 &2935612521407029362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 30
+  VelocitySoftCap: 27
   MoraleWeight: 10
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 0}
@@ -184,6 +157,30 @@ MonoBehaviour:
   ForwardThrust: 15
   StrafeThrust: 15
   RotationSpeed: 50
+--- !u!114 &568885492946791619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471856228708017344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96039bbd098c3584496c9bf6c65e7c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::StationaryObject
+  <Team>k__BackingField: 1
+  <MaxVelocityMagnitude>k__BackingField: 30
+  <IsDying>k__BackingField: 0
+  <EscortValue>k__BackingField: 0
+  <TelemetryOrigin>k__BackingField: {fileID: 0}
+  collisionCheckers:
+  - {fileID: 2402209039077652550}
+  damageTakingObjects:
+  - {fileID: 2935612521407029362}
+  - {fileID: 6308112266851948967}
+  <PlaySpawnEffect>k__BackingField: 1
+  <Parameters>k__BackingField: {fileID: 5834217629255433718}
 --- !u!1 &522178110574290531
 GameObject:
   m_ObjectHideFlags: 0

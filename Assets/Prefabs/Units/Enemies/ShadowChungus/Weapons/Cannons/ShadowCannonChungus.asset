@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ShadowCannonChungus
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.WeaponData
   MaxShotCooldown: 5
-  RateOfFireRampUp: 0.1
+  RateOfFireRampUp: 0.05
   RateOfFireRampDown: 1
-  MinShotCooldown: 1
+  MinShotCooldown: 4
   readinessCurve:
     serializedVersion: 2
     m_Curve:

@@ -13,7 +13,7 @@ public class TargetTooCloseCondition : ConditionData
         if (target.Active())
         {
             var dist = Vector3.Distance(target.Position, ctx.Position);
-            //Debug.Log($"TargetTooCloseCondition: Distance to target is {dist}, min range is {minRangeFromTarget}");
+            //Debugging.Log($"TargetTooCloseCondition: Distance to target is {dist}, min range is {minRangeFromTarget}");
             return dist <= minRangeFromTarget;
         }
         return false;

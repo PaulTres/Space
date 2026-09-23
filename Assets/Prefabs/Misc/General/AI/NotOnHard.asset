@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da8b33d4662f9a1489301105ba3cc16e, type: 3}
-  m_Name: RetreatSM
-  m_EditorClassIdentifier: SpaceAssembly::RetreatNode
+  m_Script: {fileID: 11500000, guid: 454c252fdf5edf844a16a2a3291540c9, type: 3}
+  m_Name: NotOnHard
+  m_EditorClassIdentifier: SpaceAssembly::DifficultyCondition
   myName: 
-  AlwaysCheck: 1
-  Conditions: []
-  Services: []
-  maintainFacing: 1
+  minDifficulty: 0
+  maxDifficulty: 1

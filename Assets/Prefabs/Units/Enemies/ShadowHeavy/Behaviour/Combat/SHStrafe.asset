@@ -19,7 +19,7 @@ MonoBehaviour:
   Services: []
   TargetFacing: 1
   TicksBeforeRepath: 0
-  strafeMagnitude: 10
+  strafeMagnitude: 1
   UseOptimalFiringRange: 1
   distanceBuffer: -10
   strafeDirections: 000000000100000002000000

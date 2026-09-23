@@ -39,7 +39,7 @@ namespace Player
 
             foreach (var map in GameManager.InputActions.asset.actionMaps)
             {
-                //Debug.Log(map);
+                //Debugging.Log(map);
                 if (actionMapsToInclude.Count > 0 && !actionMapsToInclude.Contains(map.name))
                     continue;
 

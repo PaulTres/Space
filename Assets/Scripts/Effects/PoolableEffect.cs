@@ -102,7 +102,7 @@ namespace Effects
                 lifetimeTimer.OnTimerStop += () => gameObject.SetActive(false);
             }
             lifetimeTimer.Start();
-            //Debug.Log($"Playing effect: {PoolKey}");
+            //Debugging.Log($"Playing effect: {PoolKey}");
             soundData.Play(transform.position);
             if (!Particles.IsEmpty())
             {

@@ -43,7 +43,7 @@ public class TargetAcquisitionService : ServiceData
                 }
             }
         }
-        //Debug.Log($"TargetAcquisitionService: bestTarget={bestTarget}, bestTargetScore={bestTargetScore}");
+        //Debugging.Log($"TargetAcquisitionService: bestTarget={bestTarget}, bestTargetScore={bestTargetScore}");
         ctx.SetData(Blackboard.Keys.Target, bestTarget);
     };
 }

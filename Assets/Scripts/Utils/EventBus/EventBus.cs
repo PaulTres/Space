@@ -11,7 +11,7 @@ namespace EventBus
 
         static void Clear()
         {
-            //Debug.Log("Clearing bindings");
+            //Debugging.Log("Clearing bindings");
             bindings.Clear();
             globalBinding = null;
         }

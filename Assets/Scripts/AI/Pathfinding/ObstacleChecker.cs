@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Obstacle Checker", fileName = "ObstacleChecker")]
 public class ObstacleChecker : ScriptableObject
 {
-    public bool Debug = true;
+    public bool Debugging = true;
     public LayerMask collisionMask = 1 << 0 | 1 << 11 | 1 << 12;
     public float collisionCheckRadius = 1f, collisionCheckDistance = 1f;
     public int[] offsetPointsZ = new int[3] { 1, 0, -1 },
@@ -25,6 +25,7 @@ public class ObstacleChecker : ScriptableObject
         for (int i = 0; i < count; i++)
         {
             if (buffer[i].transform.root.GetInstanceID() == origin.Transform.root.GetInstanceID()) continue;
+            //Debug.Log(buffer[i] + " " + buffer[i].transform.root);
             return true;
         }
         return false;
@@ -65,7 +66,7 @@ public class ObstacleChecker : ScriptableObject
 
     public void Draw(Transform origin, Collider[] buffer)
     {
-        if (!Debug) return;
+        if (!Debugging) return;
         for (int i = 0; i < offsetPointsZ.Length; i++)
         {
             for (int j = 0; j < offsetPointsX.Length; j++)

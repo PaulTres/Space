@@ -16,12 +16,12 @@ MonoBehaviour:
   Key: 2
   ValidateData: 1
   DisableOnHit: 1
-  Damage: 1
+  Damage: 5
   LifeTime: 7
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 6332652951562218706, guid: f42cd35e2a769904dbc1196ae0676d85, type: 3}
   OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
-  TopSpeed: 40
+  TopSpeed: 60
   Acceleration: 5
   InitialVelocity: 40
   InertialDampeners: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
+      time: 0.35
       value: 0
       inSlope: 0
       outSlope: 0
@@ -52,9 +52,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Tracking: 5
+  resetCurve: 0
+  Tracking: 10
   MaxTargetSignature: 0
-  MaxTelemetryBonus: 0.7
+  MaxTelemetryBonus: 1
   HP: 0.1
   OnDeathEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
   ShowOnRadar: 0

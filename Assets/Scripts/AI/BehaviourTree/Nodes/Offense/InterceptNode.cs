@@ -34,6 +34,7 @@ public class InterceptNode : LeafNodeData
         {
             Repath(target, n, ctx);
         }
+        //Debug.Log("Intercepting");
         return NodeState.RUNNING;
     };
 
@@ -44,6 +45,6 @@ public class InterceptNode : LeafNodeData
         var dist = UseOptimalFiringRange ? target.CurrentSignature +
             ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer;
         ctx.Navigation.SetDestination(target.Position + dir.normalized * dist);
-        //if (Name.Contains("Medium")) Debug.Log("Intercepting " + target + "; moving at " + dist);
+        //Debug.Log("Intercepting " + target + "; moving at " + dist);
     }
 }

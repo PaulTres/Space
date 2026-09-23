@@ -40,7 +40,7 @@ namespace Player
                 top.Deactivate();
             }
             windows.Push(window);
-            //Debug.Log(System.DateTime.Now + " opening " + window.gameObject);
+            //Debugging.Log(System.DateTime.Now + " opening " + window.gameObject);
             window.Activate();
         }
 
@@ -50,7 +50,7 @@ namespace Player
             {
                 var p = windows.Pop();
                 p.Deactivate();
-                //Debug.Log(System.DateTime.Now + " deactivated " + p.transform);
+                //Debugging.Log(System.DateTime.Now + " deactivated " + p.transform);
                 if (p == window)
                 {
                     if (windows.Count > 0)
@@ -75,7 +75,7 @@ namespace Player
             if (!allowEmpty && windows.Count == 1) return null;
             var top = windows.Pop();
             top.Deactivate();
-            //Debug.Log(System.DateTime.Now + " deactivated " + top.transform);
+            //Debugging.Log(System.DateTime.Now + " deactivated " + top.transform);
             if (activatePrevious && windows.Count > 0)
             {
                 windows.Peek().Activate();

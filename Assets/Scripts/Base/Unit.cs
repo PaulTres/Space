@@ -8,7 +8,6 @@ using UnityEngine;
 using Utilities;
 using Weapons;
 
-
 [RequireComponent(typeof(HPComponent))]
 [RequireComponent(typeof(UnitDeathEffects))]
 [RequireComponent(typeof(ShipParameters))]
@@ -92,7 +91,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     #region Setup/Cleanup
     protected virtual void Awake()
     {
-        //Debug.Assert(!damageTakingObjects.IsEmpty(), $"{Transform} has no critical objects set!");
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(Parameters.TickInterval);
@@ -180,7 +178,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         missileCount = Physics.OverlapSphereNonAlloc(Position, ScanRange,
             missileBuffer, GlobalConfig.GetEnemyBulletsCheckMask(Team));
-        //Debug.Log($"{Transform} missile Count: {missileCount}");
     }
 
     public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
@@ -216,13 +213,11 @@ public abstract class Unit : ImprovedMonoBehaviour
         if (IsDying) return;
         if (@event.Killer == null && IsFleeing) return;
         IsDying = true;
-        //Debug.Log($"{Transform} is dead.");
         UnitDestroyed unitDestroyed = new(this, @event.Killer);
         GameManager.UnitsDestroyed.Add(unitDestroyed);
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetTransformInstanceID(this), Die);
         if (tickCoroutine != null) StopCoroutine(tickCoroutine);
         UnitManager.Unregister(this);
-        //Debug.Log(unitDestroyed);
         EventBus<UnitDestroyed>.Raise(unitDestroyed);
         UnitDeathEffects.PlayDeathEffects();
     }
@@ -233,8 +228,8 @@ public abstract class Unit : ImprovedMonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Transform.position, MinimumSignature);
-        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(Transform.position, MaximumSignature);
+        Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
         Gizmos.color = Color.green;

@@ -39,7 +39,7 @@ namespace Player
         {
             if (context.started && !pauseMenu.gameObject.activeSelf)
             {
-                //Debug.Log("Pressed escape. Pausing.");
+                //Debugging.Log("Pressed escape. Pausing.");
                 pauseMenu.gameObject.SetActive(true);
             }
         }

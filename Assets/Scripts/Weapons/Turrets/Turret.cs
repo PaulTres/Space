@@ -132,12 +132,12 @@ namespace Weapons
             {
                 if (Time.time - lastBurstTime >= @params.BurstCooldown && Weapons[weaponBurstIndex].CanShoot())
                 {
-                    //Debug.Log("Burst firing " + weaponBurstIndex + " " + Weapons[weaponBurstIndex].CanShoot());
+                    //Debugging.Log("Burst firing " + weaponBurstIndex + " " + Weapons[weaponBurstIndex].CanShoot());
                     lastBurstTime = Time.time;
                     int i;
                     for (i = weaponBurstIndex; i < Mathf.Min(Weapons.Count, weaponBurstIndex + @params.BurstCount); i++)
                     {
-                        //Debug.Log($"Turret {transform.name} firing weapon {i} at target {Target.Transform.name}.");
+                        //Debugging.Log($"Turret {transform.name} firing weapon {i} at target {Target.Transform.name}.");
                         Weapons[i].Shoot(Target);
                     }
                     if (i > Weapons.Count - 1) weaponBurstIndex = 0;
@@ -148,7 +148,7 @@ namespace Weapons
             {
                 foreach (var w in Weapons)
                 {
-                    //if (Target == GameManager.Player) Debug.Log(w.transform);
+                    //if (Target == GameManager.Player) Debugging.Log(w.transform);
                     w.Shoot(Target);
                 }
             }
@@ -175,17 +175,13 @@ namespace Weapons
             RecalculateDPS();
             if (Target.Active())
             {
-                //if (Target == GameManager.Player) Debug.Log($"Turret {transform.name} targeting {Target.Transform}.");
-                //if (@params.BurstFire) Debug.Log($"Turret {transform.name} targeting {Target.Transform.name}.");
                 var pos = ComputeTargetingPosition(Target);
-                //Debug.DrawLine(Transform.position, pos, Color.red);
+                Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {
-                    //if (Target == GameManager.Player && !@params.TargetMissiles) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                     if (@params.MaxAngleDifference >= 360 || Vector3.Angle(ElevationPivot.forward, (pos - Transform.position)) < @params.MaxAngleDifference)
                     {
-                        //if (@params.BurstFire) Debug.Log($"Turret {transform.name} is aiming at {Target.Transform.name}.");
                         Shoot();
                         IncreaseReadiness(deltaTime);
                         return;
@@ -271,7 +267,7 @@ namespace Weapons
             if (m != null) timeToHit = (target.Transform.position -
                     Transform.position).magnitude / (m.Speed + Mathf.Epsilon);
 
-            //Debug.Log(timeToHit);
+            //Debugging.Log(timeToHit);
             var futureTargetPos = target.GetPositionWithOscilation(Unit) +
                 target.LinearVelocity * timeToHit;
 
@@ -290,7 +286,7 @@ namespace Weapons
             if (!target.Active()) return false;
             if (Weapons[0].RequiresOptimalFiringRange && !Unit.InOptimalFiringRange(target)) return false;
 
-            //if (@params.BurstFire) Debug.Log(target.Transform);
+            //if (@params.BurstFire) Debugging.Log(target.Transform);
             var dir = target.Transform.position - Transform.position;
             if (dir.sqrMagnitude > MaxRangeSquared) return false;
             if (!IsInAngle(target.Transform.position)) return false;
@@ -323,7 +319,7 @@ namespace Weapons
         /// <param name="deltaTime"></param>
         protected void RotateToIdle(float deltaTime)
         {
-            //Debug.Log("Rotating turret to idle position.");
+            //Debugging.Log("Rotating turret to idle position.");
             if (@params.RotSpeed == 0 || (RotationPivot.rotation == Quaternion.identity && ElevationPivot.rotation == Quaternion.identity)) return;
 
             if (RotationPivot == ElevationPivot)
@@ -415,7 +411,7 @@ namespace Weapons
             //var targetPitch=Mathf.Clamp(ElevationPivot.localRotation.x,)
             ElevationPivot.localRotation = Quaternion.Euler(targetPitch, 0, 0);
 
-            //Debug.Log($"Turret {transform.name} rotated to yaw {targetYaw} and pitch {targetPitch}: {ElevationPivot.localRotation.eulerAngles}.");
+            //Debugging.Log($"Turret {transform.name} rotated to yaw {targetYaw} and pitch {targetPitch}: {ElevationPivot.localRotation.eulerAngles}.");
         }
         #endregion
         #endregion
