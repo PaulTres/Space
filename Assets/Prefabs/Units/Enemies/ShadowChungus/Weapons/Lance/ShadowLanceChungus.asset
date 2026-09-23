@@ -19,7 +19,7 @@ MonoBehaviour:
   Damage: 30
   LifeTime: 20
   EffectScaleFactor: 1
-  OnSpawnEffect: {fileID: 0}
+  OnSpawnEffect: {fileID: 6332652951562218706, guid: 8c2df941e4b329749918b2091f9e59ef, type: 3}
   OnHitEffect: {fileID: 0}
   TopSpeed: 5
   Acceleration: 2
@@ -41,7 +41,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
+      time: 0.35
       value: 0
       inSlope: 0
       outSlope: 0
@@ -52,6 +52,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  resetCurve: 0
   Delay: 3
   Range: 200
   Radius: 10

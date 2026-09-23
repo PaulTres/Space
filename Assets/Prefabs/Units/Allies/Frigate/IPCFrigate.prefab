@@ -472,7 +472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 461578530611163109}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 4
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 925549486881023273}
 --- !u!1 &1344456069637726405
 GameObject:
@@ -912,7 +914,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 461578530611163109}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 4
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 6981087579883792657}
 --- !u!1 &2474310241023163928
 GameObject:
@@ -1474,7 +1478,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 461578530611163109}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 4
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 8701863238892367738}
 --- !u!1 &4587133028154063135
 GameObject:
@@ -3140,7 +3146,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 461578530611163109}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 4
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 8401642456857426593}
 --- !u!114 &5116531328898741344
 MonoBehaviour:
@@ -3155,12 +3163,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::UnitDeathEffects
   effectDuringDeath: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
-  finalEffect: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
+  finalEffect: {fileID: 6657925166995645850, guid: fc23e0d519f150f4ca4e86e88f4f141f, type: 3}
   explosionOriginsParent: {fileID: 7227496198349556677}
+  explosionOrigins:
+  - {fileID: 121541227519093833}
+  - {fileID: 6981087579883792657}
+  - {fileID: 925549486881023273}
+  - {fileID: 1150401157123353185}
+  - {fileID: 8701863238892367738}
   interval: 0.5
   count: 3
   effectScaleFactor: 1
-  finalEffectScaleFactor: 5
+  finalEffectScaleFactor: 4
 --- !u!114 &7987621152319063558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3222,7 +3236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 25
-  MoraleWeight: 25
+  MoraleWeight: 35
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
   MinimumSignature: 30
@@ -3351,7 +3365,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
   hpComponents:
   - {fileID: 461578530611163109}
-  armorModifiers: []
+  armorModifiers:
+  - <Direction>k__BackingField: 4
+    <Modifier>k__BackingField: 0.5
   body: {fileID: 1150401157123353185}
 --- !u!1001 &1496554441701179986
 PrefabInstance:

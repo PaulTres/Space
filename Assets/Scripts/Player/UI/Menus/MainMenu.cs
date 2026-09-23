@@ -7,6 +7,7 @@ namespace Player
 
         public void StartTutorial()
         {
+            GameManager.ChosenMissionIndex = -1;
             UnitData.PlayerChoice = playerTutorialShip;
             GameManager.LoadTutorial();
         }

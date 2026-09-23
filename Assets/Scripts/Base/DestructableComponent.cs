@@ -72,4 +72,10 @@ public class DestructableComponent : ImprovedMonoBehaviour
         Transform.root.TakeDamage(damageInfo);
         gameObject.SetActive(false);
     }
+
+    protected void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, EffectScaleFactor);
+    }
 }

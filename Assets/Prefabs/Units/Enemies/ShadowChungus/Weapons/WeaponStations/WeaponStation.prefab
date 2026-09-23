@@ -90,7 +90,7 @@ MonoBehaviour:
   minHPRegainCooldown: 5
   currentHP: 0
   damageEffects: []
-  effectOnDamage: {fileID: 0}
+  effectOnDamage: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
@@ -110,11 +110,11 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
   <EscortValue>k__BackingField: 0
   remains: {fileID: 5067697582717300710}
-  effectOnDestruction: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
+  effectOnDestruction: {fileID: 6657925166995645850, guid: f6d723d02fa33374591829a041ce6ff5, type: 3}
   damageOnDestroy: 20
+  effectScaleFactor: 2
 --- !u!33 &2152980899710129318
 MeshFilter:
   m_ObjectHideFlags: 0

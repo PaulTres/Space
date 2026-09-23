@@ -110,7 +110,8 @@ public static class GameManager
 
     public static void LoadMission()
     {
-        LoadMission(ChosenMissionIndex);
+        if (ChosenMissionIndex < 0) LoadTutorial();
+        else LoadMission(ChosenMissionIndex);
     }
 
     /// <summary>

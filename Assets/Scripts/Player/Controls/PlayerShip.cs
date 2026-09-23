@@ -200,7 +200,6 @@ namespace Player
 
         public void PerformFixedUpdate(float deltaTime)
         {
-            //Debug.Log(missileCount);
             Vector3 intendedVelocity;
             if (!Dampeners)
             {

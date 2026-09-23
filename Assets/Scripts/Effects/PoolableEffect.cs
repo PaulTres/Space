@@ -26,7 +26,9 @@ namespace Effects
             HumanCannonShot,
             HumanLaserShot,
             MissileLaunchShadow,
-            ShadowCannonShot
+            ShadowCannonShot,
+            HumanExplosionLarge,
+            ShadowExplosionLarge
         }
         static readonly ObjectPool<Type, PoolableEffect> objectPool = new();
 

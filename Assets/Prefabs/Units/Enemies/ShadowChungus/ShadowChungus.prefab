@@ -1513,7 +1513,7 @@ MonoBehaviour:
   - {fileID: 8475051046336999118}
   - {fileID: 2804005569974697939}
   - {fileID: 1025872525521136025}
-  effectOnDamage: {fileID: 0}
+  effectOnDamage: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
   damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
@@ -1531,12 +1531,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::UnitDeathEffects
   effectDuringDeath: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
-  finalEffect: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
+  finalEffect: {fileID: 6657925166995645850, guid: f6d723d02fa33374591829a041ce6ff5, type: 3}
   explosionOriginsParent: {fileID: 3401860231242572748}
+  explosionOrigins:
+  - {fileID: 920340431865873768}
+  - {fileID: 2244711624294407123}
+  - {fileID: 4342170148613228174}
+  - {fileID: 7721318337994065209}
+  - {fileID: 5999264755159133867}
+  - {fileID: 6379572598478488828}
+  - {fileID: 7053414539692435095}
+  - {fileID: 8520308771816501459}
+  - {fileID: 8653920097314592033}
+  - {fileID: 3899479231199943333}
   interval: 0.5
   count: 7
   effectScaleFactor: 10
-  finalEffectScaleFactor: 50
+  finalEffectScaleFactor: 25
 --- !u!114 &3656737314857615257
 MonoBehaviour:
   m_ObjectHideFlags: 0

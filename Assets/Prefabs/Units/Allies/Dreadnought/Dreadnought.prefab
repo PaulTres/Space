@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::UnitDeathEffects
   effectDuringDeath: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
-  finalEffect: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
+  finalEffect: {fileID: 6657925166995645850, guid: fc23e0d519f150f4ca4e86e88f4f141f, type: 3}
   explosionOriginsParent: {fileID: 3988468671292186863}
   explosionOrigins:
   - {fileID: 8096087162842111028}

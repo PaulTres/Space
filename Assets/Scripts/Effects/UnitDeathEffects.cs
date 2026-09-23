@@ -66,9 +66,13 @@ public class UnitDeathEffects : MonoBehaviour
     {
         Gizmos.color = Color.red;
         OnValidate();
-        foreach (var origin in explosionOrigins)
+        if (!explosionOrigins.IsEmpty())
         {
-            Gizmos.DrawWireSphere(origin.position, 0.1f * effectScaleFactor);
+            foreach (var origin in explosionOrigins)
+            {
+                Gizmos.DrawWireSphere(origin.position, effectScaleFactor);
+            }
         }
+        Gizmos.DrawWireSphere(transform.root.position, finalEffectScaleFactor);
     }
 }

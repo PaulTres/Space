@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::UnitDeathEffects
   effectDuringDeath: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
-  finalEffect: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
+  finalEffect: {fileID: 6657925166995645850, guid: f6d723d02fa33374591829a041ce6ff5, type: 3}
   explosionOriginsParent: {fileID: 6416665111217952267}
   explosionOrigins:
   - {fileID: 8518595530262455468}
@@ -332,8 +332,8 @@ MonoBehaviour:
   - {fileID: 2144426898891625647}
   interval: 0.5
   count: 0
-  effectScaleFactor: 1
-  finalEffectScaleFactor: 10
+  effectScaleFactor: 0.5
+  finalEffectScaleFactor: 1.5
 --- !u!114 &7722082318002812990
 MonoBehaviour:
   m_ObjectHideFlags: 0
