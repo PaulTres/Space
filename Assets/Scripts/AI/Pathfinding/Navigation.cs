@@ -88,7 +88,8 @@ public class Navigation : Ship
             Destination = null;
             return;
         }
-        if (!checker.CheckForward(this, direction.normalized, buffer))
+        direction = direction.normalized;
+        if (!checker.CheckForward(this, direction, buffer))
         {
             MoveTowards(direction, deltaTime);
         }
@@ -137,14 +138,12 @@ public class Navigation : Ship
         if (UpdateRotation) Face(direction, deltaTime);
         else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
-        if (Dampeners) ApplyDampeners(direction, deltaTime);
-        if (Vector3.Angle(transform.forward, direction) <= angleToForward)
-        {
-            rb.linearVelocity += ForwardThrust * deltaTime * direction.normalized;
-            if (thrusters != null) thrusters.Increase(deltaTime);
-        }
-        else if (thrusters != null) thrusters.Decrease(deltaTime);
-        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
+        Vector3 input = transform.InverseTransformDirection(direction.normalized);
+
+        if (Vector3.Angle(transform.forward, direction) > angleToForward)
+            input.z = 0f; // don't apply forward thrust unless roughly facing target
+
+        ApplyThrust(input, deltaTime);
     }
 
     protected override void OnDrawGizmos()

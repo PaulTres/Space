@@ -18,8 +18,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e1b596d1b2a8764468f17795b57cb718, type: 2}
   Services: []
   TargetFacing: 1
-  TicksBeforeRepath: 1
-  strafeMagnitude: 10
+  TicksBeforeRepath: 0
+  strafeMagnitude: 1
   UseOptimalFiringRange: 1
   distanceBuffer: -10
   strafeDirections: 010000000000000002000000

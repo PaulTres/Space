@@ -52,9 +52,6 @@ namespace Player
         public bool CannotDie { get; set; } = false;
         public event System.Action<bool> OnDampenersChanged;
         protected bool callbacksEnabled;
-        #region Sounds
-        protected AudioSource engineAudioSource;
-        #endregion
         #endregion
 
         #region Setup
@@ -79,7 +76,6 @@ namespace Player
         protected override void OnEnable()
         {
             base.OnEnable();
-            engineAudioSource = GetComponent<AudioSource>();
             PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
@@ -200,63 +196,7 @@ namespace Player
 
         public void PerformFixedUpdate(float deltaTime)
         {
-            Vector3 intendedVelocity;
-            if (!Dampeners)
-            {
-                intendedVelocity = movementVector.z * ForwardThrust * shipBody.forward +
-                    movementVector.x * StrafeThrust * shipBody.right +
-                    movementVector.y * StrafeThrust * shipBody.up;
-            }
-            else
-            {
-                intendedVelocity = Vector3.zero;
-                if (movementVector.x == 0)
-                {
-                    //apply counterforce
-                    var error = Vector3.ClampMagnitude(Vector3.Project(LinearVelocity,
-                        Right), StrafeThrust);
-                    intendedVelocity -= error;
-                }
-
-                if (movementVector.y == 0)
-                {
-                    //apply counterforce
-                    var error = Vector3.ClampMagnitude(Vector3.Project(LinearVelocity,
-                        Up), StrafeThrust);
-                    intendedVelocity -= error;
-                }
-
-                if (movementVector.z == 0)
-                {
-                    var error = Vector3.Project(LinearVelocity, Forward);
-                    if (Vector3.Dot(error, Forward) < 0)
-                    {
-                        error = Vector3.ClampMagnitude(error, StrafeThrust);
-                    }
-                    else error = Vector3.ClampMagnitude(error, ForwardThrust);
-                    intendedVelocity -= error;
-                }
-
-                intendedVelocity += movementVector.z * ForwardThrust * shipBody.forward +
-                    movementVector.x * StrafeThrust * shipBody.right +
-                    movementVector.y * StrafeThrust * shipBody.up;
-            }
-
-            rb.AddForce(intendedVelocity, ForceMode.Acceleration);
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
-            if (thrusters != null)
-            {
-                if (movementVector.z > 0) thrusters.Increase(deltaTime);
-                else thrusters.Decrease(deltaTime);
-            }
-            if (engineAudioSource != null)
-            {
-                if (movementVector.sqrMagnitude > 0)
-                {
-                    if (!engineAudioSource.isPlaying) engineAudioSource.Play();
-                }
-                else if (engineAudioSource.isPlaying) engineAudioSource.Stop();
-            }
+            ApplyThrust(movementVector, deltaTime);
         }
 
         public void PerformUpdate(float deltaTime)

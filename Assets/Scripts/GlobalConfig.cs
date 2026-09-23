@@ -86,6 +86,10 @@ public class GlobalConfig : ScriptableObject
     public static readonly float PositionOscillationCoefficient = 1;
     public static readonly float MaxOscillationMagnitude = 1;
     /// <summary>
+    /// Counter-force applied when a ship is above the velocity soft cap will be multiplied by this value.
+    /// </summary>
+    public static readonly float VelocitySoftCapCoefficient = .5f;
+    /// <summary>
     /// Directory where saves are stored. This is the persistent data path, which is platform dependent.
     /// </summary>
     public static string SaveFileLocation => Application.persistentDataPath;
