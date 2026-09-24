@@ -59,13 +59,12 @@ public class FleeNode : LeafNodeData
             //jump
             if (jumpEffect != null) jumpEffect.SpawnEffect(ctx.Position, ctx.Navigation.EffectScaleFactor);
             else ctx.Navigation.SpawnEffect.SpawnEffect(ctx.Position, ctx.Navigation.EffectScaleFactor);
-            EventBus<ObjectDestroyed>.Raise(ctx.Navigation.GetInstanceID(), new(ctx.Navigation.GetInstanceID(), null));
+            EventBus<ObjectDestroyed>.Raise(ctx.Navigation.GetTransformInstanceID(), new(ctx.Navigation.GetTransformInstanceID(), null));
             ctx.Navigation.gameObject.SetActive(false);
         }
         else
         {
             jumpCharge += ctx.DeltaTime;
-            //Debugging.Log("Charging jump: " + jumpCharge + '/' + ticksUntilJump);
             n.SetData(0, jumpCharge);
         }
         return NodeState.RUNNING;

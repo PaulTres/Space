@@ -29,6 +29,12 @@ public readonly struct ObjectDestroyed : IEvent
     {
         VictimID = victimID;
         Killer = killer;
+        //Debug.Log(Killer == null);
+    }
+
+    public override string ToString()
+    {
+        return "Victim " + VictimID + " was destroyed by " + (Killer != null ? Killer.name : "nothing") + '.';
     }
 }
 

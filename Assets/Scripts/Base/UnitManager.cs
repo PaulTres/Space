@@ -11,7 +11,11 @@ public static class UnitManager
     /// </summary>
     readonly static Dictionary<int, List<ImprovedMonoBehaviour>> ships = new();
     readonly static Dictionary<int, int> moraleValues = new();
-    public static int GetMorale(int team) => moraleValues[team];
+    public static int GetMorale(int team)
+    {
+        if (moraleValues.TryGetValue(team, out var value)) return value;
+        return 0;
+    }
     public static int AllyCount => ships[GlobalConfig.PlayerTeam].Count;
     public static int EnemyCount => ships[GlobalConfig.EnemyTeam].Count;
 

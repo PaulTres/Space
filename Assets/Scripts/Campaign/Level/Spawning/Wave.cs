@@ -32,12 +32,11 @@ namespace Level
         /// <param name="event"></param>
         public void OnUnitDestroyed(ObjectDestroyed @event)
         {
-            //Debugging.Log($"Wave.OnUnitDestroyed: {@event}");
+            //Debug.Log($"Wave.OnUnitDestroyed: {@event}");
             EventBus<ObjectDestroyed>.RemoveActions(@event.VictimID, OnUnitDestroyed);
             unitCount--;
             if (unitCount <= 0)
             {
-                //if (transform.name.Equals("Friendly")) Debugging.Log($"{transform} destroyed: {OnAllUnitsDestroyed == null}.");
                 OnAllUnitsDestroyed?.Invoke();
             }
         }
@@ -57,7 +56,7 @@ namespace Level
                     Debug.LogError($"{spawner.transform.name} spawned empty unit!");
                     continue;
                 }
-                //Debugging.Log(unit.transform);
+                //Debug.Log("Spawning " + unit + " with id " + unit.GetTransformInstanceID() + '.');
                 unitCount++;
                 units.Add(unit);
                 EventBus<ObjectDestroyed>.AddActions(unit.GetTransformInstanceID(), OnUnitDestroyed);
@@ -91,7 +90,7 @@ namespace Level
                     units[i].Position -= units[i].Forward * units[i].SpawnCheckRadius;
                 }
                 if (facePlayer && GameManager.Player != null) units[i].Transform.LookAt(GameManager.Player.Position);
-                //Debugging.Log(units[i].transform);
+                //Debug.Log("Activating " + units[i].transform);
                 units[i].gameObject.SetActive(true);
             }
             units = null;

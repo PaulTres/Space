@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 5477538681752144312}
   - component: {fileID: 6935004728488135160}
   - component: {fileID: 7016987262512560399}
+  - component: {fileID: 7771979634443785169}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -166,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 30
   VelocitySoftCap: 27
-  MoraleWeight: 10
+  MoraleWeight: 10000
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 0}
   MinimumSignature: 10
@@ -180,6 +181,29 @@ MonoBehaviour:
   ForwardThrust: 15
   StrafeThrust: 15
   RotationSpeed: 50
+--- !u!114 &7771979634443785169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5928260128396124696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96039bbd098c3584496c9bf6c65e7c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::StationaryObject
+  <Team>k__BackingField: 2
+  <MaxVelocityMagnitude>k__BackingField: 30
+  <IsDying>k__BackingField: 0
+  <TelemetryOrigin>k__BackingField: {fileID: 0}
+  collisionCheckers:
+  - {fileID: 8693774543182356962}
+  damageTakingObjects:
+  - {fileID: 5477538681752144312}
+  - {fileID: 4723394945903575124}
+  <PlaySpawnEffect>k__BackingField: 1
+  <Parameters>k__BackingField: {fileID: 7016987262512560399}
 --- !u!1 &6615377180494440374
 GameObject:
   m_ObjectHideFlags: 0
