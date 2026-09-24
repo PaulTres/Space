@@ -83,6 +83,7 @@ namespace Effects
         [Tooltip("If set to true, the script will not check for particle effects with GetComponent and will only play the sound effect.")]
         [SerializeField] protected bool audioOnly = false;
         [SerializeField] protected float lifetime = 5;
+        [SerializeField] protected bool playAtPlayerLocation = false;
         protected Transform tr;
         public Transform Transform
         {
@@ -103,7 +104,11 @@ namespace Effects
             }
             lifetimeTimer.Start();
             //Debugging.Log($"Playing effect: {PoolKey}");
-            soundData.Play(transform.position);
+            if (playAtPlayerLocation && GameManager.Player.Active())
+            {
+                soundData.Play(GameManager.Player.Position);
+            }
+            else soundData.Play(transform.position);
             if (!Particles.IsEmpty())
             {
                 for (int i = 0; i < Particles.Length; i++)

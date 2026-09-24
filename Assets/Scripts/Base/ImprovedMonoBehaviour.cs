@@ -48,7 +48,8 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     public abstract float EffectScaleFactor { get; }
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
     [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
-    [field: SerializeField] public float EscortValue { get; protected set; } = 0;
+    public virtual float EscortValue => 0;
+
     public void RegisterForRadar()
     {
         var r = PlayerTargetSystem.TryGetInstance();
@@ -68,4 +69,14 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     }
 
     public abstract void SetObjectLayer();
+
+    protected virtual void Awake()
+    {
+        ComponentRegister<ImprovedMonoBehaviour>.Register(transform.root, this);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        ComponentRegister<ImprovedMonoBehaviour>.Unregister(transform.root);
+    }
 }

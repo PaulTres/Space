@@ -84,11 +84,6 @@ namespace Weapons
             gameObject.layer = GlobalConfig.GetBulletLayer(Owner.Team);
         }
 
-        protected virtual void Awake()
-        {
-            ComponentRegister<IOwnable>.Register(Transform, this);
-        }
-
         protected virtual void OnEnable()
         {
             onSpawnEffect.SpawnEffect(Transform.position, effectScaleFactor);
@@ -111,11 +106,6 @@ namespace Weapons
             var u = GlobalUpdater.TryGetInstance();
             if (u != null) u.UnregisterFixedUpdate(PerformFixedUpdate);
             Release(this);
-        }
-
-        protected virtual void OnDestroy()
-        {
-            ComponentRegister<IOwnable>.Unregister(Transform);
         }
         #endregion
 

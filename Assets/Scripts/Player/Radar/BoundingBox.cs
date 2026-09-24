@@ -24,6 +24,7 @@ namespace Radar
         [field: SerializeField] public Material DottedLineMaterial { get; protected set; }
         [field: SerializeField] public LineRenderer LineRenderer { get; protected set; }
         public float TimeSinceLastFlicker { get; set; }
+        public bool Hidden => !BBox.gameObject.activeSelf;
 
         public void Show()
         {

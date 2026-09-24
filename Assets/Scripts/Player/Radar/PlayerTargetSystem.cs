@@ -11,7 +11,8 @@ namespace Radar
     public class PlayerTargetSystem : Singleton<PlayerTargetSystem>
     {
         #region Fields
-        [SerializeField] protected Camera cam;
+        [SerializeField] protected Camera primaryCamera;
+        [field: SerializeField] public Camera OverlayCamera { get; protected set; }
         [Header("Object tracking")]
         [SerializeField] protected BoundingBox boundingBoxPrefab;
         [SerializeField] protected Sprite unitIcon;
@@ -51,13 +52,14 @@ namespace Radar
             }
         }
         protected PlayerShip owner;
+        [SerializeField] protected Transform currentTargetIndicator;
         #endregion
 
         #region Setup
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
-            if (cam == null) cam = GetComponentInChildren<Camera>();
+            if (primaryCamera == null) primaryCamera = GetComponentInChildren<Camera>();
             owner = GetComponentInParent<PlayerShip>();
             //if (secondViewCamera != null && secondView != null)
             //{
@@ -106,8 +108,8 @@ namespace Radar
 
             var directionToTarget = target.Position - owner.Position;
             var distance = directionToTarget.magnitude;
-            Vector3 viewportPos = cam.WorldToViewportPoint(target.Position);
-            if (viewportPos.z <= 0 || Vector3.Dot(cam.transform.forward, directionToTarget) <= 0)
+            Vector3 viewportPos = primaryCamera.WorldToViewportPoint(target.Position);
+            if (viewportPos.z <= 0 || Vector3.Dot(primaryCamera.transform.forward, target.Position - primaryCamera.transform.position) <= 0)
             {
                 bbox.Hide();
                 //Debug.Log($"Hidden bounding box for unit {target}");
@@ -138,7 +140,7 @@ namespace Radar
 
                 #region Scaling
                 //scale based on distance
-                float distanceToCamera = Vector3.Distance(cam.transform.position, target.Position);
+                float distanceToCamera = Vector3.Distance(primaryCamera.transform.position, target.Position);
                 var size = Mathf.Clamp(GlobalConfig.IconSizeCoefficient / (distanceToCamera + 0.00001f),
                     minScale, maxScale);
                 bbox.RectTransform.localScale = Vector3.one * size;
@@ -260,13 +262,27 @@ namespace Radar
         #region Current target
         protected void UpdateCurrentTargetInfo()
         {
+            //currentTargetIndicator.gameObject.SetActive(CurrentTarget.Active());
+
             if (!CurrentTarget.Active())
             {
                 secondViewCamera.gameObject.SetActive(false);
                 secondView.gameObject.SetActive(false);
+                currentTargetIndicator.gameObject.SetActive(false);
                 SelectTarget();
                 return;
             }
+
+            //only activate the indicator when the target is off-screen
+            //var dot=Vector3.Dot(primaryCamera.transform.forward,)
+            if (boundingBoxes.TryGetValue(CurrentTarget, out var bbox))
+            {
+                currentTargetIndicator.gameObject.SetActive(bbox.Hidden);
+            }
+            else currentTargetIndicator.gameObject.SetActive(false);
+
+            //currentTargetIndicator.gameObject.SetActive()
+            currentTargetIndicator.LookAt(CurrentTarget.Position);
 
             #region Target view
             if (secondViewCamera != null && secondView != null)
@@ -358,7 +374,7 @@ namespace Radar
 
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;
-            var angleScore = Vector3.Dot(direction.normalized, cam.transform.forward);
+            var angleScore = Vector3.Dot(direction.normalized, primaryCamera.transform.forward);
             inFov = angleScore > 0;
             var distanceScore = (GlobalConfig.PlayerTargetMaxDistance - distance) /
                 GlobalConfig.PlayerTargetMaxDistance;

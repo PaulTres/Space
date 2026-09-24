@@ -31,6 +31,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     protected float currentSignature = 0;
     public override float CurrentSignature => currentSignature;
+
     #endregion
 
     [field: SerializeField] public ShipParameters Parameters { get; protected set; }
@@ -52,6 +53,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Helpers
+    public override float EscortValue => Parameters.EscortValue;
     public override float EffectScaleFactor => Parameters.EffectScaleFactor;
     public PoolableEffect SpawnEffect => Parameters.EffectOnSpawn;
     public UnitDeathEffects UnitDeathEffects
@@ -89,8 +91,9 @@ public abstract class Unit : ImprovedMonoBehaviour
     #endregion
 
     #region Setup/Cleanup
-    protected virtual void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (TelemetryOrigin == null) TelemetryOrigin = Transform;
         Turrets = new(GetComponentsInChildren<Turret>());
         wait = new(Parameters.TickInterval);
@@ -148,8 +151,9 @@ public abstract class Unit : ImprovedMonoBehaviour
         missileBuffer = null;
     }
 
-    protected virtual void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         onTick = null;
         EventBus<ObjectDestroyed>.RemoveBinding(Extensions.GetTransformInstanceID(this));
         ComponentRegister<Unit>.Unregister(Transform.root);

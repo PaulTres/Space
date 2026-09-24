@@ -31,6 +31,7 @@ namespace HybridBT2
         protected float lastTime;
         public HashSet<IThreat> Threats { get; protected set; } = new();
 
+
         public Blackboard(Transform transform)
         {
             if (transform != null) Navigation = transform.GetComponent<Navigation>();

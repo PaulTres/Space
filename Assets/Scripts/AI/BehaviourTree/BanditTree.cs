@@ -16,17 +16,7 @@ public class BanditTree : BT, IRegisterableComponent
     {
         base.Awake();
         ComponentRegister<BanditTree>.Register(transform, this);
-        EventBus<ObjectDestroyed>.AddActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
-    }
-
-    protected void OnValidate()
-    {
-        var currentEscortValue = GetComponent<Navigation>().EscortValue;
-        if (minEscortValue <= currentEscortValue)
-        {
-            Debug.LogError($"The min escort value ({minEscortValue}) is less than or equal to {transform.root}'s escort value ({currentEscortValue}). The unit will misbehave if it has an escort node. Doubling min escort value for this.");
-            minEscortValue = (currentEscortValue + 1) * 2;
-        }
+        EventBus<ObjectDestroyed>.AddActions(transform.root.GetInstanceID(), null, Pause);
     }
 
     protected override void SetupBlackboard()

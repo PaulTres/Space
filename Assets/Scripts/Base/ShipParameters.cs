@@ -14,13 +14,14 @@ public class ShipParameters : MonoBehaviour
     public PoolableEffect EffectOnSpawn;
     public float MinimumSignature = 10;
     public float MaximumSignature = 50;
-    public float SignatureDecreaseRate = 0.1f;
+    public float SignatureDecreaseRate = 5f;
     [Tooltip("The time it takes before the signature starts decreasing after it has been increased. This is used to prevent the signature from decreasing too quickly after it has been increased.")]
     public float SignatureDecreaseCooldown = 5f;
     public float ScanRange = 30;
     [Tooltip("On spawn, the unit will check for obstructions in a sphere of this radius.")]
     public float SpawnCheckRadius = 5;
     public float EffectScaleFactor = 1;
+    public float EscortValue = 10;
     [Header("Ship")]
     public float ForwardThrust = 15;
     public float StrafeThrust = 15;

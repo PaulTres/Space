@@ -70,6 +70,7 @@ namespace Player
         public void EnableCamera()
         {
             PlayerCamera.enabled = true;
+            PlayerTargetSystem.TryGetInstance().OverlayCamera.enabled = true;
             ResetCamera();
         }
 
