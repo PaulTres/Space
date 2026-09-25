@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  <RotationPivot>k__BackingField: {fileID: 4829932685244431974}
+  <ElevationPivot>k__BackingField: {fileID: 4829932685244431974}
   params: {fileID: 11400000, guid: f6ee718b25c9ed44b8b248062e9b25df, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
@@ -65,7 +65,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: f616ad21683f340478d1821e4ab7d4ec, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 4829932685244431974}
+  Heatsink: {fileID: 0}
 --- !u!1 &984434264717445648
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 99fe08694a339444eacf9056f3876605, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 8175003383977752533}
   magazine: {fileID: 0}
 --- !u!1 &1900686505265394529
 GameObject:
@@ -161,8 +164,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  <RotationPivot>k__BackingField: {fileID: 1251345459685353301}
+  <ElevationPivot>k__BackingField: {fileID: 1251345459685353301}
   params: {fileID: 11400000, guid: b3da029f3abeec24abaa7ab8a933a269, type: 2}
   <MinElevation>k__BackingField: -45
   <MaxElevation>k__BackingField: 90
@@ -213,7 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 99fe08694a339444eacf9056f3876605, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6996250850588942223}
   magazine: {fileID: 0}
 --- !u!1 &5745060562032930043
 GameObject:
@@ -260,7 +264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 99fe08694a339444eacf9056f3876605, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 5015230395678904346}
   magazine: {fileID: 0}
 --- !u!1 &6209264538972985836
 GameObject:
@@ -307,7 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 99fe08694a339444eacf9056f3876605, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 5644782172895155532}
   magazine: {fileID: 0}
 --- !u!1001 &2982669514696901047
 PrefabInstance:
@@ -319,7 +325,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 191161681866770233, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
       propertyPath: m_Name
-      value: WeaponStationRed Variant
+      value: Heavy Cyst
       objectReference: {fileID: 0}
     - target: {fileID: 1284035446529913938, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
       propertyPath: m_LocalPosition.x
@@ -374,56 +380,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 901630060269158923, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4829932685244431974}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7756835116518912502, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8724018137210520947}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
 --- !u!4 &2731338468575478716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 901630060269158923, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
   m_PrefabInstance: {fileID: 2982669514696901047}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4810198917432471617 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7756835116518912502, guid: 3fc8f0eeeff995d4586e90862ee6e350, type: 3}
-  m_PrefabInstance: {fileID: 2982669514696901047}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8724018137210520947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4810198917432471617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
-  overheatThreshold: 1
-  heatLoss: 0.34
-  heatLossCooldown: 0.5
-  overheatSound:
-    clip: {fileID: 0}
-    mixerGroup: {fileID: 0}
-    loop: 0
-    playOnAwake: 0
-    frequentSound: 0
-    mute: 0
-    bypassEffects: 0
-    bypassListenerEffects: 0
-    bypassReverbZones: 0
-    priority: 128
-    volume: 1
-    pitch: 1
-    panStereo: 0
-    spatialBlend: 0
-    reverbZoneMix: 1
-    dopplerLevel: 1
-    spread: 0
-    minDistance: 1
-    maxDistance: 500
-    ignoreListenerVolume: 0
-    ignoreListenerPause: 0
-    rolloffMode: 0

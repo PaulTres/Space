@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad3433ad3521184488d385d17e51507, type: 3}
   m_Name: Satellite
   m_EditorClassIdentifier: SpaceAssembly::UnitData
-  Prefab: {fileID: 3631511395967583101, guid: 4ebcceab5f74ede41ba7b566a6aeba28, type: 3}
+  Prefab: {fileID: 568885492946791619, guid: 4ebcceab5f74ede41ba7b566a6aeba28, type: 3}
   ShouldBeDisabled: 1
   Points: 1
-  MissionRequirement: -1
   description: 

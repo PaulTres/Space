@@ -850,7 +850,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
   - Difficulty: Easy
-    Options: []
+    Options:
+    - {fileID: 11400000, guid: 824b7fb2ed79769419defdcf5e7cb76f, type: 2}
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
@@ -1623,7 +1624,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Level.NPCSpawner
   spawnOptions:
   - Difficulty: Easy
-    Options: []
+    Options:
+    - {fileID: 11400000, guid: 824b7fb2ed79769419defdcf5e7cb76f, type: 2}
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1

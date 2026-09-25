@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
   overheatThreshold: 20
   heatLoss: 0.34
-  heatLossCooldown: 0.5
+  heatLossCooldown: 2
   overheatSound:
     clip: {fileID: 0}
     mixerGroup: {fileID: 0}
@@ -1226,7 +1226,6 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EscortValue>k__BackingField: 100
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 5586086991175637683}
@@ -1293,6 +1292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 10
+  VelocitySoftCap: 9
   MoraleWeight: 10
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
@@ -1303,6 +1303,7 @@ MonoBehaviour:
   ScanRange: 30
   SpawnCheckRadius: 5
   EffectScaleFactor: 1
+  EscortValue: 10
   ForwardThrust: 10
   StrafeThrust: 5
   RotationSpeed: 20

@@ -31,6 +31,7 @@ namespace Player
         [SerializeField] protected TextMeshProUGUI dampenerText;
         [Tooltip("All weapon displays will be children of this object.")]
         [SerializeField] protected RectTransform weaponDisplayParent;
+        [SerializeField] protected Image reloadIconPrefab;
         #endregion
 
         #region Setup
@@ -50,25 +51,14 @@ namespace Player
             foreach (var weapon in PlayerWeaponsProperty.LauncherGroups)
             {
                 var display = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
-                display.HeatStatusImage.enabled = false;
-                display.ReloadStatusImage.enabled = true;
-                display.ReloadStatusImage.fillAmount = 0;
-                display.WeaponIcon.sprite = weapon.Icon;
-                display.TurretStanceIcon.enabled = false;
-                display.AmmoText.enabled = weapon.Magazine != null;
-                display.SelectionIcon.enabled = false;
+                display.Initialize(weapon, reloadIconPrefab);
                 launcherDisplays.Add(display);
             }
             foreach (var weapon in PlayerWeaponsProperty.TurretGroups)
             {
                 var display = Instantiate(weaponDisplayPrefab, weaponDisplayParent);
-                display.HeatStatusImage.enabled = weapon.Heatsink != null;
-                display.ReloadStatusImage.enabled = true;
-                display.ReloadStatusImage.fillAmount = 0;
-                display.WeaponIcon.sprite = weapon.Icon;
-                display.AmmoText.enabled = false;
+                display.Initialize(weapon, reloadIconPrefab);
                 display.TurretStanceIcon.sprite = turretStanceIcons[weapon.Turrets[0].CurrentStanceIndex];
-                display.SelectionIcon.enabled = false;
                 turretDisplays.Add(display);
             }
             PlayerWeaponsProperty.OnTurretGroupStanceChange += (i) =>
@@ -130,29 +120,11 @@ namespace Player
         {
             for (int i = 0; i < PlayerWeaponsProperty.TurretGroups.Count; i++)
             {
-                turretDisplays[i].ReloadStatusImage.fillAmount = PlayerWeaponsProperty.TurretGroups[i].ReloadStatus;
-                if (turretDisplays[i].HeatStatusImage.enabled)
-                {
-                    turretDisplays[i].HeatStatusImage.fillAmount = PlayerWeaponsProperty.TurretGroups[i].Heatsink.OverheatPercentage;
-                    if (PlayerWeaponsProperty.TurretGroups[i].Heatsink.Overheated)
-                    {
-                        turretDisplays[i].HeatStatusImage.color = Color.red;
-                    }
-                    else
-                    {
-                        turretDisplays[i].HeatStatusImage.color = Color.Lerp(
-                            Color.white, Color.red, PlayerWeaponsProperty.TurretGroups[i].Heatsink.
-                            OverheatPercentage);
-                    }
-                }
+                turretDisplays[i].UpdateDisplay(PlayerWeaponsProperty.TurretGroups[i]);
             }
             for (int i = 0; i < launcherDisplays.Count; i++)
             {
-                if (launcherDisplays[i].AmmoText.enabled)
-                {
-                    launcherDisplays[i].AmmoText.text = PlayerWeaponsProperty.LauncherGroups[i].Magazine.AmmoCount.ToString();
-                }
-                launcherDisplays[i].ReloadStatusImage.fillAmount = PlayerWeaponsProperty.LauncherGroups[i].ReloadStatus;
+                launcherDisplays[i].UpdateDisplay(PlayerWeaponsProperty.LauncherGroups[i]);
             }
         }
 

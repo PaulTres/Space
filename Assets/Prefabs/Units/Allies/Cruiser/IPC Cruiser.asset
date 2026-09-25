@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bad3433ad3521184488d385d17e51507, type: 3}
-  m_Name: Frigate
+  m_Name: IPC Cruiser
   m_EditorClassIdentifier: SpaceAssembly::UnitData
-  Prefab: {fileID: 7987621152319063558, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+  Prefab: {fileID: 8506764437379590348, guid: af887574845d8644aa010d9e0585ef18, type: 3}
   ShouldBeDisabled: 1
   Points: 1
   description: 
   unitParameters:
-    MoraleWeight: 30
+    MoraleWeight: 70
     TickInterval: 0.2
     EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 20
-    <MaximumSignature>k__BackingField: 80
+    <MinimumSignature>k__BackingField: 40
+    <MaximumSignature>k__BackingField: 120
     SignatureDecreaseRate: 0.1
     SignatureDecreaseCooldown: 5
-    ScanRange: 50
-    SpawnCheckRadius: 6
+    ScanRange: 60
+    SpawnCheckRadius: 10
   takeParametersFromPrefab: 0

@@ -68,7 +68,7 @@ namespace Weapons
         #endregion
 
         #region Setup
-        protected void OnValidate()
+        protected virtual void OnValidate()
         {
             if (shootPoints.IsEmpty()) shootPoints = new Transform[] { transform };
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace Utilities
 {
     public class Singleton<T> : MonoBehaviour where T : Component

@@ -282,6 +282,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: f616ad21683f340478d1821e4ab7d4ec, type: 2}
   shootPoints:
   - {fileID: 427745863350147429}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &1058267553307964328
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +787,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: f616ad21683f340478d1821e4ab7d4ec, type: 2}
   shootPoints:
   - {fileID: 5893094008756597995}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &4032581592841576001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1565,6 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EscortValue>k__BackingField: 1000
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 731779712251133623}
@@ -1630,6 +1631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 15
+  VelocitySoftCap: 13.5
   MoraleWeight: 200
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
@@ -1640,6 +1642,7 @@ MonoBehaviour:
   ScanRange: 30
   SpawnCheckRadius: 5
   EffectScaleFactor: 1
+  EscortValue: 10
   ForwardThrust: 10
   StrafeThrust: 5
   RotationSpeed: 50
@@ -1653,6 +1656,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5608285259230370461}
   - component: {fileID: 2236077962093127969}
+  - component: {fileID: 5654665886309344042}
   m_Layer: 0
   m_Name: Weapons
   m_TagString: Untagged
@@ -1693,10 +1697,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
   overheatThreshold: 1
   heatLoss: 0.34
-  heatLossCooldown: 0.5
+  heatLossCooldown: 2
   overheatSound:
     clip: {fileID: 0}
     mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+--- !u!114 &5654665886309344042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261766306148284041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
+  overheatThreshold: 10
+  heatLoss: 0.34
+  heatLossCooldown: 2
+  overheatSound:
+    clip: {fileID: 8300000, guid: 19bb777c626e24220835300df5aca6b5, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
     frequentSound: 0
@@ -1901,6 +1943,14 @@ PrefabInstance:
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175957556254080914, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 8724018137210520947, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: heatLossCooldown
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2228,6 +2278,14 @@ PrefabInstance:
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175957556254080914, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 8724018137210520947, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: heatLossCooldown
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2559,6 +2617,14 @@ PrefabInstance:
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8175957556254080914, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 8724018137210520947, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: heatLossCooldown
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

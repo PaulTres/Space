@@ -19,8 +19,8 @@ MonoBehaviour:
   Damage: 1
   LifeTime: 5
   EffectScaleFactor: 1
-  OnSpawnEffect: {fileID: 985664761693772524, guid: 57485f16f0edf1d4385b2ab98ded1192, type: 3}
-  OnHitEffect: {fileID: 0}
+  OnSpawnEffect: {fileID: 985664761693772524, guid: 1fe5d09d3fc20b54da2a8bb30f40d75a, type: 3}
+  OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
   TopSpeed: 45
   Acceleration: 1
   InitialVelocity: 40

@@ -14,7 +14,8 @@ namespace AudioSystem
         [SerializeField] bool collectionCheck = true;
         [SerializeField] int defaultCapacity = 10;
         [SerializeField] int maxPoolSize = 100;
-        [SerializeField] int maxSoundInstances = 30;
+        [SerializeField] int maxSoundInstances = 200;
+
         protected override void InitializeSingleton()
         {
             base.InitializeSingleton();
@@ -32,6 +33,7 @@ namespace AudioSystem
                 try
                 {
                     FrequentSoundEmitters.First.Value.Stop();
+                    Debug.Log("Stopped frequent sound emitter.");
                     return true;
                 }
                 catch

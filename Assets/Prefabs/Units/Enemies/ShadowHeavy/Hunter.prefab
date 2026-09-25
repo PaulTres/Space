@@ -189,6 +189,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: fc5f14bb25254c44cbf214e208357e1b, type: 2}
   shootPoints:
   - {fileID: 5644066219969725766}
+  <Heatsink>k__BackingField: {fileID: 3215237065322307359}
 --- !u!1 &903256320739450830
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +621,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: fc5f14bb25254c44cbf214e208357e1b, type: 2}
   shootPoints:
   - {fileID: 4712808770849751739}
+  <Heatsink>k__BackingField: {fileID: 3215237065322307359}
 --- !u!1 &3184801349752786162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1519,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: fc5f14bb25254c44cbf214e208357e1b, type: 2}
   shootPoints:
   - {fileID: 25538221906293701}
+  <Heatsink>k__BackingField: {fileID: 3215237065322307359}
 --- !u!1 &7977397136099219233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1680,7 +1683,6 @@ MonoBehaviour:
   <Team>k__BackingField: 0
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EscortValue>k__BackingField: 50
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 1329890387165328382}
@@ -1732,8 +1734,8 @@ MonoBehaviour:
   - {fileID: 4240226987818666298}
   interval: 0.5
   count: 3
-  effectScaleFactor: 1
-  finalEffectScaleFactor: 5
+  effectScaleFactor: 2
+  finalEffectScaleFactor: 10
 --- !u!114 &6510060353242106149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1763,6 +1765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 20
+  VelocitySoftCap: 18
   MoraleWeight: 10
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
@@ -1773,6 +1776,7 @@ MonoBehaviour:
   ScanRange: 90
   SpawnCheckRadius: 10
   EffectScaleFactor: 1
+  EscortValue: 10
   ForwardThrust: 15
   StrafeThrust: 10
   RotationSpeed: 30
