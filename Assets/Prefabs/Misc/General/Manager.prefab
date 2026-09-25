@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2676641148444264701}
   - component: {fileID: 5047494723204293062}
   - component: {fileID: 7572458680675845857}
+  - component: {fileID: 2811303521562036857}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -61,3 +62,20 @@ MonoBehaviour:
   defaultCapacity: 10
   maxPoolSize: 100
   maxSoundInstances: 60
+--- !u!114 &2811303521562036857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2294206698379235442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}

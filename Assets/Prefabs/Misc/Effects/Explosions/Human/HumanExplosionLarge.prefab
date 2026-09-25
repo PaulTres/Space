@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Effects.PoolableEffect
   <PoolKey>k__BackingField: 16
   soundData:
-    clip: {fileID: 8300000, guid: 8524588a69a4f3e40bb597b6221138f1, type: 3}
+    clip: {fileID: 8300000, guid: 9d605a19056520046ac09aa1a1f2d4d5, type: 3}
     mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     loop: 0
     playOnAwake: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
     rolloffMode: 0
   audioOnly: 0
   lifetime: 3
+  playAtPlayerLocation: 0
 --- !u!1 &3440386896652761076
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,8 +242,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.3
+      scalar: 0.3
+      minScalar: 0.75
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -823,7 +824,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 1.25
       mode: 0
       spread: 0
       speed:
@@ -1052,7 +1053,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 25
+        scalar: 50
         minScalar: 15
         maxCurve:
           serializedVersion: 2
@@ -1621,7 +1622,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -2154,7 +2155,7 @@ ParticleSystem:
         m_RotationOrder: 4
     speedModifier:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -2171,7 +2172,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: -0.1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -6332,8 +6333,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.8044683, b: 0, a: 1}
-        key1: {r: 0, g: 0, b: 0, a: 0.39215687}
+        key0: {r: 1, g: 0.44906956, b: 0, a: 1}
+        key1: {r: 0.19245279, g: 0.19245279, b: 0.19245279, a: 0.39215687}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

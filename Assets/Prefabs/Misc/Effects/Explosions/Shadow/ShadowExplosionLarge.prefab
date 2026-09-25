@@ -72,6 +72,7 @@ MonoBehaviour:
     rolloffMode: 0
   audioOnly: 0
   lifetime: 3
+  playAtPlayerLocation: 0
 --- !u!1 &6420471809337579758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,8 +1119,8 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -2
-          outSlope: -2
+          inSlope: 0
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -1438,8 +1439,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0.78881884, a: 1}
-        key1: {r: 0, g: 0, b: 0, a: 0.39215687}
+        key0: {r: 0.6226415, g: 0, b: 0.49078825, a: 1}
+        key1: {r: 0.15471691, g: 0.15471691, b: 0.15471691, a: 0.39215687}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5717,7 +5718,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 1.25
       mode: 0
       spread: 0
       speed:
@@ -6515,7 +6516,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -7048,7 +7049,7 @@ ParticleSystem:
         m_RotationOrder: 4
     speedModifier:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -7065,7 +7066,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
+          value: -0.1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
