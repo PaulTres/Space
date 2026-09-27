@@ -6,6 +6,7 @@ namespace Weapons
     public class Turret : MonoBehaviour
     {
         #region Fields
+        [SerializeField] bool sendDebugMessages;
         protected ImprovedMonoBehaviour currentTarget;
         public ImprovedMonoBehaviour Target
         {
@@ -148,7 +149,7 @@ namespace Weapons
             {
                 foreach (var w in Weapons)
                 {
-                    //if (Target == GameManager.Player) Debugging.Log(w.transform);
+                    if (sendDebugMessages) Debug.Log(w.ToString());
                     w.Shoot(Target);
                 }
             }
@@ -283,7 +284,7 @@ namespace Weapons
         /// <returns>True if the target is valid, false otherwise.</returns>
         public bool IsTargetValid(ImprovedMonoBehaviour target)
         {
-            if (!target.Active()) return false;
+            if (!target.Active() || target.Untargetable) return false;
             if (Weapons[0].RequiresOptimalFiringRange && !Unit.InOptimalFiringRange(target)) return false;
 
             //if (@params.BurstFire) Debugging.Log(target.Transform);

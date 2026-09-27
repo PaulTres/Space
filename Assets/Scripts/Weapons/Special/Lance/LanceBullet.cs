@@ -18,7 +18,7 @@ namespace Weapons
         [SerializeField] protected ParticleSystem telegraphVisuals, damageVisuals;
         protected Color telegraphColor, telegraphTransparent, damageColor, damageTransparent;
         protected float maxLifeTime, timerProgressTrackingThreshold, delay;
-        protected SoundData soundData, telegraphSound;
+        protected SoundData damageSound, telegraphSound;
         public event Action<IThreat> OnThreatOver = delegate { };
 
         #region Setup
@@ -55,7 +55,7 @@ namespace Weapons
             delay = data.Delay;
             lifeTime += delay;
             maxLifeTime = lifeTime;
-            soundData = data.FireSound;
+            damageSound = data.FireSound;
             telegraphSound = data.TelegraphSound;
             timerProgressTrackingThreshold = data.TimerProgressTrackingThreshold;
         }
@@ -99,7 +99,7 @@ namespace Weapons
         {
             telegraphVisuals.Play();
             telegraphTimer.Start();
-            telegraphSound.Play(Position);
+            telegraphSound.Play(GameManager.Player.Active() ? GameManager.Player.Position : Position);
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);
             for (int i = 0; i < colliderCount; i++)
@@ -118,7 +118,7 @@ namespace Weapons
             OnThreatOver(this);
             telegraphVisuals.Stop();
             telegraphVisuals.Clear();
-            soundData?.Play(Position);
+            damageSound?.Play(GameManager.Player.Active() ? GameManager.Player.Position : Position);
             damageVisuals.Play();
             colliderCount = Physics.OverlapCapsuleNonAlloc(Transform.position,
                 Position + Forward * range, radius, buffer, GlobalConfig.LanceCheckMask);

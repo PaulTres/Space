@@ -56,6 +56,7 @@ namespace Effects
         {
             if (effect == null) return;
             if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
+            //Debug.Log($"{effect}:{playSound}");
             e.Transform.SetPositionAndRotation(position, rotation);
             e.Transform.localScale = scale;
             e.gameObject.SetActive(true);
@@ -103,7 +104,7 @@ namespace Effects
                 lifetimeTimer.OnTimerStop += () => gameObject.SetActive(false);
             }
             lifetimeTimer.Start();
-            //Debugging.Log($"Playing effect: {PoolKey}");
+
             if (playAtPlayerLocation && GameManager.Player.Active())
             {
                 soundData.Play(GameManager.Player.Position);

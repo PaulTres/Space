@@ -7,6 +7,14 @@ public class DamageEffect : MonoBehaviour
 {
     protected ParticleSystem particles;
     protected Transform tr;
+    public Transform Transform
+    {
+        get
+        {
+            if (tr == null) tr = transform;
+            return tr;
+        }
+    }
     [field: SerializeField] public float DamageThreshold { get; protected set; } = .3f;
     [SerializeField] protected PoolableEffect effect;
     [SerializeField] protected float effectScaleFactor = 1f;
@@ -15,8 +23,7 @@ public class DamageEffect : MonoBehaviour
     {
         //Debugging.Log("DamageEffect enabled");
         if (particles == null) particles = GetComponent<ParticleSystem>();
-        if (tr == null) tr = transform;
         particles.Play();
-        effect.SpawnEffect(tr.position, tr.rotation, effectScaleFactor);
+        effect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
     }
 }

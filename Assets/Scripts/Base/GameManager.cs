@@ -69,7 +69,7 @@ public static class GameManager
     #region Progress
     public static void NewGame(int difficulty)
     {
-        currentSave = new(0, difficulty);
+        currentSave = new(difficulty);
         currentSave.Save();
         LoadMissionSelection();
     }

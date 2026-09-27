@@ -187,7 +187,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     public (int, Collider[]) GetMissiles() => (missileCount, missileBuffer);
 
     /// <summary>
-    /// Returns a list of all units that are on a different Team than this unit.
+    /// Returns a list of all units that are on a different team than this unit.
     /// </summary>
     /// <returns></returns>
     public List<ImprovedMonoBehaviour> GetTargets() => UnitManager.GetTargets(Team);

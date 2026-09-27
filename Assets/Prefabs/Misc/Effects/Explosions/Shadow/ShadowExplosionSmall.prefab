@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8886830819801127071
 Transform:
   m_ObjectHideFlags: 0
@@ -66,12 +66,13 @@ MonoBehaviour:
     dopplerLevel: 1
     spread: 0
     minDistance: 1
-    maxDistance: 500
+    maxDistance: 30
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
   audioOnly: 0
   lifetime: 3
+  playAtPlayerLocation: 0
 --- !u!1 &6420471809337579758
 GameObject:
   m_ObjectHideFlags: 0

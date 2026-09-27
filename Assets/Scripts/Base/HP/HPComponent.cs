@@ -1,4 +1,3 @@
-using Effects;
 using EventBus;
 using System;
 using System.Collections.Generic;
@@ -59,9 +58,6 @@ namespace HP
                 return improvedMonoBehaviour;
             }
         }
-        [SerializeField] protected PoolableEffect effectOnDamage;
-        [Tooltip("The threshold of damage at which the damage effect will be played.")]
-        [SerializeField] protected float damageThreshold = 0.5f;
         [SerializeField] protected float effectScaleFactor = .5f;
         [Tooltip("If true, this entity will not take damage.")]
         [SerializeField] protected bool invulnerable = false;
@@ -129,7 +125,6 @@ namespace HP
                 //}
                 return;
             }
-            if (damageInfo.Amount >= damageThreshold) effectOnDamage.SpawnEffect(damageInfo.Position, effectScaleFactor);
             if (currentHP < minHP)
             {
                 //begin hp regain timer

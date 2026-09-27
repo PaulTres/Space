@@ -325,7 +325,7 @@ namespace Radar
             foreach (var target in targets)
             {
                 //compute a score for all of these
-                if (!target.Active() || target.IsEqual(CurrentTarget)) continue;
+                if (!target.Active() || target.Untargetable || target.IsEqual(CurrentTarget)) continue;
                 var score = EvaluateTarget(target, out var inFov);
                 if (!inFov && targetInFov) continue;
                 if (score > bestScore)

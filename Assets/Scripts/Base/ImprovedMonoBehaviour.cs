@@ -49,6 +49,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     [field: SerializeField] public bool IsDying { get; protected set; } = false;
     [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
     public virtual float EscortValue => 0;
+    [field: SerializeField] public bool Untargetable { get; set; } = false;
 
     public void RegisterForRadar()
     {

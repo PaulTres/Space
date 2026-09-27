@@ -28,7 +28,7 @@ namespace AudioSystem
         public float spread;
 
         public float minDistance = 1f;
-        public float maxDistance = 500f;
+        public float maxDistance = 30f;
 
         public bool ignoreListenerVolume;
         public bool ignoreListenerPause;

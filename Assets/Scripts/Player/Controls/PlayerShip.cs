@@ -76,7 +76,6 @@ namespace Player
 
         protected override void OnEnable()
         {
-            base.OnEnable();
             PlayerDead = false;
             PlayerCamera = cameraData.CameraTransform.GetComponent<Camera>();
             defaultCamPos = cameraData.CameraTransform.localPosition;
@@ -95,6 +94,7 @@ namespace Player
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
             ResetCamera();
             EventBus<PauseScreen.PauseEvent>.AddActions(OnPauseEvent);
+            base.OnEnable();
         }
 
         protected override void OnDisable()

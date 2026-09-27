@@ -121,12 +121,12 @@ namespace Weapons
 
         protected virtual void OnHit(Collider collider)
         {
-            if (collider.transform.root == Owner) return;
+            var root = collider.transform.root;
+            if (root == Owner.Transform.root) return;
             if (!collider.transform.TakeDamage(damageInfo))
             {
                 Debug.LogError($"{collider.transform} on {collider.transform.root} cannot take damage!");
             }
-            //Debugging.Log($"{collider.transform} on {collider.transform.root} taking {damageInfo.Amount} damage.");
             onHitEffect.SpawnEffect(Transform.position, Transform.rotation, effectScaleFactor);
             if (disableOnHit) gameObject.SetActive(false);
         }

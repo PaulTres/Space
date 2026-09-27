@@ -27,7 +27,7 @@ public class TargetAcquisitionService : ServiceData
         //}
         foreach (var target in ctx.Navigation.GetTargets())
         {
-            if (!target.Active()) continue;
+            if (!target.Active() || target.Untargetable) continue;
             if (!bestTarget.Active())
             {
                 bestTarget = target;

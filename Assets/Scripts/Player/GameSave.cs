@@ -15,12 +15,24 @@ namespace Player
         public int CurrentMissionIndex { get; set; } = 0;
         public readonly int Difficulty;
 
-        [JsonConstructor]
-        public GameSave([JsonProperty("LatestMissionIndex")] int index, [JsonProperty("Difficulty")] int difficulty)
+        public GameSave(int difficulty)
         {
+            Difficulty = difficulty;
+            CurrentMissionIndex = 0;
             dateTimeBinary = DateTime.Now.ToBinary();
+        }
+
+        [JsonConstructor]
+        public GameSave([JsonProperty("LatestMissionIndex")] int index, [JsonProperty("Difficulty")] int difficulty, [JsonProperty("dateTimeBinary")] long dateTimeBinary)
+        {
+            this.dateTimeBinary = dateTimeBinary;
             CurrentMissionIndex = index;
             Difficulty = difficulty;
+        }
+
+        public void Save()
+        {
+            JSONService.SaveData(this, Name + "_" + dateTimeBinary + ".json");
         }
 
         public override string ToString()
@@ -32,12 +44,12 @@ namespace Player
         public static string ConvertToFileName(string fancyString)
         {
             var dateTime = DateTime.Parse(fancyString.Replace("GameSave: ", ""));
-            return Name + "_" + dateTime.ToBinary();
+            return Name + "_" + dateTime.ToBinary() + ".json";
         }
 
         public static string ConvertFileName(string fileName)
         {
-            var binary = long.Parse(fileName.Replace("GameSave_", ""));
+            var binary = long.Parse(fileName.Replace("GameSave_", "").Replace(".json", ""));
             return "GameSave: " + DateTime.FromBinary(binary).ToString();
         }
 
@@ -74,11 +86,6 @@ namespace Player
                 return result;
             }
             return null;
-        }
-
-        public void Save()
-        {
-            JSONService.SaveData(this, Name + "_" + dateTimeBinary);
         }
         #endregion
     }

@@ -54,12 +54,21 @@ namespace Utilities
         }
         #endregion
 
-        public static void Play(this SoundData soundData, Vector3 position, bool createManager = true)
+        public static void Play(this SoundData soundData, Vector3 position, bool createManager = true, bool requiresPlayer = true)
         {
             if (soundData != null)
             {
                 var m = SoundManager.TryGetInstance(createManager);
-                if (m != null) m.Play(soundData, position);
+                if (m != null)
+                {
+                    if (requiresPlayer)
+                    {
+                        if (!GameManager.Player.Active()) return;
+                        var dist = Vector3.Distance(position, GameManager.Player.Position);
+                        if (dist > soundData.maxDistance) return;
+                    }
+                    m.Play(soundData, position);
+                }
             }
         }
 
@@ -202,6 +211,13 @@ namespace Utilities
         }
 
         #region Transform
+        public static bool IsPlayer(this Transform transform)
+        {
+            if (transform == null) return false;
+            if (!GameManager.Player.Active()) return false;
+            return transform == GameManager.Player.transform.root;
+        }
+
         /// <summary>
         /// Get the direction from the transform to the target position in terms of the transform's local axes.
         /// </summary>

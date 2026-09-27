@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-namespace Utilities
+using Utilities;
+namespace AudioSystem
 {
     public class ButtonSoundHook : MonoBehaviour
     {
@@ -12,8 +12,8 @@ namespace Utilities
 
         public void PlayClickSound()
         {
-            if (GameManager.Player.Active()) GlobalConfig.ClickSound.Play(GameManager.Player.Position);
-            else GlobalConfig.ClickSound.Play(Vector3.zero);
+            if (GameManager.Player.Active()) GlobalConfig.ClickSound.Play(GameManager.Player.Position, requiresPlayer: false);
+            else GlobalConfig.ClickSound.Play(Vector3.zero, requiresPlayer: false);
         }
     }
 }
