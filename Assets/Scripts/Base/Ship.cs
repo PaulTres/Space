@@ -86,28 +86,28 @@ public abstract class Ship : Unit
             intendedVelocity += movementVector.z * ForwardThrust * Forward +
                 movementVector.x * StrafeThrust * Right +
                 movementVector.y * StrafeThrust * Up;
-            rb.AddForce(intendedVelocity, ForceMode.Acceleration);
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
-            if (thrusters != null)
+        }
+        rb.AddForce(intendedVelocity, ForceMode.Acceleration);
+        rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, MaxVelocityMagnitude);
+        if (thrusters != null)
+        {
+            if (movementVector.z > 0) thrusters.Increase(deltaTime);
+            else thrusters.Decrease(deltaTime);
+            if (engineAudioSource != null)
             {
-                if (movementVector.z > 0) thrusters.Increase(deltaTime);
-                else thrusters.Decrease(deltaTime);
-                if (engineAudioSource != null)
+                if (movementVector.sqrMagnitude > 0)
                 {
-                    if (movementVector.sqrMagnitude > 0)
-                    {
-                        if (!engineAudioSource.isPlaying) engineAudioSource.Play();
-                    }
-                    else if (engineAudioSource.isPlaying) engineAudioSource.Stop();
+                    if (!engineAudioSource.isPlaying) engineAudioSource.Play();
                 }
+                else if (engineAudioSource.isPlaying) engineAudioSource.Stop();
             }
+        }
 
-            var counterForceMultiplier = (LinearVelocity.magnitude - VelocitySoftCap) / (MaxVelocityMagnitude - VelocitySoftCap);
-            if (counterForceMultiplier > 0)
-            {
-                var counterForce = counterForceMultiplier * GlobalConfig.VelocitySoftCapCoefficient * deltaTime * rb.linearVelocity;
-                rb.linearVelocity -= counterForce * (MaxVelocityMagnitude - intendedVelocity.magnitude);
-            }
+        var counterForceMultiplier = Mathf.Clamp01(LinearVelocity.magnitude - VelocitySoftCap) / (MaxVelocityMagnitude - VelocitySoftCap);
+        if (counterForceMultiplier > 0)
+        {
+            var counterForce = counterForceMultiplier * GlobalConfig.VelocitySoftCapCoefficient * deltaTime * rb.linearVelocity;
+            rb.linearVelocity -= counterForce;
         }
     }
 

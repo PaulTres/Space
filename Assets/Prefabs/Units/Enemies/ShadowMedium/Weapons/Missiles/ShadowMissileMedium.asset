@@ -23,7 +23,7 @@ MonoBehaviour:
   OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
   TopSpeed: 70
   Acceleration: 10
-  InitialVelocity: 20
+  InitialVelocity: 10
   InertialDampeners: 1
   ScaleFactor: 1
   RendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
@@ -53,7 +53,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   resetCurve: 0
-  Tracking: 10
+  Tracking: 3
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0.7
   HP: 0.1

@@ -204,7 +204,7 @@ MonoBehaviour:
   EffectScaleFactor: 1
   EscortValue: 10
   ForwardThrust: 20
-  StrafeThrust: 15
+  StrafeThrust: 5
   RotationSpeed: 40
 --- !u!1 &1407200627766093388
 GameObject:

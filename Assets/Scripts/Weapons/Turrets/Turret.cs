@@ -63,7 +63,8 @@ namespace Weapons
             get => currentStanceIndex;
             set
             {
-                value %= turretStances.Count;
+                if (turretStances.Count == 0) value = 0;
+                else value %= turretStances.Count;
                 if (currentStanceIndex != value)
                 {
                     currentStanceIndex = value;

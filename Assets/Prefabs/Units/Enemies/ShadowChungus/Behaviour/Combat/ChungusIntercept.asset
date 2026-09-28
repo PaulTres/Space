@@ -18,4 +18,4 @@ MonoBehaviour:
   Services: []
   InterceptError: 1
   UseOptimalFiringRange: 1
-  distanceBuffer: -10
+  distanceBuffer: -30

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 5671837062557374259}
   <ElevationPivot>k__BackingField: {fileID: 5671837062557374259}
   params: {fileID: 11400000, guid: e69925e79780c6448b5336571dc3f0c9, type: 2}
@@ -260,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 427745863350147429}
   <ElevationPivot>k__BackingField: {fileID: 427745863350147429}
   params: {fileID: 11400000, guid: f6ee718b25c9ed44b8b248062e9b25df, type: 2}
@@ -765,6 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 5893094008756597995}
   <ElevationPivot>k__BackingField: {fileID: 5893094008756597995}
   params: {fileID: 11400000, guid: f6ee718b25c9ed44b8b248062e9b25df, type: 2}
@@ -1073,6 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 691328799431473439}
   <ElevationPivot>k__BackingField: {fileID: 691328799431473439}
   params: {fileID: 11400000, guid: e69925e79780c6448b5336571dc3f0c9, type: 2}
@@ -1515,8 +1519,6 @@ MonoBehaviour:
   - {fileID: 8475051046336999118}
   - {fileID: 2804005569974697939}
   - {fileID: 1025872525521136025}
-  effectOnDamage: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
-  damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
   debug: 0
@@ -1565,6 +1567,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 731779712251133623}
@@ -1644,7 +1647,7 @@ MonoBehaviour:
   EffectScaleFactor: 1
   EscortValue: 10
   ForwardThrust: 10
-  StrafeThrust: 5
+  StrafeThrust: 1
   RotationSpeed: 50
 --- !u!1 &8261766306148284041
 GameObject:

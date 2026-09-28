@@ -309,7 +309,7 @@ MonoBehaviour:
   tickInterval: 0.1
   shouldTick: 1
   maxThreats: 1
-  minEscortValue: 10
+  minEscortValue: 11
 --- !u!114 &1902977087149361923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   EffectScaleFactor: 0.5
   EscortValue: 10
   ForwardThrust: 25
-  StrafeThrust: 25
+  StrafeThrust: 10
   RotationSpeed: 40
 --- !u!1 &4891043787746463599
 GameObject:

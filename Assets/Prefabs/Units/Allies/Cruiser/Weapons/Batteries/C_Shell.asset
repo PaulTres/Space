@@ -21,9 +21,9 @@ MonoBehaviour:
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 985664761693772524, guid: f94698d05bc40c34d8938048281bd674, type: 3}
   OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
-  TopSpeed: 60
+  TopSpeed: 80
   Acceleration: 1
-  InitialVelocity: 60
+  InitialVelocity: 80
   InertialDampeners: 1
   ScaleFactor: 0.1
   RendererMaterial: {fileID: 2100000, guid: 2717e9cd8dbd4464d86960218f25345c, type: 2}
