@@ -52,7 +52,7 @@ ParticleSystem:
   looping: 0
   prewarm: 0
   playOnAwake: 0
-  useUnscaledTime: 0
+  useUnscaledTime: 1
   autoRandomSeed: 1
   startDelay:
     serializedVersion: 2
@@ -4942,3 +4942,4 @@ MonoBehaviour:
     rolloffMode: 0
   audioOnly: 0
   lifetime: 3
+  playAtPlayerLocation: 0

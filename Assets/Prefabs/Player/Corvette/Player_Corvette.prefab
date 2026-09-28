@@ -214,8 +214,7 @@ MonoBehaviour:
   <Team>k__BackingField: 1
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EffectScaleFactor>k__BackingField: 1
-  <EscortValue>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 2271448370152943029}
@@ -227,23 +226,11 @@ MonoBehaviour:
   - {fileID: 6332054048094493594}
   - {fileID: 6776047194658260325}
   <PlaySpawnEffect>k__BackingField: 1
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 10
-    <MaximumSignature>k__BackingField: 50
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 30
-    SpawnCheckRadius: 5
-  forwardThrust: 25
-  <RotationSpeed>k__BackingField: 50
-  strafeThrust: 20
+  <Parameters>k__BackingField: {fileID: 7874128326911120359}
   <Dampeners>k__BackingField: 1
   shipBody: {fileID: 6003703947580855234}
   cameraData:
-    CameraPivot: {fileID: 8933938335763968280}
+    CameraPivot: {fileID: 9142308644188303047}
     FreelookCameraPivot: {fileID: 5251525311450475504}
     CameraTransform: {fileID: 1727524867164971710}
     ZoomSpeed: 1
@@ -286,6 +273,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+--- !u!114 &7874128326911120359 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5968943782017760857, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
+  m_PrefabInstance: {fileID: 4581136363299089854}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6717120728570219876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82da82ea6369c6947823cec214bdad2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::ShipParameters
 --- !u!114 &8572090967617740510 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5288730168815367008, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
@@ -329,7 +327,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 30823223772318358, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: m_Name
-      value: CameraPivot
+      value: CameraPivotParent
       objectReference: {fileID: 0}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: weaponParent
@@ -453,5 +451,10 @@ Transform:
 --- !u!4 &8933938335763968280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2659574982318271215, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+  m_PrefabInstance: {fileID: 6850833545366871031}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &9142308644188303047 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2446313908768585008, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
   m_PrefabInstance: {fileID: 6850833545366871031}
   m_PrefabAsset: {fileID: 0}

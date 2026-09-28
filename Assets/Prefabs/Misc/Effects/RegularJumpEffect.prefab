@@ -72,6 +72,7 @@ MonoBehaviour:
     rolloffMode: 0
   audioOnly: 0
   lifetime: 3
+  playAtPlayerLocation: 0
 --- !u!198 &4918853256161837267
 ParticleSystem:
   m_ObjectHideFlags: 0

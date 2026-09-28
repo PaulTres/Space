@@ -1,13 +1,11 @@
 using Timers;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Level
 {
-    public class TimerTrigger : MonoBehaviour
+    public class TimerTrigger : Trigger
     {
         [SerializeField] protected float time;
-        public UnityEvent Delegate;
         protected CountdownTimer timer;
         [SerializeField] protected bool fireOnEnable = true;
 
@@ -30,6 +28,5 @@ namespace Level
         {
             timer?.Dispose();
         }
-
     }
 }

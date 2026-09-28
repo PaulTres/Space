@@ -186,16 +186,12 @@ namespace Radar
                 var unit = target as Unit;
                 if (unit != null && target.Team != GlobalConfig.PlayerTeam && target.Target == GameManager.Player && GameManager.Player.Active())
                 {
+                    //handle line renderer
                     bbox.LineRenderer.enabled = true;
                     bbox.LineRenderer.SetPosition(0, target.Position);
                     bbox.LineRenderer.SetPosition(1, GameManager.Player.Position);
-                    if (distance > unit.ScanRange + GameManager.Player.CurrentSignature)
-                    {
-                        bbox.LineRenderer.material = bbox.DottedLineMaterial;
-                        bbox.LineRenderer.material.mainTextureScale =
-                            new Vector2(distance / 2, 1f);
-                    }
-                    else bbox.LineRenderer.material = bbox.RegularLineMaterial;
+                    var distanceDelta = Mathf.Clamp(distance - (unit.ScanRange + GameManager.Player.CurrentSignature), 0, 100);
+                    bbox.SetLineRendererTransparency((255 - 2 * distanceDelta) / 255);
                 }
                 else bbox.LineRenderer.enabled = false;
             }
@@ -297,8 +293,9 @@ namespace Radar
                 {
                     secondViewCamera.gameObject.SetActive(true);
                     secondView.gameObject.SetActive(true);
-                    secondViewCamera.transform.position = CurrentTarget.Position +
-                        direction.normalized * Mathf.Max(5, CurrentTarget.EffectScaleFactor * 2);
+                    secondViewCamera.transform.position = CurrentTarget.Position
+                        + direction.normalized * Mathf.Max(20,
+                        CurrentTarget.EffectScaleFactor * 2);
                     secondViewCamera.transform.LookAt(CurrentTarget.Position);
                 }
             }

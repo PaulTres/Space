@@ -20,11 +20,10 @@ namespace Radar
         [field: SerializeField] public Image SelectionIcon { get; protected set; }
         [field: SerializeField] public TextMeshProUGUI DistanceText { get; protected set; }
         [field: SerializeField] public Image BBox { get; protected set; }
-        [field: SerializeField] public Material RegularLineMaterial { get; protected set; }
-        [field: SerializeField] public Material DottedLineMaterial { get; protected set; }
         [field: SerializeField] public LineRenderer LineRenderer { get; protected set; }
         public float TimeSinceLastFlicker { get; set; }
         public bool Hidden => !BBox.gameObject.activeSelf;
+        [SerializeField] protected Gradient lineRendererColors;
 
         public void Show()
         {
@@ -50,6 +49,12 @@ namespace Radar
             //SelectionIcon.enabled = false;
             //DistanceText.enabled = false;
             BBox.gameObject.SetActive(false);
+        }
+
+        public void SetLineRendererTransparency(float value)
+        {
+            //Debug.Log(value);
+            LineRenderer.startColor = LineRenderer.endColor = lineRendererColors.Evaluate(value);
         }
     }
 }
