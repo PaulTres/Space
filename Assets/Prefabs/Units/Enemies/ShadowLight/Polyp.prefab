@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 3906928593270123133}
   <ElevationPivot>k__BackingField: {fileID: 3906928593270123133}
   params: {fileID: 11400000, guid: 6a59c4d8d74d9594e8a422cf0993deff, type: 2}
@@ -239,8 +240,6 @@ MonoBehaviour:
   minHPRegainCooldown: 5
   currentHP: 0
   damageEffects: []
-  effectOnDamage: {fileID: 0}
-  damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
   debug: 0
@@ -259,7 +258,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
-  <EscortValue>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 6663940830056700868}
@@ -268,7 +267,7 @@ MonoBehaviour:
   <PlaySpawnEffect>k__BackingField: 1
   <Parameters>k__BackingField: {fileID: 970454256636518834}
   <Dampeners>k__BackingField: 1
-  <StopDistance>k__BackingField: 0.5
+  <StopDistance>k__BackingField: 3
   angleToForward: 10
   checker: {fileID: 11400000, guid: 5bb8b19c7faf0984290ef02187a1f0ec, type: 2}
 --- !u!136 &3947328160120870552
@@ -363,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::ShipParameters
   MaxVelocityMagnitude: 30
+  VelocitySoftCap: 27
   MoraleWeight: 10
   TickInterval: 0.2
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
@@ -373,6 +373,7 @@ MonoBehaviour:
   ScanRange: 30
   SpawnCheckRadius: 3
   EffectScaleFactor: 0.5
+  EscortValue: 10
   ForwardThrust: 25
   StrafeThrust: 25
   RotationSpeed: 40

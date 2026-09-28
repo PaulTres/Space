@@ -177,7 +177,7 @@ namespace Weapons
             if (Target.Active())
             {
                 var pos = ComputeTargetingPosition(Target);
-                Debug.DrawLine(Transform.position, pos, Color.red);
+                //Debug.DrawLine(Transform.position, pos, Color.red);
                 LookAt(pos, deltaTime);
                 if ((Transform.position - pos).sqrMagnitude <= @params.MaxRangeSquared)
                 {

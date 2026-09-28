@@ -24,7 +24,7 @@ namespace HybridBT2
                 }
             }
             context.SetData(Blackboard.Keys.EscortCandidate, bestCandidate);
-            return bestScore;
+            return bestCandidate.Active() ? bestScore : float.MinValue;
         }
 
         protected float EvaluateCandidate(ImprovedMonoBehaviour candidate, Blackboard context, float minEscortValue)

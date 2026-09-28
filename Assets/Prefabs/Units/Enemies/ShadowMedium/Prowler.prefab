@@ -92,8 +92,6 @@ MonoBehaviour:
   currentHP: 0
   damageEffects:
   - {fileID: 6468972933554443549}
-  effectOnDamage: {fileID: 0}
-  damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
   debug: 0
@@ -112,6 +110,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 3437810654484111270}
@@ -120,7 +119,7 @@ MonoBehaviour:
   <PlaySpawnEffect>k__BackingField: 1
   <Parameters>k__BackingField: {fileID: 6414609136424912816}
   <Dampeners>k__BackingField: 1
-  <StopDistance>k__BackingField: 0.5
+  <StopDistance>k__BackingField: 3
   angleToForward: 10
   checker: {fileID: 11400000, guid: af33f9179724c9c4488b87681fe476a5, type: 2}
 --- !u!114 &769438905589229889
@@ -413,6 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 3250141220001803489}
   <ElevationPivot>k__BackingField: {fileID: 3250141220001803489}
   params: {fileID: 11400000, guid: 6c3ef151e5a747044a0607c9afa87a39, type: 2}
@@ -559,6 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 1168545924643275943}
   <ElevationPivot>k__BackingField: {fileID: 1168545924643275943}
   params: {fileID: 11400000, guid: e68b5d433da5c32499f6fcf9d03505af, type: 2}
@@ -627,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 1565110788186583638}
   <ElevationPivot>k__BackingField: {fileID: 1565110788186583638}
   params: {fileID: 11400000, guid: e68b5d433da5c32499f6fcf9d03505af, type: 2}
@@ -806,6 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 824115751843068165}
   <ElevationPivot>k__BackingField: {fileID: 824115751843068165}
   params: {fileID: 11400000, guid: 6c3ef151e5a747044a0607c9afa87a39, type: 2}

@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 72703f626daec094796a1c53f5b5fbb2, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 3047896544002093697}
   magazine: {fileID: 0}
 --- !u!1 &3102445756847667998
 GameObject:
@@ -92,9 +93,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  sendDebugMessages: 0
+  <RotationPivot>k__BackingField: {fileID: 2314323264457749824}
+  <ElevationPivot>k__BackingField: {fileID: 2314323264457749824}
   params: {fileID: 11400000, guid: d1773223d648b4141b388c0b445e49e9, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
 --- !u!1001 &8521373495446229752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -105,7 +111,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2030571594334976142, guid: 7e1e89d9c78a82e4fb6f908a5b5df003, type: 3}
       propertyPath: m_Name
-      value: ShadowLightRed Variant
+      value: Heavy Polyp
       objectReference: {fileID: 0}
     - target: {fileID: 2030571594334976142, guid: 7e1e89d9c78a82e4fb6f908a5b5df003, type: 3}
       propertyPath: m_IsActive

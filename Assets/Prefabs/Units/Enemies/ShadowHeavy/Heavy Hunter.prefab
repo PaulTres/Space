@@ -196,9 +196,13 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d4ef4d5c741bcd446907830b501baed9, type: 2}
+    - target: {fileID: 8418237621207518437, guid: 1e5d985401d0d5b49aacb62a3ad34b98, type: 3}
+      propertyPath: <StopDistance>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8427289535332996151, guid: 1e5d985401d0d5b49aacb62a3ad34b98, type: 3}
       propertyPath: m_Name
-      value: ShadowHeavyRed
+      value: Heavy Hunter
       objectReference: {fileID: 0}
     - target: {fileID: 8427289535332996151, guid: 1e5d985401d0d5b49aacb62a3ad34b98, type: 3}
       propertyPath: m_IsActive

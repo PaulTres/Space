@@ -190,7 +190,14 @@ public abstract class Unit : ImprovedMonoBehaviour
     /// Returns a list of all units that are on a different team than this unit.
     /// </summary>
     /// <returns></returns>
-    public List<ImprovedMonoBehaviour> GetTargets() => UnitManager.GetTargets(Team);
+    public List<ImprovedMonoBehaviour> GetTargets()
+    {
+        if (Team == GlobalConfig.PlayerTeam) return UnitManager.GetShips(GlobalConfig.EnemyTeam);
+        else if (Team == GlobalConfig.EnemyTeam) return UnitManager.GetShips(GlobalConfig.PlayerTeam);
+        Debug.LogError($"{this} is on an invalid team!");
+        return new();
+
+    }
     #endregion
 
     public List<ImprovedMonoBehaviour> GetAllies() => UnitManager.GetShips(Team);
@@ -227,7 +234,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     }
     #endregion
 
-    #region Debugging
     protected virtual void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -236,15 +242,14 @@ public abstract class Unit : ImprovedMonoBehaviour
         Gizmos.DrawWireSphere(Transform.position, CurrentSignature);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(Transform.position, ScanRange);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
+        //Gizmos.color = Color.green;
+        //Gizmos.DrawWireSphere(Transform.position, SpawnCheckRadius);
         if (Target.Active())
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(Transform.position, Target.Position);
         }
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(Transform.position, EffectScaleFactor);
+        //Gizmos.color = Color.magenta;
+        //Gizmos.DrawWireSphere(Transform.position, EffectScaleFactor);
     }
-    #endregion
 }

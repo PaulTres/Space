@@ -33,28 +33,8 @@ public static class UnitManager
     /// <returns></returns>
     public static List<ImprovedMonoBehaviour> GetShips(int team)
     {
-        return ships.ContainsKey(team) ? ships[team].ToList() : new();
-    }
-
-    /// <summary>
-    /// Get all ships which are not in a specific team.
-    /// </summary>
-    /// <param name="myTeam"></param>
-    /// <returns></returns>
-    public static List<ImprovedMonoBehaviour> GetTargets(int myTeam)
-    {
-        //string s = "";
-        //foreach (var kvp in ships)
-        //{
-        //    s += $"{kvp.Key}: ";
-        //    foreach (var ship in kvp.Value)
-        //    {
-        //        s += $"{ship.transform};";
-        //    }
-        //    s += '\n';
-        //}
-        //Debug.Log(s);
-        return ships.Where(kv => kv.Key != myTeam).SelectMany(kv => kv.Value).ToList();
+        if (ships.TryGetValue(team, out var value)) return value;
+        return new();
     }
 
     public static void Register(ImprovedMonoBehaviour ship)

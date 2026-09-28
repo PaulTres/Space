@@ -8,7 +8,7 @@ public class BanditTree : BT, IRegisterableComponent
 {
     public Blackboard Context => blackboard;
     [SerializeField] protected int maxThreats = 1;
-    [Tooltip("Only friendly units with an escort value higher than this are eligible for escort duty.")]
+    [Tooltip("Only friendly units with an escort value higher than this are eligible for escort duty. Should always be higher than own escort value.")]
     [SerializeField] protected float minEscortValue = 10;
 
     #region Setup
@@ -34,6 +34,16 @@ public class BanditTree : BT, IRegisterableComponent
     {
         EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
         ComponentRegister<BanditTree>.Unregister(transform);
+    }
+
+    protected void OnValidate()
+    {
+        var @params = GetComponentInParent<ShipParameters>(true);
+        if (minEscortValue <= @params.EscortValue)
+        {
+            minEscortValue = @params.EscortValue + 1;
+            Debug.LogWarning($"{this} has too small of an escort value! Adjusting!");
+        }
     }
     #endregion
 

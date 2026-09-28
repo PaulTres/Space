@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 3532511611071250271}
   <ElevationPivot>k__BackingField: {fileID: 3532511611071250271}
   params: {fileID: 11400000, guid: 56a049c0fc906a3499449099a37f678e, type: 2}
@@ -112,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 6440681201868439176}
   <ElevationPivot>k__BackingField: {fileID: 6440681201868439176}
   params: {fileID: 11400000, guid: 2ce43e37aea483b46a75b626e16bdef3, type: 2}

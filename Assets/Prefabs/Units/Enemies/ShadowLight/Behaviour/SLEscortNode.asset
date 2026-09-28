@@ -16,3 +16,4 @@ MonoBehaviour:
   AlwaysCheck: 1
   Conditions: []
   Services: []
+  escortDistance: 20

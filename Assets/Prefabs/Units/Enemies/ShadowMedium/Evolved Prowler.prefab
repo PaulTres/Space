@@ -48,9 +48,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  sendDebugMessages: 0
+  <RotationPivot>k__BackingField: {fileID: 946221796779266795}
+  <ElevationPivot>k__BackingField: {fileID: 946221796779266795}
   params: {fileID: 11400000, guid: 0d3f31b17fd432446b20e5df02bff792, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
 --- !u!1 &4387409283085836501
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,9 +101,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  sendDebugMessages: 0
+  <RotationPivot>k__BackingField: {fileID: 6363489266462676043}
+  <ElevationPivot>k__BackingField: {fileID: 6363489266462676043}
   params: {fileID: 11400000, guid: e68b5d433da5c32499f6fcf9d03505af, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
 --- !u!114 &4097629091515473454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.LaserWeapon
   params: {fileID: 11400000, guid: f9cfbd0b017bb0b4487acfb2c99ab577, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6363489266462676043}
+  <Heatsink>k__BackingField: {fileID: 199881709752158281}
 --- !u!1 &4620187406922185769
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 35211323851766314}
   magazine: {fileID: 0}
 --- !u!1 &5597726647368495219
 GameObject:
@@ -205,7 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
   params: {fileID: 11400000, guid: 50e341eac6d3abf4eafc825da0c0deaa, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 3111374066960426051}
 --- !u!1 &6898597854833748973
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,9 +266,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  sendDebugMessages: 0
+  <RotationPivot>k__BackingField: {fileID: 8096792441151357949}
+  <ElevationPivot>k__BackingField: {fileID: 8096792441151357949}
   params: {fileID: 11400000, guid: 6c3ef151e5a747044a0607c9afa87a39, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
 --- !u!1 &7356436291467064680
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 2398316642533568227}
   magazine: {fileID: 0}
 --- !u!1 &7494035450715155356
 GameObject:
@@ -347,7 +367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 1757921199677838529}
   magazine: {fileID: 0}
 --- !u!1 &8227922459225354886
 GameObject:
@@ -394,7 +415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 6099733099779509739}
   magazine: {fileID: 0}
 --- !u!1 &8953484584717726804
 GameObject:
@@ -441,7 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Cannon
   params: {fileID: 11400000, guid: 50e341eac6d3abf4eafc825da0c0deaa, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 9022180873424672836}
 --- !u!1001 &682087375607622132
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -452,7 +475,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 559443161338865368, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
       propertyPath: m_Name
-      value: ShadowMediumBlue Variant 1
+      value: Evolved Prowler
       objectReference: {fileID: 0}
     - target: {fileID: 3250141220001803489, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -517,6 +540,17 @@ PrefabInstance:
       addedObject: {fileID: 6363489266462676043}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
+--- !u!114 &199881709752158281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 842557416380752317, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
+  m_PrefabInstance: {fileID: 682087375607622132}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Weapons.Heatsink
 --- !u!4 &3762812098976609090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4417876685502028470, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}

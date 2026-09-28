@@ -10,7 +10,7 @@ public class Navigation : Ship
     public bool HasDestination => Destination != null;
     [Header("Parameters")]
     public Transform NavPivot { get; set; }
-    [field: SerializeField] public float StopDistance { get; set; } = 0.5f;
+    [field: SerializeField] public float StopDistance { get; set; } = 3f;
     public float angleToForward = 10;
     protected float radAngleToForward;
     [SerializeField] protected ObstacleChecker checker;
@@ -60,6 +60,7 @@ public class Navigation : Ship
     {
         base.OnEnable();
         GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformUpdate);
+        //Destination = Vector3.zero;
     }
 
     protected override void OnDisable()
@@ -88,8 +89,7 @@ public class Navigation : Ship
             Destination = null;
             return;
         }
-        direction = direction.normalized;
-        if (!checker.CheckForward(this, direction, buffer))
+        if (!checker.CheckForward(this, direction.normalized, buffer))
         {
             MoveTowards(direction, deltaTime);
         }
@@ -126,11 +126,30 @@ public class Navigation : Ship
         if (UpdateRotation) Face(direction, deltaTime);
         else Face(RotationTarget.GetTargetRotation(transform), deltaTime);
 
-        Vector3 input = transform.InverseTransformDirection(direction.normalized);
-        //Debugging.DrawRay(transform.position, direction.normalized * 100);
-        //if (Vector3.Angle(transform.forward, direction) > angleToForward) input.z = 0f; // don't apply forward thrust unless roughly facing target
+        direction -= LinearVelocity;
+        var z = Vector3.Project(direction, Forward);
+        float zInput;
+        if (Vector3.Dot(z.normalized, Forward) > 0)
+        {
+            //apply forward thrust
+            zInput = Mathf.Min(1, z.magnitude / ForwardThrust);
+        }
+        else
+        {
+            zInput = -Mathf.Min(1, z.magnitude / StrafeThrust);
+        }
 
-        ApplyThrust(input, deltaTime);
+        var x = Vector3.Project(direction, Right);
+        //Debug.DrawRay(Position, x, Color.magenta);
+        var xInput = Vector3.Dot(x.normalized, Right) * Mathf.Min(1, x.magnitude / StrafeThrust);
+        //Debug.Log(xInput);
+
+        var y = Vector3.Project(direction, Up);
+        var yInput = Vector3.Dot(y.normalized, Up) * Mathf.Min(1, y.magnitude / StrafeThrust);
+
+        //Debug.DrawRay(Position, 10 * (zInput * Forward + xInput * Right + yInput * Up));
+
+        ApplyThrust(new(xInput, yInput, zInput), deltaTime);
     }
 
     protected override void OnDrawGizmos()

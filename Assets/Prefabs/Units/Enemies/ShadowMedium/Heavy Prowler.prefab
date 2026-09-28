@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 8752216614849365072}
   magazine: {fileID: 0}
 --- !u!1 &2812407472696126960
 GameObject:
@@ -92,7 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 901171435233261771}
   magazine: {fileID: 0}
 --- !u!1 &3245276012702851361
 GameObject:
@@ -141,9 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
-  <RotationPivot>k__BackingField: {fileID: 0}
-  <ElevationPivot>k__BackingField: {fileID: 0}
+  sendDebugMessages: 0
+  <RotationPivot>k__BackingField: {fileID: 8721069585894738079}
+  <ElevationPivot>k__BackingField: {fileID: 8721069585894738079}
   params: {fileID: 11400000, guid: 0d3f31b17fd432446b20e5df02bff792, type: 2}
+  <MinElevation>k__BackingField: -90
+  <MaxElevation>k__BackingField: 90
+  <MinRot>k__BackingField: -181
+  <MaxRot>k__BackingField: 181
 --- !u!1 &8403887824305859955
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.MissileLauncher
   params: {fileID: 11400000, guid: 091960a21e8d565498be908ebea9d95a, type: 2}
-  shootPoints: []
+  shootPoints:
+  - {fileID: 587187971697605991}
   magazine: {fileID: 0}
 --- !u!1001 &7386924125944566945
 PrefabInstance:
@@ -201,7 +209,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 559443161338865368, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
       propertyPath: m_Name
-      value: ShadowMediumRed
+      value: Heavy Prowler
       objectReference: {fileID: 0}
     - target: {fileID: 559443161338865368, guid: 61269308a568c3e43a6ba0c27974bcc0, type: 3}
       propertyPath: m_IsActive
