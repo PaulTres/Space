@@ -26,8 +26,8 @@ MonoBehaviour:
   InitialVelocity: 10
   InertialDampeners: 1
   ScaleFactor: 1
-  RendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
-  TrailRendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
+  RendererMaterial: {fileID: 2100000, guid: 09d644190570dbf4698563347228b7a8, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 09d644190570dbf4698563347228b7a8, type: 2}
   TrailRendererCurve:
     serializedVersion: 2
     m_Curve:

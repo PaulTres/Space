@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: magazine
       value: 
       objectReference: {fileID: 5296540094122990187}
+    - target: {fileID: 973707587532016634, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: minHP
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1955120915635093136, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

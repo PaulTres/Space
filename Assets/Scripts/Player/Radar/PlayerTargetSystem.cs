@@ -271,9 +271,10 @@ namespace Radar
 
             //only activate the indicator when the target is off-screen
             //var dot=Vector3.Dot(primaryCamera.transform.forward,)
+            var distance = Vector3.Distance(CurrentTarget.Position, transform.root.position);
             if (boundingBoxes.TryGetValue(CurrentTarget, out var bbox))
             {
-                currentTargetIndicator.gameObject.SetActive(bbox.Hidden);
+                currentTargetIndicator.gameObject.SetActive(bbox.Hidden || distance > 200);
             }
             else currentTargetIndicator.gameObject.SetActive(false);
 
@@ -307,7 +308,11 @@ namespace Radar
                 string enemyTarget = CurrentTarget.Target == null ? "None" :
                     CurrentTarget == GameManager.Player ? "You" :
                     CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
-                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}";
+                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}\nDistance: {distance}";
+                if (CurrentTarget.IsFleeing)
+                {
+                    targetInfoText.text += "\nFleeing";
+                }
             }
             #endregion
         }

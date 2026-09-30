@@ -10,7 +10,7 @@ namespace Player
     public class GameSave
     {
         public static readonly string Name = "GameSave";
-        public static readonly List<string> Saves = new List<string>();
+        public static readonly List<string> Saves = new();
         public readonly long dateTimeBinary;
         public int CurrentMissionIndex { get; set; } = 0;
         public readonly int Difficulty;

@@ -1,6 +1,7 @@
 using Level;
 using TMPro;
 using UnityEngine;
+using Utilities;
 namespace Player
 {
     public class MissionSelectScreen : MonoBehaviour
@@ -23,13 +24,16 @@ namespace Player
                 missionOptions.options.Add(new(Mission.Campaign[i].name));
             }
             missionOptions.SetValueWithoutNotify(GameManager.LatestMissionIndex);
-            SetMissionChoice(GameManager.LatestMissionIndex);
+            Mission.CurrentMission = Mission.Campaign[GameManager.LatestMissionIndex];
+            GameManager.ChosenMissionIndex = GameManager.LatestMissionIndex;
+            missionBriefingText.text = Mission.CurrentMission.Briefing;
         }
 
         #endregion
 
         public void SetMissionChoice(int index)
         {
+            GlobalConfig.ClickSound.Play(transform.position, requiresPlayer: false);
             Mission.CurrentMission = Mission.Campaign[index];
             GameManager.ChosenMissionIndex = index;
             missionBriefingText.text = Mission.CurrentMission.Briefing;

@@ -16,8 +16,7 @@ MonoBehaviour:
   AlwaysCheck: 1
   Conditions:
   - {fileID: 11400000, guid: 69d8c64557ab98a45a32e0ac3c25a341, type: 2}
-  Services:
-  - {fileID: 11400000, guid: 4ceb34716f2365549ac1c3bfd61839ae, type: 2}
+  Services: []
   jumpEffect: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
   fleeDistance: 1000
   requiredJumpCharge: 3

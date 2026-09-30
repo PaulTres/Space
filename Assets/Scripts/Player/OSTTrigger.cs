@@ -15,8 +15,7 @@ namespace Player
 
         public void SetOST()
         {
-            if (audioClip == null) Debug.LogError($"{this} has no audio clip set!");
-            else coroutine = StartCoroutine(SetOSTCoroutine());
+            if (audioClip != null) coroutine = StartCoroutine(SetOSTCoroutine());
         }
 
         protected IEnumerator SetOSTCoroutine()

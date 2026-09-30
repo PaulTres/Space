@@ -9,7 +9,7 @@ namespace Level
 {
     public class Wave : MonoBehaviour
     {
-        protected List<NPCSpawner> spawners;
+        [SerializeField] protected List<NPCSpawner> spawners;
         [SerializeField] protected float delay = 0;
         [SerializeField] protected float minDistanceFromPlayer = 0;
         [SerializeField] protected bool facePlayer = false;
@@ -18,10 +18,17 @@ namespace Level
         protected List<Unit> units;
         protected int unitCount = 0;
 
+        protected void OnValidate()
+        {
+            if (spawners.IsEmpty())
+            {
+                spawners = GetComponentsInChildren<NPCSpawner>(true).ToList();
+            }
+        }
+
         protected void Awake()
         {
             if (transform.name.Equals("Friendly")) OnAllUnitsDestroyed.AddListener(() => Debug.Log("A"));
-            spawners = GetComponentsInChildren<NPCSpawner>(true).ToList();
             SpawnInactive();
             if (spawnOnAwake) Spawn();
         }

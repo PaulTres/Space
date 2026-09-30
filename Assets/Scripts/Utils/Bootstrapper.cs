@@ -10,7 +10,6 @@ namespace Utilities
 {
     public class Bootstrapper : MonoBehaviour
     {
-        [Tooltip("The audioClip mixer to use for audioClip settings.")]
         [SerializeField] protected AudioMixer audioMixer;
 
         protected async void Start()
@@ -24,7 +23,7 @@ namespace Utilities
                 //EventBus.EventBusUtil.ClearAllBuses();
             };
             VideoSettingsMenu.LoadVideoSettings();
-            AudioSettingsMenu.LoadAudioSettings(audioMixer);
+            AudioSettingsMenu.LoadSettings(audioMixer);
 
             await GlobalConfig.LoadInstance();
             await UnitData.LoadAllSpawnableUnits();

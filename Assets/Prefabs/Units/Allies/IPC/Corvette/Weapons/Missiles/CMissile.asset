@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916cf2d17c3d29646931fe2a405be942, type: 3}
+  m_Name: CMissile
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileData
+  Prefab: {fileID: 3846582215461886678, guid: 5d3396fc602c4aa479b19becfcf466d0, type: 3}
+  Key: 2
+  ValidateData: 1
+  DisableOnHit: 1
+  Damage: 5
+  LifeTime: 7
+  EffectScaleFactor: 1
+  OnSpawnEffect: {fileID: 6332652951562218706, guid: f42cd35e2a769904dbc1196ae0676d85, type: 3}
+  OnHitEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
+  TopSpeed: 60
+  Acceleration: 5
+  InitialVelocity: 40
+  InertialDampeners: 1
+  ScaleFactor: 0.1
+  RendererMaterial: {fileID: 2100000, guid: 2717e9cd8dbd4464d86960218f25345c, type: 2}
+  TrailRendererMaterial: {fileID: 2100000, guid: 2509e4f2fe29d49448a9753cd4449c25, type: 2}
+  TrailRendererCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.35
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  resetCurve: 0
+  Tracking: 10
+  MaxTargetSignature: 0
+  MaxTelemetryBonus: 1
+  HP: 0.1
+  OnDeathEffect: {fileID: 985664761693772524, guid: a6031ef3e36465648a949f948d351c8a, type: 3}
+  ShowOnRadar: 0

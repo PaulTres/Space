@@ -11,6 +11,8 @@ namespace Player
 
         protected virtual void OnEnable()
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             GameManager.InputActions.UI.AddCallbacks(this);
             if (initialWindows != null)
             {

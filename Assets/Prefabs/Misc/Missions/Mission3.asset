@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Level.Mission
   <TimeLimit>k__BackingField: -1
   briefing: Battlegroup 8 has been under heavy attack by the Phi hostiles, and their
-    mothership has been isolated by enemy wolfpacks. Battlegroup 7 is to hold off
-    the enemy assault until reinforcements arrive from groups 4 and 6.
-  afterActionReport: Hostile wolfpacks have been driven back. However, enemy assaults
-    throughout known space are increasing in intensity, and there have been reports
-    of planet-cracking weapons being deployed.
+    mothership has been isolated by enemy wolfpacks. Echo squadron is to hold off
+    the enemy assault until reinforcements arrive.
+  afterActionReport: Hostile wolfpacks have been driven back, and group 8 has successfully
+    disengaged.
   <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647

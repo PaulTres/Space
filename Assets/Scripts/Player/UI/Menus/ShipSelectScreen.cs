@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
+
 namespace Player
 {
     public class ShipSelectScreen : MonoBehaviour
     {
         [SerializeField] protected int missionStartTimerDuration = 5;
         [SerializeField] protected TextMeshProUGUI timerText;
+        [SerializeField] protected float fadeOutDuration = 1;
+        [SerializeField] protected Image blackImage;
         [SerializeField] protected TMP_Dropdown playerOptions;
         [Header("Current ship info")]
         [SerializeField] protected TextMeshProUGUI shipDescriptionText;
@@ -39,7 +43,7 @@ namespace Player
                 playerOptionsList.Add(data);
                 playerOptions.options.Add(new(data.Name));
             }
-            SetPlayerChoice(0);
+            SetPlayerChoiceNoSound(0);
             playerOptions.SetValueWithoutNotify(0);
         }
 
@@ -49,8 +53,24 @@ namespace Player
         }
         #endregion
 
+        public void SetPlayerChoiceNoSound(int index)
+        {
+            UnitData.PlayerChoice = playerOptionsList[index];
+            shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice.Description;
+            for (int i = 0; i < previewModelRoll.childCount; i++)
+            {
+                Destroy(previewModelRoll.GetChild(i).gameObject);
+            }
+            previewModelAzimuth.localRotation = Quaternion.identity;
+            previewModelRoll.localRotation = Quaternion.identity;
+            Instantiate(UnitData.PlayerChoice.PreviewModel, previewModelRoll);
+            azimuthSlider.SetValueWithoutNotify(0);
+            pitchSlider.SetValueWithoutNotify(0);
+        }
+
         public void SetPlayerChoice(int index)
         {
+            GlobalConfig.ClickSound.Play(transform.position, requiresPlayer: false);
             UnitData.PlayerChoice = playerOptionsList[index];
             shipDescriptionText.text = "Ship description:\n" + UnitData.PlayerChoice.Description;
             for (int i = 0; i < previewModelRoll.childCount; i++)
@@ -91,6 +111,8 @@ namespace Player
                 timerText.text = $"00:{count:D2}";
                 yield return waitForOneSecond;
             }
+            blackImage.CrossFadeAlpha(1, fadeOutDuration, true);
+            yield return new WaitForSeconds(fadeOutDuration);
             GameManager.LoadMission();
         }
         #endregion

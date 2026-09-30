@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mission2
   m_EditorClassIdentifier: Assembly-CSharp::Level.Mission
   <TimeLimit>k__BackingField: -1
-  briefing: Battlegroup 7 has been tasked with destroying enemy forward defense clusters
+  briefing: Echo squadron has been tasked with destroying enemy forward defense clusters
     and listening posts. Heavy enemy opposition is expected. Rapid demolition and
     withdrawal advised.
   afterActionReport: Several hostile installations have been successfully neutralized,

@@ -9,68 +9,55 @@ namespace Player
         [SerializeField] protected Slider masterSlider;
         [SerializeField] protected Slider musicSlider;
         [SerializeField] protected Slider sfxSlider;
-
-        protected const string mixerMaster = "MasterVolume";
-        protected const string mixerMusic = "MusicVolume";
-        protected const string mixerSFX = "SFXVolume";
-
-        protected const string keyMaster = "Audio_Master";
-        protected const string keyMusic = "Audio_Music";
-        protected const string keySFX = "Audio_SFX";
-
-        [SerializeField] AudioMixer audioMixer;
+        protected static readonly string musicVolume = "MusicVolume",
+            masterVolume = "MasterVolume",
+            sfxVolume = "SFXVolume";
+        [SerializeField] protected AudioMixer audioMixer;
 
         protected void OnEnable()
         {
-            float master = PlayerPrefs.GetFloat(keyMaster, 1f);
-            float music = PlayerPrefs.GetFloat(keyMusic, 1f);
-            float sfx = PlayerPrefs.GetFloat(keySFX, 1f);
+            LoadSettings();
+        }
 
-            masterSlider.SetValueWithoutNotify(master);
-            musicSlider.SetValueWithoutNotify(music);
+        public static void LoadSettings(AudioMixer mixer)
+        {
+            var mVol = PlayerPrefs.GetFloat(masterVolume, 1);
+            mixer.SetFloat(masterVolume, mVol);
+            var m_vol = PlayerPrefs.GetFloat(musicVolume, 1);
+            mixer.SetFloat(musicVolume, m_vol);
+            var sfx = PlayerPrefs.GetFloat(sfxVolume, 1);
+            mixer.SetFloat(sfxVolume, sfx);
+        }
+
+        protected void LoadSettings()
+        {
+            var mVol = PlayerPrefs.GetFloat(masterVolume, 1);
+            masterSlider.SetValueWithoutNotify(mVol);
+            SetMasterVolume(mVol);
+            var m_vol = PlayerPrefs.GetFloat(musicVolume, 1);
+            musicSlider.SetValueWithoutNotify(m_vol);
+            SetMusicVolume(m_vol);
+            var sfx = PlayerPrefs.GetFloat(sfxVolume, 1);
             sfxSlider.SetValueWithoutNotify(sfx);
-
-            ApplyVolume(mixerMaster, master);
-            ApplyVolume(mixerMusic, music);
-            ApplyVolume(mixerSFX, sfx);
+            SetSFXVolume(sfx);
         }
 
-        protected void OnDisable()
+        public void SetMusicVolume(float volume)
         {
-            SaveAudioSettings();
+            audioMixer.SetFloat(musicVolume, volume);
+            PlayerPrefs.SetFloat(musicVolume, volume);
         }
 
-        public void SetMasterVolume(float value) => ApplyVolume(mixerMaster, value);
-
-        public void SetMusicVolume(float value) => ApplyVolume(mixerMusic, value);
-
-        public void SetSFXVolume(float value) => ApplyVolume(mixerSFX, value);
-
-        protected void ApplyVolume(string parameter, float linearValue)
+        public void SetMasterVolume(float volume)
         {
-            float db = Mathf.Log10(Mathf.Max(linearValue, 0.0001f)) * 20f;
-            audioMixer.SetFloat(parameter, db);
+            audioMixer.SetFloat(masterVolume, volume);
+            PlayerPrefs.SetFloat(masterVolume, volume);
         }
 
-        public void SaveAudioSettings()
+        public void SetSFXVolume(float volume)
         {
-            PlayerPrefs.SetFloat(keyMaster, masterSlider.value);
-            PlayerPrefs.SetFloat(keyMusic, musicSlider.value);
-            PlayerPrefs.SetFloat(keySFX, sfxSlider.value);
-            PlayerPrefs.Save();
-        }
-
-        public static void LoadAudioSettings(AudioMixer mixer)
-        {
-            SetMixerVolume(mixer, mixerMaster, PlayerPrefs.GetFloat(keyMaster, 1f));
-            SetMixerVolume(mixer, mixerMusic, PlayerPrefs.GetFloat(keyMusic, 1f));
-            SetMixerVolume(mixer, mixerSFX, PlayerPrefs.GetFloat(keySFX, 1f));
-        }
-
-        static void SetMixerVolume(AudioMixer mixer, string parameter, float linearValue)
-        {
-            float db = Mathf.Log10(Mathf.Max(linearValue, 0.0001f)) * 20f;
-            mixer.SetFloat(parameter, db);
+            audioMixer.SetFloat(sfxVolume, volume);
+            PlayerPrefs.SetFloat(sfxVolume, volume);
         }
     }
 }

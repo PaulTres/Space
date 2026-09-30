@@ -40,8 +40,7 @@ MonoBehaviour:
   - m_GUID: aed561d1d24b43448a7cf50ad0afa6f5
     m_Address: Assets/Prefabs/Player/Cruiser/Cruiser.asset
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Player
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 4da6d49a0b77a7240bd091e148f3cd2e, type: 2}

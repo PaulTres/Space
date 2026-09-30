@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 461578530611163109, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: minHP
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4883905929714191720, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
       propertyPath: magazine
       value: 
@@ -276,7 +280,7 @@ MonoBehaviour:
     FreelookCameraPivot: {fileID: 6925827686071360060}
     CameraTransform: {fileID: 4541096621750260594}
     ZoomSpeed: 1
-    MinZoom: -10
+    MinZoom: -20
     MaxZoom: 5
     XSens: 10
     YSens: 10

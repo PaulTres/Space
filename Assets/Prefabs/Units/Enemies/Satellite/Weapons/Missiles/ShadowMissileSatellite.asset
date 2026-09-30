@@ -21,11 +21,11 @@ MonoBehaviour:
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 6332652951562218706, guid: 8c2df941e4b329749918b2091f9e59ef, type: 3}
   OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
-  TopSpeed: 70
-  Acceleration: 10
+  TopSpeed: 50
+  Acceleration: 1
   InitialVelocity: 10
   InertialDampeners: 1
-  ScaleFactor: 1
+  ScaleFactor: 0.4
   RendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
   TrailRendererMaterial: {fileID: 2100000, guid: 0a3cb74f1f2a4174982b1f6eb7c59fd9, type: 2}
   TrailRendererCurve:
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.3
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -53,9 +53,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   resetCurve: 0
-  Tracking: 3
+  Tracking: 0.5
   MaxTargetSignature: 0
-  MaxTelemetryBonus: 0.7
+  MaxTelemetryBonus: 0
   HP: 0.1
   OnDeathEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
   ShowOnRadar: 0

@@ -35,6 +35,7 @@ public class StrafeNode : LeafNodeData
     [SerializeField] protected float maxDistance = 80;
     [Tooltip("The distance between the initial destination and intended destination will never exceed this value.")]
     [SerializeField] protected float maxDistanceDelta = 10;
+    [SerializeField] protected float attractionTowardsCenter = 10;
 
     protected enum InternalKeys
     {
@@ -95,6 +96,7 @@ public class StrafeNode : LeafNodeData
             var dist = Mathf.Min(UseOptimalFiringRange ? target.CurrentSignature +
                 ctx.Navigation.ScanRange + distanceBuffer : distanceBuffer, maxDistance);
             destination = target.Position + targetToDestination.normalized * Mathf.Min(dist, targetToDestination.magnitude + maxDistanceDelta);
+            destination -= destination.normalized * attractionTowardsCenter;
             //Debug.DrawLine(ctx.Position, destination, Color.blue);
             ctx.Navigation.SetDestination(destination);
             //Debug.Log(Vector3.Distance(destination, target.Position) + "-:-" + dist);

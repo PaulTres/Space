@@ -5,6 +5,11 @@ namespace Player
     {
         [SerializeField] protected PlayerData playerTutorialShip;
 
+        public void ShowCredits()
+        {
+            GameManager.LoadCredits();
+        }
+
         public void StartTutorial()
         {
             GameManager.ChosenMissionIndex = -1;

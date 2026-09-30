@@ -15,17 +15,6 @@ MonoBehaviour:
   Prefab: {fileID: 7233467996577603207, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
   ShouldBeDisabled: 1
   Points: 1
-  description: 
-  unitParameters:
-    MoraleWeight: 10
-    TickInterval: 0.2
-    EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
-    <MinimumSignature>k__BackingField: 10
-    <MaximumSignature>k__BackingField: 50
-    SignatureDecreaseRate: 0.1
-    SignatureDecreaseCooldown: 5
-    ScanRange: 30
-    SpawnCheckRadius: 5
-  takeParametersFromPrefab: 0
+  description: A quick and agile ship, designed for patrol and anti-piracy duties.
   MissionRequirement: -1
   PreviewModel: {fileID: 4327527961887937450, guid: 8efb6099072603548ae87118340928ec, type: 3}

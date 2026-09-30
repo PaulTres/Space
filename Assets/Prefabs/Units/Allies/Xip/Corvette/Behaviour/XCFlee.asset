@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6bfd8516ded5e48b9a2b3af95a4ce7, type: 3}
+  m_Name: XCFlee
+  m_EditorClassIdentifier: Assembly-CSharp::FleeNode
+  myName: 
+  AlwaysCheck: 1
+  Conditions:
+  - {fileID: 11400000, guid: 19c4b28246f2a7a468a6d8d78f453ba5, type: 2}
+  - {fileID: 11400000, guid: ab54772451037024ea404bbfbd0ce799, type: 2}
+  Services: []
+  jumpEffect: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
+  fleeDistance: 1000
+  requiredJumpCharge: 5

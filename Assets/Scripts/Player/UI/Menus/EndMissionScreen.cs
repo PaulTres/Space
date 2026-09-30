@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Player
 {
+
     public class EndMissionScreen : MenuPDA
     {
         [SerializeField] protected TextMeshProUGUI playerKills, afterActionReport;
@@ -22,12 +23,9 @@ namespace Player
             playerKills.text = "Kills:";
             //Debug.Log(unitsDestroyed.Output());
             var killCounts = unitsDestroyed.Where(a => a.KillerName.
-                Contains("Player")).GroupBy(a => a.VictimName).
+                Contains("You")).GroupBy(a => a.VictimName).
                 Select(a => new KeyValuePair<string, int>(a.Key, a.Count()));
-            //foreach (var pair in killCounts)
-            //{
-            //    Debug.Log(pair.Key + " x " + pair.Value);
-            //}
+            //foreach (var pair in killCounts) Debug.Log(pair.Key + " x " + pair.Value);
 
             foreach (var pair in killCounts)
             {
@@ -38,7 +36,12 @@ namespace Player
 
         public void ReturnToLobby()
         {
-            GameManager.LoadMissionSelection();
+            if (GameManager.ChosenMissionIndex == Mission.Campaign.Count - 1)
+            {
+                //this is the last mission
+                GameManager.LoadCredits();
+            }
+            else GameManager.LoadMissionSelection();
         }
     }
 }

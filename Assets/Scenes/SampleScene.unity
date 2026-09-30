@@ -179,9 +179,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6790286421007385974, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790286421007385974, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: da4b891403817490a98d35f5614607b6, type: 3}
     - target: {fileID: 7127373256748937673, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -9.999985
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941437171246025092, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+      propertyPath: cameraData.MinZoom
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -453,7 +465,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7007648082463535737, guid: 3aae6f9ece2429547b45a50226c95fe5, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,14 +2,12 @@ using Level;
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Utilities;
 
 public static class GameManager
 {
     static PlayerControls inputActions;
-    public const string RebindPrefsKey = "InputRebinds";
     /// <summary>
     /// PlayerControls global instance.
     /// </summary>
@@ -20,11 +18,6 @@ public static class GameManager
             if (inputActions == null)
             {
                 inputActions = new();
-                if (PlayerPrefs.HasKey(RebindPrefsKey))
-                {
-                    string json = PlayerPrefs.GetString(RebindPrefsKey);
-                    inputActions.LoadBindingOverridesFromJson(json);
-                }
                 inputActions.Enable();
             }
             return inputActions;
@@ -101,6 +94,11 @@ public static class GameManager
     public static void LoadMainMenu()
     {
         SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
+    }
+
+    public static void LoadCredits()
+    {
+        SceneManager.LoadScene(GlobalConfig.CreditsSceneIndex);
     }
 
     public static void LoadMissionSelection()

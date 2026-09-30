@@ -19,7 +19,6 @@ MonoBehaviour:
   afterActionReport: Hostile vessel debris does not match any known ship configuration.
     We can only conclude that this is a new, hostile force conducting probing attacks
     in preparation for a large scale offensive. The enemy has been designated Phi
-    aliens. As per the Horizon contingency, the Commonwealth will counterattack on
-    every front simultaneously.
+    aliens, and counterattacks are underway.
   <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647
