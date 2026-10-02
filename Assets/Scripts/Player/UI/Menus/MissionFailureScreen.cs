@@ -5,6 +5,7 @@ namespace Player
     public class MissionFailureScreen : MonoBehaviour
     {
         [SerializeField] protected float delayBeforeShowing = 1f;
+        [SerializeField] protected SceneFadeInAndOut sceneFadeScript;
         protected GameObject canvas;
         public GameObject Canvas
         {
@@ -55,17 +56,17 @@ namespace Player
         public void RestartMission()
         {
             //Debug.Log("Restarting mission");
-            GameManager.LoadMission();
+            sceneFadeScript.FadeOut(() => GameManager.LoadMission());
         }
 
         public void ReplanMission()
         {
-            GameManager.LoadMissionSelection();
+            sceneFadeScript.FadeOut(() => GameManager.LoadMissionSelection());
         }
 
         public void GoToMainMenu()
         {
-            GameManager.LoadMainMenu();
+            sceneFadeScript.FadeOut(() => GameManager.LoadMainMenu());
         }
     }
 }

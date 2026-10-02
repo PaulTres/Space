@@ -101,6 +101,7 @@ public static class GameManager
 
     public static void LoadMainMenu()
     {
+        //Debug.Log("Loading main menu");
         SceneManager.LoadScene(GlobalConfig.MainMenuSceneIndex);
     }
 

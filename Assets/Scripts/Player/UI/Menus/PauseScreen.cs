@@ -43,6 +43,19 @@ namespace Player
             else base.Pop();
         }
 
-        public void ReturnToMenu() => GameManager.LoadMainMenu();
+        public void ReturnToMenu()
+        {
+            sceneFadeScript.FadeOut(() => GameManager.LoadMissionSelection());
+        }
+
+        public void ReturnToMainMenu()
+        {
+            //Debug.Log("Returning to main menu-A");
+            sceneFadeScript.FadeOut(() =>
+            {
+                //Debug.Log("Returning to main menu");
+                GameManager.LoadMainMenu();
+            });
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace Player
     {
         protected Stack<Window> windows = new();
         [SerializeField] protected Window[] initialWindows;
+        [SerializeField] protected SceneFadeInAndOut sceneFadeScript;
         public Window Top => windows.Peek();
 
         protected virtual void OnEnable()

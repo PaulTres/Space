@@ -13,12 +13,12 @@ namespace Player
         [SerializeField] protected int missionStartTimerDuration = 5;
         [SerializeField] protected TextMeshProUGUI timerText;
         [SerializeField] protected float fadeOutDuration = 1;
-        [SerializeField] protected Image blackImage;
         [SerializeField] protected TMP_Dropdown playerOptions;
         [Header("Current ship info")]
         [SerializeField] protected TextMeshProUGUI shipDescriptionText;
         [SerializeField] protected Transform previewModelAzimuth, previewModelRoll;
         [SerializeField] protected Slider azimuthSlider, pitchSlider;
+        [SerializeField] protected SceneFadeInAndOut sceneFadeScript;
         protected List<PlayerData> playerOptionsList;
         protected WaitForSeconds waitForOneSecond = new(1);
         protected Coroutine coroutine;
@@ -111,9 +111,7 @@ namespace Player
                 timerText.text = $"00:{count:D2}";
                 yield return waitForOneSecond;
             }
-            blackImage.CrossFadeAlpha(1, fadeOutDuration, true);
-            yield return new WaitForSeconds(fadeOutDuration);
-            GameManager.LoadMission();
+            sceneFadeScript.FadeOut(() => GameManager.LoadMission());
         }
         #endregion
     }

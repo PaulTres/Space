@@ -14,7 +14,7 @@ namespace Player
         {
             GameManager.ChosenMissionIndex = -1;
             UnitData.PlayerChoice = playerTutorialShip;
-            GameManager.LoadTutorial();
+            sceneFadeScript.FadeOut(() => GameManager.LoadTutorial());
         }
 
         public override void Pop()
