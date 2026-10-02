@@ -15,6 +15,11 @@ namespace Player
         }
         [SerializeField] protected TextProvider textProvider;
 
+        protected void OnValidate()
+        {
+            if (textProvider != null) Text.text = textProvider.Text;
+        }
+
         protected void OnEnable()
         {
             Text.text = textProvider.Text;

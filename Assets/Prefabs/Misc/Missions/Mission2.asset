@@ -18,7 +18,6 @@ MonoBehaviour:
     withdrawal advised.
   afterActionReport: Several hostile installations have been successfully neutralized,
     however the full scale of the enemy response is concerning. They appear to have
-    completed their reconnaisance and are now engaging Commonwealth battlegroups
-    in force.
+    completed their reconnaisance and are now engaging Commonwealth units in force.
   <PlayerPoints>k__BackingField: 2147483647
   <EnemyPoints>k__BackingField: 2147483647

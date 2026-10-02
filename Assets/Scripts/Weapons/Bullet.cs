@@ -77,6 +77,7 @@ namespace Weapons
         public override float EffectScaleFactor => effectScaleFactor;
         public override float CurrentSignature => 0;
         public override float ScanRange => 0;
+        public override float CurrentHPPercentage => 0;
         #endregion
 
         #region Setup

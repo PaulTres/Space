@@ -50,6 +50,7 @@ public abstract class ImprovedMonoBehaviour : MonoBehaviour, IRegisterableCompon
     [Tooltip("The scale of effects played for this unit will be multiplied by this number.")]
     public virtual float EscortValue => 0;
     [field: SerializeField] public bool Untargetable { get; set; } = false;
+    public abstract float CurrentHPPercentage { get; }
 
     public void RegisterForRadar()
     {

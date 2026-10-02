@@ -29,6 +29,15 @@ public class DestructableComponent : ImprovedMonoBehaviour
     public override float CurrentSignature => OwningUnit.CurrentSignature;
     public override float ScanRange => OwningUnit.ScanRange;
     public override bool IsFleeing => OwningUnit.IsFleeing;
+    protected HPComponent hpComponent;
+    public override float CurrentHPPercentage
+    {
+        get
+        {
+            if (hpComponent == null) hpComponent = GetComponent<HPComponent>();
+            return hpComponent.CurrentHP / hpComponent.MaxHP;
+        }
+    }
 
     protected void OnEnable()
     {

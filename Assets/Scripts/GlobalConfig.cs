@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/GlobalConfig", fileName = "GlobalConfig")]
 public class GlobalConfig : ScriptableObject
@@ -10,6 +11,11 @@ public class GlobalConfig : ScriptableObject
     #region Access
     static readonly string addressableAdress = "GlobalConfig";
     static GlobalConfig instance;
+    /// <summary>
+    /// Returns a global instance. Will try to find the asset in the addressables 
+    /// system if it hasn't been loaded yet. This is a blocking call, so use 
+    /// LoadInstance() instead if you want to load it asynchronously.
+    /// </summary>
     public static GlobalConfig Instance
     {
         get
@@ -30,19 +36,13 @@ public class GlobalConfig : ScriptableObject
     }
     #endregion
 
+    #region Audio
+    [Header("Audio")]
+    [SerializeField] protected AudioMixer audioMixer;
+    public static AudioMixer AudioMixer => Instance.audioMixer;
+    #endregion
+
     #region UI
-    [Header("UI")]
-    [SerializeField] protected SoundData clickSound;
-    public static SoundData ClickSound => Instance.clickSound;
-    public static float FOV { get; set; } = 90;
-    public static float PlayerTargetAngleWeight { get; set; } = 1;
-    public static float PlayerTargetDistanceWeight { get; set; } = 1;
-    public static float PlayerTargetMaxDistance { get; set; } = 1000;
-
-    [SerializeField] protected float iconSizeCoefficient = 5;
-    public static float IconSizeCoefficient => Instance.iconSizeCoefficient;
-    public static readonly float UIUpdateCooldown = 1;
-
     /// <summary>
     /// Returns what color should an object appear with on the radar. Default is white.
     /// </summary>
@@ -60,6 +60,61 @@ public class GlobalConfig : ScriptableObject
             _ => Color.white
         };
     }
+
+    [Header("UI")]
+    [SerializeField] protected SoundData clickSound;
+    public static SoundData ClickSound => Instance.clickSound;
+    public static float FOV { get; set; } = 90;
+    public static float PlayerTargetAngleWeight { get; set; } = 1;
+    public static float PlayerTargetDistanceWeight { get; set; } = 1;
+    public static float PlayerTargetMaxDistance { get; set; } = 1000;
+
+    [SerializeField] protected float iconSizeCoefficient = 5;
+    public static float IconSizeCoefficient => Instance.iconSizeCoefficient;
+    #endregion
+
+    #region Controls
+
+    #region Sensitivity
+    public static int XSensitivity { get; set; } = 10;
+    static readonly string xSensKey = "xSens";
+    public static int YSensitivity { get; set; } = 10;
+    static readonly string ySensKey = "ySens";
+    public static int ZSensitivity { get; set; } = 50;
+    static readonly string zSensKey = "zSens";
+
+    public static void LoadSensitivitySettings()
+    {
+        XSensitivity = PlayerPrefs.GetInt(xSensKey, 10);
+        YSensitivity = PlayerPrefs.GetInt(ySensKey, 10);
+        ZSensitivity = PlayerPrefs.GetInt(zSensKey, 50);
+    }
+
+    public static void SaveSensitivitySettings()
+    {
+        PlayerPrefs.SetInt(xSensKey, XSensitivity);
+        PlayerPrefs.SetInt(ySensKey, YSensitivity);
+        PlayerPrefs.SetInt(zSensKey, ZSensitivity);
+    }
+    #endregion
+
+    #region Invert Y
+    public static int YMultiplier => InvertY ? 1 : -1;
+    static readonly string invertYKey = "invertY";
+    public static bool InvertY { get; set; } = false;
+
+    public static void LoadInvertYSetting()
+    {
+        InvertY = PlayerPrefs.GetInt(invertYKey, 0) == 1;
+    }
+
+    public static void SaveInvertYSetting()
+    {
+        PlayerPrefs.SetInt(invertYKey, InvertY ? 1 : 0);
+    }
+
+    #endregion
+
     #endregion
 
     #region Misc

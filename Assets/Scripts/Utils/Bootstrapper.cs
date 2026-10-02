@@ -2,7 +2,6 @@ using Effects;
 using Level;
 using Player;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using Weapons;
 
@@ -10,8 +9,6 @@ namespace Utilities
 {
     public class Bootstrapper : MonoBehaviour
     {
-        [SerializeField] protected AudioMixer audioMixer;
-
         protected async void Start()
         {
             PoolableEffect.InitializePool();
@@ -21,9 +18,10 @@ namespace Utilities
                 Time.timeScale = 1;
                 //UnitManager.Clear();
                 //EventBus.EventBusUtil.ClearAllBuses();
+                AudioSettingsMenu.LoadSettings(GlobalConfig.AudioMixer);
             };
             VideoSettingsMenu.LoadVideoSettings();
-            AudioSettingsMenu.LoadSettings(audioMixer);
+            ControlsSettingsMenu.LoadSettings();
 
             await GlobalConfig.LoadInstance();
             await UnitData.LoadAllSpawnableUnits();

@@ -49,7 +49,7 @@ public abstract class Unit : ImprovedMonoBehaviour
     }
     public float MaxHP => HPComponent != null ? HPComponent.MaxHP : 0;
     public float CurrentHP => HPComponent != null ? HPComponent.CurrentHP : 0;
-    public float CurrentHPPercentage => HPComponent != null ? HPComponent.CurrentHP / HPComponent.MaxHP : 0;
+    public override float CurrentHPPercentage => HPComponent != null ? HPComponent.CurrentHP / HPComponent.MaxHP : 0;
     #endregion
 
     #region Helpers

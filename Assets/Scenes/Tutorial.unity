@@ -372,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 251532332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 1.5}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.6}
   m_LocalScale: {x: 52, y: 20, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cfd4a95f9a45f840b79c75e8cd341a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Player.WorldText
-  textProvider: {fileID: 11400000, guid: 0e58c5fa33bf94d4baa6ee01d95adacc, type: 2}
+  textProvider: {fileID: 11400000, guid: 2f8e3b433f2613b45b702fae26537fc8, type: 2}
 --- !u!114 &343883979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: E/Q to to roll..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -613,7 +613,7 @@ Transform:
   m_GameObject: {fileID: 459379656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7, z: 1.5}
+  m_LocalPosition: {x: 0, y: -7, z: 0.6}
   m_LocalScale: {x: 40, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: Space+Control/A+D/W+S to to move your ship..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -1139,7 +1139,7 @@ Transform:
   m_GameObject: {fileID: 622153709}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8, z: 1.5}
+  m_LocalPosition: {x: 0, y: -8, z: 0.6}
   m_LocalScale: {x: 55, y: 50, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1324,7 +1324,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: RMB to to rotate camera independently..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: Tap LMB to to fire missiles or toggle turret stance..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -1895,7 +1895,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: F to to cycle through weapons..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -2382,7 +2382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: T to to cycle through targets..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -2533,7 +2533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rotate your mouse to look around.
+  m_text: MMB to to reset the camera..
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -3043,7 +3043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 12.02}
   m_SizeDelta: {x: 50, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2062430348
@@ -3066,8 +3066,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Turrets on your ship will fire automatically. The white diamond indicates
-    your selected target.
+  m_text: Turrets on your ship will fire automatically. The diamond indicates your
+    selected target. When the diamond turns red, missiles can be used.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -3133,7 +3133,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: -1.8756409}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3204,13 +3204,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Facing your ship towards the target will boost the speed and tracking
-    of your guided munitions.
+  m_text: 'Firing most weapons increases your signature, which is denoted by the
+    number in the bottom left corner. The higher your signature, the easier you are
+    to target. This applies to enemy ships as well.
 
 
-    Firing most weapons increases your signature,
-    which is denoted by the number in the bottom left corner. The higher your signature,
-    the easier you are to target. This applies to enemy ships as well.'
+    Keeping your ship aimed
+    towards the target will boost the speed and tracking of your guided munitions.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
@@ -3276,7 +3276,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -10.028999}
+  m_margin: {x: 0, y: 0, z: 0, w: -11.55509}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

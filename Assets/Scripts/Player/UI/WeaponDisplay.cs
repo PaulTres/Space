@@ -79,7 +79,12 @@ namespace Player
         {
             for (int i = 0; i < missileGroup.Launchers.Count; i++)
             {
-                UpdateReloadIcon(reloadIcons[i], 1 - missileGroup.Launchers[i].ReloadStatus);
+                float value = 1 - missileGroup.Launchers[i].ReloadStatus;
+                if (missileGroup.Magazine != null)
+                {
+                    if (missileGroup.Magazine.AmmoCount <= i) value = 0;
+                }
+                UpdateReloadIcon(reloadIcons[i], value);
             }
             if (missileGroup.Magazine != null)
             {

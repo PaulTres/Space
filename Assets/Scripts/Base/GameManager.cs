@@ -2,11 +2,13 @@ using Level;
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Utilities;
 
 public static class GameManager
 {
+    static readonly string rebindKey = "InputBindings";
     static PlayerControls inputActions;
     /// <summary>
     /// PlayerControls global instance.
@@ -18,6 +20,12 @@ public static class GameManager
             if (inputActions == null)
             {
                 inputActions = new();
+                if (PlayerPrefs.HasKey(rebindKey))
+                {
+                    //get any overrides for the controls
+                    //how does Unity have such shit docs?
+                    inputActions.asset.LoadBindingOverridesFromJson(PlayerPrefs.GetString(rebindKey));
+                }
                 inputActions.Enable();
             }
             return inputActions;
@@ -126,6 +134,7 @@ public static class GameManager
     public static void EndMission()
     {
         if (!Player.Active()) return;
+        Soundtrack.StopSoundtrack();
         UnitManager.Clear();
         OnMissionCompleted();
         MissionTime = Time.time - MissionManager.StartTime;

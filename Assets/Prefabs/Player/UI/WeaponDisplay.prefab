@@ -513,6 +513,9 @@ MonoBehaviour:
   HeatStatusImage: {fileID: 549020954523754681}
   ReloadIconsParent: {fileID: 5948260670535518938}
   AmmoText: {fileID: 6101583482091593018}
+  emptyColor: {r: 1, g: 1, b: 1, a: 0.5882353}
+  reloadedColor: {r: 1, g: 0.6470588, b: 0, a: 0.5882353}
+  reloadIcons: []
 --- !u!1 &8464274983077171124
 GameObject:
   m_ObjectHideFlags: 0

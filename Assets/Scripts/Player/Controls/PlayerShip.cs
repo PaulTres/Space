@@ -19,9 +19,6 @@ namespace Player
             public float MinZoom = -10;
             [Range(0, 50)]
             public float MaxZoom = 5;
-            public float XSens = 10;
-            public float YSens = 10;
-            public float ZSens = 10;
         }
         public static Camera PlayerCamera { get; protected set; } = null;
         public static bool PlayerDead { get; protected set; } = false;
@@ -217,23 +214,23 @@ namespace Player
             }
         }
 
+        //camera movement
         public void PerformLateUpdate(float deltaTime)
         {
             if (!PlayerCamera.enabled && !callbacksEnabled) return;
             var lookDelta = GameManager.InputActions.BasicControls.MouseLook.ReadValue<Vector2>();
+
+            var rotationInput = new Vector3(
+                GlobalConfig.YMultiplier * deltaTime * lookDelta.y * GlobalConfig.XSensitivity,
+                deltaTime * lookDelta.x * GlobalConfig.YSensitivity,
+                deltaTime * rollInput * GlobalConfig.ZSensitivity);
             if (freeLook)
             {
-                cameraData.FreelookCameraPivot.Rotate(
-                    -deltaTime * lookDelta.y * cameraData.XSens,
-                    deltaTime * lookDelta.x * cameraData.YSens,
-                    deltaTime * rollInput * cameraData.ZSens);
+                cameraData.FreelookCameraPivot.Rotate(rotationInput);
             }
             else
             {
-                cameraData.CameraPivot.Rotate(
-                    -deltaTime * lookDelta.y * cameraData.XSens,
-                    deltaTime * lookDelta.x * cameraData.YSens,
-                    deltaTime * rollInput * cameraData.ZSens);
+                cameraData.CameraPivot.Rotate(rotationInput);
             }
         }
 
@@ -244,6 +241,7 @@ namespace Player
             MissionManager.TryGetInstance(true).StopAllTimers();
             UISystem.ShowText(new(Vector3.zero, 5, "Mission failed!", Color.red));
             DisableCallbacks();
+            Soundtrack.FadeSoundtrack(GlobalConfig.MissionFailureEndDuration);
             base.Die(@event);
         }
 

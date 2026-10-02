@@ -1,3 +1,4 @@
+using AudioSystem;
 using Effects;
 using Player;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Level
         /// If true, victory/failure can no longer occur.
         /// </summary>
         public bool LockMissionState { get; protected set; }
+        [SerializeField] protected SoundData victorySound, failureSound;
 
         protected override void InitializeSingleton()
         {
@@ -94,6 +96,8 @@ namespace Level
             {
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
+                victorySound.Play(GameManager.Player.Position);
+                Soundtrack.FadeSoundtrack(GlobalConfig.MissionSuccessEndDuration - 1);
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionSuccessEndDuration, text, Color.green));
                 ExecuteAction(() => GameManager.EndMission(), GlobalConfig.MissionSuccessEndDuration);
             }
@@ -114,6 +118,8 @@ namespace Level
                 //Debug.Log("Defeat");
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
+                failureSound.Play(GameManager.Player.Position);
+                Soundtrack.FadeSoundtrack(GlobalConfig.MissionFailureEndDuration - 1);
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
                 ExecuteAction(() => GameManager.Player.MissionFailed(), GlobalConfig.MissionFailureEndDuration);
             }

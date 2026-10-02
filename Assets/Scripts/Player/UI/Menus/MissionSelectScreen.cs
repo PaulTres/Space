@@ -18,14 +18,15 @@ namespace Player
         protected void PopulateMissionDropdown()
         {
             missionOptions.ClearOptions();
-            for (int i = 0; i <= GameManager.LatestMissionIndex; i++)
+            var latestMission = Mathf.Min(Mission.Campaign.Count - 1, GameManager.LatestMissionIndex);
+            for (int i = 0; i <= latestMission; i++)
             {
                 //Debug.Log(i);
                 missionOptions.options.Add(new(Mission.Campaign[i].name));
             }
-            missionOptions.SetValueWithoutNotify(GameManager.LatestMissionIndex);
-            Mission.CurrentMission = Mission.Campaign[GameManager.LatestMissionIndex];
-            GameManager.ChosenMissionIndex = GameManager.LatestMissionIndex;
+            missionOptions.SetValueWithoutNotify(latestMission);
+            Mission.CurrentMission = Mission.Campaign[latestMission];
+            GameManager.ChosenMissionIndex = latestMission;
             missionBriefingText.text = Mission.CurrentMission.Briefing;
         }
 

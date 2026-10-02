@@ -3,7 +3,6 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 namespace Player
 {
-
     public class AudioSettingsMenu : MonoBehaviour
     {
         [SerializeField] protected Slider masterSlider;

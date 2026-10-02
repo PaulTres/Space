@@ -56,19 +56,18 @@ namespace Utilities
 
         public static void Play(this SoundData soundData, Vector3 position, bool createManager = true, bool requiresPlayer = true)
         {
-            if (soundData != null)
+            if (soundData == null) return;
+            var m = SoundManager.TryGetInstance(createManager);
+            if (m != null)
             {
-                var m = SoundManager.TryGetInstance(createManager);
-                if (m != null)
+                if (requiresPlayer)
                 {
-                    if (requiresPlayer)
-                    {
-                        if (!GameManager.Player.Active()) return;
-                        var dist = Vector3.Distance(position, GameManager.Player.Position);
-                        if (dist > soundData.maxDistance) return;
-                    }
-                    m.Play(soundData, position);
+                    if (!GameManager.Player.Active()) return;
+                    var dist = Vector3.Distance(position, GameManager.Player.Position);
+                    if (dist > soundData.maxDistance) return;
                 }
+                m.Play(soundData, position);
+
             }
         }
 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7d40f19ab2299d4299ef3b6a2d9d1fd, type: 3}
   m_Name: GlobalConfig
   m_EditorClassIdentifier: Assembly-CSharp::ScriptableGlobalConfig
+  audioMixer: {fileID: 24100000, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
   clickSound:
     clip: {fileID: 8300000, guid: 36387ba55cf74dc408f93e002ee92653, type: 3}
     mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}

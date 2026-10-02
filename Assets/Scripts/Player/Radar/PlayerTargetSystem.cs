@@ -149,11 +149,16 @@ namespace Radar
                 #region Distance text
                 if (distance < 10) bbox.DistanceText.text = distance.ToString("#.##");
                 else bbox.DistanceText.text = ((int)distance).ToString();
-                if (distance <= owner.ScanRange + target.CurrentSignature)
+                if (owner.InOptimalFiringRange(target))
                 {
                     bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
+                    bbox.SelectionIcon.color = Color.red;
                 }
-                else bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
+                else
+                {
+                    bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
+                    bbox.SelectionIcon.color = Color.white;
+                }
                 #endregion
 
                 #region Fleeing
@@ -308,7 +313,7 @@ namespace Radar
                 string enemyTarget = CurrentTarget.Target == null ? "None" :
                     CurrentTarget == GameManager.Player ? "You" :
                     CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
-                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}:\nTarget: {enemyTarget}\nDistance: {distance}";
+                targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}: {(int)distance} KM\nTarget: {enemyTarget}\nHull:{(int)(CurrentTarget.CurrentHPPercentage * 100)}%";
                 if (CurrentTarget.IsFleeing)
                 {
                     targetInfoText.text += "\nFleeing";

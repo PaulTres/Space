@@ -1,3 +1,4 @@
+using AudioSystem;
 using EventBus;
 using Radar;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Player
         protected int currentWeaponIndex;
         public event System.Action<(int oldValue, int newValue)> OnWeaponsCycled = delegate { };
         public event System.Action<int> OnTurretGroupStanceChange = delegate { };
+        [SerializeField] protected SoundData errorSound;
 
         protected void OnValidate()
         {
@@ -122,8 +124,9 @@ namespace Player
             if (t == null || !t.CurrentTarget.Active()) return;
             foreach (var launcher in LauncherGroups[missileGroup].Launchers)
             {
-                if (launcher.Shoot(t.CurrentTarget)) break;
+                if (launcher.Shoot(t.CurrentTarget)) return;
             }
+            errorSound.Play(transform.position);
         }
 
         /// <summary>
@@ -134,9 +137,14 @@ namespace Player
         {
             var t = PlayerTargetSystem.TryGetInstance();
             if (t == null || !t.CurrentTarget.Active()) return;
+            bool playedErrorSound = false;
             foreach (var launcher in LauncherGroups[missileGroup].Launchers)
             {
-                launcher.Shoot(t.CurrentTarget);
+                if (!launcher.Shoot(t.CurrentTarget) && !playedErrorSound)
+                {
+                    errorSound.Play(transform.position);
+                    playedErrorSound = true;
+                }
             }
         }
 
