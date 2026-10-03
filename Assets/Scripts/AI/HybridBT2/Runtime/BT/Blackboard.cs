@@ -17,6 +17,7 @@ namespace HybridBT2
         }
 
         public Vector3 Position => Navigation.Position;
+        public readonly Unit Unit;
         public readonly Navigation Navigation;
         /// <summary>
         /// Time since last tree tick.
@@ -34,7 +35,11 @@ namespace HybridBT2
 
         public Blackboard(Transform transform)
         {
-            if (transform != null) Navigation = transform.GetComponent<Navigation>();
+            if (transform != null)
+            {
+                Navigation = transform.GetComponent<Navigation>();
+                Unit = transform.GetComponent<Unit>();
+            }
             DeltaTime = 0;
             lastTime = Time.time;
         }

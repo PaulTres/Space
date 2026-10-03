@@ -25,17 +25,17 @@ public class TargetAcquisitionService : ServiceData
         //    bestTarget = escortCandidate.Target;
         //    if (bestTarget.Active()) bestTargetScore = escortCandidateTargetMultiplier * TargetEvaluation.Evaluate(ctx.Navigation, bestTarget, MaxRange);
         //}
-        foreach (var target in ctx.Navigation.GetTargets())
+        foreach (var target in ctx.Unit.GetTargets())
         {
             if (!target.Active() || target.Untargetable) continue;
             if (!bestTarget.Active())
             {
                 bestTarget = target;
-                bestTargetScore = TargetEvaluation.Evaluate(ctx.Navigation, target, MaxRange);
+                bestTargetScore = TargetEvaluation.Evaluate(ctx.Unit, target, MaxRange);
             }
             else
             {
-                var score = TargetEvaluation.Evaluate(ctx.Navigation, target, MaxRange);
+                var score = TargetEvaluation.Evaluate(ctx.Unit, target, MaxRange);
                 if (score > bestTargetScore + MinUtilityDelta)
                 {
                     bestTarget = target;
@@ -43,7 +43,6 @@ public class TargetAcquisitionService : ServiceData
                 }
             }
         }
-        //Debugging.Log($"TargetAcquisitionService: bestTarget={bestTarget}, bestTargetScore={bestTargetScore}");
         ctx.SetData(Blackboard.Keys.Target, bestTarget);
     };
 }

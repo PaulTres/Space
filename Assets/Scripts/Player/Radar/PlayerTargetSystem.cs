@@ -276,10 +276,14 @@ namespace Radar
 
             //only activate the indicator when the target is off-screen
             //var dot=Vector3.Dot(primaryCamera.transform.forward,)
-            var distance = Vector3.Distance(CurrentTarget.Position, transform.root.position);
+            var dirToTarget = CurrentTarget.Position - transform.root.position;
+            var distance = dirToTarget.magnitude;
             if (boundingBoxes.TryGetValue(CurrentTarget, out var bbox))
             {
-                currentTargetIndicator.gameObject.SetActive(bbox.Hidden || distance > 200);
+                currentTargetIndicator.gameObject.SetActive(
+                    bbox.Hidden ||
+                    distance > 200 ||
+                    Vector3.Dot(primaryCamera.transform.forward, dirToTarget) < 0.25f);
             }
             else currentTargetIndicator.gameObject.SetActive(false);
 
@@ -342,7 +346,8 @@ namespace Radar
                     bestScore = score;
                 }
             }
-            TargetSelected(bestCandidate.Active() ? bestCandidate : currentTarget);
+            if (!currentTarget.Active()) TargetSelected(bestCandidate);
+            else TargetSelected(bestCandidate.Active() && targetInFov ? bestCandidate : currentTarget);
         }
 
         /// <summary>
@@ -382,7 +387,7 @@ namespace Radar
             var direction = target.Position - GameManager.Player.Position;
             var distance = direction.magnitude;
             var angleScore = Vector3.Dot(direction.normalized, primaryCamera.transform.forward);
-            inFov = angleScore > 0;
+            inFov = angleScore > 0.1f;
             var distanceScore = (GlobalConfig.PlayerTargetMaxDistance - distance) /
                 GlobalConfig.PlayerTargetMaxDistance;
             return angleScore * GlobalConfig.PlayerTargetAngleWeight + distanceScore *

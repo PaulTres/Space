@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DampenersBindingText
   m_EditorClassIdentifier: SpaceAssembly::Player.BindingTextProvider
   inputAction: {fileID: -4364834714556953440, guid: af2cb1c9203da6a488e039941f3f9aa4, type: 3}
-  actionName: to toggle dampeners. When they are off, the ship will not correct lingering
-    velocity.
+  actionName: to toggle inertial dampeners. When they are off, the ship will not
+    correct lingering velocity.

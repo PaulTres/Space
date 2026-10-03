@@ -32,7 +32,7 @@ public class BanditTree : BT, IRegisterableComponent
 
     protected virtual void OnDestroy()
     {
-        EventBus<ObjectDestroyed>.RemoveActions(Extensions.GetTransformInstanceID(Context.Navigation), null, Pause);
+        EventBus<ObjectDestroyed>.RemoveActions(transform.root.GetInstanceID(), null, Pause);
         ComponentRegister<BanditTree>.Unregister(transform);
     }
 

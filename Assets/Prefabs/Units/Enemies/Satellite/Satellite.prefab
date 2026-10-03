@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2935612521407029362}
   - component: {fileID: 5834217629255433718}
   - component: {fileID: 568885492946791619}
+  - component: {fileID: 4246599311010329585}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -60,8 +61,6 @@ MonoBehaviour:
   currentHP: 0
   damageEffects:
   - {fileID: 5114164307030127781}
-  effectOnDamage: {fileID: 6657925166995645850, guid: 7bac74cfdeb0f5c46b8f6157e6755005, type: 3}
-  damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
   debug: 0
@@ -145,6 +144,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 2402209039077652550}
@@ -153,6 +153,23 @@ MonoBehaviour:
   - {fileID: 6308112266851948967}
   <PlaySpawnEffect>k__BackingField: 1
   <Parameters>k__BackingField: {fileID: 5834217629255433718}
+--- !u!114 &4246599311010329585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471856228708017344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f764f23fdef8054b86888c1cee5b779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::BanditTree
+  rootData: {fileID: 11400000, guid: 2c35d4691efea2242a878a87f999e46b, type: 2}
+  tickInterval: 0.1
+  shouldTick: 1
+  maxThreats: 1
+  minEscortValue: 24
 --- !u!1 &522178110574290531
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,6 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 5148691603424548254}
   <ElevationPivot>k__BackingField: {fileID: 5148691603424548254}
   params: {fileID: 11400000, guid: 1c1cd41ec9df9a54b95c5c123d52f82e, type: 2}
@@ -388,6 +406,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: e97a71c29a14c5a49a6ed99ff60f4590, type: 2}
   shootPoints:
   - {fileID: 5148691603424548254}
+  <Heatsink>k__BackingField: {fileID: 6039548699851361486}
 --- !u!114 &6039548699851361486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,6 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 3948264059839932059}
   <ElevationPivot>k__BackingField: {fileID: 3948264059839932059}
   params: {fileID: 11400000, guid: f54cf012eca61174ba7c8554602885a0, type: 2}

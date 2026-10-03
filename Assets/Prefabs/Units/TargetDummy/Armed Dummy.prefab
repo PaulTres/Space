@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 5169994244638383308}
   <ElevationPivot>k__BackingField: {fileID: 5169994244638383308}
   params: {fileID: 11400000, guid: 83f4c4e137d857448a0f4939dcb9135d, type: 2}
@@ -153,6 +154,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 33351deda03674e4daf602b9e315ad0c, type: 2}
   shootPoints:
   - {fileID: 5169994244638383308}
+  <Heatsink>k__BackingField: {fileID: 6520273464265282937}
 --- !u!1 &4106498077352577260
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 1239160485747845687}
   <ElevationPivot>k__BackingField: {fileID: 1239160485747845687}
   params: {fileID: 11400000, guid: 3c5db4bd6e32c3e4c85ec054c76695ae, type: 2}
@@ -251,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3316b3881595c5b45800179464ecd93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapons.Turret
+  sendDebugMessages: 0
   <RotationPivot>k__BackingField: {fileID: 4474830839329730189}
   <ElevationPivot>k__BackingField: {fileID: 4474830839329730189}
   params: {fileID: 11400000, guid: 2e585fc34f02d8845a5c6bc10d5ba0ea, type: 2}
@@ -421,10 +425,35 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8077901967565991093, guid: e0f97dbeaaf8fbf4fbdd67832896f67c, type: 3}
       insertIndex: 2
       addedObject: {fileID: 1239160485747845687}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5928260128396124696, guid: e0f97dbeaaf8fbf4fbdd67832896f67c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7637053584365831200}
   m_SourcePrefab: {fileID: 100100000, guid: e0f97dbeaaf8fbf4fbdd67832896f67c, type: 3}
 --- !u!4 &4658372362513548679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8077901967565991093, guid: e0f97dbeaaf8fbf4fbdd67832896f67c, type: 3}
   m_PrefabInstance: {fileID: 3512708692907469106}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7132238207324031786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5928260128396124696, guid: e0f97dbeaaf8fbf4fbdd67832896f67c, type: 3}
+  m_PrefabInstance: {fileID: 3512708692907469106}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7637053584365831200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7132238207324031786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f764f23fdef8054b86888c1cee5b779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::BanditTree
+  rootData: {fileID: 11400000, guid: 2c35d4691efea2242a878a87f999e46b, type: 2}
+  tickInterval: 0.1
+  shouldTick: 1
+  maxThreats: 1
+  minEscortValue: 11

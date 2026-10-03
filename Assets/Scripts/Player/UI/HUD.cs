@@ -106,7 +106,7 @@ namespace Player
         public void UpdateSpeedBar()
         {
             speedBar.fillAmount = Mathf.Max(0, player.LinearVelocity.magnitude / player.MaxVelocityMagnitude);
-            speedText.text = $"{(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude}";
+            speedText.text = $"SPD: {(int)player.LinearVelocity.magnitude}/{(int)player.MaxVelocityMagnitude} KM/s";
         }
 
         public void UpdateSignatureDisplay()

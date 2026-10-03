@@ -25,6 +25,8 @@ namespace Player
 
         public void FadeOut(Action callback)
         {
+            gameObject.SetActive(true);
+            enabled = true;
             coroutine = StartCoroutine(FadeOutCoroutine(callback));
         }
 

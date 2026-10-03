@@ -7,6 +7,6 @@ namespace Player
     {
         [SerializeField] protected InputActionReference inputAction;
         [SerializeField] protected string actionName;
-        public override string Text => inputAction.action.GetBindingDisplayString() + " to " + (actionName.Length > 0 ? actionName : inputAction.action.name.ToLower()) + ".";
+        public override string Text => inputAction.action.GetBindingDisplayString() + " to " + (actionName.Length > 0 ? actionName : inputAction.action.name.ToLower());
     }
 }
