@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8991542081120678977, guid: f4cc4aaf400c04c488176cb1a7d40719, type: 3}
       propertyPath: invulnerable
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

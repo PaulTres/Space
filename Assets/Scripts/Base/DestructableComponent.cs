@@ -35,7 +35,7 @@ public class DestructableComponent : ImprovedMonoBehaviour
         get
         {
             if (hpComponent == null) hpComponent = GetComponent<HPComponent>();
-            return hpComponent.CurrentHP / hpComponent.MaxHP;
+            return hpComponent.CurrentHPPercentage;
         }
     }
 

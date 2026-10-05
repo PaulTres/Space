@@ -103,15 +103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f702d7000c81af94f84b5e549e7cce70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::HP.HPComponent
-  <MaxHP>k__BackingField: 1000
+  <MaxHP>k__BackingField: 40
   startingHPFraction: 1
-  sendEventOnHPChange: 0
-  minHP: 1000
+  hpBlockCount: 1
   minHPRegainCooldown: 1
-  currentHP: 0
+  regenerating: 0
+  regenRate: 1
+  <HPBlocks>k__BackingField: []
   damageEffects: []
-  effectOnDamage: {fileID: 6657925166995645850, guid: bcdf64f4ddd6e4d4db725e20b2c6813e, type: 3}
-  damageThreshold: 0.5
   effectScaleFactor: 1
   invulnerable: 0
   debug: 0
@@ -172,7 +171,7 @@ MonoBehaviour:
   EffectOnSpawn: {fileID: 0}
   MinimumSignature: 10
   MaximumSignature: 50
-  SignatureDecreaseRate: 0.1
+  SignatureDecreaseRate: 10
   SignatureDecreaseCooldown: 5
   ScanRange: 30
   SpawnCheckRadius: 5
@@ -181,6 +180,7 @@ MonoBehaviour:
   ForwardThrust: 15
   StrafeThrust: 15
   RotationSpeed: 50
+  validateData: 0
 --- !u!114 &7771979634443785169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ MonoBehaviour:
   <Team>k__BackingField: 2
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
+  <Untargetable>k__BackingField: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 8693774543182356962}

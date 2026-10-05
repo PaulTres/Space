@@ -40,6 +40,10 @@ public class GlobalConfig : ScriptableObject
     [Header("Audio")]
     [SerializeField] protected AudioMixer audioMixer;
     public static AudioMixer AudioMixer => Instance.audioMixer;
+    [SerializeField] protected SoundData clickSound;
+    public static SoundData ClickSound => Instance.clickSound;
+    [SerializeField] protected SoundData audioOnHPBlockPop;
+    public static SoundData AudioOnHPBlockPop => Instance.audioOnHPBlockPop;
     #endregion
 
     #region UI
@@ -62,8 +66,6 @@ public class GlobalConfig : ScriptableObject
     }
 
     [Header("UI")]
-    [SerializeField] protected SoundData clickSound;
-    public static SoundData ClickSound => Instance.clickSound;
     public static float FOV { get; set; } = 90;
     public static float PlayerTargetAngleWeight { get; set; } = 1;
     public static float PlayerTargetDistanceWeight { get; set; } = 1;

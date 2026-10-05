@@ -1,7 +1,7 @@
+using AudioSystem;
 using EventBus;
 using System;
 using System.Collections.Generic;
-using Timers;
 using UnityEngine;
 using Utilities;
 
@@ -9,6 +9,34 @@ namespace HP
 {
     public class HPComponent : MonoBehaviour, IResettable
     {
+        [Serializable]
+        public class HPBlock
+        {
+            [field: SerializeField] public float MaxHP { get; protected set; }
+            [SerializeField] protected float currentHP;
+            public float CurrentHP
+            {
+                get => currentHP;
+                set
+                {
+                    value = Mathf.Clamp(value, 0f, MaxHP);
+                    if (currentHP != value)
+                    {
+                        currentHP = value;
+                        if (currentHP <= 0 && root.IsPlayer()) GlobalConfig.AudioOnHPBlockPop.Play(root.position, requiresPlayer: true);
+                    }
+                }
+            }
+            public float CurrentHPPercentage => CurrentHP / MaxHP;
+            protected Transform root;
+
+            public HPBlock(float maxHP, Transform root)
+            {
+                MaxHP = maxHP;
+                this.root = root;
+            }
+        }
+
         #region Fields
         [field: SerializeField] public float MaxHP { get; set; } = 10;
         [Tooltip("The unit will spawn with maxHP*this number.")]
@@ -25,28 +53,36 @@ namespace HP
                 return tr;
             }
         }
-        [SerializeField] protected bool sendEventOnHPChange = false;
-        public event Action OnDamageTaken = delegate { };
-        [Tooltip("If the ship is not damaged for some time, it will recover health up to this threshold.")]
-        [SerializeField] protected float minHP = 0;
+        [SerializeField] protected int hpBlockCount = 1;
         [Tooltip("The time it takes for min hp regain to kick in.")]
         [SerializeField] protected float minHPRegainCooldown = 5;
-        [SerializeField] protected float currentHP;
+        [SerializeField] protected bool regenerating = false;
+        [SerializeField] protected float regenRate = 1;
+        protected float currentHP;
         public float CurrentHP
         {
-            get => currentHP;
+            get
+            {
+                return currentHP;
+            }
             set
             {
-                value = Mathf.Clamp(value, 0, MaxHP);
-                if (currentHP != value)
+                currentHP = 0;
+                for (int i = 0; i < hpBlockCount; i++)
                 {
-                    if (sendEventOnHPChange) OnDamageTaken?.Invoke();
-                    currentHP = value;
-                    UpdateDamageEffects();
+                    var val = Mathf.Clamp(value, 0, HPBlocks[i].MaxHP);
+                    HPBlocks[i].CurrentHP = val;
+                    value -= val;
+                    currentHP += HPBlocks[i].CurrentHP;
+                    if (value <= 0) break;
                 }
+                UpdateDamageEffects();
             }
         }
-        protected CountdownTimer hpRegainTimer;
+        public float CurrentHPPercentage => CurrentHP / MaxHP;
+        protected float lastDamageTime = -1;
+        [field: SerializeField] public List<HPBlock> HPBlocks { get; protected set; } = new();
+        [SerializeField] protected SoundData audioOnHPBlockPop;
         protected bool firedEvent = false;
         [SerializeField] protected List<DamageEffect> damageEffects = new();
         protected ImprovedMonoBehaviour improvedMonoBehaviour;
@@ -61,46 +97,83 @@ namespace HP
         [SerializeField] protected float effectScaleFactor = .5f;
         [Tooltip("If true, this entity will not take damage.")]
         [SerializeField] protected bool invulnerable = false;
-        [SerializeField] protected bool debug;
+        [SerializeField] protected bool debug = false;
         #endregion
 
         #region Setup
         protected virtual void Awake()
         {
-            if (minHP > 0)
+            if (minHPRegainCooldown >= 0)
             {
-                hpRegainTimer = new(minHPRegainCooldown);
-                hpRegainTimer.OnTimerStop += () =>
-                {
-                    if (currentHP < minHP) currentHP = minHP;
-                };
+                GlobalUpdater.TryGetInstance(true).RegisterUpdate(PerformRegeneration);
             }
             if (damageEffects.IsEmpty()) damageEffects = new(Transform.root.GetComponentsInChildren<DamageEffect>(true));
         }
 
         public void PerformReset()
         {
+            lastDamageTime = -1;
             firedEvent = false;
             MaxHP *= GlobalConfig.GetHPModifier(ImprovedMonoBehaviour.Team);
+            if (HPBlocks.Count != hpBlockCount)
+            {
+                HPBlocks.Clear();
+                for (int i = 0; i < hpBlockCount; i++)
+                {
+                    var block = new HPBlock(MaxHP / hpBlockCount, transform.root);
+                    HPBlocks.Add(block);
+                }
+            }
             CurrentHP = MaxHP * startingHPFraction;
         }
 
         protected void OnEnable() => PerformReset();
 
-        protected void OnDisable()
-        {
-            OnDamageTaken = delegate { };
-        }
-
         protected void OnDestroy()
         {
-            hpRegainTimer?.Dispose();
+            var u = GlobalUpdater.TryGetInstance();
+            if (u != null) u.UnregisterUpdate(PerformRegeneration);
         }
         #endregion
+
+        public void PerformRegeneration(float deltaTime)
+        {
+            if (!regenerating) return;
+            if (Time.time - lastDamageTime < minHPRegainCooldown) return;
+            IncreaseCurrentHP(deltaTime * regenRate);
+        }
 
         public static bool TakeDamage(Transform transform, DamageInfo damageInfo)
         {
             return EventBus<DamageInfo>.Raise(transform.GetInstanceID(), damageInfo);
+        }
+
+        protected void IncreaseCurrentHP(float value)
+        {
+            for (int i = HPBlocks.Count - 1; i >= 0; i--)
+            {
+                if (HPBlocks[i].CurrentHP > 0 && HPBlocks[i].CurrentHP < HPBlocks[i].MaxHP)
+                {
+                    currentHP += Mathf.Min(value, HPBlocks[i].MaxHP - HPBlocks[i].CurrentHP);
+                    HPBlocks[i].CurrentHP += value;
+                    break;
+                }
+            }
+            UpdateDamageEffects();
+        }
+
+        protected void ReduceCurrentHP(float value)
+        {
+            for (int i = HPBlocks.Count - 1; i >= 0; i--)
+            {
+                if (HPBlocks[i].CurrentHP > 0)
+                {
+                    currentHP -= Mathf.Min(value, HPBlocks[i].CurrentHP);
+                    HPBlocks[i].CurrentHP -= value;
+                    break;
+                }
+            }
+            UpdateDamageEffects();
         }
 
         public void TakeDamage(DamageInfo damageInfo)
@@ -113,8 +186,11 @@ namespace HP
             }
             if (ImprovedMonoBehaviour.IsDying) return;
             if (debug) Debug.Log($"{this} took {damageInfo.Amount} damage from {damageInfo.Source}.");
-            CurrentHP -= damageInfo.Amount;
-            if (CurrentHP <= 0 && !firedEvent)
+
+            ReduceCurrentHP(damageInfo.Amount);
+
+            lastDamageTime = Time.time;
+            if (!firedEvent && HPBlocks[0].CurrentHP <= 0)
             {
                 firedEvent = true;
                 ObjectDestroyed @event = new(Transform.GetInstanceID(), damageInfo.Source);
@@ -124,11 +200,6 @@ namespace HP
                 //    e.gameObject.SetActive(false);
                 //}
                 return;
-            }
-            if (currentHP < minHP)
-            {
-                //begin hp regain timer
-                hpRegainTimer.Start();
             }
         }
 
@@ -147,7 +218,7 @@ namespace HP
         {
             foreach (var damageEffect in damageEffects)
             {
-                damageEffect.gameObject.SetActive(currentHP / MaxHP <
+                damageEffect.gameObject.SetActive(CurrentHP / MaxHP <
                     damageEffect.DamageThreshold);
             }
         }

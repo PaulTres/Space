@@ -26,9 +26,16 @@ public class ShipParameters : MonoBehaviour
     public float ForwardThrust = 15;
     public float StrafeThrust = 15;
     public float RotationSpeed = 50;
+    [SerializeField] protected bool validateData = true;
 
     protected void OnValidate()
     {
         VelocitySoftCap = Mathf.Min(VelocitySoftCap, MaxVelocityMagnitude * .9f);
+        if (validateData)
+        {
+            validateData = false;
+            SignatureDecreaseRate = 10f;
+            Debug.Log("Validation performed on " + transform.root);
+        }
     }
 }

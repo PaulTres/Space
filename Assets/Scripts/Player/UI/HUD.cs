@@ -8,8 +8,9 @@ namespace Player
     public class HUD : UISystem
     {
         #region Fields
-        [SerializeField] protected Image healthBar;
-        [SerializeField] protected TextMeshProUGUI healthText;
+        [SerializeField] protected RectTransform healthParent;
+        [SerializeField] protected HealthDisplay healthDisplayPrefab;
+        protected List<HealthDisplay> healthDisplays = new();
         [SerializeField] protected Image speedBar;
         [SerializeField] protected TextMeshProUGUI speedText;
         [SerializeField] protected Image maxSignatureDisplay, signatureDisplay;
@@ -40,7 +41,6 @@ namespace Player
             base.Awake();
             canvas = transform.root.GetComponentInChildren<Canvas>();
             player = GetComponentInParent<PlayerShip>();
-            healthBar.fillAmount = 1;
             GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
             player.OnDampenersChanged += UpdateDampenerText;
             UpdateDampenerText(player.Dampeners);
@@ -99,8 +99,26 @@ namespace Player
 
         public void UpdateHealthBar()
         {
-            healthBar.fillAmount = Mathf.Max(0, player.CurrentHPPercentage);
-            healthText.text = $"HP: {(int)player.CurrentHP}/{(int)player.MaxHP}";
+            if (player.HPComponent.HPBlocks.Count <= 0) return;
+            if (player.HPComponent.HPBlocks.Count != healthParent.childCount)
+            {
+                //generate the health blocks
+                healthDisplays.Clear();
+                for (int i = 0; i < healthParent.childCount; i++)
+                {
+                    Destroy(healthParent.GetChild(i).gameObject);
+                }
+                for (int i = 0; i < player.HPComponent.HPBlocks.Count; i++)
+                {
+                    healthDisplays.Add(Instantiate(healthDisplayPrefab, healthParent));
+                }
+            }
+            for (int i = 0; i < healthDisplays.Count; i++)
+            {
+                var val = Mathf.Max(0, player.HPComponent.HPBlocks[i].CurrentHPPercentage);
+                healthDisplays[i].HealthImage.fillAmount = val;
+                healthDisplays[i].HealthImage.color = Color.Lerp(Color.red, Color.green, val);
+            }
         }
 
         public void UpdateSpeedBar()

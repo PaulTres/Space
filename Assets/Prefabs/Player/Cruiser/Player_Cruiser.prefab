@@ -20,6 +20,22 @@ PrefabInstance:
       propertyPath: minHP
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 973707587532016634, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: hpBlockCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 973707587532016634, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: regenerating
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 973707587532016634, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: audioOnHPBlockPop.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d75f22ad3b736aa45acee5411178f1f9, type: 3}
+    - target: {fileID: 973707587532016634, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: audioOnHPBlockPop.mixerGroup
+      value: 
+      objectReference: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     - target: {fileID: 1955120915635093136, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -354,9 +370,6 @@ MonoBehaviour:
     ZoomSpeed: 1
     MinZoom: -30
     MaxZoom: 5
-    XSens: 10
-    YSens: 10
-    ZSens: 10
   missionFailureScreenPrefab: {fileID: 3564781924928465574, guid: 01e313aa3a2e5b24d87c6332bfd75666, type: 3}
 --- !u!114 &6966646386308261496 stripped
 MonoBehaviour:

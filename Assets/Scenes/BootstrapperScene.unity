@@ -252,7 +252,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe31f3c3e9c3b04c8560efc6016497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Utilities.Bootstrapper
-  audioMixer: {fileID: 24100000, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
 --- !u!4 &943173854
 Transform:
   m_ObjectHideFlags: 0

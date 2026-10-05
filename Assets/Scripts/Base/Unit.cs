@@ -31,7 +31,6 @@ public abstract class Unit : ImprovedMonoBehaviour
     [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
     protected float currentSignature = 0;
     public override float CurrentSignature => currentSignature;
-
     #endregion
 
     [field: SerializeField] public ShipParameters Parameters { get; protected set; }
@@ -48,8 +47,8 @@ public abstract class Unit : ImprovedMonoBehaviour
         }
     }
     public float MaxHP => HPComponent != null ? HPComponent.MaxHP : 0;
-    public float CurrentHP => HPComponent != null ? HPComponent.CurrentHP : 0;
-    public override float CurrentHPPercentage => HPComponent != null ? HPComponent.CurrentHP / HPComponent.MaxHP : 0;
+    public float CurrentHP => HPComponent.CurrentHP;
+    public override float CurrentHPPercentage => HPComponent.CurrentHPPercentage;
     #endregion
 
     #region Helpers

@@ -52,6 +52,22 @@ PrefabInstance:
       propertyPath: minHP
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4853517699977681407, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
+      propertyPath: hpBlockCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853517699977681407, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
+      propertyPath: regenerating
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853517699977681407, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
+      propertyPath: audioOnHPBlockPop.clip
+      value: 
+      objectReference: {fileID: 8300000, guid: d75f22ad3b736aa45acee5411178f1f9, type: 3}
+    - target: {fileID: 4853517699977681407, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
+      propertyPath: audioOnHPBlockPop.mixerGroup
+      value: 
+      objectReference: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
     - target: {fileID: 7109907238248407258, guid: ed88b05f9a8ff4e458b2690c0d31ee80, type: 3}
       propertyPath: m_Name
       value: Player_Corvette
@@ -236,9 +252,6 @@ MonoBehaviour:
     ZoomSpeed: 1
     MinZoom: -10
     MaxZoom: 5
-    XSens: 10
-    YSens: 10
-    ZSens: 10
   missionFailureScreenPrefab: {fileID: 3564781924928465574, guid: 01e313aa3a2e5b24d87c6332bfd75666, type: 3}
 --- !u!114 &6776047194658260325 stripped
 MonoBehaviour:
