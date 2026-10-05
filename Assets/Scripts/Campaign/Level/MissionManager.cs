@@ -96,7 +96,7 @@ namespace Level
             {
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
-                victorySound.Play(GameManager.Player.Position);
+                GlobalConfig.VictorySound.Play(GameManager.Player.Position);
                 Soundtrack.FadeSoundtrack(GlobalConfig.MissionSuccessEndDuration - 1);
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionSuccessEndDuration, text, Color.green));
                 ExecuteAction(() => GameManager.EndMission(), GlobalConfig.MissionSuccessEndDuration);
@@ -118,7 +118,7 @@ namespace Level
                 //Debug.Log("Defeat");
                 LockMissionState = true;
                 GameManager.Player.CannotDie = true;
-                failureSound.Play(GameManager.Player.Position);
+                GlobalConfig.DefeatSound.Play(GameManager.Player.Position);
                 Soundtrack.FadeSoundtrack(GlobalConfig.MissionFailureEndDuration - 1);
                 UISystem.ShowText(new(Vector3.zero, GlobalConfig.MissionFailureEndDuration, text, Color.red));
                 ExecuteAction(() => GameManager.Player.MissionFailed(), GlobalConfig.MissionFailureEndDuration);

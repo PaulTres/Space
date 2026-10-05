@@ -59,6 +59,52 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+  victorySound:
+    clip: {fileID: 8300000, guid: 85b0a0192cbc749159c4f71241b3ff2d, type: 3}
+    mixerGroup: {fileID: -9084424427438386734, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 30
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+  defeatSound:
+    clip: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+    mixerGroup: {fileID: -9084424427438386734, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 30
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
   iconSizeCoefficient: 50
   flickerInterval: 0.25
   allyHPModifiers:

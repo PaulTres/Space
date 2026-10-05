@@ -11,6 +11,7 @@ namespace Weapons
         public AnimationCurve TrailRendererCurve;
         public override float Speed => (Mathf.Max(InitialVelocity, Acceleration) + TopSpeed) / 2;
         [SerializeField] protected bool resetCurve = true;
+        [SerializeField] protected bool validateData = true;
 
         protected override void OnValidate()
         {
@@ -22,9 +23,15 @@ namespace Weapons
                     new Keyframe(0f, ScaleFactor),
                     new Keyframe(.35f, 0f)
                 );
+                Debug.Log("Resetting curve on " + this + ".");
+            }
+            if (validateData)
+            {
+                validateData = false;
+                TopSpeed = Mathf.Max(TopSpeed, 2 * InitialVelocity);
+                Debug.Log("Validating data for " + this + '.');
             }
         }
-
 
         protected virtual void Reset()
         {

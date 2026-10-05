@@ -126,6 +126,7 @@ namespace Player
             {
                 if (launcher.Shoot(t.CurrentTarget)) return;
             }
+            //Debug.Log("Error");
             errorSound.Play(transform.position);
         }
 
@@ -142,6 +143,7 @@ namespace Player
             {
                 if (!launcher.Shoot(t.CurrentTarget) && !playedErrorSound)
                 {
+                    //Debug.Log("Error1");
                     errorSound.Play(transform.position);
                     playedErrorSound = true;
                 }

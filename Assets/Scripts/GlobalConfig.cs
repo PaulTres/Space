@@ -44,6 +44,9 @@ public class GlobalConfig : ScriptableObject
     public static SoundData ClickSound => Instance.clickSound;
     [SerializeField] protected SoundData audioOnHPBlockPop;
     public static SoundData AudioOnHPBlockPop => Instance.audioOnHPBlockPop;
+    [SerializeField] protected SoundData victorySound, defeatSound;
+    public static SoundData VictorySound => Instance.victorySound;
+    public static SoundData DefeatSound => Instance.defeatSound;
     #endregion
 
     #region UI

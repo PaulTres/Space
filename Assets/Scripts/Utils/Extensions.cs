@@ -79,6 +79,7 @@ namespace Utilities
                     var dist = Vector3.Distance(position, GameManager.Player.Position);
                     if (dist > soundData.maxDistance) return;
                 }
+                //Debug.Log("Playing " + soundData.clip.name);
                 m.Play(soundData, position);
 
             }
