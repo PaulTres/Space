@@ -18,6 +18,19 @@ namespace Utilities
 
     public static class Extensions
     {
+        public static string ConvertToDistance(this float distance)
+        {
+            distance *= 20;
+            if (distance < 1000)
+            {
+                return $"{distance:0} m";
+            }
+            else
+            {
+                return $"{distance / 1000:0.00} km";
+            }
+        }
+
         #region Unit
         public static float GetMoraleWeight(this Unit unit)
         {

@@ -2987,7 +2987,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Turrets with a shield icon are in a passive stance and will not engage
-    targets (they may still shoot down missiles).
+    targets (they may still shoot down missiles). Use this to rapidly decrease your
+    signature in order to lower the enemy's accuracy.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}
   m_sharedMaterial: {fileID: 293797498040040403, guid: 52e6ae2838f9ff44dbd15175a7f87939, type: 2}

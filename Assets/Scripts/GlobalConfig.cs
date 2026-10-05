@@ -300,8 +300,8 @@ public class GlobalConfig : ScriptableObject
     [SerializeField] protected List<float> enemyHPModifiers = new() { .75f, 1, 1.25f };
     public static float GetHPModifier(int team)
     {
-        if (team == PlayerTeam) return Instance.allyTrackingModifiers[GameManager.Difficulty];
-        if (team == EnemyTeam) return Instance.enemyTrackingModifiers[GameManager.Difficulty];
+        if (team == PlayerTeam) return Instance.allyHPModifiers[GameManager.Difficulty];
+        if (team == EnemyTeam) return Instance.enemyHPModifiers[GameManager.Difficulty];
         return 1;
     }
 
