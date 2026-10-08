@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShipParameters : MonoBehaviour
 {
     public float MaxVelocityMagnitude = 30;
-    public float VelocitySoftCap = 1000000;
+    public float VelocitySoftCap = 29;
     [Tooltip("How much morale damage will allies suffer when this unit is destroyed.")]
     public int MoraleWeight = 10;
     public float TickInterval = 0.2f;
@@ -35,6 +35,7 @@ public class ShipParameters : MonoBehaviour
         {
             validateData = false;
             SignatureDecreaseRate = 10f;
+            StrafeThrust = Mathf.Min(StrafeThrust, ForwardThrust / 2);
             Debug.Log("Validation performed on " + transform.root);
         }
     }

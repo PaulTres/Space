@@ -8,7 +8,7 @@ namespace Player
     {
         [Tooltip("This will be enabled when the weapon is selected.")]
         public Image SelectionIcon;
-        public Image WeaponIcon;
+        public TextMeshProUGUI weaponsName;
         public Image TurretStanceIcon;
         public Image HeatStatusImage;
         public RectTransform ReloadIconsParent;
@@ -30,7 +30,7 @@ namespace Player
         {
             reloadIcons = new();
             HeatStatusImage.enabled = turretGroup.Heatsink != null;
-            WeaponIcon.sprite = turretGroup.Icon;
+            weaponsName.text = turretGroup.Name;
             AmmoText.enabled = false;
             SelectionIcon.enabled = false;
             for (int i = 0; i < turretGroup.Turrets.Count; i++)
@@ -43,7 +43,7 @@ namespace Player
         {
             reloadIcons = new();
             HeatStatusImage.enabled = false;
-            WeaponIcon.sprite = missileGroup.Icon;
+            weaponsName.text = missileGroup.Name;
             TurretStanceIcon.enabled = false;
             AmmoText.enabled = missileGroup.Magazine != null;
             SelectionIcon.enabled = false;

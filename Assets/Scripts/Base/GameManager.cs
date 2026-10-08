@@ -1,5 +1,6 @@
 using Level;
 using Player;
+using Radar;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -139,7 +140,9 @@ public static class GameManager
         UnitManager.Clear();
         OnMissionCompleted();
         MissionTime = Time.time - MissionManager.StartTime;
-        SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
+        var t = PlayerTargetSystem.TryGetInstance();
+        if (t != null) t.FadeToBlack(() => SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex));
+        else SceneManager.LoadScene(GlobalConfig.EndMissionSceneIndex);
     }
     #endregion
 }

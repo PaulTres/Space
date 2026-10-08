@@ -20,11 +20,15 @@ namespace Radar
         [field: SerializeField] public Image SelectionIcon { get; protected set; }
         [field: SerializeField] public TextMeshProUGUI DistanceText { get; protected set; }
         [field: SerializeField] public Image BBox { get; protected set; }
+        [field: SerializeField] public TextMeshProUGUI PriorityText { get; protected set; }
         [field: SerializeField] public LineRenderer LineRenderer { get; protected set; }
         public float TimeSinceLastFlicker { get; set; }
         public bool Hidden => !BBox.gameObject.activeSelf;
         [SerializeField] protected Gradient lineRendererColors;
 
+        /// <summary>
+        /// Activates the main bounding box object - the child of this object.
+        /// </summary>
         public void Show()
         {
             //BBox.color = new Color(1, 1, 1, 0);
@@ -43,6 +47,9 @@ namespace Radar
             TimeSinceLastFlicker = Time.time;
         }
 
+        /// <summary>
+        /// Deactivates the main bounding box object - the child of this object.
+        /// </summary>
         public void Hide()
         {
             //BBox.enabled = false;

@@ -21,6 +21,7 @@ namespace Level
         [SerializeField] protected float spawnRadius = 0;
         [SerializeField] protected int team = 2;
         [field: SerializeField] public bool PlaySpawnEffect { get; set; } = true;
+        [SerializeField] protected bool criticalObjective = false;
 
         protected void OnValidate()
         {
@@ -76,6 +77,7 @@ namespace Level
             var unit = data.CreateInstance();
             unit.Team = team;
             unit.PlaySpawnEffect = PlaySpawnEffect;
+            unit.CriticalObjective = criticalObjective;
             //Debugging.Log($"Team of {unit.Transform} is {unit.Team}.");
             unit.Transform.SetPositionAndRotation(transform.position +
                 Random.insideUnitSphere * spawnRadius, transform.rotation);

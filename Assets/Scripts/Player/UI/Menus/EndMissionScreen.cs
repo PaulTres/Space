@@ -22,8 +22,7 @@ namespace Player
             afterActionReport.text = Mission.CurrentMission.AfterActionReport;
             playerKills.text = "Kills:";
             //Debug.Log(unitsDestroyed.Output());
-            var killCounts = unitsDestroyed.Where(a => a.KillerName.
-                Contains("You")).GroupBy(a => a.VictimName).
+            var killCounts = unitsDestroyed.Where(a => a.VictimTeam == GlobalConfig.EnemyTeam).GroupBy(a => a.VictimName).
                 Select(a => new KeyValuePair<string, int>(a.Key, a.Count()));
             //foreach (var pair in killCounts) Debug.Log(pair.Key + " x " + pair.Value);
 

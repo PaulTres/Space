@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2725236034981725534, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: m_Name
+      value: Cannons
+      objectReference: {fileID: 0}
+    - target: {fileID: 2813909860010570509, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 6624770288895973825}
     - target: {fileID: 3479937686050625776, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       propertyPath: magazine
       value: 
@@ -100,6 +108,14 @@ PrefabInstance:
       propertyPath: magazine
       value: 
       objectReference: {fileID: 5296540094122990187}
+    - target: {fileID: 6437375601093419638, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 6624770288895973825}
+    - target: {fileID: 6799226795515991163, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 6624770288895973825}
     - target: {fileID: 6859179319343322303, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       propertyPath: magazine
       value: 
@@ -133,6 +149,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8318712247183423008, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5373921020566061718}
+    - targetCorrespondingSourceObject: {fileID: 2725236034981725534, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6624770288895973825}
     - targetCorrespondingSourceObject: {fileID: 6812091340984124033, guid: af887574845d8644aa010d9e0585ef18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5296540094122990187}
@@ -262,6 +281,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d0d6eb59d1b1e42aceb41771f82e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::HP.DamageReceiver
+--- !u!1 &4358204386313174970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2725236034981725534, guid: af887574845d8644aa010d9e0585ef18, type: 3}
+  m_PrefabInstance: {fileID: 1849440612991957732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6624770288895973825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358204386313174970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
+  overheatThreshold: 2
+  heatLoss: 1
+  heatLossWhileOverheated: 0.5
+  heatLossCooldown: 2
+  overheatSound:
+    clip: {fileID: 8300000, guid: 19bb777c626e24220835300df5aca6b5, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 30
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!114 &4643858171929952694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6474140069148949330, guid: af887574845d8644aa010d9e0585ef18, type: 3}
@@ -352,6 +415,7 @@ MonoBehaviour:
   <MaxVelocityMagnitude>k__BackingField: 20
   <IsDying>k__BackingField: 0
   <Untargetable>k__BackingField: 0
+  CriticalObjective: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 6462000736487996699}
@@ -486,17 +550,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b618a4750ef81c94c8bcde0fae940691, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[0].Name
+      value: Cannons
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[1].Icon
       value: 
       objectReference: {fileID: 21300000, guid: c8a99bdd0f08b8c47af88824e592097b, type: 3}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[1].Name
+      value: PD
+      objectReference: {fileID: 0}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Icon
       value: 
       objectReference: {fileID: 21300000, guid: 9c7df7a295e42674eb093a49346a77db, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Name
+      value: Spinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[1].Icon
       value: 
       objectReference: {fileID: 21300000, guid: 98be93167ed6cd54d82a8e882da6f3e1, type: 3}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <LauncherGroups>k__BackingField.Array.data[1].Name
+      value: Missiles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[0].Heatsink
+      value: 
+      objectReference: {fileID: 6624770288895973825}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[1].Heatsink
       value: 

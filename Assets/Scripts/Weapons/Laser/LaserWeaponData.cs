@@ -5,6 +5,6 @@ namespace Weapons
     [System.Serializable]
     public class LaserWeaponData : WeaponData
     {
-        public float HeatPerShot = .1f;
+
     }
 }

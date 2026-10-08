@@ -65,12 +65,23 @@ namespace Weapons
         [SerializeField] protected WeaponData @params;
         [Tooltip("A separate bullet will be spawned with the position and rotation of each of these objects.")]
         [SerializeField] protected Transform[] shootPoints;
+        [field: SerializeField] public Heatsink Heatsink { get; protected set; }
         #endregion
 
         #region Setup
         protected virtual void OnValidate()
         {
             if (shootPoints.IsEmpty()) shootPoints = new Transform[] { transform };
+            if (Heatsink == null)
+            {
+                Transform parent = transform;
+                while (parent != null)
+                {
+                    Heatsink = parent.GetComponent<Heatsink>();
+                    if (Heatsink != null) break;
+                    parent = parent.parent;
+                }
+            }
         }
 
         protected virtual void Awake()
@@ -147,7 +158,7 @@ namespace Weapons
         /// <returns></returns>
         public virtual bool CanShoot()
         {
-            return shotTimer == null || !shotTimer.IsRunning;
+            return (shotTimer == null || !shotTimer.IsRunning) && (Heatsink == null || !Heatsink.Overheated);
         }
 
         #region Shooting
@@ -187,8 +198,9 @@ namespace Weapons
         /// <param name="target">The target of the bullet.</param>
         public void ProcessBullet(Bullet bullet, ImprovedMonoBehaviour target)
         {
-            UnitProperty.IncreaseSignature(@params.SignatureIncrease);
+            //UnitProperty.IncreaseSignature(@params.SignatureIncrease);
             bullet.Owner = UnitProperty;
+            if (Heatsink != null) Heatsink.IncreaseHeat(@params.HeatPerShot);
             PerformBulletInitialization(bullet, target);
             bullet.gameObject.SetActive(true);
         }

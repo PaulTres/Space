@@ -7,7 +7,7 @@ namespace Player
 {
     public abstract class WeaponGroup
     {
-        public Sprite Icon;
+        public string Name;
         public abstract float ReloadStatus { get; }
         public UnityEvent OnSelected;
         public UnityEvent OnDeselected;
@@ -32,9 +32,10 @@ namespace Player
             }
         }
 
-        public TurretGroup(List<Turret> turrets, Heatsink heatsink)
+        public TurretGroup(List<Turret> turrets, Heatsink heatsink, string name)
         {
             Turrets = turrets;
+            Name = name;
             Heatsink = heatsink;
         }
     }
@@ -64,9 +65,10 @@ namespace Player
             }
         }
 
-        public MissileGroup(List<MissileLauncher> launchers)
+        public MissileGroup(List<MissileLauncher> launchers, string name)
         {
             Launchers = launchers;
+            Name = name;
         }
     }
 }

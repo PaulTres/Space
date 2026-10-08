@@ -13,8 +13,6 @@ namespace Player
         protected List<HealthDisplay> healthDisplays = new();
         [SerializeField] protected Image speedBar;
         [SerializeField] protected TextMeshProUGUI speedText;
-        [SerializeField] protected Image maxSignatureDisplay, signatureDisplay;
-        [SerializeField] protected TextMeshProUGUI signatureText;
         protected PlayerShip player;
         [SerializeField] protected List<Sprite> turretStanceIcons = new();
         protected Canvas canvas;
@@ -33,6 +31,7 @@ namespace Player
         [Tooltip("All weapon displays will be children of this object.")]
         [SerializeField] protected RectTransform weaponDisplayParent;
         [SerializeField] protected Image reloadIconPrefab;
+        [SerializeField] protected TextMeshProUGUI friendlyHP;
         #endregion
 
         #region Setup
@@ -88,8 +87,21 @@ namespace Player
         {
             UpdateHealthBar();
             UpdateSpeedBar();
-            UpdateSignatureDisplay();
             UpdateWeaponDisplays();
+            UpdateFriendlyHP();
+        }
+
+        public void UpdateFriendlyHP()
+        {
+            string s = "";
+            foreach (var ship in UnitManager.GetShips(GlobalConfig.PlayerTeam))
+            {
+                if (ship.CriticalObjective)
+                {
+                    s += $"{ship.Transform.name}: {ship.CurrentHPPercentage * 100:0}%\n";
+                }
+            }
+            friendlyHP.text = s;
         }
 
         public void UpdateDampenerText(bool value)
@@ -117,7 +129,7 @@ namespace Player
             {
                 var val = Mathf.Max(0, player.HPComponent.HPBlocks[i].CurrentHPPercentage);
                 healthDisplays[i].HealthImage.fillAmount = val;
-                healthDisplays[i].HealthImage.color = Color.Lerp(Color.red, Color.green, val);
+                //healthDisplays[i].HealthImage.color = Color.Lerp(Color.red, Color.green, val);
             }
         }
 
@@ -125,13 +137,6 @@ namespace Player
         {
             speedBar.fillAmount = Mathf.Max(0, player.LinearVelocity.magnitude / player.MaxVelocityMagnitude);
             speedText.text = $"SPD: {(int)(10 * player.LinearVelocity.magnitude)} m/s";
-        }
-
-        public void UpdateSignatureDisplay()
-        {
-            var percentage = player.CurrentSignature / (player.MaximumSignature + Mathf.Epsilon);
-            signatureText.text = $"{(int)player.CurrentSignature}/{(int)player.MaximumSignature}";
-            signatureDisplay.rectTransform.localScale = percentage * maxSignatureDisplay.rectTransform.localScale;
         }
 
         public void UpdateWeaponDisplays()

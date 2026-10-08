@@ -173,7 +173,7 @@ public abstract class Unit : ImprovedMonoBehaviour
             yield return wait;
             GetSurroundingMissiles();
             onTick?.Invoke();
-            DecreaseSignature(Parameters.TickInterval);
+            //DecreaseSignature(Parameters.TickInterval);
         }
     }
 

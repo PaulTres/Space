@@ -24,7 +24,7 @@ MonoBehaviour:
     bypassListenerEffects: 0
     bypassReverbZones: 0
     priority: 128
-    volume: 1
+    volume: 4
     pitch: 1
     panStereo: 0
     spatialBlend: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
     bypassListenerEffects: 0
     bypassReverbZones: 0
     priority: 128
-    volume: 1
+    volume: 4
     pitch: 1
     panStereo: 0
     spatialBlend: 0

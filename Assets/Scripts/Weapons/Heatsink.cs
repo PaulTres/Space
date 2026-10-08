@@ -7,6 +7,7 @@ namespace Weapons
     {
         [SerializeField] protected float overheatThreshold = 1.0f;
         [SerializeField] protected float heatLoss = .34f;
+        [SerializeField] protected float heatLossWhileOverheated = .3f;
         [SerializeField] protected float heatLossCooldown = 2f;
         [SerializeField] protected SoundData overheatSound;
         public bool Overheated { get; protected set; }

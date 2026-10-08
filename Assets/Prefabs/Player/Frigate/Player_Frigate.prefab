@@ -28,6 +28,34 @@ PrefabInstance:
       propertyPath: audioOnHPBlockPop.mixerGroup
       value: 
       objectReference: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    - target: {fileID: 1268338386752663356, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 1772934926949333406, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 2293096105565197039, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 2992988641389853614, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 3370558499927165683, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 3622368146130673125, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 4003970670627855362, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
     - target: {fileID: 4883905929714191720, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
       propertyPath: magazine
       value: 
@@ -44,6 +72,14 @@ PrefabInstance:
       propertyPath: magazine
       value: 
       objectReference: {fileID: 9001297296429987472}
+    - target: {fileID: 6393006879378037264, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 165381583898528690}
+    - target: {fileID: 6838539490357912896, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      propertyPath: m_Name
+      value: Cannons
+      objectReference: {fileID: 0}
     - target: {fileID: 7242539690405231791, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
       propertyPath: magazine
       value: 
@@ -113,6 +149,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8774651058757072463, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7941437171246025092}
+    - targetCorrespondingSourceObject: {fileID: 6838539490357912896, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 165381583898528690}
     - targetCorrespondingSourceObject: {fileID: 901479301498874453, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9001297296429987472}
@@ -278,6 +317,7 @@ MonoBehaviour:
   <MaxVelocityMagnitude>k__BackingField: 25
   <IsDying>k__BackingField: 0
   <Untargetable>k__BackingField: 0
+  CriticalObjective: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 6609453413672879956}
@@ -408,6 +448,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5ce5e1df441f441ae1f723dba1665c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SpaceAssembly::Weapons.MissileLauncher
+--- !u!1 &8343092766686275060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6838539490357912896, guid: 0194dbf9f3db9474bb90a5a73bbe1be7, type: 3}
+  m_PrefabInstance: {fileID: 3256034111209652404}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &165381583898528690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343092766686275060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d9efae50088744cb2105fd7a62d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
+  overheatThreshold: 4
+  heatLoss: 0.7
+  heatLossWhileOverheated: 0.4
+  heatLossCooldown: 4
+  overheatSound:
+    clip: {fileID: 8300000, guid: 19bb777c626e24220835300df5aca6b5, type: 3}
+    mixerGroup: {fileID: -7435249275222494475, guid: 9f5f1d66633bc4d4c964ea26d03d5b7c, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 30
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1001 &8642228638354188859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -437,13 +521,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: b618a4750ef81c94c8bcde0fae940691, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[0].Name
+      value: Cannons
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[1].Icon
       value: 
       objectReference: {fileID: 21300000, guid: c8a99bdd0f08b8c47af88824e592097b, type: 3}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[1].Name
+      value: PD
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Icon
       value: 
       objectReference: {fileID: 21300000, guid: 98be93167ed6cd54d82a8e882da6f3e1, type: 3}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <LauncherGroups>k__BackingField.Array.data[0].Name
+      value: Missiles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
+      propertyPath: <TurretGroups>k__BackingField.Array.data[0].Heatsink
+      value: 
+      objectReference: {fileID: 165381583898528690}
     - target: {fileID: 1341088141097745748, guid: 176c37202bc170f468f8aa1560aa1b82, type: 3}
       propertyPath: <TurretGroups>k__BackingField.Array.data[1].Heatsink
       value: 

@@ -31,6 +31,7 @@ namespace Weapons
         public bool RequiresOptimalFiringRange = true;
         [Tooltip("If true, the weapon will be ready to fire the moment the owner spawns.")]
         public bool StartLoaded = true;
+        public float HeatPerShot = .1f;
 
         protected virtual void OnValidate()
         {

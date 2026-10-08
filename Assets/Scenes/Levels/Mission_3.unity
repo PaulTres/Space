@@ -177,6 +177,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &138018530
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +236,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &140314372
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +288,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &226168826
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +347,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &273096574
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +384,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!4 &273096576
 Transform:
   m_ObjectHideFlags: 0
@@ -459,6 +464,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &379038117
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +516,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &393586153
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,6 +701,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &444883746
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +886,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &558236034
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,6 +945,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &563566983
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +982,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!4 &563566985
 Transform:
   m_ObjectHideFlags: 0
@@ -1048,6 +1059,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &648778801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +1187,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &812989238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,6 +1246,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &933738262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,6 +1298,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1021162876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,6 +1444,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1142899746
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,6 +1496,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 0
+  criticalObjective: 0
 --- !u!1001 &1193664472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1612,6 +1629,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1272928696
 GameObject:
   m_ObjectHideFlags: 0
@@ -1735,6 +1753,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1532441323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,6 +1884,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1648232655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,6 +1946,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1703948652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,6 +2008,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1764093792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,6 +2282,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 2
   <PlaySpawnEffect>k__BackingField: 1
+  criticalObjective: 0
 --- !u!1 &1998093782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,6 +2334,7 @@ MonoBehaviour:
   spawnRadius: 0
   team: 1
   <PlaySpawnEffect>k__BackingField: 0
+  criticalObjective: 1
 --- !u!1 &2001178853
 GameObject:
   m_ObjectHideFlags: 0

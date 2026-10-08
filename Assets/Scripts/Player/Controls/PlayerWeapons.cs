@@ -32,11 +32,11 @@ namespace Player
                     {
                         //this is a launcher group
                         var launchers = child.GetComponentsInChildren<MissileLauncher>();
-                        LauncherGroups.Add(new(launchers.ToList()));
+                        LauncherGroups.Add(new(launchers.ToList(), child.name));
                     }
                     else
                     {
-                        TurretGroups.Add(new(turrets.ToList(), child.GetComponent<Heatsink>()));
+                        TurretGroups.Add(new(turrets.ToList(), child.GetComponent<Heatsink>(), child.name));
                     }
                 }
             }
