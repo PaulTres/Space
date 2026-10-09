@@ -54,7 +54,6 @@ namespace Radar
         }
         protected PlayerShip owner;
         [SerializeField] protected Transform currentTargetIndicator;
-        protected static readonly float ScreenMargin = 64f; //pixels outside the screen before we cull
         #endregion
 
         #region Setup
@@ -99,28 +98,6 @@ namespace Radar
         }
 
         #region Bounding boxes
-        protected bool TryGetBoundingBoxPosition(Vector3 worldPos, out Vector2 localPos)
-        {
-            localPos = default;
-
-            Vector3 screen = primaryCamera.WorldToScreenPoint(worldPos);
-
-            // Behind or too close to the camera plane -> projection is meaningless.
-            if (screen.z <= primaryCamera.nearClipPlane + 0.001f) return false;
-
-            // Non-finite values would make the rect conversion fail silently.
-            if (!float.IsFinite(screen.x) || !float.IsFinite(screen.y)) return false;
-
-            // Off-screen (with a small margin so boxes don't pop at the very edge).
-            Rect r = primaryCamera.pixelRect;
-            if (screen.x < r.xMin - ScreenMargin || screen.x > r.xMax + ScreenMargin ||
-                screen.y < r.yMin - ScreenMargin || screen.y > r.yMax + ScreenMargin) return false;
-
-            // Never trust the out value unless the method reports success.
-            return RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                boundingBoxParent, new Vector2(screen.x, screen.y), null, out localPos);
-        }
-
         /// <summary>
         /// Handles bounding box and other UI aspects of objects.
         /// </summary>
@@ -133,16 +110,34 @@ namespace Radar
             var directionToTarget = target.Position - owner.Position;
             var distance = directionToTarget.magnitude;
             Vector3 viewportPos = primaryCamera.WorldToViewportPoint(target.Position);
-
-            if (TryGetBoundingBoxPosition(target.Position, out var localPos))
+            if (viewportPos.z <= 0 || Vector3.Dot(primaryCamera.transform.forward, target.Position - primaryCamera.transform.position) <= 0)
             {
                 bbox.Hide();
+                //Debug.Log($"Hidden bounding box for unit {target}");
+                //if (CurrentTarget == target) ClearTarget();
             }
+            //handle bounding box
             else
             {
                 bbox.Show();
+                //if (target == currentTarget) bbox.SelectionIcon.enabled = true;
 
+                #region Bounding box position
+                Vector2 screenPos = new(
+                    viewportPos.x * Screen.width,
+                    viewportPos.y * Screen.height
+                );
+
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    boundingBoxParent,
+                    screenPos,
+                    null,//CameraTransform,
+                    out Vector2 localPos
+                );
+
+                //Debug.Log($"{worldPos}-:-{viewportPos}-:-{localPos}");
                 bbox.RectTransform.localPosition = localPos;
+                #endregion
 
                 #region Scaling
                 //scale based on distance
@@ -154,23 +149,15 @@ namespace Radar
 
                 #region Distance text
                 bbox.DistanceText.text = distance.ConvertToDistance();
-                if (target.Team == GlobalConfig.PlayerTeam)
+                if (owner.InOptimalFiringRange(target))
                 {
                     bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
                     bbox.SelectionIcon.color = Color.red;
                 }
                 else
                 {
-                    if (owner.InOptimalFiringRange(target))
-                    {
-                        bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
-                        bbox.SelectionIcon.color = Color.red;
-                    }
-                    else
-                    {
-                        bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
-                        bbox.SelectionIcon.color = Color.white;
-                    }
+                    bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
+                    bbox.SelectionIcon.color = Color.white;
                 }
                 #endregion
 
@@ -193,9 +180,8 @@ namespace Radar
                     bbox.DistanceText.enabled = true;
                 }
                 #endregion
-            }
 
-            #region Line renderer
+            }
             if (target.IsFleeing)
             {
                 bbox.LineRenderer.enabled = false;
@@ -214,7 +200,6 @@ namespace Radar
                 }
                 else bbox.LineRenderer.enabled = false;
             }
-            #endregion
         }
 
         protected BoundingBox GetBoundingBox()
@@ -233,12 +218,11 @@ namespace Radar
 
             //Debug.Log($"{target} registered");
             var bbox = GetBoundingBox();
-            bbox.Hide();
             bbox.SelectionIcon.enabled = false;
             if (target is Missile) bbox.BBox.sprite = missileIcon;
             else bbox.BBox.sprite = unitIcon;
             bbox.TimeSinceLastFlicker = Time.time;
-
+            bbox.Hide();
             if (target.Team == GlobalConfig.PlayerTeam)
             {
                 bbox.RegularMaterial = allyMaterial;
@@ -254,13 +238,10 @@ namespace Radar
                 bbox.RegularMaterial = neutralMaterial;
                 bbox.TransluscentMaterial = neutralTransluscentMaterial;
             }
-
             bbox.PriorityText.enabled = target.CriticalObjective;
-
             bbox.BBox.SetAllDirty();
             bbox.gameObject.SetActive(true);
             boundingBoxes.Add(target, bbox);
-            ProcessTarget(target, bbox);
         }
 
         public void UnregisterTarget(ImprovedMonoBehaviour target)
@@ -332,8 +313,10 @@ namespace Radar
                     CurrentTarget == GameManager.Player ? "You" :
                     CurrentTarget.Target.Transform.name.Replace("(Clone)", "");
                 targetInfoText.text = $"{CurrentTarget.name.Replace("(Clone)", "")}: {distance.ConvertToDistance()}\nTarget: {enemyTarget}\nHull:{CurrentTarget.CurrentHPPercentage * 100:0}%";
-                if (currentTarget.CriticalObjective) targetInfoText.text += "\nPriority target";
-                if (CurrentTarget.IsFleeing) targetInfoText.text += "\nFleeing";
+                if (CurrentTarget.IsFleeing)
+                {
+                    targetInfoText.text += "\nFleeing";
+                }
             }
             #endregion
         }
