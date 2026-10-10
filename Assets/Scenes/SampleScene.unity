@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 8183
       objectReference: {fileID: 0}
+    - target: {fileID: 5310403886519883644, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+      propertyPath: m_Viewport
+      value: 
+      objectReference: {fileID: 954899080}
     - target: {fileID: 6118724346875524859, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
       propertyPath: m_Name
       value: You
@@ -411,6 +415,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81f2a26ea4425914eb1e85318dc550da, type: 3}
+--- !u!224 &954899080 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2090126652424091023, guid: d3778a31a5a89a14480d8d2130c5189c, type: 3}
+  m_PrefabInstance: {fileID: 422373780}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1040874402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -554,7 +563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7286455426397343272, guid: e93eb97cb2c6fec4ab3a6a181430a12a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
