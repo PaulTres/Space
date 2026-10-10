@@ -57,8 +57,8 @@ namespace Effects
             if (effect == null) return;
             if (!Get(effect.PoolKey, out var e)) e = Instantiate(effect);
             //Debug.Log($"{effect}:{playSound}");
-            e.Transform.SetPositionAndRotation(position, rotation);
             e.Transform.localScale = scale;
+            e.Transform.SetPositionAndRotation(position, rotation);
             e.gameObject.SetActive(true);
         }
         #endregion

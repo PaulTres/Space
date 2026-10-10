@@ -232,6 +232,9 @@ namespace Player
             {
                 cameraData.CameraPivot.Rotate(rotationInput);
             }
+
+            var t = PlayerTargetSystem.TryGetInstance();
+            if (t != null) t.PerformLateUpdate(deltaTime);
         }
 
         public override void Die(ObjectDestroyed @event)

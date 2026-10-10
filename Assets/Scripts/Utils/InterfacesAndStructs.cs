@@ -15,6 +15,7 @@ public struct DamageInfo : IEvent
     public Unit Source { get; set; }
     public bool IgnoreArmor { get; set; }
     public Vector3 Position { get; set; }
+    public bool DamagePriorityTargets { get; set; }
 }
 
 /// <summary>
@@ -29,7 +30,6 @@ public readonly struct ObjectDestroyed : IEvent
     {
         VictimID = victimID;
         Killer = killer;
-        //Debug.Log(Killer == null);
     }
 
     public override string ToString()

@@ -139,14 +139,16 @@ namespace Player
             var t = PlayerTargetSystem.TryGetInstance();
             if (t == null || !t.CurrentTarget.Active()) return;
             bool playedErrorSound = false;
+            bool shouldPlaySound = true;
             foreach (var launcher in LauncherGroups[missileGroup].Launchers)
             {
-                if (!launcher.Shoot(t.CurrentTarget) && !playedErrorSound)
+                if (!launcher.Shoot(t.CurrentTarget) && !playedErrorSound && shouldPlaySound)
                 {
                     //Debug.Log("Error1");
                     errorSound.Play(transform.position);
                     playedErrorSound = true;
                 }
+                else shouldPlaySound = false;
             }
         }
 

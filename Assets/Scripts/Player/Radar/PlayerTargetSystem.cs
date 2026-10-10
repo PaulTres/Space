@@ -70,8 +70,7 @@ namespace Radar
 
         protected virtual void OnEnable()
         {
-            CurrentTarget = null;
-            GlobalUpdater.TryGetInstance(true).RegisterLateUpdate(PerformLateUpdate);
+            ClearTarget();
             foreach (var unit in UnitManager.GetAllShips())
             {
                 RegisterTarget(unit);
@@ -81,14 +80,16 @@ namespace Radar
         protected void OnDisable()
         {
             ClearTarget();
+            foreach (var b in boundingBoxes)
+            {
+                if (b.Value != null) b.Value.Hide();
+            }
             boundingBoxes.Clear();
-            var u = GlobalUpdater.TryGetInstance();
-            if (u != null) u.UnregisterLateUpdate(PerformLateUpdate);
         }
         #endregion
 
         #region Functionality
-        protected void PerformLateUpdate(float deltaTime)
+        public void PerformLateUpdate(float deltaTime)
         {
             foreach (var (target, bbox) in boundingBoxes)
             {
@@ -98,6 +99,24 @@ namespace Radar
         }
 
         #region Bounding boxes
+        protected readonly float screenMargin = 0.1f;
+
+        protected bool IsOnScreen(Vector3 v)
+        {
+            if (float.IsNaN(v.x) || float.IsNaN(v.y) || float.IsInfinity(v.x) || float.IsInfinity(v.y)) return false;
+            if (v.z < primaryCamera.nearClipPlane) return false;
+            return v.x > -screenMargin && v.x < 1 + screenMargin &&
+                   v.y > -screenMargin && v.y < 1 + screenMargin;
+        }
+
+        protected Vector2 ViewportToLocal(Vector3 viewportPos)
+        {
+            Rect r = boundingBoxParent.rect;
+            return new Vector2(
+                r.xMin + viewportPos.x * r.width,
+                r.yMin + viewportPos.y * r.height);
+        }
+
         /// <summary>
         /// Handles bounding box and other UI aspects of objects.
         /// </summary>
@@ -105,39 +124,26 @@ namespace Radar
         /// <param name="bbox"></param>
         protected void ProcessTarget(ImprovedMonoBehaviour target, BoundingBox bbox)
         {
-            if (!target.Active() || bbox == null) return;
+            if (bbox == null) return;
+            if (!target.Active())
+            {
+                bbox.Hide();
+                bbox.LineRenderer.enabled = false;
+                return;
+            }
 
             var directionToTarget = target.Position - owner.Position;
             var distance = directionToTarget.magnitude;
             Vector3 viewportPos = primaryCamera.WorldToViewportPoint(target.Position);
-            if (viewportPos.z <= 0 || Vector3.Dot(primaryCamera.transform.forward, target.Position - primaryCamera.transform.position) <= 0)
+
+            if (!IsOnScreen(viewportPos))
             {
                 bbox.Hide();
-                //Debug.Log($"Hidden bounding box for unit {target}");
-                //if (CurrentTarget == target) ClearTarget();
             }
-            //handle bounding box
             else
             {
+                bbox.RectTransform.localPosition = ViewportToLocal(viewportPos);
                 bbox.Show();
-                //if (target == currentTarget) bbox.SelectionIcon.enabled = true;
-
-                #region Bounding box position
-                Vector2 screenPos = new(
-                    viewportPos.x * Screen.width,
-                    viewportPos.y * Screen.height
-                );
-
-                RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                    boundingBoxParent,
-                    screenPos,
-                    null,//CameraTransform,
-                    out Vector2 localPos
-                );
-
-                //Debug.Log($"{worldPos}-:-{viewportPos}-:-{localPos}");
-                bbox.RectTransform.localPosition = localPos;
-                #endregion
 
                 #region Scaling
                 //scale based on distance
@@ -151,12 +157,13 @@ namespace Radar
                 bbox.DistanceText.text = distance.ConvertToDistance();
                 if (owner.InOptimalFiringRange(target))
                 {
-                    bbox.BBox.material = bbox.DistanceText.material = bbox.RegularMaterial;
+
+                    bbox.CurrentMaterial = bbox.RegularMaterial;
                     bbox.SelectionIcon.color = Color.red;
                 }
                 else
                 {
-                    bbox.BBox.material = bbox.DistanceText.material = bbox.TransluscentMaterial;
+                    bbox.CurrentMaterial = bbox.TransluscentMaterial;
                     bbox.SelectionIcon.color = Color.white;
                 }
                 #endregion
@@ -182,6 +189,8 @@ namespace Radar
                 #endregion
 
             }
+
+            #region Line renderer
             if (target.IsFleeing)
             {
                 bbox.LineRenderer.enabled = false;
@@ -200,6 +209,7 @@ namespace Radar
                 }
                 else bbox.LineRenderer.enabled = false;
             }
+            #endregion
         }
 
         protected BoundingBox GetBoundingBox()
@@ -394,7 +404,7 @@ namespace Radar
         /// </summary>
         public void ClearTarget()
         {
-            if (CurrentTarget == null) return;
+            if (!CurrentTarget.Active()) return;
             if (boundingBoxes.TryGetValue(CurrentTarget, out var data))
             {
                 data.SelectionIcon.enabled = false;

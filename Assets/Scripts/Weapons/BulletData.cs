@@ -15,6 +15,7 @@ namespace Weapons
         public Vector3 EffectScale => EffectScaleFactor * Vector3.one;
         public PoolableEffect OnSpawnEffect;
         public PoolableEffect OnHitEffect;
+        public bool DamagePriorityTargets = true;
         /// <summary>
         /// Roughly how fast the bullet can hit the target. Used for AI decision making.
         /// </summary>

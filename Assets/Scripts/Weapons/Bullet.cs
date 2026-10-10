@@ -97,6 +97,7 @@ namespace Weapons
             poolKey = poolableData.Key;
             disableOnHit = poolableData.DisableOnHit;
             damageInfo.Amount = poolableData.Damage * GlobalConfig.GetDamageModifier(Team);
+            damageInfo.DamagePriorityTargets = poolableData.DamagePriorityTargets;
             lifeTime = poolableData.LifeTime;
             onSpawnEffect = poolableData.OnSpawnEffect;
             onHitEffect = poolableData.OnHitEffect;

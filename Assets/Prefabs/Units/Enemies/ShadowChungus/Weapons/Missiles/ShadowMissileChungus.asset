@@ -21,8 +21,9 @@ MonoBehaviour:
   EffectScaleFactor: 1.5
   OnSpawnEffect: {fileID: 6332652951562218706, guid: 8c2df941e4b329749918b2091f9e59ef, type: 3}
   OnHitEffect: {fileID: 985664761693772524, guid: b1aa19e5ed5ff1a4ba2a467b05d12831, type: 3}
+  DamagePriorityTargets: 1
   TopSpeed: 60
-  Acceleration: 7
+  Acceleration: 5
   InitialVelocity: 10
   InertialDampeners: 1
   ScaleFactor: 1
@@ -53,7 +54,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   resetCurve: 0
-  Tracking: 2
+  validateData: 0
+  Tracking: 1
   MaxTargetSignature: 0
   MaxTelemetryBonus: 0
   HP: 0.25

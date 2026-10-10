@@ -404,6 +404,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 4215664039157283273}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &1259082856886612612
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +983,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 7587871519743128113}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &4648368592002236083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,6 +1031,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 8992083503976469328}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &5505632934023296377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,6 +1134,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 4115297903506588938}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &6168769415453029314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,6 +1254,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 1679872027437883012}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &6457678694538407408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,10 +1516,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::HP.HPComponent
   <MaxHP>k__BackingField: 200
   startingHPFraction: 1
-  sendEventOnHPChange: 0
-  minHP: 0
+  hpBlockCount: 1
   minHPRegainCooldown: 5
-  currentHP: 200
+  regenerating: 0
+  regenRate: 1
+  <HPBlocks>k__BackingField: []
+  audioOnHPBlockPop:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 30
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
   damageEffects:
   - {fileID: 8475051046336999118}
   - {fileID: 2804005569974697939}
@@ -1568,6 +1597,7 @@ MonoBehaviour:
   <MaxVelocityMagnitude>k__BackingField: 30
   <IsDying>k__BackingField: 0
   <Untargetable>k__BackingField: 0
+  CriticalObjective: 0
   <TelemetryOrigin>k__BackingField: {fileID: 0}
   collisionCheckers:
   - {fileID: 731779712251133623}
@@ -1640,15 +1670,16 @@ MonoBehaviour:
   EffectOnSpawn: {fileID: 6922654280961368421, guid: 1061f013d0b91ea4fbaef9613c730e61, type: 3}
   MinimumSignature: 10
   MaximumSignature: 50
-  SignatureDecreaseRate: 0.1
+  SignatureDecreaseRate: 10
   SignatureDecreaseCooldown: 5
   ScanRange: 30
   SpawnCheckRadius: 5
-  EffectScaleFactor: 1
+  EffectScaleFactor: 20
   EscortValue: 10
   ForwardThrust: 10
   StrafeThrust: 1
   RotationSpeed: 50
+  validateData: 0
 --- !u!1 &8261766306148284041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1731,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
   overheatThreshold: 1
   heatLoss: 0.34
+  heatLossWhileOverheated: 0.3
   heatLossCooldown: 2
   overheatSound:
     clip: {fileID: 0}
@@ -1738,6 +1770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: SpaceAssembly::Weapons.Heatsink
   overheatThreshold: 10
   heatLoss: 0.34
+  heatLossWhileOverheated: 0.3
   heatLossCooldown: 2
   overheatSound:
     clip: {fileID: 8300000, guid: 19bb777c626e24220835300df5aca6b5, type: 3}
@@ -1842,6 +1875,7 @@ MonoBehaviour:
   params: {fileID: 11400000, guid: 18fda264661ae8a40b0176320dda46d2, type: 2}
   shootPoints:
   - {fileID: 4728929671887330553}
+  <Heatsink>k__BackingField: {fileID: 2236077962093127969}
 --- !u!1 &9141530471267068562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,6 +1925,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8204266301800510828}
     m_Modifications:
+    - target: {fileID: 215810724395561445, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 377838960493290613, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 1303336215627050934, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 3153564926022289038, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: m_Name
       value: WeaponStationRed Variant (1)
@@ -1943,6 +1989,10 @@ PrefabInstance:
       propertyPath: 'hpComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 517454534649041658}
+    - target: {fileID: 6317955559850634830, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
@@ -2134,6 +2184,10 @@ PrefabInstance:
       propertyPath: 'hpComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 517454534649041658}
+    - target: {fileID: 8787125835985463857, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2152,6 +2206,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450028404799532896}
     m_Modifications:
+    - target: {fileID: 429720835022936567, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: hpComponents.Array.size
       value: 2
@@ -2168,6 +2226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponStationBlue Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5420242036917178520, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6215601140237817887, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2226,6 +2288,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8204266301800510828}
     m_Modifications:
+    - target: {fileID: 215810724395561445, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 377838960493290613, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 1303336215627050934, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 3153564926022289038, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: m_Name
       value: WeaponStationRed Variant (2)
@@ -2278,6 +2352,10 @@ PrefabInstance:
       propertyPath: 'hpComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 517454534649041658}
+    - target: {fileID: 6317955559850634830, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
@@ -2386,6 +2464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450028404799532896}
     m_Modifications:
+    - target: {fileID: 429720835022936567, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 3371785441352251417, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: hpComponents.Array.size
       value: 2
@@ -2402,6 +2484,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponStationBlue Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5420242036917178520, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6215601140237817887, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2565,6 +2651,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8204266301800510828}
     m_Modifications:
+    - target: {fileID: 215810724395561445, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 377838960493290613, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
+    - target: {fileID: 1303336215627050934, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 3153564926022289038, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: m_Name
       value: WeaponStationRed Variant
@@ -2617,6 +2715,10 @@ PrefabInstance:
       propertyPath: 'hpComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 517454534649041658}
+    - target: {fileID: 6317955559850634830, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6365943154167686152, guid: 4ffcdb668ded5b142a981666318b2f7f, type: 3}
       propertyPath: damageEffects.Array.size
       value: 0
@@ -2756,6 +2858,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1450028404799532896}
     m_Modifications:
+    - target: {fileID: 429720835022936567, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 460165294075970658, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: <MaxRot>k__BackingField
       value: 110
@@ -2780,6 +2886,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponStationBlue Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5420242036917178520, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     - target: {fileID: 6215601140237817887, guid: 3df15c61c6c57ae43bc15385d4af2c03, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2894,6 +3004,10 @@ PrefabInstance:
       propertyPath: 'hpComponents.Array.data[1]'
       value: 
       objectReference: {fileID: 517454534649041658}
+    - target: {fileID: 8787125835985463857, guid: 45f9bbda6bcd75844a7be835dd0cf2da, type: 3}
+      propertyPath: <Heatsink>k__BackingField
+      value: 
+      objectReference: {fileID: 2236077962093127969}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

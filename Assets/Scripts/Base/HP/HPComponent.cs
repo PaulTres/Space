@@ -185,6 +185,7 @@ namespace HP
                 return;
             }
             if (ImprovedMonoBehaviour.IsDying) return;
+            if (!damageInfo.DamagePriorityTargets && ImprovedMonoBehaviour.CriticalObjective) return;
             if (debug) Debug.Log($"{this} took {damageInfo.Amount} damage from {damageInfo.Source}.");
 
             ReduceCurrentHP(damageInfo.Amount);

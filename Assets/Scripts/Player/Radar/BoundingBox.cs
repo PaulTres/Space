@@ -25,6 +25,16 @@ namespace Radar
         public float TimeSinceLastFlicker { get; set; }
         public bool Hidden => !BBox.gameObject.activeSelf;
         [SerializeField] protected Gradient lineRendererColors;
+        public Material CurrentMaterial
+        {
+            get => BBox.material;
+            set
+            {
+                if (BBox.material == value) return;
+                BBox.material = value;
+                DistanceText.material = value;
+            }
+        }
 
         /// <summary>
         /// Activates the main bounding box object - the child of this object.

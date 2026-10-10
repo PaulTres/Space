@@ -54,13 +54,28 @@ namespace Player
         #endregion
 
         #region Keybinds
+        [SerializeField] protected ScrollRect scrollRect;
         [SerializeField] protected RebindRow rebindRowPrefab;
         [SerializeField] protected RectTransform rowParent;
         [SerializeField] protected List<RebindRow> rebindRows = new();
 
+        protected void ClearRows()
+        {
+            //Destroy() is deferred until the end of the frame, so the old rows would still
+            //be counted by the layout group. Detach them first so they stop affecting layout.
+            for (int i = rowParent.childCount - 1; i >= 0; i--)
+            {
+                var child = rowParent.GetChild(i);
+                child.SetParent(null, false);
+                Destroy(child.gameObject);
+            }
+            rebindRows ??= new();
+            rebindRows.Clear();
+        }
+
         protected void GenerateMenu()
         {
-            rebindRows = new();
+            ClearRows();
 
             //go over Combat and BasicControls
             foreach (var action in GameManager.InputActions)
@@ -96,6 +111,18 @@ namespace Player
                     }
                 }
             }
+
+            RefreshLayout();
+        }
+
+        /// <summary>
+        /// Forces the Content to be resized to fit all rows right now, then resets the scroll position.
+        /// </summary>
+        protected void RefreshLayout()
+        {
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rowParent);
+            if (scrollRect != null) scrollRect.verticalNormalizedPosition = 1f;
         }
         #endregion
 
@@ -112,10 +139,6 @@ namespace Player
             xSensSlider.onValueChanged.AddListener(OnXSensChanged);
             ySensSlider.onValueChanged.AddListener(OnYSensChanged);
             zSensSlider.onValueChanged.AddListener(OnZSensChanged);
-            for (int i = 0; i < rowParent.childCount; i++)
-            {
-                Destroy(rowParent.GetChild(i).gameObject);
-            }
             GenerateMenu();
         }
 
@@ -123,15 +146,14 @@ namespace Player
         {
             invertY.SetIsOnWithoutNotify(GlobalConfig.InvertY);
             DisplaySensitivities();
+            if (rebindRows.Count > 0) RefreshLayout();
         }
 
         public void OnResetBindings()
         {
             GameManager.InputActions.RemoveAllBindingOverrides();
-            foreach (var row in rebindRows)
-            {
-                row.Redraw();
-            }
+            foreach (var row in rebindRows) row.Redraw();
+            RefreshLayout();
         }
     }
 }
