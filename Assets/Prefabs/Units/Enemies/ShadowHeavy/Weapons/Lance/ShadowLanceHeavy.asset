@@ -21,6 +21,7 @@ MonoBehaviour:
   EffectScaleFactor: 1
   OnSpawnEffect: {fileID: 6332652951562218706, guid: 8c2df941e4b329749918b2091f9e59ef, type: 3}
   OnHitEffect: {fileID: 0}
+  DamagePriorityTargets: 0
   TopSpeed: 5
   Acceleration: 2
   InitialVelocity: 0
@@ -53,6 +54,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   resetCurve: 0
+  validateData: 0
   Delay: 3
   Range: 200
   Radius: 10

@@ -75,6 +75,8 @@ namespace Effects
                     foreach (var particle in particles)
                     {
                         var p = particle.main;
+                        p.scalingMode = ParticleSystemScalingMode.Hierarchy;
+                        p.useUnscaledTime = true;
                     }
                 }
                 return particles;
